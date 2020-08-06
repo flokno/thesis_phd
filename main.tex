@@ -25,7 +25,8 @@
 
 % comments:
 \definecolor{dblue}{RGB}{31,119,180}
-\newcommand{\REM}[1]{\textcolor{dblue}{{\bf REM: #1 }}}
+\newcommand{\REM}[1]{\textcolor{blue}{{\bf #1}}}
+% \newcommand{\FK}[1]{\textcolor{blue}{{\bf #1 }}}
 
 \usepackage{blindtext}
 
@@ -48,34 +49,33 @@
 \maketitle
 
 \chapter{Introduction}
-One of the major challenges mankind faces in the 21th century is the responsible and sustainable handling of the earth's natural resources.  In fact, most energy 
-today is lost during the transformation of raw energy sources to usable 
-power. To date, there is no fuel based heat engine that exceeds an 
-efficiency of 50\,\% and often it is even worse~\cite{eia}. 
-%\emph{Increasing} power efficiency is thus tantamount 
-%to \emph{decreasing} waste heat emission or finding clever ways to \emph{reuse} it. 
-Since gas- and aircraft-turbines
-are essentially Carnot engines, their efficiency and core power are directly related to the 
-combustion temperature~\cite{Clarke2012,Perepezko2009}.
-This has been utilized during the past 30 years by developing 
-ceramics with high thermal resistivity that are nowadays applied as 
-\emph{thermal barrier coatings} on turbine airfoils in heat engines~\cite{Clarke2003}. 
-A thermal barrier coating serves as a thin, extremely heat insulating layer and thus allows to 
-operate a turbine at
-higher temperatures, thereby increasing its efficiency.
+% [ ] Why thermal conductivity?
+% [ ] Why novel thermal insulators?
+% [ ] Why computational materials science?
+One of the major challenges humankind faces in the 21th century is the responsible and sustainable handling of the earth's natural resources~\cite{Schottky1929}.  Yet, most energy today is lost as waste heat during the transformation of raw energy sources to usable power. To date, there is no fuel based heat engine that exceeds an efficiency of 50\,\% and often it is even worse~\cite{eia}. 
+Since gas- and aircraft-turbines are essentially Carnot engines, their efficiency and core power are directly related to the combustion temperature~\cite{Clarke2012,Perepezko2009}. This has been utilized during the past 30 years by developing 
+ceramics with high thermal resistivity that are nowadays applied as \emph{thermal barrier coatings} on turbine airfoils in heat engines~\cite{Clarke2003}. A thermal barrier coating serves as a thin, extremely heat insulating layer and thus allows to operate a turbine at higher temperatures, thereby increasing its efficiency.
 
-A complementary strategy %to improve efficiency 
-is to recycle waste heat where it occurs.
-%, especially in 
-%applications where its emission is not diminishable or avoidable. 
-One way to do so is to use the
-\emph{thermoelectric effect} to 
-generate electric power from temperature gradients~\cite{Tritt2}. The main obstacle 
-preventing mass operation though is the very limited conversion rate (figure of merit) of even the 
-most 
-advanced thermoelectric materials known to date, especially when taking production costs 
-into account~\cite{Nolas2001}. A prerequisite to finding better thermoelectrics is the 
-determination of their thermal conductivity, which is inversely proportional to the figure of merit.
+A complementary strategy is to recycle waste heat where it occurs. One way to do so is to use the
+\emph{thermoelectric effect} to  generate electric power from temperature gradients~\cite{Snyder2008}. The main obstacle preventing mass operation though is the limited conversion rate (figure of merit) $zT$ of even the most advanced thermoelectric materials known to date. To make matters worse, these materials often contain heavy metals and are toxic, and their manufacturing process is difficult and expensive~\cite{Nolas2001}. Recent advancements in the field, such as the discovery of a high thermoelectric figure of merit in the lead-free material Tin Selenide~\cite{Zhao2014}, offer hope that novel materials with significant figure of merit can be found that are non-toxic, easy and cheap to produce, and consist of abundant elements.
+
+A key physical property of both thermal barrier coatings (TBCs) and thermoelectrics is their thermal conductivity $\kappa$. In the case of thermoelectrics, the figure of merit is inversely proportional to $\kappa$~\cite{Nolas2001}:
+\begin{align}
+	zT = \frac{S^2 \sigma_{\rm el}}{\kappa} T~,
+	\label{eq:zT}
+\end{align} 
+where $T$ dentoes the temperature, $S$ the Seebeck coefficient, and $\sigma_{\rm el}$ is the electrical conductivity.
+A prerequisite to finding better thermoelectrics or TBCs therefore is to find materials which are thermally insulating. These are typically non-metals, since the free electrons in metals are good heat carriers, and most of the known thermoelectrics are thermally insulating inorganic semiconductors~\cite[p.\,15]{Nolas2001}.
+
+% [ ] say sth. about microstructuring?
+
+Despite the technological needs, systematic knowledge of thermal conductivities in inorganic compounds is scarce. A renowned database like Springer Materials only lists thermal conductivities for about 200~of these compounds~\cite{SpringerMaterials}, which is partially due to the fact that accurate measurements of thermal conductivity are tricky to perform[\REM{citation!}]. As a consequence, thermal conductivity is not systematically understood beyond semi-empirical and phenomenological trends in a very limited number of simple material classes~\cite{Morelli}.
+
+The aim of this work is to open a new pathway for overcoming the problem of limited data by devising a route to systematically scan material space for thermal insulators and calculate their thermal conductivities from first principles.
+
+The route is twofold: After reviewing the relevant theoretical tools necessary to model heat transport in thermal insulators, 
+
+The challenge of finding new thermal insulators
 
 \chapter{Theory and Methods}
 Lorem ipsum
@@ -85,5 +85,8 @@ Lorem ipsum
 
 \chapter{Results}
 Lorem ipsum
+
+\bibliography{references}
+\bibliographystyle{unsrt}
 
 \end{document}
