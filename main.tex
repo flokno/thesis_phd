@@ -1,14 +1,89 @@
-\documentclass{article}
+\documentclass[a4paper,12pt]{book}
 \usepackage[utf8]{inputenc}
 
-\title{[Thesis] Doktor}
-\author{knoop }
-\date{August 2020}
+\usepackage{amsmath, enumitem, bm, xcolor}
+\usepackage[colorlinks, linkcolor = red, citecolor = black, filecolor = black, urlcolor = blue]{hyperref} 
+% \usepackage{mathptmx}
+\usepackage{setspace}
+%\singlespacing
+\onehalfspacing
+
+\renewcommand{\t}[1]{\text{#1}}
+\renewcommand{\d}{\text{d}}
+\renewcommand{\b}[1]{\boldsymbol{#1}}
+\newcommand{\B}[1]{\mathbf{#1}}
+\newcommand{\D}[1]{{#1}^\dagger}
+\newcommand{\fD}[1]{{#1}^{ \phantom{\dagger}}}
+\renewcommand{\P}[1]{{#1}^\prime}
+\newcommand{\fP}[1]{{#1}^{\phantom{\prime}}}
+
+% transpose
+\usepackage{relsize}
+\newcommand{\tp}[1]{{#1}^{\mathrm t}}
+% \!\: = 1mu distance; \!\; = 2mu (\, = 3mu)
+\newcommand{\itp}[1]{{#1}^{\!\:\scalebox{0.55}[1.0]{\( - \)}1 \mathrm t}}
+
+% comments:
+\definecolor{dblue}{RGB}{31,119,180}
+\newcommand{\REM}[1]{\textcolor{dblue}{{\bf REM: #1 }}}
+
+\usepackage{blindtext}
+
+% https://en.wikibooks.org/wiki/LaTeX/Title_Creation
+\title{
+    Thermal Conductivities of Strongly Anharmonic Compounds from First Principles
+}
+\author{
+    Florian Knoop
+    \\ \and
+    First Supervisor: Prof. Dr. Matthias Scheffler
+    \and
+    Second Supervisor: Dr. Christian Carbogno
+    \\ \and
+    Fritz-Haber-Institut der Max-Planck-Gesellschaft, Berlin
+}
+\date{2020}
 
 \begin{document}
-
 \maketitle
 
-\section{Introduction}
+\chapter{Introduction}
+One of the major challenges mankind faces in the 21th century is the responsible and sustainable handling of the earth's natural resources.  In fact, most energy 
+today is lost during the transformation of raw energy sources to usable 
+power. To date, there is no fuel based heat engine that exceeds an 
+efficiency of 50\,\% and often it is even worse~\cite{eia}. 
+%\emph{Increasing} power efficiency is thus tantamount 
+%to \emph{decreasing} waste heat emission or finding clever ways to \emph{reuse} it. 
+Since gas- and aircraft-turbines
+are essentially Carnot engines, their efficiency and core power are directly related to the 
+combustion temperature~\cite{Clarke2012,Perepezko2009}.
+This has been utilized during the past 30 years by developing 
+ceramics with high thermal resistivity that are nowadays applied as 
+\emph{thermal barrier coatings} on turbine airfoils in heat engines~\cite{Clarke2003}. 
+A thermal barrier coating serves as a thin, extremely heat insulating layer and thus allows to 
+operate a turbine at
+higher temperatures, thereby increasing its efficiency.
+
+A complementary strategy %to improve efficiency 
+is to recycle waste heat where it occurs.
+%, especially in 
+%applications where its emission is not diminishable or avoidable. 
+One way to do so is to use the
+\emph{thermoelectric effect} to 
+generate electric power from temperature gradients~\cite{Tritt2}. The main obstacle 
+preventing mass operation though is the very limited conversion rate (figure of merit) of even the 
+most 
+advanced thermoelectric materials known to date, especially when taking production costs 
+into account~\cite{Nolas2001}. A prerequisite to finding better thermoelectrics is the 
+determination of their thermal conductivity, which is inversely proportional to the figure of merit.
+
+\chapter{Theory and Methods}
+Lorem ipsum
+
+\chapter{Screening}
+Lorem ipsum
+
+\chapter{Results}
+Lorem ipsum
 
 \end{document}
