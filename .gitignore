@@ -1,0 +1,12 @@
+# pdf-Dokumente ausser (ggf.) Bilder
+main.pdf
+
+# ueberfluessiger Latex-Output
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.bak
