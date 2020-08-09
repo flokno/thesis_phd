@@ -3,6 +3,12 @@
 
 \usepackage{amsmath, enumitem, bm, xcolor}
 \usepackage[colorlinks, linkcolor = red, citecolor = black, filecolor = black, urlcolor = blue]{hyperref} 
+
+% Quotes
+\usepackage{epigraph}
+\setlength\epigraphwidth{12cm}
+\setlength\epigraphrule{0pt}
+
 % \usepackage{mathptmx}
 \usepackage{setspace}
 %\singlespacing
@@ -16,6 +22,7 @@
 \newcommand{\fD}[1]{{#1}^{ \phantom{\dagger}}}
 \renewcommand{\P}[1]{{#1}^\prime}
 \newcommand{\fP}[1]{{#1}^{\phantom{\prime}}}
+\newcommand{\im}{{\rm i}}
 
 % transpose
 \usepackage{relsize}
@@ -26,6 +33,7 @@
 % comments:
 \definecolor{dblue}{RGB}{31,119,180}
 \newcommand{\REM}[1]{\textcolor{blue}{{\bf #1}}}
+\newcommand{\CITE}[1]{\textcolor{blue}{{\bf [#1]}}}
 % \newcommand{\FK}[1]{\textcolor{blue}{{\bf #1 }}}
 
 \usepackage{blindtext}
@@ -47,8 +55,10 @@
 
 \begin{document}
 \maketitle
+\tableofcontents
 
 \chapter{Introduction}
+\epigraph{\singlespacing \it ``Die Zeit des unbedenklichen Wirtschaftens mit den Energiequellen und Stofflagern, die uns die Natur zur Verfügung gestellt hat, wird wahrscheinlich schon für unsere Kinder nur noch die Bedeutung einer vergangenen Wirtschaftsepoche haben.''}{W. Schottky, 1929}
 % [ ] Why thermal conductivity?
 % [ ] Why novel thermal insulators?
 % [ ] Why computational materials science?
@@ -74,10 +84,155 @@ Despite the technological needs, systematic knowledge of thermal conductivities 
 The aim of this work is to open a new pathway for overcoming the problem of limited data by devising a route to systematically scan material space for thermal insulators and calculate their thermal conductivities from first principles. This route is twofold: After reviewing the relevant theoretical tools necessary to simulate heat transport in thermal insulators, we describe how to assess a key physical property shared by most thermal insulators,~.i.\,e.,~\emph{anharmonicity}, without the need for explicit model building beyond the harmonic approximation.
 
 \chapter{Theory and Methods}
-\section{The Many Body Problem and Density Functional Theory}
+
+\section{The Many Body Problem}
+\epigraph{\singlespacing \it ``The underlying physical laws necessary
+for the mathematical theory of a large part of physics and the whole of chemistry
+are thus completely known, and the difficulty is only that the exact application
+of these laws leads to equations much too complicated to be soluble. It therefore becomes desirable that approximate practical methods of applying quantum
+mechanics should be developed, which can lead to an explanation of the main
+features of complex atomic systems without too much computation.''}{P.A.M. Dirac, 1929}
+
+In this chapter, we summarize the theoretical background of {\it ab initio} simulations.
+
 \subsection{The Many Body Hamiltonian}
+
+The full (non-relativistic) many body Hamiltonian in the absence of external electromagnetic fields for an otherwise arbitrary system reads
+\begin{align}
+    \hat{\mathrm{H}}
+        = \hat{\mathrm{T}}^{\mathrm{e}}
+        + \hat{\mathrm{V}}^{\mathrm{e}-\mathrm{e}}
+        + \hat{\mathrm{V}}^{\mathrm{e}-\mathrm{Nuc}}
+        + \hat{\mathrm{V}}^{\mathrm{Nuc}-\mathrm{Nuc}}
+        + \hat{\mathrm{T}}^{\mathrm{Nuc}}~,
+    \label{eq:Hamiltonian}
+\end{align}
+where
+\begin{align}
+    \hat T^{\rm e} 
+        =\sum_{i} \frac{\hat{\mathbf{p}}_{i}^{2}}{2 m_{\rm e}}
+    \label{eq:Te}
+\end{align}
+is the kinetic energy operator for electrons of mass $m_{\rm e}$ with momentum operators $\hat{\bf p}_i$, and 
+\begin{align}
+    \hat V^{\rm e-e}
+        = \sum_{i < j} \frac{e^{2}}{\left|\hat{\b r}_{i}-\hat{\bf r}_{j}\right|}~,
+    \label{eq:Ve}
+\end{align}
+is the Coulombic electron-electron repulsion operator with the electronic position operators $\hat{\bf r_i}$ and the elementary charge $e$. 
+The Coulomb attraction between the negatively charged electrons and the positively charged nuclei reads
+\begin{align}
+    \hat V^{\rm e-Nuc}
+        = \sum_{i, J} -\frac{Z_J e^{2}}{\left|\hat{\b r}_{i}-\hat{\bf R}_{J}\right|}~,
+    \label{eq:Venuc}
+\end{align}
+where $Z_J$ denotes the charge number of nucleus $J$, and $\hat{\bf R}_J$ is the nuclear position operator. 
+Accordingly, we define the nuclear-nuclear repulsion as
+\begin{align}
+    \hat V^{\rm Nuc-Nuc}
+        = \sum_{I < J} \frac{Z_{I} Z_{J} e^{2}}{\left|\hat{\b R}_{I}-\hat{\bf R}_{J}\right|}~,
+    \label{eq:Vnuc}
+\end{align}
+and the kinetic energy operator for nuclei with momentum operators $\hat{\bf P}_I$ and masses $M_I$ reads
+\begin{align}
+    \hat T^{\rm Nuc} 
+        =\sum_{I} \frac{\hat{\mathbf{P}}_{I}^{2}}{2 M_{I}}~.
+    \label{eq:Tnuc}
+\end{align}
+
 \subsection{The Born Oppenheimer Approximation}
+We go over to a unitless Hamiltonian by scaling Eq.\,\eqref{eq:Hamiltonian} with the Hartree energy $E_{\rm h} = me^4 / \hbar^2 \approx 27.2\,{\rm eV}$ and expressing distances in terms of the Bohr radius $a_0 = \hbar^2 / m e^2$,~i.\,e.,~${\bf r} = a_0 \tilde{\bf r}$, where $\hbar$ denotes the Planck constant~\CITE{Czycholl}. Dropping the operator hats in the following and using $\hat{\bf p}=-\im \hbar \partial / \partial {\bf r}$ instead, we have
+\begin{align}
+\begin{split}
+    \tilde H 
+        \equiv& ~H / E_{\rm h} \\
+        =& 
+        - \frac{1}{2} \sum_i \frac{\partial^2}{\partial \tilde{\bf r}_i^2}
+        + \sum_{i < j} \frac{1}{\left|\tilde{\b r}_{i}-\tilde{\bf r}_{j}\right|}
+        - \sum_{i, J} -\frac{Z_J}{\left|\tilde{\b r}_{i}-\tilde{\bf R}_{J}\right|}
+        + \sum_{I < J} \frac{Z_{I} Z_{J}}{
+            \left|\tilde{\b R}_{I}-\tilde{\bf R}_{J}\right|} 
+        \\
+        &- \frac{1}{2} \sum_I \frac{m_{\rm e}}{M_I} \frac{\partial^2}{\partial \tilde{\bf R}_I^2}~,
+    \label{eq:Hscaled}
+\end{split}
+\end{align}
+which only depends on the charge numbers $\{Z_I\}$ and the mass ratios $\{ m_{\rm e} / M_I \}$. The relative order of magnitude of the nuclear kinetic energy is $m_{\rm e} / M_I \approx 10^{-4} - 10^{-5}$. This means that the nuclear kinetic energy can be treated as a perturbation of the remaining electronic and electron-nuclear contributions:
+\begin{align}
+    H   &= H^0 + T^{\rm Nuc}~, \text{ where} 
+    \label{eq:H=H0+T}
+    \\
+    H^0 &=
+        \hat{\mathrm{T}}^{\mathrm{e}}
+        + \hat{\mathrm{V}}^{\mathrm{e}-\mathrm{e}}
+        + \hat{\mathrm{V}}^{\mathrm{e}-\mathrm{Nuc}}
+        + \hat{\mathrm{V}}^{\mathrm{Nuc}-\mathrm{Nuc}}~.
+    \label{eq:H0}
+\end{align}
+The full (time-independent) many-body Schroedinger equation reads
+\begin{align}
+    H \psi ({\bf r}, {\bf R}) = E \psi ({\bf r}, {\bf R})~,
+    \label{eq:Schroedinger1}
+\end{align}
+with ground-state eigenvalues and many-body wave functions $E$ and \mbox{$\psi ({\bf r}, {\bf R})$},
+where \mbox{${\bf r} = ({\bf r}_i, \ldots, {\bf r}_{N_{\rm e}})$} denotes all electronic coordinates, and ${\bf R} = ({\bf R}_i, \ldots, {\bf R}_{N_{\rm Nuc}})$ all nuclear coordinates, respectively. According to Eq.\,\eqref{eq:H=H0+T}, we expand the wave functions in solutions to the Hamiltonian $H^0$,
+\begin{align}
+    H^0 \phi_l ({\bf r}, {\bf R})
+        = E^0_l ({\bf R}) \phi_l ({\bf r}, {\bf R})~,
+    \label{eq:Hsolution1}
+\end{align}
+where the dependence on $\bf R$ is parametric,~i.\,e.,~Eq.\,\eqref{eq:Hsolution1} is solved for a given nuclear configuration $\bf R$.
+The full solution $\psi ({\bf r}, {\bf R})$ is given as
+\begin{align}
+    \psi ({\bf r}, {\bf R}) = \sum_l \chi_l ({\bf R}) \phi_l ({\bf r}, {\bf R})~.
+    \label{eq:psi_expansion_phi}
+\end{align}
+The functions $\chi_l$ are to be determined by using Eq.\,\eqref{eq:psi_expansion_phi} in Eq.\,\eqref{eq:Schroedinger1},
+\begin{align}
+    (H - E) \psi ({\bf r}, {\bf R})
+        & = \sum_l (H^0 + T^{\rm Nuc} - E) \chi_l ({\bf R}) \phi_l ({\bf r}, {\bf R}) \nonumber \\
+        &= \sum_l (E^0_l({\bf R}) + T^{\rm Nuc} - E) \chi_l ({\bf R}) \phi_l ({\bf r}, {\bf R}) \\
+    = 0 \nonumber~,
+\end{align}
+and integrating with $\int \d^3 r ~ \phi^\ast_m ({\bf r}, {\bf R})$, so that
+\begin{align}
+    \left( T^{\rm Nuc} + E^0_m({\bf R}) \right) \chi_m ({\bf R})
+        + \sum_l A_{ml} ({\bf R}) \chi_l ({\bf R})
+        = E \chi_m ({\bf R})~,
+    \label{eq:chi1}
+\end{align}
+where the operator $A_{ml}$~\CITE{Czycholl},
+\begin{align}
+    A_{ml} ({\bf R})
+        = - \sum_I \frac{\hbar^2}{2 M_I} \int \d^3 r ~ 
+        &\left[ \phi^\ast_m ({\bf r}, {\bf R}) \frac{\partial^2}{\partial {\bf R}_I^2}
+            \phi_l ({\bf r}, {\bf R}) \right. \nonumber \\
+        &\left.
+            + 2 \phi^\ast_m ({\bf r}, {\bf R}) \left(
+                \frac{\partial}{\partial {\bf R}_I} \phi_l ({\bf r}, {\bf R}) \right)
+            \frac{\partial}{\partial {\bf R}_I}
+        \right]~,
+    \label{eq:Aml}
+\end{align}
+describes coupling between different electronic states $(l, m)$. This term is of the order of $(m/M)^{1/4} \approx 10^{-1} - 10^{-2}$ smaller than the nuclear energy~\CITE{BornOppenheimer}. Neglecting this term is known as the \emph{Born-Oppenheimer approximation} and completely separates the dynamical evolution of electrons and nuclei. In effect, Eq.\,\eqref{eq:chi1} reduces to
+\begin{align}
+    \left( T^{\rm Nuc} + E^0_l({\bf R}) \right) \chi_l ({\bf R})
+        = E \chi_l ({\bf R})~.
+    \label{eq:chi2}
+\end{align}
+Solving Eq.\,\eqref{eq:chi2} is performed in two steps:
+\begin{enumerate}
+    \item For a given configuration $\bf R$, the electronic Schr\"odinger equation \eqref{eq:Hsolution1} is solved, yielding the energies $E^0_l({\bf R})$ which thereby parametrically depend on $\bf R$.
+    \item For each electronic quantum number $l$, Eq.\,\eqref{eq:chi2} for the nuclei is solved, where the electronic energy $E^0_l({\bf R})$ defines the effective \emph{potential energy surface}.
+\end{enumerate}
+Pictorially, the electrons move \emph{adiabatically} with the nuclei, hence the alternative term \emph{adiabatic approximation.}
+
 \subsection{Kohn-Sham DFT}
+In the previous chapter, it was tacitly assumed that the electronic Schr\"odinger equation \eqref{eq:Hsolution1} yielding the effective potential for the nuclei can be solved. Finding an exact solution to this equation is, however, infeasible for more than a few electrons.
+
+\subsubsection{Hohenberg-Kohn}
+
+
 \subsection{Hellmann-Feynmann Theorem}
 \subsection{Conclusion}
 
