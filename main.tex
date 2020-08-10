@@ -1,7 +1,7 @@
 \documentclass[a4paper,12pt]{book}
 \usepackage[utf8]{inputenc}
 
-\usepackage{amsmath, enumitem, bm, xcolor}
+\usepackage{amsmath, amssymb, enumitem, bm, xcolor, braket, dsfont}
 \usepackage[colorlinks, linkcolor = red, citecolor = black, filecolor = black, urlcolor = blue]{hyperref} 
 
 % Quotes
@@ -163,10 +163,10 @@ which only depends on the charge numbers $\{Z_I\}$ and the mass ratios $\{ m_{\r
     \label{eq:H=H0+T}
     \\
     H^0 &=
-        \hat{\mathrm{T}}^{\mathrm{e}}
-        + \hat{\mathrm{V}}^{\mathrm{e}-\mathrm{e}}
-        + \hat{\mathrm{V}}^{\mathrm{e}-\mathrm{Nuc}}
-        + \hat{\mathrm{V}}^{\mathrm{Nuc}-\mathrm{Nuc}}~.
+        {\mathrm{T}}^{\mathrm{e}}
+        + {\mathrm{V}}^{\mathrm{e}-\mathrm{e}}
+        + {\mathrm{V}}^{\mathrm{e}-\mathrm{Nuc}}
+        + {\mathrm{V}}^{\mathrm{Nuc}-\mathrm{Nuc}}~.
     \label{eq:H0}
 \end{align}
 The full (time-independent) many-body Schroedinger equation reads
@@ -227,10 +227,81 @@ Solving Eq.\,\eqref{eq:chi2} is performed in two steps:
 \end{enumerate}
 Pictorially, the electrons move \emph{adiabatically} with the nuclei, hence the alternative term \emph{adiabatic approximation.}
 
+\REM{Notation: Maybe $H^{\rm e}$ instead of $H^0$?}
+
 \subsection{Kohn-Sham DFT}
-In the previous chapter, it was tacitly assumed that the electronic Schr\"odinger equation \eqref{eq:Hsolution1} yielding the effective potential for the nuclei can be solved. Finding an exact solution to this equation is, however, infeasible for more than a few electrons.
+\epigraph{\singlespacing \it ``It is my sense that at the present time DFT is the method of choice for systems consisting of many (\,$\gtrsim 5$) atoms and for smaller systems, when moderate accuracies are sufficient.''}{W.~Kohn, 1993}
+
+In the previous chapter, it was tacitly assumed that the electronic Schr\"odinger equation \eqref{eq:Hsolution1} yielding the effective potential for the nuclei can be solved. Finding an exact solution to this equation is, however, infeasible for more than a few electrons. We will now introduce \emph{density functional theory} (DFT) as a framework for making approximations that enable to find a first-principles electronic potential energy surface $E^0_l ({\bf R})$ for atomic systems with order of magnitudes more electrons.
+
+To set the stage, we rewrite the electronic Schr\"odinger equation \eqref{eq:Hsolution1}:
+\begin{align}
+	\hat H = \hat T + \hat W + \hat V^{\rm ext}~,
+	\label{eq:H.dft.1}
+\end{align}
+where $T \equiv T^{\rm e}$ denotes the electronic kinetic energy operator, $W \equiv V^{\rm e-e}$ is the electronic Coulomb repulsion, and $V^{\rm ext} \equiv V^{\rm e-Nuc}$ is the \emph{external} potential determined by the nuclear configuration $\bf R$. Note that the bare nuclear-nuclear repulsion $V^{\rm Nuc-Nuc}$ is neglected as it merely contributes an additive constant to the electronic Hamiltonian at fixed configuration and therefore does not change the solutions to Eq.\,\eqref{eq:H.dft.1}.
+
+Let us look for solutions to Eq.\,\eqref{eq:H.dft.1} of the form
+\begin{align}
+	\hat H \Ket{\Psi} = E_\Psi \Ket{\Psi}~,
+	\label{eq:SE.dft.1}
+\end{align}
+where $\hat H$ is the electronic Hamiltonian given by Eq.\,\eqref{eq:H.dft.1}, $\Ket{\Psi}$ denotes a many-body eigenstate in index-free bra--ket notation\footnote{
+	Here and in the following we employ the usual convention that from the state $\Ket{\Psi}$, many-body wavefunctions are obtained via
+	\begin{align*}
+		\braket{{\bf r} | \Psi} 
+			= \Psi ({\bf r})
+		\Leftrightarrow
+		\braket{{\bf r}_1, \ldots, {\bf r}_N | \Psi} 
+			= \Psi({\bf r}_1, \ldots, {\bf r}_N)~.
+	\end{align*}
+	Likewise we define the $\mathcal{L}^2$ scalar product as
+	$$
+	\braket{\Psi | \Phi} = \int \d^{3N} r ~ \Psi^\ast ({\bf r}) \ \Phi({\bf r})~.
+	$$	
+},
+and $E_\Psi$ is the corresponding total energy.
+
+Any state $\Ket{\Psi}$ maps to an electron density $n_\Psi ({\bf x})$ via the density operator
+\begin{align}
+	\hat n ({\bf x}) \equiv \sum_i \hat n_i ({\bf x}) = \sum_i \delta ({\bf x} - \hat{\bf r}_i)~,
+	\label{eq:densop}
+\end{align}
+such that
+\begin{align}
+	n_\Psi({\bf x}) 
+	&\equiv \braket{\Psi | \hat n({\bf x}) | \Psi} \\
+	&= \sum_i \int \d^3 r_1 \cdots \d^3 r_{i-1} \d^3 r_{i+1} \cdots \d^3 r_{N} ~ 
+\left\lvert 
+\Psi ({\bf r}_1, \ldots, {\bf r}_{i-1}, {\bf x}, {\bf r}_{i+1}, \ldots, {\bf r}_N) 
+\right\rvert^2~.
+\end{align}
+We note that ${\bf x} \in \mathds{R}^3$ denotes a point in real space, whereas ${\bf r} = ({\bf r}_1, \ldots, {\bf r}_N)$ denotes the positions of electrons as before.
+%\begin{align}
+%	\braket{\Psi | n_i({\bf r}) | \Psi} 
+%		= \int \d^3 r_1 \cdots \d^3 r_{i-1} \d^3 r_{i+1} \cdots \d^3 r_{N} ~ 
+%			\left\lvert 
+%				\Psi ({\bf r}_1, \ldots, {\bf r}_{i-1}, {\bf x}, {\bf r}_{i+1}, \ldots, {\bf r}_N) 
+%			\right\rvert^2
+%\end{align}
+The density operator $\hat n ({\bf x})$ can be used to express the one-particle operator $V^{\rm ext}$ as an operator valued functional of a potential function $v^{\rm ext} ({\bf x})$ by writing
+\begin{align}
+	\hat V^{\rm ext}
+		= \sum_i v^{\rm ext} (\hat{\bf r}_i)
+		= \int \d^3 x ~ v^{\rm ext} ({\bf x}) \, \hat n ({\bf x})~,
+		\label{eq:Vext}
+\end{align}
+where $v^{\rm ext} ({\bf x})$ is the Coulomb potential stemming from the nuclear arrangement $\bf R$,~cf.~Eq.\,\eqref{eq:Venuc}.
+The expectation value of Eq.\,\eqref{eq:Vext} is a functional of the density,
+\begin{align}
+	V^{\rm ext} 
+		= \braket{\Psi | \hat V^{\rm ext} | \Psi}
+		= \int \d^3 x ~ v^{\rm ext} ({\bf x}) \, n_\Psi ({\bf x})~,
+\end{align}
 
 \subsubsection{Hohenberg-Kohn}
+
+\REM{Hohenberg Kohn map only unique for ground state densities -> Dreizler/Gross p. 33}
 
 
 \subsection{Hellmann-Feynmann Theorem}
