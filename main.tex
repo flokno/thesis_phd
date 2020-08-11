@@ -229,7 +229,7 @@ Pictorially, the electrons move \emph{adiabatically} with the nuclei, hence the 
 
 \REM{Notation: Maybe $H^{\rm e}$ instead of $H^0$?}
 
-\subsection{Kohn-Sham DFT}
+\subsection{Density Functional Theory}
 \epigraph{\singlespacing \it ``It is my sense that at the present time DFT is the method of choice for systems consisting of many (\,$\gtrsim 5$) atoms and for smaller systems, when moderate accuracies are sufficient.''}{W.~Kohn, 1993}
 
 In the previous chapter, it was tacitly assumed that the electronic Schr\"odinger equation \eqref{eq:Hsolution1} yielding the effective potential for the nuclei can be solved. Finding an exact solution to this equation is, however, infeasible for more than a few electrons. We will now introduce \emph{density functional theory} (DFT) as a framework for making approximations that enable to find a first-principles electronic potential energy surface $E^0_l ({\bf R})$ for atomic systems with order of magnitudes more electrons.
@@ -292,19 +292,59 @@ The density operator $\hat n ({\bf x})$ can be used to express the one-particle 
 		\label{eq:Vext}
 \end{align}
 where $v^{\rm ext} ({\bf x})$ is the Coulomb potential stemming from the nuclear arrangement $\bf R$,~cf.~Eq.\,\eqref{eq:Venuc}.
-The expectation value of Eq.\,\eqref{eq:Vext} is a functional of the density,
+It follows that the expectation value of Eq.\,\eqref{eq:Vext} is a functional of the density,
 \begin{align}
-	V^{\rm ext} 
-		= \braket{\Psi | \hat V^{\rm ext} | \Psi}
-		= \int \d^3 x ~ v^{\rm ext} ({\bf x}) \, n_\Psi ({\bf x})~,
+	\braket{\Psi | \hat V^{\rm ext} | \Psi}
+		= V^{\rm ext} [n_\Psi]
+		= \int \d^3 x ~ v^{\rm ext} ({\bf x}) \, n_\Psi ({\bf x})~.
+		\label{eq:dft.Vext.expectation}
+\end{align}
+As $n_\Psi$ is obtained from the solution $\Ket{\Psi}$ of Eq.\,\eqref{eq:SE.dft.1} and the term $\hat V^{\rm ext}$ in the Hamiltonian given by Eq.\,\eqref{eq:H.dft.1} is solely determined by the external potential funktion $v^{\rm ext} ({\bf x})$ via Eq.\,\eqref{eq:Vext}, it naturally follows that $n_\Psi ({\bf r})$ is a functional of $v^{\rm ext} ({\bf x})$. In other words, there is a map between the set of external potentials $\mathds V = \set{v^{\rm ext}}$, and the set of eigensolutions $\mathds P = \set{\Psi}$ and their corresponding densities $\mathds N = \set{n_\Psi}$:
+\begin{align}
+	M: \mathds V \rightarrow \mathds N~.
+	\label{eq:dft.map.1}
 \end{align}
 
 \subsubsection{Hohenberg-Kohn}
+Hohenberg and Kohn were able to show that, for non-degenerate ground states $\Psi \equiv \Psi_0$,\footnote{Kohn was later able to loosen the requirement of non-degeneracy~\CITE{Kohn1985}.} there exists the \emph{inverse map} from ground-state densities $\mathds N_0$ to potential functions $\mathds V$, and that this map is bijective~\CITE{HohenbergKohn64}:
+\begin{align}
+	M^{-1}: \mathds N_0 \rightarrow \mathds V~. 
+\end{align}
+The beauty of this theorem is that it establishes a one-to-one correspondence between the \emph{ground-state density} $n_0 ({\bf x})$ and the external potential function $v^{\rm ext} ({\bf x})$ which, in turn, describes the full many-body problem via Eq.\,\eqref{eq:H.dft.1}. For example, the ground-state wavefunctions $\Psi_0$ are functionals of $n_0$, as well as the expectation value of any ground-state observable. In the following, we will stay with ground-state densities and denote them simply by $n ({\bf x}) \equiv n_0 ({\bf x})$.
 
-\REM{Hohenberg Kohn map only unique for ground state densities -> Dreizler/Gross p. 33}
-
+Hohenberg and Kohn further define the \emph{universal functional} 
+\begin{align}
+	F[n] \equiv \braket{\Psi [n] | \hat T + \hat W | \Psi [n]}~,
+	\label{eq:dft.Fn}
+\end{align}
+i.\,e.,~the contributions to the Hamiltonian which do not depend on the external potential. The ground-state total energy for a given potential function $v$ is then given as
+\begin{align}
+	E_v [n] 
+		= \braket{\Psi [n] | \hat H | \Psi [n]}
+		\equiv F[n] + \int \d^3 x ~ v ({\bf x}) n ({\bf x})~.
+	\label{eq:dft.En}
+\end{align}
+By virtue of the Raleigh-Ritz variational principle, this functional is minimized for the correct ground-state density $n$ only, and any other density $n'$ that differs from $n$ non-trivially yields a larger energy:
+\begin{align}
+	E_v[n] < E_v [n'] \quad \text{for} \quad n \neq n'~.
+\end{align}
+This also means that the true ground-state density for a given potential $v$ can be found by minimizing the total energy function, Eq.\,\eqref{eq:dft.En}:
+\begin{align}
+	n = \arg \min_{n} E_v[n]~
+	\label{eq:dft.n}
+\end{align}
+under the constraint of fixed particle number
+\begin{align}
+	N [n] = \int \d^3 x ~ n({\bf x}) = N~.
+	\label{eq:dft.N}
+\end{align}
 
 \subsection{Hellmann-Feynmann Theorem}
+
+
+\subsection{Kohn-Sham Scheme}
+
+
 \subsection{Conclusion}
 
 \section{Lattice Dynamics}
