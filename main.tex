@@ -15,7 +15,7 @@
 \onehalfspacing
 
 \renewcommand{\t}[1]{\text{#1}}
-\renewcommand{\d}{\text{d}}
+\renewcommand{\d}{{\rm d}}
 \renewcommand{\b}[1]{\boldsymbol{#1}}
 \newcommand{\B}[1]{\mathbf{#1}}
 \newcommand{\D}[1]{{#1}^\dagger}
@@ -37,6 +37,10 @@
 % \newcommand{\FK}[1]{\textcolor{blue}{{\bf #1 }}}
 
 \usepackage{blindtext}
+
+% theorems
+\usepackage{amsthm}
+\newtheorem*{theorem}{Theorem}
 
 % https://en.wikibooks.org/wiki/LaTeX/Title_Creation
 \title{
@@ -225,9 +229,11 @@ Solving Eq.\,\eqref{eq:chi2} is performed in two steps:
     \item For a given configuration $\bf R$, the electronic Schr\"odinger equation \eqref{eq:Hsolution1} is solved, yielding the energies $E^0_l({\bf R})$ which thereby parametrically depend on $\bf R$.
     \item For each electronic quantum number $l$, Eq.\,\eqref{eq:chi2} for the nuclei is solved, where the electronic energy $E^0_l({\bf R})$ defines the effective \emph{potential energy surface}.
 \end{enumerate}
-Pictorially, the electrons move \emph{adiabatically} with the nuclei, hence the alternative term \emph{adiabatic approximation.}
-
-\REM{Notation: Maybe $H^{\rm e}$ instead of $H^0$?}
+Pictorially, the electrons move \emph{adiabatically} with the nuclei, hence the alternative term \emph{adiabatic approximation.} For reasons that will become apparent later, we now call the electronic energy $E^0_0$ corresponding to the electronic ground state for the given configuration ${\bf R}$ as the \emph{Born-Oppenheimer potential energy},
+\begin{align}
+	E^{\rm BO} ({\bf R}) \equiv E^0_0 ({\bf R})~.
+	\label{eq:E^BO}
+\end{align}
 
 \subsection{Density Functional Theory}
 \epigraph{\singlespacing \it ``It is my sense that at the present time DFT is the method of choice for systems consisting of many (\,$\gtrsim 5$) atoms and for smaller systems, when moderate accuracies are sufficient.''}{W.~Kohn, 1993}
@@ -270,7 +276,7 @@ Any state $\Ket{\Psi}$ maps to an electron density $n_\Psi ({\bf x})$ via the de
 such that
 \begin{align}
 	n_\Psi({\bf x}) 
-	&\equiv \braket{\Psi | \hat n({\bf x}) | \Psi} \\
+	&\equiv \Braket{\Psi | \hat n({\bf x}) | \Psi} \\
 	&= \sum_i \int \d^3 r_1 \cdots \d^3 r_{i-1} \d^3 r_{i+1} \cdots \d^3 r_{N} ~ 
 \left\lvert 
 \Psi ({\bf r}_1, \ldots, {\bf r}_{i-1}, {\bf x}, {\bf r}_{i+1}, \ldots, {\bf r}_N) 
@@ -314,13 +320,13 @@ The beauty of this theorem is that it establishes a one-to-one correspondence be
 
 Hohenberg and Kohn further define the \emph{universal functional} 
 \begin{align}
-	F[n] \equiv \braket{\Psi [n] | \hat T + \hat W | \Psi [n]}~,
+	F[n] \equiv \Braket{\Psi [n] | \hat T + \hat W | \Psi [n]}~,
 	\label{eq:dft.Fn}
 \end{align}
 i.\,e.,~the contributions to the Hamiltonian which do not depend on the external potential. The ground-state total energy for a given potential function $v$ is then given as
 \begin{align}
 	E_v [n] 
-		= \braket{\Psi [n] | \hat H | \Psi [n]}
+		= \Braket{\Psi [n] | \hat H | \Psi [n]}
 		\equiv F[n] + \int \d^3 x ~ v ({\bf x}) n ({\bf x})~.
 	\label{eq:dft.En}
 \end{align}
@@ -333,16 +339,95 @@ This also means that the true ground-state density for a given potential $v$ can
 	n = \arg \min_{n} E_v[n]~
 	\label{eq:dft.n}
 \end{align}
-under the constraint of fixed particle number
+under the constraint of fixed particle number imposed by the Lagrange multiplier $\mu$,
+%\begin{align}
+%	N [n] = \int \d^3 x ~ n({\bf x}) = N~.
+%	\label{eq:dft.N}
+%\end{align}
+%By using Eq.\,\eqref{eq:dft.N}, the total energy can be written as a functional of the external potential $v$ and the particle Number $N$ under the requirement of stationarity,
+%\begin{align}
+%	\begin{split}
+%		E        &= E[v, N] \\
+%		\delta E &= 0~,
+%	\end{split}
+%	\label{eq:dft.stationarity}
+%\end{align}
+%or, by imposing the conservation of particle number explicitly via the Lagrange multiplicator $\mu$,
 \begin{align}
-	N [n] = \int \d^3 x ~ n({\bf x}) = N~.
-	\label{eq:dft.N}
+	\frac{\delta}{\delta n ({\bf x})}
+		\left.\left[ 
+			E[n] + \mu \left(
+				\int \d^3 x' ~ n ({\bf x}') - N \right)
+		\right]\right\vert_{n = n_0}
+		=0~.
+		\label{eq:dft.stationarity}
+\end{align}
+
+\subsubsection{Reconstructing the Born-Oppenheimer Surface}
+In the definition of the effective electronic Hamiltonian in Eq.\,\eqref{eq:H.dft.1}, we had neglected the nuclear repulsion $V^{\rm Nuc-Nuc}$ defined in Eq.\,\eqref{eq:Vnuc}. The Born-Oppenheimer potential energy surface defined in Eq.\,\eqref{eq:E^BO} therefore consists of both terms,~i.\,e.,
+\begin{align}
+	E^{\rm BO} ({\bf R}) 
+		= E[n] + \sum_{I < J} \frac{Z_{I} Z_{J} e^{2}}{\left|{\b R}_{I}-{\bf R}_{J}\right|}~.
+	\label{eq:E^BO}
 \end{align}
 
 \subsection{Hellmann-Feynmann Theorem}
-
+The forces on individual atomic positions ${\bf R}_I$ are given in terms of derivatives of the Born-Oppenheimer energy, $E^{\rm BO} ({\bf R})$,
+\begin{align}
+	\frac{\d}{\d {\bf R}_I} E^{\rm BO} ({\bf R})
+		\stackrel{\eqref{eq:E^BO}}{=}
+			\frac{\d}{\d {\bf R}_I } \left[
+				E[n] + \sum_{J < K} \frac{Z_{J} Z_{K} e^{2}}{\left|{\b R}_{J}-{\bf R}_{K}\right|}
+			\right]
+			~.
+	\label{eq:hellmannfeynman.1}
+\end{align}
+The electronic part is given by
+\begin{align}
+		\frac{\d}{\d {\bf R}_I} E[n]
+			= 
+				\underset{I}{\underbrace{\frac{\partial}{\partial {\bf R}_I} E[n]}}
+			+ \underset{II}{\underbrace{
+					\int \d^{3} x ~ \frac{\delta E[n]}{\delta n(\boldsymbol{x})} \frac{\partial n(\boldsymbol{x})}{\partial \boldsymbol{R}_{I}}
+				}}~,
+		\label{eq:hellmannfeynman.2}
+\end{align}
+where term $II)$ can be evaluated under the assumption of stationarity expressed by Eq.\,\eqref{eq:dft.stationarity} which yields 
+\mbox{$\delta E[n] / \delta n({\bf x}) = -\mu$},
+and using the Leibniz rule, so that
+\begin{align}
+	\int \d^{3} x ~ \frac{\delta E[n]}{\delta n(\boldsymbol{x})} \frac{\partial n(\boldsymbol{x})}{\partial \boldsymbol{R}_{I}}
+	= -\mu \frac{\partial}{\partial {\bf R}_I} \int \d^{3} x ~ n ({\bf x})
+	= 0~.
+	\label{eq:hellmannfeynman.3}
+\end{align}
+Term $I)$ only depends explicitly on ${\bf R}_I$ via the electron-nucleus contribution to $V^{\rm ext}$ given by Eq.\,\eqref{eq:Venuc}, yielding
+\begin{align}
+	\frac{\d}{\d {\bf R}_I} E[n]
+		= \frac{\d}{\d {\bf R}_I} \braket{\Psi_0 | \hat V ^{\rm ext} | \Psi_0} 
+		= \int \d^3 x ~ n({\bf x}) \frac{Z_I e^2 ({\bf R}_I - {\bf x})}{\left\lvert {\bf R}_I - {\bf x} \right\rvert^3}~.
+\end{align}
+In total, we have
+\begin{align}
+	\frac{\d}{\d {\bf R}_I} E^{\rm BO} ({\bf R})
+	= \int \d^3 x ~ n({\bf x}) \frac{Z_I e^2 ({\bf R}_I - {\bf x})}{\left\lvert {\bf R}_I - {\bf x} \right\rvert^3}
+	- \sum_{I \neq J} \frac{Z_I Z_J e^2 ({\b R}_{I}-{\bf R}_{J})}{
+		\left\lvert {\b R}_{I}-{\bf R}_{J} \right\rvert^3}~,
+	\label{eq:hellmannfeynman.force}
+\end{align}
+which is solely determined by the ground-state electron density $n ({\bf x})$ and the nuclear configuration $\bf R$. This result is known as the \emph{Hellmann-Feynman theorem}\CITE{Hellmann, Feynman}, which can also be formulated in more general terms for any parametric dependence of the Hamiltonian on some external quantitiy $\lambda$:
+\begin{theorem}[Hellmann-Feynman]
+	\begin{align}
+		\frac{\d E_\lambda}{\d \lambda}
+			= \frac{\d}{\d \lambda}
+				\Braket{\Psi_\lambda  | \hat H_\lambda | \Psi_\lambda}~.
+		\label{eq:hellmannfeynman.theorem}
+	\end{align}
+\end{theorem}
+We note in passing that while the Hellmann-Feynman theorem is formally correct, in practice there often arise correction terms when non-complete basis sets are used that also depend on the parameter $\lambda$. The most famous correction are the so-called \emph{Pulay forces} that arise in atom centered basissets~\CITE{Pulay1969}.
 
 \subsection{Kohn-Sham Scheme}
+
 
 
 \subsection{Conclusion}
