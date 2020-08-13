@@ -325,18 +325,20 @@ Hohenberg and Kohn further define the \emph{universal functional}
 \end{align}
 i.\,e.,~the contributions to the Hamiltonian which do not depend on the external potential. The ground-state total energy for a given potential function $v$ is then given as
 \begin{align}
-	E_v [n] 
+	E [n] 
 		= \Braket{\Psi [n] | \hat H | \Psi [n]}
-		\equiv F[n] + \int \d^3 x ~ v ({\bf x}) n ({\bf x})~.
+		\equiv F[n] + V^{\rm ext}[n]~,
+		%+ \int \d^3 x ~ v ({\bf x}) n ({\bf x})~.
 	\label{eq:dft.En}
 \end{align}
+where $V^{\rm ext}[n]$ is given by Eq.\,\eqref{eq:dft.Vext.expectation}.
 By virtue of the Raleigh-Ritz variational principle, this functional is minimized for the correct ground-state density $n$ only, and any other density $n'$ that differs from $n$ non-trivially yields a larger energy:
 \begin{align}
-	E_v[n] < E_v [n'] \quad \text{for} \quad n \neq n'~.
+	E[n] < E [n'] \quad \text{for} \quad n \neq n'~.
 \end{align}
 This also means that the true ground-state density for a given potential $v$ can be found by minimizing the total energy function, Eq.\,\eqref{eq:dft.En}:
 \begin{align}
-	n = \arg \min_{n} E_v[n]~
+	n = \arg \min_{n} E[n]~
 	\label{eq:dft.n}
 \end{align}
 under the constraint of fixed particle number imposed by the Lagrange multiplier $\mu$,
@@ -367,7 +369,7 @@ under the constraint of fixed particle number imposed by the Lagrange multiplier
 In the definition of the effective electronic Hamiltonian in Eq.\,\eqref{eq:H.dft.1}, we had neglected the nuclear repulsion $V^{\rm Nuc-Nuc}$ defined in Eq.\,\eqref{eq:Vnuc}. The Born-Oppenheimer potential energy surface defined in Eq.\,\eqref{eq:E^BO} therefore consists of both terms,~i.\,e.,
 \begin{align}
 	E^{\rm BO} ({\bf R}) 
-		= E[n] + \sum_{I < J} \frac{Z_{I} Z_{J} e^{2}}{\left|{\b R}_{I}-{\bf R}_{J}\right|}~.
+		= E[n] + \sum_{I < J} \frac{Z_{I} Z_{J} e^{2}}{\left|{\bf R}_{I}-{\bf R}_{J}\right|}~.
 	\label{eq:E^BO}
 \end{align}
 
@@ -388,7 +390,7 @@ The electronic part is given by
 			= 
 				\underset{I}{\underbrace{\frac{\partial}{\partial {\bf R}_I} E[n]}}
 			+ \underset{II}{\underbrace{
-					\int \d^{3} x ~ \frac{\delta E[n]}{\delta n(\boldsymbol{x})} \frac{\partial n(\boldsymbol{x})}{\partial \boldsymbol{R}_{I}}
+					\int \d^{3} x ~ \frac{\delta E[n]}{\delta n(\boldsymbol{x})} \frac{\partial n(\boldsymbol{x})}{\partial {\bf R}_{I}}
 				}}~,
 		\label{eq:hellmannfeynman.2}
 \end{align}
@@ -396,7 +398,7 @@ where term $II)$ can be evaluated under the assumption of stationarity expressed
 \mbox{$\delta E[n] / \delta n({\bf x}) = -\mu$},
 and using the Leibniz rule, so that
 \begin{align}
-	\int \d^{3} x ~ \frac{\delta E[n]}{\delta n(\boldsymbol{x})} \frac{\partial n(\boldsymbol{x})}{\partial \boldsymbol{R}_{I}}
+	\int \d^{3} x ~ \frac{\delta E[n]}{\delta n(\boldsymbol{x})} \frac{\partial n(\boldsymbol{x})}{\partial {\bf R}_{I}}
 	= -\mu \frac{\partial}{\partial {\bf R}_I} \int \d^{3} x ~ n ({\bf x})
 	= 0~.
 	\label{eq:hellmannfeynman.3}
@@ -412,7 +414,7 @@ In total, we have
 	\frac{\d}{\d {\bf R}_I} E^{\rm BO} ({\bf R})
 	= \int \d^3 x ~ n({\bf x}) \frac{Z_I e^2 ({\bf R}_I - {\bf x})}{\left\lvert {\bf R}_I - {\bf x} \right\rvert^3}
 	- \sum_{I \neq J} \frac{Z_I Z_J e^2 ({\b R}_{I}-{\bf R}_{J})}{
-		\left\lvert {\b R}_{I}-{\bf R}_{J} \right\rvert^3}~,
+		\left\lvert {\bf R}_{I}-{\bf R}_{J} \right\rvert^3}~,
 	\label{eq:hellmannfeynman.force}
 \end{align}
 which is solely determined by the ground-state electron density $n ({\bf x})$ and the nuclear configuration $\bf R$. This result is known as the \emph{Hellmann-Feynman theorem}\CITE{Hellmann, Feynman}, which can also be formulated in more general terms for any parametric dependence of the Hamiltonian on some external quantitiy $\lambda$:
@@ -427,8 +429,55 @@ which is solely determined by the ground-state electron density $n ({\bf x})$ an
 We note in passing that while the Hellmann-Feynman theorem is formally correct, in practice there often arise correction terms when non-complete basis sets are used that also depend on the parameter $\lambda$. The most famous correction are the so-called \emph{Pulay forces} that arise in atom centered basissets~\CITE{Pulay1969}.
 
 \subsection{Kohn-Sham Scheme}
+By introducing density functional theory, we have not solved the many-body problem. However, we have shifted the intricacies of this problem to a \emph{universal} functional $F[n]$ which depends on the electron density $n({\bf x})$ which is a scalar function of three coordinates, $n: \mathds R^3 \rightarrow \mathds R$, and entails a \emph{massive} reduction of complexity compared to working with wavefunctions, which are complex functions of $3N$ variables, $\Psi: \mathds R^{3N} \rightarrow \mathds C$.
+
+In order to proceed, we follow the original argument by Kohn and Sham~\CITE{KohnSham1965} and investigate the universal functional $F[n]$ defined in Eq.\,\eqref{eq:dft.Fn} in more detail. The definition reads
+\begin{align}
+	F[n] 
+		= \Braket{\Psi [n] | \hat T + \hat W | \Psi [n]}
+		\equiv T[n] + W[n]~,
+	\label{eq:dft.Fn.2}
+\end{align}
+where $T[n]$ now denotes the kinetic energy of the electrons expressed as a functional of the density $n ({\bf x})$, and $W[n]$ denotes the electron-electron interaction term. We split this term into two contributions,
+\begin{align}
+	\begin{split}
+	W[n] 
+		&= E^{\rm es} + E^{\rm xc} \\
+		&= \frac{1}{2} \int \mathrm{d}^{3} x ~ 
+			v^{\mathrm{es}}[n](\boldsymbol{x}) n(\boldsymbol{x})+E^{\mathrm{xc}}[n]~,
+	\end{split}
+	\label{eq:dft.KS.W}
+\end{align}
+where $E^{\rm es} [n]$ is the electrostatic (Hartree) energy stemming from a charge distribution $n ({\bf x})$ in the Coulomb potential
+\begin{align}
+	v^{\mathrm{es}}[n](\boldsymbol{x})
+		= \int \mathrm{d}^{3} x^{\prime} \frac{n\left(\boldsymbol{x}^{\prime}\right)}{\left|\boldsymbol{x}-\boldsymbol{x}^{\prime}\right|}~,
+	\label{eq:dft.KS.ves}
+\end{align}
+which is a functional of the density itself. $E^{\rm xc} [n]$ denotes all exchange and correlation effects not captured by $E^{\rm es}$ and is therefore termed the \emph{exchange-correlation energy}. Again, we have only shifted the problem, this time to the unknown functional $E^{\rm xc} [n]$ which we will discuss later.
+In this notation, the total energy functional for the electron system in an external potential reads
+\begin{align}
+	E[n]
+		= T[n] +  E^{\rm es}[n] + E^{\rm xc} [n] + V^{\rm ext}[n]~.
+	\label{eq:dft.Ks.En}
+\end{align}
+
+Let us now define the density $n({\bf x})$ in terms of an \emph{auxiliary} orthonormal set of one-particle wavefunctions $\{ \psi_l ({\bf x}) \}$, such that
+\begin{align}
+	n({\bf x}) = \sum_l f_l \left\lvert \psi_l ({\bf x}) \right\rvert^2~,
+	\label{eq:dft.KS.n(psi)}
+\end{align}
+where ${\bf f}=\left\{f_{l}\right\}$ denote the occupation of each orbital. \REM{refer to thermal ensemble?}
+$$\bf \kappa$$
 
 
+\begin{itemize}
+	\item Write energy contributions,
+	\item define aux. single-particle system,
+	\item obtain KS equations by constrained minimization.
+\end{itemize}
+
+\subsection{Periodic Systems}
 
 \subsection{Conclusion}
 
