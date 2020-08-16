@@ -462,22 +462,158 @@ In this notation, the total energy functional for the electron system in an exte
 	\label{eq:dft.Ks.En}
 \end{align}
 
-Let us now define the density $n({\bf x})$ in terms of an \emph{auxiliary} orthonormal set of one-particle wavefunctions $\{ \psi_l ({\bf x}) \}$, such that
+Let us now define the density $n({\bf x})$ in terms of an \emph{auxiliary} orthonormal set of complex functions $\{ \psi_l ({\bf x}) \}$, such that
 \begin{align}
 	n({\bf x}) = \sum_l f_l \left\lvert \psi_l ({\bf x}) \right\rvert^2~,
 	\label{eq:dft.KS.n(psi)}
 \end{align}
-where ${\bf f}=\left\{f_{l}\right\}$ denote the occupation of each orbital. \REM{refer to thermal ensemble?}
-$$\bf \kappa$$
+where ${\bf f}=\set{f_l : 0 \leq f_l \leq 1}$ denote the occupation of each orbital,~i.\,e.,~a Fermi-like function that represents a thermal ensemble or the 0\,K ground state. We use Eq.\,\eqref{eq:dft.KS.n(psi)} in Eq.\,\eqref{eq:dft.Ks.En} and vary with respect to $\psi^\ast_l ({\bf x})$ under the constraint of keeping the functions $\set{\psi_l}$ normalized via the Lagrange multiplier $\lambda_l$,
+\begin{align}
+	\frac{\delta}{\delta \psi^\ast_l ({\bf x})}
+		\left[
+			T[n] +  E^{\rm es}[n] + E^{\rm xc} [n] + V^{\rm ext}[n]
+			- \lambda_l \left(
+				\int \d^3 x ~ \left\lvert \psi_l ({\bf x}) \right\rvert^2 - 1
+			\right)
+		\right]
+		= 0~.
+	\label{eq:dft.Ks.variation.1}
+\end{align}
+By Eq.\,\eqref{eq:dft.KS.n(psi)} we have
+\begin{align}
+	\frac{\delta n({\bf x})}{\delta \psi^\ast_l ({\bf x}')}
+		&= f_l \psi_l ({\bf x}) \delta ({\bf x} - {\bf x}')~,
+	\label{eq:dft.KS.dn}
+\end{align}
+and therefore by chain rule 
+$\delta / \delta \psi^\ast = (\delta n / \delta \psi^\ast) \delta / \delta n$
+%\begin{align}
+%	\frac{\delta n({\bf x})}{\delta \psi^\ast_l ({\bf x}')}
+%		&= f_l \psi_l ({\bf x}) \delta ({\bf x} - {\bf x}')~,
+%		\label{eq:dft.KS.dn} \\
+%	\frac{\delta T[n]}{\delta \psi^\ast_l ({\bf x})}
+%		&= -\frac{1}{2} f_l \nabla^2 \psi_l ({\bf x})
+%		\label{eq:dft.KS.dT} \\
+%	\frac{\delta E^{\rm es}[n]}{\delta \psi^\ast_l ({\bf x})}
+%		&= v^{\rm es} [n] ({\bf x})
+%		\label{eq:dft.KS.dEes} \\
+%	\frac{\delta E^{\rm xc}[n]}{\delta \psi^\ast_l ({\bf x})}
+%		&= v^{\rm xc} [n] ({\bf x})
+%		\label{eq:dft.KS.dExc} \\
+%	\frac{\delta v^{\rm ext}[n]}{\delta \psi^\ast_l ({\bf x})}
+%		&= v^{\rm ext} ({\bf x})
+%		\label{eq:dft.KS.dEext} \\
+%\end{align}
+\begin{align}
+	\left(
+		-\frac{1}{2} \nabla^2 
+		+ v^{\rm es} [n] ({\bf x})
+		+ v^{\rm xc} [n] ({\bf x})
+		+ v^{\rm ext}  ({\bf x})
+	\right) \psi_l ({\bf x})
+	= \frac{\lambda_l}{f_l} \psi_l ({\bf x})~.
+	\label{eq:dft.KS.1}
+\end{align}
+Here, $-\frac{1}{2} \nabla^2$ is the kinetic operator, $v^{\rm es}$ and $v^{\rm ext}$ are the electrostatic and external potentials defined earlier, and
+\begin{align}
+	v^{\rm xc} [n] ({\bf x})
+		= \frac{\delta E^{\rm xc}[n]}{\delta n ({\bf x})}
+	\label{eq:dft.vxc}
+\end{align}
+is the \emph{exchange-correlation potential} formally defined as the functional derivative of $E^{\rm xc}$ with respect to the density. By summarizing the three potentials entering Eq.\,\eqref{eq:dft.KS.1} as one \emph{effective} potential,
+\begin{align}
+	v^{\rm eff} [n] ({\bf x})
+	\equiv
+		v^{\rm es} [n] ({\bf x})
+		+ v^{\rm xc} [n] ({\bf x})
+		+ v^{\rm ext}  ({\bf x})~,
+	\label{eq:dft.KS.veff}
+\end{align}
+ and denoting $\epsilon_l \equiv \lambda_l / f_l$, we can write
+\begin{align}
+	\left(
+		-\frac{1}{2} \nabla^2 
+		+ v^{\rm eff} [n] ({\bf x})
+	\right) \psi_l ({\bf x})
+	= \epsilon_l \psi_l ({\bf x})~,
+\label{eq:dft.KS.2}
+\end{align}
+which is a one-particle Schr\"odinger-like equation for orbitals $\psi_l$ with eigenvalues $\epsilon_l$ in an effective potential $v^{\rm eff}[n]$ which is a functional of the density $n$ given in terms of the orbitals by Eq.\,\eqref{eq:dft.KS.n(psi)}. Equation\,\eqref{eq:dft.KS.2} therefore needs to be solved \emph{self-consistently} by starting from an initial guess for the density $n^0$ to set up the effective potential, and solving for $(\psi_l, \epsilon_l)$ until convergence. That the density $n$ of the \emph{interacting} many-particle systems can be obtained from the \emph{non-interacting} single-particle for the Kohn-Sham orbitals $\psi_l$ is ensured by the \emph{Kohn-Sham theorem}~\CITE{KohnSham1965,GrossDreizler1990}.
 
+Given that the solution $\set{(\psi_l, \epsilon_l}$ is known, Eq.\,\eqref{eq:dft.KS.2} can be used to express the kinetic energy in terms of the density and eigenvalues $\epsilon_l$ by summing and integrating with $\sum_l \int \d^3 x~\psi^\ast_l ({\bf x})$ and using the orthonormality of the orbitals $\psi_l$, so that
+\begin{align}
+	T[n] 
+		\equiv - \frac{1}{2}\sum_l \int \d^3 x ~ \psi^\ast_l ({\bf x}) \nabla^2 \psi({\bf x})
+		\stackrel{\eqref{eq:dft.KS.2}}{=} 
+			\sum_l \epsilon_l 
+			- \int \d^3 x ~ v^{\rm eff}[n] ({\bf x}) n({\bf x})~.
+	\label{eq:dft.KS.Tn}
+\end{align}
+The total energy in terms of the Kohn-Sham eigenvalues $\set{\epsilon_l}$ and density $n ({\bf x}) = \sum_l \lvert \psi_l ({\bf x}) \rvert^2$ is then given as
+\begin{align}
+	E[n]
+		&\stackrel{\phantom{\eqref{eq:dft.KS.Tn}}}{=} 
+			T[n] 
+			+ \frac{1}{2} \int \d^3 x ~ v^{\rm es} [n] ({\bf x}) n ({\bf x})
+			+ E^{\rm xc}[n]
+			+ \int \d^3 x ~ v^{\rm ext} ({\bf x}) n ({\bf x})
+			\nonumber \\
+		&\stackrel{\eqref{eq:dft.KS.Tn}}{=}
+			\sum_l \epsilon_l 
+			- \frac{1}{2} \int \d^3 x ~ v^{\rm es} [n] ({\bf x}) n ({\bf x})
+			+ E^{\rm xc}[n]
+			- \int \d^3 x ~ v^{\rm xc}[n] ({\bf x}) n ({\bf x})~.
+	\label{eq:dft.KS.En}
+\end{align}
 
-\begin{itemize}
-	\item Write energy contributions,
-	\item define aux. single-particle system,
-	\item obtain KS equations by constrained minimization.
-\end{itemize}
+\subsection{Approximations to the exchange-correlation energy}
+We are finally in position to introduce approximations to the exchange-correlation energy functional $E^{\rm xc}[n]$ from which the corresponding potential can be obtained by the functional derivative with respect to the density as expressed in Eq.\,\eqref{eq:dft.KS.veff}. Indeed, the very success of the Kohn-Sham DFT scheme probably can be traced back to the fact that simple approximations to $E^{\rm xc}[n]$ lead to reasonable results for a large class of systems. 
+
+Let us now define an exchange-correlation energy density via
+\begin{align}
+	E^{\rm xc}[n] 
+		= \int \d^3 x ~ e^{\rm xc} \left[ n \right] ({\bf x})~,
+\label{eq:dft.xc.1}
+\end{align}
+where the density $e^{\rm xc} \left[ n \right] ({\bf x})$ is a functional of the density by itself. 
+The most straighforward way to approximate $e^{\rm xc}[n] ({\bf x})$ is to replace the \emph{functional} $e^{\rm xc} [n] ({\bf x})$ by a \emph{function} of the local density,
+\begin{align}
+	e^{\rm xc} [n] ({\bf x})
+		\approx e^{\rm xc}_{\rm LDA} \left( n({\bf x}) \right)~.
+	\label{eq:dft.exc.lda.1}
+\end{align}
+This approximation is called the \emph{local density approximation} (LDA), and the resulting exchange-correlation energy reads\footnote{
+	Some authors prefer to write $e^{\rm xc}(n) = n \tilde e^{\rm xc} (n)$, such that
+	\begin{align*}
+		E^{\rm xc}_{\rm LDA} = \int \d^3 x ~ n({\bf x}) \tilde e^{\rm xc} (n ({\bf x}))~.
+	\end{align*}}
+\begin{align}
+	E^{\rm xc}_{\rm LDA}[n] 
+		= \int \d^3 x ~ e^{\rm xc}_{\rm LDA} \left(n ({\bf x}) \right)~.
+	\label{eq:dft.LDA.1}
+\end{align}
+The energy density $e^{\rm xc}_{\rm LDA} \left(n ({\bf x}) \right)$ is usually taken to be the exchange-correlation energy density of a homogeneous electron gas obtained from higher-level theory approaches. The LDA is (by construction) exact in the limit of vanishing density gradient, $\lvert \nabla n ({\bf x}) \rvert / n({\bf x}) \rightarrow 0$, but yields surprisingly good results under circumstances where the density is non-homogeneous as well.\REM{what does that mean? Chp. 7.2 Gross/Greizler}\CITE{Gross/Dreizler}
+
+In the spirit of the original work by Hohenberg and Kohn, and Kohn and Sham, improvements on the LDA can be constructed by going beyond the local density and taking into account gradients of the density as well,
+\begin{align}
+	e^{\rm xc} [n] ({\bf x})
+		\approx e^{\rm xc}_{\rm GGA} \left( n({\bf x}), \nabla n({\bf x}) \right)~.
+	\label{eq:dft.exc.gga.1}
+\end{align}
+Again, the full functional $e^{\rm xc}[n]$ is replaced by a function of the density and its gradient. This approximation is called \emph{generalized gradient approximation} (GGA), an the resulting energy is usually written in the form
+\begin{align}
+		E^{\rm xc}_{\rm GGA}[n] 
+		= \int \d^3 x ~ e^{\rm x}_{\rm hom} \left(n ({\bf x}) \right) 
+			F^{\rm xc} \left(n ({\bf x}), \lvert \nabla n ({\bf x})\rvert \right)~,
+		\label{eq:dft.GGA.1}
+\end{align}
+where $e^{\rm x}_{\rm hom}(n)$ is the exchange energy density of a homogeneous electron gas, and $F^{\rm xc}(n, \nabla n)$ is an \emph{enhancement factor}.
+\CITE{[1] J. P. Perdew, J. A. Chevary, S. H. Vosko, K. A. Jackson, M. R. Pederson, D. J. Singh, and C. Fiolhais, Phys. Rev. B 46, 6671 (1992).}
+\CITE{[1] J. P. Perdew, K. Burke, and M. Ernzerhof, Phys. Rev. Lett. 77, 3865 (1996).}
 
 \subsection{Periodic Systems}
+
+
 
 \subsection{Conclusion}
 
