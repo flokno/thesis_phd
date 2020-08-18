@@ -41,6 +41,7 @@
 % theorems
 \usepackage{amsthm}
 \newtheorem*{theorem}{Theorem}
+\newtheorem*{thm}{Theorem}
 
 % https://en.wikibooks.org/wiki/LaTeX/Title_Creation
 \title{
@@ -419,12 +420,11 @@ In total, we have
 \end{align}
 which is solely determined by the ground-state electron density $n ({\bf x})$ and the nuclear configuration $\bf R$. This result is known as the \emph{Hellmann-Feynman theorem}\CITE{Hellmann, Feynman}, which can also be formulated in more general terms for any parametric dependence of the Hamiltonian on some external quantitiy $\lambda$:
 \begin{theorem}[Hellmann-Feynman]
-	\begin{align}
-		\frac{\d E_\lambda}{\d \lambda}
-			= \frac{\d}{\d \lambda}
-				\Braket{\Psi_\lambda  | \hat H_\lambda | \Psi_\lambda}~.
-		\label{eq:hellmannfeynman.theorem}
-	\end{align}
+\begin{align}
+	\frac{\d E_{\lambda}}{\d \lambda}
+		= \frac{\d}{\d \lambda}\left\langle\Psi_{\lambda} \left|\hat{H}_{\lambda}\right| \Psi_{\lambda} \right\rangle
+		= \left\langle\Psi_{\lambda} \left| \frac{\d \hat{H}_{\lambda}}{\d \lambda} \right| \Psi_{\lambda} \right\rangle~.
+\end{align}
 \end{theorem}
 We note in passing that while the Hellmann-Feynman theorem is formally correct, in practice there often arise correction terms when non-complete basis sets are used that also depend on the parameter $\lambda$. The most famous correction are the so-called \emph{Pulay forces} that arise in atom centered basissets~\CITE{Pulay1969}.
 
@@ -612,8 +612,123 @@ where $e^{\rm x}_{\rm hom}(n)$ is the exchange energy density of a homogeneous e
 \CITE{[1] J. P. Perdew, K. Burke, and M. Ernzerhof, Phys. Rev. Lett. 77, 3865 (1996).}
 
 \subsection{Periodic Systems}
+So far, we did not specify the external potential $v^{\rm ext} ({\bf x})$ entering the Kohn-Sham equation \eqref{eq:dft.KS.1} beyond stating that it describes the arrangement of nuclei. For (finite) molecules and clusters, no further statements need to be made and a self-consistent solution to Eq.\,\eqref{eq:dft.KS.1} can be attempted from here. For (practically infinite) bulk systems and crystals on the other hand, further statements need to be made.
 
+Let us assume that the configuration of the nuclei is in a perfect periodic arrangement described by the 
+%\emph{unit cell}
+%\begin{align}
+%	\text{unit cell}
+%		= \set{{\bf x} = f^i {\bf a}_i : f^i \in \mathds R^{[0, 1)}}~,
+%	\label{eq:dft.Bloch.unitcell}
+%\end{align}
+%where 
+\emph{Bravais vectors}
+\begin{align}
+	{\bf R}_{\bf n} 
+		= \sum_{i=1}^{3} n^i {\bf a}_i~,
+	\label{eq:Rn}
+\end{align}
+where $\set{{\bf a}_i}$ is a basis that spans
+the \emph{unit cell},
+\begin{align}
+	\text{unit cell}
+		= \set{{\bf x} = f^i {\bf a}_i : f^i \in \mathds R^{[0, 1)}}~,
+	\label{eq:dft.Bloch.unitcell}
+\end{align}
+and the full crystal is spanned by the unit cell translated by all possible translations $\bf R_n$ given by Eq.\,\eqref{eq:Rn} with integer numbers $\set{n^i : n^i \in \mathds{N}^{[0, N_i)}}$ smaller than some large but finite value $N_i$ for each basis vector ${\bf a}_i$. The periodicity of the crystal is characterized by the condition that any translation by $\bf R_n$ maps the crystal back onto itself such that
+\begin{align}
+	v^{\rm ext} ({\bf x} + {\bf R_n}) 
+		= v^{\rm ext} ({\bf x})~.
+	\label{eq:dft.Bloch.1}
+\end{align}
+By definition of the effective potential entering the Kohn-Sham equations \eqref{eq:dft.KS.2}, $v^{\rm eff} [n] ({\bf x})$ shares this periodicity. We can therefore formulate a \emph{Bloch theorem}\footnote{Cf.~Sec.\,\ref{sec:BlochTheorem} for an informal proof.}
+for the Kohn-Sham orbitals $\psi_l ({\bf x})$,~i.\,e.,~solutions to Eq.\,\eqref{eq:dft.KS.2} can be separated into independent equations labelled by a quantum number $\bf k$ with solutions
+\begin{align}
+	\psi_{{\bf k} l} ({\bf x}) 
+		= {\rm e}^{\im {\bf k} \cdot {\bf x}} u_{{\bf k} l} ({\bf x})
+	\label{eq:dft.Bloch.2}
+\end{align}
+where $u_{{\bf k} l}$ are periodic functions satisfying
+\begin{align}
+	u_{{\bf k} l} ({\bf x} + {\bf R_n})
+		= u_{{\bf k} l} ({\bf x})~.
+	\label{eq:dft.Bloch.3}
+\end{align}
 
+\subsubsection{Born-von Karman Boundary Conditions}
+To ensure normalizability of the functions $\psi_{{\bf k}l}$, one additionally imposes the \emph{Born-von Karman boundary conditions}
+\begin{align}
+	\psi_{{\bf k}l} ({\bf x} + N_i {\bf a}_i) 
+		= \psi_{{\bf k}l} ({\bf x})
+	\label{eq:dft.Bloch.4}
+\end{align}
+where $N_i$ denotes the number of repetitions along direction ${\bf a}_i$. The domain $V$ of all functions and functionals appearing the Kohn-Sham equations thereby becomes a parallelepiped of size 
+$V = N_1 N_2 N_3 \, {\bf a}_1 \cdot ({\bf a}_2 \times {\bf a}_3)$ with periodically connected edges. The ideal, infinite crystal is obtained in the limit $N_i \rightarrow \infty$.
+Using the periodic boundary condition expressed by Eq.\,\eqref{eq:dft.Bloch.4} in the Bloch functions given by Eq.\,\eqref{eq:dft.Bloch.2}, and the periodicity of the functions $u_{{\bf k} l}$, one finds that
+\begin{align}
+%	{\rm e}^{\im {\bf k} \cdot ({\bf x} + N_i {\bf a}_i)} u_{{\bf k} l} ({\bf x})
+%		&= {\rm e}^{\im {\bf k} \cdot {\bf x}} u_{{\bf k} l} ({\bf x}) \nonumber \\
+%	\implies
+%		{\rm e}^{\im {\bf k} \cdot  N_i {\bf a}_i} 
+%			&= 1 \nonumber \\
+%	\implies
+		{\bf k} \cdot {\bf a}_i
+			&= \frac{2 \pi}{N_i} m_i~,\quad\text{with } m_i \in \mathds N^{[0, N_i)}~.
+	\label{eq:dft.Bloch.5}
+\end{align}
+In total there are $N_1 N_2 N_3$ permissible values of $\bf k$ labelled by ${\bf m} = (m_1, m_2, m_3)$ that can be expressed in terms of the \emph{reciprocal lattice vectors}~\cite{Sands2002}
+\begin{align}
+	{\bf b}^i 
+		= 2 \pi \varepsilon^{ijk} \frac{{\bf a}_j \times {\bf a}_k}{{\bf a}_1 \cdot ({\bf a}_2 \times {\bf a}_3)} ~,
+	\label{eq:dft.Bloch.bi}
+\end{align}
+where $\varepsilon^{ijk}$ denotes the Levi-Civita symbol enforcing the correct ordering of $ijk$. The complete set of $\bf k$-values is
+\begin{align}
+	{\bf k}_{\bf m} 
+		= \sum_{i=1}^3 \frac{m_i}{N_i} {\bf b}^i~.
+	\label{eq:dft.Bloch.k_m}
+\end{align}
+The space spanned by the $\set{{\bf b}_i}$,~i.\,e.,~the space containing all permissible values of $\b k$, is called the \emph{first Brillouin zone}. The values of $\bf k$ given by Eq.\,\eqref{eq:dft.Bloch.k_m} are those sampled in real-space simulation in a box of the given size,~i.\,e.,~the \emph{Born-von Karman cell}.
+
+\subsubsection{ALTERNATIVE TAKE: Born-von Karman Boundary Conditions}
+To ensure normalizability of the functions $\psi_{{\bf k}l}$, one additionally imposes the \emph{Born-von Karman boundary conditions}
+\begin{align}
+\psi_{{\bf k}l} ({\bf x} + {\bf A}_i) 
+= \psi_{{\bf k}l} ({\bf x})
+\label{eq:dft.Bloch.4}
+\end{align}
+where each ${\bf A}_i$ is a linear combination of the primitive basis vectors $\set{{\bf a}_i}$,
+\begin{align}
+	{\bf A}_i = S_i^{~j} {\bf a}_j\quad\text{with } S_i^{~j} \in \mathds Z~,
+\end{align}
+where $S$ is a non-singular matrix with integer elements. The space spanned by the $\set{{\bf A}_i}$ is parallelepiped of volume $V = N \, {\bf a}_1 \cdot ({\bf a}_2 \times {\bf a}_3)$, where $N = \det S$ is the number of unit cells that fit into the enlarged cell. This cell is therefore often called \emph{supercell}, and the matrix $S$ is denoted as a \emph{supercell matrix}.
+With the Born-von Karman boundary conditions, the domain of all functions and functionals appearing in the Kohn-Sham equations become restricted to the supercell. The ideal, infinite crystal is obtained in the limit $N \rightarrow \infty$.
+Using the periodic boundary condition expressed by Eq.\,\eqref{eq:dft.Bloch.4} in the Bloch functions given by Eq.\,\eqref{eq:dft.Bloch.2}, and the periodicity of the functions $u_{{\bf k} l}$, one finds that
+\begin{align}
+%	{\rm e}^{\im {\bf k} \cdot ({\bf x} + N_i {\bf a}_i)} u_{{\bf k} l} ({\bf x})
+%		&= {\rm e}^{\im {\bf k} \cdot {\bf x}} u_{{\bf k} l} ({\bf x}) \nonumber \\
+%	\implies
+%		{\rm e}^{\im {\bf k} \cdot  N_i {\bf a}_i} 
+%			&= 1 \nonumber \\
+%	\implies
+{\bf k} \cdot {\bf A}_i
+&= 2 \pi m_i\quad\text{with } m_i \in \mathds N \text{ such that } 
+	\forall i: {\bf k} \cdot {\bf a}_i \leq 2 \pi~.
+\label{eq:dft.Bloch.5}
+\end{align}
+In total there are $N_1 N_2 N_3$ permissible values of $\bf k$ labelled by ${\bf m} = (m_1, m_2, m_3)$ that can be expressed in terms of the \emph{reciprocal lattice vectors}~\cite{Sands2002}
+\begin{align}
+{\bf b}^i 
+= 2 \pi \varepsilon^{ijk} \frac{{\bf a}_j \times {\bf a}_k}{{\bf a}_1 \cdot ({\bf a}_2 \times {\bf a}_3)} ~,
+\label{eq:dft.Bloch.bi}
+\end{align}
+where $\varepsilon^{ijk}$ denotes the Levi-Civita symbol enforcing the correct ordering of $ijk$. The complete set of $\bf k$-values is
+\begin{align}
+{\bf k}_{\bf m} 
+= \sum_{i=1}^3 \frac{m_i}{N_i} {\bf b}^i~.
+\label{eq:dft.Bloch.k_m}
+\end{align}
+The space spanned by the $\set{{\bf b}_i}$,~i.\,e.,~the space containing all permissible values of $\b k$, is called the \emph{first Brillouin zone}. The values of $\bf k$ given by Eq.\,\eqref{eq:dft.Bloch.k_m} are those sampled in real-space simulation in a box of the given size,~i.\,e.,~the \emph{Born-von Karman cell}.
 
 \subsection{Conclusion}
 
@@ -653,5 +768,53 @@ where $e^{\rm x}_{\rm hom}(n)$ is the exchange energy density of a homogeneous e
 
 \bibliography{references}
 \bibliographystyle{unsrt}
+
+\appendix
+\chapter{Bloch Theorem}
+\label{sec:BlochTheorem}
+The Schr\"odinger equation in 1d reads
+\begin{align}
+	\left( - \frac{\nabla^2}{2m} + V(x) \right) \psi (x) = E_l \psi (x)~.
+	\label{eq:app.bloch.se}
+\end{align}
+In a periodic potential,
+\begin{align}
+	V(x + a) = V(x)~,
+	\label{eq:app.bloch.potential}
+\end{align}
+the probability density for a given eigenstate $\psi$ must share the periodicity of the potential,
+\begin{align}
+	\left\lvert \psi (x + a) \right\rvert^2 = \lvert \psi (x) \rvert^2~.
+\end{align}
+The function $\psi$ can therefore be written as
+\begin{align}
+	\psi (x) = c(x) u(x)~,
+\end{align}
+with a real, periodic function
+\begin{align}
+	u: \mathds R \rightarrow \mathds R
+	\quad\text{with}\quad u(x + a) = u(x)~,
+\end{align}
+and a complex function of unit modulus,
+\begin{align}
+	c: \mathds R \rightarrow \mathds C
+	\quad\text{with}\quad \left\lvert c(x) \right\rvert = 1~.
+\end{align}
+We label non-equivalent solutions by the number $k$, then
+\begin{align}
+	c_k (x) = {\rm e}^{\im k x}
+	\quad\text{with}\quad k \in \left[0, \frac{2 \pi}{a} \right)
+\end{align}
+is a unique map from the domain $x \in [0, a)$ to the complex unit circle $\set{z \in \mathds C : \lvert z \rvert = 1}$. We therefore formulate the
+\begin{thm}[Bloch]
+	Solutions to the Schr\"odinger equation~\eqref{eq:app.bloch.se} with a periodic potential of periodicity $a$ are of the form
+	\begin{align*}
+		\psi_k (x) = {\rm e}^{\im k x} u_k (x)~,
+	\end{align*}
+	with a real, periodic function $u_k$ for each $k$ in the first Brillouin zone,
+	\begin{align*}
+		k \in \left[0, \frac{2 \pi}{a} \right)~.
+	\end{align*}
+\end{thm}
 
 \end{document}
