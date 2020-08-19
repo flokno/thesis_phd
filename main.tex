@@ -774,7 +774,7 @@ The space spanned by the $\set{{\bf b}_i}$,~i.\,e.,~the space containing all per
 \label{sec:BlochTheorem}
 The Schr\"odinger equation in 1d reads
 \begin{align}
-	\left( - \frac{\nabla^2}{2m} + V(x) \right) \psi (x) = E_l \psi (x)~.
+	\hat H \psi (x) = \left( - \frac{\nabla^2}{2m} + V(x) \right) \psi (x) = E \psi (x)~.
 	\label{eq:app.bloch.se}
 \end{align}
 In a periodic potential,
@@ -782,10 +782,17 @@ In a periodic potential,
 	V(x + a) = V(x)~,
 	\label{eq:app.bloch.potential}
 \end{align}
-the probability density for a given eigenstate $\psi$ must share the periodicity of the potential,
+the periodicity can be expressed by stating that the translation operator $\hat T_a$ defined by its action,
 \begin{align}
-	\left\lvert \psi (x + a) \right\rvert^2 = \lvert \psi (x) \rvert^2~.
+	\hat T_a f(x) = f(x + a)~,
+	\label{eq:app.bloch.Ta}
 \end{align}
+commutes with the Hamiltonian,
+\begin{align}
+	\left[ \hat H , \hat T_a\right] = 0~.
+	\label{eq:app.bloch.commute}
+\end{align}
+The eigenstates $\psi (x)$ of $\hat H$ are therefore also eigenstates of $\hat T_a$~\cite{Basdevant2000}. The translation operator is unitary, $\D{\hat T}_a = \hat{T}_a^{-1}$, but not hermitian. The eigenvalues $\lambda$ associated with $\hat T_a$ are thus complex numbers. By definition, one has \mbox{$\psi ( x + na ) = \lambda^n \psi(x)$}. Requiring bounded solutions, $\lim_{x \rightarrow \infty} \lvert \psi (x) \rvert < \infty$, imposes the condition $\lvert \lambda \rvert = 1$.
 The function $\psi$ can therefore be written as
 \begin{align}
 	\psi (x) = c(x) u(x)~,
@@ -805,7 +812,7 @@ We label non-equivalent solutions by the number $k$, then
 	c_k (x) = {\rm e}^{\im k x}
 	\quad\text{with}\quad k \in \left[0, \frac{2 \pi}{a} \right)
 \end{align}
-is a unique map from the domain $x \in [0, a)$ to the complex unit circle $\set{z \in \mathds C : \lvert z \rvert = 1}$. We therefore formulate the
+is a unique map from the domain $x \in [0, a)$ to the complex unit circle $\set{z \in \mathds C : \lvert z \rvert = 1}$. It then holds that $\hat T_a \psi_k (x) = {\rm e}^{\im k a} \psi(x)$,~i.\,e.,~$\psi_k$ is an eigenfunction of $\hat T_a$ with eigenvalue $\lambda = {\rm e}^{\im k a}$. We formulate the
 \begin{thm}[Bloch]
 	Solutions to the Schr\"odinger equation~\eqref{eq:app.bloch.se} with a periodic potential of periodicity $a$ are of the form
 	\begin{align*}
@@ -816,5 +823,10 @@ is a unique map from the domain $x \in [0, a)$ to the complex unit circle $\set{
 		k \in \left[0, \frac{2 \pi}{a} \right)~.
 	\end{align*}
 \end{thm}
+The theorem is trivially extended to the 3d case by using the multiplication rule
+\begin{align}
+	\hat{T}_{{\bf a} + {\bf b}} f({\bf x}) = \hat{T}_{\bf a} \hat{T}_{\bf b} f({\bf x}) \equiv f({\bf x} + {\bf a} + {\bf b})~.
+\end{align}
+A more rigorous proof in terms of representation theory can be found,~e.\,g.,~in~\cite{Dresselhaus2007}.
 
 \end{document}
