@@ -124,7 +124,7 @@ is the kinetic energy operator for electrons of mass $m_{\rm e}$ with momentum o
         = \sum_{i < j} \frac{e^{2}}{\left|\hat{\b r}_{i}-\hat{\bf r}_{j}\right|}~,
     \label{eq:Ve}
 \end{align}
-is the Coulombic electron-electron repulsion operator with the electronic position operators $\hat{\bf r_i}$ and the elementary charge $e$. 
+is the Coulombic electron-electron repulsion operator with the electronic position operators $\hat{\bf r}_i$ and the elementary charge $e$. 
 The Coulomb attraction between the negatively charged electrons and the positively charged nuclei reads
 \begin{align}
     \hat V^{\rm e-Nuc}
@@ -180,18 +180,19 @@ The full (time-independent) many-body Schroedinger equation reads
     \label{eq:Schroedinger1}
 \end{align}
 with ground-state eigenvalues and many-body wave functions $E$ and \mbox{$\psi ({\bf r}, {\bf R})$},
-where \mbox{${\bf r} = ({\bf r}_i, \ldots, {\bf r}_{N_{\rm e}})$} denotes all electronic coordinates, and ${\bf R} = ({\bf R}_i, \ldots, {\bf R}_{N_{\rm Nuc}})$ all nuclear coordinates, respectively. According to Eq.\,\eqref{eq:H=H0+T}, we expand the wave functions in solutions to the Hamiltonian $H^0$,
+where \mbox{${\bf r} = ({\bf r}_i, \ldots, {\bf r}_{N_{\rm e}})$} denotes all electronic coordinates, and ${\bf R} = ({\bf R}_i, \ldots, {\bf R}_{N_{\rm Nuc}})$ all nuclear coordinates, respectively. According to Eq.\,\eqref{eq:H=H0+T}, we expand the wave functions $\psi ({\bf r}, {\bf R})$ in a complete set of orthonormal basis functions $\phi_l$,
+\begin{align}
+\psi ({\bf r}, {\bf R}) = \sum_l \chi_l ({\bf R}) \phi_l ({\bf r}, {\bf R})~,
+\label{eq:psi_expansion_phi}
+\end{align}
+where the $\phi_l$ are the solutions to the Hamiltonian $H^0$,
 \begin{align}
     H^0 \phi_l ({\bf r}, {\bf R})
-        = E^0_l ({\bf R}) \phi_l ({\bf r}, {\bf R})~,
+        = E^0_l ({\bf R}) \phi_l ({\bf r}, {\bf R})~.
     \label{eq:Hsolution1}
 \end{align}
-where the dependence on $\bf R$ is parametric,~i.\,e.,~Eq.\,\eqref{eq:Hsolution1} is solved for a given nuclear configuration $\bf R$.
-The full solution $\psi ({\bf r}, {\bf R})$ is given as
-\begin{align}
-    \psi ({\bf r}, {\bf R}) = \sum_l \chi_l ({\bf R}) \phi_l ({\bf r}, {\bf R})~.
-    \label{eq:psi_expansion_phi}
-\end{align}
+The dependence of $\phi_l$ and the eigenvalue $E_l^0({\bf R})$ on $\bf R$ is parametric,~i.\,e.,~Eq.\,\eqref{eq:Hsolution1} is solved for a given nuclear configuration $\bf R$.
+
 The functions $\chi_l$ are to be determined by using Eq.\,\eqref{eq:psi_expansion_phi} in Eq.\,\eqref{eq:Schroedinger1},
 \begin{align}
     (H - E) \psi ({\bf r}, {\bf R})
@@ -199,7 +200,7 @@ The functions $\chi_l$ are to be determined by using Eq.\,\eqref{eq:psi_expansio
         &= \sum_l (E^0_l({\bf R}) + T^{\rm Nuc} - E) \chi_l ({\bf R}) \phi_l ({\bf r}, {\bf R}) \\
     = 0 \nonumber~,
 \end{align}
-and integrating with $\int \d^3 r ~ \phi^\ast_m ({\bf r}, {\bf R})$, so that
+and integrating with $\int \d^3 r ~ \phi^\ast_m ({\bf r}, {\bf R})$ using their orthonormality, so that
 \begin{align}
     \left( T^{\rm Nuc} + E^0_m({\bf R}) \right) \chi_m ({\bf R})
         + \sum_l A_{ml} ({\bf R}) \chi_l ({\bf R})
@@ -239,7 +240,7 @@ Pictorially, the electrons move \emph{adiabatically} with the nuclei, hence the 
 \subsection{Density Functional Theory}
 \epigraph{\singlespacing \it ``It is my sense that at the present time DFT is the method of choice for systems consisting of many (\,$\gtrsim 5$) atoms and for smaller systems, when moderate accuracies are sufficient.''}{W.~Kohn, 1993}
 
-In the previous chapter, it was tacitly assumed that the electronic Schr\"odinger equation \eqref{eq:Hsolution1} yielding the effective potential for the nuclei can be solved. Finding an exact solution to this equation is, however, infeasible for more than a few electrons. We will now introduce \emph{density functional theory} (DFT) as a framework for making approximations that enable to find a first-principles electronic potential energy surface $E^0_l ({\bf R})$ for atomic systems with order of magnitudes more electrons.
+In the previous chapter, it was tacitly assumed that the electronic Schr\"odinger equation \eqref{eq:Hsolution1} yielding the effective potential for the nuclei can be solved. Finding an exact solution to this equation is, however, infeasible for more than a few electrons. We will now introduce \emph{density functional theory} (DFT) as a framework for making approximations that enable to find a first-principles electronic potential energy surface $E^{\rm BO} ({\bf R})$ for atomic systems with order of magnitudes more electrons.
 
 To set the stage, we rewrite the electronic Schr\"odinger equation \eqref{eq:Hsolution1}:
 \begin{align}
@@ -277,12 +278,13 @@ Any state $\Ket{\Psi}$ maps to an electron density $n_\Psi ({\bf x})$ via the de
 such that
 \begin{align}
 	n_\Psi({\bf x}) 
-	&\equiv \Braket{\Psi | \hat n({\bf x}) | \Psi} \\
-	&= \sum_i \int \d^3 r_1 \cdots \d^3 r_{i-1} \d^3 r_{i+1} \cdots \d^3 r_{N} ~ 
-\left\lvert 
-\Psi ({\bf r}_1, \ldots, {\bf r}_{i-1}, {\bf x}, {\bf r}_{i+1}, \ldots, {\bf r}_N) 
-\right\rvert^2~.
+	\equiv \Braket{\Psi | \hat n({\bf x}) | \Psi} 
+	= N \int \d^3 r_2 \cdots \d^3 r_{N} ~ 
+	\left\lvert 
+	\Psi ({\bf x}, {\bf r}_2, \ldots, {\bf r}_N) 
+	\right\rvert^2~,
 \end{align}
+where it was used that the arguments of $\lvert \Psi ({\bf r}_1, \ldots, {\bf r}_N) \rvert^2$ can be arbitrarily permuted.
 We note that ${\bf x} \in \mathds{R}^3$ denotes a point in real space, whereas ${\bf r} = ({\bf r}_1, \ldots, {\bf r}_N)$ denotes the positions of electrons as before.
 %\begin{align}
 %	\braket{\Psi | n_i({\bf r}) | \Psi} 
@@ -306,16 +308,16 @@ It follows that the expectation value of Eq.\,\eqref{eq:Vext} is a functional of
 		= \int \d^3 x ~ v^{\rm ext} ({\bf x}) \, n_\Psi ({\bf x})~.
 		\label{eq:dft.Vext.expectation}
 \end{align}
-As $n_\Psi$ is obtained from the solution $\Ket{\Psi}$ of Eq.\,\eqref{eq:SE.dft.1} and the term $\hat V^{\rm ext}$ in the Hamiltonian given by Eq.\,\eqref{eq:H.dft.1} is solely determined by the external potential funktion $v^{\rm ext} ({\bf x})$ via Eq.\,\eqref{eq:Vext}, it naturally follows that $n_\Psi ({\bf r})$ is a functional of $v^{\rm ext} ({\bf x})$. In other words, there is a map between the set of external potentials $\mathds V = \set{v^{\rm ext}}$, and the set of eigensolutions $\mathds P = \set{\Psi}$ and their corresponding densities $\mathds N = \set{n_\Psi}$:
+As $n_\Psi$ is obtained from the solution $\Ket{\Psi}$ of Eq.\,\eqref{eq:SE.dft.1} and the term $\hat V^{\rm ext}$ in the Hamiltonian given by Eq.\,\eqref{eq:H.dft.1} is solely determined by the external potential funktion $v^{\rm ext} ({\bf x})$ via Eq.\,\eqref{eq:Vext}, it naturally follows that $n_\Psi ({\bf r})$ is a functional of $v^{\rm ext} ({\bf x})$. In other words, there is a map between the set of external potentials $\mathbb V = \set{v^{\rm ext}}$, and the set of eigensolutions $\mathbb P = \set{\Psi}$ and their corresponding densities $\mathbb N = \set{n_\Psi}$:
 \begin{align}
-	M: \mathds V \rightarrow \mathds N~.
+	M: \mathbb V \rightarrow \mathbb N~.
 	\label{eq:dft.map.1}
 \end{align}
 
 \subsubsection{Hohenberg-Kohn}
-Hohenberg and Kohn were able to show that, for non-degenerate ground states $\Psi \equiv \Psi_0$,\footnote{Kohn was later able to loosen the requirement of non-degeneracy~\CITE{Kohn1985}.} there exists the \emph{inverse map} from ground-state densities $\mathds N_0$ to potential functions $\mathds V$, and that this map is bijective~\CITE{HohenbergKohn64}:
+Hohenberg and Kohn were able to show that, for non-degenerate ground states $\Psi \equiv \Psi_0$, there exists the \emph{inverse map} from ground-state densities $\mathbb N_0$ to potential functions $\mathbb V$, and that this map is bijective~\CITE{HohenbergKohn64}:\footnote{Kohn was later able to loosen the requirement of non-degeneracy~\CITE{Kohn1985}.}
 \begin{align}
-	M^{-1}: \mathds N_0 \rightarrow \mathds V~. 
+	M^{-1}: \mathbb N_0 \rightarrow \mathbb V~. 
 \end{align}
 The beauty of this theorem is that it establishes a one-to-one correspondence between the \emph{ground-state density} $n_0 ({\bf x})$ and the external potential function $v^{\rm ext} ({\bf x})$ which, in turn, describes the full many-body problem via Eq.\,\eqref{eq:H.dft.1}. For example, the ground-state wavefunctions $\Psi_0$ are functionals of $n_0$, as well as the expectation value of any ground-state observable. In the following, we will stay with ground-state densities and denote them simply by $n ({\bf x}) \equiv n_0 ({\bf x})$.
 
@@ -337,9 +339,9 @@ By virtue of the Raleigh-Ritz variational principle, this functional is minimize
 \begin{align}
 	E[n] < E [n'] \quad \text{for} \quad n \neq n'~.
 \end{align}
-This also means that the true ground-state density for a given potential $v$ can be found by minimizing the total energy function, Eq.\,\eqref{eq:dft.En}:
+This also means that the true ground-state density for a given potential $v$ can be found by minimizing the total energy function, Eq.\,\eqref{eq:dft.En},
 \begin{align}
-	n = \arg \min_{n} E[n]~
+	n = \arg \min_{n} E[n]~,
 	\label{eq:dft.n}
 \end{align}
 under the constraint of fixed particle number imposed by the Lagrange multiplier $\mu$,
@@ -429,7 +431,7 @@ which is solely determined by the ground-state electron density $n ({\bf x})$ an
 We note in passing that while the Hellmann-Feynman theorem is formally correct, in practice there often arise correction terms when non-complete basis sets are used that also depend on the parameter $\lambda$. The most famous correction are the so-called \emph{Pulay forces} that arise in atom centered basissets~\CITE{Pulay1969}.
 
 \subsection{Kohn-Sham Scheme}
-By introducing density functional theory, we have not solved the many-body problem. However, we have shifted the intricacies of this problem to a \emph{universal} functional $F[n]$ which depends on the electron density $n({\bf x})$ which is a scalar function of three coordinates, $n: \mathds R^3 \rightarrow \mathds R$, and entails a \emph{massive} reduction of complexity compared to working with wavefunctions, which are complex functions of $3N$ variables, $\Psi: \mathds R^{3N} \rightarrow \mathds C$.
+By introducing density functional theory, we have not solved the many-body problem. However, we have shifted the intricacies of this problem to a \emph{universal} functional $F[n]$ which depends on the electron density $n({\bf x})$, which is a scalar function of three coordinates, $n: \mathds R^3 \rightarrow \mathds R$, and thus entails a \emph{massive} reduction of complexity compared to working with wavefunctions, which are complex functions of $3N$ variables, $\Psi: \mathds R^{3N} \rightarrow \mathds C$.
 
 In order to proceed, we follow the original argument by Kohn and Sham~\CITE{KohnSham1965} and investigate the universal functional $F[n]$ defined in Eq.\,\eqref{eq:dft.Fn} in more detail. The definition reads
 \begin{align}
@@ -442,7 +444,7 @@ where $T[n]$ now denotes the kinetic energy of the electrons expressed as a func
 \begin{align}
 	\begin{split}
 	W[n] 
-		&= E^{\rm es} + E^{\rm xc} \\
+		&= E^{\rm es} [n] + E^{\rm xc} [n] \\
 		&= \frac{1}{2} \int \mathrm{d}^{3} x ~ 
 			v^{\mathrm{es}}[n](\boldsymbol{x}) n(\boldsymbol{x})+E^{\mathrm{xc}}[n]~,
 	\end{split}
@@ -454,7 +456,7 @@ where $E^{\rm es} [n]$ is the electrostatic (Hartree) energy stemming from a cha
 		= \int \mathrm{d}^{3} x^{\prime} \frac{n\left(\boldsymbol{x}^{\prime}\right)}{\left|\boldsymbol{x}-\boldsymbol{x}^{\prime}\right|}~,
 	\label{eq:dft.KS.ves}
 \end{align}
-which is a functional of the density itself. $E^{\rm xc} [n]$ denotes all exchange and correlation effects not captured by $E^{\rm es}$ and is therefore termed the \emph{exchange-correlation energy}. Again, we have only shifted the problem, this time to the unknown functional $E^{\rm xc} [n]$ which we will discuss later.
+which is a functional of the density itself. $E^{\rm xc} [n]$ denotes all exchange and correlation effects not captured by $E^{\rm es} [n]$ and is therefore termed the \emph{exchange-correlation energy}. Again, we have only shifted the problem, this time to the unknown functional $E^{\rm xc} [n]$ which we will discuss later.
 In this notation, the total energy functional for the electron system in an external potential reads
 \begin{align}
 	E[n]
@@ -520,7 +522,7 @@ Here, $-\frac{1}{2} \nabla^2$ is the kinetic operator, $v^{\rm es}$ and $v^{\rm 
 		= \frac{\delta E^{\rm xc}[n]}{\delta n ({\bf x})}
 	\label{eq:dft.vxc}
 \end{align}
-is the \emph{exchange-correlation potential} formally defined as the functional derivative of $E^{\rm xc}$ with respect to the density. By summarizing the three potentials entering Eq.\,\eqref{eq:dft.KS.1} as one \emph{effective} potential,
+is the \emph{exchange-correlation potential} formally defined as the functional derivative of $E^{\rm xc} [n]$ with respect to the density. By summarizing the three potentials entering Eq.\,\eqref{eq:dft.KS.1} as one \emph{effective} potential,
 \begin{align}
 	v^{\rm eff} [n] ({\bf x})
 	\equiv
@@ -540,7 +542,7 @@ is the \emph{exchange-correlation potential} formally defined as the functional 
 \end{align}
 which is a one-particle Schr\"odinger-like equation for orbitals $\psi_l$ with eigenvalues $\epsilon_l$ in an effective potential $v^{\rm eff}[n]$ which is a functional of the density $n$ given in terms of the orbitals by Eq.\,\eqref{eq:dft.KS.n(psi)}. Equation\,\eqref{eq:dft.KS.2} therefore needs to be solved \emph{self-consistently} by starting from an initial guess for the density $n^0$ to set up the effective potential, and solving for $(\psi_l, \epsilon_l)$ until convergence. That the density $n$ of the \emph{interacting} many-particle systems can be obtained from the \emph{non-interacting} single-particle for the Kohn-Sham orbitals $\psi_l$ is ensured by the \emph{Kohn-Sham theorem}~\CITE{KohnSham1965,GrossDreizler1990}.
 
-Given that the solution $\set{(\psi_l, \epsilon_l}$ is known, Eq.\,\eqref{eq:dft.KS.2} can be used to express the kinetic energy in terms of the density and eigenvalues $\epsilon_l$ by summing and integrating with $\sum_l \int \d^3 x~\psi^\ast_l ({\bf x})$ and using the orthonormality of the orbitals $\psi_l$, so that
+Given that the solution $\set{\psi_l, \epsilon_l}$ is known, Eq.\,\eqref{eq:dft.KS.2} can be used to express the kinetic energy in terms of the density and eigenvalues $\epsilon_l$ by summing and integrating with $\sum_l \int \d^3 x~\psi^\ast_l ({\bf x})$ and using the orthonormality of the orbitals $\psi_l$, so that
 \begin{align}
 	T[n] 
 		\equiv - \frac{1}{2}\sum_l \int \d^3 x ~ \psi^\ast_l ({\bf x}) \nabla^2 \psi({\bf x})
@@ -567,6 +569,7 @@ The total energy in terms of the Kohn-Sham eigenvalues $\set{\epsilon_l}$ and de
 \end{align}
 
 \subsection{Approximations to the exchange-correlation energy}
+\label{sec:dft.approximations}
 We are finally in position to introduce approximations to the exchange-correlation energy functional $E^{\rm xc}[n]$ from which the corresponding potential can be obtained by the functional derivative with respect to the density as expressed in Eq.\,\eqref{eq:dft.KS.veff}. Indeed, the very success of the Kohn-Sham DFT scheme probably can be traced back to the fact that simple approximations to $E^{\rm xc}[n]$ lead to reasonable results for a large class of systems. 
 
 Let us now define an exchange-correlation energy density via
@@ -612,7 +615,7 @@ where $e^{\rm x}_{\rm hom}(n)$ is the exchange energy density of a homogeneous e
 \CITE{[1] J. P. Perdew, K. Burke, and M. Ernzerhof, Phys. Rev. Lett. 77, 3865 (1996).}
 
 \subsection{Periodic Systems}
-So far, we did not specify the external potential $v^{\rm ext} ({\bf x})$ entering the Kohn-Sham equation \eqref{eq:dft.KS.1} beyond stating that it describes the arrangement of nuclei. For (finite) molecules and clusters, no further statements need to be made and a self-consistent solution to Eq.\,\eqref{eq:dft.KS.1} can be attempted from here. For (practically infinite) bulk systems and crystals on the other hand, further statements need to be made.
+So far, we did not specify the external potential $v^{\rm ext} ({\bf x})$ entering the Kohn-Sham equation \eqref{eq:dft.KS.1} beyond stating that it describes the arrangement of nuclei. For (finite) molecules and clusters, this is already sufficient and a self-consistent solution to Eq.\,\eqref{eq:dft.KS.1} can be attempted from here. For (practically infinite) bulk systems and crystals on the other hand, further statements need to be made.
 
 Let us assume that the configuration of the nuclei is in a perfect periodic arrangement described by the 
 %\emph{unit cell}
@@ -635,7 +638,7 @@ the \emph{unit cell},
 		= \set{{\bf x} = f^i {\bf a}_i : f^i \in \mathds R^{[0, 1)}}~,
 	\label{eq:dft.Bloch.unitcell}
 \end{align}
-and the full crystal is spanned by the unit cell translated by all possible translations $\bf R_n$ given by Eq.\,\eqref{eq:Rn} with integer numbers $\set{n^i : n^i \in \mathds{N}^{[0, N_i)}}$ smaller than some large but finite value $N_i$ for each basis vector ${\bf a}_i$. The periodicity of the crystal is characterized by the condition that any translation by $\bf R_n$ maps the crystal back onto itself such that
+and the full crystal is spanned by the unit cell translated by all possible translations $\bf R_n$ given by Eq.\,\eqref{eq:Rn} with integer numbers smaller than some large but finite value $N_i$ for each basis vector ${\bf a}_i$, $\set{n^i : n^i \in \mathds{N}^{[0, N_i)}}$. The periodicity of the crystal is characterized by the condition that any translation by $\bf R_n$ maps the crystal back onto itself such that
 \begin{align}
 	v^{\rm ext} ({\bf x} + {\bf R_n}) 
 		= v^{\rm ext} ({\bf x})~.
@@ -676,7 +679,7 @@ Using the periodic boundary condition expressed by Eq.\,\eqref{eq:dft.Bloch.4} i
 			&= \frac{2 \pi}{N_i} m_i~,\quad\text{with } m_i \in \mathds N^{[0, N_i)}~.
 	\label{eq:dft.Bloch.5}
 \end{align}
-In total there are $N_1 N_2 N_3$ permissible values of $\bf k$ labelled by ${\bf m} = (m_1, m_2, m_3)$ that can be expressed in terms of the \emph{reciprocal lattice vectors}~\cite{Sands2002}
+In total there are $N = N_1 N_2 N_3$ unique values of $\bf k$ labelled by ${\bf m} = (m_1, m_2, m_3)$ that can be expressed in terms of the \emph{reciprocal lattice vectors}~\cite{Sands2002}
 \begin{align}
 	{\bf b}^i 
 		= 2 \pi \varepsilon^{ijk} \frac{{\bf a}_j \times {\bf a}_k}{{\bf a}_1 \cdot ({\bf a}_2 \times {\bf a}_3)} ~,
@@ -688,49 +691,14 @@ where $\varepsilon^{ijk}$ denotes the Levi-Civita symbol enforcing the correct o
 		= \sum_{i=1}^3 \frac{m_i}{N_i} {\bf b}^i~.
 	\label{eq:dft.Bloch.k_m}
 \end{align}
-The space spanned by the $\set{{\bf b}_i}$,~i.\,e.,~the space containing all permissible values of $\b k$, is called the \emph{first Brillouin zone}. The values of $\bf k$ given by Eq.\,\eqref{eq:dft.Bloch.k_m} are those sampled in real-space simulation in a box of the given size,~i.\,e.,~the \emph{Born-von Karman cell}.
-
-\subsubsection{ALTERNATIVE TAKE: Born-von Karman Boundary Conditions}
-To ensure normalizability of the functions $\psi_{{\bf k}l}$, one additionally imposes the \emph{Born-von Karman boundary conditions}
-\begin{align}
-\psi_{{\bf k}l} ({\bf x} + {\bf A}_i) 
-= \psi_{{\bf k}l} ({\bf x})
-\label{eq:dft.Bloch.4}
-\end{align}
-where each ${\bf A}_i$ is a linear combination of the primitive basis vectors $\set{{\bf a}_i}$,
-\begin{align}
-	{\bf A}_i = S_i^{~j} {\bf a}_j\quad\text{with } S_i^{~j} \in \mathds Z~,
-\end{align}
-where $S$ is a non-singular matrix with integer elements. The space spanned by the $\set{{\bf A}_i}$ is parallelepiped of volume $V = N \, {\bf a}_1 \cdot ({\bf a}_2 \times {\bf a}_3)$, where $N = \det S$ is the number of unit cells that fit into the enlarged cell. This cell is therefore often called \emph{supercell}, and the matrix $S$ is denoted as a \emph{supercell matrix}.
-With the Born-von Karman boundary conditions, the domain of all functions and functionals appearing in the Kohn-Sham equations become restricted to the supercell. The ideal, infinite crystal is obtained in the limit $N \rightarrow \infty$.
-Using the periodic boundary condition expressed by Eq.\,\eqref{eq:dft.Bloch.4} in the Bloch functions given by Eq.\,\eqref{eq:dft.Bloch.2}, and the periodicity of the functions $u_{{\bf k} l}$, one finds that
-\begin{align}
-%	{\rm e}^{\im {\bf k} \cdot ({\bf x} + N_i {\bf a}_i)} u_{{\bf k} l} ({\bf x})
-%		&= {\rm e}^{\im {\bf k} \cdot {\bf x}} u_{{\bf k} l} ({\bf x}) \nonumber \\
-%	\implies
-%		{\rm e}^{\im {\bf k} \cdot  N_i {\bf a}_i} 
-%			&= 1 \nonumber \\
-%	\implies
-{\bf k} \cdot {\bf A}_i
-&= 2 \pi m_i\quad\text{with } m_i \in \mathds N \text{ such that } 
-	\forall i: {\bf k} \cdot {\bf a}_i \leq 2 \pi~.
-\label{eq:dft.Bloch.5}
-\end{align}
-In total there are $N_1 N_2 N_3$ permissible values of $\bf k$ labelled by ${\bf m} = (m_1, m_2, m_3)$ that can be expressed in terms of the \emph{reciprocal lattice vectors}~\cite{Sands2002}
-\begin{align}
-{\bf b}^i 
-= 2 \pi \varepsilon^{ijk} \frac{{\bf a}_j \times {\bf a}_k}{{\bf a}_1 \cdot ({\bf a}_2 \times {\bf a}_3)} ~,
-\label{eq:dft.Bloch.bi}
-\end{align}
-where $\varepsilon^{ijk}$ denotes the Levi-Civita symbol enforcing the correct ordering of $ijk$. The complete set of $\bf k$-values is
-\begin{align}
-{\bf k}_{\bf m} 
-= \sum_{i=1}^3 \frac{m_i}{N_i} {\bf b}^i~.
-\label{eq:dft.Bloch.k_m}
-\end{align}
-The space spanned by the $\set{{\bf b}_i}$,~i.\,e.,~the space containing all permissible values of $\b k$, is called the \emph{first Brillouin zone}. The values of $\bf k$ given by Eq.\,\eqref{eq:dft.Bloch.k_m} are those sampled in real-space simulation in a box of the given size,~i.\,e.,~the \emph{Born-von Karman cell}.
+The space spanned by the $\set{{\bf b}_i}$,~i.\,e.,~the space containing all unique values of $\b k$, is called the \emph{first Brillouin zone}. The values of $\bf k$ given by Eq.\,\eqref{eq:dft.Bloch.k_m} are those sampled in real-space simulation in a box of the given size,~i.\,e.,~the \emph{Born-von Karman cell}.
 
 \subsection{Conclusion}
+The concept of density functional theory in the Kohn-Sham scheme (KS-DFT) has been presented starting from the general many-body Hamiltonian given in Eq.\,\eqref{eq:Hamiltonian}. Besides the Born-Oppenheimer (BO) approximation which decouples electron and nuclear dynamics, KS-DFT offers a formally exact way of computing the total energy of the electronic ground state from first principles by solving Schr\"odinger-like single-particle equations,~i.\,e.,~the KS equations, for an auxiliary set of functions,~i.\,e.,~the KS-orbitals. In order to solve the KS equations one needs to approximate the exchange-correlation energy, $E^{\rm xc} [n]$. In Sec.\,\ref{sec:dft.approximations} we have introduced the most common approaches to approximate $E^{\rm xc} [n]$,~i.\,e.,~the local-density approximation (LDA), as well as the generalized-gradient approximation (GGA).
+
+Within the BO approximation, the BO potential-energy surface determines all dynamical properties of the nuclear system, for example heat transport. We discuss dynamical properties of this kind in more detail in the next section.
+
+\newpage
 
 \section{Lattice Dynamics}
 \subsection{Equations of Motion}
@@ -828,5 +796,45 @@ The theorem is trivially extended to the 3d case by using the multiplication rul
 	\hat{T}_{{\bf a} + {\bf b}} f({\bf x}) = \hat{T}_{\bf a} \hat{T}_{\bf b} f({\bf x}) \equiv f({\bf x} + {\bf a} + {\bf b})~.
 \end{align}
 A more rigorous proof in terms of representation theory can be found,~e.\,g.,~in~\cite{Dresselhaus2007}.
+
+\chapter{Born-von Karman Supercell}
+To ensure normalizability of the functions $\psi_{{\bf k}l}$, one additionally imposes the \emph{Born-von Karman boundary conditions}
+\begin{align}
+\psi_{{\bf k}l} ({\bf x} + {\bf A}_i) 
+= \psi_{{\bf k}l} ({\bf x})
+%\label{eq:dft.Bloch.4}
+\end{align}
+where each ${\bf A}_i$ is a linear combination of the primitive basis vectors $\set{{\bf a}_i}$,
+\begin{align}
+{\bf A}_i = S_i^{~j} {\bf a}_j\quad\text{with } S_i^{~j} \in \mathds Z~,
+\end{align}
+where $S$ is a non-singular matrix with integer elements. The space spanned by the $\set{{\bf A}_i}$ is parallelepiped of volume $V = N \, {\bf a}_1 \cdot ({\bf a}_2 \times {\bf a}_3)$, where $N = \det S$ is the number of unit cells that fit into the enlarged cell. This cell is therefore often called \emph{supercell}, and the matrix $S$ is denoted as a \emph{supercell matrix}.
+With the Born-von Karman boundary conditions, the domain of all functions and functionals appearing in the Kohn-Sham equations become restricted to the supercell. The ideal, infinite crystal is obtained in the limit $N \rightarrow \infty$.
+Using the periodic boundary condition expressed by Eq.\,\eqref{eq:dft.Bloch.4} in the Bloch functions given by Eq.\,\eqref{eq:dft.Bloch.2}, and the periodicity of the functions $u_{{\bf k} l}$, one finds that
+\begin{align}
+%	{\rm e}^{\im {\bf k} \cdot ({\bf x} + N_i {\bf a}_i)} u_{{\bf k} l} ({\bf x})
+%		&= {\rm e}^{\im {\bf k} \cdot {\bf x}} u_{{\bf k} l} ({\bf x}) \nonumber \\
+%	\implies
+%		{\rm e}^{\im {\bf k} \cdot  N_i {\bf a}_i} 
+%			&= 1 \nonumber \\
+%	\implies
+{\bf k} \cdot {\bf A}_i
+&= 2 \pi m_i\quad\text{with } m_i \in \mathds N \text{ such that } 
+\forall i: {\bf k} \cdot {\bf a}_i \leq 2 \pi~.
+%\label{eq:dft.Bloch.5}
+\end{align}
+In total there are $N$ permissible values of $\bf k$ labelled by ${\bf m} = (m_1, m_2, m_3)$ that can be expressed in terms of the \emph{reciprocal lattice vectors}~\cite{Sands2002}
+\begin{align}
+{\bf B}^i 
+= 2 \pi \varepsilon^{ijk} \frac{{\bf A}_j \times {\bf A}_k}{{\bf A}_1 \cdot ({\bf A}_2 \times {\bf A}_3)} ~,
+%\label{eq:dft.Bloch.bi}
+\end{align}
+where $\varepsilon^{ijk}$ denotes the Levi-Civita symbol enforcing the correct ordering of $ijk$. The complete set of $\bf k$-values is
+\begin{align}
+{\bf k}_{\bf m} 
+= \sum_{i=1}^3 m_i {\bf B}^i~.
+%\label{eq:dft.Bloch.k_m}
+\end{align}
+The values of $\bf k$ given by Eq.\,\eqref{eq:dft.Bloch.k_m} are those sampled in real-space simulation in a box of the given size,~i.\,e.,~the \emph{Born-von Karman cell}.
 
 \end{document}
