@@ -588,7 +588,7 @@ The most straighforward way to approximate $e^{\rm xc}[n] ({\bf x})$ is to repla
 This approximation is called the \emph{local density approximation} (LDA), and the resulting exchange-correlation energy reads\footnote{
 	Some authors prefer to write $e^{\rm xc}(n) = n \tilde e^{\rm xc} (n)$, such that
 	\begin{align*}
-		E^{\rm xc}_{\rm LDA} = \int \d^3 x ~ n({\bf x}) \tilde e^{\rm xc} (n ({\bf x}))~.
+		E^{\rm xc} = \int \d^3 x ~ n({\bf x}) \tilde e^{\rm xc} (n ({\bf x}))~.
 	\end{align*}}
 \begin{align}
 	E^{\rm xc}_{\rm LDA}[n] 
@@ -738,7 +738,8 @@ Within the BO approximation, the BO potential-energy surface determines all dyna
 \bibliographystyle{unsrt}
 
 \appendix
-\chapter{Bloch Theorem}
+\chapter{Bloch Theorem and Brillouin Zone}
+\section{Bloch Theorem}
 \label{sec:BlochTheorem}
 The Schr\"odinger equation in 1d reads
 \begin{align}
@@ -774,28 +775,51 @@ and a complex function of unit modulus,
 \begin{align}
 	c: \mathds R \rightarrow \mathds C
 	\quad\text{with}\quad \left\lvert c(x) \right\rvert = 1~.
+	\label{eq:app.bloch.c1}
 \end{align}
-We label non-equivalent solutions by the number $k$, then
+We label each possible solution by the number $k$, then
 \begin{align}
 	c_k (x) = {\rm e}^{\im k x}
-	\quad\text{with}\quad k \in \left[0, \frac{2 \pi}{a} \right)
+	%% don't impose uniqeness here
+	%\quad\text{with}\quad k \in \left[0, \frac{2 \pi}{a} \right)
+	\label{eq:app.bloch.c2}
 \end{align}
-is a unique map from the domain $x \in [0, a)$ to the complex unit circle $\set{z \in \mathds C : \lvert z \rvert = 1}$. It then holds that $\hat T_a \psi_k (x) = {\rm e}^{\im k a} \psi(x)$,~i.\,e.,~$\psi_k$ is an eigenfunction of $\hat T_a$ with eigenvalue $\lambda = {\rm e}^{\im k a}$. We formulate the
+% is a unique map from the domain $x \in [0, a)$ to the complex unit circle $\set{z \in \mathds C : \lvert z \rvert = 1}$. 
+is a map from the domain $x \in \mathds R$ to the complex unit circle $\set{z \in \mathds C : \lvert z \rvert = 1}$. 
+It then holds that $\hat T_a \psi_k (x) = {\rm e}^{\im k a} \psi(x)$,~i.\,e.,~$\psi_k$ is an eigenfunction of $\hat T_a$ with eigenvalue $\lambda = {\rm e}^{\im k a}$. We formulate the
 \begin{thm}[Bloch]
 	Solutions to the Schr\"odinger equation~\eqref{eq:app.bloch.se} with a periodic potential of periodicity $a$ are of the form
 	\begin{align*}
 		\psi_k (x) = {\rm e}^{\im k x} u_k (x)~,
 	\end{align*}
-	with a real, periodic function $u_k$ for each $k$ in the first Brillouin zone,
-	\begin{align*}
-		k \in \left[0, \frac{2 \pi}{a} \right)~.
-	\end{align*}
+	with a real, periodic function $u_k$.
+%	 for each $k$ in the first Brillouin zone,
+%	\begin{align*}
+%		k \in \left[0, \frac{2 \pi}{a} \right)~.
+%	\end{align*}
 \end{thm}
 The theorem is trivially extended to the 3d case by using the multiplication rule
 \begin{align}
 	\hat{T}_{{\bf a} + {\bf b}} f({\bf x}) = \hat{T}_{\bf a} \hat{T}_{\bf b} f({\bf x}) \equiv f({\bf x} + {\bf a} + {\bf b})~.
 \end{align}
 A more rigorous proof in terms of representation theory can be found,~e.\,g.,~in~\cite{Dresselhaus2007}.
+
+\section{Brillouin Zone}
+\label{sec:BrillouinZone}
+We have not yet specified the range of the quantum number $k$. This can be done by requiring the complex function $c_k$ defined in Eq.\,\eqref{eq:app.bloch.c2} to map the interval $x \in [0, a)$ \emph{exactly once} to the unit circle so that $k$ is a \emph{unique} label for the eigenvalues ${\rm e}^{\im k a}$ of the translation operator $\hat T_a$.
+We therefore define the
+\begin{align}
+	\text{Brillouin zone} = \set{k : k \in \left[ - \frac{\pi}{a}, \frac{\pi}{a}\right)}~.
+\end{align}
+For a wavefunction belonging to $k' = k + G$, where $G$ is an integer multiple of the the reciprocal lattice vector $b = 2\pi / a$, we would find
+\begin{align}
+	\hat T_a \psi_{k + G} (x) = {\rm e}^{\im k a} \psi_{k + G} (x)~.
+\end{align}
+They are therefore indistinguishable and we define $\psi_k$ and $\psi_{k+G}$ to be the same function,
+\begin{align}
+	\psi_k (x) = \psi_{k + G} (x)~.
+\end{align}
+This establishes periodicity of the Bloch functions in reciprocal space.
 
 \chapter{Born-von Karman Supercell}
 To ensure normalizability of the functions $\psi_{{\bf k}l}$, one additionally imposes the \emph{Born-von Karman boundary conditions}
