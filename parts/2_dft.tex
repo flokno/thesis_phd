@@ -1,0 +1,606 @@
+\epigraph{\singlespacing \it ``The underlying physical laws necessary
+for the mathematical theory of a large part of physics and the whole of chemistry
+are thus completely known, and the difficulty is only that the exact application
+of these laws leads to equations much too complicated to be soluble. It therefore becomes desirable that approximate practical methods of applying quantum
+mechanics should be developed, which can lead to an explanation of the main
+features of complex atomic systems without too much computation.''}{P.A.M. Dirac, 1929}
+
+In this chapter, we summarize the theoretical background of {\it ab initio} simulations.
+
+\subsection{The Many Body Hamiltonian}
+
+The full (non-relativistic) many body Hamiltonian in the absence of external electromagnetic fields for an otherwise arbitrary system reads
+\begin{align}
+    \hat{\mathrm{H}}
+        = \hat{\mathrm{T}}^{\mathrm{e}}
+        + \hat{\mathrm{V}}^{\mathrm{e}-\mathrm{e}}
+        + \hat{\mathrm{V}}^{\mathrm{e}-\mathrm{Nuc}}
+        + \hat{\mathrm{V}}^{\mathrm{Nuc}-\mathrm{Nuc}}
+        + \hat{\mathrm{T}}^{\mathrm{Nuc}}~,
+    \label{eq:Hamiltonian}
+\end{align}
+where
+\begin{align}
+    \hat T^{\rm e} 
+        =\sum_{i} \frac{\hat{\mathbf{p}}_{i}^{2}}{2 m_{\rm e}}
+    \label{eq:Te}
+\end{align}
+is the kinetic energy operator for electrons of mass $m_{\rm e}$ with momentum operators $\hat{\bf p}_i$, and 
+\begin{align}
+    \hat V^{\rm e-e}
+        = \sum_{i < j} \frac{e^{2}}{\left|\hat{\b r}_{i}-\hat{\bf r}_{j}\right|}~,
+    \label{eq:Ve}
+\end{align}
+is the Coulombic electron-electron repulsion operator with the electronic position operators $\hat{\bf r}_i$ and the elementary charge $e$. 
+The Coulomb attraction between the negatively charged electrons and the positively charged nuclei reads
+\begin{align}
+    \hat V^{\rm e-Nuc}
+        = \sum_{i, J} -\frac{Z_J e^{2}}{\left|\hat{\b r}_{i}-\hat{\bf R}_{J}\right|}~,
+    \label{eq:Venuc}
+\end{align}
+where $Z_J$ denotes the charge number of nucleus $J$, and $\hat{\bf R}_J$ is the nuclear position operator. 
+Accordingly, we define the nuclear-nuclear repulsion as
+\begin{align}
+    \hat V^{\rm Nuc-Nuc}
+        = \sum_{I < J} \frac{Z_{I} Z_{J} e^{2}}{\left|\hat{\b R}_{I}-\hat{\bf R}_{J}\right|}~,
+    \label{eq:Vnuc}
+\end{align}
+and the kinetic energy operator for nuclei with momentum operators $\hat{\bf P}_I$ and masses $M_I$ reads
+\begin{align}
+    \hat T^{\rm Nuc} 
+        =\sum_{I} \frac{\hat{\mathbf{P}}_{I}^{2}}{2 M_{I}}~.
+    \label{eq:Tnuc}
+\end{align}
+
+\subsection{The Born Oppenheimer Approximation}
+We go over to a unitless Hamiltonian by scaling Eq.\,\eqref{eq:Hamiltonian} with the Hartree energy $E_{\rm h} = me^4 / \hbar^2 \approx 27.2\,{\rm eV}$ and expressing distances in terms of the Bohr radius $a_0 = \hbar^2 / m e^2$,~i.\,e.,~${\bf r} = a_0 \tilde{\bf r}$, where $\hbar$ denotes the Planck constant~\CITE{Czycholl}. Dropping the operator hats in the following and using $\hat{\bf p}=-\im \hbar \partial / \partial {\bf r}$ instead, we have
+\begin{align}
+\begin{split}
+    \tilde H 
+        \equiv& ~H / E_{\rm h} \\
+        =& 
+        - \frac{1}{2} \sum_i \frac{\partial^2}{\partial \tilde{\bf r}_i^2}
+        + \sum_{i < j} \frac{1}{\left|\tilde{\b r}_{i}-\tilde{\bf r}_{j}\right|}
+        - \sum_{i, J} -\frac{Z_J}{\left|\tilde{\b r}_{i}-\tilde{\bf R}_{J}\right|}
+        + \sum_{I < J} \frac{Z_{I} Z_{J}}{
+            \left|\tilde{\b R}_{I}-\tilde{\bf R}_{J}\right|} 
+        \\
+        &- \frac{1}{2} \sum_I \frac{m_{\rm e}}{M_I} \frac{\partial^2}{\partial \tilde{\bf R}_I^2}~,
+    \label{eq:Hscaled}
+\end{split}
+\end{align}
+which only depends on the charge numbers $\{Z_I\}$ and the mass ratios $\{ m_{\rm e} / M_I \}$. The relative order of magnitude of the nuclear kinetic energy is $m_{\rm e} / M_I \approx 10^{-4} - 10^{-5}$. This means that the nuclear kinetic energy can be treated as a perturbation of the remaining electronic and electron-nuclear contributions:
+\begin{align}
+    H   &= H^0 + T^{\rm Nuc}~, \text{ where} 
+    \label{eq:H=H0+T}
+    \\
+    H^0 &=
+        {\mathrm{T}}^{\mathrm{e}}
+        + {\mathrm{V}}^{\mathrm{e}-\mathrm{e}}
+        + {\mathrm{V}}^{\mathrm{e}-\mathrm{Nuc}}
+        + {\mathrm{V}}^{\mathrm{Nuc}-\mathrm{Nuc}}~.
+    \label{eq:H0}
+\end{align}
+The full (time-independent) many-body Schroedinger equation reads
+\begin{align}
+    H \psi ({\bf r}, {\bf R}) = E \psi ({\bf r}, {\bf R})~,
+    \label{eq:Schroedinger1}
+\end{align}
+with ground-state eigenvalues and many-body wave functions $E$ and \mbox{$\psi ({\bf r}, {\bf R})$},
+where \mbox{${\bf r} = ({\bf r}_i, \ldots, {\bf r}_{N_{\rm e}})$} denotes all electronic coordinates, and ${\bf R} = ({\bf R}_i, \ldots, {\bf R}_{N_{\rm Nuc}})$ all nuclear coordinates, respectively. According to Eq.\,\eqref{eq:H=H0+T}, we expand the wave functions $\psi ({\bf r}, {\bf R})$ in a complete set of orthonormal basis functions $\phi_l$,
+\begin{align}
+\psi ({\bf r}, {\bf R}) = \sum_l \chi_l ({\bf R}) \phi_l ({\bf r}, {\bf R})~,
+\label{eq:psi_expansion_phi}
+\end{align}
+where the $\phi_l$ are the solutions to the Hamiltonian $H^0$,
+\begin{align}
+    H^0 \phi_l ({\bf r}, {\bf R})
+        = E^0_l ({\bf R}) \phi_l ({\bf r}, {\bf R})~.
+    \label{eq:Hsolution1}
+\end{align}
+The dependence of $\phi_l$ and the eigenvalue $E_l^0({\bf R})$ on $\bf R$ is parametric,~i.\,e.,~Eq.\,\eqref{eq:Hsolution1} is solved for a given nuclear configuration $\bf R$.
+
+The functions $\chi_l$ are to be determined by using Eq.\,\eqref{eq:psi_expansion_phi} in Eq.\,\eqref{eq:Schroedinger1},
+\begin{align}
+    (H - E) \psi ({\bf r}, {\bf R})
+        & = \sum_l (H^0 + T^{\rm Nuc} - E) \chi_l ({\bf R}) \phi_l ({\bf r}, {\bf R}) \nonumber \\
+        &= \sum_l (E^0_l({\bf R}) + T^{\rm Nuc} - E) \chi_l ({\bf R}) \phi_l ({\bf r}, {\bf R}) \\
+    = 0 \nonumber~,
+\end{align}
+and integrating with $\int \d^3 r ~ \phi^\ast_m ({\bf r}, {\bf R})$ using their orthonormality, so that
+\begin{align}
+    \left( T^{\rm Nuc} + E^0_m({\bf R}) \right) \chi_m ({\bf R})
+        + \sum_l A_{ml} ({\bf R}) \chi_l ({\bf R})
+        = E \chi_m ({\bf R})~,
+    \label{eq:chi1}
+\end{align}
+where the operator $A_{ml}$~\CITE{Czycholl},
+\begin{align}
+    A_{ml} ({\bf R})
+        = - \sum_I \frac{\hbar^2}{2 M_I} \int \d^3 r ~ 
+        &\left[ \phi^\ast_m ({\bf r}, {\bf R}) \frac{\partial^2}{\partial {\bf R}_I^2}
+            \phi_l ({\bf r}, {\bf R}) \right. \nonumber \\
+        &\left.
+            + 2 \phi^\ast_m ({\bf r}, {\bf R}) \left(
+                \frac{\partial}{\partial {\bf R}_I} \phi_l ({\bf r}, {\bf R}) \right)
+            \frac{\partial}{\partial {\bf R}_I}
+        \right]~,
+    \label{eq:Aml}
+\end{align}
+describes coupling between different electronic states $(l, m)$. This term is of the order of $(m/M)^{1/4} \approx 10^{-1} - 10^{-2}$ smaller than the nuclear energy~\CITE{BornOppenheimer}. Neglecting this term is known as the \emph{Born-Oppenheimer approximation} and completely separates the dynamical evolution of electrons and nuclei. In effect, Eq.\,\eqref{eq:chi1} reduces to
+\begin{align}
+    \left( T^{\rm Nuc} + E^0_l({\bf R}) \right) \chi_l ({\bf R})
+        = E \chi_l ({\bf R})~.
+    \label{eq:chi2}
+\end{align}
+Solving Eq.\,\eqref{eq:chi2} is performed in two steps:
+\begin{enumerate}
+    \item For a given configuration $\bf R$, the electronic Schr\"odinger equation \eqref{eq:Hsolution1} is solved, yielding the energies $E^0_l({\bf R})$ which thereby parametrically depend on $\bf R$.
+    \item For each electronic quantum number $l$, Eq.\,\eqref{eq:chi2} for the nuclei is solved, where the electronic energy $E^0_l({\bf R})$ defines the effective \emph{potential energy surface}.
+\end{enumerate}
+Pictorially, the electrons move \emph{adiabatically} with the nuclei, hence the alternative term \emph{adiabatic approximation.} For reasons that will become apparent later, we now call the electronic energy $E^0_0$ corresponding to the electronic ground state for the given configuration ${\bf R}$ as the \emph{Born-Oppenheimer potential energy},
+\begin{align}
+	E^{\rm BO} ({\bf R}) \equiv E^0_0 ({\bf R})~.
+	\label{eq:E^BO}
+\end{align}
+
+\subsection{Density Functional Theory}
+\epigraph{\singlespacing \it ``It is my sense that at the present time DFT is the method of choice for systems consisting of many (\,$\gtrsim 5$) atoms and for smaller systems, when moderate accuracies are sufficient.''}{W.~Kohn, 1993}
+
+In the previous chapter, it was tacitly assumed that the electronic Schr\"odinger equation \eqref{eq:Hsolution1} yielding the effective potential for the nuclei can be solved. Finding an exact solution to this equation is, however, infeasible for more than a few electrons. We will now introduce \emph{density functional theory} (DFT) as a framework for making approximations that enable to find a first-principles electronic potential energy surface $E^{\rm BO} ({\bf R})$ for atomic systems with order of magnitudes more electrons.
+
+To set the stage, we rewrite the electronic Schr\"odinger equation \eqref{eq:Hsolution1}:
+\begin{align}
+	\hat H = \hat T + \hat W + \hat V^{\rm ext}~,
+	\label{eq:H.dft.1}
+\end{align}
+where $T \equiv T^{\rm e}$ denotes the electronic kinetic energy operator, $W \equiv V^{\rm e-e}$ is the electronic Coulomb repulsion, and $V^{\rm ext} \equiv V^{\rm e-Nuc}$ is the \emph{external} potential determined by the nuclear configuration $\bf R$. Note that the bare nuclear-nuclear repulsion $V^{\rm Nuc-Nuc}$ is neglected as it merely contributes an additive constant to the electronic Hamiltonian at fixed configuration and therefore does not change the solutions to Eq.\,\eqref{eq:H.dft.1}.
+
+Let us look for solutions to Eq.\,\eqref{eq:H.dft.1} of the form
+\begin{align}
+	\hat H \Ket{\Psi} = E_\Psi \Ket{\Psi}~,
+	\label{eq:SE.dft.1}
+\end{align}
+where $\hat H$ is the electronic Hamiltonian given by Eq.\,\eqref{eq:H.dft.1}, $\Ket{\Psi}$ denotes a many-body eigenstate in index-free bra--ket notation\footnote{
+	Here and in the following we employ the usual convention that from the state $\Ket{\Psi}$, many-body wavefunctions are obtained via
+	\begin{align*}
+		\braket{{\bf r} | \Psi} 
+			= \Psi ({\bf r})
+		\Leftrightarrow
+		\braket{{\bf r}_1, \ldots, {\bf r}_N | \Psi} 
+			= \Psi({\bf r}_1, \ldots, {\bf r}_N)~.
+	\end{align*}
+	Likewise we define the $\mathcal{L}^2$ scalar product as
+	$$
+	\braket{\Psi | \Phi} = \int \d^{3N} r ~ \Psi^\ast ({\bf r}) \ \Phi({\bf r})~.
+	$$	
+},
+and $E_\Psi$ is the corresponding total energy.
+
+Any state $\Ket{\Psi}$ maps to an electron density $n_\Psi ({\bf x})$ via the density operator
+\begin{align}
+	\hat n ({\bf x}) \equiv \sum_i \hat n_i ({\bf x}) = \sum_i \delta ({\bf x} - \hat{\bf r}_i)~,
+	\label{eq:densop}
+\end{align}
+such that
+\begin{align}
+	n_\Psi({\bf x}) 
+	\equiv \Braket{\Psi | \hat n({\bf x}) | \Psi} 
+	= N \int \d^3 r_2 \cdots \d^3 r_{N} ~ 
+	\left\lvert 
+	\Psi ({\bf x}, {\bf r}_2, \ldots, {\bf r}_N) 
+	\right\rvert^2~,
+\end{align}
+where it was used that the arguments of $\lvert \Psi ({\bf r}_1, \ldots, {\bf r}_N) \rvert^2$ can be arbitrarily permuted.
+We note that ${\bf x} \in \mathds{R}^3$ denotes a point in real space, whereas ${\bf r} = ({\bf r}_1, \ldots, {\bf r}_N)$ denotes the positions of electrons as before.
+%\begin{align}
+%	\braket{\Psi | n_i({\bf r}) | \Psi} 
+%		= \int \d^3 r_1 \cdots \d^3 r_{i-1} \d^3 r_{i+1} \cdots \d^3 r_{N} ~ 
+%			\left\lvert 
+%				\Psi ({\bf r}_1, \ldots, {\bf r}_{i-1}, {\bf x}, {\bf r}_{i+1}, \ldots, {\bf r}_N) 
+%			\right\rvert^2
+%\end{align}
+The density operator $\hat n ({\bf x})$ can be used to express the one-particle operator $V^{\rm ext}$ as an operator valued functional of a potential function $v^{\rm ext} ({\bf x})$ by writing
+\begin{align}
+	\hat V^{\rm ext}
+		= \sum_i v^{\rm ext} (\hat{\bf r}_i)
+		= \int \d^3 x ~ v^{\rm ext} ({\bf x}) \, \hat n ({\bf x})~,
+		\label{eq:Vext}
+\end{align}
+where $v^{\rm ext} ({\bf x})$ is the Coulomb potential stemming from the nuclear arrangement $\bf R$,~cf.~Eq.\,\eqref{eq:Venuc}.
+It follows that the expectation value of Eq.\,\eqref{eq:Vext} is a functional of the density,
+\begin{align}
+	\braket{\Psi | \hat V^{\rm ext} | \Psi}
+		= V^{\rm ext} [n_\Psi]
+		= \int \d^3 x ~ v^{\rm ext} ({\bf x}) \, n_\Psi ({\bf x})~.
+		\label{eq:dft.Vext.expectation}
+\end{align}
+As $n_\Psi$ is obtained from the solution $\Ket{\Psi}$ of Eq.\,\eqref{eq:SE.dft.1} and the term $\hat V^{\rm ext}$ in the Hamiltonian given by Eq.\,\eqref{eq:H.dft.1} is solely determined by the external potential funktion $v^{\rm ext} ({\bf x})$ via Eq.\,\eqref{eq:Vext}, it naturally follows that $n_\Psi ({\bf r})$ is a functional of $v^{\rm ext} ({\bf x})$. In other words, there is a map between the set of external potentials $\mathbb V = \set{v^{\rm ext}}$, and the set of eigensolutions $\mathbb P = \set{\Psi}$ and their corresponding densities $\mathbb N = \set{n_\Psi}$:
+\begin{align}
+	M: \mathbb V \rightarrow \mathbb N~.
+	\label{eq:dft.map.1}
+\end{align}
+
+\subsubsection{Hohenberg-Kohn}
+Hohenberg and Kohn were able to show that, for non-degenerate ground states $\Psi \equiv \Psi_0$, there exists the \emph{inverse map} from ground-state densities $\mathbb N_0$ to potential functions $\mathbb V$, and that this map is bijective~\CITE{HohenbergKohn64}:\footnote{Kohn was later able to loosen the requirement of non-degeneracy~\CITE{Kohn1985}.}
+\begin{align}
+	M^{-1}: \mathbb N_0 \rightarrow \mathbb V~. 
+\end{align}
+The beauty of this theorem is that it establishes a one-to-one correspondence between the \emph{ground-state density} $n_0 ({\bf x})$ and the external potential function $v^{\rm ext} ({\bf x})$ which, in turn, describes the full many-body problem via Eq.\,\eqref{eq:H.dft.1}. For example, the ground-state wavefunctions $\Psi_0$ are functionals of $n_0$, as well as the expectation value of any ground-state observable. In the following, we will stay with ground-state densities and denote them simply by $n ({\bf x}) \equiv n_0 ({\bf x})$.
+
+Hohenberg and Kohn further define the \emph{universal functional} 
+\begin{align}
+	F[n] \equiv \Braket{\Psi [n] | \hat T + \hat W | \Psi [n]}~,
+	\label{eq:dft.Fn}
+\end{align}
+i.\,e.,~the contributions to the Hamiltonian which do not depend on the external potential. The ground-state total energy for a given potential function $v$ is then given as
+\begin{align}
+	E [n] 
+		= \Braket{\Psi [n] | \hat H | \Psi [n]}
+		\equiv F[n] + V^{\rm ext}[n]~,
+		%+ \int \d^3 x ~ v ({\bf x}) n ({\bf x})~.
+	\label{eq:dft.En}
+\end{align}
+where $V^{\rm ext}[n]$ is given by Eq.\,\eqref{eq:dft.Vext.expectation}.
+By virtue of the Raleigh-Ritz variational principle, this functional is minimized for the correct ground-state density $n$ only, and any other density $n'$ that differs from $n$ non-trivially yields a larger energy:
+\begin{align}
+	E[n] < E [n'] \quad \text{for} \quad n \neq n'~.
+\end{align}
+This also means that the true ground-state density for a given potential $v$ can be found by minimizing the total energy function, Eq.\,\eqref{eq:dft.En},
+\begin{align}
+	n = \arg \min_{n} E[n]~,
+	\label{eq:dft.n}
+\end{align}
+under the constraint of fixed particle number imposed by the Lagrange multiplier $\mu$,
+%\begin{align}
+%	N [n] = \int \d^3 x ~ n({\bf x}) = N~.
+%	\label{eq:dft.N}
+%\end{align}
+%By using Eq.\,\eqref{eq:dft.N}, the total energy can be written as a functional of the external potential $v$ and the particle Number $N$ under the requirement of stationarity,
+%\begin{align}
+%	\begin{split}
+%		E        &= E[v, N] \\
+%		\delta E &= 0~,
+%	\end{split}
+%	\label{eq:dft.stationarity}
+%\end{align}
+%or, by imposing the conservation of particle number explicitly via the Lagrange multiplicator $\mu$,
+\begin{align}
+	\frac{\delta}{\delta n ({\bf x})}
+		\left.\left[ 
+			E[n] + \mu \left(
+				\int \d^3 x' ~ n ({\bf x}') - N \right)
+		\right]\right\vert_{n = n_0}
+		=0~.
+		\label{eq:dft.stationarity}
+\end{align}
+
+\subsubsection{Reconstructing the Born-Oppenheimer Surface}
+In the definition of the effective electronic Hamiltonian in Eq.\,\eqref{eq:H.dft.1}, we had neglected the nuclear repulsion $V^{\rm Nuc-Nuc}$ defined in Eq.\,\eqref{eq:Vnuc}. The Born-Oppenheimer potential energy surface defined in Eq.\,\eqref{eq:E^BO} therefore consists of both terms,~i.\,e.,
+\begin{align}
+	E^{\rm BO} ({\bf R}) 
+		= E[n] + \sum_{I < J} \frac{Z_{I} Z_{J} e^{2}}{\left|{\bf R}_{I}-{\bf R}_{J}\right|}~.
+	\label{eq:E^BO}
+\end{align}
+
+\subsection{Hellmann-Feynmann Theorem}
+The forces on individual atomic positions ${\bf R}_I$ are given in terms of derivatives of the Born-Oppenheimer energy, $E^{\rm BO} ({\bf R})$,
+\begin{align}
+	\frac{\d}{\d {\bf R}_I} E^{\rm BO} ({\bf R})
+		\stackrel{\eqref{eq:E^BO}}{=}
+			\frac{\d}{\d {\bf R}_I } \left[
+				E[n] + \sum_{J < K} \frac{Z_{J} Z_{K} e^{2}}{\left|{\b R}_{J}-{\bf R}_{K}\right|}
+			\right]
+			~.
+	\label{eq:hellmannfeynman.1}
+\end{align}
+The electronic part is given by
+\begin{align}
+		\frac{\d}{\d {\bf R}_I} E[n]
+			= 
+				\underset{I}{\underbrace{\frac{\partial}{\partial {\bf R}_I} E[n]}}
+			+ \underset{II}{\underbrace{
+					\int \d^{3} x ~ \frac{\delta E[n]}{\delta n(\boldsymbol{x})} \frac{\partial n(\boldsymbol{x})}{\partial {\bf R}_{I}}
+				}}~,
+		\label{eq:hellmannfeynman.2}
+\end{align}
+where term $II)$ can be evaluated under the assumption of stationarity expressed by Eq.\,\eqref{eq:dft.stationarity} which yields 
+\mbox{$\delta E[n] / \delta n({\bf x}) = -\mu$},
+and using the Leibniz rule, so that
+\begin{align}
+	\int \d^{3} x ~ \frac{\delta E[n]}{\delta n(\boldsymbol{x})} \frac{\partial n(\boldsymbol{x})}{\partial {\bf R}_{I}}
+	= -\mu \frac{\partial}{\partial {\bf R}_I} \int \d^{3} x ~ n ({\bf x})
+	= 0~.
+	\label{eq:hellmannfeynman.3}
+\end{align}
+Term $I)$ only depends explicitly on ${\bf R}_I$ via the electron-nucleus contribution to $V^{\rm ext}$ given by Eq.\,\eqref{eq:Venuc}, yielding
+\begin{align}
+	\frac{\d}{\d {\bf R}_I} E[n]
+		= \frac{\d}{\d {\bf R}_I} \braket{\Psi_0 | \hat V ^{\rm ext} | \Psi_0} 
+		= \int \d^3 x ~ n({\bf x}) \frac{Z_I e^2 ({\bf R}_I - {\bf x})}{\left\lvert {\bf R}_I - {\bf x} \right\rvert^3}~.
+\end{align}
+In total, we have
+\begin{align}
+	\frac{\d}{\d {\bf R}_I} E^{\rm BO} ({\bf R})
+	= \int \d^3 x ~ n({\bf x}) \frac{Z_I e^2 ({\bf R}_I - {\bf x})}{\left\lvert {\bf R}_I - {\bf x} \right\rvert^3}
+	- \sum_{I \neq J} \frac{Z_I Z_J e^2 ({\b R}_{I}-{\bf R}_{J})}{
+		\left\lvert {\bf R}_{I}-{\bf R}_{J} \right\rvert^3}~,
+	\label{eq:hellmannfeynman.force}
+\end{align}
+which is solely determined by the ground-state electron density $n ({\bf x})$ and the nuclear configuration $\bf R$. This result is known as the \emph{Hellmann-Feynman theorem}\CITE{Hellmann, Feynman}, which can also be formulated in more general terms for any parametric dependence of the Hamiltonian on some external quantitiy $\lambda$:
+\begin{theorem}[Hellmann-Feynman]
+\begin{align}
+	\frac{\d E_{\lambda}}{\d \lambda}
+		= \frac{\d}{\d \lambda}\left\langle\Psi_{\lambda} \left|\hat{H}_{\lambda}\right| \Psi_{\lambda} \right\rangle
+		= \left\langle\Psi_{\lambda} \left| \frac{\d \hat{H}_{\lambda}}{\d \lambda} \right| \Psi_{\lambda} \right\rangle~.
+\end{align}
+\end{theorem}
+We note in passing that while the Hellmann-Feynman theorem is formally correct, in practice there often arise correction terms when non-complete basis sets are used that also depend on the parameter $\lambda$. The most famous correction are the so-called \emph{Pulay forces} that arise in atom centered basissets~\CITE{Pulay1969}.
+
+\subsection{Kohn-Sham Scheme}
+By introducing density functional theory, we have not solved the many-body problem. However, we have shifted the intricacies of this problem to a \emph{universal} functional $F[n]$ which depends on the electron density $n({\bf x})$, which is a scalar function of three coordinates, $n: \mathds R^3 \rightarrow \mathds R$, and thus entails a \emph{massive} reduction of complexity compared to working with wavefunctions, which are complex functions of $3N$ variables, $\Psi: \mathds R^{3N} \rightarrow \mathds C$.
+
+In order to proceed, we follow the original argument by Kohn and Sham~\CITE{KohnSham1965} and investigate the universal functional $F[n]$ defined in Eq.\,\eqref{eq:dft.Fn} in more detail. The definition reads
+\begin{align}
+	F[n] 
+		= \Braket{\Psi [n] | \hat T + \hat W | \Psi [n]}
+		\equiv T[n] + W[n]~,
+	\label{eq:dft.Fn.2}
+\end{align}
+where $T[n]$ now denotes the kinetic energy of the electrons expressed as a functional of the density $n ({\bf x})$, and $W[n]$ denotes the electron-electron interaction term. We split this term into two contributions,
+\begin{align}
+	\begin{split}
+	W[n] 
+		&= E^{\rm es} [n] + E^{\rm xc} [n] \\
+		&= \frac{1}{2} \int \mathrm{d}^{3} x ~ 
+			v^{\mathrm{es}}[n](\boldsymbol{x}) n(\boldsymbol{x})+E^{\mathrm{xc}}[n]~,
+	\end{split}
+	\label{eq:dft.KS.W}
+\end{align}
+where $E^{\rm es} [n]$ is the electrostatic (Hartree) energy stemming from a charge distribution $n ({\bf x})$ in the Coulomb potential
+\begin{align}
+	v^{\mathrm{es}}[n](\boldsymbol{x})
+		= \int \mathrm{d}^{3} x^{\prime} \frac{n\left(\boldsymbol{x}^{\prime}\right)}{\left|\boldsymbol{x}-\boldsymbol{x}^{\prime}\right|}~,
+	\label{eq:dft.KS.ves}
+\end{align}
+which is a functional of the density itself. $E^{\rm xc} [n]$ denotes all exchange and correlation effects not captured by $E^{\rm es} [n]$ and is therefore termed the \emph{exchange-correlation energy}. Again, we have only shifted the problem, this time to the unknown functional $E^{\rm xc} [n]$ which we will discuss later.
+In this notation, the total energy functional for the electron system in an external potential reads
+\begin{align}
+	E[n]
+		= T[n] +  E^{\rm es}[n] + E^{\rm xc} [n] + V^{\rm ext}[n]~.
+	\label{eq:dft.Ks.En}
+\end{align}
+
+Let us now define the density $n({\bf x})$ in terms of an \emph{auxiliary} orthonormal set of complex functions $\{ \psi_l ({\bf x}) \}$, such that
+\begin{align}
+	n({\bf x}) = \sum_l f_l \left\lvert \psi_l ({\bf x}) \right\rvert^2~,
+	\label{eq:dft.KS.n(psi)}
+\end{align}
+where ${\bf f}=\set{f_l : 0 \leq f_l \leq 1}$ denote the occupation of each orbital,~i.\,e.,~a Fermi-like function that represents a thermal ensemble or the 0\,K ground state. We use Eq.\,\eqref{eq:dft.KS.n(psi)} in Eq.\,\eqref{eq:dft.Ks.En} and vary with respect to $\psi^\ast_l ({\bf x})$ under the constraint of keeping the functions $\set{\psi_l}$ normalized via the Lagrange multiplier $\lambda_l$,
+\begin{align}
+	\frac{\delta}{\delta \psi^\ast_l ({\bf x})}
+		\left[
+			T[n] +  E^{\rm es}[n] + E^{\rm xc} [n] + V^{\rm ext}[n]
+			- \lambda_l \left(
+				\int \d^3 x ~ \left\lvert \psi_l ({\bf x}) \right\rvert^2 - 1
+			\right)
+		\right]
+		= 0~.
+	\label{eq:dft.Ks.variation.1}
+\end{align}
+By Eq.\,\eqref{eq:dft.KS.n(psi)} we have
+\begin{align}
+	\frac{\delta n({\bf x})}{\delta \psi^\ast_l ({\bf x}')}
+		&= f_l \psi_l ({\bf x}) \delta ({\bf x} - {\bf x}')~,
+	\label{eq:dft.KS.dn}
+\end{align}
+and therefore by chain rule 
+$\delta / \delta \psi^\ast = (\delta n / \delta \psi^\ast) \delta / \delta n$
+%\begin{align}
+%	\frac{\delta n({\bf x})}{\delta \psi^\ast_l ({\bf x}')}
+%		&= f_l \psi_l ({\bf x}) \delta ({\bf x} - {\bf x}')~,
+%		\label{eq:dft.KS.dn} \\
+%	\frac{\delta T[n]}{\delta \psi^\ast_l ({\bf x})}
+%		&= -\frac{1}{2} f_l \nabla^2 \psi_l ({\bf x})
+%		\label{eq:dft.KS.dT} \\
+%	\frac{\delta E^{\rm es}[n]}{\delta \psi^\ast_l ({\bf x})}
+%		&= v^{\rm es} [n] ({\bf x})
+%		\label{eq:dft.KS.dEes} \\
+%	\frac{\delta E^{\rm xc}[n]}{\delta \psi^\ast_l ({\bf x})}
+%		&= v^{\rm xc} [n] ({\bf x})
+%		\label{eq:dft.KS.dExc} \\
+%	\frac{\delta v^{\rm ext}[n]}{\delta \psi^\ast_l ({\bf x})}
+%		&= v^{\rm ext} ({\bf x})
+%		\label{eq:dft.KS.dEext} \\
+%\end{align}
+\begin{align}
+	\left(
+		-\frac{1}{2} \nabla^2 
+		+ v^{\rm es} [n] ({\bf x})
+		+ v^{\rm xc} [n] ({\bf x})
+		+ v^{\rm ext}  ({\bf x})
+	\right) \psi_l ({\bf x})
+	= \frac{\lambda_l}{f_l} \psi_l ({\bf x})~.
+	\label{eq:dft.KS.1}
+\end{align}
+Here, $-\frac{1}{2} \nabla^2$ is the kinetic operator, $v^{\rm es}$ and $v^{\rm ext}$ are the electrostatic and external potentials defined earlier, and
+\begin{align}
+	v^{\rm xc} [n] ({\bf x})
+		= \frac{\delta E^{\rm xc}[n]}{\delta n ({\bf x})}
+	\label{eq:dft.vxc}
+\end{align}
+is the \emph{exchange-correlation potential} formally defined as the functional derivative of $E^{\rm xc} [n]$ with respect to the density. By summarizing the three potentials entering Eq.\,\eqref{eq:dft.KS.1} as one \emph{effective} potential,
+\begin{align}
+	v^{\rm eff} [n] ({\bf x})
+	\equiv
+		v^{\rm es} [n] ({\bf x})
+		+ v^{\rm xc} [n] ({\bf x})
+		+ v^{\rm ext}  ({\bf x})~,
+	\label{eq:dft.KS.veff}
+\end{align}
+ and denoting $\epsilon_l \equiv \lambda_l / f_l$, we can write
+\begin{align}
+	\left(
+		-\frac{1}{2} \nabla^2 
+		+ v^{\rm eff} [n] ({\bf x})
+	\right) \psi_l ({\bf x})
+	= \epsilon_l \psi_l ({\bf x})~,
+\label{eq:dft.KS.2}
+\end{align}
+which is a one-particle Schr\"odinger-like equation for orbitals $\psi_l$ with eigenvalues $\epsilon_l$ in an effective potential $v^{\rm eff}[n]$ which is a functional of the density $n$ given in terms of the orbitals by Eq.\,\eqref{eq:dft.KS.n(psi)}. Equation\,\eqref{eq:dft.KS.2} therefore needs to be solved \emph{self-consistently} by starting from an initial guess for the density $n^0$ to set up the effective potential, and solving for $(\psi_l, \epsilon_l)$ until convergence. That the density $n$ of the \emph{interacting} many-particle systems can be obtained from the \emph{non-interacting} single-particle for the Kohn-Sham orbitals $\psi_l$ is ensured by the \emph{Kohn-Sham theorem}~\CITE{KohnSham1965,GrossDreizler1990}.
+
+Given that the solution $\set{\psi_l, \epsilon_l}$ is known, Eq.\,\eqref{eq:dft.KS.2} can be used to express the kinetic energy in terms of the density and eigenvalues $\epsilon_l$ by summing and integrating with $\sum_l \int \d^3 x~\psi^\ast_l ({\bf x})$ and using the orthonormality of the orbitals $\psi_l$, so that
+\begin{align}
+	T[n] 
+		\equiv - \frac{1}{2}\sum_l \int \d^3 x ~ \psi^\ast_l ({\bf x}) \nabla^2 \psi({\bf x})
+		\stackrel{\eqref{eq:dft.KS.2}}{=} 
+			\sum_l \epsilon_l 
+			- \int \d^3 x ~ v^{\rm eff}[n] ({\bf x}) n({\bf x})~.
+	\label{eq:dft.KS.Tn}
+\end{align}
+The total energy in terms of the Kohn-Sham eigenvalues $\set{\epsilon_l}$ and density $n ({\bf x}) = \sum_l \lvert \psi_l ({\bf x}) \rvert^2$ is then given as
+\begin{align}
+	E[n]
+		&\stackrel{\phantom{\eqref{eq:dft.KS.Tn}}}{=} 
+			T[n] 
+			+ \frac{1}{2} \int \d^3 x ~ v^{\rm es} [n] ({\bf x}) n ({\bf x})
+			+ E^{\rm xc}[n]
+			+ \int \d^3 x ~ v^{\rm ext} ({\bf x}) n ({\bf x})
+			\nonumber \\
+		&\stackrel{\eqref{eq:dft.KS.Tn}}{=}
+			\sum_l \epsilon_l 
+			- \frac{1}{2} \int \d^3 x ~ v^{\rm es} [n] ({\bf x}) n ({\bf x})
+			+ E^{\rm xc}[n]
+			- \int \d^3 x ~ v^{\rm xc}[n] ({\bf x}) n ({\bf x})~.
+	\label{eq:dft.KS.En}
+\end{align}
+
+\subsection{Approximations to the exchange-correlation energy}
+\label{sec:dft.approximations}
+We are finally in position to introduce approximations to the exchange-correlation energy functional $E^{\rm xc}[n]$ from which the corresponding potential can be obtained by the functional derivative with respect to the density as expressed in Eq.\,\eqref{eq:dft.KS.veff}. Indeed, the very success of the Kohn-Sham DFT scheme probably can be traced back to the fact that simple approximations to $E^{\rm xc}[n]$ lead to reasonable results for a large class of systems. 
+
+Let us now define an exchange-correlation energy density via
+\begin{align}
+	E^{\rm xc}[n] 
+		= \int \d^3 x ~ e^{\rm xc} \left[ n \right] ({\bf x})~,
+\label{eq:dft.xc.1}
+\end{align}
+where the density $e^{\rm xc} \left[ n \right] ({\bf x})$ is a functional of the density by itself. 
+The most straighforward way to approximate $e^{\rm xc}[n] ({\bf x})$ is to replace the \emph{functional} $e^{\rm xc} [n] ({\bf x})$ by a \emph{function} of the local density,
+\begin{align}
+	e^{\rm xc} [n] ({\bf x})
+		\approx e^{\rm xc}_{\rm LDA} \left( n({\bf x}) \right)~.
+	\label{eq:dft.exc.lda.1}
+\end{align}
+This approximation is called the \emph{local density approximation} (LDA), and the resulting exchange-correlation energy reads\footnote{
+	Some authors prefer to write $e^{\rm xc}(n) = n \tilde e^{\rm xc} (n)$, such that
+	\begin{align*}
+		E^{\rm xc} = \int \d^3 x ~ n({\bf x}) \tilde e^{\rm xc} (n ({\bf x}))~.
+	\end{align*}}
+\begin{align}
+	E^{\rm xc}_{\rm LDA}[n] 
+		= \int \d^3 x ~ e^{\rm xc}_{\rm LDA} \left(n ({\bf x}) \right)~.
+	\label{eq:dft.LDA.1}
+\end{align}
+The energy density $e^{\rm xc}_{\rm LDA} \left(n ({\bf x}) \right)$ is usually taken to be the exchange-correlation energy density of a homogeneous electron gas obtained from higher-level theory approaches. The LDA is (by construction) exact in the limit of vanishing density gradient, $\lvert \nabla n ({\bf x}) \rvert / n({\bf x}) \rightarrow 0$, but yields surprisingly good results under circumstances where the density is non-homogeneous as well.\REM{what does that mean? Chp. 7.2 Gross/Greizler}\CITE{Gross/Dreizler}
+
+In the spirit of the original work by Hohenberg and Kohn, and Kohn and Sham, improvements on the LDA can be constructed by going beyond the local density and taking into account gradients of the density as well,
+\begin{align}
+	e^{\rm xc} [n] ({\bf x})
+		\approx e^{\rm xc}_{\rm GGA} \left( n({\bf x}), \nabla n({\bf x}) \right)~.
+	\label{eq:dft.exc.gga.1}
+\end{align}
+Again, the full functional $e^{\rm xc}[n]$ is replaced by a function of the density and its gradient. This approximation is called \emph{generalized gradient approximation} (GGA), an the resulting energy is usually written in the form
+\begin{align}
+		E^{\rm xc}_{\rm GGA}[n] 
+		= \int \d^3 x ~ e^{\rm x}_{\rm hom} \left(n ({\bf x}) \right) 
+			F^{\rm xc} \left(n ({\bf x}), \lvert \nabla n ({\bf x})\rvert \right)~,
+		\label{eq:dft.GGA.1}
+\end{align}
+where $e^{\rm x}_{\rm hom}(n)$ is the exchange energy density of a homogeneous electron gas, and $F^{\rm xc}(n, \nabla n)$ is an \emph{enhancement factor}.
+\CITE{[1] J. P. Perdew, J. A. Chevary, S. H. Vosko, K. A. Jackson, M. R. Pederson, D. J. Singh, and C. Fiolhais, Phys. Rev. B 46, 6671 (1992).}
+\CITE{[1] J. P. Perdew, K. Burke, and M. Ernzerhof, Phys. Rev. Lett. 77, 3865 (1996).}
+
+\subsection{Periodic Systems}
+So far, we did not specify the external potential $v^{\rm ext} ({\bf x})$ entering the Kohn-Sham equation \eqref{eq:dft.KS.1} beyond stating that it describes the arrangement of nuclei. For (finite) molecules and clusters, this is already sufficient and a self-consistent solution to Eq.\,\eqref{eq:dft.KS.1} can be attempted from here. For (practically infinite) bulk systems and crystals on the other hand, further statements need to be made.
+
+Let us assume that the configuration of the nuclei is in a perfect periodic arrangement described by the 
+%\emph{unit cell}
+%\begin{align}
+%	\text{unit cell}
+%		= \set{{\bf x} = f^i {\bf a}_i : f^i \in \mathds R^{[0, 1)}}~,
+%	\label{eq:dft.Bloch.unitcell}
+%\end{align}
+%where 
+\emph{Bravais vectors}
+\begin{align}
+	{\bf R}_{\bf n} 
+		= \sum_{i=1}^{3} n^i {\bf a}_i~,
+	\label{eq:Rn}
+\end{align}
+where $\set{{\bf a}_i}$ is a basis that spans
+the \emph{unit cell},
+\begin{align}
+	\text{unit cell}
+		= \set{{\bf x} = f^i {\bf a}_i : f^i \in \mathds R^{[0, 1)}}~,
+	\label{eq:dft.Bloch.unitcell}
+\end{align}
+and the full crystal is spanned by the unit cell translated by all possible translations $\bf R_n$ given by Eq.\,\eqref{eq:Rn} with integer numbers smaller than some large but finite value $N_i$ for each basis vector ${\bf a}_i$, $\set{n^i : n^i \in \mathds{N}^{[0, N_i)}}$. The periodicity of the crystal is characterized by the condition that any translation by $\bf R_n$ maps the crystal back onto itself such that
+\begin{align}
+	v^{\rm ext} ({\bf x} + {\bf R_n}) 
+		= v^{\rm ext} ({\bf x})~.
+	\label{eq:dft.Bloch.1}
+\end{align}
+By definition of the effective potential entering the Kohn-Sham equations \eqref{eq:dft.KS.2}, $v^{\rm eff} [n] ({\bf x})$ shares this periodicity. We can therefore formulate a \emph{Bloch theorem}\footnote{Cf.~Sec.\,\ref{sec:BlochTheorem} for an informal proof.}
+for the Kohn-Sham orbitals $\psi_l ({\bf x})$,~i.\,e.,~solutions to Eq.\,\eqref{eq:dft.KS.2} can be separated into independent equations labelled by a quantum number $\bf k$ with solutions
+\begin{align}
+	\psi_{{\bf k} l} ({\bf x}) 
+		= {\rm e}^{\im {\bf k} \cdot {\bf x}} u_{{\bf k} l} ({\bf x})
+	\label{eq:dft.Bloch.2}
+\end{align}
+where $u_{{\bf k} l}$ are periodic functions satisfying
+\begin{align}
+	u_{{\bf k} l} ({\bf x} + {\bf R_n})
+		= u_{{\bf k} l} ({\bf x})~.
+	\label{eq:dft.Bloch.3}
+\end{align}
+
+\subsubsection{Born-von Karman Boundary Conditions}
+To ensure normalizability of the functions $\psi_{{\bf k}l}$, one additionally imposes the \emph{Born-von Karman boundary conditions}
+\begin{align}
+	\psi_{{\bf k}l} ({\bf x} + N_i {\bf a}_i) 
+		= \psi_{{\bf k}l} ({\bf x})
+	\label{eq:dft.Bloch.4}
+\end{align}
+where $N_i$ denotes the number of repetitions along direction ${\bf a}_i$. The domain $V$ of all functions and functionals appearing the Kohn-Sham equations thereby becomes a parallelepiped of size 
+$V = N_1 N_2 N_3 \, {\bf a}_1 \cdot ({\bf a}_2 \times {\bf a}_3)$ with periodically connected edges. The ideal, infinite crystal is obtained in the limit $N_i \rightarrow \infty$.
+Using the periodic boundary condition expressed by Eq.\,\eqref{eq:dft.Bloch.4} in the Bloch functions given by Eq.\,\eqref{eq:dft.Bloch.2}, and the periodicity of the functions $u_{{\bf k} l}$, one finds that
+\begin{align}
+%	{\rm e}^{\im {\bf k} \cdot ({\bf x} + N_i {\bf a}_i)} u_{{\bf k} l} ({\bf x})
+%		&= {\rm e}^{\im {\bf k} \cdot {\bf x}} u_{{\bf k} l} ({\bf x}) \nonumber \\
+%	\implies
+%		{\rm e}^{\im {\bf k} \cdot  N_i {\bf a}_i} 
+%			&= 1 \nonumber \\
+%	\implies
+		{\bf k} \cdot {\bf a}_i
+			&= \frac{2 \pi}{N_i} m_i~,\quad\text{with } m_i \in \mathds N^{[0, N_i)}~.
+	\label{eq:dft.Bloch.5}
+\end{align}
+In total there are $N = N_1 N_2 N_3$ unique values of $\bf k$ labelled by ${\bf m} = (m_1, m_2, m_3)$ that can be expressed in terms of the \emph{reciprocal lattice vectors}~\cite{Sands2002}
+\begin{align}
+	{\bf b}^i 
+		= 2 \pi \varepsilon^{ijk} \frac{{\bf a}_j \times {\bf a}_k}{{\bf a}_1 \cdot ({\bf a}_2 \times {\bf a}_3)} ~,
+	\label{eq:dft.Bloch.bi}
+\end{align}
+where $\varepsilon^{ijk}$ denotes the Levi-Civita symbol enforcing the correct ordering of $ijk$. The complete set of $\bf k$-values is
+\begin{align}
+	{\bf k}_{\bf m} 
+		= \sum_{i=1}^3 \frac{m_i}{N_i} {\bf b}^i~.
+	\label{eq:dft.Bloch.k_m}
+\end{align}
+The space spanned by the $\set{{\bf b}_i}$,~i.\,e.,~the space containing all unique values of $\b k$, is called the \emph{first Brillouin zone}. The values of $\bf k$ given by Eq.\,\eqref{eq:dft.Bloch.k_m} are those sampled in real-space simulation in a box of the given size,~i.\,e.,~the \emph{Born-von Karman cell}.
+
+\subsection{Conclusion}
+The concept of density functional theory in the Kohn-Sham scheme (KS-DFT) has been presented starting from the general many-body Hamiltonian given in Eq.\,\eqref{eq:Hamiltonian}. Besides the Born-Oppenheimer (BO) approximation which decouples electron and nuclear dynamics, KS-DFT offers a formally exact way of computing the total energy of the electronic ground state from first principles by solving Schr\"odinger-like single-particle equations,~i.\,e.,~the KS equations, for an auxiliary set of functions,~i.\,e.,~the KS-orbitals. In order to solve the KS equations one needs to approximate the exchange-correlation energy, $E^{\rm xc} [n]$. In Sec.\,\ref{sec:dft.approximations} we have introduced the most common approaches to approximate $E^{\rm xc} [n]$,~i.\,e.,~the local-density approximation (LDA), as well as the generalized-gradient approximation (GGA).
+
+Within the BO approximation, the BO potential-energy surface determines all dynamical properties of the nuclear system, for example heat transport. We discuss dynamical properties of this kind in more detail in the next section.
