@@ -87,7 +87,7 @@ The full (time-independent) many-body Schroedinger equation reads
     \label{eq:Schroedinger1}
 \end{align}
 with ground-state eigenvalues and many-body wave functions $E$ and \mbox{$\psi ({\bf r}, {\bf R})$},
-where \mbox{${\bf r} = ({\bf r}_i, \ldots, {\bf r}_{N_{\rm e}})$} denotes all electronic coordinates, and ${\bf R} = ({\bf R}_i, \ldots, {\bf R}_{N_{\rm Nuc}})$ all nuclear coordinates, respectively. According to Eq.\,\eqref{eq:H=H0+T}, we expand the wave functions $\psi ({\bf r}, {\bf R})$ in a complete set of orthonormal basis functions $\phi_l$,
+where \mbox{${\bf r} = ({\bf r}_, \ldots, {\bf r}_{N_{\rm e}})$} denotes all electronic coordinates, and ${\bf R} = ({\bf R}_1, \ldots, {\bf R}_{N_{\rm Nuc}})$ all nuclear coordinates, respectively. According to Eq.\,\eqref{eq:H=H0+T}, we expand the wave functions $\psi ({\bf r}, {\bf R})$ in a complete set of orthonormal basis functions $\phi_l$,
 \begin{align}
 \psi ({\bf r}, {\bf R}) = \sum_l \chi_l ({\bf R}) \phi_l ({\bf r}, {\bf R})~,
 \label{eq:psi_expansion_phi}
@@ -110,13 +110,13 @@ The functions $\chi_l$ are to be determined by using Eq.\,\eqref{eq:psi_expansio
 and integrating with $\int \d^3 r ~ \phi^\ast_m ({\bf r}, {\bf R})$ using their orthonormality, so that
 \begin{align}
     \left( T^{\rm Nuc} + E^0_m({\bf R}) \right) \chi_m ({\bf R})
-        + \sum_l A_{ml} ({\bf R}) \chi_l ({\bf R})
+        + \sum_l C_{ml} ({\bf R}) \chi_l ({\bf R})
         = E \chi_m ({\bf R})~,
     \label{eq:chi1}
 \end{align}
-where the operator $A_{ml}$~\CITE{Czycholl},
+where the operator $C_{ml}$~\CITE{Czycholl},
 \begin{align}
-    A_{ml} ({\bf R})
+    C_{ml} ({\bf R})
         = - \sum_I \frac{\hbar^2}{2 M_I} \int \d^3 r ~ 
         &\left[ \phi^\ast_m ({\bf r}, {\bf R}) \frac{\partial^2}{\partial {\bf R}_I^2}
             \phi_l ({\bf r}, {\bf R}) \right. \nonumber \\
@@ -138,7 +138,7 @@ Solving Eq.\,\eqref{eq:chi2} is performed in two steps:
     \item For a given configuration $\bf R$, the electronic Schr\"odinger equation \eqref{eq:Hsolution1} is solved, yielding the energies $E^0_l({\bf R})$ which thereby parametrically depend on $\bf R$.
     \item For each electronic quantum number $l$, Eq.\,\eqref{eq:chi2} for the nuclei is solved, where the electronic energy $E^0_l({\bf R})$ defines the effective \emph{potential energy surface}.
 \end{enumerate}
-Pictorially, the electrons move \emph{adiabatically} with the nuclei, hence the alternative term \emph{adiabatic approximation.} For reasons that will become apparent later, we now call the electronic energy $E^0_0$ corresponding to the electronic ground state for the given configuration ${\bf R}$ as the \emph{Born-Oppenheimer potential energy},
+Pictorially, the electrons move \emph{adiabatically} with the nuclei.\footnote{Born and Oppenheimer neglected $C_{ml}$ in their original work~\cite{BornOppenheimer} and later called this the \emph{adiabatic approximation}~\cite{BornHuang}. However, only the terms $C_{m \neq l}$ describe a coupling of different electronic states induced by nuclear coupling, and keeping the terms $C_{m=l}$ gives the exact potential when the electronic states are sufficiently separated,~e.\,g.,~in presence of an electronic gap~\cite{BornHuang}. Therefore the term ``adiabatic approximation'' is nowadays used when only the terms $C_{m=l}$ are kept~\cite{Marx2009}. The full BO approximation is correct to fourth order in the expansion of the full Hamiltonian in the mass parameter $\sqrt[4]{m/M}$~\cite{BornHuang}.} Since we will deal with insulators and semiconductors with bandgaps providing a sufficient energetic separation between the electronic ground state $l=0$ and the first exited state $l=1$,\footnote{Thermal energy at room temperature is $\sim 25\,{\rm meV} \ll $~typical bandgap.} we will concentrate on the electronic ground state energy $E^0_0$ for the given configuration ${\bf R}$ in the following. We denote this energy as the \emph{Born-Oppenheimer potential energy},
 \begin{align}
 	E^{\rm BO} ({\bf R}) \equiv E^0_0 ({\bf R})~.
 	\label{eq:E^BO}
@@ -561,9 +561,10 @@ for the Kohn-Sham orbitals $\psi_l ({\bf x})$,~i.\,e.,~solutions to Eq.\,\eqref{
 where $u_{{\bf k} l}$ are periodic functions satisfying
 \begin{align}
 	u_{{\bf k} l} ({\bf x} + {\bf R_n})
-		= u_{{\bf k} l} ({\bf x})~.
+		= u_{{\bf k} l} ({\bf x})~,
 	\label{eq:dft.Bloch.3}
 \end{align}
+and $\bf k$ is restricted to the first Brillouin zone of the reciprocal lattice.
 
 \subsubsection{Born-von Karman Boundary Conditions}
 To ensure normalizability of the functions $\psi_{{\bf k}l}$, one additionally imposes the \emph{Born-von Karman boundary conditions}
@@ -598,7 +599,7 @@ where $\varepsilon^{ijk}$ denotes the Levi-Civita symbol enforcing the correct o
 		= \sum_{i=1}^3 \frac{m_i}{N_i} {\bf b}^i~.
 	\label{eq:dft.Bloch.k_m}
 \end{align}
-The space spanned by the $\set{{\bf b}_i}$,~i.\,e.,~the space containing all unique values of $\b k$, is called the \emph{first Brillouin zone}. The values of $\bf k$ given by Eq.\,\eqref{eq:dft.Bloch.k_m} are those sampled in real-space simulation in a box of the given size,~i.\,e.,~the \emph{Born-von Karman cell}.
+The space spanned by the $\set{{\bf b}_i}$,~i.\,e.,~the space containing all unique values of $\b k$, is the unit cell of the reciprocal lattice. Alternatively, one chooses those equivalent $\bf k_m$ which are closest to the $\bf 0$,~i.\,e.,~the Brillouin zone. The values of $\bf k$ given by Eq.\,\eqref{eq:dft.Bloch.k_m} are those sampled in real-space simulation in a box of the given size,~i.\,e.,~the \emph{Born-von Karman cell}.
 
 \subsection{Conclusion}
 The concept of density functional theory in the Kohn-Sham scheme (KS-DFT) has been presented starting from the general many-body Hamiltonian given in Eq.\,\eqref{eq:Hamiltonian}. Besides the Born-Oppenheimer (BO) approximation which decouples electron and nuclear dynamics, KS-DFT offers a formally exact way of computing the total energy of the electronic ground state from first principles by solving Schr\"odinger-like single-particle equations,~i.\,e.,~the KS equations, for an auxiliary set of functions,~i.\,e.,~the KS-orbitals. In order to solve the KS equations one needs to approximate the exchange-correlation energy, $E^{\rm xc} [n]$. In Sec.\,\ref{sec:dft.approximations} we have introduced the most common approaches to approximate $E^{\rm xc} [n]$,~i.\,e.,~the local-density approximation (LDA), as well as the generalized-gradient approximation (GGA).
