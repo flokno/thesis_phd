@@ -1,6 +1,52 @@
 In the previous chapter, we have seen how the many-body problem can be decoupled into an electronic problem given by Eq.\,\eqref{eq:Hsolution1}, which can be solved in the framework of DFT, and a nuclear problem given by Eq.\,\eqref{eq:chi2} that describes the dynamical properties of the nuclei. This was achieved by means of the Born-Oppenheimer approximation where electron-nucleus interactions beyond a parametric dependence on each other is neglected~\cite{BornOppenheimer}.
 
-\subsection{Equations of Motion}
+We will now introduce two approximation to progress in the description of the nuclear dynamics. First, the \emph{harmonic approximation} in which the nuclear Schr\"odinger equation is solved for an approximated potential. Second, we treat the nuclei as classical particles, but on the full, non-truncated Born-Oppenheimer potential which we denote by $\mathcal V ({\bf R})$ in the following.
+
+We begin by recalling the Schr\"odinger equation for the nuclear wavefunctions $\chi_\nu ({\bf R})$ initially defined in Eq.\,\eqref{eq:chi2},
+\begin{align}
+  \left( T^{\rm Nuc} + \mathcal V ({\bf R}) \right) \chi_\nu ({\bf R})
+  = E_\nu \chi_\nu ({\bf R})~,
+  \label{eq:BOSE}
+\end{align}
+where the index $\nu$ was introduced to label different eigenstates, and
+\begin{align}
+  T^{\rm Nuc}
+    = \sum_I \frac{- \hbar^2}{2 M_I} \frac{\partial^2}{\partial {\bf R}_I^2}~,
+  \label{eq:Tnuc2}
+\end{align}
+as before.
+
+\subsection{Harmonic Approximation}
+The Born-Oppenheimer potential appearing in Eq.\,\eqref{eq:BOSE} is an ordinary function of the $3 N_{\rm Nuc}$ coordinates ${\bf R} = ({\bf R}_1, \ldots, {\bf R}_{N_{\rm Nuc}})$ and therefore can be expanded as a Taylor series about a given configuration ${\bf R}^0$,~i.\,e.,
+\begin{align}
+\begin{split}
+  \mathcal V ({\bf R} = {\bf R}^0 + \Delta {\bf R})
+    = \mathcal V ({\bf R}^0)
+    &+ \sum_{I, \alpha} 
+      \left. \frac{\partial V({\bf R})}{\partial R^\alpha_I} 
+      \right\vert_{{\bf R}^0}
+    \,\Delta R^\alpha_I
+    \\
+    &
+    + \frac{1}{2}
+    \sum_{\substack{I, J \\ \alpha, \beta}}
+    \left.\frac{\partial^{2} \mathcal{V}(\mathbf{R})}{\partial R_{I}^{\alpha} \partial R_{J}^{\beta}}\right|_{\mathbf{R}^{0}}
+    \, \Delta R_I^\alpha \Delta R_J^\beta
+    \\
+    &+\frac{1}{3!}\cdots ~,
+\end{split}
+\end{align}
+where the expansion coefficients are called \emph{force constants}. In particular, we have
+\begin{align}
+  \Phi_{\alpha, \beta}^{I, J}
+    =\left.\frac{\partial^{2} \mathcal{V}(\mathbf{R})}{\partial R_{I}^{\alpha} \partial R_{J}^{\beta}}\right|_{\mathbf{R}^{0}}~,
+\end{align}
+the \emph{harmonic force constants}.
+
+\REM{improve, Maradudin?}
+
+\newpage
+
 \subsection{Harmonic Approximation}
 \subsubsection{Finite Differences}
 \subsection{Harmonic Sampling}
