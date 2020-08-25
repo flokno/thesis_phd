@@ -45,21 +45,96 @@ the \emph{harmonic force constants}.
 
 \REM{improve, Maradudin?}
 
-\newpage
 
 \subsection{Harmonic Approximation}
 \subsubsection{Finite Differences}
 \subsection{Harmonic Sampling}
 
 \subsection{Molecular Dynamics}
-We proceed by considering a semiclassical approximation to the nuclear wavefunction $\chi_s$ by writing~\CITE{Dirac, Landau, Marx}
+The classical limit of the nuclear Schr\"odinger equation~\eqref{eq:BOSE} is usually performed by writing the nuclear wavefunction $\chi_s ({\bf R}, t)$ in terms of a real amplitude $A_s({\bf R}, t)$ and a \emph{classical action function} $S_s({\bf R}, t)$~\cite{Dirac1981,Landau2013,Marx2009}
 \begin{align}
-	\chi_s({\bf R}, t) = A({\bf R}, t) \, {\rm e}^{\frac{\im}{\hbar} S({\bf R}, t)}~,
+	\chi_s({\bf R}, t) = A_s({\bf R}, t) \, {\rm e}^{\frac{\im}{\hbar} S_s({\bf R}, t)}~.
 	\label{eq:class.1}
 \end{align}
-where 
+The Schr\"odinger equation then yields a set of differential equations for $A_s$ and $S_s$ that, in the limit $\hbar \to 0$, go over to a \emph{Hamilton-Jacobi} equation for $S_s$,~i.\,e.,~
+\begin{align}
+  \frac{\partial S_s}{\partial t} + \mathcal H \left({\bf R}, {\bf P}\right)
+  = 0~,
+  \label{eq:HamiltonJacobi}
+\end{align}
+where ${\bf P} = ({\bf P}_1, \ldots) \equiv ({\bf \nabla}_1 S_s, \ldots)$ denotes the conjugate momenta and $\mathcal H$ is the \emph{classical} Hamilton function corresponding the to the operator in Eq.\,\eqref{eq:BOSE}, from which the equations of motion for the nuclei can be obtained:
+\begin{align}
+  \dot{{\bf P}}_I 
+    = -\frac{\partial \mathcal H}{\partial {\bf R}_I}
+    \quad\implies\quad M_I \ddot{\bf R}_I
+    = -\frac{\partial \mathcal V}{\partial {\bf R}_I}~.
+    % \equiv - {\bf F}_I~.
+\end{align}
+The negative gradient of the Born-Oppenheimer potential, 
+$-\partial \mathcal V / \partial {\bf R}_I$ is the force ${\bf F}_I$ acting on atom $I$ which can be obtained via the Hellmann-Feynmann theorem,~cf.~Sec.\,\ref{sec:HellmannFeynman}.
 
-\CITE{Basdevant: Ehrenfest}
+An alternative viewpoint that is more instructive can be taken by invoking the \emph{Ehrenfest theorem}~\cite{Ehrenfest1927,Basdevant2007}. The statement is that
+\begin{align}
+  \frac{\d}{\d t} \left\langle {\bf P}_I \right\rangle_{\chi_s}
+    = \left\langle
+      - \frac{\partial \mathcal{V}}{\partial {\bf R}_I}
+    \right\rangle_{\chi_s}~,
+  \label{eq:ehrenfest.de1}
+\end{align}
+where $\langle \cdot \rangle_{\chi_s}$ denotes an expectation value taken with respect to the state $\chi_s$. This expression differs only slightly from the classical counterpart, which would read
+\begin{align}
+\frac{\d}{\d t} \left\langle {\bf P}_I \right\rangle
+= \left.
+- \frac{\partial \mathcal{V}}{\partial {\bf R}_I}
+\right\vert_{{\bf R} = \langle {\bf R} \rangle}~.
+\label{eq:ehrenfest.de2}
+\end{align}
+The difference comes from the fact that, in general,
+\begin{align}
+  \delta f
+  \equiv 
+  f \bm ( \langle x \rangle \bm{)} 
+  - 
+  \bm{\langle} f (x) \bm{\rangle}
+  \neq 0
+  ~,
+  \label{eq:ehrenfest.delta1}
+\end{align}
+where $x = {\bf R}_I$ denotes the space coordinate for notional simplicity, $f$ is some function of the observable $x$, and $\delta f$ measures the difference between the classical and the quantum expectation value. Ehrenfest's argument is that this difference becomes negligible when the state is sufficiently peaked around some value $x_0$. Expanding $f$ around the expectation value of $x$, $x_0 \equiv \langle x \rangle$, we have
+\begin{align}
+  f(x) = f \bm ( \langle x \rangle \bm{)}  
+    + (x - \langle x \rangle) \, f' \bm ( \langle x \rangle \bm{)}
+    + \frac{1}{2} (x - \langle x \rangle)^2 \, f'' \bm ( \langle x \rangle \bm{)}
+    + \cdots~.
+  \label{eq:ehrenfest.f2}
+\end{align}
+It follows that the $f'$ term vanishes when the expectation value is taken, and
+\begin{align}
+\langle f(x) \rangle 
+  = f \bm ( \langle x \rangle \bm{)}  
+    + \frac{1}{2} \Delta x^2 f'' \bm ( \langle x \rangle \bm{)}
+    + \cdots~,
+\label{eq:ehrenfest.f3}
+\end{align}
+where $\Delta x^2 = \bm{\langle} (x - \langle x \rangle)^2 \bm{\rangle}$ measures the variance of the underlying distribution,~i.\,e.~the width of the wavepacket. The relative error between the classical and quantum expectation value is readily computed to be
+\begin{align}
+  \left\lvert \frac{\delta f}{f \bm ( \langle x \rangle \bm{)}} \right\rvert
+  = \frac{1}{2} \Delta x^2 \left\lvert \frac{f'' \bm ( \langle x \rangle \bm{)}}{f \bm ( \langle x \rangle \bm{)}} \right\rvert
++ \mathcal{O}(\Delta x^3)~.
+  \label{eq:ehrenfest.delta2}
+\end{align}
+This estimation holds in general for any observable $f$.
+By crudely estimating the dimension of the wavepacket in terms of the thermal de Broglie-wavelength, we find
+\begin{align}
+  \Delta x^2 
+    \sim \left( \frac{h}{P} \right)^2
+    \sim \frac{h^2}{MT}~,
+  \label{eq:ehrenfest:dimension}
+\end{align}
+which gives support to the intuitive assumption that we can expect the classical limit to work better the heavier the atoms and the higher the temperature.
+Let us now set $f(x) \hat = -\partial \mathcal V / \partial {\bf R}_I$, then another important conclusion can be drawn from Eq.\,\eqref{eq:ehrenfest.delta2}: For a harmonic potential $\mathcal V ({\bf R}) = \mathcal V^{(2)} ({\bf R})$, where derivatives higher than second order vanish, the classical and quantum mechanical expectation values \emph{always coincide}. The quantum mechanical expectation value of position will therefore evolve in the same time-periodic fashion as a classical particle in a harmonic well.
+
+\REM{this approach can only be validated by computing observables and compare the results. One can safely say that this approach has been used successfully in a plethora of studies, while additional care must be taken at low temperature and/or systems with light atoms, especially hydrogen-bonded systems~\CITE{MD-Review?,MarklandCeriotti,Litman,pHexperiment}.}
 
 \subsubsection{Thermodynamic Ensembles and Thermostats}
 \subsubsection{Finite Temperature Equations of State and Lattice Expansion}
