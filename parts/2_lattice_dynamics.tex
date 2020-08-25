@@ -1,20 +1,20 @@
 In the previous chapter, we have seen how the many-body problem can be decoupled into an electronic problem given by Eq.\,\eqref{eq:Hsolution1}, which can be solved in the framework of DFT, and a nuclear problem given by Eq.\,\eqref{eq:chi2} that describes the dynamical properties of the nuclei. This was achieved by means of the Born-Oppenheimer approximation where electron-nucleus interactions beyond a parametric dependence on each other is neglected~\cite{BornOppenheimer}.
 
-We will now introduce two approximation to progress in the description of the nuclear dynamics. First, the \emph{harmonic approximation} in which the nuclear Schr\"odinger equation is solved for an approximated potential. Second, we treat the nuclei as classical particles, but on the full, non-truncated Born-Oppenheimer potential which we denote by $\mathcal V ({\bf R})$ in the following.
+We will now introduce two approximations to progress in the description of the nuclear dynamics. First, the \emph{harmonic approximation} in which the nuclear Schr\"odinger equation is solved for an approximated potential. Second, we treat the nuclei as particles, but on the full, non-truncated Born-Oppenheimer potential which we denote by $\mathcal V ({\bf R})$ in the following. This will lead to the formulation of \emph{ab initio molecular dynamics} (aiMD).
 
-We begin by recalling the Schr\"odinger equation for the nuclear wavefunctions $\chi_\nu ({\bf R})$ initially defined in Eq.\,\eqref{eq:chi2},
+We begin by recalling the Schr\"odinger equation for the nuclear wavefunctions $\chi_s ({\bf R})$ initially defined in Eq.\,\eqref{eq:chi2},
 \begin{align}
-  \left( T^{\rm Nuc} + \mathcal V ({\bf R}) \right) \chi_\nu ({\bf R})
-  = E_\nu \chi_\nu ({\bf R})~,
+  \left( T^{\rm Nuc} + \mathcal V ({\bf R}) \right) \chi_s ({\bf R})
+  = E_s \chi_s ({\bf R})~,
   \label{eq:BOSE}
 \end{align}
-where the index $\nu$ was introduced to label different eigenstates, and
+where the index $s$ was introduced to label different eigenstates, and
 \begin{align}
   T^{\rm Nuc}
     = \sum_I \frac{- \hbar^2}{2 M_I} \frac{\partial^2}{\partial {\bf R}_I^2}~,
   \label{eq:Tnuc2}
 \end{align}
-as before.
+is the nuclear kinetic-energy operator as before.
 
 \subsection{Harmonic Approximation}
 The Born-Oppenheimer potential appearing in Eq.\,\eqref{eq:BOSE} is an ordinary function of the $3 N_{\rm Nuc}$ coordinates ${\bf R} = ({\bf R}_1, \ldots, {\bf R}_{N_{\rm Nuc}})$ and therefore can be expanded as a Taylor series about a given configuration ${\bf R}^0$,~i.\,e.,
@@ -52,6 +52,15 @@ the \emph{harmonic force constants}.
 \subsection{Harmonic Sampling}
 
 \subsection{Molecular Dynamics}
+We proceed by considering a semiclassical approximation to the nuclear wavefunction $\chi_s$ by writing~\CITE{Dirac, Landau, Marx}
+\begin{align}
+	\chi_s({\bf R}, t) = A({\bf R}, t) \, {\rm e}^{\frac{\im}{\hbar} S({\bf R}, t)}~,
+	\label{eq:class.1}
+\end{align}
+where 
+
+\CITE{Basdevant: Ehrenfest}
+
 \subsubsection{Thermodynamic Ensembles and Thermostats}
 \subsubsection{Finite Temperature Equations of State and Lattice Expansion}
 \subsubsection{Mode Projection}

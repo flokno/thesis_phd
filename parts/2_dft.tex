@@ -51,6 +51,12 @@ and the kinetic energy operator for nuclei with momentum operators $\hat{\bf P}_
         =\sum_{I} \frac{\hat{\mathbf{P}}_{I}^{2}}{2 M_{I}}~.
     \label{eq:Tnuc}
 \end{align}
+This Hamiltonian governs the dynamical evolution of a many-particle system represented by a state $\ket{\Psi}$ via the time dependent Schr\"odinger equation,
+\begin{align}
+	\hat H \ket{\Psi} = \im \hbar \frac{\partial}{\partial t} \ket{\Psi}~,
+	\label{eq:TdSE}
+\end{align}
+from which all material properties (neglecting relativistic and effects and electromagnetic fields) follow.
 
 \subsection{The Born Oppenheimer Approximation}
 We go over to a unitless Hamiltonian by scaling Eq.\,\eqref{eq:Hamiltonian} with the Hartree energy $E_{\rm h} = me^4 / \hbar^2 \approx 27.2\,{\rm eV}$ and expressing distances in terms of the Bohr radius $a_0 = \hbar^2 / m e^2$,~i.\,e.,~${\bf r} = a_0 \tilde{\bf r}$, where $\hbar$ denotes the Planck constant~\CITE{Czycholl}. Dropping the operator hats in the following and using $\hat{\bf p}=-\im \hbar \partial / \partial {\bf r}$ instead, we have
@@ -81,7 +87,7 @@ which only depends on the charge numbers $\{Z_I\}$ and the mass ratios $\{ m_{\r
         + {\mathrm{V}}^{\mathrm{Nuc}-\mathrm{Nuc}}~.
     \label{eq:H0}
 \end{align}
-The full (time-independent) many-body Schroedinger equation reads
+The time-independent many-body Schroedinger equation reads
 \begin{align}
     H \psi ({\bf r}, {\bf R}) = E \psi ({\bf r}, {\bf R})~,
     \label{eq:Schroedinger1}
