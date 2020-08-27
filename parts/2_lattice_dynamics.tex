@@ -155,6 +155,43 @@ The thermodynamic properties of such a system of harmonic oscillators follow fro
 This derivation is generally valid for a system of $N$ particles described by a potential-energy surface of which a (local) minimum ${\bf R}^0$, and the matrix of second derivatives at this configuration, $\Phi^{IJ}$, is known.
 
 \subsubsection{Periodic Systems}
+As already mentioned in Sec.~\ref{sec:theory.periodic.1}, the crystalline state is characterized by a periodic long-range order described the Bravais vectors ${\bf R}_{\bf L} = L^i {\bf a}_i$, where $\set{{\bf a}_i}$ is the crystal basis
+. 
+The periodicity of the lattice is in fact a permutation symmetry of the following kind:
+Let ${\bf R} = \set{{\bf R}_I}$ be an atomic configuration. Then ${\bf R}' = \set{{\bf R}'_{I}}$ is a configuration such that
+\begin{align}
+	{\bf R}'_{I} = {\bf R}_{I} + {\bf R}_{\bf L}~.
+	\label{eq:RI'}
+\end{align}
+This new configuration ${\bf R}'$ can be either viewed as a rigid shift of $\bf R$ by the Bravais vector ${\bf R}_{\bf L}$, or it can be viewed as a map $P_{\bf L}$ between indices $I, I'$ such that the displacement of atom $I$ is replaced with the displacement of atom $I'$,
+\begin{align}
+	P_{\bf L} : I \to I' \quad\text{such that}\quad
+	%{\bf R}_I = {\bf R}_{I'}~.
+	({\bf R}_I - {\bf R}_I^0) = ({\bf R}_{I'} - {\bf R}_{I'}^0)~,
+\end{align}
+so that ${\bf R}' = \set{{\bf R}_{I'}}$ \REM{improve}.
+A one-dimensional depiction of this viewpoint is shown in Fig.\,\ref{fig:translation.permutation}.
+\begin{figure}
+	\centering
+	\includegraphics[width=.68\textwidth]{./sketches/permutation1.jpg}
+	\caption{A linear chain with three atoms (bullets) displaced from their equilibrium position (open circels). With periodic boundary conditions, the consecutive translation by a lattice vector $a$ induces a permutation of the atoms,~i.\,e.,~$(1, 2 , 3) \to (3, 1, 2) \to (2, 3, 1)$.}
+	\label{fig:translation.permutation}
+\end{figure}
+For a periodic potential, we require that the permutation $P_{\bf L}$ leaves the following invariant:
+\begin{subequations}
+\begin{align}
+	{\bf R}^{0 \prime}
+		= \set{{\bf R}_{I'}^0 }
+		&= {\bf R}^0 = \set{{\bf R}_{I}^0 }~,
+		\quad\text{and}
+		\label{eq:inv.R0} \\
+	\mathcal{V} \left( {\bf R}' = \set{{\bf R}_{I'}} \right)
+		&= \mathcal{V}({\bf R} = \set{{\bf R}_{I}} ) 
+		\quad\text{for all}\quad L^i \in \mathds Z~.
+		\label{eq:inv.V}
+\end{align}
+\end{subequations}
+\REM{Alternative: explain in terms of ${\bf U}_I$}
 
 
 \subsubsection{Finite Differences}
@@ -201,8 +238,7 @@ where $\langle \cdot \rangle_{\chi_s}$ denotes an expectation value taken with r
 \end{align}
 The difference comes from the fact that, in general,
 \begin{align}
-  \delta f
-  \equiv 
+  \delta f  \equiv 
   f \bm ( \langle x \rangle \bm{)} 
   - 
   \bm{\langle} f (x) \bm{\rangle}
