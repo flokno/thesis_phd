@@ -1,6 +1,6 @@
 In the previous chapter, we have seen how the many-body problem can be decoupled into an electronic problem given by Eq.\,\eqref{eq:Hsolution1}, which can be solved in the framework of DFT, and a nuclear problem given by Eq.\,\eqref{eq:chi2} that describes the dynamical properties of the nuclei. This was achieved by means of the Born-Oppenheimer approximation where electron-nucleus interactions beyond a parametric dependence on each other is neglected~\cite{BornOppenheimer}.
 
-We will now introduce two approximations to progress in the description of the nuclear dynamics. First, the \emph{harmonic approximation} in which the nuclear Schr\"odinger equation is solved for an approximated potential. Second, we treat the nuclei as particles, but on the full, non-truncated Born-Oppenheimer potential which we denote simply by $\mathcal V ({\bf R})$ in the following. This will lead to the formulation of \emph{ab initio molecular dynamics} (aiMD).
+We will now introduce two approximations to progress in the description of the nuclear dynamics. First, the \emph{harmonic approximation} in which the nuclear Schr\"odinger equation is solved for an approximated potential. Second, we treat the nuclei as particles, but on the full, non-truncated Born-Oppenheimer potential. This will lead to the formulation of \emph{ab initio molecular dynamics} (aiMD). As no electron will appear anymore, $N \equiv N_{\rm Nuc}$ will henceforth denote the number of nuclei in the system of interest, and we denote the Born-Oppenheimer potential simply as \emph{the} potential, $\mathcal V ({\bf R})$.
 
 We begin by recalling the Schr\"odinger equation for the nuclear wavefunctions $\chi_s ({\bf R})$ initially defined in Eq.\,\eqref{eq:chi2},
 \begin{align}
@@ -157,19 +157,19 @@ This derivation is generally valid for a system of $N$ particles described by a 
 \subsubsection{Periodic Systems}
 As already mentioned in Sec.~\ref{sec:theory.periodic.1}, the crystalline state is characterized by a periodic long-range order described the Bravais vectors ${\bf L} = L^i {\bf a}_i$, where $\set{{\bf a}_i}$ is the crystal basis and $L^i \in \mathds Z$.
 We define this symmetry as follows:
-Let ${\bf R}^0 = \set{{\bf R}_I^0}$ be the configuration of atoms in the local minimum of interest. Then ${\bf R}^{0 \prime} = \set{{\bf R}^{0 \prime}_{I}}$ is the configuration obtained by moving all atoms by a Bravais vector ${\bf L}$,
+Let ${\bf R}^0 = \set{{\bf R}_I^0}$ be the configuration of atoms in the local minimum of interest, and let ${\bf R}^{0 \prime} = \set{{\bf R}^{0 \prime}_{I}}$ denote the configuration obtained by moving all atoms by a Bravais vector ${\bf L}$,
 \begin{align}
 	{\bf R}^{0 \prime}_{I} = {\bf R}^0_{I} + {\bf L}~.
 	\label{eq:RI'}
 \end{align}
-As a prerequisite for $\mathcal V ({\bf R})$ to be translationally invariant, we require that ${\bf R}^{0 \prime} = \set{{\bf R}^{0 \prime}_{I}}$ is a minimum configuration of the potential as well, \emph{and} there is a bijective permutation map $P_{\bf L}$ between the atomic positions ${\bf R}^{0 \prime}_{I}$ and ${\bf R}^{0}_{I'}$ such that
+As a prerequisite for $\mathcal V ({\bf R})$ to be translationally invariant, we require that ${\bf R}^{0 \prime} = \set{{\bf R}^{0 \prime}_{I}}$ is a minimum configuration of the potential as well, \emph{and} there is a bijective permutation map $P_{\bf L}$ between the atomic positions ${\bf R}^{0 \prime}_{I}$ and ${\bf R}^{0}_{I'}$ which fulfills
 \begin{align}
 	P_{\bf L} : I \to I' \quad\text{such that}\quad
 	{\bf R}^{0 \prime}_{I}
 		= {\bf R}^{0}_{I'}~,
 	\label{eq:translation.permutation}
 \end{align}
-i.\,e.,~the configurations ${\bf R}'_{I}$ and ${\bf R}^{0}_{I}$ are indistinguishable.\,\footnote{This requirement is obviously not fulfilled for molecules, where rigidly shifting all atoms can by no means induce a permutation map between atoms.} 
+i.\,e.,~the configurations ${\bf R}^{0 \prime}_{I}$ and ${\bf R}^{0}_{I}$ are indistinguishable.\,\footnote{This requirement is obviously not fulfilled for molecules, where rigidly shifting all atoms can by no means induce a permutation map between atoms.} 
 The final requirement for translational invariance of the potential is that the potential energy for \emph{any} configuration differing by a Bravais vector is unchanged:
 \begin{align}
 %	{\bf R}^{0 \prime}
@@ -182,7 +182,7 @@ The final requirement for translational invariance of the potential is that the 
 	\quad\text{for all}\quad {\bf L} = L^i {\bf a}_i~.
 	\label{eq:inv.V}
 \end{align}
-Figure\,\ref{fig:translation.permutation} shows a one-dimensional depiction of the relation between discrete translation by Bravais vectors and the permutation map, despite yielding different structures.
+This effectively corresponds to a permutation of the displacements of the atoms, $U_I \to U_{I'}$ according to $P_{\bf L}$. Figure\,\ref{fig:translation.permutation} shows a one-dimensional depiction of the relation between discrete translation by Bravais vectors and the permutation map.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=.68\textwidth]{./sketches/permutation1.jpg}
@@ -196,25 +196,84 @@ We can draw several important conclusions from Eq.\,\eqref{eq:translation.permut
 		= {\bf R}^0_i + {\bf U}_{i {\bf L}} + {\bf L}~,
 	\label{eq:R_iL}
 \end{align}
-where ${\bf R}^0_i$ labels the position of a symmetrically equivalent reference atom in the primitive unit cell, ${\bf U}_{i {\bf L}}$ is the displacement of the atom from its equilibrium position, and $\bf L$ is a Bravais vector as before.
-We can therefore split the index $I$ into a tuple $I = (i, {\bf L})$,~i.\,e.,~primitive cell and lattice point labels.
+where ${\bf R}^0_i$ labels the position of an equivalent reference atom in the unit cell, ${\bf U}_{i {\bf L}}$ is the displacement of the atom from its equilibrium position, and $\bf L$ is a Bravais vector as before.
+We can therefore split the index $I$ into a tuple $I = (i, {\bf L})$,~i.\,e.,~uni cell and lattice point labels.
 
-In turn, the harmonic force constants $\Phi_{I \alpha, J \beta}$ can be written as $\Phi_{i {\bf L} \alpha, j {\bf K} \beta}$~, where $\bf L$ and $\b K$ are the Bravais vectors belonging to $I$ and $J$, respectively. From the translational invariance of the potential, Eq.\,\eqref{eq:inv.V}, we see that the force constants have to fulfill
+Second, the harmonic force constants $\Phi_{I \alpha, J \beta}$ can be written as $\Phi_{i {\bf L} \alpha, j {\bf K} \beta}$~, where $\bf L$ and $\b K$ are the Bravais vectors belonging to $I$ and $J$, respectively. From the translational invariance of the potential, Eq.\,\eqref{eq:inv.V}, we see that the force constants have to fulfill
 \begin{align}
 	\Phi_{i {\bf L} + \b M \alpha, j {\bf K} + \b M \beta} 
 		= \Phi_{i {\bf L} \alpha, j {\bf K} \beta}~,
+	\label{eq:fc.sym.1}
 \end{align}
 where $\b M$ again denotes an arbitrary Bravais vector. Using this translational invariance, we can Fourier transform the dynamical matrix defined in Eq.\,\eqref{eq:D},
 \begin{align}
-	D_{i \alpha, j \beta} (\b q) 
-		= \frac{1}{N} \sum_{\b L} {\rm e}^{\im \b q \cdot \b L} D_{i \b 0 \alpha, j \b L \beta}
+	{\rm D}_{i \alpha, j \beta} (\b q) 
+		= \frac{1}{N} \sum_{\b L} {\rm e}^{\im \b q \cdot \b L} {\rm D}_{i \b 0 \alpha, j \b L \beta}
 	\label{eq:D(q)}
 \end{align}
 where we restrict the values of $\b q$ to reside in the first Brillouin zone, thereby transforming the $3N \times 3N$ matrix ${\rm D}_{IJ}$ to one $3n \times 3n$ matrix ${\rm D}_{ij} (\bf q)$ for each~$\b q$, where $n$ is the number of atoms in the primitive unit cell.
 
-\subsubsection{Cyclic Boundary Conditions and Ledermann's Theorem}
+\subsubsection{Supercell Approximation and Ledermann's Theorem}
+In the previous section, we did not specify the system beyond requiring periodic boundary conditions, and implicitly assumed an infinite crystal in the limit $N \to \infty$ without boundaries. In practice we introduce Born-von Karman cyclic boundary conditions as already done in Sec.\,\ref{sec:theory.periodic.1} for the description of electronic states, but reintroduce them here in a slightly more general fashion.
+
+We define the boundary conditions for the nuclear problem such that
+\begin{align}
+	\b R_I + S^i \b A_i = \b R_I \quad\text{for}\quad S^i \in \mathds{Z}~,
+	\label{eq:sc.1}
+\end{align}
+where each ${\bf A}_i$ is a linear combination of the primitive basis vectors $\set{{\bf a}_i}$,
+\begin{align}
+{\bf A}_i = {\rm M}_{ij}^{\rm sc} {\bf a}_j\quad\text{with } {\rm M}_{ij}^{\rm sc} \in \mathds Z~,
+\end{align}
+and $\rm M^{\rm sc}$ is a non-singular matrix with integer elements. The space spanned by the $\set{{\bf A}_i}$ is parallelepiped of volume $V_{\rm sc} = N_{\rm sc} \, {\bf a}_1 \cdot ({\bf a}_2 \times {\bf a}_3)$, where $N_{\rm sc} = \det {\rm M}^{\rm S}$ is the number of unit cells that fit into the enlarged cell, and $V_{\rm uc} = {\bf a}_1 \cdot ({\bf a}_2 \times {\bf a}_3)$ is the unit cell volume. This cell is therefore called \emph{supercell}, and the matrix ${\rm M}^{\rm S}$ is denoted as the \emph{supercell matrix}. The vectors $\b S = S^i \b A_i$ are the equivalent of the Bravais vectors $\b L$ in a superlattice described by $\set{ \b A_i }$ instead of $\set{ \b a_i}$.
+The ideal, infinite crystal is obtained in the limit $N_{\rm sc} \rightarrow \infty$.
+From Eq.\,\eqref{eq:sc.1} we see that the force constants need to fulfill
+\begin{align}
+	\Phi_{i {\bf L} \alpha, j {\bf K} + \b S \beta} 
+		= \Phi_{i {\bf L} \alpha, j {\bf K} \beta} \quad\text{for all}\quad \b S = S^i \b A_i~,
+	\label{eq:fc.sym.2}
+\end{align}
+so that the dynamical matrix in Eq.\,\eqref{eq:D(q)} can be written as a sum over lattice points that are contained in the supercell only:
+\begin{align}
+	{\rm D}_{i \alpha, j \beta} (\b q) 
+		&= \frac{1}{N} 
+				\sum_{\b L \in V_{\rm sc}} 
+			\left( 
+				{\rm e}^{\im \b q \cdot \b L} {\rm D}_{i \b 0 \alpha, j \b L \beta}
+			+ \sum_{\b S \neq \b 0} {\rm e}^{\im \b q \cdot (\b L + \b S)} {\rm D}_{i \b 0 \alpha, j \b L \beta}
+			\right)
+	\label{eq:D^S(q).1} \\
+	&= \frac{1}{N_{\rm sc}} \sum_{\b L \in V_{\rm sc}} {\rm e}^{\im \b q \cdot \b L} {\rm D}_{i \b 0 \alpha, j \b L \beta}~,
+	\label{eq:D^S(q).2}
+\end{align}
+for $\b q$ that fulfill
+\begin{align}
+	{\bf q} \cdot {\bf A}_i	= 2 \pi m_i \quad\text{with}\quad m_i \in \mathds Z~,
+	\label{eq:q.commensurate}
+\end{align}
+since only for these $\b q$ the summands in the second sum of Eq.\,\eqref{eq:D^S(q).1} interfere constructively, and for all other $\b q$ the entire summand vanishes in the limit $1/N \to 0$.
+The $\b q$ that fulfill Eq.\,\eqref{eq:q.commensurate} are called \emph{commensurate} $\b q$-points, as they represent wave numbers that fit into the supercell.
+In total there are $N_{\rm sc}$ permissible values of $\bf q$ labelled by ${\bf m} = (m_1, m_2, m_3)$ that can be expressed in terms of the lattice vectors of the reciprocal supercell,
+\begin{align}
+{\bf B}^i 
+= 2 \pi \varepsilon^{ijk} \frac{{\bf A}_j \times {\bf A}_k}{{\bf A}_1 \cdot ({\bf A}_2 \times {\bf A}_3)} ~,
+%\label{eq:dft.Bloch.bi}
+\end{align}
+where $\varepsilon^{ijk}$ denotes the Levi-Civita symbol enforcing the correct ordering of $ijk$. The complete set of $\bf q$-values is
+\begin{align}
+{\bf q}_{\bf m} 
+= \sum_{i=1}^3 m_i {\bf B}^i~,
+%\label{eq:dft.Bloch.k_m}
+\end{align}
+with $m_i \in \mathds Z$ such that $\b q_{\bf m}$ is an element of the first Brillouin zone of the direct lattice.
+
+\REM{for $\b q = \b q_{\b m}$ D is exact up to boundary effects (?!), nevertheless one can interpolate -> Fourier interpolation}
+\REM{Alternative: Use effective cutoff of $\Phi$}
+\REM{Effective cutoff -> effect on spectrum, Maradudin, Ledermann}
 
 \subsubsection{Finite Differences}
+
+
 \subsection{Harmonic Sampling}
 
 \subsection{Molecular Dynamics}
