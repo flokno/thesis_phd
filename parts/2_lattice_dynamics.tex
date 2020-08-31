@@ -91,6 +91,7 @@ As required earlier, the dynamical matrix $\rm D$ is a positive definite matrix.
 	\label{eq:D.symmetric}
 \end{align}
 i.\,e.,~$\rm D$ is a symmetric matrix in the $3N$ coordinates $(I, \alpha)$. The eigenvalues of $\rm D$ will therefore be real and positive, and the eigenvectors will be real and orthogonal. We denote the eigenvalues as $\omega_s^2$ and the normalized eigenvectors as ${\bf e}_s$, where $s$ is the \emph{mode} label. $\omega_s$ will have the unit of a frequency and  will be called \emph{eigenfrequency} in the following. The dynamical matrix elements can be rewritten in therms of the eigenvectors and eigenvalues as
+\begin{subequations}
 \begin{align}
 	\sum_{J \beta}
 		D_{I \alpha, J \beta} \, e_{s, J \beta} 
@@ -100,6 +101,7 @@ i.\,e.,~$\rm D$ is a symmetric matrix in the $3N$ coordinates $(I, \alpha)$. The
 			&= \sum_s \omega^2_s \, e_{s, I \alpha} e_{s, J \beta}~.
 			\label{eq:D_IJs}
 \end{align}
+\end{subequations}
 Since the eigenvectors fulfill
 \begin{align}
 	\sum_{I \alpha} e_{s, I \alpha} e_{s', I \alpha} = \delta_{s s'}
@@ -208,13 +210,13 @@ Second, the harmonic force constants $\Phi_{I \alpha, J \beta}$ can be written a
 where $\b M$ again denotes an arbitrary Bravais vector. Using this translational invariance, we can Fourier transform the dynamical matrix defined in Eq.\,\eqref{eq:D},
 \begin{align}
 	{\rm D}_{i \alpha, j \beta} (\b q) 
-		= \frac{1}{N} \sum_{\b L} {\rm e}^{\im \b q \cdot \b L} {\rm D}_{i \b 0 \alpha, j \b L \beta}
+		= \sum_{\b L} {\rm e}^{- \im \b q \cdot \b L} {\rm D}_{i \b 0 \alpha, j \b L \beta}
 	\label{eq:D(q)}
 \end{align}
 where we restrict the values of $\b q$ to reside in the first Brillouin zone, thereby transforming the $3N \times 3N$ matrix ${\rm D}_{IJ}$ to one $3n \times 3n$ matrix ${\rm D}_{ij} (\bf q)$ for each~$\b q$, where $n$ is the number of atoms in the primitive unit cell.
 
-\subsubsection{Supercell Approximation and Ledermann's Theorem}
-In the previous section, we did not specify the system beyond requiring periodic boundary conditions, and implicitly assumed an infinite crystal in the limit $N \to \infty$ without boundaries. In practice we introduce Born-von Karman cyclic boundary conditions as already done in Sec.\,\ref{sec:theory.periodic.1} for the description of electronic states, but reintroduce them here in a slightly more general fashion.
+\subsubsection{Cyclic Boundary Conditions and Supercell Approximation}
+In the previous section, we did not specify the system beyond requiring periodic boundary conditions, and implicitly assumed an infinite crystal in the limit $N \to \infty$ without boundaries. In practice we introduce Born-von Karman cyclic boundary conditions~\cite{born2013atomtheorie}, as already done in Sec.\,\ref{sec:theory.periodic.1} for the description of electronic states, but reintroduce them here in a slightly more general fashion.
 
 We define the boundary conditions for the nuclear problem such that
 \begin{align}
@@ -233,25 +235,25 @@ From Eq.\,\eqref{eq:sc.1} we see that the force constants need to fulfill
 		= \Phi_{i {\bf L} \alpha, j {\bf K} \beta} \quad\text{for all}\quad \b S = S^i \b A_i~,
 	\label{eq:fc.sym.2}
 \end{align}
-so that the dynamical matrix in Eq.\,\eqref{eq:D(q)} can be written as a sum over lattice points that are contained in the supercell only:
+so that the dynamical matrix in Eq.\,\eqref{eq:D(q)} can be written as a sum over lattice points that are contained in the supercell only,
 \begin{align}
 	{\rm D}_{i \alpha, j \beta} (\b q) 
-		&= \frac{1}{N} 
-				\sum_{\b L \in V_{\rm sc}} 
-			\left( 
-				{\rm e}^{\im \b q \cdot \b L} {\rm D}_{i \b 0 \alpha, j \b L \beta}
-			+ \sum_{\b S \neq \b 0} {\rm e}^{\im \b q \cdot (\b L + \b S)} {\rm D}_{i \b 0 \alpha, j \b L \beta}
-			\right)
-	\label{eq:D^S(q).1} \\
-	&= \frac{1}{N_{\rm sc}} \sum_{\b L \in V_{\rm sc}} {\rm e}^{\im \b q \cdot \b L} {\rm D}_{i \b 0 \alpha, j \b L \beta}~,
+%		&= \sum_{\b L \in V_{\rm sc}} 
+%			\left( 
+%				{\rm e}^{- \im \b q \cdot \b L} {\rm D}_{i \b 0 \alpha, j \b L \beta}
+%			+ \sum_{\b S \neq \b 0} {\rm e}^{- \im \b q \cdot (\b L + \b S)} {\rm D}_{i \b 0 \alpha, j \b L \beta}
+%			\right)~
+%	\label{eq:D^S(q).1} \\
+	&= %\frac{N}{N_{\rm sc}} 
+	\sum_{\b L \in V_{\rm sc}} {\rm e}^{- \im \b q \cdot \b L} {\rm D}_{i \b 0 \alpha, j \b L \beta}~,
 	\label{eq:D^S(q).2}
 \end{align}
 for $\b q$ that fulfill
 \begin{align}
-	{\bf q} \cdot {\bf A}_i	= 2 \pi m_i \quad\text{with}\quad m_i \in \mathds Z~,
+	{\bf q} \cdot {\bf A}_i	= 2 \pi m_i \quad\text{with}\quad m_i \in \mathds Z~.
 	\label{eq:q.commensurate}
 \end{align}
-since only for these $\b q$ the summands in the second sum of Eq.\,\eqref{eq:D^S(q).1} interfere constructively, and for all other $\b q$ the entire summand vanishes in the limit $1/N \to 0$.
+% the summands in the second sum of Eq.\,\eqref{eq:D^S(q).1} interfere constructively and yield a factor $\sum_{\b S}' = N / N_{\rm sc} - 1$. For all other $\b q$, the entire summand becomes negligible in the limit $N \to \infty$.
 The $\b q$ that fulfill Eq.\,\eqref{eq:q.commensurate} are called \emph{commensurate} $\b q$-points, as they represent wave numbers that fit into the supercell.
 In total there are $N_{\rm sc}$ permissible values of $\bf q$ labelled by ${\bf m} = (m_1, m_2, m_3)$ that can be expressed in terms of the lattice vectors of the reciprocal supercell,
 \begin{align}
@@ -267,12 +269,26 @@ where $\varepsilon^{ijk}$ denotes the Levi-Civita symbol enforcing the correct o
 \end{align}
 with $m_i \in \mathds Z$ such that $\b q_{\bf m}$ is an element of the first Brillouin zone of the direct lattice.
 
+%As we will be interested in the eigenvalues and eigenvectors of the dynamical matrices $\rm D ({\b q})$, the prefactor $N/N_{\rm sc}$ can be neglected in the following.
+
 \REM{for $\b q = \b q_{\b m}$ D is exact up to boundary effects (?!), nevertheless one can interpolate -> Fourier interpolation}
 \REM{Alternative: Use effective cutoff of $\Phi$}
 \REM{Effective cutoff -> effect on spectrum, Maradudin, Ledermann}
 
-\subsubsection{Finite Differences}
+% Equation~\eqref{eq:D^S(q).2} will in general not be hermitian in $(i \alpha, j \beta)$
 
+For each $\b q$, ${\rm D} (\b q)$ is a hermitian $3n \times 3n$ matrix in the indices $(i \alpha, j \beta)$ and will therefore yield $3n$ real eigenvalues and $3n$ complex, orthogonal eigenvectors, which denote in accordance with Eq.\,\eqref{eq:sum_D_IJ}
+\begin{align}
+	\sum_{j \beta} {\rm D}_{i \alpha, j \beta} (\b q) e_{j \beta} (\b q , b)
+		= \omega^2 \, (\b q, b) e_{i \alpha} (\b q , b)~,
+	\label{eq:D_ij(q)w}
+\end{align}
+where the \emph{band index} $b$ is used to discern the $3n$ \emph{branches} at each $\b q$. Using the combined index $s = (\b q, b)$, the notation becomes similar to the non-periodic case with $3N_{\rm sc} N_{\rm uc}$ degrees of freedom, only that the eigenvectors $\b e_{s = (\b q, n)}$ can be complex valued instead of strictly real.
+\REM{This is Born conventions. Togo and Parlinski use extra phase factor ${\rm e}^{\im \b q \cdot (\b R_i^0 - \b R_j^0)}$ that alters the eigenvectors but not the frequencies.}
+
+\subsubsection{Ledermann's Theorem}
+
+\subsubsection{Finite Differences}
 
 \subsection{Harmonic Sampling}
 
