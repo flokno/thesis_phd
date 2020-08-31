@@ -1,0 +1,40 @@
+# configfile written at 2020/08/30 19:21:25
+
+[phonopy]
+supercell_matrix:              [-2, 2, 2, 2, -2, 2, 2, 2, -2]
+displacement:                  0.01
+is_diagonal:                   False
+is_plusminus:                  auto
+symprec:                       1e-05
+q_mesh:                        [45, 45, 45]
+workdir:                       phonopy
+
+[common]
+email:                         knoop@fhi-berlin.mpg.de
+
+[machine]
+basissetloc:                   /home/knoop/FHIaims/aimsfiles/species_defaults
+aims_command:                  run_aims
+
+[calculator]
+socketio:                      True
+name:                          aims
+workdir:                       /home/knoop/thcloud/Share/MarcelLanger/StressNet/ZrO2/cell_cubic/phonopy
+
+[calculator.parameters]
+xc:                            pw-lda
+k_grid:                        [2, 2, 2]
+sc_accuracy_rho:               1e-06
+relativistic:                  atomic_zora scalar
+output_level:                  MD_light
+compute_forces:                True
+use_pimd_wrapper:              ('localhost', 10001)
+
+[calculator.kpoints]
+density:                       2
+
+[calculator.basissets]
+default:                       light
+
+[files]
+geometry:                      geometry.in.primitive

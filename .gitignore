@@ -10,3 +10,5 @@ main.pdf
 *.synctex.gz
 *.toc
 *.bak
+
+*.ipynb_checkpoints
