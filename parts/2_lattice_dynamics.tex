@@ -238,22 +238,19 @@ From Eq.\,\eqref{eq:sc.1} we see that the force constants need to fulfill
 so that the dynamical matrix in Eq.\,\eqref{eq:D(q)} can be written as a sum over lattice points that are contained in the supercell only,
 \begin{align}
 	{\rm D}_{i \alpha, j \beta} (\b q) 
-%		&= \sum_{\b L \in V_{\rm sc}} 
-%			\left( 
-%				{\rm e}^{- \im \b q \cdot \b L} {\rm D}_{i \b 0 \alpha, j \b L \beta}
-%			+ \sum_{\b S \neq \b 0} {\rm e}^{- \im \b q \cdot (\b L + \b S)} {\rm D}_{i \b 0 \alpha, j \b L \beta}
-%			\right)~
-%	\label{eq:D^S(q).1} \\
-	&= %\frac{N}{N_{\rm sc}} 
-	\sum_{\b L \in V_{\rm sc}} {\rm e}^{- \im \b q \cdot \b L} {\rm D}_{i \b 0 \alpha, j \b L \beta}~,
-	\label{eq:D^S(q).2}
+		&= \sum_{\b L \in V_{\rm sc}} 
+			\left( 
+				{\rm e}^{- \im \b q \cdot \b L} {\rm D}_{i \b 0 \alpha, j \b L \beta}
+			+ \sum_{\b S \neq \b 0} {\rm e}^{- \im \b q \cdot (\b L + \b S)} {\rm D}_{i \b 0 \alpha, j \b L \beta}
+			\right)~.
+	\label{eq:D^S(q).1}
 \end{align}
-for $\b q$ that fulfill
+For $\b q$ that fulfill
 \begin{align}
-	{\bf q} \cdot {\bf A}_i	= 2 \pi m_i \quad\text{with}\quad m_i \in \mathds Z~.
+	{\bf q} \cdot {\bf A}_i	= 2 \pi m_i \quad\text{with}\quad m_i \in \mathds Z~,
 	\label{eq:q.commensurate}
 \end{align}
-% the summands in the second sum of Eq.\,\eqref{eq:D^S(q).1} interfere constructively and yield a factor $\sum_{\b S}' = N / N_{\rm sc} - 1$. For all other $\b q$, the entire summand becomes negligible in the limit $N \to \infty$.
+the summands in the second sum of Eq.\,\eqref{eq:D^S(q).1} interfere constructively and yield a factor $\sum_{\b S}' = N / N_{\rm sc} - 1$. For all other $\b q$, the entire summand becomes negligible in the limit $N \to \infty$ when normalized to the supercell volume.
 The $\b q$ that fulfill Eq.\,\eqref{eq:q.commensurate} are called \emph{commensurate} $\b q$-points, as they represent wave numbers that fit into the supercell.
 In total there are $N_{\rm sc}$ permissible values of $\bf q$ labelled by ${\bf m} = (m_1, m_2, m_3)$ that can be expressed in terms of the lattice vectors of the reciprocal supercell,
 \begin{align}
@@ -265,9 +262,17 @@ where $\varepsilon^{ijk}$ denotes the Levi-Civita symbol enforcing the correct o
 \begin{align}
 {\bf q}_{\bf m} 
 = \sum_{i=1}^3 m_i {\bf B}^i~,
-%\label{eq:dft.Bloch.k_m}
+\label{eq:q_m}
 \end{align}
 with $m_i \in \mathds Z$ such that $\b q_{\bf m}$ is an element of the first Brillouin zone of the direct lattice.
+For the set of commensurate $\b q$-points, the dynamical matrix is given by
+\begin{align}
+{\rm D}_{i \alpha, j \beta} (\b q_{\bf m}) 	
+	&= %\frac{N}{N_{\rm sc}} 
+	\sum_{\b L \in V_{\rm sc}} {\rm e}^{- \im \b q_{\bf m} \cdot \b L} {\rm D}_{i \b 0 \alpha, j \b L \beta}~,
+	\label{eq:D^S(q).2}
+\end{align}
+
 
 %As we will be interested in the eigenvalues and eigenvectors of the dynamical matrices $\rm D ({\b q})$, the prefactor $N/N_{\rm sc}$ can be neglected in the following.
 
@@ -285,6 +290,21 @@ For each $\b q$, ${\rm D} (\b q)$ is a hermitian $3n \times 3n$ matrix in the in
 \end{align}
 where the \emph{band index} $b$ is used to discern the $3n$ \emph{branches} at each $\b q$. Using the combined index $s = (\b q, b)$, the notation becomes similar to the non-periodic case with $3N_{\rm sc} N_{\rm uc}$ degrees of freedom, only that the eigenvectors $\b e_{s = (\b q, n)}$ can be complex valued instead of strictly real.
 \REM{This is Born conventions. Togo and Parlinski use extra phase factor ${\rm e}^{\im \b q \cdot (\b R_i^0 - \b R_j^0)}$ that alters the eigenvectors but not the frequencies.}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=.32\textwidth]{./notes/2_sc.pdf}
+	\hfill
+	\includegraphics[width=.32\textwidth]{./notes/3_sc.pdf}
+	\hfill
+	\includegraphics[width=.32\textwidth]{./notes/4_sc.pdf}
+	\caption{Depiction of square supercells with lattice points in the range $[-0.5 L, 0.5 L)$ (bullets $\bullet$), and extended lattice points at the supercell boundary (empty bullets $\circ$), where $L$ is the length of the supercell.}
+	\label{fig:sketch_supercells}
+\end{figure}
+
+\subsubsection{Interpolation to non-commensurate q-points}
+The definition of the dynamical matrix in Eq.\,\eqref{eq:D^S(q).2} was formulated for commensurate $\b q$-points $\set{\b q_{\b m}}$,~i.\,e.,~those given in terms of Eq.\,\eqref{eq:q_m}. Evaluating Eq.\,\eqref{eq:D^S(q).2} for any other value of $\b q$ will however yield a non-vanishing matrix.
+
 
 \subsubsection{Ledermann's Theorem}
 
