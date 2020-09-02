@@ -17,7 +17,7 @@ where
 is the nuclear kinetic-energy operator as before.
 
 \subsection{Harmonic Approximation}
-The Born-Oppenheimer potential $\mathcal V ({\bf R})$ appearing in Eq.\,\eqref{eq:BOSE} is an ordinary function of the $3 N_{\rm Nuc}$ coordinates ${\bf R} = ({\bf R}_1, \ldots, {\bf R}_{N_{\rm Nuc}})$ and therefore can be expanded as a Taylor series in displacements ${\bf U} \equiv \Delta {\bf R}$ about a given configuration ${\bf R}^0$,~i.\,e.,
+The Born-Oppenheimer potential $\mathcal V ({\bf R})$ appearing in Eq.\,\eqref{eq:BOSE} is an ordinary function of the\,\footnote{Remember $N \equiv N_{\rm Nuc}$.} $3 N$ coordinates ${\bf R} = ({\bf R}_1, \ldots, {\bf R}_{N})$ and therefore can be expanded as a Taylor series in displacements ${\bf U} \equiv \Delta {\bf R}$ about a given configuration ${\bf R}^0$,~i.\,e.,
 \begin{align}
 \begin{split}
   \mathcal V ({\bf R} = {\bf R}^0 + {\bf U})
@@ -192,14 +192,14 @@ This effectively corresponds to a permutation of the displacements of the atoms,
 	\label{fig:translation.permutation}
 \end{figure}
 
-We can draw several important conclusions from Eq.\,\eqref{eq:translation.permutation} and \eqref{eq:inv.V}. First, the existence of the map $P_{\bf L}$ enables us to write every atomic coordinate ${\bf R}_I$ as
+We can draw two important conclusions from Eq.\,\eqref{eq:translation.permutation} and \eqref{eq:inv.V}. First, the existence of the map $P_{\bf L}$ enables us to write every atomic coordinate ${\bf R}_I$ as
 \begin{align}
 	{\bf R}_I \equiv {\bf R}_{i {\bf L}} 
 		= {\bf R}^0_i + {\bf U}_{i {\bf L}} + {\bf L}~,
 	\label{eq:R_iL}
 \end{align}
 where ${\bf R}^0_i$ labels the position of an equivalent reference atom in the unit cell, ${\bf U}_{i {\bf L}}$ is the displacement of the atom from its equilibrium position, and $\bf L$ is a Bravais vector as before.
-We can therefore split the index $I$ into a tuple $I = (i, {\bf L})$,~i.\,e.,~uni cell and lattice point labels.
+We can therefore split the index $I$ into a tuple $I = (i, {\bf L})$,~i.\,e.,~unit cell and lattice point labels.
 
 Second, the harmonic force constants $\Phi_{I \alpha, J \beta}$ can be written as $\Phi_{i {\bf L} \alpha, j {\bf K} \beta}$~, where $\bf L$ and $\b K$ are the Bravais vectors belonging to $I$ and $J$, respectively. From the translational invariance of the potential, Eq.\,\eqref{eq:inv.V}, we see that the force constants have to fulfill
 \begin{align}
@@ -227,7 +227,14 @@ where each ${\bf A}_i$ is a linear combination of the primitive basis vectors $\
 \begin{align}
 {\bf A}_i = {\rm M}_{ij}^{\rm sc} {\bf a}_j\quad\text{with } {\rm M}_{ij}^{\rm sc} \in \mathds Z~,
 \end{align}
-and $\rm M^{\rm sc}$ is a non-singular matrix with integer elements. The space spanned by the $\set{{\bf A}_i}$ is parallelepiped of volume $V_{\rm sc} = N_{\rm sc} \, {\bf a}_1 \cdot ({\bf a}_2 \times {\bf a}_3)$, where $N_{\rm sc} = \det {\rm M}^{\rm S}$ is the number of unit cells that fit into the enlarged cell, and $V_{\rm uc} = {\bf a}_1 \cdot ({\bf a}_2 \times {\bf a}_3)$ is the unit cell volume. This cell is therefore called \emph{supercell}, and the matrix ${\rm M}^{\rm S}$ is denoted as the \emph{supercell matrix}. The vectors $\b S = S^i \b A_i$ are the equivalent of the Bravais vectors $\b L$ in a superlattice described by $\set{ \b A_i }$ instead of $\set{ \b a_i}$.
+and $\rm M^{\rm sc}$ is a non-singular matrix with integer elements. The space spanned by the $\set{{\bf A}_i}$ is parallelepiped of volume $V_{\rm sc} = N_{\rm sc} \, {\bf a}_1 \cdot ({\bf a}_2 \times {\bf a}_3)$, where $N_{\rm sc} = \det {\rm M}^{\rm sc}$ is the number of unit cells that fit into the enlarged cell, and $V_{\rm uc} = {\bf a}_1 \cdot ({\bf a}_2 \times {\bf a}_3)$ is the unit cell volume. This cell is therefore called \emph{supercell} and we define it such that its midpoint is located at the origin,~i.\,e.,~
+\begin{align}
+	\mathds V_{\rm sc}
+		&= \set{{\bf X} = X^i {\bf A}_i : X^i \in {[-0.5, 0.5)_{\mathds R}}}~.
+	\label{eq:supercell}
+\end{align}
+We therefore denote the matrix ${\rm M}^{\rm sc}$ as the \emph{supercell matrix}.
+The vectors \mbox{$\b S = S^i \b A_i$} are the equivalent of the Bravais vectors $\b L$ in a superlattice described by $\set{ \b A_i }$ instead of $\set{ \b a_i}$.
 The ideal, infinite crystal is obtained in the limit $N_{\rm sc} \rightarrow \infty$.
 From Eq.\,\eqref{eq:sc.1} we see that the force constants need to fulfill
 \begin{align}
@@ -238,7 +245,7 @@ From Eq.\,\eqref{eq:sc.1} we see that the force constants need to fulfill
 so that the dynamical matrix in Eq.\,\eqref{eq:D(q)} can be written as a sum over lattice points that are contained in the supercell only,
 \begin{align}
 	{\rm D}_{i \alpha, j \beta} (\b q) 
-		&= \sum_{\b L \in V_{\rm sc}} 
+		&= \sum_{\b L \in \mathds V_{\rm sc}} 
 			\left( 
 				{\rm e}^{- \im \b q \cdot \b L} {\rm D}_{i \b 0 \alpha, j \b L \beta}
 			+ \sum_{\b S \neq \b 0} {\rm e}^{- \im \b q \cdot (\b L + \b S)} {\rm D}_{i \b 0 \alpha, j \b L \beta}
@@ -265,23 +272,13 @@ where $\varepsilon^{ijk}$ denotes the Levi-Civita symbol enforcing the correct o
 \label{eq:q_m}
 \end{align}
 with $m_i \in \mathds Z$ such that $\b q_{\bf m}$ is an element of the first Brillouin zone of the direct lattice.
-For the set of commensurate $\b q$-points, the dynamical matrix is given by
+For the set of commensurate $\b q$-points, the dynamical matrix is therefore given by
 \begin{align}
 {\rm D}_{i \alpha, j \beta} (\b q_{\bf m}) 	
 	&= %\frac{N}{N_{\rm sc}} 
-	\sum_{\b L \in V_{\rm sc}} {\rm e}^{- \im \b q_{\bf m} \cdot \b L} {\rm D}_{i \b 0 \alpha, j \b L \beta}~,
+	\sum_{\b L \in \mathds V_{\rm sc}} {\rm e}^{- \im \b q_{\bf m} \cdot \b L} {\rm D}_{i \b 0 \alpha, j \b L \beta}~.
 	\label{eq:D^S(q).2}
 \end{align}
-
-
-%As we will be interested in the eigenvalues and eigenvectors of the dynamical matrices $\rm D ({\b q})$, the prefactor $N/N_{\rm sc}$ can be neglected in the following.
-
-\REM{for $\b q = \b q_{\b m}$ D is exact up to boundary effects (?!), nevertheless one can interpolate -> Fourier interpolation}
-\REM{Alternative: Use effective cutoff of $\Phi$}
-\REM{Effective cutoff -> effect on spectrum, Maradudin, Ledermann}
-
-% Equation~\eqref{eq:D^S(q).2} will in general not be hermitian in $(i \alpha, j \beta)$
-
 For each $\b q$, ${\rm D} (\b q)$ is a hermitian $3n \times 3n$ matrix in the indices $(i \alpha, j \beta)$ and will therefore yield $3n$ real eigenvalues and $3n$ complex, orthogonal eigenvectors, which denote in accordance with Eq.\,\eqref{eq:sum_D_IJ}
 \begin{align}
 	\sum_{j \beta} {\rm D}_{i \alpha, j \beta} (\b q) e_{j \beta} (\b q , b)
@@ -293,22 +290,69 @@ where the \emph{band index} $b$ is used to discern the $3n$ \emph{branches} at e
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=.32\textwidth]{./notes/2_sc.pdf}
+	\includegraphics[width=.32\textwidth]{./sketches/2_sc.pdf}
 	\hfill
-	\includegraphics[width=.32\textwidth]{./notes/3_sc.pdf}
+	\includegraphics[width=.32\textwidth]{./sketches/3_sc.pdf}
 	\hfill
-	\includegraphics[width=.32\textwidth]{./notes/4_sc.pdf}
-	\caption{Depiction of square supercells with lattice points in the range $[-0.5 L, 0.5 L)$ (bullets $\bullet$), and extended lattice points at the supercell boundary (empty bullets $\circ$), where $L$ is the length of the supercell.}
+	\includegraphics[width=.32\textwidth]{./sketches/4_sc.pdf}
+	\caption{Depiction of square supercells with lattice points in the range $[-0.5 A, 0.5 A)$ (bullets $\bullet$), and extended lattice points at the supercell boundary (empty bullets $\circ$), where $A$ is the edge length of the supercell. Blue arrows denote the unit cell vectors, black arrows denote the supercell vectors.}
 	\label{fig:sketch_supercells}
 \end{figure}
 
 \subsubsection{Interpolation to non-commensurate q-points}
-The definition of the dynamical matrix in Eq.\,\eqref{eq:D^S(q).2} was formulated for commensurate $\b q$-points $\set{\b q_{\b m}}$,~i.\,e.,~those given in terms of Eq.\,\eqref{eq:q_m}. Evaluating Eq.\,\eqref{eq:D^S(q).2} for any other value of $\b q$ will however yield a non-vanishing matrix.
+The definition of the dynamical matrix in Eq.\,\eqref{eq:D^S(q).2} was formulated for commensurate $\b q$-points $\set{\b q_{\b m}}$,~i.\,e.,~those given in terms of Eq.\,\eqref{eq:q_m}. To obtain an \emph{approximated} dynamical matrix at any other, non-commensurate value of $\b q$ within the Brillouin zone, we define an \emph{extended supercell}, 
+\begin{align}
+	\mathds V_{\rm sc}^{\rm ext}
+		&= \set{{\bf X} = X^i {\bf A}_i : X^i \in {[-0.5, 0.5 \boldsymbol{]}_{\mathds R}}}~,
+	\label{eq:supercell.extended}
+\end{align}
+which also contains the lattice points at the positive boundary of the supercell as depicted by open circles in Fig.\,\ref{fig:sketch_supercells}. These lattice points are included in the Fourier series with an appropriate weight $w_{\b L}$ that accounts for double counting of lattice points that are separated by a linear combination of supercell lattice vectors~\cite{Parlinski1997}. Furthermore, we use a minimal image convention (MIC) between the atoms $(i, \b 0)$ and $(j, \b L)$,~i.\,e.,~for each pair we use an equivalent lattice point $\b L'$ within the extended supercell which depends on $(i, j, \b L)$ such that
+\begin{align}
+	- R_{i \b 0 } + R_{j \b 0} + \b L' \in V_{\rm sc}^{\rm ext}~.
+	\label{eq:L'}
+\end{align}
+In total we define
+\begin{align}
+	{\rm D}_{i \alpha, j \beta} (\b q) 	
+		&= %\frac{N}{N_{\rm sc}} 
+		\sum_{\b L \in \mathds V_{\rm sc}^{\rm ext}} 
+			w_{\b L}
+		{\rm e}^{- \im \b q \cdot \b L'} {\rm D}_{i \b 0 \alpha, j \b L \beta}~.
+	\label{eq:D_Parlinski}
+\end{align}
+We note that the dynamical matrix elements defined by Eq.\,\eqref{eq:D_Parlinski} differ from the ones found in Ref.~\cite{Parlinski1997} by a phase factor ${\rm e}^{\im \b q \cdot (\b R_i^0 - \b R_j^0)}$, which is typical when the discussion is performed from a lattice-wave ansatz to solve the equations of motion~\cite[p. 298]{BornHuang}.
+
 
 
 \subsubsection{Ledermann's Theorem}
 
+%As we will be interested in the eigenvalues and eigenvectors of the dynamical matrices $\rm D ({\b q})$, the prefactor $N/N_{\rm sc}$ can be neglected in the following.
+
+\REM{for $\b q = \b q_{\b m}$ D is exact up to boundary effects (?!), nevertheless one can interpolate -> Fourier interpolation}
+\REM{Alternative: Use effective cutoff of $\Phi$}
+\REM{Effective cutoff -> effect on spectrum, Maradudin, Ledermann}
+
+% Equation~\eqref{eq:D^S(q).2} will in general not be hermitian in $(i \alpha, j \beta)$
+
 \subsubsection{Finite Differences}
+The force constants can be obtained from first-order derivatives of the potential-energy surface,~i.\,e.,~the forces, by rewriting the second derivative in terms of a finite difference expression,
+\begin{align}
+	\Phi_{I \alpha, J \beta}
+		= \left.\frac{\partial^{2} \mathcal{V}(\mathbf{R})}{\partial R_{I}^{\alpha} \partial R_{J}^{\beta}}\right|_{\mathbf{R}^{0}}
+		= - \frac{\partial}{\partial R_I^\alpha} F_{J, \beta}
+		= \lim_{\epsilon \to 0}
+			\frac{F_{J, \beta} (\set{\b R': R^{\prime \beta}_I = R^{\beta}_I + \epsilon )}}{\epsilon}
+		~.
+\label{eq:FC2_finite}
+\end{align}
+In practice, atom $J$ is displaced by a small but finite displacement $\epsilon$ in the direction $\beta$, and the force on all other atoms is recorded.
+
+\begin{align}
+	F &= - H U \\
+	\implies
+	H &= - U^{+} F
+\end{align}
+
 
 \subsection{Harmonic Sampling}
 

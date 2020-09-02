@@ -549,10 +549,11 @@ Let us assume that the configuration of the nuclei is in a perfect periodic arra
 where $\set{{\bf a}_i}$ is a basis that spans
 the \emph{unit cell},
 \begin{align}
-	\text{unit cell}
+	\mathds V_{\rm uc}
 		= \set{{\bf x} = f^i {\bf a}_i : f^i \in \mathds R^{[0, 1)}}~,
 	\label{eq:dft.Bloch.unitcell}
 \end{align}
+\REM{Use $[-0.5, 0.5)$}
 and the full crystal is spanned by the unit cell translated by all possible translations $\bf R_n$ given by Eq.\,\eqref{eq:Rn} with integer numbers smaller than some large but finite value $N_i$ for each basis vector ${\bf a}_i$, $\set{n^i : n^i \in \mathds{N}^{[0, N_i)}}$. The periodicity of the crystal is characterized by the condition that any translation by $\bf R_n$ maps the crystal back onto itself such that
 \begin{align}
 	v^{\rm ext} ({\bf x} + {\bf R_n}) 
