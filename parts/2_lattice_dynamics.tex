@@ -330,15 +330,11 @@ For each $\b q$, ${\rm D} (\b q)$ is a hermitian $3n \times 3n$ matrix in the in
 where the \emph{band index} $b$ is used to discern the $3n$ \emph{branches} at each $\b q$. Using the combined index $s = (\b q, b)$, the notation becomes similar to the non-periodic case with $3N_{\rm sc} N_{\rm uc}$ degrees of freedom, only that the eigenvectors $\b e_{s = (\b q, n)}$ can be complex valued instead of strictly real.
 \REM{This is Born conventions. Togo and Parlinski use extra phase factor ${\rm e}^{\im \b q \cdot (\b R_i^0 - \b R_j^0)}$ that alters the eigenvectors but not the frequencies.}
 
-\subsubsection{Ledermann's Theorem}
+\subsubsection{Supercell Convergence and Ledermann's Theorem}
 
-%As we will be interested in the eigenvalues and eigenvectors of the dynamical matrices $\rm D ({\b q})$, the prefactor $N/N_{\rm sc}$ can be neglected in the following.
 
-\REM{for $\b q = \b q_{\b m}$ D is exact up to boundary effects (?!), nevertheless one can interpolate -> Fourier interpolation}
-\REM{Alternative: Use effective cutoff of $\Phi$}
-\REM{Effective cutoff -> effect on spectrum, Maradudin, Ledermann}
+\REM{Supercell imposes effective cutoff on the range of the force constants -> effect on spectrum, Maradudin, Ledermann}
 
-% Equation~\eqref{eq:D^S(q).2} will in general not be hermitian in $(i \alpha, j \beta)$
 
 \subsubsection{Finite Differences}
 The force constants can be obtained from first-order derivatives of the potential-energy surface,~i.\,e.,~the forces, by rewriting the second derivative in terms of a finite difference expression,
@@ -347,15 +343,19 @@ The force constants can be obtained from first-order derivatives of the potentia
 		= \left.\frac{\partial^{2} \mathcal{V}(\mathbf{R})}{\partial R_{I}^{\alpha} \partial R_{J}^{\beta}}\right|_{\mathbf{R}^{0}}
 		= - \frac{\partial}{\partial R_I^\alpha} F_{J, \beta}
 		= - \lim_{\epsilon \to 0}
-			\frac{F_{J, \beta} (\set{\b R': R^{\prime \beta}_I = R^{\beta}_I + \epsilon )}}{\epsilon}
+			\frac{F_{J, \beta} (\set{\b R': R^{\prime \alpha}_I = R^{0, \alpha}_I + \epsilon )}}{\epsilon}
 		~.
 \label{eq:FC2_finite}
 \end{align}
-In practice, atom $J$ is displaced by a small but finite displacement $\epsilon$ in the direction $\beta$, and the force on all other atoms is recorded. By performing the displacement in all $3N$ degrees of freedom, the $3N \times 3N$ forces can be arranges in a matrix $F_{[3N \times 3N]}$, and the displacements can be arranged in a matrix $U_{[3N \times 3N]} = \epsilon \mathds 1_{[3N \times 3N]}$. The $3N \times 3N$ force-constants matrix $\Phi$ is obtained by the trivial matrix inversion
+In practice, atom $I$ is displaced by a small but finite displacement $\epsilon$ in the direction $\alpha$, and the force on all other atoms is recorded. By performing the displacement in all $3N$ degrees of freedom, the $3N \times 3N$ forces can be arranged in a matrix $F_{[3N \times 3N]}$, and the displacements can be arranged in a matrix $U_{[3N \times 3N]} = \epsilon \mathds 1_{[3N \times 3N]}$. The $3N \times 3N$ force-constants matrix $\Phi$ is obtained by the trivial matrix multiplication
 \begin{align}
-F &= - H U = - \epsilon \Phi \mathds 1\\
-\implies
-\Phi &= - \frac{1}{\epsilon} F \mathds 1~.
+F 
+	&= - \Phi U 
+	= - \epsilon \Phi \mathds 1
+	\label{eq:finite.diff.1}
+	\\
+	\implies
+	\Phi &= - \frac{1}{\epsilon} F \mathds 1~.
 \end{align}
 %\begin{align}
 %	F &= - H U \\
@@ -367,15 +367,51 @@ If $M > 3N$ displacements are used,~e.\,g.,~because positive and negative displa
 \begin{align}
 	F_{[3N \times M]} &= - \Phi_{[3N \times 3N]} U_{[3N \times M]} \\
 	\implies
-	\Phi &= - U^{+} F~,
-%	F &= \begin{pmatrix} \b F_1, & \cdots, & \b F_{3N} \end{pmatrix}
+	\Phi &= - F U^{+}~,
+	\label{eq:phi.pseudo.1}
 \end{align}
-where $U^{+}$ denotes the Moore-Penrose pseudo inverse of the displacement matrix $U$~\CITE{pseudoinverse}.
-\CITE{Parlinski, Togo}
+where $U^{+}$ denotes the Moore-Penrose pseudo inverse of the displacement matrix $U$~\cite{Penrose1955,Parlinski1997}.
 
-In practice, the number of required force calculations can be reduced by considering the spacegroup symmetry of the crystal. This can be achieved in two ways: First, the symmetry can be used to identify the set of inequivalent displacements from which all other forces can be reconstructed. Second, the symmetry can be used to reduce the forceconstant matrix to an irreducible basis.
+The number of required force calculations can be reduced by considering the spacegroup symmetry of the crystal. This can be achieved in two ways: First, the symmetry can be used to identify the set of inequivalent displacements from which all other forces can be constructed by the following argument: We define the representation $\Gamma^g$ of a symmetry operation $g$ by its action on the atomic coordinates $\set{\b R_I = \b R_I^0 + \b U_I}$ as
+\begin{align}
+	\b R_I^{g} &\equiv {\Gamma}^g (\b R_I) = { P}^g_{IJ} \b R^0_J + { M}^g \b U_I~,
+	\label{eq:sym.RI'}
+\end{align}	
+where $P^g_{IJ}$ is the permutation that relates the reference positions of atom $I$ and atom $J$, and $M^g$ is an orthogonal matrix representing the rotation (or inversion) of the respective displacement. As depicted in Fig.~\ref{fig:symmetry.1}, the forces on each atom in the rotated system $\b R^g = \set{\b R^g_I}$ are obtained by co-rotating the forces in the initial configuration $\b R = \set{\b R_I}$ as
+\begin{align}
+	\b F_I (\b R^g) &= {M}^g \b F_I (\b R)~,
+	\label{eq:sym.Fp}
+\end{align}
+i.\,e.,~the forces transform as the displacements $\b U_I$. Let us now define a new configuration $\tilde{\b R}^g$ where just the displacements $\b U_I$ are rotated according to $g$. This can be achieved by rotating the entire system according Eq.\,\eqref{eq:sym.RI'} and applying the inverse permutation $P^{g-1}$,~i.\,e.,
+\begin{align}
+	\tilde{\b R}_I^g 
+		&= P^{g-1}_{IJ} \b R_I^g 
+		\stackrel{\eqref{eq:sym.RI'}}{=} \b R^0_I + {\rm M}^g P^{g-1}_{IJ} \b U_J~.
+\end{align}
+It follows that the force on atom $I$ in the new configuration $\tilde{\b R}^g$ is related to the force in the rotated system $\b R^g$ by this inverse permutation, so that
+\begin{align}
+		\b F_I (\tilde{\b R}^g) 
+			&= {P}^{g-1}_{IJ} \b F_J (\b R^g) 
+			= {M}^g  {P}^{g-1}_{IJ} \b F_J (\b R)~.
+		\label{eq:sym.Ftilde}
+\end{align}
+By means of this equation, the set of forces obtained for a configuration $\set{\b R_I = \b R_I^0 + \b U_I}$ can be used to generate a set of forces for each symmetrically equivalent configuration $\set{\tilde{\b R}_I^g = \b R_I^0 + {\rm M}^g P^{g-1}_{IJ} \b U_J}$, where $g$ are spacegroup elements.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=.75\textwidth]{./sketches/symop.jpg}
+	\caption{The configurations $\b R$, $\b R^g$, and $\tilde{\b R}^g$ obtained from the symmetry operation $g=\text{90 degrees rotation}$ for a two-dimensional system with five atoms. Arrows indicate the force at each atom.}
+	\label{fig:symmetry.1}
+\end{figure}
 
-\REM{Symmetry: 2 ways: i) construct full $F$ from a reduced set of displacements, ii) reduce $H$ to reduces/irreducible representation like original Parlinski article.}
+A complementary approach is to use the symmetry elements $\set{g}$ to reduce the forceconstant matrix to an irreducible basis,
+\begin{align}
+	\Phi 
+		= \sum_{i=1}^{D} p_i \tilde{\Phi}_i~,
+	\label{eq:sym.Phi.irrep.1}
+\end{align}
+where the $\tilde{\Phi}_i$ are \emph{solely} determined by the space group elements $\set{g}$ and analytical properties of the forceconstants, and only the \emph{irreducible components} $p_i$ are system dependent. The pseudoinverse procedure given in Eq.\,\eqref{eq:phi.pseudo.1} then only has to be performed for the $D$ parameters $p_i$~\cite{Parlinski1997}. This procedure can drastically reduce the number of free parameters in the forceconstant matrix. For example, in a $4\times4\times4$ bcc lattice with 128 atoms, $\Phi$ is a matrix with $(3 \cdot 128)^2 = 147456$ elements. However, there are only $D=11$ irreducible parameters $p_i$ that need to be determined~\cite{Hellman2013}.
+
+\REM{Add the theory for symmetry reduction in practice to appendix?}
 
 \subsection{Harmonic Sampling}
 
