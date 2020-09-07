@@ -123,6 +123,25 @@ We are now in position to formulate the expected response of a phase space obser
 \end{align}
 where it was used that $a(t) = {\rm e}^{\im L^0 t} a(0) = a(0) {\rm e}^{-\im L^0 t}$~\cite[p.\,498]{Tuckerman}, and $\braket{\cdot}_0$ denotes a phase-space average with respect to the unperturbed distribution function $f^0 (\Gamma)$.
 
+\paragraph{Conserved densities and currents}
+Macroscopic properties of matter are often \emph{extensive},~i.\,e.,~they scale with the system size, and are described by a locally conserved \emph{density}. For example, we define the energy at time $t$ of a system contained in a volume $V$ as
+\begin{align}
+  E [V, t] = \int_V e (\b r, t) \, \d^3 r~.
+  \label{eq:lr.E(V)}
+\end{align}
+Here, $e(\b r, t)$ is the local \emph{energy density} which fulfills a continuity equation
+\begin{align}
+  \partial_t \, e(\b r, t) = - \b \nabla \cdot \b j (\b r, t)~,
+  \label{eq:lr.continuity.1}
+\end{align}
+where $\b j (\b r, t)$ is the associated energy current. From the local current, the macroscopic flux is obtained by spatially averaging over the system volume,
+\begin{align}
+  \b J (t)
+    = \frac{1}{V} \int_V \d^3 r ~ \b j (\b r, t)~.
+  \label{eq:lr.J(t)}
+\end{align}
+
+
 \REM{Local density and conserved currents} \CITE{Baroni}
 
 \REM{Thermal gradient $\to$ thermal conductivity}
