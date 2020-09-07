@@ -121,3 +121,42 @@ where $\varepsilon^{ijk}$ denotes the Levi-Civita symbol enforcing the correct o
 %\label{eq:dft.Bloch.k_m}
 \end{align}
 The values of $\bf k$ given by Eq.\,\eqref{eq:dft.Bloch.k_m} are those sampled in real-space simulation in a box of the given size,~i.\,e.,~the \emph{Born-von Karman cell}.
+
+\chapter{Linear Response Distribution Function}
+\label{app:lr.f}
+To solve for $\Delta f(t)$ defined in Eq.\,\eqref{eq:lr.df.2}, we introduce a shorthand notation such that
+\begin{align}
+\frac{\d \Delta f}{\d t} = -\im L \Delta f(t) - \im \Delta L (t) f^0~,
+\label{eq:lr.df.3}
+\end{align}
+where the Liouville operator $L^0$ is defined by
+\begin{align}
+\im L^0 g = \set{g, H^0}~,
+\label{eq:lr.L}
+\end{align}
+and similarly
+\begin{align}
+\im \Delta L (t) g = \set{g, H'(t)}~.
+\label{eq:lr.L'}
+\end{align}
+Equation~\eqref{eq:lr.df.3} is a first order linear differential equation of the form
+\begin{align}
+\frac{\d y}{\d t} + p(t) y = q(t)~,
+\label{eq:lr.dgl.1}
+\end{align}
+which is straightforward to solve by using an integrating factor as follows: We identify $y = \Delta f$, $p(t) = \im L^0$, and $q(t) = - \im \Delta L (t) f^0$. Following Ref.~\cite[p.\,68]{Lomen1986}, we define the integrating factor \mbox{$\rho (t) = \exp(\int \d t \, p (t)) = \exp (\im L^0 t)$}, multiply Eq.\,\eqref{eq:lr.dgl.1} with $\rho (t)$, and use that \mbox{$\frac{\d}{\d t} \, \rho(t) = \rho(t) p(t)$} to obtain
+$$
+\frac{\d}{\d t} (\rho (t) y) = \rho(t) q(t)~.
+$$
+This gets integrated to
+$$
+\rho(t) y = \int_{-\infty}^t \d t' \, \rho(t') q(t')
+$$
+under the boundary condition $y (t \to -\infty) = 0$. In total we obtain
+\begin{align}
+  y(t) 
+    &= \rho^{-1} (t) \int_{-\infty}^t \d t' \, \rho(t') q(t')~, \\
+  \implies
+  \Delta f(t) 
+    &= - {\rm e}^{- \im L^0 t}  \int_{-\infty}^t \d t' \, {\rm e}^{\im L^0 t'} \im \Delta L (t') f^0~.
+\end{align}
