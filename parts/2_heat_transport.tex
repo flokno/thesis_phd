@@ -124,28 +124,122 @@ We are now in position to formulate the expected response of a phase space obser
 where it was used that $a(t) = {\rm e}^{\im L^0 t} a(0) = a(0) {\rm e}^{-\im L^0 t}$~\cite[p.\,498]{Tuckerman}, and $\braket{\cdot}_0$ denotes a phase-space average with respect to the unperturbed distribution function $f^0 (\Gamma)$.
 
 \paragraph{Conserved densities and currents}
-Macroscopic properties of matter are often \emph{extensive},~i.\,e.,~they scale with the system size, and are described by a locally conserved \emph{density}. For example, we define the energy at time $t$ of a system contained in a volume $V$ as
+Macroscopic properties of matter are often \emph{extensive},~i.\,e.,~they scale with the system size, and are described by a locally conserved \emph{density}. Taking the general property $A$ represented by the phase-space observable $A(\Gamma_t)$ evaluated at a time $t$ as an example, we define
 \begin{align}
-  E [V, t] = \int_V e (\b r, t) \, \d^3 r~.
-  \label{eq:lr.E(V)}
+  A (\Gamma_t) = \int_V a (\b r, \Gamma_t) \, \d^3 r~,
+  \label{eq:lr.A}
 \end{align}
-Here, $e(\b r, t)$ is the local \emph{energy density} which fulfills a continuity equation
+where $a(\b r, \Gamma_t)$ is the \emph{local density} associated with the observable $A$. The notation $\Gamma_t$ highlights that the quantity is implicitly time-dependent because the phase-space point $\Gamma$ evolves in time.\footnote{
+	Notation for phase-space functions $f (\Gamma)$:
+	\begin{align}
+	f(t) &\equiv f(\Gamma (t)) \\
+	\frac{\partial f}{\partial t} &= \frac{\d f (\Gamma (t))}{\d t} \equiv \dot{f}(t)
+	\end{align}
+	} 
+When no ambiguity arises, we can therefore just write $a (\b r, t)$. The locally conserved density fulfills a continuity equation
 \begin{align}
-  \partial_t \, e(\b r, t) = - \b \nabla \cdot \b j (\b r, t)~,
+  \partial_t \, a(\b r, t) = - \b \nabla \cdot \b j_a (\b r, t)~,
   \label{eq:lr.continuity.1}
 \end{align}
-where $\b j (\b r, t)$ is the associated energy current. From the local current, the macroscopic flux is obtained by spatially averaging over the system volume,
+where $\b j_a (\b r, t)$ is the associated current. From the local current, the macroscopic flux is obtained by spatially averaging over the system volume,
 \begin{align}
   \b J (t)
-    = \frac{1}{V} \int_V \d^3 r ~ \b j (\b r, t)~.
+    = \frac{1}{V} \int_V \d^3 r ~ \b j (\b r, t)~,
   \label{eq:lr.J(t)}
 \end{align}
+where the subscript $a$ was dropped for notational clarity.
+Likewise we formulate a local version of the perturbing Hamiltonian \mbox{$H' = A (\Gamma) F(t)$} in the form
+\begin{align}
+	H' (\Gamma, t) = \int \d^3 r ~ a (\b r, \Gamma) v(\b r, t)~,
+	\label{eq:lr.H'}
+\end{align}
+where $a(\b r, \Gamma)$ represents the density of interest as introduced above, and $v(\b r, t)$ is the local driving force coupling to the system via the density $a (\b r, \Gamma)$.
 
+The local version of linear-response formula given in Eq.\,\eqref{eq:lr.dB} with \mbox{$\Delta B = B \equiv \b J$} ($\braket{\b J} = 0$) reads:
+\begin{align}
+j^\alpha (\b r , t) 
+	& \equiv \braket{j^\alpha (\b r)}_{\Delta f (t)} \\
+	&= - \beta \int_{-\infty}^{t} \d t' \int_V \d^3 r' ~ \braket{
+			j^\alpha (\b r, \Gamma_t) \dot{a} (\b r', \Gamma_{t'})
+		}_0 v (\b r', t')~.
+	\label{eq:lr.ja.1}
+\end{align}
+The time derivative of the density can be eliminated by using the continuity equation~\eqref{eq:lr.continuity.1}, $\dot a = \partial'_\beta j^\beta$ where $\partial'_\beta = \partial/\partial r^{\prime \beta}$, and integrating by parts, so that
+\begin{align}
+j^\alpha (\b r , t) 
+&= - \beta \int_{-\infty}^{t} \d t' \int_V \d^3 r' ~ \braket{
+	j^\alpha (\b r, \Gamma_t) j^\beta (\b r', \Gamma_{t'})
+}_0 \partial'_\beta v (\b r', t')~.
+\label{eq:lr.ja.2}
+\end{align}
+If we now assume the external driving force $v (\b r, t)$ to be constant in time and homogeneously varying in space such that
+\begin{align}
+	\partial_\beta v (\b r, t) \equiv f_\beta~,
+	\label{eq:lr.force}
+\end{align}
+and spatially average over Eq.\,\eqref{eq:lr.ja.2} with $\frac{1}{V} \int_V \d^3 r$, we arrive at
+\begin{align}
+	J^\alpha 
+		&= -\beta V \int_{0}^{\infty} 
+		\d t
+		\braket{
+		J^\alpha (\Gamma_t) J^\beta (\Gamma_{0})
+	}_0 
+	f_\beta~,
+	\label{eq:lr.J}
+\end{align}
+where the stationarity in time was used to shift the lower bound of the integral to $t=0$.
+This resembles the well-known macroscopic transport equation
+\begin{align}
+	J^\alpha =  L^{\alpha \beta} F_\beta~,
+		\label{eq:lr.LF}
+\end{align}
+with
+\begin{align}
+	L^{\alpha \beta}
+		= \frac{V}{k_{\rm B}} \int_{0}^{\infty} 
+		\d t \braket{J^\alpha (\Gamma_t) J^\beta (\Gamma_{0})}_0 ~,
+	\label{eq:lr.L}
+\end{align}
+and
+\begin{align}
+	F_\beta
+		= - \frac{f_\beta}{T}~,
+	\label{eq:lr.F}
+\end{align}
+where $J^\alpha$ is the macroscopic generalized current associated with the extensive property $A$, $F_\beta$ is the thermodynamic force, and $L^{\alpha \beta}$ is the associated conductance tensor~\cite{Onsager1931a,Baroni2020a}.
 
-\REM{Local density and conserved currents} \CITE{Baroni}
-
-\REM{Thermal gradient $\to$ thermal conductivity}
-
+\paragraph{Thermal Conductivity}
+After this general exposition, let us now look at the example of the total energy of the system and it's associated energy density,
+\begin{align}
+	E = \int_V \d^3 r ~ e(\b r)~.
+	\label{eq:lr.E}
+\end{align}
+We are interested in the occuring flux in the presence of a temperature inhomogeneity, which we model by
+\begin{align}
+	H' (\Gamma) = \frac{1}{T} \int \d^3 r ~ \Delta T (\b r) e(\b r, \Gamma)~,
+	\label{eq:lr.Hp.temp}
+\end{align}
+so that
+\begin{align}
+	f_\beta = \frac{1}{T} \partial_\beta T (\b r) 
+		\stackrel{\eqref{eq:lr.F}}{\implies}
+	F_\beta = - \frac{1}{T^2} (\b \nabla T)_\beta ~.
+	\label{eq:lr.F.temp}
+\end{align}
+Using the general transport equation $\b J = L \b F$ with the conductance given by Eq.\,\eqref{eq:lr.L} and $F$ as defined above, we obtain
+\begin{align}
+	J^\alpha 
+		&= - \kappa^{\alpha \beta} (\b \nabla T)_\beta~,
+	\label{eq:lr.J.2}
+\end{align}
+where $\kappa^{\alpha \beta}$ denotes the \emph{thermal conductivity tensor} defined as
+\begin{align}
+	\kappa^{\alpha \beta}
+		&=
+		\frac{V}{k_{\rm B} T^2} \int_{0}^{\infty} 
+		\d t \braket{J^\alpha (\Gamma_t) J^\beta (\Gamma_{0})}_0 ~.
+\end{align}
 
 \subsubsection{Green and Kubo}
 \subsubsection{Ab initio Virial Heat Flux}
