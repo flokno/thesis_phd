@@ -1,16 +1,55 @@
 \subsection{Heat Transport}
+\epigraph{\singlespacing \it ``It seems there is no problem in modern physics for which there are on record as many false starts, and as many theories which overlook some essential feature, as in the problem of the thermal conductivity of [electrically] non-conducting crystals.''}{R.~Peierls, 1960}
+
+
+Conductive heat transport is the phenomenon of vibrational energy traversing a material when a temperature gradient is applied. As first described by Joseph Fourier in the early 19th century~\cite{Fourier1878}, the heat flux $\b J$ resulting from a stationary temperature gradient $\nabla T$ is directly proportional to this gradient. The proportionality constant is second-rank tensor denoted by $\kappa$ and called the \emph{thermal conductivity}. The defining equation,
+\begin{align}
+  \b J = - \kappa \nabla T~,
+  \label{eq:Fourier}
+\end{align}
+is called \emph{Fourier's law}. The sign convention is such that the heat flux points ``from hot to cold''. The regime where Eq.\,\eqref{eq:Fourier} is valid is called the \emph{diffusive} regime, as it holds when the temperature gradient is small on microscopic scale, and the sample size is big enough so that boundary effects are negligible~\cite{Kapitza1941a,Antidormi2020}.
+
+It is evident from Eq.\,\eqref{eq:Fourier} that the thermal conductivity $\kappa$ is an explicitly non-equilibrium quantity. As such, it can however be related to equilibrium fluctuations by means of the \emph{fluctuation-dissipation theorem}~\cite{Einstein1905a,Nyquist1928,Callen1951,Kubo1957a}, resulting in the famous Green-Kubo formula~\cite{Green1952,Kubo1957b},
+\begin{align}
+  \kappa^{\alpha \beta} = \frac{V}{k_{\rm B} T^2} \int_{0}^{\infty} \d t ~
+    \braket{J^\alpha (t) J^\beta(0)}_{\rm eq}~.
+  \label{eq:GreenKubo}
+\end{align}
+This formula relates the temporal fluctuations of the macroscopic heat flux $\b J (t)$ as given by an equilibrium ensemble average of the autocorrelation function, $\braket{J^\alpha (t) J^\beta(0)}_{\rm eq}$, to the associated transport coefficient $\kappa$. It is however \emph{a priori} unclear how a microscopic description of the appearing quantities can be obtained. To tackle this question in full, we first show how the Kubo formula emerges in the framework of linear response theory. We then present how a microscopic description of heat in terms of a thermal energy density and an associated, locally conserved current follows, before reviewing the necessary steps to define an \emph{ab initio} heat flux~\cite{Carbogno2016}.
+
 \subsubsection{Linear Response Theory}
 \cite{Einstein1905a,Onsager1931a,Onsager1931b,Kubo1957a,Kubo1957b}
 \cite[p. 68]{Lomen1986} \cite{Tuckerman}
 
-In order to establish the famous Green-Kubo relation for computing the non-equilibrium transport coefficients from equilibrium fluctuations of the corresponding flux,~i.\,e.,~by means of the fluctuation-dissipation theorem, we briefly review linear response theory for classical statistical mechanics. We do so by starting from a general Hamiltonian $H$ that is given in terms of the many-body Hamiltonian
+In order to establish the famous Green-Kubo relation for computing the non-equilibrium transport coefficients from equilibrium fluctuations of the corresponding flux,~i.\,e.,~by means of the fluctuation-dissipation theorem, we briefly review linear response theory for classical statistical mechanics. 
+
+The aim of linear response theory is to compute the expected value of a phase-space observable $B$ in presence of an external perturbation driving the system out of equilibrium. The ensemble is characterized by a \emph{distribution function} $f(\Gamma, t)$, where $\Gamma = \set{\b R, \b P}$ is a shorthand for a point in phase space. The expectation value of $B$ is then given by
+\begin{align}
+  \braket{B (t)}_f
+    = \int \d \Gamma ~ B (\Gamma) f(\Gamma, t)~,
+  \label{eq:lr.B.1}
+\end{align}
+and we assume without loss of generality that 
+\begin{align}
+\braket{B (t)}_{f^0}
+= \int \d \Gamma ~ B (\Gamma) f^0(\Gamma) = 0~,
+\label{eq:lr.B0}
+\end{align}
+where $f^0 (\Gamma)$ is the distribution function of the unperturbed system in thermal equilibrium. In order to calculate Eq.\,\eqref{eq:lr.B.1} in a non-equilibrium situation, we start by defining the Hamiltonian describing the equilibrium dynamics, $H^0$, which we take to be given by the many-body Hamiltonian
 \begin{align}
   H^0 (\Gamma) 
     = H^0(\set{\b R, \b P})
-    = \sum_I \frac{\b P^2}{2 M_I} + V (\b R)~,
+    = \sum_I \frac{\b P^2}{2 M_I} + V (\b R)~.
   \label{eq:lr.H0}
 \end{align}
-and some yet unspecified external perturbation $H'$. We write the full Hamiltonian as
+The canonical distribution function for the unperturbed system therefore reads
+\begin{align}
+f^0 (\Gamma) 
+= \frac{1}{\mathcal{Z}^0} {\rm e}^{- \beta H^0 (\Gamma)}~,
+\label{eq:lr.f0}
+\end{align}
+where the partition sum $\mathcal{Z}_0$ normalizes the phase-space integral, \mbox{$\int \d \Gamma f^0 (\Gamma) = 1$}.
+In the next step, we write the full Hamiltonian as
 \begin{align}
   H (\Gamma, t)
    = H^0 (\Gamma) + \lambda H' (\Gamma, t)~,
@@ -23,13 +62,7 @@ where the perturbation is given by an external force $F(t)$ coupled to the syste
 \end{align}
 with a bookkeeping parameter $\lambda = 1$ that we introduce to count the order in the perturbation $A$.
 
-The canonical distribution function for the unperturbed system reads
-\begin{align}
-  f^0 (\Gamma) 
-    = \frac{1}{\mathcal{Z}^0} {\rm e}^{- \beta H^0 (\Gamma)}~,
-  \label{eq:lr.f0}
-\end{align}
-where the partition sum $\mathcal{Z}_0$ normalizes the phase-space integral, \mbox{$\int \d \Gamma f^0 (\Gamma) = 1$}.
+
 We write the distribution function in presence of the perturbation as
 \begin{align}
   f (\Gamma, t) = f^0(\Gamma) + \lambda \Delta f (\Gamma, t)~,
