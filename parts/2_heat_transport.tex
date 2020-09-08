@@ -298,6 +298,17 @@ the flux is then given by
 		= \frac{1}{V} \sum_I \dot{E}_I (t) \b R_I (t) + E_I (t) \dot{\b R}_I (t)~.
 	\label{eq:hf.J.atomic}
 \end{align}
+\REM{Technically no! Take
+	\begin{align}
+		\dot e (\b r, t) = \sum_I \dot{E}_I \delta (\b r - \b R_I (t)) + E_I \dot{\b R}_I \cdot \nabla \delta (\b r - \b R_I)~,
+	\end{align}
+	then the second term always integrates to zero because it contains
+	 a derivative of the delta function. One obtains
+	\begin{align}
+		\b J (t) = \frac{1}{V} \sum_I \dot{E}_I \b R_I (t)
+	\end{align}
+	which means the extra term $\b J_{\rm c} = \frac{1}{V} \sum_I E_I \dot{R}_I$, usually termed convective, is an artifact of integrating Eq.\,\eqref{eq:hf.J} incorrectly. This would explain why it is usually safe to neglect the term.
+	}
 
 \paragraph{Gauge invariance}
 As seen above, the local current is only defined up to a non-heat carrying contribution $\b j_{\perp}$. Likewise, the energy density is only defined up to terms that keep the total energy integral unchanged. The choice of a local energy partitioning as,~e.\,g.,~given by Eq.\,\eqref{eq:hf.e.atomic} is therefore not unique, and different partitioning schemes will lead to differing heat fluxes. However, the thermal conductivity obtained by these heat fluxes will be the same in the long time limit~\cite{Ercole2016}.
