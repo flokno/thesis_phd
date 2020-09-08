@@ -284,12 +284,14 @@ From the first non-vanishing term, we obtain
 	\b J (t) = \frac{1}{V} \int \d^3 r ~ \b r \, \dot{e} (\b r)~,
 	\label{eq:hf.J}
 \end{align}
-i.\,e.,~the heat flux is given as the first moment of the time derivative of the local energy density. When the energy density is split into atomic contributions as
+i.\,e.,~the heat flux is given as the first moment of the time derivative of the local energy density. 
+
+In force-field approaches, it is common split the energy density into atomic contributions as
 \begin{align}
 	e (\b r, t ) = \sum_I E_I (t) \delta (\b r - \b R_I)~,
 	\label{eq:hf.e.atomic}
 \end{align}
-the flux is given by
+the flux is then given by
 \begin{align}
 	\b J (t) 
 		= \frac{1}{V} \frac{\d}{\d t} \sum_I E_I(t) \b R_I(t)
@@ -301,8 +303,89 @@ the flux is given by
 As seen above, the local current is only defined up to a non-heat carrying contribution $\b j_{\perp}$. Likewise, the energy density is only defined up to terms that keep the total energy integral unchanged. The choice of a local energy partitioning as,~e.\,g.,~given by Eq.\,\eqref{eq:hf.e.atomic} is therefore not unique, and different partitioning schemes will lead to differing heat fluxes. However, the thermal conductivity obtained by these heat fluxes will be the same in the long time limit~\cite{Ercole2016}.
 
 \subsubsection{Ab initio Heat Flux}
-The above formulas are readily applied when empirical force fields are used to describe the atomic interactions, as an atomic partitioning of the total energy is trivial in that case, although care must be taken in deriving the correct formulae nevertheless~\cite{Fan2015,Boone2019}. An \emph{ab initio} derivation of heat flux on the other hand was a long-standing problem because it was not clear how an expression of the form Eq.\,\eqref{eq:hf.J} or Eq.\,\eqref{eq:hf.J.atomic} can be obtained when no atomic partitioning is available. This problem was solved when Marcologno \emph{et al.} and Carbogno \emph{et al.} independently of each other arrived at well-defined heat flux expressions in \emph{ab initio} frameworks~\cite{Marcolongo2016,Carbogno2016}. We adopt the latter approach in the following and review derivation shortly.
+The above formulas are readily applied when empirical force fields are used to describe the atomic interactions, as an atomic partitioning of the total energy is trivial in that case, although care must be taken in deriving the correct formulae nevertheless~\cite{Fan2015,Boone2019}. An \emph{ab initio} derivation of heat flux on the other hand was a long-standing problem because it was not clear how an expression of the form Eq.\,\eqref{eq:hf.J} or Eq.\,\eqref{eq:hf.J.atomic} can be obtained when no atomic partitioning is available. This problem was solved when Marcologno \emph{et al.} and Carbogno \emph{et al.} independently of each other arrived at well-defined heat flux expressions in \emph{ab initio} frameworks~\cite{Marcolongo2016,Carbogno2016}. We adopt the latter approach in the following, but present a derivation that slightly differs from Ref.\,\cite{Carbogno2016}.
 
-\REM{arg1}
+% \paragraph{Derivation of ab initio Heat Flux}
+We start the derivation from Eq.\,\eqref{eq:hf.J},~i.\,e.,~the definition of heat flux as the first moment of the energy density.
+
+Recall Hamiltonian and define an energy density
+\begin{align}
+	H (\Gamma = (\b R, \b P)) = \sum_I \frac{\b P_I^2}{2 M_I} + V(\b R) 
+		~\equiv~ \int \d^3 r ~ e (\b r, \Gamma)
+\end{align}
+
+Time derivative defines time derivate of energy density
+\begin{align}
+	\dot{H} (\Gamma)
+		= \sum_I \b F_I \cdot \dot{\b R}_I + \frac{\partial V(\b R)}{\partial \b R_I} \cdot \dot{\b R}_I
+			\label{eq:hf.ai.Hdot}
+		\stackrel{!}{\equiv}
+			\int \d r^3 ~ \dot{e} (\b r , \Gamma)~,
+\end{align}
+Note that the time derivate of the total energy vanishes, therefore $\dot{e} (\b r, \Gamma)$ needs to integrate to zero as well. The trivial solution is given by $e = H/V$ with vanishing time derivative. We are looking for non-trivial solutions.
+To progess, please  note that as explained in Sec.\,\ref{sec:HellmannFeynman}, the force has a nuclear and an electronic contribution given by the two terms in Eq.\,\eqref{eq:hellmannfeynman.force}, so that
+\begin{align}
+	\b F_I
+		&%= - \frac{\partial V (\b R)}{\partial \b R_I}  
+			= \int \d^3 r ~ \b f_I^{\rm el} (\b r) + \sum_{J \neq I} \b F_{IJ}^{\rm Nuc} \quad\text{with}
+		\label{eq:hf.ai.F}\\
+	\b f_I^{\rm el} (\b r)
+		&= - n(\b r) Z_I \frac{\b R_I - \b r}{\lvert \b R_I - \b r \rvert^3} \quad\text{and} \\
+	\b F_{IJ}^{\rm Nuc}
+		&= Z_I Z_J \frac{\b R_I - \b R_J}{\lvert \b R_I - \b R_J \rvert^3}~.
+\end{align}
+
+Therefore Eq.\,\eqref{eq:hf.ai.Hdot}
+\begin{align}
+	\dot{H} (\Gamma)
+		&= \underset{I)}{\underbrace{\sum_I \b F_I \cdot \dot{\b R}_I}} ~ 
+			 \underset{II)}{\underbrace{-\sum_{I} \int \d^3 r ~ \b f_I^{\rm el} (\b r) \cdot \dot{\b R}_I}}
+			 \underset{III)}{\underbrace{-\sum_{I \neq J} \b F^{\rm Nuc}_{IJ} \cdot \dot{\b R}_I}} ~
+\end{align}
+
+Define three contributions to density $\dot{e} (\b r)$
+\begin{subequations}
+\begin{align}
+	\text{I):}&&
+		\dot{e}^{\rm kin} (\b r) &= \sum_I \b F_I \cdot \dot{\b R}_I \, \delta (\b R_I - \b r) \\
+	\text{II):}&&
+		\dot{e}^{\rm el} (\b r)  &= -\sum_{I} \b f_I^{\rm el} (\b r) \cdot \dot{\b R}_I \\
+	\text{III):}&&
+		\dot{e}^{\rm Nuc} (\b r) &= -\sum_{I \neq J} \b F^{\rm Nuc}_{IJ} \cdot \dot{\b R}_I \, \delta (\b R_J - \b r)
+\end{align}
+\label{eq:hf.ai.densities}
+\end{subequations}
+
+Easily verified:
+\begin{align}
+	\int \d^3 r ~ \left(\dot{e}^{\rm kin} (\b r) + \dot{e}^{\rm el} (\b r) + \dot{e}^{\rm Nuc} (\b r) \right)
+	= \dot{H} (\Gamma)
+	= 0~.
+\end{align}
+
+Use these densities in Eq.\,\eqref{eq:hf.J} to obtain heat flux:
+\begin{align}
+	\b J (\Gamma)
+		% &= \frac{1}{V} \int \d^3 r ~ \b r \, \dot{e} (\b r, \Gamma) \\
+		&= \frac{1}{V} \int \d^3 r ~ \b r \left( \dot{e}^{\rm kin} (\b r) + \dot{e}^{\rm el} (\b r) + \dot{e}^{\rm Nuc} (\b r)  \right) \\
+		&= \frac{1}{V} \sum_I
+			\left( 
+				\b R_I \b F_I \cdot \dot{\b R}_I
+				- \b R_J \int \d^3 r ~ \b f_I^{\rm el} (\b r) \cdot \dot{\b R}_I
+				- \sum_{J \neq I} \b F^{\rm Nuc}_{IJ} \cdot \dot{\b R}_I
+			\right)
+\end{align}
+By using Eq.\,\eqref{eq:hf.ai.F} and resolving the indices
+\begin{align}
+	J^\alpha (\Gamma) 
+		=  \sum_I \frac{Z_I}{V}
+			\left\{ 
+				\sum_{J \neq I} Z_J \frac{(R_I^\alpha - R_J^\alpha) (R_I^\beta - R_J^\beta)}{\lvert \b R_I - \b R_J \rvert^3}
+				- \int \d^3 r ~ n(\b r) \frac{(R_I^\alpha - r^\alpha) (R_I^\beta - r^\beta)}{\lvert \b R_I - \b r \vert^3}
+			\right\}
+			R^\beta_I~.
+\end{align}
+
+
 
 \subsubsection{Ab initio Green Kubo}
