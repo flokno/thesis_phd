@@ -300,6 +300,24 @@ the flux is then given by
 	\label{eq:hf.J.atomic}
 \end{align}
 
+\paragraph{Doubts regarding the energy partitioning scheme}
+The expression in Eq.\,\eqref{eq:hf.J.atomic} was originally derived by Helfand~\cite{Helfand1960} and later popularized by McQuarrie~\cite{McQuarrie}. The derivation is, however, is not based on Eq.\,\eqref{eq:hf.J} but on a phenomenological diffusion equation for the energy density, and it is proved at no point that the quantities obey the continuity equation or are linked to conserved quantitites. 
+
+We see the problem arising from an energy partitioning as defined in Eq.\eqref{eq:hf.e.atomic} as follows: In the definition of the heat flux, it is not the energy density $e (\b r)$, but its time derivate $\dot{e} (\b r)$ that gives the flux. By differentiation the energy density according to Eq.\,\eqref{eq:hf.e.atomic}, we have
+\begin{align}
+	\dot{e} (\b r, \Gamma) = \sum_I \dot{E}_I (\Gamma) \delta(\b r - \b R_I (\Gamma)) + E_I (\Gamma) \dot{\b R}_I (\Gamma) \cdot \nabla_{\b R_I} \delta (\b r - \b R_I (\Gamma))~,
+	\label{eq:hf.e.dot.delta}
+\end{align}
+where the notation highlights that the time dependence is only given via the temporal evolution of the phase-space point $\Gamma$. When integrating Eq.\,\eqref{eq:hf.e.dot.delta} with $\int \d^3 r ~ \b r$, the second part of the sum including the derivative of the $\delta$ distribution vanishes as its derivative integrates to zero. We are thus left with
+\begin{align}
+	\b J (\Gamma) = \frac{1}{V} \sum_I \dot{E}_I (\Gamma) \b R_I (t)~,
+\end{align}
+which shows that the commonly discarded ``convective flux'',
+\begin{align}
+	\b J_{\rm convective} (\Gamma) = \frac{1}{V} \sum_I E_I (\Gamma) \dot{\b R}_I (t)~,
+\end{align}
+is rather an artifact of heuristic derivation. Similar doubts have been put forward in the context of similar relations for shear viscosity~\cite{Allen1994comment}.
+
 \paragraph{Gauge invariance}
 As seen above, the local current is only defined up to a non-heat carrying contribution $\b j_{\perp}$. Likewise, the energy density is only defined up to terms that keep the total energy integral unchanged. The choice of a local energy partitioning as,~e.\,g.,~given by Eq.\,\eqref{eq:hf.e.atomic} is therefore not unique, and different partitioning schemes will lead to differing heat fluxes. However, the thermal conductivity obtained by these heat fluxes will be the same in the long time limit~\cite{Ercole2016}.
 
@@ -337,7 +355,7 @@ Therefore, Eq.\,\eqref{eq:hf.ai.Hdot} can be written as the sum of three terms t
 \begin{align}
 	\dot{H} (\Gamma)
 		&= \underset{I)}{\underbrace{\sum_I \b F_I \cdot \dot{\b R}_I}} ~ 
-			 \underset{II)}{\underbrace{-\sum_{I} \int \d^3 r ~ \b f_I^{\rm el} (\b r) \cdot \dot{\b R}_I}}
+			 \underset{II)}{\underbrace{-\sum_{I} \int \d^3 r ~ \b f_I^{\rm el} (\b r) \cdot \dot{\b R}_I}} ~
 			 \underset{III)}{\underbrace{-\sum_{I \neq J} \b F^{\rm Nuc}_{IJ} \cdot \dot{\b R}_I}}~.
 \end{align}
 We use these terms to define three contributions to the local density $\dot{e} (\b r)$ as
