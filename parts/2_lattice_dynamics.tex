@@ -501,6 +501,50 @@ Let us now set $f(x) \hat = -\partial \mathcal V / \partial {\bf R}_I$, then ano
 \REM{this approach can only be validated by computing observables and compare the results. One can safely say that this approach has been used successfully in a plethora of studies, while additional care must be taken at low temperature and/or systems with light atoms, especially hydrogen-bonded systems~\CITE{MD-Review?,MarklandCeriotti,Litman,pHexperiment}.}
 
 \subsubsection{Thermodynamic Ensembles and Thermostats}
+In this work, we use two thermodynamic ensembles, the microcanonical, where the total energy $E$ of the system is conserved, and the canonical, where the system can be viewed as coupled to a bath of temperature $T$. 
+\paragraph{Microcanonical Ensemble}
+The microcanonical ensemble is characterized by three conserved extensive quantities: particle number $N$, system volume $V$, and total energy $E$. The conserved total energy is given by the Hamiltonian of the system, $H$, which governs the time evolution of a phase space point $\Gamma (t) = \set{\b R (t), \b P (t)}$ in terms of Hamilton's equations,
+\begin{align}
+	\dot{\b R}_I (t) = \frac{\partial H}{\partial \b P_I} \quad\text{and}\quad
+	\dot{\b P}_I (t) = -\frac{\partial H}{\partial \b R_I}~.
+	\label{eq:stat.eom}
+\end{align}
+The temporal evolution of an observable $B$ is given by the Liouville equation~\cite{Tuckerman}
+\begin{align}
+	\dot{B} = \set{B, H} \equiv \im L B~,
+	\label{eq:Liouville}
+\end{align}
+where $L$ is the \emph{Liouville operator} defined by its action according to Eq.\,\eqref{eq:L}, and $\set{\cdot , \cdot}$ denotes the \emph{Poisson bracket} defined by~\CITE{Goldbach}
+\begin{align}
+	\set{B, H}
+		= \sum_{I, \alpha} \frac{\partial B}{\partial R_I^\alpha} \frac{\partial H}{\partial P_I^\alpha}
+			- \frac{\partial B}{\partial P_I^\alpha} \frac{\partial H}{\partial R_I^\alpha}
+		= \sum_{I, \alpha} \frac{\partial B}{\partial R_I^\alpha} \dot{R}_I^\alpha
+			+ \frac{\partial B}{\partial P_I^\alpha} \dot{P}_I^\alpha~.
+	\label{eq:Poisson}
+\end{align}
+The Liouville equation is formally solved by
+\begin{align}
+	B (t) = {\rm e}^{\im L t} B(0)~.
+	\label{eq:B.time.evolution}
+\end{align}
+The operator ${\rm e}^{\im L t}$ is therefore called the \emph{time evolution operator} or \emph{classical propagator}.
+
+In practice, the equations of motion given in Eq.\,\eqref{eq:stat.eom} are solved by a \emph{velocity Verlet} algorithm~\CITE{Verlet1967,Swope1982},
+\begin{subequations}
+\begin{align}
+	\b R_I (t + \delta t) 
+		&= \b R_I (t) + \delta t \dot{\b R}_I (t) + \frac{\delta t^2}{2 M_I} \b F_I(t) + \mathcal{O} (\delta t^4)~, \\
+	\dot{\b R}_I (t + \delta t) 
+		&= \dot{\b R}_I (t) + \frac{\delta t}{2 M_I} \left[\b F_I(t) + \b F_I (t + \delta t)\right] + \mathcal{O} (\delta t^4)~.
+\end{align}
+\label{eq:VelocityVerlet}
+\end{subequations}
+The velocity Verlet algorithm introduces an error of order $\delta t^4$ in the integration step, but has two important properties mitigating a negative impact on obervables: First, a velocity Verlet integration step is time-reversible, an important prerequisite for long-term stability of the total energy for symmetry reasons. Second, the velocity Verlet map from $t$ to $t + \delta t$ has the property of being \emph{symplectic}~\cite[p.\,101]{Tuckerman}. This means that the discrete time propagation is not guaranteed to preserve the energy along the trajectory $\Gamma(t)$, but there exists a Hamiltonian $\tilde{H} (\Gamma, \delta t)$ which is conserved exactly and fulfills $\tilde{H (\Gamma, \delta t)} \to H(\Gamma)$ for vanishing timestep $\delta t \to 0$~\cite[p.\,121]{Tuckerman}. The symplectic property is formalized in the ``shadowing theorem'', which states that existence of a ``shadow Hamiltonian'' $\tilde H$ ensures that errors introduced by using a finite time step are bounded~\CITE{see tuckerman}.
+
+\paragraph{Canonical ensemble}
+
+
 \subsubsection{Finite Temperature Equations of State and Lattice Expansion}
 \subsubsection{Mode Projection}
 \subsubsection{Approximative Anharmonic Methods}
