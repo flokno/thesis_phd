@@ -300,32 +300,14 @@ the flux is then given by
 	\label{eq:hf.J.atomic}
 \end{align}
 
-\paragraph{Doubts regarding the energy partitioning scheme}
-The expression in Eq.\,\eqref{eq:hf.J.atomic} was originally derived by Helfand~\cite{Helfand1960} and later popularized by McQuarrie~\cite{McQuarrie}. The derivation is, however, is not based on Eq.\,\eqref{eq:hf.J} but on a phenomenological diffusion equation for the energy density, and it is proved at no point that the quantities obey the continuity equation or are linked to conserved quantitites. 
-
-We see the problem arising from an energy partitioning as defined in Eq.\eqref{eq:hf.e.atomic} as follows: In the definition of the heat flux, it is not the energy density $e (\b r)$, but its time derivate $\dot{e} (\b r)$ that gives the flux. By differentiation the energy density according to Eq.\,\eqref{eq:hf.e.atomic}, we have
-\begin{align}
-	\dot{e} (\b r, \Gamma) = \sum_I \dot{E}_I (\Gamma) \delta(\b r - \b R_I (\Gamma)) + E_I (\Gamma) \dot{\b R}_I (\Gamma) \cdot \nabla_{\b R_I} \delta (\b r - \b R_I (\Gamma))~,
-	\label{eq:hf.e.dot.delta}
-\end{align}
-where the notation highlights that the time dependence is only given via the temporal evolution of the phase-space point $\Gamma$. When integrating Eq.\,\eqref{eq:hf.e.dot.delta} with $\int \d^3 r ~ \b r$, the second part of the sum including the derivative of the $\delta$ distribution vanishes as its derivative integrates to zero. We are thus left with
-\begin{align}
-	\b J (\Gamma) = \frac{1}{V} \sum_I \dot{E}_I (\Gamma) \b R_I (t)~,
-\end{align}
-which shows that the commonly discarded ``convective flux'',
-\begin{align}
-	\b J_{\rm convective} (\Gamma) = \frac{1}{V} \sum_I E_I (\Gamma) \dot{\b R}_I (t)~,
-\end{align}
-is rather an artifact of heuristic derivation. Similar doubts have been put forward in the context of similar relations for shear viscosity~\cite{Allen1994comment}.
-
 \paragraph{Gauge invariance}
 As seen above, the local current is only defined up to a non-heat carrying contribution $\b j_{\perp}$. Likewise, the energy density is only defined up to terms that keep the total energy integral unchanged. The choice of a local energy partitioning as,~e.\,g.,~given by Eq.\,\eqref{eq:hf.e.atomic} is therefore not unique, and different partitioning schemes will lead to differing heat fluxes. However, the thermal conductivity obtained by these heat fluxes will be the same in the long time limit~\cite{Ercole2016}.
 
 \subsubsection{Ab initio Heat Flux}
-The above formulas are readily applied when empirical force fields are used to describe the atomic interactions, as an atomic partitioning of the total energy is trivial in that case, although care must be taken in deriving the correct formulae nevertheless~\cite{Fan2015,Boone2019}. An \emph{ab initio} derivation of heat flux on the other hand was a long-standing problem because it was not clear how an expression of the form Eq.\,\eqref{eq:hf.J} or Eq.\,\eqref{eq:hf.J.atomic} can be obtained when no atomic partitioning is available. This problem was solved when Marcologno \emph{et al.} and Carbogno \emph{et al.} independently arrived at well-defined heat flux expressions in \emph{ab initio} frameworks~\cite{Marcolongo2016,Carbogno2016}. We adopt the latter approach in the following, but present a derivation that slightly differs from Ref.\,\cite{Carbogno2016}.
+The above formulas are readily applied when empirical force fields are used to describe the atomic interactions, as an atomic partitioning of the total energy is trivial in that case, although care must be taken in deriving the correct formulae nevertheless~\cite{Fan2015,Boone2019}. An \emph{ab initio} derivation of heat flux on the other hand was a long-standing problem because it was not clear how an expression like Eq.\,\eqref{eq:hf.J.atomic} can be obtained when no atomic partitioning is available. This problem was solved when Marcologno \emph{et al.} and Carbogno \emph{et al.} independently arrived at well-defined heat flux expressions in \emph{ab initio} frameworks~\cite{Marcolongo2016,Carbogno2016}. We adopt the latter approach in the following, but present a derivation that slightly differs from Ref.\,\cite{Carbogno2016},~i.\,e.,~by starting from Eq.\,\eqref{eq:hf.J} instead of Eq.\,\eqref{eq:hf.J.atomic}.
 
 % \paragraph{Derivation of ab initio Heat Flux}
-We start the derivation from Eq.\,\eqref{eq:hf.J},~i.\,e.,~the definition of heat flux as the first moment of the time derivative of the energy density. The many-body Hamiltonian for a given configuration $\Gamma = (\b R, \b P)$ is given again as
+To evaluate Eq.\,\eqref{eq:hf.J}, we need a definition of the time derivative of the energy density. The many-body Hamiltonian for a given configuration $\Gamma = (\b R, \b P)$ is given again as
 \begin{align}
 	H (\Gamma) = \sum_I \frac{\b P_I^2}{2 M_I} + V(\b R) 
 		~\equiv~ \int \d^3 r ~ e (\b r, \Gamma)~,
@@ -351,7 +333,7 @@ As explained in Sec.\,\ref{sec:HellmannFeynman}, the force appearing in Eq.\,\eq
 	\b F_{IJ}^{\rm Nuc}
 		&= Z_I Z_J \frac{\b R_I - \b R_J}{\lvert \b R_I - \b R_J \rvert^3}~.
 \end{align}
-Therefore, Eq.\,\eqref{eq:hf.ai.Hdot} can be written as the sum of three terms that sum to zero, as required
+Therefore, Eq.\,\eqref{eq:hf.ai.Hdot} can be written as the sum of three terms that sum to zero as required,
 \begin{align}
 	\dot{H} (\Gamma)
 		&= \underset{I)}{\underbrace{\sum_I \b F_I \cdot \dot{\b R}_I}} ~ 
@@ -370,7 +352,7 @@ We use these terms to define three contributions to the local density $\dot{e} (
 \end{align}
 \label{eq:hf.ai.densities}
 \end{subequations}
-Pictorially, the kinetic contribution $\dot{e}^{\rm kin} (\b r)$ is assigned to atom $I$ in the sum, the electronic contribution $\dot{e}^{\rm el} (\b r)$ is assigned to the local electron density at $\b r$ and as such a local quantity per definition, and the nuclear contribution $\dot{e}^{\rm Nuc} (\b r)$ is assigned to atom $J$ in analogy to the electronic case. It is easily verified that these contributions integrate to zero. Their first moment however gives a non-vanishing heat flux by Eq.\,\eqref{eq:hf.J},
+Pictorially, the kinetic contribution $\dot{e}^{\rm kin} (\b r)$ is assigned to atom $I$ in the sum, the electronic contribution $\dot{e}^{\rm el} (\b r)$ is assigned to the local electron density at $\b r$ and as such a local quantity per definition, and the nuclear contribution $\dot{e}^{\rm Nuc} (\b r)$ is assigned to atom $J$ in analogy to the electronic case. It is easily verified that the sum of these contributions integrate to zero. Their first moment however gives a non-vanishing heat flux by Eq.\,\eqref{eq:hf.J},
 \begin{align}
 	\b J (\Gamma)
 		% &= \frac{1}{V} \int \d^3 r ~ \b r \, \dot{e} (\b r, \Gamma) \\
