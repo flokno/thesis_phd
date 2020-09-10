@@ -334,6 +334,7 @@ where the \emph{band index} $b$ is used to discern the $3n$ \emph{branches} at e
 
 
 \REM{Supercell imposes effective cutoff on the range of the force constants -> effect on spectrum, Maradudin, Ledermann}
+\REM{Supercell convergence as manifestation of Ledermann's theorem!}
 
 
 \subsubsection{Finite Differences}
@@ -413,7 +414,7 @@ where the $\tilde{\Phi}_i$ are \emph{solely} determined by the space group eleme
 
 \REM{Add the theory for symmetry reduction in practice to appendix?}
 
-\subsection{Harmonic Sampling}
+\subsubsection{Harmonic Sampling}
 
 \subsection{Molecular Dynamics}
 The classical limit of the nuclear Schr\"odinger equation~\eqref{eq:BOSE} is usually performed by writing the nuclear wavefunction $\chi_s ({\bf R}, t)$ in terms of a real amplitude $A_s({\bf R}, t)$ and a \emph{classical action function} $S_s({\bf R}, t)$~\cite{Dirac1981,Landau2013,Marx2009}
@@ -464,7 +465,7 @@ The difference comes from the fact that, in general,
   ~,
   \label{eq:ehrenfest.delta1}
 \end{align}
-where $x = {\bf R}_I$ denotes the space coordinate for notional simplicity, $f$ is some function of the observable $x$, and $\delta f$ measures the difference between the classical and the quantum expectation value. Ehrenfest's argument is that this difference becomes negligible when the state is sufficiently peaked around some value $x_0$. Expanding $f$ around the expectation value of $x$, $x_0 \equiv \langle x \rangle$, we have
+where $x = {\bf R}_I$ denotes the space coordinate for notional simplicity, $f$ is some function of the observable $x$, and $\delta f$ measures the difference between the classical and the quantum expectation value. Ehrenfest's argument is that this difference becomes negligible when the state is sufficiently peaked around some value $x_0$. Expanding $f$ around the expectation value of $x$ denoted by $x_0 \equiv \langle x \rangle$, we have
 \begin{align}
   f(x) = f \bm ( \langle x \rangle \bm{)}  
     + (x - \langle x \rangle) \, f' \bm ( \langle x \rangle \bm{)}
@@ -514,7 +515,7 @@ The temporal evolution of an observable $B$ is given by the Liouville equation~\
 	\dot{B} = \set{B, H} \equiv \im L B~,
 	\label{eq:Liouville}
 \end{align}
-where $L$ is the \emph{Liouville operator} defined by its action according to Eq.\,\eqref{eq:L}, and $\set{\cdot , \cdot}$ denotes the \emph{Poisson bracket} defined by~\CITE{Goldbach}
+where $L$ is the \emph{Liouville operator} defined by its action according to Eq.\,\eqref{eq:Liouville}, and $\set{\cdot , \cdot}$ denotes the \emph{Poisson bracket} defined by~\CITE{Goldbach}
 \begin{align}
 	\set{B, H}
 		= \sum_{I, \alpha} \frac{\partial B}{\partial R_I^\alpha} \frac{\partial H}{\partial P_I^\alpha}
@@ -530,6 +531,12 @@ The Liouville equation is formally solved by
 \end{align}
 The operator ${\rm e}^{\im L t}$ is therefore called the \emph{time evolution operator} or \emph{classical propagator}.
 
+\REM{Ensemble average, ergodicity}
+\begin{align}
+  \braket{A} 
+    = \lim\limits_{t \to \infty} \frac{1}{t} \int_0^\infty \d t' ~ A (t')
+\end{align}
+
 In practice, the equations of motion given in Eq.\,\eqref{eq:stat.eom} are solved by a \emph{velocity Verlet} algorithm~\CITE{Verlet1967,Swope1982},
 \begin{subequations}
 \begin{align}
@@ -544,12 +551,15 @@ The velocity Verlet algorithm introduces an error of order $\delta t^4$ in the i
 
 \paragraph{Canonical ensemble}
 The canonical ensemble is characterized by the two extensive variables particle number $N$ and volume $V$, and the intensive quantity temperature $T$. It can be viewed as a representing a system in contact with an infinite thermal bath of temperature $T$, where heat can be exchanged via a weak coupling.
+
+Canonical distribution function at inverse temperature $\beta = 1 / k_{\rm B} T$
 \begin{align}
-	f (\Gamma) 
+	f_\beta (\Gamma) 
 		= \frac{1}{\mathcal{Z}} {\rm e}^{- \beta H (\Gamma)}~,
 	\label{eq:f.canonical}
 \end{align}
 
+Partition sum
 \begin{align}
 	\mathcal Z (N, V, T) 
 		&= \int \d \Gamma ~ {\rm e}^{- \beta H (\Gamma)} \\
@@ -557,12 +567,7 @@ The canonical ensemble is characterized by the two extensive variables particle 
 \end{align}
 
 \begin{align}
-	Q = \sum_i {\rm e}^{- \beta E_i}
-		\to  \int \d \Gamma ~ 
-\end{align}
-
-\begin{align}
-	\beta = \frac{1}{k_{\rm B} T}
+  \braket{A}_\beta = \int \d \Gamma ~ A(\Gamma) f_\beta(\Gamma)
 \end{align}
 
 
