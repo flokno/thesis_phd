@@ -543,6 +543,27 @@ In practice, the equations of motion given in Eq.\,\eqref{eq:stat.eom} are solve
 The velocity Verlet algorithm introduces an error of order $\delta t^4$ in the integration step, but has two important properties mitigating a negative impact on obervables: First, a velocity Verlet integration step is time-reversible, an important prerequisite for long-term stability of the total energy for symmetry reasons. Second, the velocity Verlet map from $t$ to $t + \delta t$ has the property of being \emph{symplectic}~\cite[p.\,101]{Tuckerman}. This means that the discrete time propagation is not guaranteed to preserve the energy along the trajectory $\Gamma(t)$, but there exists a Hamiltonian $\tilde{H} (\Gamma, \delta t)$ which is conserved exactly and fulfills $\tilde{H (\Gamma, \delta t)} \to H(\Gamma)$ for vanishing timestep $\delta t \to 0$~\cite[p.\,121]{Tuckerman}. The symplectic property is formalized in the ``shadowing theorem'', which states that existence of a ``shadow Hamiltonian'' $\tilde H$ ensures that errors introduced by using a finite time step are bounded~\CITE{see tuckerman}.
 
 \paragraph{Canonical ensemble}
+The canonical ensemble is characterized by the two extensive variables particle number $N$ and volume $V$, and the intensive quantity temperature $T$. It can be viewed as a representing a system in contact with an infinite thermal bath of temperature $T$, where heat can be exchanged via a weak coupling.
+\begin{align}
+	f (\Gamma) 
+		= \frac{1}{\mathcal{Z}} {\rm e}^{- \beta H (\Gamma)}~,
+	\label{eq:f.canonical}
+\end{align}
+
+\begin{align}
+	\mathcal Z (N, V, T) 
+		&= \int \d \Gamma ~ {\rm e}^{- \beta H (\Gamma)} \\
+		&\equiv N! h^{3N}  Q (N, V, T)
+\end{align}
+
+\begin{align}
+	Q = \sum_i {\rm e}^{- \beta E_i}
+		\to  \int \d \Gamma ~ 
+\end{align}
+
+\begin{align}
+	\beta = \frac{1}{k_{\rm B} T}
+\end{align}
 
 
 \subsubsection{Finite Temperature Equations of State and Lattice Expansion}
