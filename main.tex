@@ -9,10 +9,25 @@
 \setlength\epigraphwidth{12cm}
 \setlength\epigraphrule{0pt}
 
+% theorems
+\usepackage{amsthm}
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{thm}{Theorem}
+
+%% style
 % \usepackage{mathptmx}
 \usepackage{setspace}
 %\singlespacing
-\onehalfspacing
+% \onehalfspacing
+\linespread{1.0}
+
+% integrate amsthm and txmath
+\usepackage{savesym}
+\usepackage{amsthm}
+\savesymbol{openbox}
+\usepackage{newtxtext,newtxmath}
+\restoresymbol{TX}{openbox}
+
 
 \renewcommand{\t}[1]{\text{#1}}
 \renewcommand{\d}{{\rm d}}
@@ -34,15 +49,12 @@
 % comments:
 \definecolor{dblue}{RGB}{31,119,180}
 \newcommand{\REM}[1]{\textcolor{blue}{{\bf #1}}}
+\newcommand{\TODO}[1]{\textcolor{orange}{{\bf #1}}}
 \newcommand{\CITE}[1]{\textcolor{blue}{{\bf [#1]}}}
 % \newcommand{\FK}[1]{\textcolor{blue}{{\bf #1 }}}
 
 \usepackage{blindtext}
 
-% theorems
-\usepackage{amsthm}
-\newtheorem*{theorem}{Theorem}
-\newtheorem*{thm}{Theorem}
 
 % https://en.wikibooks.org/wiki/LaTeX/Title_Creation
 \title{
@@ -92,6 +104,9 @@ A prerequisite to finding better thermoelectrics or TBCs therefore is to find ma
 Despite the technological needs, systematic knowledge of thermal conductivities in inorganic compounds is scarce. A renowned database like Springer Materials only lists thermal conductivities for about 200~of these compounds~\cite{SpringerMaterials}, which is partially due to the fact that accurate measurements of thermal conductivity are tricky to perform[\REM{citation!}]. As a consequence, thermal conductivity is not systematically understood beyond semi-empirical and phenomenological trends in a very limited number of simple material classes~\cite{Morelli}.
 \\ \\
 The aim of this work is to open a new pathway for overcoming the problem of limited data by devising a route to systematically scan material space for thermal insulators and calculate their thermal conductivities from first principles. This route is twofold: After reviewing the relevant theoretical tools necessary to simulate heat transport in thermal insulators, we describe how to assess a key physical property shared by most thermal insulators,~.i.\,e.,~\emph{anharmonicity}, without the need for explicit model building beyond the harmonic approximation.
+
+\section{Organization of the Thesis}
+\TODO{Derive all the formulas, discuss anharmonicity, present thermal conductivity}
 
 \chapter{Theory and Methods}
 

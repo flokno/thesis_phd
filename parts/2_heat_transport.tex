@@ -33,8 +33,8 @@ and we assume without loss of generality that its equilibrium value vanishes,
 where $f^0 (\Gamma)$ is the distribution function of the unperturbed system in thermal equilibrium. In order to calculate Eq.\,\eqref{eq:lr.B.1} in a non-equilibrium situation, we start by defining the Hamiltonian describing the equilibrium dynamics, $H^0$, which we take to be given by the many-body Hamiltonian
 \begin{align}
   H^0 (\Gamma) 
-    = H^0(\set{\b R, \b P})
-    = \sum_I \frac{\b P^2}{2 M_I} + V (\b R)~.
+    %= H^0(\set{\b R, \b P})
+    = \sum_I \frac{\b P_I^2}{2 M_I} + V (\b R)~.
   \label{eq:lr.H0}
 \end{align}
 The canonical distribution function for the unperturbed system reads
@@ -168,7 +168,7 @@ j^\alpha (\b r , t)
 \end{align}
 If we now assume the external driving force $v (\b r, t)$ to be constant in time and homogeneously varying in space such that
 \begin{align}
-	\partial_\beta v (\b r, t) \equiv f_\beta~,
+	\partial_\beta v (\b r, t) \equiv v_\beta~,
 	\label{eq:lr.force}
 \end{align}
 and spatially average over Eq.\,\eqref{eq:lr.ja.2} with $\frac{1}{V} \int_V \d^3 r$, we arrive at
@@ -179,7 +179,7 @@ and spatially average over Eq.\,\eqref{eq:lr.ja.2} with $\frac{1}{V} \int_V \d^3
 		\braket{
 		J^\alpha (\Gamma_t) J^\beta (\Gamma_{0})
 	}_0 
-	f_\beta~,
+	v_\beta~,
 	\label{eq:lr.J}
 \end{align}
 where the stationarity in time was used to shift the lower bound of the integral to $t=0$.
@@ -198,7 +198,7 @@ with
 and
 \begin{align}
 	F_\beta
-		= - \frac{f_\beta}{T}~.
+		= - \frac{v_\beta}{T}~.
 	\label{eq:lr.F}
 \end{align}
 Here, $J^\alpha$ is the macroscopic generalized current associated with the extensive property $A$, $F_\beta$ is the thermodynamic force, and $L^{\alpha \beta}$ is the associated conductance tensor~\cite{Onsager1931a,Baroni2020a}.
@@ -216,7 +216,7 @@ We are interested in the occuring flux in the presence of a temperature inhomoge
 \end{align}
 so that
 \begin{align}
-	f_\beta = \frac{1}{T} \partial_\beta T (\b r) 
+	v_\beta = \frac{1}{T} \partial_\beta T (\b r) 
 		\stackrel{\eqref{eq:lr.F}}{\implies}
 	F_\beta = - \frac{1}{T^2} (\b \nabla T)_\beta ~.
 	\label{eq:lr.F.temp}
