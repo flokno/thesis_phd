@@ -1,18 +1,24 @@
-\documentclass[a4paper,11pt]{book}
+\PassOptionsToPackage{full}{textcomp}
+% include symmetric to place margins left and right instead of right only
+% nohyper, nobib?
+\documentclass[nobib, a4paper,twoside,notoc,justified,marginals=raggedouter,11pt]{tufte-book}
+\hypersetup{colorlinks}
 \usepackage[utf8]{inputenc}
 
-\usepackage{amsmath, amssymb, enumitem, bm, xcolor, braket, dsfont, graphicx, cancel}
-\usepackage[colorlinks, linkcolor = red, citecolor = black, filecolor = black, urlcolor = blue]{hyperref} 
+% fix too many alphabets error
+\usepackage{amsmath, amssymb}
+\newcommand\hmmax{0}
+\newcommand\bmmax{0}
+
+\usepackage{enumitem, bm, xcolor, braket, dsfont, graphicx, cancel}
+% \usepackage[colorlinks, linkcolor = red, citecolor = black, filecolor = black, urlcolor = blue]{hyperref} 
+% \usepackage{nameref}
+% \hypersetup{colorlinks}
 
 % Quotes
 \usepackage{epigraph}
-\setlength\epigraphwidth{12cm}
+\setlength\epigraphwidth{10cm}
 \setlength\epigraphrule{0pt}
-
-% theorems
-\usepackage{amsthm}
-\newtheorem*{theorem}{Theorem}
-\newtheorem*{thm}{Theorem}
 
 %% style
 % \usepackage{mathptmx}
@@ -28,7 +34,11 @@
 \usepackage{newtxtext,newtxmath}
 \restoresymbol{TX}{openbox}
 
+% theorems
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{thm}{Theorem}
 
+% shorthand
 \renewcommand{\t}[1]{\text{#1}}
 \renewcommand{\d}{{\rm d}}
 \renewcommand{\b}[1]{{\bf #1}}
@@ -49,97 +59,180 @@
 % comments:
 \definecolor{dblue}{RGB}{31,119,180}
 \newcommand{\REM}[1]{\textcolor{blue}{{\bf #1}}}
-\newcommand{\TODO}[1]{\textcolor{orange}{{\bf #1}}}
 \newcommand{\CITE}[1]{\textcolor{blue}{{\bf [#1]}}}
 % \newcommand{\FK}[1]{\textcolor{blue}{{\bf #1 }}}
 
-\usepackage{blindtext}
+% Tufte
 
+% TOC
+% https://tex.stackexchange.com/questions/121790/how-to-generate-a-full-width-table-of-contents-tufte-book
+\usepackage{lipsum,mdframed}
+\definecolor{secnum}{RGB}{13,151,225}
+\definecolor{ptcbackground}{RGB}{212,237,252}
+\definecolor{ptctitle}{RGB}{0,177,235}
 
-% https://en.wikibooks.org/wiki/LaTeX/Title_Creation
-\title{
-    Thermal Conductivities of Strongly Anharmonic Compounds from First Principles
+\setcounter{secnumdepth}{3}
+
+\usepackage[toc]{appendix}
+% \usepackage{titletoc}
+% \usepackage{etoolbox}
+\setcounter{tocdepth}{1}
+%\pretocmd{\tableofcontents}{\begin{mdframed}\let\cleardoublepage\relax}{}{}
+%  \apptocmd{\tableofcontents}{\end{mdframed}}{}{}
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+
+%%
+% Prints argument within hanging parentheses (i.e., parentheses that take
+% up no horizontal space).  Useful in tabular environments.
+\newcommand{\hangp}[1]{\makebox[0pt][r]{(}#1\makebox[0pt][l]{)}}
+
+%%
+% Prints an asterisk that takes up no horizontal space.
+% Useful in tabular environments.
+\newcommand{\hangstar}{\makebox[0pt][l]{*}}
+
+%%
+% Prints a trailing space in a smart way.
+\usepackage{xspace}
+
+% Prints the month name (e.g., January) and the year (e.g., 2008)
+\newcommand{\monthyear}{%
+  \ifcase\month\or January\or February\or March\or April\or May\or June\or
+  July\or August\or September\or October\or November\or
+  December\fi\space\number\year
 }
-\author{
-    Florian Knoop
-    \\ \and
-    First Supervisor: Prof. Dr. Claudia Draxl
-    \and
-    Second Supervisor: Prof. Dr. Matthias Scheffler
-    \\ \and
-    Fritz-Haber-Institut der Max-Planck-Gesellschaft, Berlin
-}
-\date{2020}
 
-% section numbering
-% \setcounter{secnumdepth}{5}
-% \numberwithin{equation}{section}
+
+% Prints an epigraph and speaker in sans serif, all-caps type.
+\newcommand{\openepigraph}[2]{%
+  %\sffamily\fontsize{14}{16}\selectfont
+  \begin{fullwidth}
+  \sffamily\large
+  \begin{doublespace}
+  \noindent\allcaps{#1}\\% epigraph
+  \noindent\allcaps{#2}% author
+  \end{doublespace}
+  \end{fullwidth}
+}
+
+% Inserts a blank page
+\newcommand{\blankpage}{\newpage\hbox{}\thispagestyle{empty}\newpage}
+
+\usepackage{units}
+
+% Typesets the font size, leading, and measure in the form of 10/12x26 pc.
+\newcommand{\measure}[3]{#1/#2$\times$\unit[#3]{pc}}
+
+% Macros for typesetting the documentation
+\newcommand{\hlred}[1]{\textcolor{Maroon}{#1}}% prints in red
+\newcommand{\hangleft}[1]{\makebox[0pt][r]{#1}}
+\newcommand{\hairsp}{\hspace{1pt}}% hair space
+\newcommand{\hquad}{\hskip0.5em\relax}% half quad space
+\newcommand{\TODO}{\textcolor{red}{\bf TODO!}\xspace}
+\newcommand{\na}{\quad--}% used in tables for N/A cells
+
+% Generates the index
+\usepackage{makeidx}
+\makeindex
+
 
 \begin{document}
-\maketitle
+
+  % Front matter
+  \frontmatter
+  
+%  % r.1 blank page
+%  \blankpage
+%  
+%% r.3 full title page
+%\maketitle
+
+% r.5 contents
 \tableofcontents
 
+% \listoffigures
+
+% \listoftables
+
+% r.7 dedication
+%\cleardoublepage
+%~\vfill
+%\begin{doublespace}
+%  \noindent\fontsize{12}{12}\selectfont\itshape
+%  \nohyphenation
+%  \hfill To my teachers.
+%\end{doublespace}
+%\vfill
+%\vfill
+
+
+% r.9 introduction
+\cleardoublepage
+\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
 \chapter{Introduction}
-\epigraph{\singlespacing \it ``Die Zeit des unbedenklichen Wirtschaftens mit den Energiequellen und Stofflagern, die uns die Natur zur Verfügung gestellt hat, wird wahrscheinlich schon für unsere Kinder nur noch die Bedeutung einer vergangenen Wirtschaftsepoche haben.''}{W. Schottky, 1929}
-% [ ] Why thermal conductivity?
-% [ ] Why novel thermal insulators?
-% [ ] Why computational materials science?
-One of the major challenges humankind faces in the 21th century is the responsible and sustainable handling of the earth's natural resources~\cite{Schottky1929}.  Yet, most energy today is lost as waste heat during the transformation of raw energy sources to usable power. To date, there is no fuel based heat engine that exceeds an efficiency of 50\,\% and often it is even worse~\cite{eia}. 
-Since gas- and aircraft-turbines are essentially Carnot engines, their efficiency and core power are directly related to the combustion temperature~\cite{Clarke2012,Perepezko2009}. This has been utilized during the past 30 years by developing 
-ceramics with high thermal resistivity that are nowadays applied as \emph{thermal barrier coatings} on turbine airfoils in heat engines~\cite{Clarke2003}. A thermal barrier coating serves as a thin, extremely heat insulating layer and thus allows to operate a turbine at higher temperatures, thereby increasing its efficiency.
+\input{./parts/1_intro.tex}
 
-A complementary strategy is to recycle waste heat where it occurs. One way to do so is to use the
-\emph{thermoelectric effect} to  generate electric power from temperature gradients~\cite{Snyder2008}. The main obstacle preventing mass operation though is the limited conversion rate (figure of merit) $zT$ of even the most advanced thermoelectric materials known to date. To make matters worse, these materials often contain heavy metals and are toxic, and their manufacturing process is difficult and expensive~\cite{Nolas2001}. Recent advancements in the field, such as the discovery of a high thermoelectric figure of merit in the lead-free material Tin Selenide~\cite{Zhao2014}, offer hope that novel materials with significant figure of merit can be found that are non-toxic, easy and cheap to produce, and consist of abundant elements.
+%%
+% Start the main matter (normal chapters)
+\mainmatter
 
-A key physical property of both thermal barrier coatings (TBCs) and thermoelectrics is their thermal conductivity $\kappa$. In the case of thermoelectrics, the figure of merit is inversely proportional to $\kappa$~\cite{Nolas2001}:
-\begin{align}
-	zT = \frac{S^2 \sigma_{\rm el}}{\kappa} T~,
-	\label{eq:zT}
-\end{align} 
-where $T$ dentoes the temperature, $S$ the Seebeck coefficient, and $\sigma_{\rm el}$ is the electrical conductivity.
-A prerequisite to finding better thermoelectrics or TBCs therefore is to find materials which are thermally insulating. These are typically non-metals, since the free electrons in metals are good heat carriers, and most of the known thermoelectrics are thermally insulating inorganic semiconductors~\cite[p.\,15]{Nolas2001}.
+\addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
+\part{Theory and Methods}
 
-% [ ] say sth. about microstructuring?
-
-Despite the technological needs, systematic knowledge of thermal conductivities in inorganic compounds is scarce. A renowned database like Springer Materials only lists thermal conductivities for about 200~of these compounds~\cite{SpringerMaterials}, which is partially due to the fact that accurate measurements of thermal conductivity are tricky to perform[\REM{citation!}]. As a consequence, thermal conductivity is not systematically understood beyond semi-empirical and phenomenological trends in a very limited number of simple material classes~\cite{Morelli}.
-\\ \\
-The aim of this work is to open a new pathway for overcoming the problem of limited data by devising a route to systematically scan material space for thermal insulators and calculate their thermal conductivities from first principles. This route is twofold: After reviewing the relevant theoretical tools necessary to simulate heat transport in thermal insulators, we describe how to assess a key physical property shared by most thermal insulators,~.i.\,e.,~\emph{anharmonicity}, without the need for explicit model building beyond the harmonic approximation.
-
-\section{Organization of the Thesis}
-\TODO{Derive all the formulas, discuss anharmonicity, present thermal conductivity}
-
-\chapter{Theory and Methods}
-
-\section{The Many Body Problem}
+\chapter{The Many Body Problem}
 \input{./parts/2_dft.tex}
 
 % \newpage
 
-\section{Lattice Dynamics}
+\chapter{Lattice Dynamics}
 \input{./parts/2_lattice_dynamics.tex}
 
+\chapter{Heat Transport}
 \input{./parts/2_heat_transport.tex}
 
+\part{Benchmarks}
+
+\part{Results}
 \chapter{Screening Materials for Anharmonicity}
 \section{Anharmonicity Measure}
 \section{Screening Material Space}
-\subsubsection{Literature Review}
+\subsection{Literature Review}
 \subsection{Candidate Materials}
 
 \chapter{Thermal Conductivities for Strongly Anharmonic Compounds}
 \section{Overview: Results of Dataset}
 \section{Discussion}
-\subsubsection{Relation to Anharmonicity}
-\subsubsection{Dynamical Effects}
+\subsection{Relation to Anharmonicity}
+\subsection{Dynamical Effects}
+
 
 \chapter{Conclusion}
 
 \chapter{Outlook}
 
+
+
+
+% \setcounter{secnumdepth}{-1}
+
+% part*{appendix}
+
+% \setcounter{tocdepth}{1}
+% \addtocontents{toc}{\setcounter{tocdepth}{0}}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+\begin{appendices}
+%  \appendixpage
+  \part*{Appendix}
+  \input{./parts/appendix.tex}
+\end{appendices}
+
+\backmatter
+
 \bibliography{references}
 \bibliographystyle{unsrt}
-
-\appendix
-\input{./parts/appendix.tex}
 
 \end{document}

@@ -16,7 +16,7 @@ where
 \end{align}
 is the nuclear kinetic-energy operator as before.
 
-\subsection{Harmonic Approximation}
+\section{Harmonic Approximation}
 The Born-Oppenheimer potential $\mathcal V ({\bf R})$ appearing in Eq.\,\eqref{eq:BOSE} is an ordinary function of the\,\footnote{Remember $N \equiv N_{\rm Nuc}$.} $3 N$ coordinates ${\bf R} = ({\bf R}_1, \ldots, {\bf R}_{N})$ and therefore can be expanded as a Taylor series in displacements ${\bf U} \equiv \Delta {\bf R}$ about a given configuration ${\bf R}^0$,~i.\,e.,
 \begin{align}
 \begin{split}
@@ -156,7 +156,7 @@ The thermodynamic properties of such a system of harmonic oscillators follow fro
 
 This derivation is generally valid for a system of $N$ particles described by a potential-energy surface of which a (local) minimum ${\bf R}^0$, and the matrix of second derivatives at this configuration, $\Phi^{IJ}$, is known.
 
-\subsubsection{Periodic Systems}
+\section{Periodic Systems}
 As already mentioned in Sec.~\ref{sec:theory.periodic.1}, the crystalline state is characterized by a periodic long-range order described the Bravais vectors ${\bf L} = L^i {\bf a}_i$, where $\set{{\bf a}_i}$ is the crystal basis and $L^i \in \mathds Z$.
 We define this symmetry as follows:
 Let ${\bf R}^0 = \set{{\bf R}_I^0}$ be the configuration of atoms in the local minimum of interest, and let ${\bf R}^{0 \prime} = \set{{\bf R}^{0 \prime}_{I}}$ denote the configuration obtained by moving all atoms by a Bravais vector ${\bf L}$,
@@ -185,12 +185,13 @@ The final requirement for translational invariance of the potential is that the 
 	\label{eq:inv.V}
 \end{align}
 This effectively corresponds to a permutation of the displacements of the atoms, $U_I \to U_{I'}$ according to $P_{\bf L}$. Figure\,\ref{fig:translation.permutation} shows a one-dimensional depiction of the relation between discrete translation by Bravais vectors and the permutation map.
-\begin{figure}[h]
+\begin{marginfigure}
 	\centering
-	\includegraphics[width=.68\textwidth]{./sketches/permutation1.jpg}
+	% \includegraphics[width=.68\textwidth]{./sketches/permutation1.jpg}
+	\includegraphics[width=\textwidth]{./sketches/permutation1.jpg}
 	\caption{A linear chain with three atoms (bullets) displaced from their equilibrium position (open circels). With periodic boundary conditions, the consecutive translation by a lattice vector $a$ induces a permutation of the atoms,~i.\,e.,~$(1, 2 , 3) \to (3, 1, 2) \to (2, 3, 1)$.}
 	\label{fig:translation.permutation}
-\end{figure}
+\end{marginfigure}
 
 We can draw two important conclusions from Eq.\,\eqref{eq:translation.permutation} and \eqref{eq:inv.V}. First, the existence of the map $P_{\bf L}$ enables us to write every atomic coordinate ${\bf R}_I$ as
 \begin{align}
@@ -215,7 +216,7 @@ where $\b M$ again denotes an arbitrary Bravais vector. Using this translational
 \end{align}
 where we restrict the values of $\b q$ to reside in the first Brillouin zone, thereby transforming the $3N \times 3N$ matrix ${\rm D}_{IJ}$ to one $3n \times 3n$ matrix ${\rm D}_{ij} (\bf q)$ for each~$\b q$, where $n$ is the number of atoms in the primitive unit cell.
 
-\subsubsection{Cyclic Boundary Conditions and Supercell Approximation}
+\subsection{Cyclic Boundary Conditions and Supercell Approximation}
 In the previous section, we did not specify the system beyond requiring periodic boundary conditions, and implicitly assumed an infinite crystal in the limit $N \to \infty$ without boundaries. In practice we introduce Born-von Karman cyclic boundary conditions~\cite{born2013atomtheorie}, as already done in Sec.\,\ref{sec:theory.periodic.1} for the description of electronic states, but reintroduce them here in a slightly more general fashion.
 
 We define the boundary conditions for the nuclear problem such that
@@ -287,7 +288,7 @@ with $m_i \in \mathds Z$ such that $\b q_{\bf m}$ is an element of the first Bri
 %\end{align}
 
 
-\subsubsection{Interpolation to non-commensurate q-points}
+\subsection{Interpolation to non-commensurate q-points}
 The definition of the dynamical matrix in Eq.\,\eqref{eq:D^S(q).2} was formulated for commensurate $\b q$-points $\set{\b q_{\b m}}$,~i.\,e.,~those given in terms of Eq.\,\eqref{eq:q_m}. Evaluating this expression at a non-commensurate value of $\b q$ will, in general, yield a non-hermitian matrix which cannot be used to extract physically sound information about the system. To obtain an \emph{approximated} dynamical matrix at any other, non-commensurate value of $\b q$ within the Brillouin zone, we define an \emph{extended supercell}, 
 \begin{align}
 	\mathds V_{\rm sc}^{\rm ext}
@@ -330,14 +331,14 @@ For each $\b q$, ${\rm D} (\b q)$ is a hermitian $3n \times 3n$ matrix in the in
 where the \emph{band index} $b$ is used to discern the $3n$ \emph{branches} at each $\b q$. Using the combined index $s = (\b q, b)$, the notation becomes similar to the non-periodic case with $3N_{\rm sc} N_{\rm uc}$ degrees of freedom, only that the eigenvectors $\b e_{s = (\b q, n)}$ can be complex valued instead of strictly real.
 \REM{This is Born conventions. Togo and Parlinski use extra phase factor ${\rm e}^{\im \b q \cdot (\b R_i^0 - \b R_j^0)}$ that alters the eigenvectors but not the frequencies.}
 
-\subsubsection{Supercell Convergence and Ledermann's Theorem}
+\subsection{Supercell Convergence and Ledermann's Theorem}
 
 
 \REM{Supercell imposes effective cutoff on the range of the force constants -> effect on spectrum, Maradudin, Ledermann}
 \REM{Supercell convergence as manifestation of Ledermann's theorem!}
 
 
-\subsubsection{Finite Differences}
+\section{Finite Differences}
 The force constants can be obtained from first-order derivatives of the potential-energy surface,~i.\,e.,~the forces, by rewriting the second derivative in terms of a finite difference expression,
 \begin{align}
 	\Phi_{I \alpha, J \beta}
@@ -378,7 +379,14 @@ The number of required force calculations can be reduced by considering the spac
 	\b R_I^{g} &\equiv {\Gamma}^g (\b R_I) = { P}^g_{IJ} \b R^0_J + { M}^g \b U_I~,
 	\label{eq:sym.RI'}
 \end{align}	
-where $P^g_{IJ}$ is the permutation that relates the reference positions of atom $I$ and atom $J$, and $M^g$ is an orthogonal matrix representing the rotation (or inversion) of the respective displacement. As depicted in Fig.~\ref{fig:symmetry.1}, the forces on each atom in the rotated system $\b R^g = \set{\b R^g_I}$ are obtained by co-rotating the forces in the initial configuration $\b R = \set{\b R_I}$ as
+where $P^g_{IJ}$ is the permutation that relates the reference positions of atom $I$ and atom $J$, and $M^g$ is an orthogonal matrix representing the rotation (or inversion) of the respective displacement. 
+\begin{marginfigure}
+  \centering
+  \includegraphics[width=\textwidth]{./sketches/symop.jpg}
+  \caption{The configurations $\b R$, $\b R^g$, and $\tilde{\b R}^g$ obtained from the symmetry operation $g=\text{90 degrees rotation}$ for a two-dimensional system with five atoms. Arrows indicate the force at each atom.}
+  \label{fig:symmetry.1}
+\end{marginfigure}
+As depicted in Fig.~\ref{fig:symmetry.1}, the forces on each atom in the rotated system $\b R^g = \set{\b R^g_I}$ are obtained by co-rotating the forces in the initial configuration $\b R = \set{\b R_I}$ as
 \begin{align}
 	\b F_I (\b R^g) &= {M}^g \b F_I (\b R)~,
 	\label{eq:sym.Fp}
@@ -397,12 +405,6 @@ It follows that the force on atom $I$ in the new configuration $\tilde{\b R}^g$ 
 		\label{eq:sym.Ftilde}
 \end{align}
 By means of this equation, the set of forces obtained for a configuration $\set{\b R_I = \b R_I^0 + \b U_I}$ can be used to generate a set of forces for each symmetrically equivalent configuration $\set{\tilde{\b R}_I^g = \b R_I^0 + {\rm M}^g P^{g-1}_{IJ} \b U_J}$, where $g$ are spacegroup elements.
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=.75\textwidth]{./sketches/symop.jpg}
-	\caption{The configurations $\b R$, $\b R^g$, and $\tilde{\b R}^g$ obtained from the symmetry operation $g=\text{90 degrees rotation}$ for a two-dimensional system with five atoms. Arrows indicate the force at each atom.}
-	\label{fig:symmetry.1}
-\end{figure}
 
 A complementary approach is to use the symmetry elements $\set{g}$ to reduce the forceconstant matrix to an irreducible basis,
 \begin{align}
@@ -414,9 +416,9 @@ where the $\tilde{\Phi}_i$ are \emph{solely} determined by the space group eleme
 
 \REM{Add the theory for symmetry reduction in practice to appendix?}
 
-\subsubsection{Harmonic Sampling}
+\subsection{Harmonic Sampling}
 
-\subsection{Classical Limit}
+\section{Classical Limit}
 The classical limit of the nuclear Schr\"odinger equation~\eqref{eq:BOSE} is usually performed by writing the nuclear wavefunction $\chi_s ({\bf R}, t)$ in terms of a real amplitude $A_s({\bf R}, t)$ and a \emph{classical action function} $S_s({\bf R}, t)$~\cite{Dirac1981,Landau2013,Marx2009}
 \begin{align}
 	\chi_s({\bf R}, t) = A_s({\bf R}, t) \, {\rm e}^{\frac{\im}{\hbar} S_s({\bf R}, t)}~.
@@ -503,10 +505,11 @@ Let us now set $f(x) \hat = -\partial \mathcal V / \partial {\bf R}_I$, then ano
 
 \newpage
 
-\subsection{Thermodynamic Ensembles and Molecular Dynamics}
+\section{Thermodynamic Ensembles and Molecular Dynamics}
+\REM{Maybe make chapter?}
 In this work, we use two thermodynamic ensembles: the microcanonical, $NVE$ for short, where the total energy $E$ of the system is conserved, and the canonical ($NVT$), where the system can be viewed as coupled to a bath of temperature $T$. The latter is mimicking more realistic experimental conditions, where usually the temperature and not the total energy of the system can be controlled. Technically, experiments are performed rather at constants pressure $p$ instead of constant volume, and the correct ensemble to describe such a situation is the isothermal-isobaric one commonly denoted as $NPT$. In practice however, the canonical ensemble is easier to simulate and is a good approximation to the $NPT$ ensemble when the system size is not too small~\cite[p.\,134]{Tuckerman}
 
-\subsubsection{Microcanonical Ensemble}
+\subsection{Microcanonical Ensemble}
 The microcanonical ensemble is characterized by three conserved extensive quantities: particle number $N$, system volume $V$, and total energy $E$. The total energy of a given microstate,~i.\,e.,~the configuration of particles and their momenta represented by the phase-space point $\Gamma = \set{\b R, \b P}$, is given by the Hamiltonian of the system, $H (\Gamma)$. 
 
 The central postulate of statistical mechanics is that each microstate is equally probable. Therefore, any point in phase space $\Gamma$ yielding an energy in a thin interval around the target energy, $H (\Gamma) \in [E, E + \d E]$, is realized with the same likelihood. Taking particle number $N$ and system volume $V$ to be fixed and non-controllable, the expectation value of a phase-space observable $A$ in an ensemble of energy $E$ is defined as
@@ -532,7 +535,9 @@ The temporal evolution of an observable $B$ is then given by the Liouville equat
 	\dot{B} = \set{B, H} \equiv \im L B~,
 	\label{eq:Liouville}
 \end{align}
-where $L$ is the \emph{Liouville operator} defined by its action according to Eq.\,\eqref{eq:Liouville}, and $\set{\cdot , \cdot}$ denotes the \emph{Poisson bracket} defined by~\CITE{Goldbach}
+where $L$ is the \emph{Liouville operator} defined by its action according to Eq.\,\eqref{eq:Liouville}, and $\set{\cdot , \cdot}$ denotes the \emph{Poisson bracket}.
+\marginnote{
+The Poisson bracket is defined by~\CITE{Goldbach}
 \begin{align}
 	\set{B, H}
 		= \sum_{I, \alpha} \frac{\partial B}{\partial R_I^\alpha} \frac{\partial H}{\partial P_I^\alpha}
@@ -541,6 +546,7 @@ where $L$ is the \emph{Liouville operator} defined by its action according to Eq
 %			+ \frac{\partial B}{\partial P_I^\alpha} \dot{P}_I^\alpha~.
 	\label{eq:Poisson}
 \end{align}
+}
 The Liouville equation is formally solved by
 \begin{align}
 	B (t) = {\rm e}^{\im L t} B(0)~.
@@ -571,7 +577,7 @@ In practice, the equations of motion are solved by a \emph{velocity Verlet} algo
 \end{subequations}
 The velocity Verlet algorithm introduces an error of order $\delta t^4$ in the integration step, but has two important properties mitigating a negative impact on obervables: First, a velocity Verlet integration step is time-reversible, an important prerequisite for long-term stability of the total energy for symmetry reasons. Second, the velocity Verlet map from $t$ to $t + \delta t$ has the property of being \emph{symplectic}~\cite[p.\,101]{Tuckerman}. This means that the discrete time propagation is not guaranteed to preserve the energy along the trajectory $\Gamma(t)$, but there exists a Hamiltonian $\tilde{H} (\Gamma, \delta t)$ which is conserved exactly and fulfills $\tilde{H (\Gamma, \delta t)} \to H(\Gamma)$ for vanishing timestep $\delta t \to 0$~\cite[p.\,121]{Tuckerman}. The symplectic property is formalized in the ``shadowing theorem'', which states that existence of a ``shadow Hamiltonian'' $\tilde H$ ensures that errors introduced by using a finite time step are bounded~\CITE{see tuckerman}.
 
-\subsubsection{Canonical ensemble}
+\subsection{Canonical ensemble}
 The canonical ensemble is characterized by the two extensive variables particle number $N$ and volume $V$, and the intensive quantity temperature $T$. It can be viewed as representing a system in contact with an infinite thermal bath of temperature $T$, where heat can be exchanged via a weak coupling.
 
 In analogy to the previous section, we define the \emph{canonical distribution function} at inverse temperature $\beta = 1 / k_{\rm B} T$
@@ -588,6 +594,5 @@ where the  canonical partition sum $\mathcal{Z}$ normalizes $f_\beta$. The canon
 \REM{Langevin eq.} \cite[p.\,580, p.\,591]{Tuckerman}
 
 
-\subsubsection{Finite Temperature Equations of State and Lattice Expansion}
-\subsubsection{Mode Projection}
-\subsubsection{Approximative Anharmonic Methods}
+\section{Finite Temperature Equations of State and Lattice Expansion}
+\subsection{Mode Projection}

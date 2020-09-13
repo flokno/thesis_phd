@@ -7,7 +7,7 @@ features of complex atomic systems without too much computation.''}{P.A.M. Dirac
 
 In this chapter, we summarize the theoretical background of {\it ab initio} simulations starting from the non-relativistic, time-independent Schrödinger equation for a general many-body system.
 
-\subsection{The Many Body Hamiltonian}
+\section{The Many Body Hamiltonian}
 
 The full (non-relativistic) many body Hamiltonian in the absence of external electromagnetic fields for an otherwise arbitrary system reads
 \begin{align}
@@ -58,7 +58,7 @@ This Hamiltonian governs the dynamical evolution of a many-particle system repre
 \end{align}
 from which all material properties (neglecting relativistic and effects and electromagnetic fields) follow.
 
-\subsection{The Born Oppenheimer Approximation}
+\section{The Born Oppenheimer Approximation}
 We go over to a unitless Hamiltonian by scaling Eq.\,\eqref{eq:Hamiltonian} with the Hartree energy $E_{\rm h} = me^4 / \hbar^2 \approx 27.2\,{\rm eV}$ and expressing distances in terms of the Bohr radius $a_0 = \hbar^2 / m e^2$,~i.\,e.,~${\bf r} = a_0 \tilde{\bf r}$, where $\hbar$ denotes the Planck constant~\CITE{Czycholl}. Dropping the operator hats in the following and using $\hat{\bf p}=-\im \hbar \partial / \partial {\bf r}$ instead, we have
 \begin{align}
 \begin{split}
@@ -87,7 +87,7 @@ which only depends on the charge numbers $\{Z_I\}$ and the mass ratios $\{ m_{\r
         + {\mathrm{V}}^{\mathrm{Nuc}-\mathrm{Nuc}}~.
     \label{eq:H0}
 \end{align}
-The time-independent many-body Schroedinger equation reads
+The time-independent many-body Schr\"odinger equation reads
 \begin{align}
     H \psi ({\bf r}, {\bf R}) = E \psi ({\bf r}, {\bf R})~,
     \label{eq:Schroedinger1}
@@ -144,14 +144,14 @@ Solving Eq.\,\eqref{eq:chi2} is performed in two steps:
     \item For a given configuration $\bf R$, the electronic Schr\"odinger equation \eqref{eq:Hsolution1} is solved, yielding the energies $E^0_l({\bf R})$ which thereby parametrically depend on $\bf R$.
     \item For each electronic quantum number $l$, Eq.\,\eqref{eq:chi2} for the nuclei is solved, where the electronic energy $E^0_l({\bf R})$ defines the effective \emph{potential energy surface}.
 \end{enumerate}
-Pictorially, the electrons move \emph{adiabatically} with the nuclei.\footnote{Born and Oppenheimer neglected $C_{ml}$ in their original work~\cite{BornOppenheimer} and later called this the \emph{adiabatic approximation}~\cite{BornHuang}. However, only the terms $C_{m \neq l}$ describe a coupling of different electronic states induced by nuclear coupling, and keeping the terms $C_{m=l}$ gives the exact potential when the electronic states are sufficiently separated,~e.\,g.,~in presence of an electronic gap~\cite{BornHuang}. Therefore the term ``adiabatic approximation'' is nowadays used when only the terms $C_{m=l}$ are kept~\cite{Marx2009}. The full BO approximation is correct to fourth order in the expansion of the full Hamiltonian in the mass parameter $\sqrt[4]{m/M}$~\cite{BornHuang}. Corrections to the forces arising from the $C_{m=l}$ term can however be expected to be much smaller~\cite{Ziman1955}.} Since we will deal with insulators and semiconductors with bandgaps providing a sufficient energetic separation between the electronic ground state $l=0$ and the first exited state $l=1$,\footnote{Thermal energy at room temperature is $\sim 25\,{\rm meV} \ll $~typical bandgap.} we will concentrate on the electronic ground state energy $E^0_0$ for the given configuration ${\bf R}$ in the following. We denote this energy as the \emph{Born-Oppenheimer potential energy},
+Pictorially, the electrons move \emph{adiabatically} with the nuclei.\footnote[][-15em]{Born and Oppenheimer neglected $C_{ml}$ in their original work~\cite{BornOppenheimer} and later called this the \emph{adiabatic approximation}~\cite{BornHuang}. However, only the terms $C_{m \neq l}$ describe transitions between different electronic states induced by nuclear coupling, and keeping the terms $C_{m=l}$ gives the exact potential when the electronic states are sufficiently separated,~e.\,g.,~in presence of an electronic gap~\CITE{BORN1951}. Therefore the term ``adiabatic approximation'' is nowadays used when only the terms $C_{m=l}$ are kept~\cite{Marx2009}. The full BO approximation is correct to fourth order in the expansion of the full Hamiltonian in the mass parameter $\sqrt[4]{m/M}$~\cite{BornHuang}. Corrections to the forces arising from the $C_{m=l}$ term can however be expected to be much smaller~\cite{Ziman1955}.} Since we will deal with insulators and semiconductors with bandgaps providing a sufficient energetic separation between the electronic ground state $l=0$ and the first exited state $l=1$,\footnote{Thermal energy at room temperature is $\sim 25\,{\rm meV} \ll $~typical bandgap.} we will concentrate on the electronic ground state energy $E^0_0$ for the given configuration ${\bf R}$ in the following. We denote this energy as the \emph{Born-Oppenheimer potential energy},
 \begin{align}
 	E^{\rm BO} ({\bf R}) \equiv E^0_0 ({\bf R})~.
 	\label{eq:E^BO}
 \end{align}
 
 \newpage
-\subsection{Density Functional Theory}
+\section{Density Functional Theory}
 \epigraph{\singlespacing \it ``It is my sense that at the present time DFT is the method of choice for systems consisting of many (\,$\gtrsim 5$) atoms and for smaller systems, when moderate accuracies are sufficient.''}{W.~Kohn, 1993}
 
 In the previous chapter, it was tacitly assumed that the electronic Schr\"odinger equation \eqref{eq:Hsolution1} yielding the effective potential for the nuclei can be solved. Finding an exact solution to this equation is, however, infeasible for more than a few electrons. We will now introduce \emph{density functional theory} (DFT) as a framework for making approximations that enable to find a first-principles electronic potential energy surface $E^{\rm BO} ({\bf R})$ for atomic systems with order of magnitudes more electrons.
@@ -172,10 +172,10 @@ where $\hat H$ is the electronic Hamiltonian given by Eq.\,\eqref{eq:H.dft.1}, $
 	Here and in the following we employ the usual convention that from the state $\Ket{\Psi}$, many-body wavefunctions are obtained via
 	\begin{align*}
 		\braket{{\bf r} | \Psi} 
-			= \Psi ({\bf r})
+			&= \Psi ({\bf r}) \\
 		\Leftrightarrow
 		\braket{{\bf r}_1, \ldots, {\bf r}_N | \Psi} 
-			= \Psi({\bf r}_1, \ldots, {\bf r}_N)~.
+			&= \Psi({\bf r}_1, \ldots, {\bf r}_N)~.
 	\end{align*}
 	Likewise we define the $\mathcal{L}^2$ scalar product as
 	$$
@@ -228,7 +228,7 @@ As $n_\Psi$ is obtained from the solution $\Ket{\Psi}$ of Eq.\,\eqref{eq:SE.dft.
 	\label{eq:dft.map.1}
 \end{align}
 
-\subsubsection{Hohenberg-Kohn}
+\subsection{Hohenberg-Kohn Theorem}
 Hohenberg and Kohn were able to show that, for non-degenerate ground states $\Psi \equiv \Psi_0$, there exists the \emph{inverse map} from ground-state densities $\mathbb N_0$ to potential functions $\mathbb V$, and that this map is bijective~\CITE{HohenbergKohn64}:\footnote{Kohn was later able to loosen the requirement of non-degeneracy~\CITE{Kohn1985}.}
 \begin{align}
 	M^{-1}: \mathbb N_0 \rightarrow \mathbb V~. 
@@ -253,7 +253,7 @@ By virtue of the Raleigh-Ritz variational principle, this functional is minimize
 \begin{align}
 	E[n] < E [n'] \quad \text{for} \quad n \neq n'~.
 \end{align}
-This also means that the true ground-state density for a given potential $v$ can be found by minimizing the total energy function, Eq.\,\eqref{eq:dft.En},
+This also means that the true ground-state density for a given potential $v (\b x)$ can be found by minimizing the total energy function, Eq.\,\eqref{eq:dft.En},
 \begin{align}
 	n = \arg \min_{n} E[n]~,
 	\label{eq:dft.n}
@@ -282,7 +282,7 @@ under the constraint of fixed particle number imposed by the Lagrange multiplier
 		\label{eq:dft.stationarity}
 \end{align}
 
-\subsubsection{Reconstructing the Born-Oppenheimer Surface}
+\subsection{Reconstructing the Born-Oppenheimer Surface}
 In the definition of the effective electronic Hamiltonian in Eq.\,\eqref{eq:H.dft.1}, we had neglected the nuclear repulsion $V^{\rm Nuc-Nuc}$ defined in Eq.\,\eqref{eq:Vnuc}. The Born-Oppenheimer potential energy surface defined in Eq.\,\eqref{eq:E^BO} therefore consists of both terms,~i.\,e.,
 \begin{align}
 	E^{\rm BO} ({\bf R}) 
@@ -290,7 +290,7 @@ In the definition of the effective electronic Hamiltonian in Eq.\,\eqref{eq:H.df
 	\label{eq:E^BO}
 \end{align}
 
-\subsection{Hellmann-Feynmann Theorem}
+\section{Hellmann-Feynmann Theorem}
 \label{sec:HellmannFeynman}
 The forces on individual atomic positions ${\bf R}_I$ are given in terms of derivatives of the Born-Oppenheimer energy, $E^{\rm BO} ({\bf R})$,
 \begin{align}
@@ -345,7 +345,7 @@ which is solely determined by the ground-state electron density $n ({\bf x})$ an
 \end{theorem}
 We note in passing that while the Hellmann-Feynman theorem is formally correct, in practice there often arise correction terms when non-complete basis sets are used that also depend on the parameter $\lambda$. The most famous correction are the so-called \emph{Pulay forces} that arise in atom centered basissets~\CITE{Pulay1969}.
 
-\subsection{Kohn-Sham Scheme}
+\section{Kohn-Sham Scheme}
 By introducing density functional theory, we have not solved the many-body problem. However, we have shifted the intricacies of this problem to a \emph{universal} functional $F[n]$ which depends on the electron density $n({\bf x})$, which is a scalar function of three coordinates, $n: \mathds R^3 \rightarrow \mathds R$, and thus entails a \emph{massive} reduction of complexity compared to working with wavefunctions, which are complex functions of $3N$ variables, $\Psi: \mathds R^{3N} \rightarrow \mathds C$.
 
 In order to proceed, we follow the original argument by Kohn and Sham~\CITE{KohnSham1965} and investigate the universal functional $F[n]$ defined in Eq.\,\eqref{eq:dft.Fn} in more detail. The definition reads
@@ -483,7 +483,7 @@ The total energy in terms of the Kohn-Sham eigenvalues $\set{\epsilon_l}$ and de
 	\label{eq:dft.KS.En}
 \end{align}
 
-\subsection{Approximations to the exchange-correlation energy}
+\section{Approximations to the exchange-correlation energy}
 \label{sec:dft.approximations}
 We are finally in position to introduce approximations to the exchange-correlation energy functional $E^{\rm xc}[n]$ from which the corresponding potential can be obtained by the functional derivative with respect to the density as expressed in Eq.\,\eqref{eq:dft.KS.veff}. Indeed, the very success of the Kohn-Sham DFT scheme probably can be traced back to the fact that simple approximations to $E^{\rm xc}[n]$ lead to reasonable results for a large class of systems. 
 
@@ -500,8 +500,9 @@ The most straighforward way to approximate $e^{\rm xc}[n] ({\bf x})$ is to repla
 		\approx e^{\rm xc}_{\rm LDA} \left( n({\bf x}) \right)~.
 	\label{eq:dft.exc.lda.1}
 \end{align}
-This approximation is called the \emph{local density approximation} (LDA), and the resulting exchange-correlation energy reads\footnote{
-	Some authors prefer to write $e^{\rm xc}(n) = n \tilde e^{\rm xc} (n)$, such that
+This approximation is called the \emph{local density approximation} (LDA), and the resulting exchange-correlation energy reads\marginnote{
+	Some authors prefer to write 
+  \mbox{$e^{\rm xc}(n) = n \tilde e^{\rm xc} (n)$}, such that
 	\begin{align*}
 		E^{\rm xc} = \int \d^3 x ~ n({\bf x}) \tilde e^{\rm xc} (n ({\bf x}))~.
 	\end{align*}}
@@ -529,7 +530,7 @@ where $e^{\rm x}_{\rm hom}(n)$ is the exchange energy density of a homogeneous e
 \CITE{[1] J. P. Perdew, J. A. Chevary, S. H. Vosko, K. A. Jackson, M. R. Pederson, D. J. Singh, and C. Fiolhais, Phys. Rev. B 46, 6671 (1992).}
 \CITE{[1] J. P. Perdew, K. Burke, and M. Ernzerhof, Phys. Rev. Lett. 77, 3865 (1996).}
 
-\subsection{Periodic Systems}
+\section{Periodic Systems}
 \label{sec:theory.periodic.1}
 So far, we did not specify the external potential $v^{\rm ext} ({\bf x})$ entering the Kohn-Sham equation \eqref{eq:dft.KS.1} beyond stating that it describes the arrangement of nuclei. For (finite) molecules and clusters, this is already sufficient and a self-consistent solution to Eq.\,\eqref{eq:dft.KS.1} can be attempted from here. For (practically infinite) bulk systems and crystals on the other hand, further statements need to be made.
 
@@ -576,7 +577,7 @@ where $u_{{\bf k} l}$ are periodic functions satisfying
 \end{align}
 and $\bf k$ is restricted to the first Brillouin zone of the reciprocal lattice.
 
-\subsubsection{Born-von Karman Boundary Conditions}
+\subsection{Born-von Karman Boundary Conditions}
 To ensure normalizability of the functions $\psi_{{\bf k}l}$, one additionally imposes the \emph{Born-von Karman boundary conditions}
 \begin{align}
 	\psi_{{\bf k}l} ({\bf x} + N_i {\bf a}_i) 
@@ -611,7 +612,7 @@ where $\varepsilon^{ijk}$ denotes the Levi-Civita symbol enforcing the correct o
 \end{align}
 The space spanned by the $\set{{\bf b}_i}$,~i.\,e.,~the space containing all unique values of $\b k$, is the unit cell of the reciprocal lattice. Alternatively, one chooses those equivalent $\bf k_m$ which are closest to the $\bf 0$,~i.\,e.,~the Brillouin zone. The values of $\bf k$ given by Eq.\,\eqref{eq:dft.Bloch.k_m} are those sampled in real-space simulation in a box of the given size,~i.\,e.,~the \emph{Born-von Karman cell}.
 
-\subsection{Conclusion}
+\section{Conclusion}
 The concept of density functional theory in the Kohn-Sham scheme (KS-DFT) has been presented starting from the general many-body Hamiltonian given in Eq.\,\eqref{eq:Hamiltonian}. Besides the Born-Oppenheimer (BO) approximation which decouples electron and nuclear dynamics, KS-DFT offers a formally exact way of computing the total energy of the electronic ground state from first principles by solving Schr\"odinger-like single-particle equations,~i.\,e.,~the KS equations, for an auxiliary set of functions,~i.\,e.,~the KS-orbitals. In order to solve the KS equations one needs to approximate the exchange-correlation energy, $E^{\rm xc} [n]$. In Sec.\,\ref{sec:dft.approximations} we have introduced the most common approaches to approximate $E^{\rm xc} [n]$,~i.\,e.,~the local-density approximation (LDA), as well as the generalized-gradient approximation (GGA).
 
 Within the BO approximation, the BO potential-energy surface determines all dynamical properties of the nuclear system, for example heat transport. We discuss dynamical properties of this kind in more detail in the next section.
