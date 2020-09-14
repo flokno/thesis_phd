@@ -591,8 +591,39 @@ where the  canonical partition sum $\mathcal{Z}$ normalizes $f_\beta$. The canon
 	\braket{A}_\beta = \int \d \Gamma ~ A(\Gamma) f_\beta(\Gamma)~.
 \end{align}
 
-\REM{Langevin eq.} \cite[p.\,580, p.\,591]{Tuckerman}
+As we have seen earlier, a time-independent Hamiltonian generates energy-preserving dynamics via the equations of motion given in Eq.\,\eqref{eq:stat.eom}. To perform a simulation at non-constant energy, the coupling to a thermal bath therefore has to be incorporated explicitly into the equations of motion. One of the many ways to achieve this is via the \emph{Langevin equation}~\cite{Vanden2006},
+\marginnote{
+	% \normalsize
+	The stochastic force is given by:
+	\begin{align*}
+	\b F^{\rm stochastic}_I (t) 
+	&= \sqrt{2 k_{\rm B} T M_I \gamma} \eta (t)~, \\
+	\braket{\eta (t) \eta (0)}
+	& = \delta (t)~.
+	\end{align*}
+	It replenishes the kinetic energy dissipated by the friction proportinoal to $\gamma$, see discussion in Ref.\,\cite[p.\,328]{Phillies2012}.
+}
+\begin{align}
+	\dot{\b P}_I (t) 
+		&= \b F_I (t) - \gamma \b P_I (t) + \b F^{\rm stochastic}_I (t)~.
+	\label{eq:stat.Langevin}
+\end{align}
+This equation describes a perturbation of the nuclei induced by a velocity-dependent friction proportional to a constant $\gamma$,%\marginnote{From Eq.\,\eqref{eq:stat.Langevin} follows that $\gamma$ has the unit of inverse time.}
+and a stochastic force proportional to a white-noise kernel $\eta (t)$. With the modified equation of motion in terms of the stochastic force, an ergodic hypothesis for the canonical ensemble can be stated,
+% 
+\begin{align}
+	\braket{A}_\beta
+		= \left. \lim\limits_{t \to \infty} \frac{1}{t} \int_0^t \d t' ~ A {\bm (} \Gamma(t') {\bm )}
+			\right.~,
+	\label{eq:time.average.canonical}
+\end{align}
+where the time evolution of the system is given by Eq.\,\eqref{eq:stat.Langevin} and the friction constant is chosen such that the expectation value $\braket{A}_\beta$ is insensitive to the chosen value.
 
+\REM{The Langevin equation can be used to thermalize a system and generate a canonical ensemble starting from some initial configuration $\b R^0$} \cite[p.\,590]{Tuckerman}
+\REM{Plot: Temperature evolution and velocity distribution.}
 
 \section{Finite Temperature Equations of State and Lattice Expansion}
-\subsection{Mode Projection}
+
+
+
+\section{Mode Projection}
