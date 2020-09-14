@@ -509,6 +509,8 @@ Let us now set $f(x) \hat = -\partial \mathcal V / \partial {\bf R}_I$, then ano
 \REM{Maybe make chapter?}
 In this work, we use two thermodynamic ensembles: the microcanonical, $NVE$ for short, where the total energy $E$ of the system is conserved, and the canonical ($NVT$), where the system can be viewed as coupled to a bath of temperature $T$. The latter is mimicking more realistic experimental conditions, where usually the temperature and not the total energy of the system can be controlled. Technically, experiments are performed rather at constants pressure $p$ instead of constant volume, and the correct ensemble to describe such a situation is the isothermal-isobaric one commonly denoted as $NPT$. In practice however, the canonical ensemble is easier to simulate and is a good approximation to the $NPT$ ensemble when the system size is not too small~\cite[p.\,134]{Tuckerman}
 
+\REM{Birdsview Phillies?}
+
 \subsection{Microcanonical Ensemble}
 The microcanonical ensemble is characterized by three conserved extensive quantities: particle number $N$, system volume $V$, and total energy $E$. The total energy of a given microstate,~i.\,e.,~the configuration of particles and their momenta represented by the phase-space point $\Gamma = \set{\b R, \b P}$, is given by the Hamiltonian of the system, $H (\Gamma)$. 
 
@@ -622,8 +624,57 @@ where the time evolution of the system is given by Eq.\,\eqref{eq:stat.Langevin}
 \REM{The Langevin equation can be used to thermalize a system and generate a canonical ensemble starting from some initial configuration $\b R^0$} \cite[p.\,590]{Tuckerman}
 \REM{Plot: Temperature evolution and velocity distribution.}
 
-\section{Finite Temperature Equations of State and Lattice Expansion}
+\section{Lattice Expansion}
+\REM{lattice TRM here?}
+\newthought{At finite temperatures},\marginnote{The volume expansion is usually measured in terms of the \emph{thermal expansion coefficient} $\alpha (T)$~\cite{Kittel1969}
+	\begin{align}
+	\alpha (T) = \frac{1}{3 V} \frac{\partial V (T)}{\partial T}~.
+	\label{eq:lattice.expansion.coefficient}
+	\end{align}
+}
+the nuclear motion results in dynamical pressure $p(T)$ and the lattice reacts by deforming,
+\begin{align}
+	a (T) = \bm ( \mathds 1 + \varepsilon (T) \bm ) a_0~,
+	\label{eq:lattice.T}
+\end{align}
+where $a_0$ is the 0\,K static lattice matrix\footnote[][0em]{Lattice matrix: $$a = \begin{pmatrix} \b a_1, \b a_2, \b a_3 \end{pmatrix}~,$$ where $\set{\b a_i}$ are the lattice vectors.}, and $a (T)$ is the lattice at finite temperature given in terms of a \emph{strain transformation} $\varepsilon (T)$. 
+The energy change $\d W$ of a system subject to an infinitesimal strain deformation $\varepsilon$ is defined as
+\begin{align}
+\d W = \sigma_{\alpha}^{~\beta} \d \varepsilon^{\alpha}_{~\beta}~,
+\label{eq:stress.strain}
+\end{align}
+where $\sigma$ is the \emph{stress tensor} of the system. The lattice $a(T)$ in thermal equilibrium will therefore be the lattice that minimizes the stress $\sigma$ in Eq.\,\eqref{eq:stress.strain}. Depending on the crystal symmetry~\cite{Nye1985}, the strain tensor $\varepsilon$ has up to six independent values. Equation\,\eqref{eq:stress.strain} therefore poses a six-dimensional optimization problem at a given temperature~$T$ which can be solved for example by coupling the system to a barostat and performing an $NPT$ simulation~\CITE{NPT}. In the language of the previous chapter, the lattice $a(T)$ is then given as a time or ensemble average $\braket{a}_{(p, T)}$ at thermodynamic conditions $(p, T)$. In practice however, this approach is quite inefficient and suffers from large noise, especially in the system sizes typically available to \emph{ab initio} MD simulations~\CITE{ai NPT}.
 
+\newthought{An approximate solution} to the six-dimensional optimization problem of finding the finite temperature lattice $a (T)$ can be  found by the following rationale: We assume that the thermodynamic pressure at a given volume $V$ and temperature $T$ is given as
+\begin{align}
+	p (V, T) \approx \frac{N k_{\rm B} T}{V} + p_{\rm pot} (V_0, T) + p_{\rm int}(V)~,
+	\label{eq:eos.p}
+\end{align}
+where $p_{\rm kin} (T) = N k_{\rm B} T / V$ is the kinetic pressure, and $p_{\rm pot} (V_0, T)$ is the potential part of the pressure in the system at reference volume $V_0$ which stems from the nuclear interaction $\mathcal V (\b R)$~\cite{Hansen1990}. The last term, $p_{\rm int} (V)$, is an internal pressure induced by the volume change. We assume that $p_{\rm int} (V)$ mainly stems from the lattice and is not temperature dependent. It can therefore be obtained from an equation of state parametrized at 0\,K, for example the \emph{Vinet equation}~\cite{Vinet1987}:
+\begin{align}
+	p_{\rm int} (V) 
+		&= \frac{3 B_0}{X^2} (1-X) {\rm e}^{\eta (1-X)} \label{eq:p.Vinet} \quad\text{with} \\ 
+	X &= \left[\frac{V}{V_0}\right]^{\frac{1}{3}}
+		\quad\text{and}\quad
+	\eta 
+		= \frac{3}{2} \left(B_0' - 1 \right)~,
+\end{align}
+where $V_0$ is the volume, $B_0$ is the bulk modulus, and $B_0' = \partial B_0 / \partial p$ is the isothermal pressure derivative of the bulk modulus. All these three parameters are obtained for the static lattice and we neglect their temperature dependence. Once the full parametrization of Eq.\,\eqref{eq:eos.p} is known, the temperature-dependent volume $V_{\rm min} (T)$ is found by requiring zero pressure. The resulting pressure $p_{\rm int} (V_{\rm min})$ can be used to find the static reference lattice $a(T)$ by optimizing the geometry while applying the external pressure $p_{\rm relax} = - p_{\rm int} (V_{\rm min})$. The lattice $a (T)$ obtained this way will then generate the static pressure contribution $p_{\rm int}$ which compensates the dynamical contributions stemming from kinetic and potential energy.
+
+\newthought{The procedure goes as follows}:
+\begin{enumerate}
+	\item To parametrize $p_{\rm int} (V)$, calculate a $p(V)$ curve for different volumes\footnote{For non-cubic systems or systems with internal degrees of freedom, use a set of external pressures $p_{\rm relax}$ to obtain a set of reference structures at different volumes $V_{p_{\rm relax}}$ by geometry optimization.} and fit the Vinet equation of state given by Eq.\,\eqref{eq:p.Vinet} to obtain $(V_0, B_0, B_0')$.
+	\item Perform MD simulation at $V_0$ and target temperature $T$ until pressure $p_{\rm pot} (V_0, T)$ is sufficiently  converged.
+	\item Minimize Eq.\,\eqref{eq:eos.p} with respect to volume to find $V_{\rm min} = \arg \min_V p (V, T)$.
+	\item Predict pressure $p_{\rm relax} = - p_{\rm int} (V_{\rm min})$ and obtain a reference structure of correct volume $V_{\rm min}$ by applying this pressure during a geometry optimization, see Fig.\,\ref{fig:lattice.expansion}. The lattice of this structure will satisfy $\det a(T) = V_{\rm min}$.
+\end{enumerate}
+\begin{marginfigure}
+	\includegraphics[width=\textwidth]{./sketches/lattice_expansion.jpg}
+	\caption{Determination of relaxation pressure to obtain lattice at finite temperature. Dots denote volumes used to parametrize Eq.\,\eqref{eq:p.Vinet}.}
+	\label{fig:lattice.expansion}
+\end{marginfigure}
+
+\newthought{After the lattice $a (T)$ is obtained}, it should be verified that the pressure $p (V_{\rm min}, T)$ is indeed minimized. If a significant residual pressure $p_{\rm residual}$ persists it can be added to the pressure used for relaxation until self consistence is reached.
 
 
 \section{Mode Projection}
