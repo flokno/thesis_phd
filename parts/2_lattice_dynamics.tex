@@ -1,6 +1,8 @@
-In the previous chapter, we have seen how the many-body problem can be decoupled into an electronic problem given by Eq.\,\eqref{eq:Hsolution1}, which can be solved in the framework of DFT, and a nuclear problem given by Eq.\,\eqref{eq:chi2} that describes the dynamical properties of the nuclei. This was achieved by means of the Born-Oppenheimer approximation where electron-nucleus interactions beyond a parametric dependence on each other is neglected~\cite{BornOppenheimer}.
+In the previous chapter, we have seen how the many-body problem can be decoupled into an electronic problem given by Eq.\,\eqref{eq:Hsolution1}, which can be solved in the framework of DFT, and a nuclear problem given by Eq.\,\eqref{eq:chi2} that describes the dynamical properties of the nuclei. This was achieved by means of the Born-Oppenheimer approximation where electron-nucleus interactions beyond a parametric dependence on each other are neglected~\cite{BornOppenheimer}.
 
-We will now introduce two approximations to progress in the description of the nuclear dynamics. First, the \emph{harmonic approximation} in which the nuclear Schr\"odinger equation is solved for an approximated potential. Second, we treat the nuclei as particles, but on the full, non-truncated Born-Oppenheimer potential. This will lead to the formulation of \emph{ab initio molecular dynamics} (aiMD). As no electron will appear anymore, $N \equiv N_{\rm Nuc}$ will henceforth denote the number of nuclei in the system of interest, and we denote the Born-Oppenheimer potential simply as \emph{the} potential, $\mathcal V ({\bf R})$.
+\newthought{We will now approach} the description of the nuclear dynamics from two sides: First, we treat the nuclei as \emph{classical} particles on the full, non-truncated Born-Oppenheimer potential. This will lead to the formulation of \emph{ab initio molecular dynamics} (aiMD). 
+Second, we introduce the \emph{harmonic approximation} in which the nuclear Schr\"odinger equation is solved for an approximated potential.
+As no electron will appear anymore, $N \equiv N_{\rm Nuc}$ will henceforth denote the number of nuclei in the system of interest, and we denote the Born-Oppenheimer potential simply as \emph{the} potential, $\mathcal V ({\bf R})$.
 
 We begin by recalling the Schr\"odinger equation for the nuclear wavefunctions $\chi_s ({\bf R})$ initially defined in Eq.\,\eqref{eq:chi2},
 \begin{align}
@@ -16,8 +18,96 @@ where
 \end{align}
 is the nuclear kinetic-energy operator as before.
 
+
+\section{Classical Limit}
+The classical limit of the nuclear Schr\"odinger equation~\eqref{eq:BOSE} is usually performed by writing the nuclear wavefunction $\chi_s ({\bf R}, t)$ in terms of a real amplitude $A_s({\bf R}, t)$ and a \emph{classical action function} $S_s({\bf R}, t)$~\cite{Dirac1981,Landau2013,Marx2009}
+\begin{align}
+\chi_s({\bf R}, t) = A_s({\bf R}, t) \, {\rm e}^{\frac{\im}{\hbar} S_s({\bf R}, t)}~.
+\label{eq:class.1}
+\end{align}
+The Schr\"odinger equation then yields a set of differential equations for $A_s$ and $S_s$ that, in the limit $\hbar \to 0$, go over to a \emph{Hamilton-Jacobi} equation for the action $S_s$,
+\begin{align}
+\frac{\partial S_s}{\partial t} + \mathcal H \left({\bf R}, {\bf P}\right)
+= 0~,
+\label{eq:HamiltonJacobi}
+\end{align}
+where ${\bf P} = ({\bf P}_1, \ldots) \equiv ({\bf \nabla}_1 S_s, \ldots)$ denotes the conjugate momenta and $\mathcal H$ is the \emph{classical} Hamilton function\footnote{We use the terms \emph{Hamilton function} and \emph{Hamiltonian} interchangeably in the following.} corresponding the to the operator in Eq.\,\eqref{eq:BOSE}, from which the equations of motion for the nuclei can be obtained:
+\begin{align}
+\dot{{\bf P}}_I 
+= -\frac{\partial \mathcal H}{\partial {\bf R}_I}
+\quad\implies\quad M_I \ddot{\bf R}_I
+= -\frac{\partial \mathcal V}{\partial {\bf R}_I}~.
+% \equiv - {\bf F}_I~.
+\end{align}
+The negative gradient of the Born-Oppenheimer potential, 
+$-\partial \mathcal V / \partial {\bf R}_I$ is the force ${\bf F}_I$ acting on atom $I$ which can be obtained via the Hellmann-Feynmann theorem,~cf.~Sec.\,\ref{sec:HellmannFeynman}.
+
+\newthought{An alternative viewpoint} that is more instructive can be taken by invoking the \emph{Ehrenfest theorem}~\cite{Ehrenfest1927,Basdevant2007}. The statement is that
+\begin{align}
+\frac{\d}{\d t} \left\langle {\bf P}_I \right\rangle_{\chi_s}
+= \left\langle
+- \frac{\partial \mathcal{V}}{\partial {\bf R}_I}
+\right\rangle_{\chi_s}~,
+\label{eq:ehrenfest.de1}
+\end{align}
+where $\langle \cdot \rangle_{\chi_s}$ denotes an expectation value taken with respect to the state $\chi_s$. This expression differs only slightly from the classical counterpart, which would read
+\begin{align}
+\frac{\d}{\d t} \left\langle {\bf P}_I \right\rangle
+= \left.
+- \frac{\partial \mathcal{V}}{\partial {\bf R}_I}
+\right\vert_{{\bf R} = \langle {\bf R} \rangle}~.
+\label{eq:ehrenfest.de2}
+\end{align}
+The difference comes from the fact that, in quantum mechanics, the expectation value of a function of an observable does not equal the function of its expectation. In mathematical terms, we have
+\begin{align}
+\delta f  \equiv 
+f \bm ( \langle x \rangle \bm{)} 
+- 
+\bm{\langle} f (x) \bm{\rangle}
+\neq 0
+~,
+\label{eq:ehrenfest.delta1}
+\end{align}
+where $x = {\bf R}_I$ denotes the space coordinate for notional simplicity, $f$ is some function of the observable $x$, and $\delta f$ measures the difference between the classical and the quantum expectation value. Ehrenfest's argument is that this difference becomes negligible when the state is sufficiently peaked around some value $x_0$. Expanding $f$ around the expectation value of $x$ denoted by $x_0 \equiv \langle x \rangle$, we have
+\begin{align}
+f(x) = f \bm ( \langle x \rangle \bm{)}  
++ (x - \langle x \rangle) \, f' \bm ( \langle x \rangle \bm{)}
++ \frac{1}{2} (x - \langle x \rangle)^2 \, f'' \bm ( \langle x \rangle \bm{)}
++ \cdots~.
+\label{eq:ehrenfest.f2}
+\end{align}
+It follows that the $f'$ term vanishes when the expectation value is taken, and
+\begin{align}
+\langle f(x) \rangle 
+= f \bm ( \langle x \rangle \bm{)}  
++ \frac{1}{2} \Delta x^2 f'' \bm ( \langle x \rangle \bm{)}
++ \cdots~,
+\label{eq:ehrenfest.f3}
+\end{align}
+where $\Delta x^2 = \bm{\langle} (x - \langle x \rangle)^2 \bm{\rangle}$ measures the variance of the underlying distribution,~i.\,e.~the width of the wavepacket. The relative error between the classical and quantum expectation value is readily computed to be proportional to the variance $\Delta x^2$,
+\begin{align}
+\left\lvert \frac{\delta f}{f \bm ( \langle x \rangle \bm{)}} \right\rvert
+= \frac{1}{2} \Delta x^2 \left\lvert \frac{f'' \bm ( \langle x \rangle \bm{)}}{f \bm ( \langle x \rangle \bm{)}} \right\rvert
++ \mathcal{O}(\Delta x^3)~.
+\label{eq:ehrenfest.delta2}
+\end{align}
+This estimation holds in general for any observable $f$.
+By crudely estimating the dimension of the wavepacket in terms of the thermal de Broglie-wavelength, we find
+\begin{align}
+\Delta x^2 
+\sim \left( \frac{h}{P} \right)^2
+\sim \frac{h^2}{MT}~,
+\label{eq:ehrenfest:dimension}
+\end{align}
+where $h$ is Planck's constants, $M$ is the atomic mass, and $T$ is temperature. This estimate gives support to the intuitive assumption that we can expect the classical limit to work better the heavier the atoms and the higher the temperature.
+Let us now set $f(x) \hat = -\partial \mathcal V / \partial {\bf R}_I$, then another important conclusion can be drawn from Eq.\,\eqref{eq:ehrenfest.delta2}: For a harmonic potential $\mathcal V ({\bf R}) = \mathcal V^{(2)} ({\bf R})$, where derivatives higher than second order vanish, the classical and quantum mechanical expectation values \emph{coincide}. The quantum mechanical expectation value of position will therefore evolve in the same time-periodic fashion as a classical particle in a harmonic well.
+
+\REM{this approach can only be validated by computing observables and compare the results. One can safely say that this approach has been used successfully in a plethora of studies, while additional care must be taken at low temperature and/or systems with light atoms, especially hydrogen-bonded systems~\CITE{MD-Review?,MarklandCeriotti,Litman,pHexperiment}.}
+
+\newpage
+
 \section{Harmonic Approximation}
-The Born-Oppenheimer potential $\mathcal V ({\bf R})$ appearing in Eq.\,\eqref{eq:BOSE} is an ordinary function of the\,\footnote{Remember $N \equiv N_{\rm Nuc}$.} $3 N$ coordinates ${\bf R} = ({\bf R}_1, \ldots, {\bf R}_{N})$ and therefore can be expanded as a Taylor series in displacements ${\bf U} \equiv \Delta {\bf R}$ about a given configuration ${\bf R}^0$,~i.\,e.,
+The Born-Oppenheimer potential $\mathcal V ({\bf R})$ appearing in Eq.\,\eqref{eq:BOSE} is an ordinary function of the\marginnote{Remember $N \equiv N_{\rm Nuc}$.} $3 N$ coordinates ${\bf R} = ({\bf R}_1, \ldots, {\bf R}_{N})$ and therefore can be expanded as a Taylor series in displacements ${\bf U} \equiv \Delta {\bf R}$ about a given configuration ${\bf R}^0$,~i.\,e.,
 \begin{align}
 \begin{split}
   \mathcal V ({\bf R} = {\bf R}^0 + {\bf U})
@@ -36,14 +126,14 @@ The Born-Oppenheimer potential $\mathcal V ({\bf R})$ appearing in Eq.\,\eqref{e
     &+\frac{1}{3!}\cdots ~,
 \end{split}
 \end{align}
-where the expansion coefficients are called \emph{force constants}. In particular, we have
+where the expansion coefficients are called \emph{force constants}. In particular, we have the \emph{harmonic force constants}
 \begin{align}
   % \Phi_{\alpha, \beta}^{I, J}
   \Phi_{I \alpha, J \beta}
-  \equiv \left.\frac{\partial^{2} \mathcal{V}(\mathbf{R})}{\partial R_{I}^{\alpha} \partial R_{J}^{\beta}}\right|_{\mathbf{R}^{0}}~,
+  \equiv \left.\frac{\partial^{2} \mathcal{V}(\mathbf{R})}{\partial R_{I}^{\alpha} \partial R_{J}^{\beta}}\right|_{\mathbf{R}^{0}}~.
   \label{eq:FC2}
 \end{align}
-i.\,e.,~the \emph{harmonic force constants}. The harmonic approximation is typically used to assess dynamical properties of a system in some confined phase-space region close a (local) minimum of the potential-energy surface. It is therefore customary to start the investigation from the ground state of the system,~i.\,e.,~a local minimum configuration ${\bf R}^0$ characterized by
+The harmonic approximation is typically used to assess dynamical properties of a system in some confined phase-space region close a (local) minimum of the potential-energy surface. It is therefore customary to start the investigation from the ground state of the system,~i.\,e.,~a local minimum configuration ${\bf R}^0$ characterized by
 \begin{align}
 	\left. \frac{\partial V({\bf R})}{\partial R^\alpha_I} 
 	\right\vert_{{\bf R}^0} 
@@ -55,9 +145,9 @@ i.\,e.,~the \emph{harmonic force constants}. The harmonic approximation is typic
 		&~>~ 0 \quad\text{for all possible}\quad \set{{\bf U}_I}~.
 	\label{eq:ha.positive}
 \end{align}
-The condition in Eq.\,\eqref{eq:ha.positive} is fulfilled if the harmonic force constants $\Phi_{\alpha, \beta}^{I, J}$ are positive-definite.
+The condition in Eq.\,\eqref{eq:ha.positive} is satisfied when the harmonic force constants $\Phi_{I \alpha, J \beta}$ are positive-definite. It needs to be fulfilled to make the Hamiltonian bounded.
 
-We progress by defining \emph{mass-reduced coordinates} for the displacements
+\newthought{We progress by defining} \emph{mass-reduced coordinates} for the displacements,
 \begin{align}
 	{\bf u}_I 
 		&\equiv \sqrt{M_I} {\bf U}_I~, 
@@ -85,12 +175,12 @@ Using these coordinates, the Hamiltonian assumes the form
 	\end{split}
 	\label{eq:ha.H1}
 \end{align}
-As required earlier, the dynamical matrix $\rm D$ is a positive definite matrix. Furthermore, we see from Eq.\,\eqref{eq:FC2} that
+\newthought{As required earlier}, the dynamical matrix $\rm D$ is a positive definite matrix. Furthermore, we see from Eq.\,\eqref{eq:FC2} that $\rm D$ is symmetric in the $3N$ coordinates $(I, \alpha)$,
 \begin{align}
-	D_{I \alpha, J \beta} = D_{J \beta, I \alpha}~,
+	D_{I \alpha, J \beta} = D_{J \beta, I \alpha}~.
 	\label{eq:D.symmetric}
 \end{align}
-i.\,e.,~$\rm D$ is a symmetric matrix in the $3N$ coordinates $(I, \alpha)$. The eigenvalues of $\rm D$ will therefore be real and positive, and the eigenvectors will be real and orthogonal. We denote the eigenvalues as $\omega_s^2$ and the normalized eigenvectors as ${\bf e}_s$, where $s$ is the \emph{mode} label. $\omega_s$ will have the unit of a frequency and  will be called \emph{eigenfrequency} in the following. The dynamical matrix elements can be rewritten in therms of the eigenvectors and eigenvalues as
+The eigenvalues of $\rm D$ will therefore be real and positive, and the eigenvectors will be real and orthogonal. We denote the eigenvalues as $\omega_s^2$ and the normalized eigenvectors as ${\bf e}_s$, where $s$ is the \emph{mode} label. $\omega_s$ will have the unit of a frequency and  will be called \emph{eigenfrequency} in the following. The dynamical matrix elements can be rewritten in therms of the eigenvectors and eigenvalues as
 \begin{subequations}
 \begin{align}
 	\sum_{J \beta}
@@ -168,10 +258,10 @@ As a prerequisite for $\mathcal V ({\bf R})$ to be translationally invariant, we
 \begin{align}
 	P_{\bf L} : I \to I' \quad\text{such that}\quad
 	{\bf R}^{0 \prime}_{I}
-		= {\bf R}^{0}_{I'}~,
+		= {\bf R}^{0}_{I'}~.
 	\label{eq:translation.permutation}
 \end{align}
-i.\,e.,~the configurations ${\bf R}^{0 \prime}_{I}$ and ${\bf R}^{0}_{I}$ are indistinguishable.\,\footnote{This requirement is obviously not fulfilled for molecules, where rigidly shifting all atoms can by no means induce a permutation map between atoms.} 
+This statement is equivalent to requiring that the configurations ${\bf R}^{0 \prime}_{I}$ and ${\bf R}^{0}_{I}$ are indistinguishable.\footnote{This requirement is obviously not fulfilled for molecules, where rigidly shifting all atoms can by no means induce a permutation map between atoms.} 
 The final requirement for translational invariance of the potential is that the potential energy for \emph{any} configuration differing by a Bravais vector is unchanged:
 \begin{align}
 %	{\bf R}^{0 \prime}
@@ -210,8 +300,8 @@ Second, the harmonic force constants $\Phi_{I \alpha, J \beta}$ can be written a
 \end{align}
 where $\b M$ again denotes an arbitrary Bravais vector. Using this translational invariance, we can Fourier transform the dynamical matrix defined in Eq.\,\eqref{eq:D},
 \begin{align}
-	{\rm D}_{i \alpha, j \beta} (\b q) 
-		= \sum_{\b L} {\rm e}^{- \im \b q \cdot \b L} {\rm D}_{i \b 0 \alpha, j \b L \beta}
+	{D}_{i \alpha, j \beta} (\b q) 
+		= \sum_{\b L} {\rm e}^{- \im \b q \cdot \b L} {D}_{i \b 0 \alpha, j \b L \beta}
 	\label{eq:D(q)}
 \end{align}
 where we restrict the values of $\b q$ to reside in the first Brillouin zone, thereby transforming the $3N \times 3N$ matrix ${\rm D}_{IJ}$ to one $3n \times 3n$ matrix ${\rm D}_{ij} (\bf q)$ for each~$\b q$, where $n$ is the number of atoms in the primitive unit cell.
@@ -219,7 +309,7 @@ where we restrict the values of $\b q$ to reside in the first Brillouin zone, th
 \subsection{Cyclic Boundary Conditions and Supercell Approximation}
 In the previous section, we did not specify the system beyond requiring periodic boundary conditions, and implicitly assumed an infinite crystal in the limit $N \to \infty$ without boundaries. In practice we introduce Born-von Karman cyclic boundary conditions~\cite{born2013atomtheorie}, as already done in Sec.\,\ref{sec:theory.periodic.1} for the description of electronic states, but reintroduce them here in a slightly more general fashion.
 
-We define the boundary conditions for the nuclear problem such that
+\newthought{We define the boundary conditions} for the nuclear problem such that
 \begin{align}
 	\b R_I + S^i \b A_i = \b R_I \quad\text{for}\quad S^i \in \mathds{Z}~,
 	\label{eq:sc.1}
@@ -254,9 +344,9 @@ so that the dynamical matrix in Eq.\,\eqref{eq:D(q)} can be written as a sum ove
 %	\label{eq:D^S(q).1}
 %\end{align}
 \begin{align}
-	{\rm D}_{i \alpha, j \beta} (\b q_{\bf m}) 	
+	{D}_{i \alpha, j \beta} (\b q_{\bf m}) 	
 		&= %\frac{N}{N_{\rm sc}} 
-	\sum_{\b L \in \mathds V_{\rm sc}} {\rm e}^{- \im \b q_{\bf m} \cdot \b L} {\rm D}_{i \b 0 \alpha, j \b L \beta}~.
+	\sum_{\b L \in \mathds V_{\rm sc}} {\rm e}^{- \im \b q_{\bf m} \cdot \b L} {D}_{i \b 0 \alpha, j \b L \beta}~,
 	\label{eq:D^S(q).2}
 \end{align}
 for $\b q_{\b m}$ that fulfill
@@ -306,30 +396,29 @@ which also contains the lattice points at the positive boundary of the supercell
 	\caption{Depiction of square supercells with lattice points in the range $[-0.5 A, 0.5 A)$ (bullets $\bullet$), and extended lattice points at the supercell boundary (empty bullets $\circ$), where $A$ is the edge length of the supercell. Blue arrows denote the unit cell vectors, black arrows denote the supercell vectors.}
 	\label{fig:sketch_supercells}
 \end{figure}
-These lattice points are included in the Fourier series with an appropriate weight $w_{\b L}$ that accounts for double counting of lattice points that are separated by a linear combination of supercell lattice vectors~\cite{Parlinski1997}. Furthermore, we use a minimal image convention (MIC) between the atoms $(i, \b 0)$ and $(j, \b L)$,~i.\,e.,~for each pair we use an equivalent lattice point $\b L'$ within the extended supercell which depends on $(i, j, \b L)$ such that
+These lattice points are included in the Fourier series with an appropriate weight $w_{\b L}$ that accounts for double counting of lattice points that are separated by a linear combination of supercell lattice vectors~\cite{Parlinski1997}. Furthermore, we use a minimal image convention (MIC) between the atoms $(i, \b 0)$ and $(j, \b L)$: For each pair, we use an equivalent lattice point $\b L'$ within the extended supercell which depends on $(i, j, \b L)$ such that
 \begin{align}
-	- \b R_{i \b 0 } + \b R_{j \b 0} + \b L' \in V_{\rm sc}^{\rm ext}~.
+	- \b R_{i \b 0 } + \b R_{j \b 0} + \b L' \in \mathds V_{\rm sc}^{\rm ext}~.
 	\label{eq:L'}
 \end{align}
 In total we define
 \begin{align}
-	{\rm D}_{i \alpha, j \beta} (\b q) 	
+	{D}_{i \alpha, j \beta} (\b q) 	
 		&= %\frac{N}{N_{\rm sc}} 
 		\sum_{\b L \in \mathds V_{\rm sc}^{\rm ext}} 
 			w_{\b L}
-		{\rm e}^{- \im \b q \cdot \b L'} {\rm D}_{i \b 0 \alpha, j \b L \beta}~.
+		{\rm e}^{- \im \b q \cdot \b L'} {D}_{i \b 0 \alpha, j \b L \beta}~.
 	\label{eq:D_Parlinski}
 \end{align}
-We note that the dynamical matrix elements defined by Eq.\,\eqref{eq:D_Parlinski} differ from the ones found in Ref.~\cite{Parlinski1997} by a phase factor ${\rm e}^{\im \b q \cdot (\b R_i^0 - \b R_j^0)}$, which is typical when the discussion is performed from a lattice-wave ansatz to solve the equations of motion~\cite[p. 298]{BornHuang}.
-
-For each $\b q$, ${\rm D} (\b q)$ is a hermitian $3n \times 3n$ matrix in the indices $(i \alpha, j \beta)$ and will therefore yield $3n$ real eigenvalues and $3n$ complex, orthogonal eigenvectors, which denote in accordance with Eq.\,\eqref{eq:sum_D_IJ}
+For each $\b q$, ${\rm D} (\b q)$ is a hermitian $3n \times 3n$ matrix in the indices $(i \alpha, j \beta)$ and will therefore yield $3n$ real eigenvalues and $3n$ complex, orthogonal eigenvectors, which we denote in accordance with Eq.\,\eqref{eq:sum_D_IJ} as
 \begin{align}
-\sum_{j \beta} {\rm D}_{i \alpha, j \beta} (\b q) e_{j \beta} (\b q , b)
+\sum_{j \beta} {D}_{i \alpha, j \beta} (\b q) e_{j \beta} (\b q , b)
 = \omega^2 \, (\b q, b) e_{i \alpha} (\b q , b)~,
 \label{eq:D_ij(q)w}
 \end{align}
-where the \emph{band index} $b$ is used to discern the $3n$ \emph{branches} at each $\b q$. Using the combined index $s = (\b q, b)$, the notation becomes similar to the non-periodic case with $3N_{\rm sc} N_{\rm uc}$ degrees of freedom, only that the eigenvectors $\b e_{s = (\b q, n)}$ can be complex valued instead of strictly real.
-\REM{This is Born conventions. Togo and Parlinski use extra phase factor ${\rm e}^{\im \b q \cdot (\b R_i^0 - \b R_j^0)}$ that alters the eigenvectors but not the frequencies.}
+where the \emph{band index} $b$ is used to discern the $3n$ \emph{branches} at each $\b q$. Using the combined index $s = (\b q, b)$, the notation becomes similar to the non-periodic case with $3N_{\rm sc} N_{\rm uc}$ degrees of freedom, only that the eigenvectors $\b e_{s = (\b q, n)}$ can be complex-valued instead of strictly real.
+
+\newthought{We note that the dynamical matrix elements} defined by Eq.\,\eqref{eq:D_Parlinski} differ from the ones found in Ref.~\cite{Parlinski1997} by a phase factor ${\rm e}^{\im \b q \cdot (\b R_i^0 - \b R_j^0)}$. The phase factor however does not affect the eigenfrequencies. It typically arises when the discussion is performed from a lattice-wave ansatz to solve the equations of motion~\cite[p. 298]{BornHuang}.
 
 \subsection{Supercell Convergence and Ledermann's Theorem}
 
@@ -339,8 +428,10 @@ where the \emph{band index} $b$ is used to discern the $3n$ \emph{branches} at e
 
 \section{Mode Projection}
 
+\newpage
+
 \section{Finite Differences}
-The force constants can be obtained from first-order derivatives of the potential-energy surface,~i.\,e.,~the forces, by rewriting the second derivative in terms of a finite difference expression,
+The force constants $\Phi$ can be obtained from first-order derivatives of the potential-energy surface,~i.\,e.,~the forces, by rewriting the second derivative in terms of a finite difference expression,
 \begin{align}
 	\Phi_{I \alpha, J \beta}
 		= \left.\frac{\partial^{2} \mathcal{V}(\mathbf{R})}{\partial R_{I}^{\alpha} \partial R_{J}^{\beta}}\right|_{\mathbf{R}^{0}}
@@ -350,15 +441,15 @@ The force constants can be obtained from first-order derivatives of the potentia
 		~.
 \label{eq:FC2_finite}
 \end{align}
-In practice, atom $I$ is displaced by a small but finite displacement $\epsilon$ in the direction $\alpha$, and the force on all other atoms is recorded. By performing the displacement in all $3N$ degrees of freedom, the $3N \times 3N$ forces can be arranged in a matrix $F_{[3N \times 3N]}$, and the displacements can be arranged in a matrix $U_{[3N \times 3N]} = \epsilon \mathds 1_{[3N \times 3N]}$. The $3N \times 3N$ force-constants matrix $\Phi$ is obtained by the trivial matrix multiplication
+In practice, atom $I$ is displaced by a small but finite displacement $\epsilon$ in the direction $\alpha$, and the force on all other atoms is recorded. By performing the displacement in all $3N$ degrees of freedom, the $3N \times 3N$ forces can be arranged in a matrix ${\rm F}_{[3N \times 3N]}$, and the displacements can be arranged in a matrix ${\rm U}_{[3N \times 3N]} = \epsilon \mathds 1_{[3N \times 3N]}$. The $3N \times 3N$ force-constants matrix $\Phi$ is obtained by the trivial matrix multiplication
 \begin{align}
-F 
-	&= - \Phi U 
+{\rm F }
+	&= - \Phi {\rm U} 
 	= - \epsilon \Phi \mathds 1
 	\label{eq:finite.diff.1}
 	\\
 	\implies
-	\Phi &= - \frac{1}{\epsilon} F \mathds 1~.
+	\Phi &= - \frac{1}{\epsilon} {\rm F} \mathds 1~.
 \end{align}
 %\begin{align}
 %	F &= - H U \\
@@ -368,14 +459,14 @@ F
 %\end{align}
 If $M > 3N$ displacements are used,~e.\,g.,~because positive and negative displacements $\pm \epsilon$ are used, the force constants can be obtained by solving an overdetermined linear equation of the kind
 \begin{align}
-	F_{[3N \times M]} &= - \Phi_{[3N \times 3N]} U_{[3N \times M]} \\
+	{\rm F}_{[3N \times M]} &= - \Phi_{[3N \times 3N]} {\rm U}_{[3N \times M]} \\
 	\implies
-	\Phi &= - F U^{+}~,
+	\Phi &= - {\rm F} {\rm U}^{+}~,
 	\label{eq:phi.pseudo.1}
 \end{align}
-where $U^{+}$ denotes the Moore-Penrose pseudo inverse of the displacement matrix $U$~\cite{Penrose1955,Parlinski1997}.
+where ${\rm U}^{+}$ denotes the Moore-Penrose pseudo inverse of the displacement matrix $\rm U$~\cite{Penrose1955,Parlinski1997}.
 
-The number of required force calculations can be reduced by considering the spacegroup symmetry of the crystal. This can be achieved in two ways: First, the symmetry can be used to identify the set of inequivalent displacements from which all other forces can be constructed by the following argument: We define the representation $\Gamma^g$ of a symmetry operation $g$ by its action on the atomic coordinates $\set{\b R_I = \b R_I^0 + \b U_I}$ as
+\newthought{The number of required force calculations} can be reduced by considering the spacegroup symmetry of the crystal. This can be achieved in two ways: First, the symmetry can be used to identify the set of inequivalent displacements from which all other forces can be constructed by the following argument: We define the representation $\Gamma^g$ of a symmetry operation $g$ by its action on the atomic coordinates $\set{\b R_I = \b R_I^0 + \b U_I}$ as
 \begin{align}
 	\b R_I^{g} &\equiv {\Gamma}^g (\b R_I) = { P}^g_{IJ} \b R^0_J + { M}^g \b U_I~,
 	\label{eq:sym.RI'}
@@ -419,92 +510,7 @@ where the $\tilde{\Phi}_i$ are \emph{solely} determined by the space group eleme
 
 \subsection{Harmonic Sampling}
 
-\section{Classical Limit}
-The classical limit of the nuclear Schr\"odinger equation~\eqref{eq:BOSE} is usually performed by writing the nuclear wavefunction $\chi_s ({\bf R}, t)$ in terms of a real amplitude $A_s({\bf R}, t)$ and a \emph{classical action function} $S_s({\bf R}, t)$~\cite{Dirac1981,Landau2013,Marx2009}
-\begin{align}
-	\chi_s({\bf R}, t) = A_s({\bf R}, t) \, {\rm e}^{\frac{\im}{\hbar} S_s({\bf R}, t)}~.
-	\label{eq:class.1}
-\end{align}
-The Schr\"odinger equation then yields a set of differential equations for $A_s$ and $S_s$ that, in the limit $\hbar \to 0$, go over to a \emph{Hamilton-Jacobi} equation for $S_s$,~i.\,e.,~
-\begin{align}
-  \frac{\partial S_s}{\partial t} + \mathcal H \left({\bf R}, {\bf P}\right)
-  = 0~,
-  \label{eq:HamiltonJacobi}
-\end{align}
-where ${\bf P} = ({\bf P}_1, \ldots) \equiv ({\bf \nabla}_1 S_s, \ldots)$ denotes the conjugate momenta and $\mathcal H$ is the \emph{classical} Hamilton function corresponding the to the operator in Eq.\,\eqref{eq:BOSE}, from which the equations of motion for the nuclei can be obtained:
-\begin{align}
-  \dot{{\bf P}}_I 
-    = -\frac{\partial \mathcal H}{\partial {\bf R}_I}
-    \quad\implies\quad M_I \ddot{\bf R}_I
-    = -\frac{\partial \mathcal V}{\partial {\bf R}_I}~.
-    % \equiv - {\bf F}_I~.
-\end{align}
-The negative gradient of the Born-Oppenheimer potential, 
-$-\partial \mathcal V / \partial {\bf R}_I$ is the force ${\bf F}_I$ acting on atom $I$ which can be obtained via the Hellmann-Feynmann theorem,~cf.~Sec.\,\ref{sec:HellmannFeynman}.
 
-An alternative viewpoint that is more instructive can be taken by invoking the \emph{Ehrenfest theorem}~\cite{Ehrenfest1927,Basdevant2007}. The statement is that
-\begin{align}
-  \frac{\d}{\d t} \left\langle {\bf P}_I \right\rangle_{\chi_s}
-    = \left\langle
-      - \frac{\partial \mathcal{V}}{\partial {\bf R}_I}
-    \right\rangle_{\chi_s}~,
-  \label{eq:ehrenfest.de1}
-\end{align}
-where $\langle \cdot \rangle_{\chi_s}$ denotes an expectation value taken with respect to the state $\chi_s$. This expression differs only slightly from the classical counterpart, which would read
-\begin{align}
-\frac{\d}{\d t} \left\langle {\bf P}_I \right\rangle
-= \left.
-- \frac{\partial \mathcal{V}}{\partial {\bf R}_I}
-\right\vert_{{\bf R} = \langle {\bf R} \rangle}~.
-\label{eq:ehrenfest.de2}
-\end{align}
-The difference comes from the fact that, in general,
-\begin{align}
-  \delta f  \equiv 
-  f \bm ( \langle x \rangle \bm{)} 
-  - 
-  \bm{\langle} f (x) \bm{\rangle}
-  \neq 0
-  ~,
-  \label{eq:ehrenfest.delta1}
-\end{align}
-where $x = {\bf R}_I$ denotes the space coordinate for notional simplicity, $f$ is some function of the observable $x$, and $\delta f$ measures the difference between the classical and the quantum expectation value. Ehrenfest's argument is that this difference becomes negligible when the state is sufficiently peaked around some value $x_0$. Expanding $f$ around the expectation value of $x$ denoted by $x_0 \equiv \langle x \rangle$, we have
-\begin{align}
-  f(x) = f \bm ( \langle x \rangle \bm{)}  
-    + (x - \langle x \rangle) \, f' \bm ( \langle x \rangle \bm{)}
-    + \frac{1}{2} (x - \langle x \rangle)^2 \, f'' \bm ( \langle x \rangle \bm{)}
-    + \cdots~.
-  \label{eq:ehrenfest.f2}
-\end{align}
-It follows that the $f'$ term vanishes when the expectation value is taken, and
-\begin{align}
-\langle f(x) \rangle 
-  = f \bm ( \langle x \rangle \bm{)}  
-    + \frac{1}{2} \Delta x^2 f'' \bm ( \langle x \rangle \bm{)}
-    + \cdots~,
-\label{eq:ehrenfest.f3}
-\end{align}
-where $\Delta x^2 = \bm{\langle} (x - \langle x \rangle)^2 \bm{\rangle}$ measures the variance of the underlying distribution,~i.\,e.~the width of the wavepacket. The relative error between the classical and quantum expectation value is readily computed to be
-\begin{align}
-  \left\lvert \frac{\delta f}{f \bm ( \langle x \rangle \bm{)}} \right\rvert
-  = \frac{1}{2} \Delta x^2 \left\lvert \frac{f'' \bm ( \langle x \rangle \bm{)}}{f \bm ( \langle x \rangle \bm{)}} \right\rvert
-+ \mathcal{O}(\Delta x^3)~.
-  \label{eq:ehrenfest.delta2}
-\end{align}
-This estimation holds in general for any observable $f$.
-By crudely estimating the dimension of the wavepacket in terms of the thermal de Broglie-wavelength, we find
-\begin{align}
-  \Delta x^2 
-    \sim \left( \frac{h}{P} \right)^2
-    \sim \frac{h^2}{MT}~,
-  \label{eq:ehrenfest:dimension}
-\end{align}
-which gives support to the intuitive assumption that we can expect the classical limit to work better the heavier the atoms and the higher the temperature.
-Let us now set $f(x) \hat = -\partial \mathcal V / \partial {\bf R}_I$, then another important conclusion can be drawn from Eq.\,\eqref{eq:ehrenfest.delta2}: For a harmonic potential $\mathcal V ({\bf R}) = \mathcal V^{(2)} ({\bf R})$, where derivatives higher than second order vanish, the classical and quantum mechanical expectation values \emph{always coincide}. The quantum mechanical expectation value of position will therefore evolve in the same time-periodic fashion as a classical particle in a harmonic well.
-
-\REM{this approach can only be validated by computing observables and compare the results. One can safely say that this approach has been used successfully in a plethora of studies, while additional care must be taken at low temperature and/or systems with light atoms, especially hydrogen-bonded systems~\CITE{MD-Review?,MarklandCeriotti,Litman,pHexperiment}.}
-
-\newpage
 
 \section{Thermodynamic Ensembles and Molecular Dynamics}
 \REM{Maybe make chapter?}
