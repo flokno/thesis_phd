@@ -508,32 +508,52 @@ where the $\tilde{\Phi}_i$ are \emph{solely} determined by the space group eleme
 
 \REM{Add the theory for symmetry reduction in practice to appendix?}
 
-\subsection{Harmonic Sampling}
+\subsection{Classical harmonic dynamics: Harmonic sampling}
 
+\newpage
 
+\section{Statistical Mechanics and Molecular Dynamics}
+There exist plenty of excellent books on statistical mechanics, some of which are included in the references~\cite{Phillies2012,Tuckerman,Schrodinger1989}. This chapter merely serves to recall the most important notions necessary for computing properties of materials under thermodynamic conditions, and introduce the notation used in the following. In particular, the concepts of \emph{ensemble}, \emph{state}, and \emph{averages} are briefly introduced.
 
-\section{Thermodynamic Ensembles and Molecular Dynamics}
-\REM{Maybe make chapter?}
-In this work, we use two thermodynamic ensembles: the microcanonical, $NVE$ for short, where the total energy $E$ of the system is conserved, and the canonical ($NVT$), where the system can be viewed as coupled to a bath of temperature $T$. The latter is mimicking more realistic experimental conditions, where usually the temperature and not the total energy of the system can be controlled. Technically, experiments are performed rather at constants pressure $p$ instead of constant volume, and the correct ensemble to describe such a situation is the isothermal-isobaric one commonly denoted as $NPT$. In practice however, the canonical ensemble is easier to simulate and is a good approximation to the $NPT$ ensemble when the system size is not too small~\cite[p.\,134]{Tuckerman}
+\newthought{A thermodynamic \emph{ensemble}} can be viewed as a complete list of all allowed \emph{states} $\Gamma$ of a system of particles, where the state is an instantaneous snapshot of all microscopic variables~\cite{Phillies2012}. In classical statistical mechanics, these variables are the positions~$\b R$ and momenta~$\b P$. A particular configuration $\Gamma = \set{\b R, \b P}$ is called \emph{phase-space point}, and the phase space is the collection of all points $\Gamma$ compliant with external constraints.\footnote{Easiest example of an external constraint: If the particles are confined in a box with impenetrable walls, the possible position $\b R$ are necessarily confined to that box. Other constraints comprise total energy, particle number, and more.} To each state $\Gamma$, a statistical weight $f (\Gamma)$ is assigned, where $f$ is called the \emph{distribution function}. A thermodynamic ensemble is completely specified by the set of external constraints under which the mechanical system evolves, and the associated statistical weight function $f$.
 
-\REM{Birdsview Phillies?}
+\newthought{Statistical averages of phase-space functions} can be obtained by averaging over all permissible states $\Gamma$ with the statistical weight given by the distribution function, $f (\Gamma)$. The \emph{phase-space average} of a generic phase-space function $A (\Gamma)$ is defined as
+\begin{align}
+  \braket{A}_f 
+    = \int \d \Gamma ~ A(\Gamma) f (\Gamma)~.
+  \label{eq:phase.space.average}
+\end{align}
+
+An alternative approach towards computing averages is the concept of time averaging. The \emph{time average} of a phase-space function is defined as
+\begin{align}
+  \braket{A}_t
+    = \lim\limits_{t \to \infty} \frac{1}{t} \int_0^t \d t' ~ A {\bm (} \Gamma(t') {\bm )}~.
+  \label{eq:time.average}
+\end{align}
+A system for which the phase-space and the time average are identical is said to be \emph{ergodic}. The \emph{ergodic hypothesis} states that this is true for most systems with non-pathological particle interaction $\mathcal V$. Albeit being virtually impossible to prove rigorously, this hypothesis is the underlying idea of \emph{molecular dynamics} (MD) simulations, where the statistical behavior of a system is assessed by choosing a suitable initial condition and propagating it in time by numerically solving the equations of motion.
+
+\newthought{In this work}, we use two thermodynamic ensembles: the microcanonical, $NVE$ for short, where the total energy $E$ of the system is conserved, and the canonical ($NVT$), where the system can be viewed as coupled to a bath of temperature $T$. The latter is mimicking more realistic experimental conditions, where usually the temperature and not the total energy of the system can be controlled. Technically, experiments are performed rather at constants pressure $p$ instead of constant volume, and the correct ensemble to describe such a situation is the isothermal-isobaric one commonly denoted as $NPT$. In practice however, the canonical ensemble is easier to simulate and is a good approximation to the $NPT$ ensemble when the system size is not too small~\cite[p.\,134]{Tuckerman}
+
 
 \subsection{Microcanonical Ensemble}
 The microcanonical ensemble is characterized by three conserved extensive quantities: particle number $N$, system volume $V$, and total energy $E$. The total energy of a given microstate,~i.\,e.,~the configuration of particles and their momenta represented by the phase-space point $\Gamma = \set{\b R, \b P}$, is given by the Hamiltonian of the system, $H (\Gamma)$. 
-
-The central postulate of statistical mechanics is that each microstate is equally probable. Therefore, any point in phase space $\Gamma$ yielding an energy in a thin interval around the target energy, $H (\Gamma) \in [E, E + \d E]$, is realized with the same likelihood. Taking particle number $N$ and system volume $V$ to be fixed and non-controllable, the expectation value of a phase-space observable $A$ in an ensemble of energy $E$ is defined as
-\begin{align}
-	\braket{A}_E 
-		= \int \d \Gamma ~ A(\Gamma) f_E (\Gamma)~.
-	\label{eq:phase.space.expectation}
-\end{align}
-Here, the \emph{microcanonical distribution function} $f_E$ is enforcing that phase-space points are sampled with equal probability which is achieved by defining
+%The central postulate of statistical mechanics is that each microstate is equally probable. Therefore, any point in phase space $\Gamma$ yielding an energy in a thin interval around the target energy, $H (\Gamma) \in [E, E + \d E]$, is realized with the same likelihood. Taking particle number $N$ and system volume $V$ to be fixed and non-controllable, the expectation value of a phase-space observable $A$ in an ensemble of energy $E$ is defined as
+%\begin{align}
+%	\braket{A}_E 
+%		= \int \d \Gamma ~ A(\Gamma) f_E (\Gamma)~.
+%	\label{eq:phase.space.expectation}
+%\end{align}
+%Here, the \emph{microcanonical distribution function} $f_E$ is enforcing that phase-space points are sampled with equal probability which is achieved by defining
+% \newthought{The microcanonical distribution function} is defined as
+The microcanonical distribution function is defined as
 \begin{align}
 f_E (\Gamma) = \frac{1}{\mathcal{Z}_E} \delta {\bm (} H (\Gamma) - E {\bm )}~,
 \end{align}
-where the microcanonical partition sum $\mathcal{Z}_E$ is a normalizing factor for $f_E$.
+where the microcanonical partition sum $\mathcal{Z}_E$ is a normalizing factor for $f_E$. The partition function $f_E$ encapsulates the underlying postulate of the microcanonical ensemble,~i.\,e.,~that any point in phase space $\Gamma$ yielding an energy $H (\Gamma)$ in a thin interval around the target energy $E$ 
+%, $H (\Gamma) \in [E, E + \d E]$, 
+will be realized with the same likelihood.
 
-The Hamiltonian governs the energy conserving time evolution of a phase space point $\Gamma (t) = \set{\b R (t), \b P (t)}$ in terms of Hamilton's equations,
+\newthought{The time evolution of a system} is governed by the Hamiltonian which generates an energy conserving propagation of a phase space point $\Gamma (t) = \set{\b R (t), \b P (t)}$ in terms of Hamilton's equations,
 \begin{align}
 	\dot{\b R}_I (t) = \frac{\partial H}{\partial \b P_I} \quad\text{and}\quad
 	\dot{\b P}_I (t) = -\frac{\partial H}{\partial \b R_I}~.
@@ -544,9 +564,8 @@ The temporal evolution of an observable $B$ is then given by the Liouville equat
 	\dot{B} = \set{B, H} \equiv \im L B~,
 	\label{eq:Liouville}
 \end{align}
-where $L$ is the \emph{Liouville operator} defined by its action according to Eq.\,\eqref{eq:Liouville}, and $\set{\cdot , \cdot}$ denotes the \emph{Poisson bracket}.
-\marginnote{
-The Poisson bracket is defined by~\CITE{Goldbach}
+where $L$ is the \emph{Liouville operator} defined by its action according to Eq.\,\eqref{eq:Liouville}, and $\set{\cdot , \cdot}$ denotes the \emph{Poisson bracket}.\marginnote{
+The Poisson bracket is defined by
 \begin{align}
 	\set{B, H}
 		= \sum_{I, \alpha} \frac{\partial B}{\partial R_I^\alpha} \frac{\partial H}{\partial P_I^\alpha}
@@ -558,23 +577,20 @@ The Poisson bracket is defined by~\CITE{Goldbach}
 }
 The Liouville equation is formally solved by
 \begin{align}
-	B (t) = {\rm e}^{\im L t} B(0)~.
+	B (t) = {\rm e}^{\im L t} B(0)~,
 	\label{eq:B.time.evolution}
 \end{align}
-The operator ${\rm e}^{\im L t}$ is therefore called the \emph{time evolution operator} or \emph{classical propagator}.
-
-\paragraph{Ergodic hypothesis}
-Under the assumption that a system initially prepared in a configuration with correct energy dynamically evolves through the entire permissible phase space, the phase-space average defined in Eq.\,\eqref{eq:phase.space.expectation} can be written in terms of a \emph{time average} defined as
-\begin{align}
-  \braket{A}_E 
-    = \left. \lim\limits_{t \to \infty} \frac{1}{t} \int_0^t \d t' ~ A {\bm (} \Gamma(t') {\bm )}
-	    \right\vert_{H \bm ( \Gamma (0) \bm ) = E}~.
-	\label{eq:time.average}
-\end{align}
-A system for which the phase-space and the time average are identical is said to be \emph{ergodic}. The \emph{ergodic hypothesis} states that this is true for most systems with non-pathological interaction $V$. Albeit being virtually impossible to prove rigorously, this hypothesis is underlying idea of \emph{molecular dynamics} (MD) simulations, where the statistical behavior of a system is assessed by choosing a suitable initial condition and propagating it in time via the classical equations of motion given by Eq.\,\eqref{eq:stat.eom}.
-
-\paragraph{Numerical time propagation}
-In practice, the equations of motion are solved by a \emph{velocity Verlet} algorithm~\CITE{Verlet1967,Swope1982},
+the operator ${\rm e}^{\im L t}$ is therefore called the \emph{time evolution operator} or \emph{classical propagator}.
+%\paragraph{Ergodic hypothesis}
+%Under the assumption that a system initially prepared in a configuration with correct energy dynamically evolves through the entire permissible phase space, the phase-space average defined in Eq.\,\eqref{eq:phase.space.expectation} can be written in terms of a \emph{time average} defined as
+%\begin{align}
+%  \braket{A}_E 
+%    = \left. \lim\limits_{t \to \infty} \frac{1}{t} \int_0^t \d t' ~ A {\bm (} \Gamma(t') {\bm )}
+%	    \right\vert_{H \bm ( \Gamma (0) \bm ) = E}~.
+%	\label{eq:time.average}
+%\end{align}
+%A system for which the phase-space and the time average are identical is said to be \emph{ergodic}. The \emph{ergodic hypothesis} states that this is true for most systems with non-pathological interaction $V$. Albeit being virtually impossible to prove rigorously, this hypothesis is underlying idea of \emph{molecular dynamics} (MD) simulations, where the statistical behavior of a system is assessed by choosing a suitable initial condition and propagating it in time via the classical equations of motion given by Eq.\,\eqref{eq:stat.eom}.
+In practice, the equations of motion are solved numerically, for example by the \emph{velocity Verlet} algorithm~\CITE{Verlet1967,Swope1982},
 \begin{subequations}
 \begin{align}
 	\b R_I (t + \delta t) 
@@ -595,12 +611,13 @@ In analogy to the previous section, we define the \emph{canonical distribution f
 		= \frac{1}{\mathcal{Z}} {\rm e}^{- \beta H (\Gamma)}~,
 	\label{eq:f.canonical}
 \end{align}
-where the  canonical partition sum $\mathcal{Z}$ normalizes $f_\beta$. The canonical expectation value is therefore given by
-\begin{align}
-	\braket{A}_\beta = \int \d \Gamma ~ A(\Gamma) f_\beta(\Gamma)~.
-\end{align}
+where the  canonical partition sum $\mathcal{Z}$ normalizes $f_\beta$. 
+%The canonical expectation value is therefore given by
+%\begin{align}
+%	\braket{A}_\beta = \int \d \Gamma ~ A(\Gamma) f_\beta(\Gamma)~.
+%\end{align}
 
-As we have seen earlier, a time-independent Hamiltonian generates energy-preserving dynamics via the equations of motion given in Eq.\,\eqref{eq:stat.eom}. To perform a simulation at non-constant energy, the coupling to a thermal bath therefore has to be incorporated explicitly into the equations of motion. One of the many ways to achieve this is via the \emph{Langevin equation}~\cite{Vanden2006},
+\newthought{As we have seen earlier}, a time-independent Hamiltonian generates energy-preserving dynamics via the equations of motion given in Eq.\,\eqref{eq:stat.eom}. To perform a simulation at non-constant energy, the coupling to a thermal bath therefore has to be incorporated explicitly into the equations of motion. One of the many ways to achieve this is via the \emph{Langevin equation}~\cite{Vanden2006} in which the change of momentum is modified,
 \marginnote{
 	% \normalsize
 	The stochastic force is given by:
@@ -618,15 +635,19 @@ As we have seen earlier, a time-independent Hamiltonian generates energy-preserv
 	\label{eq:stat.Langevin}
 \end{align}
 This equation describes a perturbation of the nuclei induced by a velocity-dependent friction proportional to a constant $\gamma$,%\marginnote{From Eq.\,\eqref{eq:stat.Langevin} follows that $\gamma$ has the unit of inverse time.}
-and a stochastic force proportional to a white-noise kernel $\eta (t)$. With the modified equation of motion in terms of the stochastic force, an ergodic hypothesis for the canonical ensemble can be stated,
-% 
+and a stochastic force proportional to a white-noise kernel $\eta (t)$. With the modified equation of motion in terms of the stochastic force, an ergodic time evolution that generates the canonical distribution can be obtained, so that
 \begin{align}
-	\braket{A}_\beta
-		= \left. \lim\limits_{t \to \infty} \frac{1}{t} \int_0^t \d t' ~ A {\bm (} \Gamma(t') {\bm )}
-			\right.~,
-	\label{eq:time.average.canonical}
+  \braket{A}_t = \braket{A}_{f_\beta}~.
 \end{align}
-where the time evolution of the system is given by Eq.\,\eqref{eq:stat.Langevin} and the friction constant is chosen such that the expectation value $\braket{A}_\beta$ is insensitive to the chosen value.
+%hypothesis for the canonical ensemble can be stated,
+%% 
+%\begin{align}
+%	\braket{A}_\beta
+%		= \left. \lim\limits_{t \to \infty} \frac{1}{t} \int_0^t \d t' ~ A {\bm (} \Gamma(t') {\bm )}
+%			\right.~,
+%	\label{eq:time.average.canonical}
+%\end{align}
+%where the time evolution of the system is given by Eq.\,\eqref{eq:stat.Langevin} and the friction constant is chosen such that the expectation value $\braket{A}_\beta$ is insensitive to the chosen value.
 
 \REM{The Langevin equation can be used to thermalize a system and generate a canonical ensemble starting from some initial configuration $\b R^0$} \cite[p.\,590]{Tuckerman}
 \REM{Plot: Temperature evolution and velocity distribution.}
@@ -682,7 +703,13 @@ The configuration $x$ is updated according
   x^{i+1} = x^i + s_x^i = ~x^i + {\rm B}^i_{xx'} f^i_{x'}.
 \end{align}
 
-\newthought{If the lattice degrees of freedom} are represented by the Cartesian components $a^\alpha_i$ of the lattice vectors, the generalized force on the lattice is given by
+\newthought{If the lattice degrees of freedom} are represented by the Cartesian components $a^\alpha_i$ of the lattice vectors, the generalized force on the lattice is given by\marginnote{Symbolically:
+  $$
+  f_a 
+    = -\frac{\partial \mathcal V}{\partial a} 
+    = -V \underset{\fD \sigma}{\underbrace{\frac{1}{V}\frac{\partial \mathcal V}{\partial \varepsilon}}} \underset{\itp a}{\underbrace{\frac{\partial \varepsilon}{\partial a}}}~.
+  $$
+}
 \begin{align}
   f_a = - V \sigma \itp{a}~,
 \end{align}
