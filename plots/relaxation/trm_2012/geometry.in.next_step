@@ -1,0 +1,31 @@
+# 
+# This is the geometry file that corresponds to the current relaxation step.
+# If you do not want this file to be written, set the "write_restart_geometry" flag to .false.
+#  aims_uuid : 76BDF4B0-DBC8-4462-AFBD-D231A1AC7115                                
+# 
+lattice_vector      0.00016218      2.71468777      2.71468777
+lattice_vector      2.71468803      0.00016105      2.71468937
+lattice_vector      2.71468803      2.71468937      0.00016105
+atom_frac      -0.00988654     -0.00988670     -0.00988670 Si
+atom_frac       0.24010870      0.24010885      0.24010885 Si
+# 
+# What follows is the current estimated Hessian matrix constructed by the BFGS algorithm.
+# This is NOT the true Hessian matrix of the system.
+# If you do not want this information here, switch it off using the "hessian_to_restart_geometry" keyword.
+# 
+trust_radius             0.2000000030
+hessian_block                1       1          18.589156           2.385638           2.385637           2.385638          18.588046           2.385082           2.385637           2.385082          18.588043
+hessian_block                1       2         -16.589156          -2.385638          -2.385637          -2.385638         -16.588046          -2.385082          -2.385637          -2.385082         -16.588043
+hessian_block                2       2          18.589156           2.385638           2.385637           2.385638          18.588046           2.385082           2.385637           2.385082          18.588043
+hessian_block_lv             1       1          18.820789          -1.017484          -1.017484          -1.017484          22.099289          -2.900711          -1.017484          -2.900711          22.099289
+hessian_block_lv             1       2          -1.017388          -2.900773          -2.900773          -6.179358          -1.017296          -1.017296          -1.017286          -2.900991          -2.900991
+hessian_block_lv             1       3          -1.017388          -2.900773          -2.900773          -1.017286          -2.900991          -2.900991          -6.179358          -1.017296          -1.017296
+hessian_block_lv             2       2          22.099165          -1.017200          -2.901052          -1.017200          18.820494          -1.017099          -2.901052          -1.017099          22.098730
+hessian_block_lv             2       3          -2.900835          -1.017200          -2.901052          -2.901053          -1.017098          -2.901270          -1.017200          -6.179506          -1.017098
+hessian_block_lv             3       3          22.099165          -2.901052          -1.017200          -2.901052          22.098730          -1.017098          -1.017200          -1.017098          18.820494
+hessian_block_lv_atom        1       1           1.230857           0.556494           0.556494           1.230764           0.556429           0.556429           1.230763           0.556430           0.556430
+hessian_block_lv_atom        1       2          -1.230857          -0.556494          -0.556494          -1.230764          -0.556429          -0.556429          -1.230763          -0.556430          -0.556430
+hessian_block_lv_atom        2       1           0.556524           1.231236           0.555867           0.556460           1.231143           0.555803           0.556460           1.231142           0.555803
+hessian_block_lv_atom        2       2          -0.556524          -1.231236          -0.555867          -0.556460          -1.231143          -0.555803          -0.556460          -1.231142          -0.555803
+hessian_block_lv_atom        3       1           0.556525           0.555868           1.231235           0.556460           0.555804           1.231142           0.556461           0.555804           1.231141
+hessian_block_lv_atom        3       2          -0.556525          -0.555868          -1.231235          -0.556460          -0.555804          -1.231142          -0.556461          -0.555804          -1.231141

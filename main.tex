@@ -1,7 +1,7 @@
 \PassOptionsToPackage{full}{textcomp}
 % include symmetric to place margins left and right instead of right only
 % nohyper, nobib?
-\documentclass[nobib, a4paper,twoside,notoc,justified,marginals=raggedouter,11pt]{tufte-book}
+\documentclass[nobib, a4paper,twoside,notoc,justified,marginals=justified,11pt]{tufte-book}
 \hypersetup{colorlinks}
 \usepackage[utf8]{inputenc}
 
@@ -134,7 +134,7 @@
 \newcommand{\hangleft}[1]{\makebox[0pt][r]{#1}}
 \newcommand{\hairsp}{\hspace{1pt}}% hair space
 \newcommand{\hquad}{\hskip0.5em\relax}% half quad space
-\newcommand{\TODO}{\textcolor{red}{\bf TODO!}\xspace}
+\newcommand{\TODO}[1]{\textcolor{red}{\bf TODO: {#1}}\xspace}
 \newcommand{\na}{\quad--}% used in tables for N/A cells
 
 % Generates the index
