@@ -131,18 +131,18 @@ To solve for $\Delta f(t)$ defined in Eq.\,\eqref{eq:lr.df.2}, we introduce a sh
 \end{align}
 where the Liouville operator $L^0$ is defined by
 \begin{align}
-\im L^0 g = \set{g, H^0}~,
-\label{eq:lr.L}
+	\im L^0 g = \set{g, H^0}~,
+	\label{eq:app.lr.L}
 \end{align}
 and similarly
 \begin{align}
-\im \Delta L (t) g = \set{g, H'(t)}~.
-\label{eq:lr.L'}
+	\im \Delta L (t) g = \set{g, H'(t)}~.
+	\label{eq:app.lr.L'}
 \end{align}
 Equation~\eqref{eq:lr.df.3} is a first order linear differential equation of the form
 \begin{align}
-\frac{\d y}{\d t} + p(t) y = q(t)~,
-\label{eq:lr.dgl.1}
+	\frac{\d y}{\d t} + p(t) y = q(t)~,
+	\label{eq:app.lr.dgl.1}
 \end{align}
 which is straightforward to solve by using an integrating factor as follows: We identify $y = \Delta f$, $p(t) = \im L^0$, and $q(t) = - \im \Delta L (t) f^0$. Following Ref.~\cite[p.\,68]{Lomen1986}, we define the integrating factor \mbox{$\rho (t) = \exp(\int \d t \, p (t)) = \exp (\im L^0 t)$}, multiply Eq.\,\eqref{eq:lr.dgl.1} with $\rho (t)$, and use that \mbox{$\frac{\d}{\d t} \, \rho(t) = \rho(t) p(t)$} to obtain
 $$
