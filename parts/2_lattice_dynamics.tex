@@ -246,7 +246,7 @@ The thermodynamic properties of such a system of harmonic oscillators follow fro
 
 This derivation is generally valid for a system of $N$ particles described by a potential-energy surface of which a (local) minimum ${\bf R}^0$, and the matrix of second derivatives at this configuration, $\Phi^{IJ}$, is known.
 
-\subsection{Classical harmonic dynamics: Harmonic sampling}
+\subsection{Classical harmonic dynamics}
 
 Hamilton's equations of motion
 \begin{align}
@@ -261,29 +261,34 @@ Hamilton's equations of motion
 		& = - \omega^2_s u_s
 \end{align}
 
-\marginnote{\REM{Probably define $\sqrt 2 \sin \omega t)$ so that $\braket{u_s^2} = A^2_s$ and $E=\sum_s \omega_s^2 A_s^2$?}}
 \begin{align}
 	u_s (t) 
 		&= \phantom{\omega_s} \sqrt 2 A_s \sin (\omega_s t + \varphi_s)
-		\equiv \frac{1}{\sqrt{2 \omega_s}} \left[ \D a_s (t) + \fD a_s (t) \right] \\
+		\equiv \frac{1}{\sqrt{2}} \left[ \D a_s (t) + \fD a_s (t) \right] \\
 	p_s (t) 
 		&= \sqrt 2 \omega_s A_s \cos (\omega_s t + \varphi_s)
-		\equiv \sqrt{\frac{\omega_s}{2}} \im \left[ \D a_s (t) - \fD a_s (t) \right]
+		\equiv \im \frac{\omega_s}{\sqrt{2}} \left[ \D a_s (t) - \fD a_s (t) \right]
 \end{align}
-with
+with\marginnote{It follows $A_s = \lvert a_s (t) \rvert~.$}
 \begin{align}
 	a_s (t) 
 		& = {\rm e}^{- \im \omega_s t} a_s (0)~, \\
 	a_s (0)
-		& = \sqrt{\omega_s} A_s {\rm e}^{- \im \varphi_s}
+		& = A_s {\rm e}^{- \im \varphi_s}
 \end{align}
 
-The Hamiltonian in terms of the complex amplitudes $a^{(\dagger)}_s$ reads\marginnote{The relation to quantum mechanics is achieved by replacing the complex numbers $a^{(\dagger)}_s$ with the operators $\hat{a}^{(\dagger)}_s$ fulfilling the canonical commutation relations $$\left[ \fD{\hat{a}}_{\fP s}, \D{\hat a}_{s'} \right] = \delta_{ss'}~.$$}
+Expressing the amplitudes $a^_s$ in terms of the conjugate variables $\set{u_s, p_s}$
+\begin{align}
+    a_s (t) = u_s (t) + \frac{\im}{\omega_s} p_s (t)
+\end{align}
+
+The Hamiltonian in terms of the complex amplitudes $a^{(\dagger)}_s$ reads\marginnote{The relation to quantum mechanics is achieved by replacing the complex numbers $a^{(\dagger)}_s$ with the operators $\sqrt{\frac{\hbar}{\omega_s}} \hat{a}^{(\dagger)}_s$ fulfilling the canonical commutation relations $$\left[ \fD{\hat{a}}_{\fP s}, \D{\hat a}_{s'} \right] = \delta_{ss'}~.$$}
 \begin{align}
 	\mathcal{H}(\b a, \D{\b a})
-		&= \halb \sum_s \omega_s \left[ \D a_s\fD  a_s + \fD a_s \D a_s \right] \\
-		&= \sum_s \omega^2_s A^2_s
+		&= \sum_s \omega^2_s \D a_s\fD  a_s
 \end{align}
+
+\subsubsection{Harmonic sampling}
 
 \begin{align}
 	\b U_I (t) 
@@ -305,8 +310,15 @@ by analogy with QM in thermal equilibrium\marginnote{Bose function ($\beta = 1 /
 
 \subsection{Mode projection}
 
+Express amplitude $a_s (t)$ in terms of the atomic displacements $\set{\b U_I (t)}$ and velocities $\set{\dot{\b U}_I (t)}$ \TODO{Check units!}
 \begin{align}
-	content...
+	u_s (t) 
+	    & = \sqrt{M_I} \sum_I \b e_{sI} \cdot \b U_I (t) \\
+	p_s (t)
+	    & = \sqrt{M_I} \sum_I \b e_{sI} \cdot \dot{\b U}_I (t) \\
+	\implies
+	a_s (t) 
+	    &= units \sum_I \b e_{sI} \cdot \left[ units \b U_I(t) + units \dot{\b U}_I (t) \right]
 \end{align}
 
 \section{Periodic Systems}

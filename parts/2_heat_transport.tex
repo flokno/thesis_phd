@@ -421,6 +421,53 @@ The atomic stress contributions $\sigma_I$ are functionals of the electron densi
 \REM{discuss convective flux}
 \CITE{[1] O. H. Nielsen and R. M. Martin, Phys. Rev. B 32, 3780 (1985).}
 
+\section{Heat Flux and the Harmonic Approximation}
+\CITE{Isaeva}
+
+\begin{align}
+    \b J (t) = \sum_{IJ} (\b R_I - \b R_J) D_{I \alpha, J \beta} \dot{u}_I (t) u_J (t)
+\end{align}
+
+use
+\begin{align}
+    u_I = \sum_s u_s
+\end{align}
+
+then
+\begin{align}
+    \b J (t) = \sum_{IJ, sp} J_{IJ,sp} \dot{u}_s (t) u_p (t)
+\end{align}
+
+\begin{align}
+    \braket{J^\alpha (t) J^\beta (0)} = \sum_{IJKL, spqr} c_{IJKL,spqr} \braket{\dot{u}_s (t) u_p (t) \dot{u}_q u_r}
+\end{align}
+
+One-particle Green's function:
+\begin{align}
+    \braket{a_{s} (t) a_{s'}} 
+    & =  0 \\
+    \braket{\D{a}_{\fP s} (t) \fD{a}_{s'}} 
+    & =  {\rm e}^{\im \omega_s t} \delta_{ss'}
+\end{align}
+
+Either oscillating terms \TODO{write out contraction once}
+\begin{align}
+    \braket{\D{a}_{s} (t) \fD{a}_{p} \D{a}_{q} (t) \fD{a}_{r}} 
+    & =  {\rm e}^{\im (\omega_s - \omega_q) t} \delta_{sp} \delta_{qr}
+\end{align}
+or when $s=q$ contstant term that integrates to infinity.
+
+Finite conductivity when
+\begin{align}
+    \braket{\D{a}_{\fP s} (t) \fD{a}_{s'}} 
+    & = {\rm e}^{\im \omega_s t} {\rm e}^{- t / \tau_s} \delta_{ss'}
+\end{align}
+
+Perturbation theory
+\begin{align}
+    \tau_s = \ldots
+\end{align}
+
 \section{Ab initio Green Kubo}
 
 \section{Approximative Anharmonic Methods}
