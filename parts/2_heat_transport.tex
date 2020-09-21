@@ -425,12 +425,22 @@ The atomic stress contributions $\sigma_I$ are functionals of the electron densi
 \CITE{Isaeva}
 
 \begin{align}
-    \b J (t) = \sum_{IJ} (\b R_I - \b R_J) D_{I \alpha, J \beta} \dot{u}_I (t) u_J (t)
+    \b J (t) = \sum_{IJ} (\b R_I^0 - \b R_J^0) D_{I \alpha, J \beta} \, p_I (t) u_J (t)
 \end{align}
 
 use
 \begin{align}
-    u_I = \sum_s u_s
+    u_s (t) 
+	    &= \sum_I \b e_{s I} \cdot \b u_I (t) \\
+	p_s (t) 
+		&= \sum_I \b e_{s I}^\ast \cdot \b p_I (t)
+\end{align}
+
+\begin{align}
+\b u_I (t)
+	&= \sum_s \b{e}^\ast_{sI} \, \fD u_s (t) \\ 
+\b p_I (t)
+	&= \sum_s \b{e}_{sI} \, \fD p_s (t)
 \end{align}
 
 then

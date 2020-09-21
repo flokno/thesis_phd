@@ -321,6 +321,8 @@ The inverse relation between the amplitudes $a_s$ in terms of the conjugate vari
 a_s (t) = u_s (t) + \frac{\im}{\omega_s} p_s (t)
 \end{align}
 with
+\begin{subequations}
+	\label{eq:mode.projection.u.p}
 \begin{align}
 	u_s (t) 
 	    & = \sum_I \sqrt{M_I} \b e_{sI} \cdot \b U_I (t) \\
@@ -330,6 +332,7 @@ with
 %	a_s (t) 
 %	    &= \sum_I \sqrt{M_I} \b e_{sI} \cdot \left[ \b U_I(t) + \frac{\im}{\omega_s} \dot{\b U}_I (t) \right]
 \end{align}
+\end{subequations}
 
 
 
@@ -373,7 +376,8 @@ This effectively corresponds to a permutation of the displacements of the atoms,
 We can draw two important conclusions from Eq.\,\eqref{eq:translation.permutation} and \eqref{eq:inv.V}. First, the existence of the map $P_{\bf L}$ enables us to write every atomic coordinate ${\bf R}_I$ as
 \begin{align}
 	{\bf R}_I \equiv {\bf R}_{i {\bf L}} 
-		= {\bf R}^0_i + {\bf U}_{i {\bf L}} + {\bf L}~,
+		= {\bf R}^0_{i \b L} + {\bf U}_{i {\bf L}}
+		= {\bf R}^0_i + {\bf L} + {\bf U}_{i {\bf L}}~,
 	\label{eq:R_iL}
 \end{align}
 where ${\bf R}^0_i$ labels the position of an equivalent reference atom in the unit cell, ${\bf U}_{i {\bf L}}$ is the displacement of the atom from its equilibrium position, and $\bf L$ is a Bravais vector as before.
@@ -473,22 +477,22 @@ The definition of the dynamical matrix in Eq.\,\eqref{eq:D^S(q).2} was formulate
 	\label{eq:supercell.extended}
 \end{align}
 which also contains the lattice points at the positive boundary of the supercell as depicted by open circles in Fig.\,\ref{fig:sketch_supercells}.
-\begin{figure}[t]
+\begin{marginfigure}[-6cm]
 	\centering
-	\includegraphics[width=.32\textwidth]{./sketches/2_sc.pdf}
+	\includegraphics[width=.8\textwidth]{./sketches/2_sc.pdf}
 	\hfill
-	\includegraphics[width=.32\textwidth]{./sketches/3_sc.pdf}
+	\includegraphics[width=.8\textwidth]{./sketches/3_sc.pdf}
 	\hfill
-	\includegraphics[width=.32\textwidth]{./sketches/4_sc.pdf}
+	\includegraphics[width=.8\textwidth]{./sketches/4_sc.pdf}
 	\caption{Depiction of square supercells with lattice points in the range $[-0.5 A, 0.5 A)$ (bullets $\bullet$), and extended lattice points at the supercell boundary (empty bullets $\circ$), where $A$ is the edge length of the supercell. Blue arrows denote the unit cell vectors, black arrows denote the supercell vectors.}
 	\label{fig:sketch_supercells}
-\end{figure}
+\end{marginfigure}
 These lattice points are included in the Fourier series with an appropriate weight $w_{\b L}$ that accounts for double counting of lattice points that are separated by a linear combination of supercell lattice vectors~\cite{Parlinski1997}. Furthermore, we use a minimal image convention (MIC) between the atoms $(i, \b 0)$ and $(j, \b L)$: For each pair, we use an equivalent lattice point $\b L'$ within the extended supercell which depends on $(i, j, \b L)$ such that
 \begin{align}
 	- \b R_{i \b 0 } + \b R_{j \b 0} + \b L' \in \mathds V_{\rm sc}^{\rm ext}~.
 	\label{eq:L'}
 \end{align}
-In total we define\marginnote{The dynamical matrix elements defined by Eq.\,\eqref{eq:D_Parlinski} differ from the ones found in Ref.~\cite{Parlinski1997} by a phase factor ${\rm e}^{\im \b q \cdot (\b R_i^0 - \b R_j^0)}$. The phase factor however does not affect the eigenfrequencies. It typically arises when the discussion is performed from a lattice-wave ansatz to solve the equations of motion~\cite[p. 298]{BornHuang}}
+In total we define\marginnote{The dynamical matrix elements defined by Eq.\,\eqref{eq:D_Parlinski} differ from the ones found in Ref.~\cite{Parlinski1997} by a phase factor ${\rm e}^{\im \b q \cdot (\b R_i^0 - \b R_j^0)}$. The phase factor however does not affect the eigenfrequencies. It typically arises when the discussion is performed from a lattice-wave ansatz to solve the equations of motion~\cite[p. 298]{BornHuang} \TODO{Makes sense to include because harmonic heat flux becomes easier}}
 \begin{align}
 	{D}_{i \alpha, j \beta} (\b q) 	
 		&= %\frac{N}{N_{\rm sc}} 
@@ -496,6 +500,14 @@ In total we define\marginnote{The dynamical matrix elements defined by Eq.\,\eqr
 			w_{\b L}
 		{\rm e}^{- \im \b q \cdot \b L'} {D}_{i \b 0 \alpha, j \b L \beta}~.
 	\label{eq:D_Parlinski}
+\end{align}
+Alternative
+\begin{align}
+	{D}_{i \alpha, j \beta} (\b q) 	
+		&= \frac{1}{N_{\rm sc}} 
+	\sum_{\b L, \b K} 
+	{\rm e}^{\im \b q \cdot (\b R^0_{i \b L} - \b R^0_{j \b K})} {D}_{i \b L \alpha, j \b K \beta}~.
+\label{eq:D_Parlinski.alt}
 \end{align}
 For each $\b q$, ${\rm D} (\b q)$ is a hermitian $3n \times 3n$ matrix in the indices $(i \alpha, j \beta)$ and will therefore yield $3n$ real eigenvalues and $3n$ complex, orthogonal eigenvectors, which we denote in accordance with Eq.\,\eqref{eq:D_IJ} as
 \begin{subequations}
@@ -510,18 +522,18 @@ For each $\b q$, ${\rm D} (\b q)$ is a hermitian $3n \times 3n$ matrix in the in
 \end{subequations}
 where the \emph{band index} $b$ is used to discern the $3n$ \emph{branches} at each $\b q$.\footnote{The notation highlights that the $\b q$ become quasi-continuous in the $N \to \infty$ limit. In that case, $\frac{1}{N_{\b q}} \sum_{\b q} \to \int \frac{\d^3 q}{(2 \pi)^3}$} With the help of Eq.\,\eqref{eq:D_ij(q)}, the dynamical matrix $\mathrm D_{IJ}$ for the full sysystem can be written as
 \begin{align}
-	D_{i \b 0 \alpha, j \b L \beta}
-		& = \frac{1}{N_{\b q}} \sum_{\b q} {\rm e}^{\im \b q \cdot \b L} {D}_{i \alpha, j \beta} (\b q) \\
-\implies
+%	D_{i \b 0 \alpha, j \b L \beta}
+%		& = \frac{1}{N_{\b q}} \sum_{\b q} {\rm e}^{- \im \b q \cdot (\b R_{i}^0 - \b R_{j}^0 - \b L)} {D}_{i \alpha, j \beta} (\b q) \\
+%\implies
 	D_{i \b L \alpha, j \b K \beta}  
-		& = \frac{1}{N_{\b q}} \sum_{\b q} {\rm e}^{\im \b q \cdot (\b K - \b L)} {D}_{i \alpha, j \beta} (\b q) \\
-		& \equiv \frac{1}{N_{\b q}} \sum_{b, \b q} \omega_b^2 (\b q) ~ \fD e_{b, i \b L \alpha} (\b q) e^{\ast}_{b, j \b K \beta} (\b q)~.
+		& = \frac{1}{N_{\b q}} \sum_{\b q} {\rm e}^{- \im \b q \cdot (\b R_{i \b L}^0 - \b R_{j \b K}^0)} {D}_{i \alpha, j \beta} (\b q) \\
+		& \equiv  \sum_{b, \b q} \omega_b^2 (\b q) ~ \fD e_{b, i \b L \alpha} (\b q) e^{\ast}_{b, j \b K \beta} (\b q)~.
 	\label{eq:D_{iLa}}
 \end{align}
 The eigenvectors of the $3n \times 3n$ matrices $\mathrm D (\b q)$ appearing in Eq.\,\eqref{eq:D_ij(q)}, and the eigenvectors of the $3N \times 3N$ matrix~$D_{IJ}$ appearing in Eq.\,\eqref{eq:D_{iLa}} are related by
 \begin{align}
 	e_{b, i \b L \alpha} (\b q)
-		\equiv {\rm e}^{- \im \b q  \cdot \b L} e_{b, i \alpha} (\b q)~.
+		\equiv \frac{1}{\sqrt{N_{\b q}}} {\rm e}^{- \im \b q  \cdot \b R^0_{i \b L}} \, e_{b, i \alpha} (\b q)~.
 \end{align}
 The completeness relations accordingly read
 \begin{align}
@@ -545,6 +557,7 @@ Using the combined index $s = (\b q, b)$, the notation becomes similar to the no
 \REM{Supercell convergence as manifestation of Ledermann's theorem!}
 
 \section{Mode Projection}
+\TODO{periodic version of Eq. \eqref{eq:mode.projection.u.p}}
 
 \newpage
 
