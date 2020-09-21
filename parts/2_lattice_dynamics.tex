@@ -270,27 +270,28 @@ The solution is given in terms of plane waves,
 \end{subequations}
 where $A_s$ and $\varphi_s$ are chosen based on the initial conditions. It can be beneficial to define the normal coordinates in terms of the complex amplitudes $a^{(\dagger)}_s$ ~,
 \begin{subequations}
+\label{eq:u_s.amplitudes}
 \begin{align}
 	u_s (t) 
-		&\equiv \frac{1}{\sqrt{2}} \left[ \D a_s (t) + \fD a_s (t) \right]~, \\
+		&\equiv \frac{1}{\sqrt{2 \omega_s}} \left[ \D a_s (t) + \fD a_s (t) \right]~, \\
 	p_s (t) 
-		&\equiv \im \frac{\omega_s}{\sqrt{2}} \left[ \D a_s (t) - \fD a_s (t) \right]~,
+		&\equiv \im \sqrt{\frac{\omega_s}{2}} \left[ \D a_s (t) - \fD a_s (t) \right]~,
 \end{align}
 \end{subequations}
-with\marginnote{It follows $A_s = \lvert a_s (t) \rvert~.$}
+with %\marginnote{It follows $\sqrt{\omega_s} A_s = \lvert a_s (t) \rvert~.$}
 \begin{subequations}
 \begin{align}
 	a_s (t) 
 		& = {\rm e}^{- \im \omega_s t} a_s (0)~, \\
 	a_s (0)
-		& = A_s {\rm e}^{- \im \varphi_s}~.
+		& = \sqrt{\omega_s} A_s {\rm e}^{- \im \varphi_s}~.
 \end{align}
 \label{eq:a_s(t)}
 \end{subequations}
-The Hamiltonian in terms of the complex amplitudes $a^{(\dagger)}_s$ then reads\marginnote{The relation to quantum mechanics is achieved by replacing the complex numbers $a^{(\dagger)}_s$ with the operators $\sqrt{\frac{\hbar}{\omega_s}} \hat{a}^{(\dagger)}_s$ fulfilling the canonical commutation relations $$\left[ \fD{\hat{a}}_{\fP s}, \D{\hat a}_{s'} \right] = \delta_{ss'}~.$$}
+The Hamiltonian in terms of the complex amplitudes $a^{(\dagger)}_s$ then reads\marginnote{The relation to quantum mechanics is achieved by replacing the complex numbers $a^{(\dagger)}_s$ with the operators $\sqrt{\hbar} \hat{a}^{(\dagger)}_s$ fulfilling the canonical commutation relations $$\left[ \fD{\hat{a}}_{\fP s}, \D{\hat a}_{s'} \right] = \delta_{ss'}~.$$}
 \begin{align}
 	\mathcal{H}(\b a, \D{\b a})
-		&= \sum_s \omega^2_s \D a_s\fD  a_s~.
+		&= \sum_s \omega_s \D a_s\fD  a_s~.
 \end{align}
 
 \subsection{Harmonic sampling}
@@ -318,7 +319,7 @@ by analogy with QM in thermal equilibrium\marginnote{Bose function ($\beta = 1 /
 Express amplitude $a_s (t)$ in terms of the atomic displacements $\set{\b U_I (t)}$ and velocities $\set{\dot{\b U}_I (t)}$ \TODO{Check units!}
 The inverse relation between the amplitudes $a_s$ in terms of the conjugate variables $\set{u_s, p_s}$ is
 \begin{align}
-a_s (t) = u_s (t) + \frac{\im}{\omega_s} p_s (t)
+a_s (t) = \sqrt{\omega_s} u_s (t) + \frac{\im}{\sqrt{\omega_s}} p_s (t)
 \end{align}
 with
 \begin{subequations}
@@ -501,7 +502,7 @@ In total we define\marginnote{The dynamical matrix elements defined by Eq.\,\eqr
 		{\rm e}^{- \im \b q \cdot \b L'} {D}_{i \b 0 \alpha, j \b L \beta}~.
 	\label{eq:D_Parlinski}
 \end{align}
-Alternative
+\REM{Alternative}
 \begin{align}
 	{D}_{i \alpha, j \beta} (\b q) 	
 		&= \frac{1}{N_{\rm sc}} 
@@ -550,8 +551,29 @@ Using the combined index $s = (\b q, b)$, the notation becomes similar to the no
 		&= \sum_s \omega^2_s \, \fD e_{s, I \alpha} e^\ast_{s, J \beta}~.
 \end{align}
 
-\subsection{Supercell Convergence and Ledermann's Theorem}
+\newthought{In terms of complex amplitudes $a^{(\dagger)}_b (\b q)$}, we define\marginnote{The sign convention enforces that $$u_b^\ast (\b q) = u_b (- \b q)~,$$ so that the displacements $u_I$ are always real.}
+\begin{subequations}
+\begin{align}
+    u_b (\b q)
+    &= \frac{1}{\sqrt{2 \omega_b (\b q)}} \left[ \D a_b (\b q) + \fD a_b (- \b q)  \right] \\
+    p_b (\b q)
+    &= \im \sqrt{\frac{\omega_b (\b q)}{2}} \left[ \D a_b (\b q) - \fD a_b (- \b q)  \right]
+\end{align}
+\end{subequations}
 
+%\begin{subequations}
+\begin{align}
+    \b u_{i \b L}
+    &= \frac{1}{\sqrt{N_{\b q}}} \sum_{b \b q} {\rm e}^{\im  \b q \cdot \b R^0_{i \b L}} \, \b e^\ast_{b i} (\b q) \fD u_b (\b q) 
+    % \\
+    % \b p_{i \b L}
+    % &= \frac{1}{\sqrt{N_{\b q}}} \sum_{b \b q} {\rm e}^{\im  \b q \cdot \b R^0_{i \b L}} \, \b e^\ast_{b i} (\b q) \fD p_b (\b q)
+\end{align}
+%\end{subequations}
+and same for $\b p$.
+
+
+\subsection{Supercell Convergence and Ledermann's Theorem}
 
 \REM{Supercell imposes effective cutoff on the range of the force constants -> effect on spectrum, Maradudin, Ledermann}
 \REM{Supercell convergence as manifestation of Ledermann's theorem!}

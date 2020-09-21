@@ -430,24 +430,17 @@ The atomic stress contributions $\sigma_I$ are functionals of the electron densi
 
 use
 \begin{align}
-    u_s (t) 
-	    &= \sum_I \b e_{s I} \cdot \b u_I (t) \\
-	p_s (t) 
-		&= \sum_I \b e_{s I}^\ast \cdot \b p_I (t)
-\end{align}
-
-\begin{align}
-\b u_I (t)
-	&= \sum_s \b{e}^\ast_{sI} \, \fD u_s (t) \\ 
-\b p_I (t)
-	&= \sum_s \b{e}_{sI} \, \fD p_s (t)
+    \b u_I (t) 
+	    &= \sum_s \b e_{s I} u_s (t) \\
+	\b p_I (t) 
+		&= \sum_s \b e_{s I}^\ast \D{p}_s (t)
 \end{align}
 
 then
 \begin{align}
-    \b J (t) = \sum_{IJ, sp} J_{IJ,sp} \dot{u}_s (t) u_p (t)
+    \b J (t) = \sum_{ss'} v_{ss'} \omega_{s} \D p_s (t) u_{s'} (t)
 \end{align}
-
+\CITE{Hardy, Isaeva}
 \begin{align}
     \braket{J^\alpha (t) J^\beta (0)} = \sum_{IJKL, spqr} c_{IJKL,spqr} \braket{\dot{u}_s (t) u_p (t) \dot{u}_q u_r}
 \end{align}
