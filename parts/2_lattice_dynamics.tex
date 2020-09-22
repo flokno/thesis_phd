@@ -319,21 +319,23 @@ by analogy with QM in thermal equilibrium\marginnote{Bose function ($\beta = 1 /
 Express amplitude $a_s (t)$ in terms of the atomic displacements $\set{\b U_I (t)}$ and velocities $\set{\dot{\b U}_I (t)}$ \TODO{Check units!}
 The inverse relation between the amplitudes $a_s$ in terms of the conjugate variables $\set{u_s, p_s}$ is
 \begin{align}
-a_s (t) = \sqrt{\omega_s} u_s (t) + \frac{\im}{\sqrt{\omega_s}} p_s (t)
+	a_s (t) = \sqrt{\frac{\omega_s}{2}} u_s (t) + \frac{\im}{\sqrt{2 \omega_s}} p_s (t)
 \end{align}
 with
 \begin{subequations}
-	\label{eq:mode.projection.u.p}
+	\label{eq:mode.projection.u_s}
 \begin{align}
 	u_s (t) 
-	    & = \sum_I \sqrt{M_I} \b e_{sI} \cdot \b U_I (t) \\
-	p_s (t)
-	    & = \sum_I \sqrt{M_I} \b e_{sI} \cdot \dot{\b U}_I (t) %\\
+	    & = \sum_I \sqrt{M_I} \b e_{sI} \cdot \b U_I (t) ~,
+%\\
+%	p_s (t)
+%	    & = \sum_I \sqrt{M_I} \b e_{sI} \cdot \dot{\b U}_I (t) %\\
 %	\implies
 %	a_s (t) 
 %	    &= \sum_I \sqrt{M_I} \b e_{sI} \cdot \left[ \b U_I(t) + \frac{\im}{\omega_s} \dot{\b U}_I (t) \right]
 \end{align}
 \end{subequations}
+and likewise for $p_s (t)$ with $\set{\dot{\b U}_I}$ instead of $\set{\b U_I}$.
 
 
 
@@ -502,6 +504,7 @@ In total we define\marginnote{The dynamical matrix elements defined by Eq.\,\eqr
 		{\rm e}^{- \im \b q \cdot \b L'} {D}_{i \b 0 \alpha, j \b L \beta}~.
 	\label{eq:D_Parlinski}
 \end{align}
+\TODO{Is anything of this necessary besides defining the eigenvectors once and introducing $s = (b, \b q)$?}
 \REM{Alternative}
 \begin{align}
 	{D}_{i \alpha, j \beta} (\b q) 	
@@ -521,7 +524,15 @@ For each $\b q$, ${\rm D} (\b q)$ is a hermitian $3n \times 3n$ matrix in the in
 		&= \sum_b \omega^2_b (\b q) \, \fD e_{b, i \alpha} (\b q) e^\ast_{b, j \beta} (\b q)~,
 \end{align}
 \end{subequations}
-where the \emph{band index} $b$ is used to discern the $3n$ \emph{branches} at each $\b q$.\footnote{The notation highlights that the $\b q$ become quasi-continuous in the $N \to \infty$ limit. In that case, $\frac{1}{N_{\b q}} \sum_{\b q} \to \int \frac{\d^3 q}{(2 \pi)^3}$} With the help of Eq.\,\eqref{eq:D_ij(q)}, the dynamical matrix $\mathrm D_{IJ}$ for the full sysystem can be written as
+where the \emph{band index} $b$ is used to discern the $3n$ \emph{branches} at each $\b q$.\footnote{The notation highlights that the $\b q$ become quasi-continuous in the $N \to \infty$ limit. In that case, $\frac{1}{N_{\b q}} \sum_{\b q} \to \int \frac{\d^3 q}{(2 \pi)^3}$} 
+Since ${\rm D} (\b q)$ is hermitian, it follows that
+\begin{align}
+	D_{i \alpha, j \beta} (- \b q) 
+		& = D_{i \alpha, j \beta}^\ast (\b q)~,\text{ and} \\
+	e_{b, i \alpha} (- \b q)
+		&= e^\ast_{b, i \alpha} (\b q)~.
+\end{align}
+With the help of Eq.\,\eqref{eq:D_ij(q)}, the dynamical matrix $\mathrm D_{IJ}$ for the full system can be written as
 \begin{align}
 %	D_{i \b 0 \alpha, j \b L \beta}
 %		& = \frac{1}{N_{\b q}} \sum_{\b q} {\rm e}^{- \im \b q \cdot (\b R_{i}^0 - \b R_{j}^0 - \b L)} {D}_{i \alpha, j \beta} (\b q) \\
@@ -536,6 +547,7 @@ The eigenvectors of the $3n \times 3n$ matrices $\mathrm D (\b q)$ appearing in 
 	e_{b, i \b L \alpha} (\b q)
 		\equiv \frac{1}{\sqrt{N_{\b q}}} {\rm e}^{- \im \b q  \cdot \b R^0_{i \b L}} \, e_{b, i \alpha} (\b q)~.
 \end{align}
+\REM{$e_{b, i \b L \alpha} (\b q)$ are real at \emph{commensurate} q-points, this expresses the 1:1 correspondence between lattice points $\b L$ and reciprocal $\b q$ points.}
 The completeness relations accordingly read
 \begin{align}
 	\sum_{i \b L \alpha} \fD e_{b, i \b L \alpha} (\b q) e^\ast_{b', i \b L \alpha} (\b q') 
@@ -545,32 +557,55 @@ The completeness relations accordingly read
 	\label{eq:completeness.e_bq}
 \end{align}
 
-Using the combined index $s = (\b q, b)$, the notation becomes similar to the non-periodic case with $3N_{\rm sc} N_{\rm uc}$ degrees of freedom, only that the eigenvectors $\b e_{s = (\b q, n)}$ can be complex-valued instead of strictly real:
+Using the combined index $s = (\b q, b)$, the notation becomes similar to the non-periodic case with $3N_{\rm sc} N_{\rm uc}$ degrees of freedom, only that the eigenvectors $\b e_{s = (\b q, b)}$ can be complex-valued instead of strictly real:
 \begin{align}
 	D_{I \alpha, J \beta}
-		&= \sum_s \omega^2_s \, \fD e_{s, I \alpha} e^\ast_{s, J \beta}~.
+		&= \sum_s \omega^{2}_{s \vphantom I} \, \fD e_{s, I \alpha} e^\ast_{s, J \beta}~.
 \end{align}
 
 \newthought{In terms of complex amplitudes $a^{(\dagger)}_b (\b q)$}, we define\marginnote{The sign convention enforces that $$u_b^\ast (\b q) = u_b (- \b q)~,$$ so that the displacements $u_I$ are always real.}
 \begin{subequations}
+	\label{eq:u_b(q).amplitudes}
 \begin{align}
     u_b (\b q)
-    &= \frac{1}{\sqrt{2 \omega_b (\b q)}} \left[ \D a_b (\b q) + \fD a_b (- \b q)  \right] \\
+    &=   \frac{1}{\sqrt{2 \omega_b (\b q)}} \left[ \D a_b (- \b q) + \fD a_b (\b q)  \right] \\
     p_b (\b q)
-    &= \im \sqrt{\frac{\omega_b (\b q)}{2}} \left[ \D a_b (\b q) - \fD a_b (- \b q)  \right]
+    &= \im \sqrt{\frac{\omega_b (\b q)}{2}} \left[ \D a_b (- \b q) - \fD a_b (\b q)  \right]
 \end{align}
 \end{subequations}
-
-%\begin{subequations}
+The inverse relation is given by
+\begin{subequations}
+	\label{eq:a(q)}
+	\begin{align}
+	a_b (\b q)
+		&= \sqrt{\frac{\omega_b (\b q)}{2}} u_b (\b q) + \frac{\im}{\sqrt{2 \omega_b (\b q)}} p_b (\b q) \\
+	a^\dagger_b (-  \b q)
+		&= \sqrt{\frac{\omega_b (\b q)}{2}} u_b (\b q) - \frac{\im}{\sqrt{2 \omega_b (\b q)}} p_b (\b q)
+	\end{align}
+\end{subequations}
+The displacements are recovered by
 \begin{align}
     \b u_{i \b L}
-    &= \frac{1}{\sqrt{N_{\b q}}} \sum_{b \b q} {\rm e}^{\im  \b q \cdot \b R^0_{i \b L}} \, \b e^\ast_{b i} (\b q) \fD u_b (\b q) 
+    &= \frac{1}{\sqrt{N_{\b q}}} \sum_{b \b q} {\rm e}^{\im  \b q \cdot \b R^0_{i \b L}} \, \b e^\ast_{b i} (\b q) \fD u_b (\b q)
+    \label{eq:u_iL}
     % \\
     % \b p_{i \b L}
     % &= \frac{1}{\sqrt{N_{\b q}}} \sum_{b \b q} {\rm e}^{\im  \b q \cdot \b R^0_{i \b L}} \, \b e^\ast_{b i} (\b q) \fD p_b (\b q)
 \end{align}
 %\end{subequations}
-and same for $\b p$.
+and likewise for $\b p$.
+
+The Hamiltonian reads
+\begin{align}
+	\mathcal H (u_b, p_b)
+		&= \frac{1}{2} \sum_{b \b q} \left[ p^\ast_b (\b q) p_b (\b q) + \omega^2_b (\b q) u^\ast_b (\b q) u_b (\b q) \right] 
+\end{align}
+Equations of motion
+\begin{align}
+	\ddot{u}_b (\b q)
+		= \dot{p}_b (\b q)
+		= - \frac{\partial \mathcal{H}}{\partial u_b^\ast (\b q)}
+\end{align}
 
 
 \subsection{Supercell Convergence and Ledermann's Theorem}
@@ -579,7 +614,13 @@ and same for $\b p$.
 \REM{Supercell convergence as manifestation of Ledermann's theorem!}
 
 \section{Mode Projection}
-\TODO{periodic version of Eq. \eqref{eq:mode.projection.u.p}}
+
+\begin{align}
+	u_b (\b q, t) 
+		& = \sum_{i \b L} \sqrt{M_I} \, \b e_{s, i\b L} (\b q) \cdot \b U_{i \b L} (t) ~,
+	\label{eq:mode.projection.u_b(q)}
+\end{align}
+and likewise for $p_b (\b q, t)$ with $\set{\dot{\b U}_{i \b L}}$ instead of $\set{\b U_{i \b L}}$.
 
 \newpage
 
@@ -659,7 +700,7 @@ A complementary approach is to use the symmetry elements $\set{g}$ to reduce the
 \end{align}
 where the $\tilde{\Phi}_i$ are \emph{solely} determined by the space group elements $\set{g}$ and analytical properties of the forceconstants, and only the \emph{irreducible components} $p_i$ are system dependent. The pseudoinverse procedure given in Eq.\,\eqref{eq:phi.pseudo.1} then only has to be performed for the $D$ parameters $p_i$~\cite{Parlinski1997}. This procedure can drastically reduce the number of free parameters in the forceconstant matrix. For example, in a $4\times4\times4$ bcc lattice with 128 atoms, $\Phi$ is a matrix with $(3 \cdot 128)^2 = 147456$ elements. However, there are only $D=11$ irreducible parameters $p_i$ that need to be determined~\cite{Hellman2013}.
 
-\REM{Add the theory for symmetry reduction in practice to appendix?}
+\TODO{Add the theory for symmetry reduction in practice to appendix}
 
 \newpage
 

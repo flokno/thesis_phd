@@ -422,25 +422,73 @@ The atomic stress contributions $\sigma_I$ are functionals of the electron densi
 \CITE{[1] O. H. Nielsen and R. M. Martin, Phys. Rev. B 32, 3780 (1985).}
 
 \section{Heat Flux and the Harmonic Approximation}
-\CITE{Isaeva}
 
+We will discuss heat flux in the harmonic approximation. This work was pioneered by \CITE{Debye} and \CITE{Peierls}, with a formal derivation first presented by Hardy~\cite{Hardy1963}. The derivation is inspired by \CITE{Isaeva et al.} although these authors draw slightly different conclusions.
+
+
+Heat flux as defined in Eq.\,\eqref{eq:hf.J.atomic}
 \begin{align}
-    \b J (t) = \sum_{IJ} (\b R_I^0 - \b R_J^0) D_{I \alpha, J \beta} \, p_I (t) u_J (t)
+	\b J (t) 
+		&= \sum_I \left[ \b R_I^0 \fD{\dot{E}}_I + \b U_I \dot{E}_I + \dot{\b U}_I E_I\right]
+		= \sum_I \b R_I^0 \fD{\dot{E}}_I + \cancel{\frac{\d}{\d t} \sum_I \b U_I E_I}~.
+\end{align}
+The last term vanishes since $\b P = \sum_I \b U_I E_I$ is a \emph{bounded} vector function in the absence of diffusive currents and therefore does not contribute to the thermal conductivity~\CITE{Ercole}.
+The atomic energy contribution expressed in mass-scaled displacements $\set{\b u_I}$ and momenta $\set{\b p_I}$ reads
+\begin{align}
+	E_I = \halb p_I^2 + \halb \sum_J D_{I \alpha , J \beta} \, u_I^\alpha u_J^\beta~.
+\end{align}
+Combining the two equations using the symmetry of the dynamical matrix, we have\marginnote{The harmonic forces are
+	\begin{align*}
+	\dot{p}_I^\alpha = - \frac{\partial E}{\partial u_I^\alpha} = \sum_J D_{I \alpha , J \beta} \, u_J^\beta~.
+	\end{align*}
+}
+\begin{align}
+    \b J (t) = \halb \sum_{IJ} (\b R_I^0 - \b R_J^0) D_{I \alpha, J \beta} \, u_I^\alpha (t) p_J^\beta (t)~.
 \end{align}
 
-use
+use\marginnote{With Eq.\,\eqref{eq:u_b(q).amplitudes}:
+	\begin{align*}
+		u_b (\b q)
+			&=   \frac{1}{\sqrt{2 \omega_b (\b q)}} \left[ \D a_b (- \b q) + \fD a_b (\b q)  \right] \\
+		p_b (\b q)
+			&= \im \sqrt{\frac{\omega_b (\b q)}{2}} \left[ \D a_b (- \b q) - \fD a_b (\b q)  \right]
+	\end{align*}
+	\REM{Shorthand $s=(b, \b q)$, $-s = (b, -\b q)$}.
+}
 \begin{align}
     \b u_I (t) 
-	    &= \sum_s \b e_{s I} u_s (t) \\
-	\b p_I (t) 
-		&= \sum_s \b e_{s I}^\ast \D{p}_s (t)
+	    &= \sum_s \b e^\ast_{s I} \fD u_s (t)~,\quad\text{and}\quad	\b p_I (t) = \sum_s \fD{\b e}_{s I} \D{p}_s (t)
 \end{align}
 
 then
 \begin{align}
-    \b J (t) = \sum_{ss'} v_{ss'} \omega_{s} \D p_s (t) u_{s'} (t)
+    \b J (t) 
+	    %&= \halb \sum_{ss'} \b v_{ss'} \omega_{s} \D u_s (t) p_{s'} (t) \\
+	    &= \halb \sum_{ss'} \b v_{ss'} \omega_{s} \left( \D a_{-s} + \fD a_{s}  \right) \left( \D a_{s'} - \fD a_{-s'}  \right)
 \end{align}
-\CITE{Hardy, Isaeva}
+
+with the generalized group velocity
+\marginnote{With the shorthand notation $s=(b, \b q)$ and $I = (i, \b L)$, we find that the diagonal term $\b v_s = \b v_{ss'}$ is indeed the group velocity:
+	\begin{align*}
+		\b v_{s} 
+			&= \frac{\partial \omega_s}{\partial \b q}  = \frac{1}{2 \omega_s} \frac{\partial \omega_s^2}{\partial \b q} \\
+			&= \frac{1}{2 \omega_s} \sum_{ij} e^\ast_{s, i \alpha} \frac{\partial D_{i \alpha, j \beta} (\b q)}{\partial \b q} e_{s, j \beta} \\
+			&= \frac{1}{2 \omega_s} \sum_{I, J} \im \left( \b R^0_{I} - \b R^0_{J} \right)
+			D_{I \alpha, J \beta}	e^\ast_{s, I \alpha} e_{s, J \beta}~.
+	\end{align*}}
+\begin{align}
+	\b v_{ss'}
+		&= \frac{1}{2 \sqrt{\omega_s \omega_{s'}}} \sum_{IJ} \im (\b R^0_I - \b R^0_J) D_{I \alpha, J \beta} e^\ast_{s, I \alpha} \fD e_{s', J \beta}
+\end{align}
+decompose into diagonal ($s=s'$) and off-diagonal ($s \neq s'$) contribution, as first noted by Hardy~\cite{Hardy1963}
+\begin{align}
+	\b J^{\rm diago} (t) 
+%		= \halb \sum_{s} \fD{\b v}_{s} \fD \omega_{s} \D p_s (t) u_{s} (t)
+		= \sum_{s} \b v_{s} \omega_{s} n_s (t)~.
+\end{align}
+where it was used that $\b v (- \b q) = - \b v (\b q)$, and $n_s (t) \equiv \D a_s (t) \fD a_s (t)$ is the mode occupation. Off-resonant terms $\D a_s \D a_{s'}$ and $a_s a_{s'}$ are neglected right away.
+
+Sort out if the conductivity is infinte
 \begin{align}
     \braket{J^\alpha (t) J^\beta (0)} = \sum_{IJKL, spqr} c_{IJKL,spqr} \braket{\dot{u}_s (t) u_p (t) \dot{u}_q u_r}
 \end{align}
