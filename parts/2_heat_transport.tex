@@ -445,28 +445,25 @@ Combining the two equations using the symmetry of the dynamical matrix, we have\
 \begin{align}
     \b J (t) = \halb \sum_{IJ} (\b R_I^0 - \b R_J^0) D_{I \alpha, J \beta} \, u_I^\alpha (t) p_J^\beta (t)~.
 \end{align}
-
-use\marginnote{With Eq.\,\eqref{eq:u_b(q).amplitudes}:
+By decomposing the displacements ${\b u_I}$ and velocities $\set{\b p_I}$ into normal mode coordinates by\marginnote{With Eq.\,\eqref{eq:u_s.amplitudes.periodic}:
 	\begin{align*}
-		u_b (\b q)
-			&=   \frac{1}{\sqrt{2 \omega_b (\b q)}} \left[ \D a_b (- \b q) + \fD a_b (\b q)  \right] \\
-		p_b (\b q)
-			&= \im \sqrt{\frac{\omega_b (\b q)}{2}} \left[ \D a_b (- \b q) - \fD a_b (\b q)  \right]
+	u_s (t) 
+		&\equiv \frac{1}{\sqrt{2 \omega_{s}}} \left[ \D a_{-s} (t) + \fD a_s (t) \right]~, \\
+	p_s (t) 
+		&\equiv \im \sqrt{\frac{\omega_s}{2}} \left[ \D a_{-s} (t) - \fD a_s (t) \right]~.
 	\end{align*}
-	\REM{Shorthand $s=(b, \b q)$, $-s = (b, -\b q)$}.
 }
 \begin{align}
     \b u_I (t) 
-	    &= \sum_s \b e^\ast_{s I} \fD u_s (t)~,\quad\text{and}\quad	\b p_I (t) = \sum_s \fD{\b e}_{s I} \D{p}_s (t)
+	    &= \sum_s \b e^\ast_{s I} \fD u_s (t)~,\quad\text{and}\quad	\b p_I (t) = \sum_s \fD{\b e}_{s I} \D{p}_s (t)~,
 \end{align}
-
-then
+the harmonic heat flux reads
 \begin{align}
     \b J (t) 
 	    %&= \halb \sum_{ss'} \b v_{ss'} \omega_{s} \D u_s (t) p_{s'} (t) \\
-	    &= \halb \sum_{ss'} \b v_{ss'} \omega_{s} \left( \D a_{-s} + \fD a_{s}  \right) \left( \D a_{s'} - \fD a_{-s'}  \right)
+	    &= \halb \sum_{ss'} \b v_{ss'} \omega_{s} \left( \D a_{-s} + \fD a_{s}  \right) \left( \D a_{s'} - \fD a_{-s'}  \right)~,
+	  \label{eq:J.ha}
 \end{align}
-
 with the generalized group velocity
 \marginnote{With the shorthand notation $s=(b, \b q)$ and $I = (i, \b L)$, we find that the diagonal term $\b v_s = \b v_{ss'}$ is indeed the group velocity:
 	\begin{align*}
@@ -478,15 +475,18 @@ with the generalized group velocity
 	\end{align*}}
 \begin{align}
 	\b v_{ss'}
-		&= \frac{1}{2 \sqrt{\omega_s \omega_{s'}}} \sum_{IJ} \im (\b R^0_I - \b R^0_J) D_{I \alpha, J \beta} e^\ast_{s, I \alpha} \fD e_{s', J \beta}
+		&= \frac{1}{2 \sqrt{\omega_s \omega_{s'}}} \sum_{IJ} \im (\b R^0_I - \b R^0_J) D_{I \alpha, J \beta} e^\ast_{s, I \alpha} \fD e_{s', J \beta}~.
 \end{align}
-decompose into diagonal ($s=s'$) and off-diagonal ($s \neq s'$) contribution, as first noted by Hardy~\cite{Hardy1963}
+Using that $\b v (- \b q) = - \b v (\b q)$ and defining the mode occupation $n_s (t) \equiv \D a_s (t) \fD a_s (t)$, the diagonal contribution ($s=s'$) to this flux is the familiar
 \begin{align}
 	\b J^{\rm diag} (t) 
 %		= \halb \sum_{s} \fD{\b v}_{s} \fD \omega_{s} \D p_s (t) u_{s} (t)
 		= \sum_{s} \b v_{s} \omega_{s} n_s (t)~.
+	\label{eq:J.ha.diag}
 \end{align}
-where it was used that $\b v (- \b q) = - \b v (\b q)$, and $n_s (t) \equiv \D a_s (t) \fD a_s (t)$ is the mode occupation. Off-resonant terms $\D a_s \D a_{s'}$ and $a_s a_{s'}$ are neglected right away.
+This result was first suggested by Peierls~\CITE{Peierls~1931} and later rigorously derived by Hardy~\cite{Hardy1963}.
+
+\newthought{With the harmonic heat flux at hand}, it is easy to see that in a purely harmonic model, the thermal conductivity $\kappa$ is ill-defined.
 
 Sort out if the conductivity is infinte
 \begin{align}

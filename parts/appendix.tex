@@ -160,3 +160,52 @@ under the boundary condition $y (t \to -\infty) = 0$. In total we obtain
   \Delta f(t) 
     &= - {\rm e}^{- \im L^0 t}  \int_{-\infty}^t \d t' \, {\rm e}^{\im L^0 t'} \im \Delta L (t') f^0~.
 \end{align}
+
+\chapter{Explicit Formulas}
+\section{Harmonic Approximation}
+\label{app:ha.formulas}
+In Sec.\,\ref{sec:dynmat.periodic}, we introduced the shorthand notation $s=(b, \b q)$, $-s=(b, -\b q)$ to write brief formulas. We give the explicit form of these formulas here.
+
+\newthought{The normal mode coordinates} in the periodic case in terms of complex amplitudes $a^{(\dagger)}_b (\b q)$ read
+\begin{subequations}
+	\label{eq:u_b(q).amplitudes}
+	\begin{align}
+	u_b (\b q)
+	&=   \frac{1}{\sqrt{2 \omega_b (\b q)}} \left[ \D a_b (- \b q) + \fD a_b (\b q)  \right] \\
+	p_b (\b q)
+	&= \im \sqrt{\frac{\omega_b (\b q)}{2}} \left[ \D a_b (- \b q) - \fD a_b (\b q)  \right]
+	\end{align}
+	\end{subequations}
+	The inverse relation is given by
+	\begin{subequations}
+		\label{eq:a(q)}
+		\begin{align}
+		a_b (\b q)
+		&= \sqrt{\frac{\omega_b (\b q)}{2}} u_b (\b q) + \frac{\im}{\sqrt{2 \omega_b (\b q)}} p_b (\b q) \\
+		a^\dagger_b (-  \b q)
+		&= \sqrt{\frac{\omega_b (\b q)}{2}} u_b (\b q) - \frac{\im}{\sqrt{2 \omega_b (\b q)}} p_b (\b q)
+		\end{align}
+		\end{subequations}
+		The displacements are recovered by
+		\begin{align}
+		\b u_{i \b L}
+		&= \frac{1}{\sqrt{N_{\b q}}} \sum_{b \b q} {\rm e}^{\im  \b q \cdot \b R^0_{i \b L}} \, \b e^\ast_{b i} (\b q) \fD u_b (\b q)
+		\label{eq:u_iL}
+		% \\
+		% \b p_{i \b L}
+		% &= \frac{1}{\sqrt{N_{\b q}}} \sum_{b \b q} {\rm e}^{\im  \b q \cdot \b R^0_{i \b L}} \, \b e^\ast_{b i} (\b q) \fD p_b (\b q)
+		\end{align}
+		%\end{subequations}
+		and likewise for $\b p$.
+		
+		The Hamiltonian reads
+		\begin{align}
+		\mathcal H (u_b, p_b)
+		&= \frac{1}{2} \sum_{b \b q} \left[ p^\ast_b (\b q) p_b (\b q) + \omega^2_b (\b q) u^\ast_b (\b q) u_b (\b q) \right] 
+		\end{align}
+		Equations of motion
+		\begin{align}
+		\ddot{u}_b (\b q)
+		= \dot{p}_b (\b q)
+		= - \frac{\partial \mathcal{H}}{\partial u_b^\ast (\b q)}
+		\end{align}
