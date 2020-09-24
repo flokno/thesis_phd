@@ -204,6 +204,7 @@ and
 Here, $J^\alpha$ is the macroscopic generalized current associated with the extensive property $A$, $F_\beta$ is the thermodynamic force, and $L^{\alpha \beta}$ is the associated conductance tensor~\cite{Onsager1931a,Baroni2020a}.
 
 \subsection{Thermal Conductivity}
+\label{sec:Thermal.Conductivity}
 After this general exposition, let us now look at the example of the total energy of the system and its associated energy density,
 \begin{align}
 	E = \int_V \d^3 r ~ e(\b r)~.
@@ -486,40 +487,111 @@ Using that $\b v (- \b q) = - \b v (\b q)$ and defining the mode occupation $n_s
 \end{align}
 This result was first suggested by Peierls~\CITE{Peierls~1931} and later rigorously derived by Hardy~\cite{Hardy1963}.
 
-\newthought{With the harmonic heat flux at hand}, it is easy to see that in a purely harmonic model, the thermal conductivity $\kappa$ is ill-defined.
+\newthought{With the harmonic heat flux at hand}, it is straightforward to show that the thermal conductivity of a purely harmonic system is infinite. At the same time, useful approximations to compute the thermal conductivity from a perturbation theory perspective can be found. We demonstrate the reasoning for the case of the diagonal contribution to the heat flux $\b J^{\rm diag}$ given by Eq.\,\eqref{eq:J.ha.diag}. The additional terms stemming from the offdiagonal contribution to the heatflux have been worked out in Ref.\,\cite{Isaeva2019}.
 
-Sort out if the conductivity is infinte
+As discussed in detail in Sec.\,\ref{sec:Thermal.Conductivity}, the thermal conductivity is given by the Kubo formula
 \begin{align}
-    \braket{J^\alpha (t) J^\beta (0)} = \sum_{IJKL, spqr} c_{IJKL,spqr} \braket{\dot{u}_s (t) u_p (t) \dot{u}_q u_r}
+	\kappa
+		&=
+		\frac{V}{k_{\rm B} T^2} \int_{0}^{\infty} 
+		\d t \braket{J (t) J} ~,
 \end{align}
-
-One-particle Green's function:
+where we have omitted the Cartesian components for clarity.
+The contribution from the diagonal harmonic heatflux therefore reads\footnote{We simply denote $J \equiv J^{\rm diag}$ in the following.}
 \begin{align}
-    \braket{a_{s} (t) a_{s'}} 
-    & =  0 \\
-    \braket{\D{a}_{\fP s} (t) \fD{a}_{s'}} 
-    & =  {\rm e}^{\im \omega_s t} \delta_{ss'}
+    \braket{J(t) J} = \sum_{ss'} \omega_s \omega_{s'} v_{\fP s} v_{s'}
+	    \braket{\D a_s (t) \fD{a}_s (t) \D a_{s'} \fD a_{s'}}~.
+	   \label{eq:ha.kappa.J.corr}
 \end{align}
-
-Either oscillating terms \TODO{write out contraction once}
+The expectation value $\braket{\cdot}$ can be viewed as a functional integral with the distribution function $f = {\rm e}^{-\beta \sum_s \omega_s n_s}$ and can therefore be evaluated by means of a Wick theorem.\footnote{In the context of complex field integration, the Wick theorem reads~\cite{Negele2018} $$\braket{ABCD} = \braket{AB}\braket{CD} + \braket{AC}\braket{BD} + \braket{AD}\braket{BC}.$$}
+Keeping only the non-vanishing pairings, we have
 \begin{align}
-    \braket{\D{a}_{s} (t) \fD{a}_{p} \D{a}_{q} (t) \fD{a}_{r}} 
-    & =  {\rm e}^{\im (\omega_s - \omega_q) t} \delta_{sp} \delta_{qr}
+	\braket{\D a_s (t) \fD{a}_s (t) \D a_{s'} \fD a_{s'}}
+		= \braket{n_s} \braket{n_{s'}} + \fD g_s (t) g^\ast_{s} (t) \delta_{ss'}~,
+	\label{eq:ha.kappa.wick}
 \end{align}
-or when $s=q$ contstant term that integrates to infinity.
-
-Finite conductivity when
+where $\braket{n_s} = \frac{k_{\rm B} T}{\omega_s}$
+%\begin{align}
+%	\braket{n_s} = \frac{k_{\rm B} T}{\omega_s}
+%\end{align}
+is the classical mode occupation, and the one-particle Green's function $g_s (t)$ is defined by
 \begin{align}
-    \braket{\D{a}_{\fP s} (t) \fD{a}_{s'}} 
-    & = {\rm e}^{\im \omega_s t} {\rm e}^{- t / \tau_s} \delta_{ss'}
+	g_s (t) \delta_{ss'}
+		\equiv \braket{\D{a}_{\fP s} (t) \fD{a}_{s'}} 
+		= {\rm e}^{\im \omega_s t} \braket{n_s} \delta_{ss'}~,
 \end{align}
-
-Perturbation theory
+where the time evolution of the complex amplitudes $a^{\dagger} (t) = {\rm e}^{\im \omega_s t} \D a_s(0)$ was used.
+It is apparent that the correlation function defined in Eq.\,\eqref{eq:ha.kappa.wick} is not time-dependent, and the heatflux autocorrelation function defined in Eq.\,\eqref{eq:ha.kappa.J.corr} is given by
 \begin{align}
-    \tau_s = \ldots
+	\braket{J (t) J} = \cancel{\braket{J}^2} + \sum_s \braket{J_s^2}~.
+	\label{eq:ha.kappa.JJ}
 \end{align}
+In thermodynamic equilibrium, the expectation value of the heatflux, $\braket{J}$, vanishes, the mode variance $J_s^2$ however does not vanish. The harmonic heatflux autocorrelation function therefore integrates to infinity and the thermal conductivity $\kappa$ diverges.
 
-\section{Ab initio Green Kubo}
+\newthought{A finite thermal conductivity} is obtained when the phonons are allowed to interact, for example by introducing impurities, electron-phonon interactions, or self interactions via anharmonic contributions to the potential-energy surface. If the perturbation is weak, it can be expressed by modified Green's functions
+\begin{align}
+	g_s (t) = {\rm e}^{\im \left( \omega_s + \Sigma_s \right) t} \braket{n_s}~,
+	\label{eq:ha.kappa.g.self}
+\end{align}
+where $\Sigma_s$ is the phonon self energy. Assuming the self energy to be purely imaginary, $\Sigma_s = \im \Gamma_s$, we have
+\begin{align}
+	\fD g_s (t) g^\ast_{s} (t) = {\rm e}^{- 2 \Gamma_s t} \braket{n_s}^2
+	\equiv {\rm e}^{-t / \tau_s} \braket{n_s}^2~,
+	\label{eq:ha.kappa.gg.Sigma}
+\end{align}
+where he have defined the lifetime $\tau_s = 1 / 2 \Gamma_s$. The heatflux autocorrelation function now reads
+\begin{align}
+	\braket{J (t) J} = \sum_s \braket{J_s^2} {\rm e}^{-t / \tau_s}~.
+	\label{eq:ha.kappa.JJ.pert}
+\end{align}
+The thermal conductivity now integrates to a finite value,\marginnote{Using $$J_s = \omega_s v_s n_s$$ and $$\braket{n_s} = \frac{k_{\rm B} T}{\omega_s}~.$$}
+\begin{align}
+	\kappa^{\alpha \beta} = V k_{\rm B} \sum_{s} v^\alpha_s v^\beta_s \tau_s~.
+	\label{eq:ha.kappa.bte}
+\end{align}
+The same expression can be found from a Boltzmann transport approach using the \emph{single-mode relaxation-time approximation}.\CITE{Broido etc.}
 
-\section{Approximative Anharmonic Methods}
-\REM{Boltzmann transport}
+\newthought{We can generalize the thoughts above} by going one step back to the heatflux autocorrelation function defined in Eq.\,\eqref{eq:ha.kappa.J.corr}, this time making explicit that $J = \braket{J} + \delta J$ with $\braket{J} = 0$. We can therefore write
+\begin{align}
+	\braket{\delta J(t)  \delta J} 
+		&= \sum_{ss'} \omega_s \omega_{s'} v_{\fP s} v_{s'}
+	\braket{\delta n_s (t) \delta n_{s'}} \\
+	&= \sum_{ss'} \braket{n_s} \omega_s \braket{n_{s'}} \omega_{s'} ~ v_{s} v_{s'}
+	\frac{\braket{\delta n_s (t) \delta n_{s'}}}{\braket{n_s} \braket{n_{s'}}}
+	~.
+\label{eq:ha.kappa.dJ.corr}
+\end{align}
+As before, the thermal conductivity is obtained by integrating the autocorrelation function. We get
+\begin{align}
+	\kappa^{\alpha \beta}
+		= V \sum_{ss'} c_{ss'} v^\alpha_{\fP s} v^\beta_{s'} \tau_{ss'}~,
+\end{align}
+%with $c_{ss'} = 1/k_{\rm B}T^2 \braket{n_s} \omega_s \braket{n_{s'}} \omega_{s'}$, 
+where we define the lifetime
+\begin{align}
+	\tau_{ss'} 
+		=	\int_{0}^{\infty} \d t ~ \frac{\braket{\delta n_s (t) \delta n_{s'}}}{\braket{n_s} \braket{n_{s'}}}~
+	\label{eq:lifetime.md}
+\end{align}
+by analogy with the considerations above.
+
+\subsection{Heat Transport and Anharmonicity}
+In low-order perturbation theory, the phonon self energy can be obtained by approximating the potential-energy surface as
+\begin{align}
+	\mathcal{V} (\b R) \approx V^{(2)} (\b R) + V^{(3)} (\b R)~,
+	\label{eq:V3}
+\end{align}
+where $V^{(2)} (\b R)$ denotes the harmonic potential, and $V^{(3)} (\b R)$ is obtained by expanding the potential $\mathcal V (\b R)$ to third order.
+
+\begin{align}
+	\Gamma_{s}=\frac{\pi \hbar^{2}}{8 \omega_{s}} \sum_{pq} \frac{\left|V^{'''}_{spq}\right|^{2}}{\omega_{p} \omega_{p}}
+		&\left[ 
+	  \frac{1}{2}\left(1+n_{p}+n_{l}\right) \delta\left(\omega_{s}-\omega_{p}-\omega_{q}\right) \right. \\
+		&\left.~~~~ \phantom{\halb} + \left(n_{p}-n_{q}\right) \delta\left(\omega_{s}+\omega_{p}-\omega_{q}\right)\right],
+\end{align}
+\CITE{FabianAllen1996}
+
+\begin{itemize}
+	\item lifetime depends on ``anharmonic strength'' and scattering phase-space
+	\item scattering phase space becomes less and less important when the dispersions blur out
+\end{itemize}
