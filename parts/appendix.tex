@@ -209,3 +209,34 @@ In Sec.\,\ref{sec:dynmat.periodic}, we introduced the shorthand notation $s=(b, 
 		= \dot{p}_b (\b q)
 		= - \frac{\partial \mathcal{H}}{\partial u_b^\ast (\b q)}
 		\end{align}
+
+\newpage
+
+\section{Heat Capacity}
+\begin{subequations}
+\begin{align}
+	\beta
+		& = \frac{1}{k_{\rm B} T} \\
+	c_V 
+		&= \frac{\partial E}{\partial T} \\
+	E (T)
+		&= \sum_s \hbar \omega_s n_s (T) \\
+	n_s (T)
+		&= \frac{1}{e^{\beta \hbar \omega_s} - 1} \\
+	\frac{\partial n_s}{\partial T}
+		&= \frac{\hbar \omega_s}{k_{\rm B} T^2} \, n_s (n_s + 1) \\
+	\implies c_V
+		&= \sum_s \underset{c_{V, s}}{\underbrace{\frac{\hbar^2 \omega_s^2}{k_{\rm B} T^2} \, n_s (n_s + 1)}}
+\end{align}
+\end{subequations}
+Classical limit $k_{\rm B} T \gg \hbar \omega_s$
+\begin{subequations}
+\begin{align}
+	n_s (T) 
+		&\to \frac{k_{\rm B} T}{\hbar \omega_s} \gg 1 \\
+	\implies E(T)
+		&\to 3 N k_{\rm B} T \\
+	\implies c_V 
+		&\to 3 N k_{\rm B}
+\end{align}
+\end{subequations}
