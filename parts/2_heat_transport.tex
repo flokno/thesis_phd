@@ -433,7 +433,7 @@ Heat flux as defined in Eq.\,\eqref{eq:hf.J.atomic}
 		&= \sum_I \left[ \b R_I^0 \fD{\dot{E}}_I + \b U_I \dot{E}_I + \dot{\b U}_I E_I\right]
 		= \sum_I \b R_I^0 \fD{\dot{E}}_I + \cancel{\frac{\d}{\d t} \sum_I \b U_I E_I}~.
 \end{align}
-The last term vanishes since $\b P = \sum_I \b U_I E_I$ is a \emph{bounded} vector function in the absence of diffusive currents and therefore does not contribute to the thermal conductivity~\CITE{Ercole}.
+The last term vanishes since $\b P = \sum_I \b U_I E_I$ is a \emph{bounded} vector function and therefore does not contribute to the thermal conductivity in solids in the absence of diffusion~\CITE{Ercole}.
 The atomic energy contribution expressed in mass-scaled displacements $\set{\b u_I}$ and momenta $\set{\b p_I}$ reads
 \begin{align}
 	E_I = \halb p_I^2 + \halb \sum_J D_{I \alpha , J \beta} \, u_I^\alpha u_J^\beta~.
@@ -446,7 +446,7 @@ Combining the two equations using the symmetry of the dynamical matrix, we have\
 \begin{align}
     \b J (t) = \halb \sum_{IJ} (\b R_I^0 - \b R_J^0) D_{I \alpha, J \beta} \, u_I^\alpha (t) p_J^\beta (t)~.
 \end{align}
-By decomposing the displacements ${\b u_I}$ and velocities $\set{\b p_I}$ into normal mode coordinates by\marginnote{With Eq.\,\eqref{eq:u_s.amplitudes.periodic}:
+By decomposing the displacements ${\b u_I}$ and velocities $\set{\b p_I}$ into normal mode coordinates via the transformations\marginnote{With Eq.\,\eqref{eq:u_s.amplitudes.periodic}:
 	\begin{align*}
 	u_s (t) 
 		&\equiv \frac{1}{\sqrt{2 \omega_{s}}} \left[ \D a_{-s} (t) + \fD a_s (t) \right]~, \\
@@ -520,7 +520,7 @@ is the classical mode occupation, and the one-particle Green's function $g_s (t)
 		\equiv \braket{\D{a}_{\fP s} (t) \fD{a}_{s'}} 
 		= {\rm e}^{\im \omega_s t} \braket{n_s} \delta_{ss'}~,
 \end{align}
-where the time evolution of the complex amplitudes $a^{\dagger} (t) = {\rm e}^{\im \omega_s t} \D a_s(0)$ was used.
+where the time evolution of the complex amplitudes $a^{\dagger} (t) = {\rm e}^{\im \omega_s t} \D a_s$ was used.
 It is apparent that the correlation function defined in Eq.\,\eqref{eq:ha.kappa.wick} is not time-dependent, and the heatflux autocorrelation function defined in Eq.\,\eqref{eq:ha.kappa.J.corr} is given by
 \begin{align}
 	\braket{J (t) J} = \cancel{\braket{J}^2} + \sum_s \braket{J_s^2}~.
@@ -541,10 +541,10 @@ where $\Sigma_s$ is the phonon self energy. Assuming the self energy to be purel
 \end{align}
 where he have defined the lifetime $\tau_s = 1 / 2 \Gamma_s$. The heatflux autocorrelation function now reads
 \begin{align}
-	\braket{J (t) J} = \sum_s \braket{J_s^2} {\rm e}^{-t / \tau_s}~.
+	\braket{J (t) J} = \sum_s \braket{J_s^2} {\rm e}^{-t / \tau_s}~,
 	\label{eq:ha.kappa.JJ.pert}
 \end{align}
-The thermal conductivity now integrates to a finite value,\marginnote{Using $$J_s = \omega_s v_s n_s$$ and $$\braket{n_s} = \frac{k_{\rm B} T}{\omega_s}~.$$}
+and the thermal conductivity integrates to a finite value,\marginnote{Using $$J_s = \omega_s v_s n_s$$ and $$\braket{n_s} = \frac{k_{\rm B} T}{\omega_s}~.$$}
 \begin{align}
 	\kappa^{\alpha \beta} = V k_{\rm B} \sum_{s} v^\alpha_s v^\beta_s \tau_s~.
 	\label{eq:ha.kappa.bte}
@@ -581,17 +581,22 @@ In low-order perturbation theory, the phonon self energy can be obtained by appr
 	\mathcal{V} (\b R) \approx V^{(2)} (\b R) + V^{(3)} (\b R)~,
 	\label{eq:V3}
 \end{align}
-where $V^{(2)} (\b R)$ denotes the harmonic potential, and $V^{(3)} (\b R)$ is obtained by expanding the potential $\mathcal V (\b R)$ to third order.
-
+where $V^{(2)} (\b R)$ denotes the harmonic potential, and $V^{(3)} (\b R)$ is obtained by expanding the potential $\mathcal V (\b R)$ to third order. Further assuming the cubic contribution $V^{(3)} (\b R)$ to be small compared to the harmonic part, the inverse mode lifetime $\tau_s^{-1} = 2 \Gamma_s$ is given by the Fermi Golden Rule expression~\cite{Fabian1996}
 \begin{align}
-	\Gamma_{s}=\frac{\pi \hbar^{2}}{8 \omega_{s}} \sum_{pq} \frac{\left|V^{'''}_{spq}\right|^{2}}{\omega_{p} \omega_{p}}
+\begin{split}
+	2 \Gamma_{s}=\frac{\pi \hbar^{2}}{4 \omega_{s}} \sum_{pq} \frac{\left|\mathcal V^{(3)}_{spq}\right|^{2}}{\omega_{p} \omega_{p}}
 		&\left[ 
 	  \frac{1}{2}\left(1+n_{p}+n_{l}\right) \delta\left(\omega_{s}-\omega_{p}-\omega_{q}\right) \right. \\
-		&\left.~~~~ \phantom{\halb} + \left(n_{p}-n_{q}\right) \delta\left(\omega_{s}+\omega_{p}-\omega_{q}\right)\right],
+		&\left.~~~~ \phantom{\halb} + \left(n_{p}-n_{q}\right) \delta\left(\omega_{s}+\omega_{p}-\omega_{q}\right)\right]~,
+\end{split}
 \end{align}
-\CITE{FabianAllen1996}
+where $\mathcal V^{(3)}_{spq}$ is the cubic potential transformed to phonon eigenstates. The quantum analogues of this equation and the single-mode expression for $\kappa$, Eq.\,\eqref{eq:ha.kappa.bte}, serve as the basis for most \emph{ab initio} studies of thermal conductivity in insulating solids in recent years~\CITE{Broido,Simoncelli,Isaeva,applications}. More recently, extensions of the perturbation-expansion approach up to fourth order have been presented~\CITE{Broido, etc., the paper that calls this "the gold standard"}.
+
+\newthought{It is apparent from the presentation above} that a low-order expansion of the potential-energy surface combined with low-order perturbation expressions represents a wealth of approximations that certainly hold for some materials~\CITE{silicon}, but are questionable or even outright unjustified for others. In particular, dynamical effects such as phase transitions to dynamically stabilized crystal structures (ZrO2, SrTiO3), spontaneous defect formation (copper halides, KCaF3), or simply a soft bonding and therefore strong anharmonicity (NaCl, NaBr) are inherently absent in such a description.
 
 \begin{itemize}
 	\item lifetime depends on ``anharmonic strength'' and scattering phase-space
 	\item scattering phase space becomes less and less important when the dispersions blur out
+	\item perturbation expansion is only asymptotic and breaks down when too string \CITE{Negele or Altland},
+	\item categorization of materials in terms of ``anharmonic strength'' was missing
 \end{itemize}
