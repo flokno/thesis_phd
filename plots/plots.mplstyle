@@ -1,0 +1,11 @@
+font.family     : serif
+font.serif      : Times, Computer Modern Roman, Times
+font.sans-serif : DejaVu Sans
+font.size       : 10
+
+text.usetex     : True
+
+pdf.fonttype    : 42
+
+xtick.direction : in
+ytick.direction : in
