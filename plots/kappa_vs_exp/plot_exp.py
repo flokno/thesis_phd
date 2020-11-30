@@ -1,30 +1,33 @@
-import typer
+from pathlib import Path
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import typer
 
 label_alpha = ("NaCl", "MgO")
-label_offset = "SrTiO3"
 label_xy_custom = {
-    "AgI": (0.12, 0.4),
-    "CuI": (0.3, 2.5),
-    "SnSe": (0.2, 1.2),
-    "MgO": (15, 90),
-    "KZnF3": (0.8, 8),
-    "KMgF3": (2, 20),
-    "NaCl": (2, 12),
-    "CuCl": (0.2, 0.6),
+    # "AgI": (0.12, 0.4),
+    # "CuI": (0.3, 2.5),
+    "MgO": (15, 85),
+    # "KZnF3": (0.8, 8),
+    "KMgF3": (1.8, 23),
+    # "NaCl": (2, 12),
+    "SnSe": (0.2, 1.3),
+    "CuCl": (0.2, 0.9),
+    "CsCl": (0.2, 0.6),
     "CsBr": (0.4, 0.175),
-    "CsI": (0.4, 0.3),
-    "CsCl": (3, 0.45),
+    "CsI": (1.5, 0.175),
     "NaI": (3, 0.65),
     "KCl": (10, 1),
-    "BaSi2": (3, 0.2),
+    "BaSi2": (3, 0.3),
     "CdS": (20, 0.4),
     "CdSe": (8, 0.4),
-    "ZnO": (20, 8),
-    "KCl": (20, 1.5),
-    "KF": (2, 4),
+    "ZnO": (22, 8),
+    "KCl": (20, 1.0),
+    "KF": (20, 1.5),
+    "SrTiO3": (16, 3),
+    # "KF": (1.4, 5.5),
 }
 
 labels_latex = {
@@ -40,6 +43,7 @@ def main(
     results_file: str = "results_1130.csv",
     exclude: bool = False,
     hide: bool = True,
+    annotate: bool = True,
 ):
     """plot kappa vs. kappa"""
     cmap = plt.get_cmap(cmap)
@@ -83,15 +87,15 @@ def main(
     d, c = 0.15, "green"
     xy = [0.1, 100]
     x = np.linspace(*xy, 100)
-    kw = {"alpha": 0.3, "color": c, "edgecolor": "face", "linewidth": 0}
+    kw = {"alpha": 0.2, "color": c, "edgecolor": "face", "linewidth": 0}
     ax.plot(xy, xy, zorder=-1, c="k", lw=0.5, alpha=kw["alpha"])
     ax.fill_between(x, x + x * d, x - x * d, zorder=-2, **kw)
 
     # plot error crosses
     kw = {
         "linewidth": 0,
-        "mew": 0.5,
-        "elinewidth": 0.5,
+        "mew": 0.75,
+        "elinewidth": 0.6,
         "legend": None,
         "mfc": "white",
         "color": "k",
@@ -106,43 +110,40 @@ def main(
     # y
     df_xerr.plot(x="kappa_exp", y="kappa", yerr="kappa_err", ax=ax, capsize=1.2, **kw)
 
-    # annotate
-    alpha = 0.5
-    kw = {
-        "arrowprops": {"arrowstyle": "-", "alpha": alpha, "linewidth": 0.5},
-        "fontsize": fontsize,
-        "zorder": 0,
-        "textcoords": "data",
-        "alpha": alpha,
-    }
-
-    for (l, x, y) in zip(df_xerr.index, df_xerr.kappa_exp, df_xerr.kappa):
-        if l in label_offset:
-            xm, ym, ha, va = 1.5, 0.5, "left", "top"
-            xt, yt = x * xm, y * ym
-        elif l in label_xy_custom:
-            xt, yt, ha, va = *label_xy_custom[l], "left", "top"
-        else:
-            xm, ym, ha, va = 0.6, 1.75, "right", "bottom"
-            xt, yt = x * xm, y * ym
-        label_latex = labels_latex.get(l, l)
-        ax.annotate(label_latex, (x, y), xytext=(xt, yt), ha=ha, va=va, **kw)
-
     # plot datapoints discerning singlecrystal and non-singlecrystal (polycryst.)
-    kw = {"linewidth": 0, "mew": 0.0, "mfc": "k", "color": "k", "ms": 6}
-    for (l, x, y, p) in zip(df.material, df.kappa_exp, df.kappa, df.polycrystalline):
+    kw = {"linewidth": 0, "mew": 0.0, "mfc": "k", "color": "k", "ms": 7}
+    iter = zip(df.material, df.kappa_exp, df.kappa, df.polycrystalline)
+    for (l, x, y, p) in iter:
         if l in df_xerr.index:
             if l in excludes:
                 kw["mfc"], kw["color"] = 2 * ("red",)
             else:
                 kw["mfc"], kw["color"] = 2 * ("k",)
 
-            if p == "y":
-                ax.plot(x, y, marker="*", **kw)
-            elif p == "t":
-                ax.plot(x, y, marker="|", **{**kw, "mew": 1})
-            else:
+            if p == "n":
                 ax.plot(x, y, marker=".", **kw)
+            # elif p == "t":
+            #     ax.plot(x, y, marker="|", **{**kw, "mew": 1})
+            else:
+                ax.plot(x, y, marker="*", **kw)
+    if annotate:
+        alpha = 0.5
+        kw = {
+            "arrowprops": {"arrowstyle": "-", "alpha": alpha, "linewidth": 0.5},
+            "fontsize": fontsize,
+            "zorder": 0,
+            "textcoords": "data",
+            "alpha": alpha,
+        }
+
+        for (l, x, y) in zip(df_xerr.index, df_xerr.kappa_exp, df_xerr.kappa):
+            if l in label_xy_custom:
+                xt, yt, ha, va = *label_xy_custom[l], "left", "top"
+            else:
+                xm, ym, ha, va = 0.6, 1.75, "right", "bottom"
+                xt, yt = x * xm, y * ym
+            label_latex = labels_latex.get(l, l)
+            ax.annotate(label_latex, (x, y), xytext=(xt, yt), ha=ha, va=va, **kw)
 
     # appearance
     # fig.set_size_inches(3.4, 3.4)
@@ -171,8 +172,9 @@ def main(
     ax.set_xticks(ticks)
 
     # plot and save
-    figname = "kappa_vs_exp.pdf"
+    figname = Path("kappa_vs_exp.pdf")
     fig.savefig(figname, bbox_inches="tight")
+    fig.savefig(figname.stem + ".png", bbox_inches="tight", dpi=600)
     print(f".. plotted to {figname}")
 
 
