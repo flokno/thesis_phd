@@ -4,6 +4,7 @@ font.sans-serif : DejaVu Sans
 font.size       : 10
 
 text.usetex     : True
+text.latex.preamble : \PassOptionsToPackage{full}{textcomp}\usepackage{newtxtext,newtxmath}
 
 pdf.fonttype    : 42
 

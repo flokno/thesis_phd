@@ -10,6 +10,9 @@
 \newcommand\hmmax{0}
 \newcommand\bmmax{0}
 
+% fix margins?
+% \usepackage{marginfix}
+
 \usepackage{enumitem, bm, xcolor, braket, dsfont, graphicx, cancel}
 % \usepackage[colorlinks, linkcolor = red, citecolor = black, filecolor = black, urlcolor = blue]{hyperref} 
 % \usepackage{nameref}
@@ -198,16 +201,13 @@
 \input{./parts/2_heat_transport.tex}
 
 \chapter{Anharmonicity}
-\section{Definition of Anharmonicity}
-\section{Anharmonicity Measure}
+\input{./parts/anharmonicity.tex}
 
-\part{Benchmarks?}
+% \part{Benchmarks?}
 
-\part{Results}
+% \part{Results}
 \chapter{Screening Materials for Anharmonicity}
-\section{Screening Material Space}
-\subsection{Literature Review}
-\subsection{Candidate Materials}
+\input{./parts/screening.tex}
 
 \chapter{Thermal Conductivities for Strongly Anharmonic Compounds}
 \section{Overview: Results of Dataset}
@@ -221,6 +221,13 @@
 \end{figure}
 
 \subsection{Relation to Anharmonicity}
+
+\begin{figure}
+	\includegraphics[width=\textwidth]{./plots/kappa_vs_sigma/kappa_vs_sigma.pdf}
+	\caption{Thermal conductivity at room temperature vs. anharmonicity measure.}
+	\label{fig:kappa_sigma}
+\end{figure}
+
 \subsection{Dynamical Effects}
 
 
