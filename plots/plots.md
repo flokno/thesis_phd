@@ -1,6 +1,20 @@
 Plots
 ===
 
+## Colors
+
+```
+c1 = "#5759aa"  # blue
+c2 = "#9c4c36" # red
+# https://meyerweb.com/eric/tools/color-blend/#9C4C36:000000:9:hex
+c1k = "#3F417C" #"#47498B"  # blue 30% black
+c2k = "#803E2C" #"#7D3D2B"  # red 30% black
+c3 = "#800080"  # purple https://www.rapidtables.com/web/color/purple-color.html
+c4 = "#9400D3"  # darkviolet
+```
+
+
+
 ## Results
 
 ### Comparison to literature

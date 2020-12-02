@@ -1,3 +1,6 @@
+"""plot
+    https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=424242
+"""
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -37,6 +40,9 @@ labels_latex = {
     "KMgF3": "KMgF$_3$",
 }
 
+black = "#1b1b1b"
+grey = "#6d6d6d"
+
 
 def main(
     cmap: str = "tab10",
@@ -44,6 +50,7 @@ def main(
     exclude: bool = False,
     hide: bool = True,
     annotate: bool = True,
+    fill: bool = False,
 ):
     """plot kappa vs. kappa"""
     cmap = plt.get_cmap(cmap)
@@ -84,12 +91,13 @@ def main(
     fig, ax = plt.subplots()
 
     # y=x agreement line
-    d, c = 0.15, "green"
+    d, c = 1.15, "green"
     xy = [0.1, 100]
     x = np.linspace(*xy, 100)
     kw = {"alpha": 0.2, "color": c, "edgecolor": "face", "linewidth": 0}
     ax.plot(xy, xy, zorder=-1, c="k", lw=0.5, alpha=kw["alpha"])
-    ax.fill_between(x, x + x * d, x - x * d, zorder=-2, **kw)
+    if fill:
+        ax.fill_between(x, x * d, x / d, zorder=-2, **kw)
 
     # plot error crosses
     kw = {
@@ -98,7 +106,7 @@ def main(
         "elinewidth": 0.6,
         "legend": None,
         "mfc": "white",
-        "color": "k",
+        "color": black,
     }
     # x
     ax.errorbar(
@@ -111,14 +119,14 @@ def main(
     df_xerr.plot(x="kappa_exp", y="kappa", yerr="kappa_err", ax=ax, capsize=1.2, **kw)
 
     # plot datapoints discerning singlecrystal and non-singlecrystal (polycryst.)
-    kw = {"linewidth": 0, "mew": 0.0, "mfc": "k", "color": "k", "ms": 7}
+    kw = {"linewidth": 0, "mew": 0.25, "mfc": black, "color": black, "ms": 7}
     iter = zip(df.material, df.kappa_exp, df.kappa, df.polycrystalline)
     for (l, x, y, p) in iter:
         if l in df_xerr.index:
             if l in excludes:
                 kw["mfc"], kw["color"] = 2 * ("red",)
             else:
-                kw["mfc"], kw["color"] = 2 * ("k",)
+                kw["mfc"], kw["color"] = 2 * (black,)
 
             if p == "n":
                 ax.plot(x, y, marker=".", **kw)
@@ -127,13 +135,13 @@ def main(
             else:
                 ax.plot(x, y, marker="*", **kw)
     if annotate:
-        alpha = 0.5
+        alpha = 0.6
         kw = {
             "arrowprops": {"arrowstyle": "-", "alpha": alpha, "linewidth": 0.5},
             "fontsize": fontsize,
             "zorder": 0,
             "textcoords": "data",
-            "alpha": alpha,
+            "color": grey,
         }
 
         for (l, x, y) in zip(df_xerr.index, df_xerr.kappa_exp, df_xerr.kappa):
