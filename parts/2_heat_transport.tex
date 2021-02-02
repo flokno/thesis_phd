@@ -432,20 +432,36 @@ Heat flux as defined in Eq.\,\eqref{eq:hf.J.atomic}
 	\b J (t) 
 		&= \sum_I \left[ \b R_I^0 \fD{\dot{E}}_I + \b U_I \dot{E}_I + \dot{\b U}_I E_I\right]
 		= \sum_I \b R_I^0 \fD{\dot{E}}_I + \cancel{\frac{\d}{\d t} \sum_I \b U_I E_I}~.
+		\label{eq:J(t)}
 \end{align}
 The last term vanishes since $\b P = \sum_I \b U_I E_I$ is a \emph{bounded} vector function and therefore does not contribute to the thermal conductivity in solids in the absence of diffusion~\CITE{Ercole}.
 The atomic energy contribution expressed in mass-scaled displacements $\set{\b u_I}$ and momenta $\set{\b p_I}$ reads
 \begin{align}
-	E_I = \halb p_I^2 + \halb \sum_J D_{I \alpha , J \beta} \, u_I^\alpha u_J^\beta~.
+	E_I = \halb p_I^2 + \halb \sum_J D_{I \alpha , J \beta} \, u_I^\alpha u_J^\beta~,
 \end{align}
-Combining the two equations using the symmetry of the dynamical matrix, we have\marginnote{The harmonic forces are
+so that\marginnote{The harmonic forces are
 	\begin{align*}
-	\dot{p}_I^\alpha = - \frac{\partial E}{\partial u_I^\alpha} = \sum_J D_{I \alpha , J \beta} \, u_J^\beta~.
+	\dot{p}_{I\alpha}
+	= - \frac{\partial E}{\partial u_I^\alpha} 
+	= - \sum_J D_{I \alpha , J \beta} \, u_J^\beta~,
 	\end{align*}
+and in mass-weighted coordinates
+	$$\dot{u}_I^\alpha = p_I^\alpha~.$$
 }
 \begin{align}
-    \b J (t) = \halb \sum_{IJ} (\b R_I^0 - \b R_J^0) D_{I \alpha, J \beta} \, u_I^\alpha (t) p_J^\beta (t)~.
+	\dot E_I 
+		&= \sum_J \dot{p}_{I\alpha} p_I^\alpha 
+		+ \halb \sum_J D_{I \alpha , J \beta} \, 
+			\left( p_I^\alpha u_J^\beta + u_I^\alpha p_J^\beta\right) \nonumber \\ 
+		&= -\halb \sum_J D_{I \alpha , J \beta} \, 
+		\left( p_I^\alpha u_J^\beta - u_I^\alpha p_J^\beta\right) ~.
+		\label{eq:dotE_I}
 \end{align}
+This expression for the time derivative of the atom-resolved harmonic energy leads to a heat flux of the form
+\begin{align}
+    \b J (t) = -\halb \sum_{IJ} (\b R_I^0 - \b R_J^0) D_{I \alpha, J \beta} \, p_I^\alpha (t) u_J^\beta (t)~.
+\end{align}
+\REM{Check signs and conjugations!}
 By decomposing the displacements ${\b u_I}$ and velocities $\set{\b p_I}$ into normal mode coordinates via the transformations\marginnote{With Eq.\,\eqref{eq:u_s.amplitudes.periodic}:
 	\begin{align*}
 	u_s (t) 
