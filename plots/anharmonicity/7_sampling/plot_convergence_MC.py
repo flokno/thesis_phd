@@ -5,7 +5,7 @@ import pandas as pd
 
 log = open("convergence.log", "w")
 
-plt.style.use("../paper.mplstyle")
+plt.style.use("../../plots.mplstyle")
 fontsize = plt.rcParams["font.size"]
 
 
@@ -67,9 +67,9 @@ ax.set_xlim(0, xlim + 1)
 # ticks
 ax.tick_params(direction="in", which="both", right=True, top=True)
 ax.set_xticks(np.arange(0, 1.1 * xlim, 5))
-ax.set_xticks(np.arange(0, xlim, 1), minor=True)
 ax.set_yticks(np.arange(0, ylim, 0.2))
-ax.set_yticks(np.arange(0, ylim, 0.1), minor=True)
+# ax.set_xticks(np.arange(0, xlim, 1), minor=True)
+# ax.set_yticks(np.arange(0, ylim, 0.1), minor=True)
 
 # label
 ax.set_xlabel("sample number $n$")

@@ -8,7 +8,7 @@ import xarray as xr
 
 from utils import get_kde, get_xy
 
-plt.style.use("../paper.mplstyle")
+plt.style.use("../../plots.mplstyle")
 fontsize = plt.rcParams["font.size"]
 
 
@@ -81,7 +81,8 @@ def plot_kde(
     ax.set_xticks(**major_ticks)
     ax.set_yticks(**major_ticks)
 
-    minor_ticks = {"ticks": np.arange(-xlim, xlim, dminor), "minor": True}
+    ticks = []  # np.arange(-xlim, xlim, dminor)
+    minor_ticks = {"ticks": ticks, "minor": True}
     ax.set_xticks(**minor_ticks)
     ax.set_yticks(**minor_ticks)
 
@@ -93,13 +94,11 @@ def plot_kde(
     typer.echo(f"Y.std = {Y.std()}\n\n")
 
     ax.tick_params(direction="in", which="both", right=True, top=True)
-    ax.tick_params(which="both", width=0.75)
+    ax.tick_params(which="both", width=0.5)
 
     # divider = make_axes_locatable(ax)
     # cax = divider.append_axes("right", size="5%", pad=0.05)
 
-    # cbar = fig.colorbar(cnt, cax=cax, orientation="vertical")
-    # cbar.set_ticks([])
     cbar = None
 
     # plot data points
@@ -107,12 +106,10 @@ def plot_kde(
     idx = np.round(np.linspace(0, len(X) - 1, n)).astype(int)
     ax.scatter(X[idx], Y[idx], s=1, marker=".", alpha=0.35, color=color)
 
-    return cbar
+    return Y.std()
 
 
 def get_fig(harmonic=False, npoints=3, lim=1):
-    plt.style.use("../paper.mplstyle")
-
     # adjust height
 
     ds1 = xr.load_dataset("../datasets/Si.nc")
@@ -124,20 +121,12 @@ def get_fig(harmonic=False, npoints=3, lim=1):
     fig.set_size_inches(4.1, 2.5)
 
     kw = {"harmonic": harmonic, "npoints": npoints * 1j, "xlim": lim, "ylim": lim}
-    cbar = plot_kde(ds1, ax1, fig, cmap=cmap1, color=c1k, **kw)
-    cbar = plot_kde(ds2, ax2, fig, cmap=cmap2, color=c2k, **kw)
+    sigma1 = plot_kde(ds1, ax1, fig, cmap=cmap1, color=c1k, **kw)
+    sigma2 = plot_kde(ds2, ax2, fig, cmap=cmap2, color=c2k, **kw)
 
     xlabel = r"$ F / \sigma[F]$"
     for ax in (ax1, ax2):
         ax.set_xlabel(xlabel)
-    # ax1.set_xlabel(r"$F / \sigma_\mathrm{Si}[F]$")
-    # ax2.set_xlabel(r"$F / \sigma_\mathrm{KCaF}[F]$")
-
-    # cbar label
-    # ylabel = r"$p \left( \tilde{F}_{I, \alpha}^\mathrm{A} \right)$"
-    # ylabel = r"$\tilde{F}_{I, \alpha}^\mathrm{A}$"
-    # ylabel = r"$F_{I, \alpha}^\mathrm{A}$ $/$ $\sigma [F]$"
-    # cbar.set_label("Probability density", rotation=-90, labelpad=15)
 
     if harmonic:
         ylabel = r"$F^\mathrm{Ha}  / \sigma[F]$"
@@ -166,8 +155,15 @@ def get_fig(harmonic=False, npoints=3, lim=1):
 
     ax1.text(-0.85 * lim, 0.75 * lim, name1, **kw)
     ax2.text(-0.85 * lim, 0.75 * lim, name2, **kw)
-    # ax1.set_title(name1, fontsize=fs)
-    # ax2.set_title(name2, fontsize=fs)
+
+    if not harmonic:
+        kw["ha"] = "right"
+        kw["arrowprops"] = {"arrowstyle": "-", "lw": 0.75}
+        x = 0.93 * lim
+        s1 = "$\\sigma^{\\rm A} = $" + f" {sigma1:.2f}"
+        s2 = "$\\sigma^{\\rm A} = $" + f" {sigma2:.2f}"
+        ax1.annotate(s1, (x, sigma1), xytext=(x, 0.75 * lim), **kw)
+        ax2.annotate(s2, (x, sigma2), xytext=(x, 0.75 * lim), **kw)
 
     return fig
 

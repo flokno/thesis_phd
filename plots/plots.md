@@ -11,6 +11,12 @@ c1k = "#3F417C" #"#47498B"  # blue 30% black
 c2k = "#803E2C" #"#7D3D2B"  # red 30% black
 c3 = "#800080"  # purple https://www.rapidtables.com/web/color/purple-color.html
 c4 = "#9400D3"  # darkviolet
+
+red = "#9c4c36"
+grey = "#6d6d6d"
+black = "#1b1b1b"
+sepia = "#704214"
+purple = "#800080"
 ```
 
 

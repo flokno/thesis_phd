@@ -7,6 +7,7 @@ from scipy import stats as st
 import typer
 
 plt.style.use("plots.mplstyle")
+fontsize = plt.rcParams["font.size"]
 
 
 # annotate materials
@@ -114,6 +115,11 @@ def main(
     # plot materials with small spread in sigma
     d_sigma_err = 0.01
 
+    print()
+    print(f"Materials with sigma_err > {d_sigma_err}:")
+    print(df[df.sigma_err.ge(d_sigma_err)])
+    print(".. highlight these in the plot")
+
     # plot this set based on space group
     df1 = df[df.sigma_err.le(d_sigma_err)]
 
@@ -196,9 +202,24 @@ def main(
     num_str = f"{slope:.1f}"
     fit_str = "$\\log \\kappa \\propto " + num_str + "\\cdot \\sigma^{\\rm A}$"
     fit_str += f"\nPearson $\\rho$: {abs(r_value):.2f}"
+    # fit_str += f"\n$R^2$: {r_value**2:.2f}"
     tax.legend(
-        [fit_str], loc="lower left", framealpha=1, fancybox=True, shadow=True,
+        # [fit_str], loc="lower left", framealpha=1, fancybox=True, shadow=True,
+        [fit_str],
+        loc="lower left",
+        framealpha=0,
     )
+    # attempt:
+    y = 0.09
+    # tax.annotate(
+    #     fit_str,
+    #     xy=(0.8, y),
+    #     xytext=(0.15, y),
+    #     ha="left",
+    #     va="center",
+    #     fontsize=fontsize - 2,
+    #     arrowprops={"arrowstyle": "->", "linewidth": 0.5},
+    # )
 
     # labels
     ax.set_ylabel("$\\kappa^{\\rm aiGK}_{300\\,{\\rm K}}$ (W/mK)")

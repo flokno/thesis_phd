@@ -2,7 +2,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
-plt.style.use("../paper.mplstyle")
+plt.style.use("../../plots.mplstyle")
 
 c1 = "#363639"
 c2 = "#5759aa"
@@ -60,7 +60,7 @@ for ax in (ax1, ax2):
     # draw equil. position
     ax.text(-1.1, -1.1, r"${\bf R}_0$", **kw)
 
-    kw = {"ms": 15, "c": "k", "mew": 2}
+    kw = {"ms": 12, "c": "k", "mew": 2}
     ax.plot(0, 0, "|", **kw)
 
     for spine in ("left", "bottom", "right", "top"):

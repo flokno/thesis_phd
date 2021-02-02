@@ -21,7 +21,7 @@ config.subplots_adjust.kw.update(
 )
 
 
-linewidth = 0.75
+linewidth = 0.5
 line_kw = {"color": "black", "linestyle": "-", "linewidth": linewidth}
 
 

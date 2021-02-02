@@ -181,6 +181,8 @@ def main(
 
     # plot and save
     figname = Path("kappa_vs_exp.pdf")
+    if exclude:
+        figname = Path("kappa_vs_exp_exclude.pdf")
     fig.savefig(figname, bbox_inches="tight")
     fig.savefig(figname.stem + ".png", bbox_inches="tight", dpi=600)
     print(f".. plotted to {figname}")

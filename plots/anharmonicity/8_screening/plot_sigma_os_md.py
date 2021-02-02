@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 
-plt.style.use("../plots.mplstyle")
+plt.style.use("../../plots.mplstyle")
 fontsize = plt.rcParams["font.size"]
 
 cmap = plt.get_cmap("tab10")
@@ -104,3 +104,4 @@ ax.legend(["ZB", "RS", "WZ", "PS"], loc="upper left", **kw)
 tax.legend(["ideal", r"$\pm 10\,\%$"], loc="lower right", **kw)
 
 fig.savefig("sigma_os_md.pdf")
+fig.savefig("sigma_os_md.png", bbox_inches='tight', dpi=600)

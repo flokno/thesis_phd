@@ -6,7 +6,7 @@ import pandas as pd
 
 mpl.use("pdf")
 
-plt.style.use("../paper.mplstyle")
+plt.style.use("../../plots.mplstyle")
 fontsize = plt.rcParams["font.size"]
 
 subplots_adjust_kw = {"left": 0.16, "right": 0.95, "bottom": 0.2, "top": 0.95}
@@ -34,7 +34,8 @@ def get_canvas(ymin=ymin, ymax=ymax, fill=True):
     ax.set_ylim([ymin, ymax])
     ax.set_xticks(np.arange(200, 1.1 * 800, 100), minor=True)
     ax.set_yticks(np.arange(ymin, ymax, 0.2))
-    ax.set_yticks(np.arange(ymin, ymax, 0.1), minor=True)
+    ax.set_yticks([], minor=True)
+    # ax.set_yticks(np.arange(ymin, ymax, 0.1), minor=True)
 
     if fill:
         ax.fill_betweenx([0, 1.5], 0, 500, color="k", alpha=0.2, linewidth=0)

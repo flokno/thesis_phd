@@ -11,7 +11,7 @@ class adict(dict):
         self.__dict__ = self
 
 
-plt.style.use("../paper.mplstyle")
+plt.style.use("../../plots.mplstyle")
 fontsize = plt.rcParams["font.size"]
 
 config = toml.load("../config.toml", _dict=adict)

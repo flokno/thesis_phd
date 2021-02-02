@@ -7,7 +7,7 @@ import xarray as xr
 # from matplotlib import font_manager
 from scipy import stats
 
-plt.style.use("../paper.mplstyle")
+plt.style.use("../../plots.mplstyle")
 fontsize = plt.rcParams["font.size"]
 
 
@@ -75,9 +75,11 @@ def plot_kde(ds, ax, c=c1, npoints=1, levels=64, xlim=1, ylim=1, std=False):
 
     xlim -= 0.5
     ax.set_xticks(np.arange(-xlim, 1.1 * xlim, 1))
-    ax.set_xticks(np.arange(-xlim, xlim, 0.5), minor=True)
+    ax.set_xticks([], minor=True)
+    # ax.set_xticks(np.arange(-xlim, xlim, 0.5), minor=True)
 
-    ax.set_yticks([0.5], minor=True)
+    ax.set_yticks([0, 1])
+    ax.set_yticks([], minor=True)
 
     kw = {"color": "k", "lw": 1, "ls": (0, (5, 7))}
     ax.axvline(X.std(), **kw)

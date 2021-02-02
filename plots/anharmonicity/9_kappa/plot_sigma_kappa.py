@@ -3,7 +3,7 @@ import pandas as pd
 from matplotlib import pyplot as plt
 from scipy import stats as st
 
-plt.style.use("../paper.mplstyle")
+plt.style.use("../../plots.mplstyle")
 fontsize = plt.rcParams["font.size"]
 
 cmap = plt.get_cmap("tab10")
@@ -147,3 +147,4 @@ tax.legend(
 # tax.legend(["Power law fit", "within order of magnitude"], loc="lower left", **kw)
 
 fig.savefig("sigma_vs_kappa.pdf")
+fig.savefig("sigma_vs_kappa.png", bbox_inches="tight", dpi=600)

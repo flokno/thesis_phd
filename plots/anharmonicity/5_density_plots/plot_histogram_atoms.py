@@ -8,7 +8,7 @@ import xarray as xr
 from utils import get_kde
 from vibes.helpers.converters import json2atoms
 
-plt.style.use("../paper.mplstyle")
+plt.style.use("../../plots.mplstyle")
 fontsize = plt.rcParams["font.size"]
 
 
@@ -94,26 +94,26 @@ def plot_kde(d, ax, cmap="OrRd", npoints=npoints, levels=64, xlim=xlim, ylim=yli
     ax.set_xticks(ticks)
     ax.set_yticks(ticks)
 
-    ticks_minor = np.arange(-xlim, xlim, 0.5)
+    ticks_minor = []  # np.arange(-xlim, xlim, 0.5)
     ax.set_xticks(ticks_minor, minor=True)
     ax.set_yticks(ticks_minor, minor=True)
 
     ax.set_aspect(1)
     print(Y.std())
 
-    ax.tick_params(direction="in", which="both", right=True, top=True, width=0.75)
+    ax.tick_params(direction="in", which="both", right=True, top=True, width=0.5)
 
     # plot data points
     n = 1000
     idx = np.round(np.linspace(0, len(X) - 1, n)).astype(int)
     ax.scatter(X[idx], Y[idx], s=1, marker=".", alpha=0.35, color=c2)
 
-    return cnt
+    return Y.std()
 
 
-plot_kde(dct["K"], ax1, cmap=cmap2)
-plot_kde(dct["Ca"], ax2, cmap=cmap2)
-cnt = plot_kde(dct["F"], ax3, cmap=cmap2)
+sigma1 = plot_kde(dct["K"], ax1, cmap=cmap2)
+sigma2 = plot_kde(dct["Ca"], ax2, cmap=cmap2)
+sigma3 = plot_kde(dct["F"], ax3, cmap=cmap2)
 
 xlabel = r"$p \left( \tilde{F}_{\alpha} \right)$"
 xlabel = r"$ {F}_{\alpha} \right)$"
@@ -130,25 +130,24 @@ ax1.set_ylabel(ylabel, labelpad=-4, y=0.6)
 x, y = 0.1, 0.9
 ha = "left"
 va = "center"
-fs = fontsize + 1
+fs = fontsize
 name1 = "Si"
 name2 = r"KCaF$_3$"
 
+y = 0.73 * ylim
 kw = {"fontsize": fs, "ha": ha, "va": va, "color": "k"}
-ax1.text(-0.85 * xlim, 0.75 * ylim, "K", **kw)
-ax2.text(-0.85 * xlim, 0.75 * ylim, "Ca", **kw)
-ax3.text(-0.85 * xlim, 0.75 * ylim, "F", **kw)
+ax1.text(-0.85 * xlim, y, "K", **kw)
+ax2.text(-0.85 * xlim, y, "Ca", **kw)
+ax3.text(-0.85 * xlim, y, "F", **kw)
 
-# colorbar
-# cb_ax = fig.add_axes([0.93, 0.1, 0.02, 0.5])
-# cbar = fig.colorbar(cnt, cax=cb_ax)
-# cbar = fig.colorbar(cnt, ax=[ax1, ax2, ax3], shrink=0.65, pad=0.02)
-# divider = make_axes_locatable(ax3)
-# cax = divider.append_axes("right", size="5%", pad=0.05)
-#
-# cbar = fig.colorbar(cnt, cax=cax, orientation="vertical")
-# cbar.set_label("Probability density", rotation=-90, labelpad=15)
-# cbar.set_ticks([])
+kw["ha"] = "right"
+# kw["va"] = "bottom"
+kw["arrowprops"] = {"arrowstyle": "-", "lw": 0.75}
+kw["fontsize"] = fs
+for ax, sigma in zip((ax1, ax2, ax3), (sigma1, sigma2, sigma3)):
+    x = 0.93 * xlim
+    s = "$\\sigma^{\\rm A} = $" + f" {sigma:.2f}"
+    ax.annotate(s, (x, sigma), xytext=(x, y), **kw)
 
 
 kw = {"bbox_inches": "tight"}

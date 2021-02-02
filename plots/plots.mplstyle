@@ -10,3 +10,27 @@ pdf.fonttype    : 42
 
 xtick.direction : in
 ytick.direction : in
+
+savefig.dpi     : 600
+
+# black: 1b1b1b
+# grey:  6d6d6d
+axes.facecolor      : white     # axes background color
+axes.edgecolor      : 1b1b1b    # axes edge color
+axes.linewidth      : 0.6       # edge linewidth
+
+xtick.major.size     : 4      # major tick size in points
+xtick.minor.size     : 2      # minor tick size in points
+xtick.major.width    : 0.5    # major tick width in points
+xtick.minor.width    : 0.4    # minor tick width in points
+xtick.color          : 1b1b1b# color of the tick labels
+
+ytick.major.size     : 4      # major tick size in points
+ytick.minor.size     : 2      # minor tick size in points
+ytick.major.width    : 0.5    # major tick width in points
+ytick.minor.width    : 0.4    # minor tick width in points
+ytick.color          : 1b1b1b # color of the tick labels
+
+# available from 3.4:
+# xtick.labelcolor     : 1b1b1b # color of the tick labels
+# ytick.labelcolor     : 1b1b1b # color of the tick labels
