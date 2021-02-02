@@ -136,15 +136,7 @@ num_str = f"{slope:.1f}"
 fit_str = "$\\log \\kappa \\propto " + num_str + "\\cdot \\sigma^{\\rm A}$"
 fit_str += f"\nPearson $\\rho$: {abs(r_value):.2f}"
 
-# tax.legend([fit_str, "within order of magnitude"], loc="lower left", **kw)
-tax.legend(
-    [fit_str, "within order of magnitude"],
-    loc="lower left",
-    framealpha=1,
-    fancybox=True,
-    shadow=True,
-)
-# tax.legend(["Power law fit", "within order of magnitude"], loc="lower left", **kw)
+tax.legend([fit_str, "within order of magnitude"], loc="lower left", **kw)
 
 fig.savefig("sigma_vs_kappa.pdf")
 fig.savefig("sigma_vs_kappa.png", bbox_inches="tight", dpi=600)
