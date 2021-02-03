@@ -2,10 +2,10 @@
 data/*
 
 !data/sketches
-!data/plots
 
-# pdf-Dokumente ausser (ggf.) Bilder
-main.pdf
+# this doesn't seem to work:
+!data/plots/**/*.pdf
+# i.e. add with `add -f`
 
 # ueberfluessiger Latex-Output
 *.aux
@@ -16,6 +16,8 @@ main.pdf
 *.synctex.gz
 *.toc
 *.bak
+*.idx
+*.pdf
 
 # things that are not plain scripts or plots
 *.xcf
