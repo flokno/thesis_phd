@@ -1,9 +1,0 @@
-#=======================================================
-#FHI-aims file: geometry.in-prim
-#Created using the Atomic Simulation Environment (ASE)
-#=======================================================
-lattice_vector 0.0 2.5 2.5
-lattice_vector 2.5 0.0 2.5
-lattice_vector 2.5 2.5 0.0
-atom_frac 0. 0. 0. Si
-atom_frac .25 .25 .25 Si

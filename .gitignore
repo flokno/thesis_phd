@@ -2,6 +2,7 @@
 data/*
 
 !data/sketches
+!data/plots
 
 # pdf-Dokumente ausser (ggf.) Bilder
 main.pdf
@@ -16,4 +17,7 @@ main.pdf
 *.toc
 *.bak
 
+# things that are not plain scripts or plots
+*.xcf
+*.ipynb
 *.ipynb_checkpoints
