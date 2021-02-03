@@ -1,3 +1,8 @@
+# data is in separate repo:
+data/*
+
+!data/sketches
+
 # pdf-Dokumente ausser (ggf.) Bilder
 main.pdf
 
