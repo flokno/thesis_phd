@@ -6,7 +6,7 @@ As no electron will appear anymore, $N \equiv N_{\rm Nuc}$ will henceforth denot
 
 We begin by recalling the Schr\"odinger equation for the nuclear wavefunctions $\chi_s ({\bf R})$ initially defined in Eq.\,\eqref{eq:chi2},
 \begin{align}
-  \left( T^{\rm Nuc} + \mathcal V ({\bf R}) - E \right) \chi ({\bf R})
+  \left( T^{\rm Nuc} + \mathcal V ({\bf R}) - E_s \right) \chi_s ({\bf R})
   = 0~,
   \label{eq:BOSE}
 \end{align}
@@ -68,7 +68,8 @@ f \bm ( \langle x \rangle \bm{)}
 ~,
 \label{eq:ehrenfest.delta1}
 \end{align}
-where $x = {\bf R}_I$ denotes the space coordinate for notional simplicity, $f$ is some function of the observable $x$, and $\delta f$ measures the difference between the classical and the quantum expectation value. Ehrenfest's argument is that this difference becomes negligible when the state is sufficiently peaked around some value $x_0$. Expanding $f$ around the expectation value of $x$ denoted by $x_0 \equiv \langle x \rangle$, we have
+where $x = {\bf R}_I$ denotes the space coordinate, %for notional simplicity, 
+$f$ is some function of the observable   $x$, and $\delta f$ measures the difference between the classical and the quantum expectation value. Ehrenfest's argument is that this difference becomes negligible when the state is sufficiently peaked around some value $x_0$. Expanding $f$ around the expectation value of $x$ denoted by $x_0 \equiv \langle x \rangle$, we have
 \begin{align}
 f(x) = f \bm ( \langle x \rangle \bm{)}  
 + (x - \langle x \rangle) \, f' \bm ( \langle x \rangle \bm{)}
@@ -84,14 +85,15 @@ It follows that the $f'$ term vanishes when the expectation value is taken, and
 + \cdots~,
 \label{eq:ehrenfest.f3}
 \end{align}
-where $\Delta x^2 = \bm{\langle} (x - \langle x \rangle)^2 \bm{\rangle}$ measures the variance of the underlying distribution,~i.\,e.~the width of the wavepacket. The relative error between the classical and quantum expectation value is readily computed to be proportional to the variance $\Delta x^2$,
+where $\Delta x^2 = \bm{\langle} (x - \langle x \rangle)^2 \bm{\rangle}$ measures the variance of the underlying distribution,~i.\,e.~the width of the wavepacket. The relative error between the classical and quantum expectation value is %readily computed to be 
+therefore proportional to the variance $\Delta x^2$,
 \begin{align}
 \left\lvert \frac{\delta f}{f \bm ( \langle x \rangle \bm{)}} \right\rvert
 = \frac{1}{2} \Delta x^2 \left\lvert \frac{f'' \bm ( \langle x \rangle \bm{)}}{f \bm ( \langle x \rangle \bm{)}} \right\rvert
 + \mathcal{O}(\Delta x^3)~.
 \label{eq:ehrenfest.delta2}
 \end{align}
-This estimation holds in general for any observable $f$.
+This estimation is general and holds for any observable $f$.
 By crudely estimating the dimension of the wavepacket in terms of the thermal de Broglie-wavelength, we find
 \begin{align}
 \Delta x^2 
@@ -268,7 +270,7 @@ The solution is given in terms of plane waves,
 		&= \sqrt 2 \omega_s A_s \cos (\omega_s t + \varphi_s)~,
 \end{align}
 \end{subequations}
-where $A_s$ and $\varphi_s$ are chosen based on the initial conditions. It can be beneficial to define the normal coordinates in terms of the complex amplitudes $a^{(\dagger)}_s$ ~,
+where $A_s$ and $\varphi_s$ are chosen based on the initial conditions. It can be beneficial to define the normal coordinates in terms of the complex amplitudes $a^{(\dagger)}_s$ ~, \REM{update convention}
 \begin{subequations}
 \label{eq:u_s.amplitudes}
 \begin{align}
