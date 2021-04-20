@@ -162,14 +162,14 @@ To set the stage, we rewrite the electronic Schr\"odinger equation \eqref{eq:Hso
 	\hat H = \hat T + \hat W + \hat V^{\rm ext}~,
 	\label{eq:H.dft.1}
 \end{align}
-where $T \equiv T^{\rm e}$ denotes the electronic kinetic energy operator, $W \equiv V^{\rm e-e}$ is the electronic Coulomb repulsion, and $V^{\rm ext} \equiv V^{\rm e-Nuc}$ is the \emph{external} potential determined by the nuclear configuration $\bf R$. For the time being, the bare nuclear-nuclear repulsion $V^{\rm Nuc-Nuc}$ is neglected as it merely contributes an additive constant to the electronic Hamiltonian at fixed configuration. We will restore this term again when looking at gradients of the total energy.
+where $\hat T \equiv \hat T^{\rm e}$ denotes the electronic kinetic energy operator, $\hat W \equiv \hat V^{\rm e-e}$ is the electronic Coulomb repulsion, and $\hat V^{\rm ext} \equiv \hat V^{\rm e-Nuc}$ is the \emph{external} potential determined by the nuclear configuration $\bf R$. For the time being, the bare nuclear-nuclear repulsion $\hat V^{\rm Nuc-Nuc}$ is neglected as it merely contributes an additive constant to the electronic Hamiltonian at fixed configuration $\bf R$. We will restore this term again when looking at gradients of the total energy.
 
 \newthought{We look for solutions} to Eq.\,\eqref{eq:H.dft.1} of the form
 \begin{align}
 	\hat H \Ket{\Psi} = E_\Psi \Ket{\Psi}~,
 	\label{eq:SE.dft.1}
 \end{align}
-where $\hat H$ is the electronic Hamiltonian given by Eq.\,\eqref{eq:H.dft.1}, $\Ket{\Psi}$ denotes a many-body eigenstate in index-free bra--ket notation\footnote{
+where $\hat H$ is the electronic Hamiltonian given by Eq.\,\eqref{eq:H.dft.1}, $\Ket{\Psi}$ denotes a many-body eigenstate in index-free bra--ket notation\sidenote{
 	Here and in the following we employ the usual convention that many-body wavefunctions are obtained from the state $\Ket{\Psi}$ via
 	\begin{align*}
 		\braket{{\bf r} | \Psi} 
@@ -182,10 +182,10 @@ where $\hat H$ is the electronic Hamiltonian given by Eq.\,\eqref{eq:H.dft.1}, $
 	$$
 	\braket{\Psi | \Phi} = \int \d^{3N} r ~ \Psi^\ast ({\bf r}) \ \Phi({\bf r})~.
 	$$
-	All functions are assumed to be square integrable ($\mathcal{L}^2$ functions) and sufficiently well-behaved so that the usual manipulations are mathematically sound.
+	All functions are assumed to be sufficiently well-behaved such that the usual manipulations are mathematically well defined.
 },
 and $E_\Psi$ is the corresponding total energy.
-The state $\Ket{\Psi}$ maps to an electron density $n_\Psi ({\bf x})$ via the density operator
+The state $\Ket{\Psi}$ maps to an electron density $n_\Psi ({\bf x})$ at a given point in space, ${\bf x} \in \mathds R^3$, via the density operator
 \begin{align}
 	\hat n ({\bf x}) \equiv \sum_i \hat n_i ({\bf x}) = \sum_i \delta ({\bf x} - \hat{\bf r}_i)~,
 	\label{eq:densop}
@@ -199,7 +199,7 @@ such that
 	\Psi ({\bf x}, {\bf r}_2, \ldots, {\bf r}_N) 
 	\right\rvert^2~,
 \end{align}
-where it was used that the arguments of $\lvert \Psi ({\bf r}_1, \ldots, {\bf r}_N) \rvert^2$ can be arbitrarily permuted.\footnote{Note that ${\bf x} \in \mathds{R}^3$ denotes a point in real space, whereas ${\bf r} = ({\bf r}_1, \ldots, {\bf r}_N)$ denotes the positions of electrons as before.}
+where it was used that the arguments of $\lvert \Psi ({\bf r}_1, \ldots, {\bf r}_N) \rvert^2$ can be arbitrarily permuted. %\footnote{Please note that ${\bf x}$ denotes a point in real space, whereas ${\bf r} = ({\bf r}_1, \ldots, {\bf r}_N)$ denotes the positions of electrons as before.}
 %\begin{align}
 %	\braket{\Psi | n_i({\bf r}) | \Psi} 
 %		= \int \d^3 r_1 \cdots \d^3 r_{i-1} \d^3 r_{i+1} \cdots \d^3 r_{N} ~ 
@@ -227,7 +227,7 @@ It follows that the expectation value of $\hat V^{\rm ext}$ is a functional of t
 		= \int \d^3 x ~ v^{\rm ext} ({\bf x}) \, n_\Psi ({\bf x})~.
 		\label{eq:dft.Vext.expectation}
 \end{align}
-Since the density $n_\Psi$ is obtained from the solution $\Ket{\Psi}$ of Eq.\,\eqref{eq:SE.dft.1} and the term $\hat V^{\rm ext}$ in the Hamiltonian given by Eq.\,\eqref{eq:H.dft.1} is solely determined by the external potential funktion $v^{\rm ext} ({\bf x})$ via Eq.\,\eqref{eq:Vext}, it follows that $n_\Psi ({\bf r})$ is a functional of $v^{\rm ext} ({\bf x})$. In other words, there is a map $M$ between the set of external potentials $\mathbb V = \set{v^{\rm ext}}$, and the set of eigensolutions $\mathbb P = \set{\Psi}$ and their corresponding densities $\mathbb N = \set{n_\Psi}$:
+Since the density $n_\Psi$ is obtained from the solution $\Ket{\Psi}$ of Eq.\,\eqref{eq:SE.dft.1} and the term $\hat V^{\rm ext}$ in the Hamiltonian given by Eq.\,\eqref{eq:H.dft.1} is solely determined by the external potential funktion $v^{\rm ext} ({\bf x})$ via Eq.\,\eqref{eq:Vext}, it follows that $n_\Psi ({\bf r})$ is a functional of $v^{\rm ext} ({\bf x})$. In other words, there is a map $M$ between the set of external potentials $\mathbb V = \set{v^{\rm ext}}$ to the set of eigensolutions $\mathbb P = \set{\Psi}$ and their corresponding densities $\mathbb N = \set{n_\Psi}$:
 \begin{align}
 	M: \mathbb V \rightarrow \mathbb N~.
 	\label{eq:dft.map.1}
@@ -238,7 +238,7 @@ Hohenberg and Kohn were able to show that, for non-degenerate\footnote{Kohn was 
 \begin{align}
 	M^{-1}: \mathbb N_0 \rightarrow \mathbb V~. 
 \end{align}
-The beauty of this theorem is that it establishes a one-to-one correspondence between the \emph{ground-state density} $n_0 ({\bf x})$ and the external potential function $v^{\rm ext} ({\bf x})$ which, in turn, describes the full many-body problem via the Schr\"odinger equation. It follows that the ground-state wavefunctions $\Psi_0$ are functionals of $n_0$, as well as the expectation value of any ground-state observable. Since we are only concerned with electronic ground-state densities in the following, we denote them simply by $n ({\bf x}) \equiv n_0 ({\bf x})$.
+The beauty of this theorem is that it establishes a one-to-one correspondence between the \emph{ground-state density} $n_0 ({\bf x})$ and the external potential function $v^{\rm ext} ({\bf x})$ which, in turn, describes the full many-body problem via the Schr\"odinger equation. It follows that the ground-state wavefunctions $\Psi_0$ are functionals of $n_0$, as well as the expectation value of any ground-state observable. Since we are only concerned with electronic ground-state densities in the following, we denote it simply by $n ({\bf x}) \equiv n_0 ({\bf x})$.
 
 \newthought{Hohenberg and Kohn further define} the \emph{universal functional} 
 \begin{align}
@@ -254,13 +254,13 @@ i.\,e.,~the contributions to the Hamiltonian which do not depend on the external
 	\label{eq:dft.En}
 \end{align}
 where $V^{\rm ext}[n]$ is given by Eq.\,\eqref{eq:dft.Vext.expectation}.
-By virtue of the Raleigh-Ritz variational principle, this functional is minimized for the correct ground-state density $n$ only, and any other density $n'$ that differs from $n$ non-trivially yields a larger energy:
+By virtue of the Raleigh-Ritz variational principle, this functional is minimized for the correct ground-state density $n$ only, and any other density $\rho$ that differs from $n$ non-trivially yields a larger energy:
 \begin{align}
-	E[n] < E [n'] \quad \text{for} \quad n \neq n'~.
+	E[n] < E [\rho] \quad \text{for} \quad n \neq \rho~.
 \end{align}
 This also means that the true ground-state density for a given potential $v^{\rm ext}$ can be found by minimizing the total energy function, Eq.\,\eqref{eq:dft.En},
 \begin{align}
-	n = \arg \min_{n} E[n]~,
+	n = \arg \min_{\rho} E[\rho]~,
 	\label{eq:dft.n}
 \end{align}
 under the constraint of fixed particle number imposed by the Lagrange multiplier $\mu$,
@@ -278,11 +278,11 @@ under the constraint of fixed particle number imposed by the Lagrange multiplier
 %\end{align}
 %or, by imposing the conservation of particle number explicitly via the Lagrange multiplicator $\mu$,
 \begin{align}
-	\frac{\delta}{\delta n ({\bf x})}
+	\frac{\delta}{\delta \rho ({\bf x})}
 		\left.\left[ 
-			E[n] + \mu \left(
-				\int \d^3 x' ~ n ({\bf x}') - N \right)
-		\right]\right\vert_{n = n_0}
+			E[\rho] + \mu \left(
+				\int \d^3 x' ~ \rho ({\bf x}') - N \right)
+		\right]\right\vert_{\rho = n}
 		=0~.
 		\label{eq:dft.stationarity}
 \end{align}
@@ -357,12 +357,12 @@ which is solely determined by the ground-state electron density $n ({\bf x})$ an
 \end{align}
 \end{theorem}
 
-\newthought{While the Hellmann-Feynman theorem is formally correct}, in practice there often arise correction terms when non-complete basis sets are used that also depend on the parameter $\lambda$. The most famous correction are the so-called \emph{Pulay forces} that arise in atom centered basissets~\cite{Pulay1969}.
+\newthought{While the Hellmann-Feynman theorem is formally correct}, in practice there often arise correction terms when non-complete basis sets are used that also depend on the parameter $\lambda$, or an approximation to the true ground-state density is used~\CITE{References Herzain}. In atomic-cerntered basissets, the most important correction terms are the so-called \emph{Pulay forces}~\cite{Pulay1969}.
 
 \newpage
 
 \section{Kohn-Sham Scheme}
-\newthought{By introducing density functional theory}, we have not solved the many-body problem. However, we have shifted the intricacies of this problem to a \emph{universal} functional $F[n]$ which depends on the electron density $n({\bf x})$. Since the density is a scalar function of three coordinates, $n: \mathds R^3 \rightarrow \mathds R$, this entails a \emph{massive} reduction of complexity compared to working with wavefunctions, which are complex functions of $3N$ variables, $\Psi: \mathds R^{3N} \rightarrow \mathds C$.
+\newthought{By introducing density functional theory}, we have not solved the many-body problem. However, we have shifted the intricacies of this problem to a \emph{universal} functional $F[n]$ which depends on the electron density $n({\bf x})$. Since the density is a scalar function of three coordinates, $n: \mathds R^3 \rightarrow \mathds R$, this entails a massive reduction of complexity compared to working with wavefunctions, which are complex functions of $3N$ variables, $\Psi: \mathds R^{3N} \rightarrow \mathds C$.
 
 In order to proceed, we follow the original argument by Kohn and Sham~\cite{Kohn1965} and investigate the universal functional $F[n]$ in more detail. The definition reads
 \begin{align}
@@ -371,7 +371,7 @@ In order to proceed, we follow the original argument by Kohn and Sham~\cite{Kohn
 		\equiv T[n] + W[n]~,
 	\label{eq:dft.Fn.2}
 \end{align}
-where $T[n]$ now denotes the kinetic energy of the electrons expressed as a functional of the density $n ({\bf x})$, and $W[n]$ denotes the electron-electron interaction term. We split this term into two contributions,
+where $T[n]$ denotes the kinetic energy of the electrons expressed as a functional of the density $n ({\bf x})$, and $W[n]$ denotes the electron-electron interaction term as before. We split this term into two contributions,
 \begin{align}
 	\begin{split}
 	W[n] 
@@ -471,7 +471,7 @@ is the \emph{exchange-correlation potential} formally defined as the functional 
 	= \epsilon_l \psi_l ({\bf x})~.
 \label{eq:dft.KS.2}
 \end{align}
-This equation is a one-particle Schr\"odinger-like equation for orbitals $\psi_l$ with eigenvalues $\epsilon_l$ in an effective potential $v^{\rm eff}[n]$. Since the effective potential is a functional of the density $n$ given in terms of the orbitals by Eq.\,\eqref{eq:dft.KS.n(psi)}, Eq.\,\eqref{eq:dft.KS.2} needs to be solved \emph{self-consistently}: One starts from an initial guess for the density $n^0$ to set up the effective potential, and solves for $(\psi_l, \epsilon_l)$ until convergence. That the density $n$ of the \emph{interacting} many-particle systems can be obtained from the \emph{non-interacting} single-particle orbitals $\psi_l$ is ensured by the \emph{Kohn-Sham theorem}~\cite{Kohn1965}. Equation\,\eqref{eq:dft.KS.2} is therefore called \emph{Kohn-Sham equation}.
+This equation is a one-particle Schr\"odinger-like equation for orbitals $\psi_l$ with eigenvalues $\epsilon_l$ in an effective potential $v^{\rm eff}[n]$. Since the effective potential is a functional of the density $n$ given in terms of the orbitals by Eq.\,\eqref{eq:dft.KS.n(psi)}, Eq.\,\eqref{eq:dft.KS.2} needs to be solved \emph{self-consistently}: One starts from an initial guess for the density $n^0$ to set up the effective potential, and solves for $(\psi_l, \epsilon_l)$. From the solution, an updated density $n^1$ is computed via Eq.\,\eqref{eq:dft.KS.n(psi)}. The produce is repeated until the density residual $\delta n^i = \lVert n^i - n^{i-1} \rVert < \epsilon$, where $\epsilon$ is the desired precision. The \emph{Kohn-Sham theorem} ensures that the density $n$ of an \emph{interacting} many-particle systems can be obtained from the \emph{non-interacting} single-particle orbitals $\psi_l$~\cite{Kohn1965}. Equation\,\eqref{eq:dft.KS.2} is therefore called \emph{Kohn-Sham equation}.
 
 \newthought{When the solution $\set{\psi_l, \epsilon_l}$ is known}, Eq.\,\eqref{eq:dft.KS.2} can be used to express the kinetic energy in terms of the density and eigenvalues $\epsilon_l$ by summing and integrating with $\sum_l \int \d^3 x~\psi^\ast_l ({\bf x})$ and using the orthonormality of the orbitals $\psi_l$, so that
 \begin{align}
