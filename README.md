@@ -8,7 +8,9 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
 ### 12.04.
 
 - [x] submit remaining materials to LISE
-- [ ] integrate interpolation in GK workflow
+- [x] integrate interpolation in GK workflow
+    - [ ] ~~compute $\kappa^\alpha$ instead of $\kappa^{\alpha \beta}$~~
+    - [x] add ha-q data to dataset
 - [ ] streamline and run for completed materials
 - [ ] extract results and statistics
     - [ ] e.g. lifetimes
@@ -31,6 +33,9 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
 
 ### 14.04.
 
+- [ ] discuss w/ Chris
+    - [ ] paper review
+
 - [ ] benchmark chapter
     - [ ] MgO and CuI (for example)
     - [ ] heat flux
@@ -41,7 +46,7 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
     - [ ] analytic interpolation scheme
     - [ ] discuss convergence w.r.t. simulation time
     - [ ] lattice expansion? Comparison to NPT run?
-- [ ] schedule meeting w/ Matthias
+- [x] schedule meeting w/ Matthias
 - [ ] list open questions
 
 ### 15.04.
@@ -56,21 +61,22 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
 
 ### 19.04.
 
-- [ ] theory: DFT
-    - [ ] prepare for Sebas
+- [ ] results: catch up with last week
 
-- [ ] theory: lattice dynamics
-    - [ ] symmetry properties of dynamical matrix (Maradudin adaption)
-    - [ ] prepare for Marcin
+- [x] paper review
 
 ### 20.04.
 
+- [ ] theory: DFT
 - [ ] theory: heat flux
-    - [ ] prepare for Yair
+- [ ] theory: lattice dynamics
+    - [ ] symmetry properties of dynamical matrix (Maradudin adaption)
 
 ### 21.04.
 
-- [ ] implementation
+- [ ] send out to reviewers
+
+- [ ] implementation/benchmark
 
 ### 22.04.
 
@@ -83,6 +89,8 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
 ## KW 17: write and include feedback
 
 ### 26.04.
+
+- [ ] Treffen Matthias
 
 - [ ] results
 
@@ -120,6 +128,10 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
 ### 4 | Implementation and benchmarking
 
 - [ ] Marcel
+
+### 5 | Anharmonicity
+
+- [ ] Tom
 
 ### Results
 
