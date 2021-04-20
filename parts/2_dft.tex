@@ -104,9 +104,8 @@ where the $\phi_l$ are the solutions to the Hamiltonian $\hat{H}^0$,
         = E^0_l ({\bf R}) \phi_l ({\bf r}, {\bf R})~.
     \label{eq:Hsolution1}
 \end{align}
-The dependence of $\phi_l$ and the eigenvalue $E_l^0({\bf R})$ on $\bf R$ is \emph{parametric},~i.\,e.,~Eq.\,\eqref{eq:Hsolution1} is solved for a given nuclear configuration $\bf R$.
-
-The functions $\chi_l$ are determined by using Eq.\,\eqref{eq:psi_expansion_phi} in Eq.\,\eqref{eq:Schroedinger1},
+The functions $\phi_l$ and the eigenvalue $E_l^0({\bf R})$ depend \emph{parametrically} on $\bf R$, which means that they are obtained for a nuclear configuration $\bf R$ regarded as fixed.
+The nuclear functions $\chi_l$ are determined by using the expanded wavefunction $\psi$ given by Eq.\,\eqref{eq:psi_expansion_phi} in the full Schr\"odinger equation~\eqref{eq:Schroedinger1},
 \begin{align}
     (\hat{H} - E) \psi ({\bf r}, {\bf R})
         & = \sum_l (\hat{H}^0 + \hat{T}^{\rm Nuc} - E) \chi_l ({\bf R}) \phi_l ({\bf r}, {\bf R}) \nonumber \\
@@ -115,13 +114,13 @@ The functions $\chi_l$ are determined by using Eq.\,\eqref{eq:psi_expansion_phi}
 and integrating with $\int \d^3 r ~ \phi^\ast_m ({\bf r}, {\bf R})$ using their orthonormality, so that
 \begin{align}
     \left( \hat{T}^{\rm Nuc} + E^0_m({\bf R}) \right) \chi_m ({\bf R})
-        + \sum_l C_{ml} ({\bf R}) \chi_l ({\bf R})
+        + \sum_l \hat{C}_{ml} ({\bf R}) \chi_l ({\bf R})
         = E \chi_m ({\bf R})~.
     \label{eq:chi1}
 \end{align}
-The operator $C_{ml}$, given by
+The operator $\hat{C}_{ml}$, given by
 \begin{align}
-    C_{ml} ({\bf R})
+    \hat{C}_{ml} ({\bf R})
         = - \sum_I \frac{\hbar^2}{2 M_I} \int \d^3 r ~ 
         &\left[ \phi^\ast_m ({\bf r}, {\bf R}) \frac{\partial^2}{\partial {\bf R}_I^2}
             \phi_l ({\bf r}, {\bf R}) \right. \nonumber \\
@@ -132,7 +131,7 @@ The operator $C_{ml}$, given by
         \right]~,
     \label{eq:Aml}
 \end{align}
-describes coupling between different electronic states $(l, m)$. This term is of the order of $(m/M)^{1/4} \approx 10^{-1} - 10^{-2}$ smaller than the nuclear energy~\cite{BornOppenheimer}. Neglecting the coupling terms $C_{ml}$ is known as the \emph{Born-Oppenheimer (BO) approximation}.\footnote[][0em]{Born and Oppenheimer neglected $C_{ml}$ in their original work~\cite{BornOppenheimer} and later called this the \emph{adiabatic approximation}~\cite{BornHuang}. However, only the terms $C_{m \neq l}$ describe transitions between different electronic states induced by nuclear coupling, and keeping the terms $C_{m=l}$ gives the exact potential when the electronic states are sufficiently separated,~e.\,g.,~in presence of an electronic gap~\cite{Born1951kopplung}. Therefore the term ``adiabatic approximation'' is nowadays used when only the terms $C_{m=l}$ are kept~\cite{Marx2009}. The full BO approximation is correct to fourth order in the expansion of the full Hamiltonian in the mass parameter $\sqrt[4]{m/M}$~\cite{BornHuang}. Corrections to the forces arising from the $C_{m=l}$ term can however be expected to be much smaller~\cite{Ziman1955}.
+describes coupling between different electronic states $(l, m)$. This term is of the order $(m/M)^{1/4} \approx 10^{-1} - 10^{-2}$ smaller than the nuclear energy~\cite{BornOppenheimer}. Neglecting the coupling terms $C_{ml}$ is known as the \emph{Born-Oppenheimer (BO) approximation}.\footnote[][0em]{Born and Oppenheimer neglected $C_{ml}$ in their original work~\cite{BornOppenheimer} and later called this the \emph{adiabatic approximation}~\cite{BornHuang}. However, only the terms $C_{m \neq l}$ describe transitions between different electronic states induced by nuclear coupling, and keeping the terms $C_{m=l}$ gives the exact potential when the electronic states are sufficiently separated,~e.\,g.,~in presence of an electronic gap~\cite{Born1951kopplung}. Therefore the term ``adiabatic approximation'' is nowadays used when only the terms $C_{m=l}$ are kept~\cite{Marx2009}. The full BO approximation is correct to fourth order in the expansion of the full Hamiltonian in the mass parameter $\sqrt[4]{m/M}$~\cite{BornHuang}. Corrections to the forces arising from the $C_{m=l}$ term can however be expected to be much smaller~\cite{Ziman1955}.
 } Within this approximation, the dynamical evolution of electrons and nuclei is completely separated and the electrons can be pictured as moving \emph{adiabatically} with the nuclei. The nuclear Schr\"odinger equation reduces to
 \begin{align}
     \left( \hat{T}^{\rm Nuc} + E^0_l({\bf R}) \right) \chi_l ({\bf R})
@@ -142,7 +141,7 @@ describes coupling between different electronic states $(l, m)$. This term is of
 Solving this equation is performed in two steps:
 \begin{enumerate}
     \item For a given configuration $\bf R$, the electronic Schr\"odinger equation \eqref{eq:Hsolution1} is solved, yielding the energies $E^0_l({\bf R})$ which thereby parametrically depend on $\bf R$.
-    \item For each electronic quantum number $l$, Eq.\,\eqref{eq:chi2} for the nuclei is solved, where the electronic energy $E^0_l({\bf R})$ defines the effective \emph{potential energy surface}.
+    \item For each electronic quantum number $l$, Eq.\,\eqref{eq:chi2} is solved, where the electronic energy $E^0_l({\bf R})$ defines the effective \emph{potential energy surface} for the nuclei.
 \end{enumerate}
 
 \newthought{Since we will deal with insulators and semiconductors} with bandgaps providing a sufficient energetic separation between the electronic ground state $l=0$ and the first exited state $l=1$,\footnote{Thermal energy at room temperature is \mbox{$\sim 25\,{\rm meV} \ll $~typical bandgap}.} we will concentrate on the electronic ground state energy $E^0_0$ for the given configuration ${\bf R}$ in the following. We denote this energy as the \emph{Born-Oppenheimer potential energy},
