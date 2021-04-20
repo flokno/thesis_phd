@@ -473,15 +473,16 @@ is the \emph{exchange-correlation potential} formally defined as the functional 
 \end{align}
 This equation is a one-particle Schr\"odinger-like equation for orbitals $\psi_l$ with eigenvalues $\epsilon_l$ in an effective potential $v^{\rm eff}[n]$. Since the effective potential is a functional of the density $n$ given in terms of the orbitals by Eq.\,\eqref{eq:dft.KS.n(psi)}, Eq.\,\eqref{eq:dft.KS.2} needs to be solved \emph{self-consistently}: One starts from an initial guess for the density $n^0$ to set up the effective potential, and solves for $(\psi_l, \epsilon_l)$. From the solution, an updated density $n^1$ is computed via Eq.\,\eqref{eq:dft.KS.n(psi)}. The produce is repeated until the density residual $\delta n^i = \lVert n^i - n^{i-1} \rVert < \epsilon$, where $\epsilon$ is the desired precision. The \emph{Kohn-Sham theorem} ensures that the density $n$ of an \emph{interacting} many-particle systems can be obtained from the \emph{non-interacting} single-particle orbitals $\psi_l$~\cite{Kohn1965}. Equation\,\eqref{eq:dft.KS.2} is therefore called \emph{Kohn-Sham equation}.
 
-\newthought{When the solution $\set{\psi_l, \epsilon_l}$ is known}, Eq.\,\eqref{eq:dft.KS.2} can be used to express the kinetic energy in terms of the density and eigenvalues $\epsilon_l$ by summing and integrating with $\sum_l \int \d^3 x~\psi^\ast_l ({\bf x})$ and using the orthonormality of the orbitals $\psi_l$, so that
+\newthought{When the solution $\set{\psi_l, \epsilon_l}$ is known}, Eq.\,\eqref{eq:dft.KS.2} can be used to express the kinetic energy in terms of the density $n$ and eigenvalues $\epsilon_l$ by summing and integrating with $\sum_l \int \d^3 x~\psi^\ast_l ({\bf x})$ and using the orthonormality of the orbitals $\psi_l$, so that
 \begin{align}
 	T[n] 
 		\equiv - \frac{1}{2}\sum_l \int \d^3 x ~ \psi^\ast_l ({\bf x}) \nabla^2 \psi({\bf x})
 		\stackrel{\eqref{eq:dft.KS.2}}{=} 
 			\sum_l \epsilon_l 
-			- \int \d^3 x ~ v^{\rm eff}[n] ({\bf x}) n({\bf x})~.
+			- \int \d^3 x ~ v^{\rm eff}[n] ({\bf x}) n({\bf x})~,
 	\label{eq:dft.KS.Tn}
 \end{align}
+thereby eliminating the Kohn-Sham orbitals $\psi_l$ from the expression.
 The total energy in terms of the Kohn-Sham eigenvalues $\set{\epsilon_l}$ and density $n ({\bf x}) = \sum_l \lvert \psi_l ({\bf x}) \rvert^2$ is then given as\marginnote{Remember that $$E[n] = T[n] +  E^{\rm es}[n] + E^{\rm xc} [n] + V^{\rm ext}[n]~,$$ and $$	v^{\rm eff} [n] ({\bf x}) = v^{\rm es} [n] ({\bf x}) + v^{\rm xc} [n] ({\bf x}) + v^{\rm ext}  ({\bf x})~.$$}
 \begin{align}
 	E[n]
@@ -502,15 +503,15 @@ The total energy in terms of the Kohn-Sham eigenvalues $\set{\epsilon_l}$ and de
 \section{Approximations to the exchange-correlation energy}
 \label{sec:dft.approximations}
 We are finally in position to introduce approximations to the exchange-correlation energy functional $E^{\rm xc}[n]$ from which the corresponding potential can be obtained by the functional derivative with respect to the density.\marginnote{Remember $$v^{\rm xc} [n] ({\bf x}) = \frac{\delta E^{\rm xc}[n]}{\delta n ({\bf x})}~.$$
-} Indeed, the very success of the Kohn-Sham DFT scheme probably can be traced back to the fact that simple approximations to $E^{\rm xc}[n]$ lead to reasonable results for a large class of systems. 
+} Indeed, the very success of the Kohn-Sham DFT scheme can most likely be traced back to the fact that simple approximations to $E^{\rm xc}[n]$ lead to reasonable results for a large class of systems. 
 
-\newthought{Let us now define} an exchange-correlation energy density via
+\newthought{Let us now define} an exchange-correlation energy density $e^{\rm xc} \left[ n \right] ({\bf x})$ via
 \begin{align}
 	E^{\rm xc}[n] 
 		= \int \d^3 x ~ e^{\rm xc} \left[ n \right] ({\bf x})~,
 \label{eq:dft.xc.1}
 \end{align}
-where the density $e^{\rm xc} \left[ n \right] ({\bf x})$ is a functional of the density by itself. 
+where the density is a functional of the density by itself. 
 The most straighforward way to approximate $e^{\rm xc}[n] ({\bf x})$ is to replace the \emph{functional} $e^{\rm xc} [n] ({\bf x})$ by a \emph{function} of the local density,
 \begin{align}
 	e^{\rm xc} [n] ({\bf x})
@@ -527,7 +528,7 @@ This approximation is called the \emph{local density approximation} (LDA), and t
 		= \int \d^3 x ~ e^{\rm xc}_{\rm LDA} \left(n ({\bf x}) \right)~.
 	\label{eq:dft.LDA.1}
 \end{align}
-The energy density $e^{\rm xc}_{\rm LDA} \left(n ({\bf x}) \right)$ is usually taken to be the exchange-correlation energy density of a homogeneous electron gas obtained from higher-level theory approaches.\REM{Clarify: Parametrization can be different, hom. el. gas is good for metals, add citations on parametrizing LDA via NN.} The LDA is (by construction) exact in the limit of vanishing density gradient, $\lvert \nabla n ({\bf x}) \rvert / n({\bf x}) \rightarrow 0$, but yields surprisingly good results under circumstances where the density is non-homogeneous as well~\cite[p.\,183]{Dreizler2012}.
+The energy density $e^{\rm xc}_{\rm LDA} \left(n ({\bf x}) \right)$ is usually taken to be the exchange-correlation energy density of a homogeneous electron gas obtained from higher-level theory approaches~\CITE{LDA}.\REM{Clarify: Parametrization can be different, hom. el. gas is good for metals, add citations on parametrizing LDA via NN.} The LDA is (by construction) exact in the limit of vanishing density gradient, $\lvert \nabla n ({\bf x}) \rvert / n({\bf x}) \rightarrow 0$, but yields surprisingly good results under circumstances where the density is non-homogeneous as well~\cite[p.\,183]{Dreizler2012}.
 
 \newthought{In the spirit of the original work} by Hohenberg and Kohn, and Kohn and Sham, improvements on the LDA can be constructed by going beyond the local density and taking into account gradients of the density as well,
 \begin{align}
@@ -548,7 +549,7 @@ where $e^{\rm x}_{\rm hom}(n)$ is the exchange energy density of a homogeneous e
 
 \section{Periodic Systems}
 \label{sec:theory.periodic.1}
-\REM{Duplicate of the phonon part, maybe just introduce BvK boundary conditions}
+\REM{Duplicate of the phonon part, maybe just introduce BvK boundary conditions -- or don't mention at all?}
 So far, we did not specify the external potential $v^{\rm ext} ({\bf x})$ entering the Kohn-Sham equation \eqref{eq:dft.KS.1} beyond stating that it describes the arrangement of nuclei. For (finite) molecules and clusters, this is already sufficient and a self-consistent solution to Eq.\,\eqref{eq:dft.KS.1} can be attempted from here. For (practically infinite) bulk systems and crystals on the other hand, further statements need to be made.
 
 Let us assume that the configuration of the nuclei is in a perfect periodic arrangement described by the 
@@ -569,10 +570,9 @@ where $\set{{\bf a}_i}$ is a basis that spans
 the \emph{unit cell},
 \begin{align}
 	\mathds V_{\rm uc}
-		= \set{{\bf x} = f^i {\bf a}_i : f^i \in \mathds R^{[0, 1)}}~,
+		= \set{{\bf x} = f^i {\bf a}_i : f^i \in \mathds R^{[-0.5, 0.5)}}~,
 	\label{eq:dft.Bloch.unitcell}
 \end{align}
-\REM{Use $[-0.5, 0.5)$}
 and the full crystal is spanned by the unit cell translated by all possible translations $\bf R_n$ given by Eq.\,\eqref{eq:Rn} with integer numbers smaller than some large but finite value $N_i$ for each basis vector ${\bf a}_i$, $\set{n^i : n^i \in \mathds{N}^{[0, N_i)}}$. The periodicity of the crystal is characterized by the condition that any translation by $\bf R_n$ maps the crystal back onto itself such that
 \begin{align}
 	v^{\rm ext} ({\bf x} + {\bf R_n}) 
