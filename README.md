@@ -67,24 +67,25 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
 
 ### 20.04.
 
-- [ ] theory: DFT
-- [ ] theory: heat flux
-- [ ] theory: lattice dynamics
-    - [ ] symmetry properties of dynamical matrix (Maradudin adaption)
+- [x] theory: DFT
 
 ### 21.04.
 
+- [ ] theory: lattice dynamics
+
+    - [ ] symmetry properties of dynamical matrix (Maradudin adaption)
+
+- [ ] theory: heat flux
+
 - [ ] send out to reviewers
 
-- [ ] implementation/benchmark
-
-### 22.04.
+### 22.0
 
 - [ ] results
 
 ### 23.04.
 
-- [ ] results
+- [ ] implementation/benchmark
 
 ## KW 17: write and include feedback
 

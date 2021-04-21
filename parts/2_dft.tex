@@ -147,7 +147,7 @@ Solving this equation is performed in two steps:
 \newthought{Since we will deal with insulators and semiconductors} with bandgaps providing a sufficient energetic separation between the electronic ground state $l=0$ and the first exited state $l=1$,\footnote{Thermal energy at room temperature is \mbox{$\sim 25\,{\rm meV} \ll $~typical bandgap}.} we will concentrate on the electronic ground state energy $E^0_0$ for the given configuration ${\bf R}$ in the following. We denote this energy as the \emph{Born-Oppenheimer potential energy},
 \begin{align}
 	E^{\rm BO} ({\bf R}) \equiv E^0_0 ({\bf R})~,
-	\label{eq:E^BO}
+	\label{eq:E^BO_0}
 \end{align}
 or simply as \emph{the potential}, $\mathcal V (\b R) $.
 
@@ -290,7 +290,7 @@ under the constraint of fixed particle number imposed by the Lagrange multiplier
 \newpage
 
 \section{The Born-Oppenheimer Surface}
-In the definition of the effective electronic Hamiltonian in Eq.\,\eqref{eq:H.dft.1}, we had neglected the electrostatic nuclear repulsion $V^{\rm Nuc-Nuc}$ defined in Eq.\,\eqref{eq:Vnuc}. The Born-Oppenheimer potential energy surface defined in Eq.\,\eqref{eq:E^BO} therefore consists of both terms,~i.\,e.,
+In the definition of the effective electronic Hamiltonian in Eq.\,\eqref{eq:H.dft.1}, we had neglected the electrostatic nuclear repulsion $V^{\rm Nuc-Nuc}$ defined in Eq.\,\eqref{eq:Vnuc}. The Born-Oppenheimer potential energy surface defined in Eq.\,\eqref{eq:E^BO_0} therefore consists of both terms,~i.\,e.,
 \begin{align}
 	E^{\rm BO} ({\bf R}) 
 		= E[n] + \sum_{I < J} \frac{Z_{I} Z_{J} e^{2}}{\left|{\bf R}_{I}-{\bf R}_{J}\right|}~.
@@ -357,7 +357,7 @@ which is solely determined by the ground-state electron density $n ({\bf x})$ an
 \end{align}
 \end{theorem}
 
-\newthought{While the Hellmann-Feynman theorem is formally correct}, in practice there often arise correction terms when non-complete basis sets are used that also depend on the parameter $\lambda$, or an approximation to the true ground-state density is used~\CITE{References Herzain}. In atomic-cerntered basissets, the most important correction terms are the so-called \emph{Pulay forces}~\cite{Pulay1969}.
+\newthought{While the Hellmann-Feynman theorem is formally correct}, in practice there often arise correction terms when non-complete basis sets are used that also depend on the parameter $\lambda$, or an approximation to the true ground-state density is used~\cite{Bendt1983,Chan1993}. In atomic-cerntered basissets, the most important correction terms are the so-called \emph{Pulay forces}~\cite{Pulay1969}.
 
 \newpage
 
