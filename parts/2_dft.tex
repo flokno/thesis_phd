@@ -505,6 +505,7 @@ The total energy in terms of the Kohn-Sham eigenvalues $\set{\epsilon_l}$ and de
 We are finally in position to introduce approximations to the exchange-correlation energy functional $E^{\rm xc}[n]$ from which the corresponding potential can be obtained by the functional derivative with respect to the density.\marginnote{Remember $$v^{\rm xc} [n] ({\bf x}) = \frac{\delta E^{\rm xc}[n]}{\delta n ({\bf x})}~.$$
 } Indeed, the very success of the Kohn-Sham DFT scheme can most likely be traced back to the fact that simple approximations to $E^{\rm xc}[n]$ lead to reasonable results for a large class of systems. 
 
+\subsection{Local Density Approximation (LDA)}
 \newthought{Let us now define} an exchange-correlation energy density $e^{\rm xc} \left[ n \right] ({\bf x})$ via
 \begin{align}
 	E^{\rm xc}[n] 
@@ -528,8 +529,9 @@ This approximation is called the \emph{local density approximation} (LDA), and t
 		= \int \d^3 x ~ e^{\rm xc}_{\rm LDA} \left(n ({\bf x}) \right)~.
 	\label{eq:dft.LDA.1}
 \end{align}
-The energy density $e^{\rm xc}_{\rm LDA} \left(n ({\bf x}) \right)$ is usually taken to be the exchange-correlation energy density of a homogeneous electron gas obtained from higher-level theory approaches~\CITE{LDA}.\REM{Clarify: Parametrization can be different, hom. el. gas is good for metals, add citations on parametrizing LDA via NN.} The LDA is (by construction) exact in the limit of vanishing density gradient, $\lvert \nabla n ({\bf x}) \rvert / n({\bf x}) \rightarrow 0$, but yields surprisingly good results under circumstances where the density is non-homogeneous as well~\cite[p.\,183]{Dreizler2012}.
+The energy density $e^{\rm xc}_{\rm LDA} \left(n ({\bf x}) \right)$ is usually taken to be the exchange-correlation energy density of a homogeneous electron gas obtained from higher-level theory approaches~\CITE{LDA}.\REM{Clarify: Parametrization can be different, hom. el. gas is good for metals, add citations on parametrizing LDA via NN.\CITE{NagaiSugino2020}} The LDA is (by construction) exact in the limit of vanishing density gradient, $\lvert \nabla n ({\bf x}) \rvert / n({\bf x}) \rightarrow 0$, but yields surprisingly good results under circumstances where the density is non-homogeneous as well~\cite[p.\,183]{Dreizler2012}.
 
+\subsection{Generalized Gradient Approximation (GGA)}
 \newthought{In the spirit of the original work} by Hohenberg and Kohn, and Kohn and Sham, improvements on the LDA can be constructed by going beyond the local density and taking into account gradients of the density as well,
 \begin{align}
 	e^{\rm xc} [n] ({\bf x})
@@ -573,7 +575,9 @@ the \emph{unit cell},
 		= \set{{\bf x} = f^i {\bf a}_i : f^i \in \mathds R^{[-0.5, 0.5)}}~,
 	\label{eq:dft.Bloch.unitcell}
 \end{align}
-and the full crystal is spanned by the unit cell translated by all possible translations $\bf R_n$ given by Eq.\,\eqref{eq:Rn} with integer numbers smaller than some large but finite value $N_i$ for each basis vector ${\bf a}_i$, $\set{n^i : n^i \in \mathds{N}^{[0, N_i)}}$. The periodicity of the crystal is characterized by the condition that any translation by $\bf R_n$ maps the crystal back onto itself such that
+and the full crystal is spanned by the unit cell translated by all possible translations $\bf R_n$ given by Eq.\,\eqref{eq:Rn} with integer numbers $n_i \in \mathds Z$ .
+%smaller than some large but finite value $N_i$ for each basis vector ${\bf a}_i$, $\set{n^i : n^i \in \mathds{N}^{[0, N_i)}}$. 
+The periodicity of the crystal is characterized by the condition that any translation by $\bf R_n$ maps the crystal back onto itself such that
 \begin{align}
 	v^{\rm ext} ({\bf x} + {\bf R_n}) 
 		= v^{\rm ext} ({\bf x})~.
@@ -630,6 +634,6 @@ where $\varepsilon^{ijk}$ denotes the Levi-Civita symbol enforcing the correct o
 The space spanned by the $\set{{\bf b}_i}$,~i.\,e.,~the space containing all unique values of $\b k$, is the unit cell of the reciprocal lattice. Alternatively, one chooses those equivalent $\bf k_m$ which are closest to the $\bf 0$,~i.\,e.,~the Brillouin zone. The values of $\bf k$ given by Eq.\,\eqref{eq:dft.Bloch.k_m} are those sampled in real-space simulation in a box of the given size,~i.\,e.,~the \emph{Born-von Karman cell}.
 
 \section{Conclusion}
-The concept of density functional theory in the Kohn-Sham scheme (KS-DFT) has been presented starting from the general many-body Hamiltonian given in Eq.\,\eqref{eq:Hamiltonian}. Besides the Born-Oppenheimer (BO) approximation which decouples electron and nuclear dynamics, KS-DFT offers a formally exact way of computing the total energy of the electronic ground state from first principles by solving the Kohn-Sham equations, a set of Schr\"odinger-like single-particle equations, for an auxiliary set of functions,~i.\,e.,~the KS-orbitals. In order to solve the KS equations one needs to approximate the exchange-correlation energy, $E^{\rm xc} [n]$. In Sec.\,\ref{sec:dft.approximations} we have introduced the most common approaches to approximate $E^{\rm xc} [n]$:~The local-density approximation (LDA), as well as the generalized-gradient approximation (GGA).
+The concept of density functional theory in the Kohn-Sham scheme (KS-DFT) has been presented starting from the general, many-body Hamiltonian given in Eq.\,\eqref{eq:Hamiltonian}. Besides the Born-Oppenheimer (BO) approximation which decouples electron and nuclear dynamics, KS-DFT offers a formally exact way of computing the non-relativistic total energy of the electronic ground state from first principles by solving the Kohn-Sham (KS) equations, a set of Schr\"odinger-like single-particle equations, for an auxiliary set of functions,~i.\,e.,~the KS-orbitals. In order to solve the KS equations one needs to approximate the exchange-correlation energy, $E^{\rm xc} [n]$. In Sec.\,\ref{sec:dft.approximations} we have introduced the most common approaches to approximate $E^{\rm xc} [n]$:~The local-density approximation (LDA), as well as the generalized-gradient approximation (GGA).
 
 Within the BO approximation, the BO potential-energy surface determines all dynamical properties of the nuclear system, for example heat transport. We discuss dynamical properties of this kind in more detail in the next chapter.
