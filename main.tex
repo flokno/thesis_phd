@@ -293,8 +293,12 @@
 
 \chapter{Outlook}
 
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliography}
 
-
+\bibliographystyle{unsrt}
+\bibliography{references}
 
 % \setcounter{secnumdepth}{-1}
 
@@ -303,15 +307,15 @@
 % \setcounter{tocdepth}{1}
 % \addtocontents{toc}{\setcounter{tocdepth}{0}}
 \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+%	\newcommand{\bibsection}{\section{Bibliography}} % <- was missing
 \begin{appendices}
 %  \appendixpage
   \part*{Appendix}
   \input{./parts/appendix.tex}
 \end{appendices}
 
-\backmatter
+% \backmatter
 
-\bibliography{references}
-\bibliographystyle{unsrt}
+
 
 \end{document}
