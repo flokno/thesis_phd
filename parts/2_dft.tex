@@ -92,16 +92,15 @@ In our notation, the time-independent many-body Schr\"odinger equation reads
     \hat{H} \psi ({\bf r}, {\bf R}) = E \psi ({\bf r}, {\bf R})~,
     \label{eq:Schroedinger1}
 \end{align}
-with ground-state eigenvalues $E$ and many-body wave functions \mbox{$\psi ({\bf r}, {\bf R})$},
-where \mbox{${\bf r} = ({\bf r}_, \ldots, {\bf r}_{N_{\rm e}})$} denotes all electronic coordinates, and ${\bf R} = ({\bf R}_1, \ldots, {\bf R}_{N_{\rm Nuc}})$ the nuclear coordinates, respectively. According to Eq.\,\eqref{eq:H=H0+T}, we expand the wave functions $\psi ({\bf r}, {\bf R})$ in a complete set of orthonormal basis functions $\phi_l$,
+with ground-state eigenvalues $E$ and many-body wave functions \mbox{$\psi ({\bf r}, {\bf R})$}, where {${\bf r} = ({\bf r} \ldots {\bf r}_{N_{\rm e}})$} denotes all electronic coordinates, and ${\bf R} = ({\bf R}_1 \ldots {\bf R}_{N_{\rm Nuc}})$ the nuclear coordinates, respectively. According to Eq.\,\eqref{eq:H=H0+T}, we expand the wave functions $\psi ({\bf r}, {\bf R})$ in a complete set of orthonormal basis functions $\phi_l$,
 \begin{align}
-\psi ({\bf r}, {\bf R}) = \sum_l \chi_l ({\bf R}) \phi_l ({\bf r}, {\bf R})~,
+\psi ({\bf r}, {\bf R}) = \sum_l \chi_l ({\bf R}) \phi_l ({\bf r}; {\bf R})~,
 \label{eq:psi_expansion_phi}
 \end{align}
 where the $\phi_l$ are the solutions to the Hamiltonian $\hat{H}^0$,
 \begin{align}
-    \hat{H}^0 \phi_l ({\bf r}, {\bf R})
-        = E^0_l ({\bf R}) \phi_l ({\bf r}, {\bf R})~.
+    \hat{H}^0 \phi_l ({\bf r}; {\bf R})
+        = E^0_l ({\bf R}) \phi_l ({\bf r}; {\bf R})~.
     \label{eq:Hsolution1}
 \end{align}
 The functions $\phi_l$ and the eigenvalue $E_l^0({\bf R})$ depend \emph{parametrically} on $\bf R$, which means that they are obtained for a nuclear configuration $\bf R$ regarded as fixed.
@@ -400,7 +399,7 @@ Let us now define the density $n({\bf x})$ in terms of an \emph{auxiliary} ortho
 	n({\bf x}) = \sum_l f_l \left\lvert \psi_l ({\bf x}) \right\rvert^2~,
 	\label{eq:dft.KS.n(psi)}
 \end{align}
-where the $f_l$\marginnote{The occupations are $f_l \in [0, 1]$ when the spin is treated explicitly, otherwise the spin degeneracy can be accounted for by allowing $f_l \in [0, 2]$.} denote the occupation of each orbital,~i.\,e.,~a Fermi-like function that represents a thermal ensemble or the 0\,K ground state. We use Eq.\,\eqref{eq:dft.KS.n(psi)} in Eq.\,\eqref{eq:dft.Ks.En} and vary with respect to $\psi^\ast_l ({\bf x})$ under the constraint of keeping the functions $\set{\psi_l}$ normalized via the Lagrange multiplier $\lambda_l$,
+where the $f_l$ denote the occupation of each orbital,~i.\,e.,~a Fermi-like function that represents a thermal ensemble or the 0\,K ground state.\footnote{The occupations are $f_l \in [0, 1]$ when the spin is treated explicitly, otherwise the spin degeneracy can be accounted for by allowing $f_l \in [0, 2]$.} We use Eq.\,\eqref{eq:dft.KS.n(psi)} in Eq.\,\eqref{eq:dft.Ks.En} and vary with respect to $\psi^\ast_l ({\bf x})$ under the constraint of keeping the functions $\set{\psi_l}$ normalized via the Lagrange multiplier $\lambda_l$,
 \begin{align}
 	\frac{\delta}{\delta \psi^\ast_l ({\bf x})}
 		\left[
@@ -471,7 +470,7 @@ is the \emph{exchange-correlation potential} formally defined as the functional 
 	= \epsilon_l \psi_l ({\bf x})~.
 \label{eq:dft.KS.2}
 \end{align}
-This equation is a one-particle Schr\"odinger-like equation for orbitals $\psi_l$ with eigenvalues $\epsilon_l$ in an effective potential $v^{\rm eff}[n]$. Since the effective potential is a functional of the density $n$ given in terms of the orbitals by Eq.\,\eqref{eq:dft.KS.n(psi)}, Eq.\,\eqref{eq:dft.KS.2} needs to be solved \emph{self-consistently}: One starts from an initial guess for the density $n^0$ to set up the effective potential, and solves for $(\psi_l, \epsilon_l)$. From the solution, an updated density $n^1$ is computed via Eq.\,\eqref{eq:dft.KS.n(psi)}. The produce is repeated until the density residual $\delta n^i = \lVert n^i - n^{i-1} \rVert < \epsilon$, where $\epsilon$ is the desired precision. The \emph{Kohn-Sham theorem} ensures that the density $n$ of an \emph{interacting} many-particle systems can be obtained from the \emph{non-interacting} single-particle orbitals $\psi_l$~\cite{Kohn1965}. Equation\,\eqref{eq:dft.KS.2} is therefore called \emph{Kohn-Sham equation}.
+This is a set of one-particle Schr\"odinger-like equations for the orbitals $\psi_l$ with eigenvalues $\epsilon_l$ in an effective potential $v^{\rm eff}[n]$. Since the effective potential is a functional of the density $n$ given in terms of the orbitals by Eq.\,\eqref{eq:dft.KS.n(psi)}, Eq.\,\eqref{eq:dft.KS.2} needs to be solved \emph{self-consistently}: One starts from an initial guess for the density $n^0$ to set up the effective potential, and solves for $(\psi_l, \epsilon_l)$. From the solution, an updated density $n^1$ is computed via Eq.\,\eqref{eq:dft.KS.n(psi)}. The procedure is repeated until the density residual $\delta n^i = \lVert n^i - n^{i-1} \rVert$ is smaller than the desired precision. The \emph{Kohn-Sham theorem} ensures that the density $n$ of an \emph{interacting} many-particle systems can be obtained from the \emph{non-interacting} single-particle orbitals $\psi_l$~\cite{Kohn1965} \REM{Explain?}. Equation\,\eqref{eq:dft.KS.2} is therefore called \emph{Kohn-Sham equation}.
 
 \newthought{When the solution $\set{\psi_l, \epsilon_l}$ is known}, Eq.\,\eqref{eq:dft.KS.2} can be used to express the kinetic energy in terms of the density $n$ and eigenvalues $\epsilon_l$ by summing and integrating with $\sum_l \int \d^3 x~\psi^\ast_l ({\bf x})$ and using the orthonormality of the orbitals $\psi_l$, so that
 \begin{align}
@@ -538,7 +537,7 @@ The energy density $e^{\rm xc}_{\rm LDA} \left(n ({\bf x}) \right)$ is usually t
 		\approx e^{\rm xc}_{\rm GGA} \bm ( n({\bf x}), \nabla n({\bf x}) \bm )~.
 	\label{eq:dft.exc.gga.1}
 \end{align}
-Again, the full functional $e^{\rm xc}[n]$ is replaced by a function of the density and its gradient. This approximation is called \emph{generalized gradient approximation} (GGA), an the resulting energy is usually written in the form
+Again, the full functional $e^{\rm xc}[n]$ is replaced by a function of the density and its gradient. This approximation is called \emph{generalized gradient approximation} (GGA), and the resulting energy is usually written in the form
 \begin{align}
 		E^{\rm xc}_{\rm GGA}[n] 
 		= \int \d^3 x ~ e^{\rm x}_{\rm hom} \left(n ({\bf x}) \right) 
@@ -552,7 +551,7 @@ where $e^{\rm x}_{\rm hom}(n)$ is the exchange energy density of a homogeneous e
 \section{Periodic Systems}
 \label{sec:theory.periodic.1}
 \REM{Duplicate of the phonon part, maybe just introduce BvK boundary conditions -- or don't mention at all?}
-So far, we did not specify the external potential $v^{\rm ext} ({\bf x})$ entering the Kohn-Sham equation \eqref{eq:dft.KS.1} beyond stating that it describes the arrangement of nuclei. For (finite) molecules and clusters, this is already sufficient and a self-consistent solution to Eq.\,\eqref{eq:dft.KS.1} can be attempted from here. For (practically infinite) bulk systems and crystals on the other hand, further statements need to be made.
+So far, we did not specify the external potential $v^{\rm ext} ({\bf x})$ entering the Kohn-Sham equation \eqref{eq:dft.KS.1} beyond stating that it describes the arrangement of nuclei. For (finite) molecules and clusters, this is already sufficient and a self-consistent solution to Eq.\,\eqref{eq:dft.KS.1} can be attempted from here. For (practically infinite) bulk systems and crystals on the other hand, further assumptions need to be made.
 
 Let us assume that the configuration of the nuclei is in a perfect periodic arrangement described by the 
 %\emph{unit cell}
@@ -568,8 +567,7 @@ Let us assume that the configuration of the nuclei is in a perfect periodic arra
 		= \sum_{i=1}^{3} n^i {\bf a}_i~,
 	\label{eq:Rn}
 \end{align}
-where $\set{{\bf a}_i}$ is a basis that spans
-the \emph{unit cell},
+where $\set{{\bf a}_i}$ are \emph{lattice vectors} that span the \emph{unit cell},
 \begin{align}
 	\mathds V_{\rm uc}
 		= \set{{\bf x} = f^i {\bf a}_i : f^i \in \mathds R^{[-0.5, 0.5)}}~,
@@ -625,13 +623,13 @@ In total there are $N = N_1 N_2 N_3$ unique values of $\bf k$ labelled by ${\bf 
 		= 2 \pi \varepsilon^{ijk} \frac{{\bf a}_j \times {\bf a}_k}{{\bf a}_1 \cdot ({\bf a}_2 \times {\bf a}_3)} ~,
 	\label{eq:dft.Bloch.bi}
 \end{align}
-where $\varepsilon^{ijk}$ denotes the Levi-Civita symbol enforcing the correct ordering of $ijk$. The complete set of $\bf k$-values is
+where $\varepsilon^{ijk}$ denotes the Levi-Civita symbol enforcing the correct ordering of $ijk$. The complete set of $\bf k$-values sampled in a simulation box of the given size,~i.\,e.,~the \emph{Born-von Karman cell}, is
 \begin{align}
 	{\bf k}_{\bf m} 
 		= \sum_{i=1}^3 \frac{m_i}{N_i} {\bf b}^i~.
 	\label{eq:dft.Bloch.k_m}
 \end{align}
-The space spanned by the $\set{{\bf b}_i}$,~i.\,e.,~the space containing all unique values of $\b k$, is the unit cell of the reciprocal lattice. Alternatively, one chooses those equivalent $\bf k_m$ which are closest to the $\bf 0$,~i.\,e.,~the Brillouin zone. The values of $\bf k$ given by Eq.\,\eqref{eq:dft.Bloch.k_m} are those sampled in real-space simulation in a box of the given size,~i.\,e.,~the \emph{Born-von Karman cell}.
+The space spanned by the $\set{{\bf b}_i}$,~i.\,e.,~the space containing all unique values of $\b k$, is the unit cell of the reciprocal lattice. Alternatively, one chooses those equivalent $\bf k_m$ which are closest to the $\bf 0$,~i.\,e.,~the Brillouin zone.
 
 \section{Conclusion}
 The concept of density functional theory in the Kohn-Sham scheme (KS-DFT) has been presented starting from the general, many-body Hamiltonian given in Eq.\,\eqref{eq:Hamiltonian}. Besides the Born-Oppenheimer (BO) approximation which decouples electron and nuclear dynamics, KS-DFT offers a formally exact way of computing the non-relativistic total energy of the electronic ground state from first principles by solving the Kohn-Sham (KS) equations, a set of Schr\"odinger-like single-particle equations, for an auxiliary set of functions,~i.\,e.,~the KS-orbitals. In order to solve the KS equations one needs to approximate the exchange-correlation energy, $E^{\rm xc} [n]$. In Sec.\,\ref{sec:dft.approximations} we have introduced the most common approaches to approximate $E^{\rm xc} [n]$:~The local-density approximation (LDA), as well as the generalized-gradient approximation (GGA).
