@@ -366,10 +366,11 @@ This makes clear that, in the absence of convection, the contribution of ${\bf J
 A final remark concerning this equation is in order: One might argue that the expression in Eq.\,\eqref{eq:J_tot_solid} is a total time derivative of ${\bf P} = \frac{1}{V}  \sum_I {\bf R}_I^0 \fD E_I$, and therefore vanishes by the aforementioned gauge invariance principle. However, this is not the case in an infinite solid, since the atomic configuration $\set{{\bf R}_I}$ is not bounded. The sum over atomic positions is therefore not well defined in the first place and remains to be understood as a symbolic representation of an actual energy partitioning scheme that needs to be cast in a boundary-insensitive form for any practical application of Eq.\,\eqref{eq:J_tot_solid}.\footnote{The author thanks Stefano Baroni for an insightful discussion clarifying this point.}
 
 \section{Ab initio Heat Flux}
-The above formulas are readily applied when empirical force fields are used to describe the atomic interactions, as an atomic partitioning of the total energy is trivial in that case, although care must be taken in deriving the correct formulae nevertheless~\cite{Fan2015,Boone2019}. An \emph{ab initio} derivation of heat flux on the other hand was a long-standing problem because it was not clear how an expression like Eq.\,\eqref{eq:J_tot_solid} can be obtained when no atomic partitioning is available. This problem was solved when Marcologno \emph{et al.} and Carbogno \emph{et al.} independently arrived at well-defined heat flux expressions in \emph{ab initio} frameworks~\cite{Marcolongo2016,Carbogno2016}. We adopt the latter approach in the following, but present a derivation that slightly differs from Ref.\,\cite{Carbogno2016},~i.\,e.,~by starting from Eq.\,\eqref{eq:hf.J} instead of Eq.\,\eqref{eq:hf.J.atomic}.
+The above formulas are readily applied when empirical force fields are used to describe the atomic interactions, as an atomic partitioning of the total energy is trivial in that case, although care must be taken in deriving the correct formulae nevertheless~\cite{Fan2015,Boone2019}. An \emph{ab initio} derivation of heat flux on the other hand was a long-standing problem because it was not clear how an expression like Eq.\,\eqref{eq:J_tot_solid} can be obtained when no atomic partitioning is available. This problem was solved when Marcologno \emph{et al.} and Carbogno \emph{et al.} independently arrived at well-defined heat flux expressions in \emph{ab initio} frameworks~\cite{Marcolongo2016,Carbogno2016}. We adopt the latter approach in the following, but present a derivation that slightly differs from Ref.\,\cite{Carbogno2016},~i.\,e.,~by starting from Eq.\,\eqref{eq:hf.J} instead of Eq.\,\eqref{eq:hf.J.atomic}, and using the phase-space formalism developed in this chapter.
 
 % \paragraph{Derivation of ab initio Heat Flux}
-To evaluate Eq.\,\eqref{eq:hf.J}, we need a definition of the time derivative of the energy density. The many-body Hamiltonian for a given configuration $\Gamma = (\b R, \b P)$ is given again as
+To evaluate Eq.\,\eqref{eq:hf.J},\footnote{Recall Eq.\,\eqref{eq:hf.J}:$$\b J (t) 
+	= \frac{1}{V} \int \d^3 r ~ \b r \, \dot{e} (\b r, t)~.$$} we need a definition of the time derivative of the energy density. We do so by first going back to the many-body Hamiltonian for a configuration $\Gamma = (\b R, \b P)$ given by
 \begin{align}
 	H (\Gamma) = \sum_I \frac{\b P_I^2}{2 M_I} + V(\b R) 
 		~\equiv~ \int \d^3 r ~ e (\b r, \Gamma)~,
@@ -384,17 +385,20 @@ where $e (\b r, \Gamma)$ is an appropriately chosen energy density yielding the 
 		\stackrel{!}{\equiv}
 			\int \d^3 r ~ \dot{e} (\b r , \Gamma)~.
 \end{align}
-Note that the energy is supposed to be conserved so that the time derivate of the Hamiltonian vanishes, and therefore $\dot{e} (\b r, \Gamma)$ needs to integrate to zero.
-As explained in Sec.\,\ref{sec:HellmannFeynman}, the force appearing in Eq.\,\eqref{eq:hf.ai.Hdot} has a nuclear and an electronic contribution given by the two terms in Eq.\,\eqref{eq:hellmannfeynman.force}, so that
+We note in passing that the energy is supposed to be conserved so that the time derivate of the Hamiltonian vanishes, and therefore $\dot{e} (\b r, \Gamma)$ needs to integrate to zero.
+As explained in Sec.\,\ref{sec:HellmannFeynman}, the force derived from the BO potential-energy surface $V ({\bf R})$ appearing in Eq.\,\eqref{eq:hf.ai.Hdot} has a nuclear and an electronic contribution given by the two terms in Eq.\,\eqref{eq:hellmannfeynman.force}, so that
 \begin{align}
 	\b F_I
 		&%= - \frac{\partial V (\b R)}{\partial \b R_I}  
 			= \int \d^3 r ~ \b f_I^{\rm el} (\b r) + \sum_{J \neq I} \b F_{IJ}^{\rm Nuc}~, \quad\text{with}
 		\label{eq:hf.ai.F}\\
 	\b f_I^{\rm el} (\b r)
-		&= - n(\b r) Z_I \frac{\b R_I - \b r}{\lvert \b R_I - \b r \rvert^3}~, \quad\text{and} \\
+		&= - n(\b r) Z_I \frac{\b R_I - \b r}{\lvert \b R_I - \b r \rvert^3}~,
+		\label{eq:hf.ai.Fel}
+		\quad\text{and} \\
 	\b F_{IJ}^{\rm Nuc}
 		&= Z_I Z_J \frac{\b R_I - \b R_J}{\lvert \b R_I - \b R_J \rvert^3}~.
+		\label{eq:hf.ai.Fnuc}
 \end{align}
 Therefore, Eq.\,\eqref{eq:hf.ai.Hdot} can be written as the sum of three terms that sum to zero as required,
 \begin{align}
@@ -415,7 +419,7 @@ We use these terms to define three contributions to the local density $\dot{e} (
 \end{align}
 \label{eq:hf.ai.densities}
 \end{subequations}
-Pictorially, the kinetic contribution $\dot{e}^{\rm kin} (\b r)$ is assigned to atom $I$ in the sum, the electronic contribution $\dot{e}^{\rm el} (\b r)$ is assigned to the local electron density at $\b r$ and is therefore a local quantity per definition, and the nuclear contribution $\dot{e}^{\rm Nuc} (\b r)$ is assigned to atom $J$ in analogy to the electronic case. It is easily verified that the sum of these contributions integrate to zero. Their first moment however gives a non-vanishing heat flux by Eq.\,\eqref{eq:hf.J},
+Pictorially, the kinetic contribution $\dot{e}^{\rm kin} (\b r)$ is assigned to atom $I$ in the sum, the electronic contribution $\dot{e}^{\rm el} (\b r)$ is assigned to the local electron density at $\b r$ and is therefore a local quantity per definition, and the nuclear contribution $\dot{e}^{\rm Nuc} (\b r)$ is assigned to atom $J$ in analogy to the electronic case. It is easily verified that the sum of these contributions integrate to zero. Their first moment however gives a non-vanishing heat flux by Eq.\,\eqref{eq:hf.J},~i.\,e.,
 \begin{align}
 	\b J (\Gamma)
 		% &= \frac{1}{V} \int \d^3 r ~ \b r \, \dot{e} (\b r, \Gamma) \\
@@ -427,7 +431,7 @@ Pictorially, the kinetic contribution $\dot{e}^{\rm kin} (\b r)$ is assigned to 
 				- \sum_{J \neq I} \b R_J \b F^{\rm Nuc}_{IJ} \cdot \dot{\b R}_I
 			\right)~.
 \end{align}
-By using Eq.\,\eqref{eq:hf.ai.F} and resolving the indices, we arrive at
+By using Eq.\,\eqref{eq:hf.ai.F} in the first summand of the above equation, Eq.\,\eqref{eq:hf.ai.Fel} for the second, and Eq.\,\eqref{eq:hf.ai.Fnuc} for the third, we arrive at
 \begin{align}
 	J^\alpha (\Gamma) \nonumber
 		=  \sum_{I, \alpha} \frac{Z_I}{V}
@@ -435,13 +439,14 @@ By using Eq.\,\eqref{eq:hf.ai.F} and resolving the indices, we arrive at
 				\sum_{J \neq I} Z_J \frac{(R_I^\alpha - R_J^\alpha) (R_I^\beta - R_J^\beta)}{\lvert \b R_I - \b R_J \rvert^3} \right. \nonumber \\
 				&~\left.- \int \d^3 r ~ n(\b r) \frac{(R_I^\alpha - r^\alpha) (R_I^\beta - r^\beta)}{\lvert \b R_I - \b r \vert^3}
 			\right\}
-			\dot{R}^\beta_I~.
+			\dot{R}^\beta_I~,
 	\label{eq:hf.ai.J}
 \end{align}
+where the Cartesian indices of the expressions have been restored.
 As shown in Ref.\,\cite{Carbogno2016}, this expression can be written in terms of atomic contributions to the stress tensor $\sigma$ defined by
 \begin{align}
   \sigma^{\alpha \beta} 
-    = - \frac{\partial V}{\partial \varepsilon_{\alpha \beta}}
+    = - \frac{\partial V ({\bf R})}{\partial \varepsilon_{\alpha \beta}}
     = \sum_I \sigma_I^{\alpha \beta}~,
   \label{eq:hf.sigma}
 \end{align}
@@ -462,10 +467,16 @@ This can be rationalized by using the same steps that led to the Hellmann-Feynma
   \label{eq:strain.derivative}
 \end{align}
 as discussed in detail in Ref.\,\cite{Knuth2015}.
-The atomic stress contributions $\sigma_I$ are functionals of the electron density and atomic configuration and as such straightforward to compute in \emph{ab initio} frameworks, for example in the all-electron, numeric atomic orbital electronic structure code \emph{FHI-aims}~\cite{FHI-aims,Knuth2015}.
+The atomic stress contributions $\sigma_I$ are functionals of the electron density and atomic configuration and as such straightforward to compute in \emph{ab initio} frameworks, for example in the all-electron, numeric atomic orbital electronic structure code \emph{FHI-aims}~\cite{FHI-aims,Knuth2015}. The final result for the \emph{ab initio} heat flux used in this work is therefore
+\begin{align}
+	{\bf J}^{\rm ai} (t) = \sum_I \sigma_I (t) \dot{\bf R}_I~,
+	\label{eq:J_ai}
+\end{align}
+where $\sigma_I (t)$ is Eq.\,\eqref{eq:hf.sigma_I} evaluated for the configuration ${\bf R} (t)$.
 
-\REM{discuss convective flux}
-\CITE{[1] O. H. Nielsen and R. M. Martin, Phys. Rev. B 32, 3780 (1985).}
+\newthought{To conclude, we like to point out} that by using the time derivative of the energy density, we neglect convective contributions to the flux from the very beginning. The present \emph{ab initio} heat flux is therefore valid for solids with vanishing or negligible mass diffusion.
+
+\CITE{[1] O. H. Nielsen and R. M. Martin, Phys. Rev. B 32, 3780 (1985).?}
 
 \section{Heat Flux and the Harmonic Approximation}
 
