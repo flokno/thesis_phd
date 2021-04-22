@@ -140,7 +140,7 @@ describes coupling between different electronic states $(l, m)$. This term is of
 Solving this equation is performed in two steps:
 \begin{enumerate}
     \item For a given configuration $\bf R$, the electronic Schr\"odinger equation \eqref{eq:Hsolution1} is solved, yielding the energies $E^0_l({\bf R})$ which thereby parametrically depend on $\bf R$.
-    \item For each electronic quantum number $l$, Eq.\,\eqref{eq:chi2} is solved, where the electronic energy $E^0_l({\bf R})$ defines the effective \emph{potential energy surface} for the nuclei.
+    \item For each electronic quantum number $l$, Eq.\,\eqref{eq:chi2} is solved, where the electronic energy $E^0_l({\bf R})$ defines the effective \emph{potential-energy surface} for the nuclei.
 \end{enumerate}
 
 \newthought{Since we will deal with insulators and semiconductors} with bandgaps providing a sufficient energetic separation between the electronic ground state $l=0$ and the first exited state $l=1$,\footnote{Thermal energy at room temperature is \mbox{$\sim 25\,{\rm meV} \ll $~typical bandgap}.} we will concentrate on the electronic ground state energy $E^0_0$ for the given configuration ${\bf R}$ in the following. We denote this energy as the \emph{Born-Oppenheimer potential energy},
@@ -154,7 +154,7 @@ or simply as \emph{the potential}, $\mathcal V (\b R) $.
 \section{Density Functional Theory}
 \epigraph{\singlespacing \it ``It is my sense that at the present time DFT is the method of choice for systems consisting of many (\,$\gtrsim 5$) atoms and for smaller systems, when moderate accuracies are sufficient.''}{W.~Kohn, 1993}
 
-In the previous chapter, it was tacitly assumed that the electronic Schr\"odinger equation \eqref{eq:Hsolution1} yielding the effective potential for the nuclei can be solved. Finding an exact solution to this equation is, however, infeasible for more than a few electrons. We will now introduce \emph{density functional theory} (DFT) as a framework for making approximations that enable to find a first-principles electronic potential energy surface $E^{\rm BO} ({\bf R})$ for atomic systems with order of magnitudes more electrons.
+In the previous chapter, it was tacitly assumed that the electronic Schr\"odinger equation \eqref{eq:Hsolution1} yielding the effective potential for the nuclei can be solved. Finding an exact solution to this equation is, however, infeasible for more than a few electrons. We will now introduce \emph{density functional theory} (DFT) as a framework for making approximations that enable to find a first-principles electronic potential-energy surface $E^{\rm BO} ({\bf R})$ for atomic systems with order of magnitudes more electrons.
 
 To set the stage, we rewrite the electronic Schr\"odinger equation \eqref{eq:Hsolution1}:
 \begin{align}
@@ -289,7 +289,7 @@ under the constraint of fixed particle number imposed by the Lagrange multiplier
 \newpage
 
 \section{The Born-Oppenheimer Surface}
-In the definition of the effective electronic Hamiltonian in Eq.\,\eqref{eq:H.dft.1}, we had neglected the electrostatic nuclear repulsion $V^{\rm Nuc-Nuc}$ defined in Eq.\,\eqref{eq:Vnuc}. The Born-Oppenheimer potential energy surface defined in Eq.\,\eqref{eq:E^BO_0} therefore consists of both terms,~i.\,e.,
+In the definition of the effective electronic Hamiltonian in Eq.\,\eqref{eq:H.dft.1}, we had neglected the electrostatic nuclear repulsion $V^{\rm Nuc-Nuc}$ defined in Eq.\,\eqref{eq:Vnuc}. The Born-Oppenheimer potential-energy surface defined in Eq.\,\eqref{eq:E^BO_0} therefore consists of both terms,~i.\,e.,
 \begin{align}
 	E^{\rm BO} ({\bf R}) 
 		= E[n] + \sum_{I < J} \frac{Z_{I} Z_{J} e^{2}}{\left|{\bf R}_{I}-{\bf R}_{J}\right|}~.
@@ -470,7 +470,12 @@ is the \emph{exchange-correlation potential} formally defined as the functional 
 	= \epsilon_l \psi_l ({\bf x})~.
 \label{eq:dft.KS.2}
 \end{align}
-This is a set of one-particle Schr\"odinger-like equations for the orbitals $\psi_l$ with eigenvalues $\epsilon_l$ in an effective potential $v^{\rm eff}[n]$. Since the effective potential is a functional of the density $n$ given in terms of the orbitals by Eq.\,\eqref{eq:dft.KS.n(psi)}, Eq.\,\eqref{eq:dft.KS.2} needs to be solved \emph{self-consistently}: One starts from an initial guess for the density $n^0$ to set up the effective potential, and solves for $(\psi_l, \epsilon_l)$. From the solution, an updated density $n^1$ is computed via Eq.\,\eqref{eq:dft.KS.n(psi)}. The procedure is repeated until the density residual $\delta n^i = \lVert n^i - n^{i-1} \rVert$ is smaller than the desired precision. The \emph{Kohn-Sham theorem} ensures that the ground-state density $n$ of an \emph{interacting} many-particle systems can be obtained from the \emph{non-interacting} single-particle orbitals $\psi_l$~\cite[p.\,51]{Kohn1965} \REM{Explain?}. Equation\,\eqref{eq:dft.KS.2} is therefore called \emph{Kohn-Sham equation}.
+This is a set of one-particle Schr\"odinger-like equations for the orbitals $\psi_l$ with eigenvalues $\epsilon_l$ in an effective potential $v^{\rm eff}[n]$ called \emph{Kohn-Sham equations}. The \emph{Kohn-Sham theorem} ensures that, for any external potential $v^{\rm ext}$, there exists a \emph{unique} effective potential $v^{\rm eff}[n]$ which yields \emph{non-interacting} single-particle orbitals $\psi_l$ that reproduce the ground-state density $n$ of the \emph{interacting} many-particle system~\cite[p.\,51]{Kohn1965}.
+
+\newthought{The effective potential itself is a functional of the density} $n$ given in terms of the orbitals by Eq.\,\eqref{eq:dft.KS.n(psi)}, the Kohn-Sham equations therefore need to be solved \emph{self-consistently}: One starts from an initial guess for the density $n^0$ to set up the effective potential, and solves for $(\psi_l, \epsilon_l)$. From the solution, an updated density $n^1$ is computed via Eq.\,\eqref{eq:dft.KS.n(psi)}. The procedure is repeated until the density residual $\delta n^i = \lVert n^i - n^{i-1} \rVert$ is smaller than the desired precision. 
+% % see https://www.isi.edu/sites/default/files/users/serboixo/lecture10.pdf
+% Equation\,\eqref{eq:dft.KS.2} is therefore called \emph{Kohn-Sham equation}.
+
 
 \newthought{When the solution $\set{\psi_l, \epsilon_l}$ is known}, Eq.\,\eqref{eq:dft.KS.2} can be used to express the kinetic energy in terms of the density $n$ and eigenvalues $\epsilon_l$ by summing and integrating with $\sum_l \int \d^3 x~\psi^\ast_l ({\bf x})$ and using the orthonormality of the orbitals $\psi_l$, so that
 \begin{align}
@@ -540,8 +545,8 @@ The energy density $e^{\rm xc}_{\rm LDA} \left(n ({\bf x}) \right)$ is usually t
 Again, the full functional $e^{\rm xc}[n]$ is replaced by a function of the density and its gradient. This approximation is called \emph{generalized gradient approximation} (GGA), and the resulting energy is usually written in the form
 \begin{align}
 		E^{\rm xc}_{\rm GGA}[n] 
-		= \int \d^3 x ~ e^{\rm x}_{\rm hom} \left(n ({\bf x}) \right) 
-			F^{\rm xc} \left(n ({\bf x}), \lvert \nabla n ({\bf x})\rvert \right)~,
+		= \int \d^3 x ~ e^{\rm x}_{\rm hom} \bm( n ({\bf x}) \bm) \,
+			F^{\rm xc} \bm( n ({\bf x}), \lvert \nabla n ({\bf x})\rvert \bm)~,
 		\label{eq:dft.GGA.1}
 \end{align}
 where $e^{\rm x}_{\rm hom}(n)$ is the exchange energy density of a homogeneous electron gas, and $F^{\rm xc}(n, \nabla n)$ is an \emph{enhancement factor}~\cite{Perdew1992}.
@@ -632,6 +637,5 @@ where $\varepsilon^{ijk}$ denotes the Levi-Civita symbol enforcing the correct o
 The space spanned by the $\set{{\bf b}_i}$,~i.\,e.,~the space containing all unique values of $\b k$, is the unit cell of the reciprocal lattice. Alternatively, one chooses those equivalent $\bf k_m$ which are closest to the $\bf 0$,~i.\,e.,~the Brillouin zone.
 
 \section{Conclusion}
-The concept of density functional theory in the Kohn-Sham scheme (KS-DFT) has been presented starting from the general, many-body Hamiltonian given in Eq.\,\eqref{eq:Hamiltonian}. Besides the Born-Oppenheimer (BO) approximation which decouples electron and nuclear dynamics, KS-DFT offers a formally exact way of computing the non-relativistic total energy of the electronic ground state from first principles by solving the Kohn-Sham (KS) equations, a set of Schr\"odinger-like single-particle equations, for an auxiliary set of functions,~i.\,e.,~the KS-orbitals. In order to solve the KS equations one needs to approximate the exchange-correlation energy, $E^{\rm xc} [n]$. In Sec.\,\ref{sec:dft.approximations} we have introduced the most common approaches to approximate $E^{\rm xc} [n]$:~The local-density approximation (LDA), as well as the generalized-gradient approximation (GGA).
-
-Within the BO approximation, the BO potential-energy surface determines all dynamical properties of the nuclear system, for example heat transport. We discuss dynamical properties of this kind in more detail in the next chapter.
+The concept of density functional theory in the Kohn-Sham scheme (KS-DFT) has been presented starting from the general, many-body Hamiltonian given in Eq.\,\eqref{eq:Hamiltonian}. Besides the Born-Oppenheimer (BO) approximation which decouples electron and nuclear dynamics, KS-DFT offers a formally exact way of computing the non-relativistic total energy of the electronic ground state from first principles by solving the Kohn-Sham equations, a set of Schr\"odinger-like single-particle equations, for an auxiliary set of functions,~i.\,e.,~the Kohn-Sham orbitals. In order to solve the Kohn-Sham equations one needs to approximate the exchange-correlation energy, $E^{\rm xc} [n]$. In Sec.\,\ref{sec:dft.approximations} we have introduced the most common approaches to approximate $E^{\rm xc} [n]$:~The local-density approximation (LDA), as well as the generalized-gradient approximation (GGA). In this framework, the BO potential-energy surface defined in Eq.\,\eqref{eq:E^BO_0} is given by the total energy obtained by \mbox{(semi-)}local KS-DFT.
+In the next chapter, we discuss how the BO potential-energy surface determines the dynamical properties of the nuclear system.
