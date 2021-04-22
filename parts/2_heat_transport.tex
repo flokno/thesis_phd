@@ -6,9 +6,9 @@ Conductive heat transport is the phenomenon of vibrational energy traversing a m
   \b J = - \kappa \nabla T~,
   \label{eq:Fourier}
 \end{align}
-is called \emph{Fourier's law}. The sign convention is such that the heat flux points ``from hot to cold''. The regime where Eq.\,\eqref{eq:Fourier} is valid is called the \emph{diffusive} regime, as it holds when the temperature gradient is small on microscopic scale, and the sample size is big enough so that boundary effects are negligible~\cite{Kapitza1941a,Antidormi2020}.
+is called \emph{Fourier's law}. The sign convention is such that the heat flows from ``hot to cold'' in compliance witht the second law of thermodynamics. The regime where Eq.\,\eqref{eq:Fourier} is valid is called the \emph{diffusive} regime, as it holds when the temperature gradient is small on microscopic scale, and the sample size is big enough so that boundary effects are negligible~\cite{Kapitza1941a,Antidormi2020}.
 
-It is evident from Eq.\,\eqref{eq:Fourier} that the thermal conductivity $\kappa$ is an explicitly non-equilibrium quantity. As such, it can however be related to equilibrium fluctuations by means of the \emph{fluctuation-dissipation theorem}~\cite{Einstein1905a,Nyquist1928,Callen1951,Kubo1957a}, resulting in the famous Green-Kubo formula~\cite{Green1952,Kubo1957b},
+It is evident from Eq.\,\eqref{eq:Fourier} that the thermal conductivity $\kappa$ is an explicitly non-equilibrium quantity. As such, it can be related to equilibrium fluctuations by means of a \emph{fluctuation-dissipation theorem}~\cite{Einstein1905a,Nyquist1928,Callen1951,Kubo1957a}, resulting in the famous Green-Kubo formula~\cite{Green1952,Kubo1957b},
 \begin{align}
   \kappa^{\alpha \beta} = \frac{V}{k_{\rm B} T^2} \int_{0}^{\infty} \d t ~
     \braket{J^\alpha (t) J^\beta(0)}_{\rm eq}~.
@@ -29,7 +29,7 @@ and we assume without loss of generality that its equilibrium value vanishes,
 = \int \d \Gamma ~ B (\Gamma) f^0(\Gamma) = 0~,
 \label{eq:lr.B0}
 \end{align}
-where $f^0 (\Gamma)$ is the distribution function of the unperturbed system in thermal equilibrium. In order to calculate Eq.\,\eqref{eq:lr.B.1} in a non-equilibrium situation, we start by defining the Hamiltonian describing the equilibrium dynamics, $H^0$, which we take to be given by the many-body Hamiltonian
+where $f^0 (\Gamma)$ is the distribution function of the unperturbed system in thermal equilibrium. In order to calculate Eq.\,\eqref{eq:lr.B.1} in a non-equilibrium situation, we start by defining the Hamiltonian describing the dynamics of the system in the absence of external perturbations, $H^0$, which we take to be given by the many-body Hamiltonian
 \begin{align}
   H^0 (\Gamma) 
     %= H^0(\set{\b R, \b P})
@@ -149,7 +149,8 @@ Likewise we formulate a local version of the perturbing Hamiltonian \mbox{$H' = 
 \end{align}
 where $a(\b r, \Gamma)$ represents the density of interest as introduced above, and $v(\b r, t)$ is the local driving force coupling to the system via the density $a (\b r, \Gamma)$.
 
-The local version of linear-response formula given in Eq.\,\eqref{eq:lr.dB} with \mbox{$\Delta B = B \equiv \b J$} ($\braket{\b J} = 0$) reads:
+The local version of linear-response formula given in Eq.\,\eqref{eq:lr.dB} with \mbox{$\Delta B = B \equiv \b J$} reads:\footnote{Remember 
+	$\braket{B} \equiv \braket{\b J} = 0$~.}
 \begin{align}
 j^\alpha (\b r , t) 
 	& \equiv \braket{j^\alpha (\b r)}_{\Delta f (t)} \\
@@ -238,9 +239,10 @@ where $\kappa^{\alpha \beta}$ denotes the \emph{thermal conductivity tensor} def
 	\kappa^{\alpha \beta}
 		&=
 		\frac{V}{k_{\rm B} T^2} \int_{0}^{\infty} 
-		\d t \braket{J^\alpha (\Gamma_t) J^\beta (\Gamma_{0})}_0 ~.
+		\d t \braket{J^\alpha (\Gamma_t) J^\beta (\Gamma_{0})}_0 ~,
 	\label{eq:GreenKubo}
 \end{align}
+that is, the Green-Kubo formula for the thermal conductivity $\kappa$.
 
 \section{Heat Flux Definition}
 In order to evaluate the thermal conductivity by means of the Green-Kubo formula, Eq.\,\eqref{eq:GreenKubo}, the  heat flux observable $\b J (\Gamma)$ needs to be defined. We do so by starting from the continuity equation again,
@@ -248,7 +250,7 @@ In order to evaluate the thermal conductivity by means of the Green-Kubo formula
 	\dot{e} (\b r) = - \b \nabla \cdot \b j (\b r)
 	\label{eq:hf.cont}
 \end{align}
-and perform a space Fourier transform defined by the pair of equations
+and perform a Fourier transform in space defined by the pair of equations
 \begin{align}
 	e(\b r) 
 		&= \int \d^3 q ~ e(\b q) \, {\rm e}^{\im \b q \cdot \b r} ~,
@@ -293,8 +295,8 @@ where the first term in the expansion is excluded since the total energy $E$ is 
 After multiplying $\dot e$ with $\im \b q / q^2$ according to Eq.\,\eqref{eq:hf.j.parallel} and taking the $\b q \to 0$ limit, we obtain
 \begin{align}
 	\b J (t) 
-		= \frac{1}{V} \int \d^3 r ~ \b r \, \dot{e} (\b r)
-		%= \frac{1}{V} \frac{\d}{\d t} \int \d^3 r ~ \b r \, e (\b r)
+		= \frac{1}{V} \int \d^3 r ~ \b r \, \dot{e} (\b r, t)
+		= \frac{1}{V} \frac{\d}{\d t} \int \d^3 r ~ \b r \, e (\b r, t)
 	~,
 	\label{eq:hf.J}
 \end{align}
@@ -305,23 +307,66 @@ In force-field approaches, it is common to adopt the latter approach and split t
 	e (\b r, t ) = \sum_I E_I (t) \delta (\b r - \b R_I)~.
 	\label{eq:hf.e.atomic}
 \end{align}
-The flux is then given by
+The heat flux is then given by~\cite{Helfand1960}
 \begin{align}
 	\b J (t) 
 		= \frac{1}{V} \frac{\d}{\d t} \sum_I E_I(t) \b R_I(t)
-		= \frac{1}{V} \sum_I \dot{E}_I (t) \b R_I (t) + E_I (t) \dot{\b R}_I (t)~.
+		% = \frac{1}{V} \sum_I \dot{E}_I (t) \b R_I (t) + E_I (t) \dot{\b R}_I (t)~,
+		= {\bf J}^{\rm pot} (t) + {\bf J}^{\rm kin} (t)~,
 	\label{eq:hf.J.atomic}
 \end{align}
+with a \emph{potential} or \emph{virial} current
+\begin{align}
+	{\bf J}^{\rm pot} (t)
+		= \frac{1}{V} \sum_I \dot{E}_I (t) \b R_I (t)~,
+	\label{eq:J_pot}
+\end{align}
+and a \emph{kinetic} or \emph{convective} current
+\begin{align}
+	{\bf J}^{\rm kin} (t)
+		= \frac{1}{V} \sum_I E_I (t) \dot{\b R}_I (t)~.
+	\label{eq:J_kin}
+\end{align}
+In non-convective solids, the kinetic contribution is typically neglected, as it was shown several times in the literature that its contribution to thermal conductivity is orders of magnitude lower compared to the virial flux~\cite{Vogelsang1987,Kinaci2012}. However, the kinetic flux becomes increasingly important and even dominant in liquids and gases with substantial convection~\cite{Cheng2020}.
 
-\subsection{Gauge invariance}
+\subsection{Gauge invariance of heat flux definitions}
 As seen above, the local current is only defined up to a non-heat carrying contribution $\b j_{\perp}$. Likewise, the energy density is only defined up to terms that keep the total energy integral unchanged. The choice of a local energy partitioning as,~e.\,g.,~given by Eq.\,\eqref{eq:hf.e.atomic} is therefore not unique, and different partitioning schemes will lead to differing heat fluxes. However, the thermal conductivity obtained by these heat fluxes will be the same in the long time limit. In particular, Ercole \emph{et al.} have shown in Ref.\,\cite{Ercole2016} that two heat fluxes differing by the time derivative of a \emph{bounded} vector field,
 \begin{align}
   \tilde{\b J} (t) = \b J (t) + \frac{\d}{\d t} \b P (t)~,
 \end{align}
-can differ in time, and in general also their autocorrelation functions will differ. The thermal conductivity obtained from both fluxes will however be the same. This property can be used to discard terms from the flux that do not contribute to the thermal conductivity and thereby reduce noise~\CITE{Gauge tunig}. We will show practical implications of this ``gauge invariance principle'' later in the results part.
+can differ in time, and in general also their autocorrelation functions will differ. The thermal conductivity obtained from both fluxes will however be the same, which can be viewed as a \emph{gauge invariance principle} for the heat flux. This property can be used to discard terms from the flux that do not contribute to the thermal conductivity and thereby reduce noise~\cite{Marcolongo2020}. 
+%We will show practical implications of this ``gauge invariance principle'' later in the results part.
+
+\newthought{As an example of immediate practical importance}, we rewrite the heat flux expression presented in Eq.\,\eqref{eq:hf.J.atomic} as
+\begin{align}
+	\b J (t) 
+%		&= \frac{1}{V} \sum_I \left[ \b R_I^0 \fD{\dot{E}}_I + \b U_I \dot{E}_I + \dot{\b U}_I E_I\right] \\
+	&= \frac{1}{V} \sum_I \b R_I^0 \fD{\dot{E}}_I + { \frac{1}{V} \frac{\d}{\d t} \sum_I \b U_I E_I}~,
+	\label{eq:J_gauge_1}
+\end{align}
+where the instantaneous positions ${\bf R} (t)$ are split into a fixed reference ${\bf R}^0$ and a displacement field ${\bf U} (t)$~\cite{Isaeva2019}. When all the atomic displacements $\set{{\bf U}_I}$ are bounded,~i.\,e.,~in the absence of convective terms, the second term in Eq.\,\eqref{eq:J_gauge_1} fulfills the condition of being the time derivative of a bounded vector field and therefore does not contribute to the thermal conductivity by the gauge invariance principle. Using the definition of the kinetic flux in Eq.\,\eqref{eq:J_kin}, the second, non-contributing term can be written as
+\begin{align}
+	\frac{1}{V} \frac{\d}{\d t} \sum_I \b U_I E_I
+		= {\bf J}^{\rm kin} + {\bf J}^{\rm res}
+	\label{eq:J_gauge_2}
+\end{align}
+with a residual flux %${\bf J}^{\rm res} = \frac{1}{V} \sum_I \b U_I \dot E_I$
+\begin{align}
+	{\bf J}^{\rm res} (t)
+		= \frac{1}{V} \sum_I \b U_I \dot E_I~.
+	\label{eq:J_gauge_3}
+\end{align}
+This makes clear that, in the absence of convection, the contribution of ${\bf J}^{\rm kin}$ to thermal conductivity does not vanish alone, but only the \emph{joint} contribution of ${\bf J}^{\rm kin}$ and ${\bf J}^{\rm res}$. By the reverse argument, one can argue that whenever the contribution of ${\bf J}^{\rm kin}$ to thermal conductivity can be neglected in a solid, the contribution of ${\bf J}^{\rm res}$ must vanish as well. In consequence, the heat flux in non-diffusing solids is given by
+\begin{align}
+	\b J (t) 
+		&= \frac{1}{V} \sum_I \b R_I^0 \fD{\dot{E}}_I
+		\approx {\bf J}^{\rm pot} (t).
+	\label{eq:J_tot_solid}
+\end{align}
+A final remark concerning this equation is in order: One might argue that the expression in Eq.\,\eqref{eq:J_tot_solid} is a total time derivative of ${\bf P} = \frac{1}{V}  \sum_I {\bf R}_I^0 \fD E_I$, and therefore vanishes by the aforementioned gauge invariance principle. However, this is not the case in an infinite solid, since the atomic configuration $\set{{\bf R}_I}$ is not bounded. The sum over atomic positions is therefore not well defined in the first place and remains to be understood as a symbolic representation of an actual energy partitioning scheme that needs to be cast in a boundary-insensitive form for any practical application of Eq.\,\eqref{eq:J_tot_solid}.\footnote{The author thanks Stefano Baroni for an insightful discussion clarifying this point.}
 
 \section{Ab initio Heat Flux}
-The above formulas are readily applied when empirical force fields are used to describe the atomic interactions, as an atomic partitioning of the total energy is trivial in that case, although care must be taken in deriving the correct formulae nevertheless~\cite{Fan2015,Boone2019}. An \emph{ab initio} derivation of heat flux on the other hand was a long-standing problem because it was not clear how an expression like Eq.\,\eqref{eq:hf.J.atomic} can be obtained when no atomic partitioning is available. This problem was solved when Marcologno \emph{et al.} and Carbogno \emph{et al.} independently arrived at well-defined heat flux expressions in \emph{ab initio} frameworks~\cite{Marcolongo2016,Carbogno2016}. We adopt the latter approach in the following, but present a derivation that slightly differs from Ref.\,\cite{Carbogno2016},~i.\,e.,~by starting from Eq.\,\eqref{eq:hf.J} instead of Eq.\,\eqref{eq:hf.J.atomic}.
+The above formulas are readily applied when empirical force fields are used to describe the atomic interactions, as an atomic partitioning of the total energy is trivial in that case, although care must be taken in deriving the correct formulae nevertheless~\cite{Fan2015,Boone2019}. An \emph{ab initio} derivation of heat flux on the other hand was a long-standing problem because it was not clear how an expression like Eq.\,\eqref{eq:J_tot_solid} can be obtained when no atomic partitioning is available. This problem was solved when Marcologno \emph{et al.} and Carbogno \emph{et al.} independently arrived at well-defined heat flux expressions in \emph{ab initio} frameworks~\cite{Marcolongo2016,Carbogno2016}. We adopt the latter approach in the following, but present a derivation that slightly differs from Ref.\,\cite{Carbogno2016},~i.\,e.,~by starting from Eq.\,\eqref{eq:hf.J} instead of Eq.\,\eqref{eq:hf.J.atomic}.
 
 % \paragraph{Derivation of ab initio Heat Flux}
 To evaluate Eq.\,\eqref{eq:hf.J}, we need a definition of the time derivative of the energy density. The many-body Hamiltonian for a given configuration $\Gamma = (\b R, \b P)$ is given again as
