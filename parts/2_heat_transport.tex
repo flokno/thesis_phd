@@ -484,7 +484,7 @@ We now discuss heat flux in the harmonic approximation. This work was pioneered 
 \newthought{We start from the gauge-invariant heat flux expression} for solids as defined in Eq.\,\eqref{eq:J_tot_solid},~i.\,e.,
 \begin{align}
 	\b J (t) 
-		= \sum_I \b R_I^0 \fD{\dot{E}}_I~.
+		= \frac{1}{V} \sum_I \b R_I^0 \fD{\dot{E}}_I~.
 		\label{eq:J_ha_0}
 \end{align}
 The atomic energy contribution $E_I$ expressed in mass-scaled displacements $\set{\b u_I}$ and momenta $\set{\b p_I}$ reads
@@ -511,30 +511,22 @@ and in mass-weighted coordinates
 \end{align}
 Using this expression for the time derivative of the atom-resolved harmonic energy  in Eq.\,\eqref{eq:J_ha_0} leads to a heat flux of the form
 \begin{align}
-    \b J^{\rm ha-r} (t) = -\halb \sum_{IJ} (\b R_I^0 - \b R_J^0) D_{I \alpha, J \beta} \, p_I^\alpha (t) u_J^\beta (t)~,
+    \b J^{\rm ha-r} (t) = - \frac{1}{2V} \sum_{IJ} (\b R_I^0 - \b R_J^0) D_{I \alpha, J \beta} \, p_I^\alpha (t) u_J^\beta (t)~,
    \label{eq:J_ha_r}
 \end{align}
 which is boundary-insensitive as required since only differences of positions enter.
 By expressing the displacements $\set {\b u_I}$ and velocities $\set{\b p_I}$ in terms of the complex mode amplitudes $a_s (t)$ introduced in Eq.\,\eqref{eq:u_s.amplitudes.periodic} in Sec.\,\ref{sec:dynmat.periodic},
-%\footnote{With Eq.\,\eqref{eq:u_s.amplitudes.periodic}:
-%	\begin{align*}
-%	u_s (t) 
-%		&\equiv \phantom{\im \omega_s } ~~\, \D a_{-s} (t) + \fD a_s (t)~, \\
-%	p_s (t) 
-%		&\equiv \im \omega_s \left[ \D a_{-s} (t) - \fD a_s (t) \right]~.
-%	\end{align*}
-%}
 \begin{align}
     \b u_I (t) 
-	    &= ~\sum_s ~~~~\, \b e^\ast_{s I} \left[ \D a_{-s} (t) + \fD a_s (t)\right]~,\quad\text{and} \\
+	    &= ~\sum_s \frac{1}{\sqrt{2 \omega_s}} \b e^\ast_{s I} \left[ \D a_{-s} (t) + \fD a_s (t)\right]~,\quad\text{and} \\
 	  \b p_I (t) 
-		  &= \im \sum_s \omega_s {\b e}_{s I} \left[ \D a_{-s} (t) - \fD a_s (t) \right]~,
+		  &= \sum_s ~\im \sqrt{\frac{\omega_s}{2}} ~ {\b e}_{s I} \left[ \D a_{-s} (t) - \fD a_s (t) \right]~,
 \end{align}
 the harmonic heat flux reads
 \begin{align}
     \b J^{\rm ha-q} (t) 
 	    %&= \halb \sum_{ss'} \b v_{ss'} \omega_{s} \D u_s (t) p_{s'} (t) \\
-	    &= \halb \sum_{ss'} \b v_{ss'} \omega_{s} \omega_{s'} \left( \D a_{-s} + \fD a_{s}  \right) \left( \D a_{s'} - \fD a_{-s'}  \right)~,
+	    &= \frac{1}{2V} \sum_{ss'} \b v_{ss'} \omega_{s} \left( \D a_{-s} + \fD a_{s}  \right) \left( \D a_{s'} - \fD a_{-s'}  \right)~,
 	  \label{eq:J.ha}
 \end{align}
 with the generalized group velocity
@@ -548,18 +540,21 @@ with the generalized group velocity
 	\end{align*}}
 \begin{align}
 	\b v_{ss'}
-		&= \frac{1}{2 {\omega_s}} \sum_{IJ} \im (\b R^0_I - \b R^0_J) D_{I \alpha, J \beta} e^\ast_{s, I \alpha} \fD e_{s', J \beta}~.
+		&= \frac{1}{2 \sqrt{\omega_s \omega_{s'}}} \sum_{IJ} \im (\b R^0_I - \b R^0_J) D_{I \alpha, J \beta} e^\ast_{s, I \alpha} \fD e_{s', J \beta}~.
 \end{align}
-Using that $\b v (- \b q) = - \b v (\b q)$ and defining the mode occupation $n_s (t) \equiv \D a_s (t) \fD a_s (t)$, the diagonal contribution ($s=s'$) to this flux is the familiar
+Using that $\b v (- \b q) = - \b v (\b q)$, %and defining the mode occupation \mbox{$n_s (t) \equiv \D a_s (t) \fD a_s (t)$}, 
+the diagonal contribution ($s=s'$) to the flux reads
 \begin{align}
 	\b J^{\rm ha-q-diag} (t) 
 %		= \halb \sum_{s} \fD{\b v}_{s} \fD \omega_{s} \D p_s (t) u_{s} (t)
-		= \sum_{s} \fD {\b v}_{s} \omega^2_{s} \fD n_s (t)~.
+		= \frac{1}{V} \sum_{s} \fD {\b v}_{s} \omega_{s} ~ \D a_s (t) \fD a_s (t)
+		\equiv \frac{1}{V} \sum_{s} E_s (t)  {\bf v}_{s}~,
 	\label{eq:J.ha.diag}
 \end{align}
-This result is the familiar phonon heat flux operator first derived by Hardy~\cite{Hardy1963}.
+where the mode energy $E_s = \omega_s \D a_s \fD a_s$ was used.
+This result is the familiar phonon heat flux operator first derived by Hardy~\cite{Hardy1963}.\footnote{Via the identification $E_s = \omega_s n_s$ (when setting $\hbar = 1$)~.}
 
-\newthought{With the harmonic heat flux at hand}, it is straightforward to show that the thermal conductivity of a purely harmonic system is infinite. At the same time, useful approximations to compute the thermal conductivity from a perturbation theory perspective can be found. We demonstrate the reasoning for the case of the diagonal contribution to the heat flux $\b J^{\rm ha-q-diag}$ given by Eq.\,\eqref{eq:J.ha.diag}. The additional terms stemming from the offdiagonal contribution to the heatflux have been worked out in Ref.\,\cite{Isaeva2019}.
+\newthought{With the harmonic heat flux at hand}, it is straightforward to show that the thermal conductivity of a purely harmonic system is infinite. At the same time, useful approximations to compute the thermal conductivity from a perturbation theory perspective can be found. We demonstrate the reasoning for the case of the diagonal contribution to the heat flux $\b J^{\rm ha-q-diag}$ given by Eq.\,\eqref{eq:J.ha.diag}, which we simply denote by $\bf J$ in the following. The additional terms stemming from the offdiagonal contribution to the heatflux have been worked out in Ref.\,\cite{Isaeva2019}.
 
 As discussed in detail in Sec.\,\ref{sec:Thermal.Conductivity}, the thermal conductivity is given by the Kubo formula
 \begin{align}
@@ -569,13 +564,14 @@ As discussed in detail in Sec.\,\ref{sec:Thermal.Conductivity}, the thermal cond
 		\d t \braket{J (t) J} ~,
 \end{align}
 where we have omitted the Cartesian components for clarity.
-The contribution from the diagonal harmonic heatflux therefore reads\footnote{We simply denote $J \equiv J^{\rm ha-q-diag}$ in the following.}
+The contribution from the diagonal harmonic heatflux therefore reads
+%\footnote{We simply denote $J \equiv J^{\rm ha-q-diag}$ in the following.}
 \begin{align}
-    \braket{J(t) J} = \sum_{ss'} \omega_s \omega_{s'} v_{\fP s} v_{s'}
+    \braket{J(t) J} = \frac{1}{V^2} \sum_{ss'} \omega_s \omega_{s'} v_{\fP s} v_{s'}
 	    \braket{\D a_s (t) \fD{a}_s (t) \D a_{s'} \fD a_{s'}}~.
 	   \label{eq:ha.kappa.J.corr}
 \end{align}
-The expectation value $\braket{\cdot}$ can be viewed as a functional integral with the distribution function $f = {\rm e}^{-\beta \sum_s \omega_s n_s}$ and can therefore be evaluated by means of a Wick theorem.\footnote{In the context of complex field integration, the Wick theorem reads~\cite{Negele2018} $$\braket{ABCD} = \braket{AB}\braket{CD} + \braket{AC}\braket{BD} + \braket{AD}\braket{BC}.$$}
+The expectation value $\braket{\cdot}$ can be viewed as a functional integral with the distribution function $f = {\rm e}^{-\beta \sum_s \omega_s \D a_{s} \fD a_{s}}$ and can therefore be evaluated by means of a Wick theorem.\footnote{In the context of complex field integration, the Wick theorem reads~\cite{Negele2018} $$\braket{ABCD} = \braket{AB}\braket{CD} + \braket{AC}\braket{BD} + \braket{AD}\braket{BC}.$$}
 Keeping only the non-vanishing pairings, we have
 \begin{align}
 	\braket{\D a_s (t) \fD{a}_s (t) \D a_{s'} \fD a_{s'}}
@@ -652,11 +648,11 @@ where $\mathcal V^{(3)}_{spq}$ is the cubic potential transformed to phonon eige
 \section{Ab initio Green Kubo}
 \newthought{We can generalize the thoughts above} by going one step back to the heatflux autocorrelation function defined in Eq.\,\eqref{eq:ha.kappa.J.corr}, this time making explicit that $J = \braket{J} + \delta J$ with $\braket{J} = 0$. We can therefore write
 \begin{align}
-\braket{\delta J(t)  \delta J} 
-&= \sum_{ss'} \omega_s \omega_{s'} v_{\fP s} v_{s'}
-\braket{\delta n_s (t) \delta n_{s'}} \\
-&= \sum_{ss'} \braket{n_s} \omega_s \braket{n_{s'}} \omega_{s'} ~ v_{s} v_{s'}
-\frac{\braket{\delta n_s (t) \delta n_{s'}}}{\braket{n_s} \braket{n_{s'}}}
+\braket{J(t) J} 
+&= \sum_{ss'} v_{\fP s} v_{s'}
+\braket{E_s (t) E_{s'}} \\
+&= \sum_{ss'} \braket{E_s E_{s'}}  v_{s} v_{s'}
+\frac{\braket{E_s (t) E_{s'}}}{\braket{E_s E_{s'}}}
 ~.
 \label{eq:ha.kappa.dJ.corr}
 \end{align}
@@ -669,7 +665,24 @@ As before, the thermal conductivity is obtained by integrating the autocorrelati
 where we define the lifetime
 \begin{align}
 \tau_{ss'} 
-=	\int_{0}^{\infty} \d t ~ \frac{\braket{\delta n_s (t) \delta n_{s'}}}{\braket{n_s} \braket{n_{s'}}}~
-\label{eq:lifetime.md}
+=	\int_{0}^{\infty} \d t ~ \frac{\braket{E_s (t) E_{s'}}}{\braket{E_s E_{s'}}}
+\label{eq:lifetime.md.general}
 \end{align}
 by analogy with the considerations above.
+In particular, we have
+\begin{align}
+	\tau_{s} 
+		=	\int_{0}^{\infty} \d t ~ \frac{\braket{E_s (t) E_s}}{\braket{E^2_s}}
+	\label{eq:lifetime.md}
+\end{align}
+for the diagonal part of the lifetime, $\tau_s \equiv \tau_{ss'}$.
+
+\begin{align}
+	G_s (t) = \frac{\braket{E_s (t) E_s}}{\braket{E^2_s}}
+		\approx  {\rm e}^{-t / \tau_s}
+\end{align}
+
+\begin{figure}
+	\includegraphics[width=\textwidth]{./data/plots/lifetimes/greenkubo_summary_interpolation_lifetimes.pdf}
+	\caption{Fit of mode lifetimes for MgO at 300\,K.}
+\end{figure}

@@ -3,7 +3,7 @@ Thesis Review
 
 - `Theory and methods` aufspalten in dedizierte Kapitel?
 
-# 1 | Many Body Problem
+## 1 | Many Body Problem
 
 - [x] Operatorhütchen?
 - [x] Eq. (1.11) an den Anfang?
@@ -13,7 +13,7 @@ Thesis Review
     - [ ] Peierls?
 - [ ] $\mathcal V$ schon notwendig fuer $E^{\rm BO}$?
 
-## Zitationen
+### Zitationen
 
 - LDA:
     - 38, 169, 168 aus aims paper
@@ -25,11 +25,23 @@ Thesis Review
     - 166: J. P. Perdew, K. Burke, and M. Ernzerhof. Generalized gradient approximation made simple. Phys. Rev. Lett., 77:3865–3868, 1997
     - 167: J. P. Perdew, J. A. Chevary, S. H. Vosko, K. A. Jackson, M. R. Pederson, D. J. Singh, and C. Fiolhais. Atoms, molecules, solids, and surfaces: Applications of the generalized gradient approximation for exchange and correlation. Phys. Rev. B, 46:6671–6687, 1992
 
-# 2 | Lattice Dynamics
+## 2 | Lattice Dynamics
 
-- [ ] Struktur?
+- [ ] erste Chp. 3, dann wird klarer was gebraucht wird
+- [ ] - [ ] Struktur?
+    - [ ] Makro: Bottom up, daher:
+        - [ ] Mikroskopische Bewegungsgleichungen in 2, Stat. Mechanik -> 3?
+    - [ ] Kontra: Chp. 3 ist heatflux ohne clutter
 - [ ] Themen fuer Appendix markieren
 - [ ] `Lattice Dynamics` -> `Nuclear Dynamics`?
 - [ ] `Geometry optimization` -> methods?
 - [ ] Formel checken und anpassen
 - [ ] Maradudin symmetries?
+
+## 3 | Heat Transport
+
+- [x] clarify missing diffusion currents
+- [ ] definiere lebenszeit einmal allgemein
+- [ ] rechne dann analytisch harmonisc/stoerungstheorie
+- [ ] diskutiere dann fit an dynamik
+- [ ] diskutiere scaling der lebenszeiten und interpolation
