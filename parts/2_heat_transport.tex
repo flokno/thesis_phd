@@ -552,26 +552,58 @@ the diagonal contribution ($s=s'$) to the flux reads
 	\label{eq:J.ha.diag}
 \end{align}
 where the mode energy $E_s = \omega_s \D a_s \fD a_s$ was used.
-This result is the familiar phonon heat flux operator first derived by Hardy~\cite{Hardy1963}.\footnote{Via the identification $E_s = \omega_s n_s$ (when setting $\hbar = 1$)~.}
+This result is the familiar phonon heat flux operator via the identification $E_s = \omega_s n_s$ (when setting $\hbar = 1$), where
+\begin{align}
+	n_s(t) = \D a_s (t) \fD a_s (t)
+	\label{eq:n_s}
+\end{align}
+is the instantaneous mode occupation~\cite{Peierls1929,Hardy1963,Isaeva2019}.
 
-\newthought{With the harmonic heat flux at hand}, it is straightforward to show that the thermal conductivity of a purely harmonic system is infinite. At the same time, useful approximations to compute the thermal conductivity from a perturbation theory perspective can be found. We demonstrate the reasoning for the case of the diagonal contribution to the heat flux $\b J^{\rm ha-q-diag}$ given by Eq.\,\eqref{eq:J.ha.diag}, which we simply denote by $\bf J$ in the following. The additional terms stemming from the offdiagonal contribution to the heatflux have been worked out in Ref.\,\cite{Isaeva2019}.
-
+\subsection{Thermal conductivity derived from the harmonic flux}
+{With the harmonic heat flux at hand}, we are now in position to evaluate the thermal conductivity and discuss certain limits of the resulting expression. For example, it is straightforward to show that the thermal conductivity of a purely harmonic system is infinite. At the same time, useful approximations to compute the thermal conductivity from a perturbation theory perspective can be found. We demonstrate the reasoning for the case of the diagonal contribution to the heat flux $\b J^{\rm ha-q-diag}$ given by Eq.\,\eqref{eq:J.ha.diag}, which we simply denote by $J$ in the following, omitting Cartesian components for clarity. 
+% The additional terms stemming from the offdiagonal contribution to the heatflux have been worked out in Ref.\,\cite{Isaeva2019}.
 As discussed in detail in Sec.\,\ref{sec:Thermal.Conductivity}, the thermal conductivity is given by the Kubo formula
 \begin{align}
 	\kappa
 		&=
 		\frac{V}{k_{\rm B} T^2} \int_{0}^{\infty} 
-		\d t \braket{J (t) J} ~,
+		\d t \braket{J (t) J} ~.
 \end{align}
-where we have omitted the Cartesian components for clarity.
-The contribution from the diagonal harmonic heatflux therefore reads
-%\footnote{We simply denote $J \equiv J^{\rm ha-q-diag}$ in the following.}
+The autocorrelation function for the diagonal harmonic heat flux defined in Eq.\,\eqref{eq:J.ha.diag} therefore reads
 \begin{align}
-    \braket{J(t) J} = \frac{1}{V^2} \sum_{ss'} \omega_s \omega_{s'} v_{\fP s} v_{s'}
-	    \braket{\D a_s (t) \fD{a}_s (t) \D a_{s'} \fD a_{s'}}~.
-	   \label{eq:ha.kappa.J.corr}
+	\braket{J(t) J} 
+		&= \frac{1}{V^2} \sum_{ss'} v_{\fP s} v_{s'}
+			\braket{E_s (t) E_{s'}}~,
+%		&= \frac{1}{V^2} \sum_{ss'} \braket{E_s E_{s'}}  v_{s} v_{s'}
+%			\frac{\braket{E_s (t) E_{s'}}}{\braket{E_s E_{s'}}}~.
+	\label{eq:ha.kappa.dJ.corr}
 \end{align}
-The expectation value $\braket{\cdot}$ can be viewed as a functional integral with the distribution function $f = {\rm e}^{-\beta \sum_s \omega_s \D a_{s} \fD a_{s}}$ and can therefore be evaluated by means of a Wick theorem.\footnote{In the context of complex field integration, the Wick theorem reads~\cite{Negele2018} $$\braket{ABCD} = \braket{AB}\braket{CD} + \braket{AC}\braket{BD} + \braket{AD}\braket{BC}.$$}
+where the $E_s (t)$ are chosen such that $\braket{E_s} = 0$. The thermal conductivity is obtained by integrating the autocorrelation function. We get
+\begin{align}
+\kappa^{\alpha \beta}
+= V \sum_{ss'} \fD c_{ss'} v^\alpha_{\fP s} v^\beta_{s'} \fD \tau_{ss'}~,
+\end{align}
+%with $c_{ss'} = 1/k_{\rm B}T^2 \braket{n_s} \omega_s \braket{n_{s'}} \omega_{s'}$, 
+where we define the lifetime
+\begin{align}
+	\tau_{ss'} 
+		=	\int_{0}^{\infty} \d t ~ G_{ss'} (t)
+	\label{eq:tau_ss}
+\end{align}
+with the normalized mode-energy autocorrelation function
+\begin{align}
+	G_{ss'} (t)
+		= \frac{\braket{E_s (t) E_{s'}}}{\braket{E_s E_{s'}}}
+	  = \frac{\braket{\D a_s (t) \fD{a}_s (t) \D a_{s'} \fD a_{s'}}}{\braket{n_s} \braket{n_{s'}}} - 1~,
+	\label{eq:G_ss}
+\end{align}
+where the $-1$ comes from choosing $\braket{E_s} =0$, and the generalized heat capacity
+\begin{align}
+	c_{ss'} = \frac{1}{k_{\rm B} T^2} \braket{E_s E_{s'}}~.
+	\label{c_ss}
+\end{align}
+
+\newthought{In the perfectly harmonic case}, the mode-energy autocorrelation function $G_{ss'}$ can be evaluated analytically by noting that the expectation value $\braket{\cdot}$ can be viewed as a functional integral with the distribution function $f = {\rm e}^{-\beta \sum_s \omega_s \D a_{s} \fD a_{s}}$ and can therefore be evaluated by means of a Wick theorem.\footnote{In the context of complex field integration, the Wick theorem reads~\cite{Negele2018} $$\braket{ABCD} = \braket{AB}\braket{CD} + \braket{AC}\braket{BD} + \braket{AD}\braket{BC}.$$}
 Keeping only the non-vanishing pairings, we have
 \begin{align}
 	\braket{\D a_s (t) \fD{a}_s (t) \D a_{s'} \fD a_{s'}}
@@ -582,19 +614,19 @@ where $\braket{n_s} = \frac{k_{\rm B} T}{\omega_s}$
 %\begin{align}
 %	\braket{n_s} = \frac{k_{\rm B} T}{\omega_s}
 %\end{align}
-is the classical mode occupation, and the one-particle Green's function $g_s (t)$ is defined by
+is the equipartition mode occupation, and the one-particle Green's function $g_s (t)$ is defined by
 \begin{align}
 	g_s (t) \delta_{ss'}
 		\equiv \braket{\D{a}_{\fP s} (t) \fD{a}_{s'}} 
 		= {\rm e}^{\im \omega_s t} \braket{n_s} \delta_{ss'}~,
 \end{align}
-where the time evolution of the complex amplitudes $a^{\dagger} (t) = {\rm e}^{\im \omega_s t} \D a_s$ was used.
-It is apparent that the correlation function defined in Eq.\,\eqref{eq:ha.kappa.wick} is not time-dependent, and the heatflux autocorrelation function defined in Eq.\,\eqref{eq:ha.kappa.J.corr} is given by
+where the time evolution of the complex amplitudes $a^{\dagger}_s (t) = {\rm e}^{\im \omega_s t} \D a_s$ was used.
+It is apparent that the correlation function defined in Eq.\,\eqref{eq:ha.kappa.wick} is not time-dependent, and the heatflux autocorrelation function defined in Eq.\,\eqref{eq:ha.kappa.dJ.corr} is given by
 \begin{align}
-	\braket{J (t) J} = \cancel{\braket{J}^2} + \sum_s \braket{J_s^2}~.
+	\braket{J (t) J} = \sum_s \braket{J_s^2}~.
 	\label{eq:ha.kappa.JJ}
 \end{align}
-In thermodynamic equilibrium, the expectation value of the heatflux, $\braket{J}$, vanishes, the mode variance $J_s^2$ however does not vanish. The harmonic heatflux autocorrelation function therefore integrates to infinity and the thermal conductivity $\kappa$ diverges.
+The harmonic heatflux autocorrelation function therefore integrates to infinity and the thermal conductivity $\kappa$ diverges.
 
 \newthought{A finite thermal conductivity} is obtained when the phonons are allowed to interact, for example by introducing impurities, electron-phonon interactions, or self interactions via anharmonic contributions to the potential-energy surface. If the perturbation is weak, it can be expressed by modified Green's functions
 \begin{align}
@@ -612,14 +644,19 @@ where he have defined the lifetime $\tau_s = 1 / 2 \Gamma_s$. The heatflux autoc
 	\braket{J (t) J} = \sum_s \braket{J_s^2} {\rm e}^{-t / \tau_s}~,
 	\label{eq:ha.kappa.JJ.pert}
 \end{align}
-and the thermal conductivity integrates to a finite value given by\marginnote{Using $$J_s = \omega_s v_s n_s$$ and $$\braket{n_s} = \frac{k_{\rm B} T}{\omega_s}~.$$}
+and the thermal conductivity integrates to a finite value given by\footnote{Using \begin{align*}
+		J_s 
+			&= \omega_s v_s n_s~,\\
+		\braket{n_s} 
+			&= \frac{k_{\rm B} T}{\omega_s}~.
+	\end{align*}}
 \begin{align}
 	\kappa^{\alpha \beta} = V k_{\rm B} \sum_{s} v^\alpha_s v^{\beta \vphantom{\dagger}}_s \fD \tau_s~.
 	\label{eq:ha.kappa.bte}
 \end{align}
-The same expression can be found from a Boltzmann transport approach using the \emph{single-mode relaxation-time approximation}~\cite{Srivastava}.
+The same expression can be found from a Boltzmann transport approach using the \emph{single-mode relaxation-time approximation}, and extension to quantum-mechanical distributions is straighforward~\cite{Srivastava}.
 
-\subsection{Heat Transport and Anharmonicity}
+\subsection{Mode lifetimes from perturbation theory}
 In low-order perturbation theory, the phonon self energy can be obtained by approximating the potential-energy surface as
 \begin{align}
 	\mathcal{V} (\b R) \approx V^{(2)} (\b R) + V^{(3)} (\b R)~,
@@ -636,7 +673,32 @@ where $V^{(2)} (\b R)$ denotes the harmonic potential, and $V^{(3)} (\b R)$ is o
 \end{align}
 where $\mathcal V^{(3)}_{spq}$ is the cubic potential transformed to phonon eigenstates. The quantum analogues of this equation and the single-mode expression for $\kappa$, Eq.\,\eqref{eq:ha.kappa.bte}, serve as the basis for most \emph{ab initio} studies of thermal conductivity in insulating solids in recent years~\CITE{Broido,Simoncelli,Isaeva,applications}. More recently, extensions of the perturbation-expansion approach up to fourth order have been presented~\CITE{Broido, etc., the Xia paper that calls this "the gold standard"}.
 
-\newthought{It is apparent from the presentation above} that a low-order expansion of the potential-energy surface combined with low-order perturbation expressions represents a wealth of approximations that certainly hold for some materials~\CITE{silicon}, but are questionable or even outright unjustified for others. In particular, dynamical effects such as phase transitions to dynamically stabilized crystal structures (ZrO2, SrTiO3), spontaneous defect formation (copper halides, KCaF3), or simply a soft bonding and therefore strong anharmonicity (NaCl, NaBr) are inherently absent in such a description.
+\subsection{Mode lifetimes from molecular dynamics simulations}
+In \emph{ab intio} molecular dynamics, we have direct access to the non-perturbative dynamics of the nuclear system. Lifetimes can therefore be extracted by straightforward application of Eq.\,\eqref{eq:tau_ss} and \eqref{eq:G_ss}. To circumvent the problem of brute-force integrating the time integral in the evaluation of the lifetime expression, we use the theoretical discussion in terms of Green's functions from above to approximate
+\begin{align}
+	G_{ss'} (t) \approx G_s (t) \delta_{ss'} = \frac{\braket{E_s (t) E_s}}{\braket{E^2_s}}
+		\approx  {\rm e}^{-t / \tau_s}~,
+	\label{eq:G_s}
+\end{align}
+from which the lifetime $\tau_s$ can be obtained by fitting the normalized energy autocorrelation function $G_s (t)$ to an exponential function. This is exemplified for a simulation of MgO at 300\,K in Fig.\,\ref{fig:G_s}
+\begin{figure}
+	\includegraphics[width=\textwidth]{./data/plots/lifetimes/greenkubo_summary_interpolation_lifetimes.pdf}
+	\caption{Fit of mode lifetimes for MgO at 300\,K. Simulation performed with a timestep of 5\,fs for a simulation time of 60\,ps. The size of the simulatin cell was 216 atoms. Left: normalized mode-energy autocorrelation function $G_s (t)$ as obtained from the simulation. Right: Analytic expression of the form $G_s (t) = {\rm e}^{-t / \tau_s}$ after fitting mode lifetimes $\tau_s$.}
+	\label{fig:G_s}
+\end{figure}
+
+\section{Ab initio Green Kubo}
+Building on the previous sections, we are now in position to present the \emph{ab initio} Green Kubo approach adopted in this work.
+
+\begin{itemize}
+	\item Compute $\kappa^{\rm ai}$ from evaluating the full ai heat flux.
+	\item Compute harmonic contribution $\kappa^{\rm ha-q}$ from the simulation data, essentially \eqref{eq:ha.kappa.bte} with fitted lifetimes.
+	\item Interpolate quantities in \eqref{eq:ha.kappa.bte} to dense grid to obtain finite size correction, assuming $\tau_s = \lambda_s \omega_s^{-2}$ with a weakly q-dependent function $\lambda_s$ obtained by linear interpolation~\cite{Herring1954,McGaughey2004}.
+\end{itemize}
+
+
+\section{Conclusion}
+It is apparent from the presentation above that a low-order expansion of the potential-energy surface combined with low-order perturbation expressions represents a wealth of approximations that certainly hold for some materials~\CITE{silicon}, but are questionable or even outright unjustified for others. In particular, dynamical effects such as phase transitions to dynamically stabilized crystal structures (ZrO2, SrTiO3), spontaneous defect formation (copper halides, KCaF3), or simply a soft bonding and therefore strong anharmonicity (NaCl, NaBr) are inherently absent in such a description.
 
 \begin{itemize}
 	\item lifetime depends on ``anharmonic strength'' and scattering phase-space
@@ -644,45 +706,3 @@ where $\mathcal V^{(3)}_{spq}$ is the cubic potential transformed to phonon eige
 	\item perturbation expansion is only asymptotic and breaks down when too strong \CITE{Negele or Altland}, complexity grows very fast when terms higher than third order are considered, especially in systems of low symmetry,
 	\item categorization of materials in terms of ``anharmonic strength'' was missing
 \end{itemize}
-
-\section{Ab initio Green Kubo}
-\newthought{We can generalize the thoughts above} by going one step back to the heatflux autocorrelation function defined in Eq.\,\eqref{eq:ha.kappa.J.corr}, this time making explicit that $J = \braket{J} + \delta J$ with $\braket{J} = 0$. We can therefore write
-\begin{align}
-\braket{J(t) J} 
-&= \sum_{ss'} v_{\fP s} v_{s'}
-\braket{E_s (t) E_{s'}} \\
-&= \sum_{ss'} \braket{E_s E_{s'}}  v_{s} v_{s'}
-\frac{\braket{E_s (t) E_{s'}}}{\braket{E_s E_{s'}}}
-~.
-\label{eq:ha.kappa.dJ.corr}
-\end{align}
-As before, the thermal conductivity is obtained by integrating the autocorrelation function. We get
-\begin{align}
-\kappa^{\alpha \beta}
-= V \sum_{ss'} c_{ss'} v^\alpha_{\fP s} v^\beta_{s'} \tau_{ss'}~,
-\end{align}
-%with $c_{ss'} = 1/k_{\rm B}T^2 \braket{n_s} \omega_s \braket{n_{s'}} \omega_{s'}$, 
-where we define the lifetime
-\begin{align}
-\tau_{ss'} 
-=	\int_{0}^{\infty} \d t ~ \frac{\braket{E_s (t) E_{s'}}}{\braket{E_s E_{s'}}}
-\label{eq:lifetime.md.general}
-\end{align}
-by analogy with the considerations above.
-In particular, we have
-\begin{align}
-	\tau_{s} 
-		=	\int_{0}^{\infty} \d t ~ \frac{\braket{E_s (t) E_s}}{\braket{E^2_s}}
-	\label{eq:lifetime.md}
-\end{align}
-for the diagonal part of the lifetime, $\tau_s \equiv \tau_{ss'}$.
-
-\begin{align}
-	G_s (t) = \frac{\braket{E_s (t) E_s}}{\braket{E^2_s}}
-		\approx  {\rm e}^{-t / \tau_s}
-\end{align}
-
-\begin{figure}
-	\includegraphics[width=\textwidth]{./data/plots/lifetimes/greenkubo_summary_interpolation_lifetimes.pdf}
-	\caption{Fit of mode lifetimes for MgO at 300\,K.}
-\end{figure}
