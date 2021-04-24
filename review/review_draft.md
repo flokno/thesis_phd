@@ -3,6 +3,14 @@ Thesis Review
 
 - `Theory and methods` aufspalten in dedizierte Kapitel?
 
+## Notation
+
+- $\alpha, \beta, \gamma, \delta$: Cartesian components
+- $\mu, \nu$: crystal-basis components
+- $I, J$: atom labels
+- $i, j$: atom labels in primitive cell
+- ${\bf L}, {\bf K}$: lattice vectors ${\bf L} = L^\mu {\bf a}_\mu$ with lattice vectors ${\bf a}_\mu$
+
 ## 1 | Many Body Problem
 
 - [x] Operatorhütchen?
@@ -27,17 +35,18 @@ Thesis Review
 
 ## 2 | Lattice Dynamics
 
-- [ ] erste Chp. 3, dann wird klarer was gebraucht wird
-- [ ] - [ ] Struktur?
-    - [ ] Makro: Bottom up, daher:
-        - [ ] Mikroskopische Bewegungsgleichungen in 2, Stat. Mechanik -> 3?
-    - [ ] Kontra: Chp. 3 ist heatflux ohne clutter
-- [ ] Themen fuer Appendix markieren
-- [ ] `Lattice Dynamics` -> `Nuclear Dynamics`?
-- [ ] `Geometry optimization` -> methods?
+- [x] erste Chp. 3, dann wird klarer was gebraucht wird
+- [x] - [ ] Struktur?
+    - [ ] HA
+    - [ ] MD
+    - [ ] HA@MD
+- [x] Themen fuer Appendix markieren
+- [x] `Lattice Dynamics` -> `Nuclear Dynamics`?
+- [x] `Geometry optimization` -> appendix?
 - [ ] Formel checken und anpassen
 - [ ] Maradudin symmetries?
 - [ ] group velocities
+- [ ] ${\bf e_s} \to e^\alpha_s ~\text{oder}~ e_{s, \alpha}$?
 
 ## 3 | Heat Transport
 

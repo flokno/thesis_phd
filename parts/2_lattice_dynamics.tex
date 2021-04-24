@@ -168,7 +168,7 @@ This derivation is generally valid for a system of $N$ particles described by a 
 
 
 \subsection{Periodic Systems}
-As already mentioned in Sec.~\ref{sec:theory.periodic.1}, the crystalline state is characterized by a periodic long-range order described the Bravais vectors ${\bf L} = L^i {\bf a}_i$, where $\set{{\bf a}_i}$ is the crystal basis and $L^i \in \mathds Z$.
+As already mentioned in Sec.~\ref{sec:theory.periodic.1}, the crystalline state is characterized by a periodic long-range order described the Bravais vectors ${\bf L} = L^\mu {\bf a}_\mu$, where $\set{{\bf a}_\mu}$ is the crystal basis and $L_\mu$ are integers.\footnote{Notation: We index components in the crystal basis $\set{{\bf a}_\mu}$ with $\mu, \nu$, as opposed to Cartesian components indexed by $\alpha, \beta~.$}
 We define this symmetry as follows:
 Let ${\bf R}^0 = \set{{\bf R}_I^0}$ be the configuration of atoms in the local minimum of interest, and let ${\bf R}^{0 \prime} = \set{{\bf R}^{0 \prime}_{I}}$ denote the configuration obtained by moving all atoms by a Bravais vector ${\bf L}$,
 \begin{align}
@@ -192,7 +192,7 @@ The final requirement for translational invariance of the potential is that the 
 %	\label{eq:inv.R0} \\
 	\mathcal{V} \left( {\bf R}' = \set{{\bf R}_{I} + {\bf L}} \right)
 	&= \mathcal{V}({\bf R} = \set{{\bf R}_{I}} ) 
-	\quad\text{for all}\quad {\bf L} = L^i {\bf a}_i~.
+	\quad\text{for all}\quad {\bf L} = L^\mu {\bf a}_\mu~.
 	\label{eq:inv.V}
 \end{align}
 This effectively corresponds to a permutation of the displacements of the atoms, $U_I \to U_{I'}$ according to $P_{\bf L}$. Figure\,\ref{fig:translation.permutation} shows a one-dimensional depiction of the relation between discrete translation by Bravais vectors and the permutation map.
@@ -242,26 +242,26 @@ In the previous section, we did not specify the system beyond requiring periodic
 
 \newthought{We define the boundary conditions} for the nuclear problem such that
 \begin{align}
-	\b R_I + S^i \b A_i = \b R_I \quad\text{for}\quad S^i \in \mathds{Z}~,
+	\b R_I + S^\mu \b A_\mu = \b R_I \quad\text{for}\quad S^\mu \in \mathds{Z}~,
 	\label{eq:sc.1}
 \end{align}
-where each ${\bf A}_i$ is a linear combination of the primitive basis vectors $\set{{\bf a}_i}$,
+where each ${\bf A}_\mu$ is a linear combination of the primitive basis vectors $\set{{\bf a}_\nu}$,
 \begin{align}
-{\bf A}_i = {\rm M}_{ij}^{\rm sc} {\bf a}_j\quad\text{with } {\rm M}_{ij}^{\rm sc} \in \mathds Z~,
+{\bf A}_\mu = {\rm M}_{\mu}^{{\rm sc}, \nu} {\bf a}_\nu\quad\text{with}\quad {\rm M}_{\mu}^{{\rm sc}, \nu} \in \mathds Z~,
 \end{align}
 and $\rm M^{\rm sc}$ is a non-singular matrix with integer elements. The space spanned by the $\set{{\bf A}_i}$ is parallelepiped of volume $V_{\rm sc} = N_{\rm sc} \, {\bf a}_1 \cdot ({\bf a}_2 \times {\bf a}_3)$, where $N_{\rm sc} = \det {\rm M}^{\rm sc}$ is the number of unit cells that fit into the enlarged cell, and $V_{\rm uc} = {\bf a}_1 \cdot ({\bf a}_2 \times {\bf a}_3)$ is the unit cell volume. This cell is therefore called \emph{supercell} and we define it such that its midpoint is located at the origin,~i.\,e.,~
 \begin{align}
 	\mathds V_{\rm sc}
-		&= \set{{\bf X} = X^i {\bf A}_i : X^i \in {[-0.5, 0.5)_{\mathds R}}}~.
+		&= \set{{\bf X} = X^\mu {\bf A}_\mu : X^\mu \in {[-0.5, 0.5)_{\mathds R}}}~.
 	\label{eq:supercell}
 \end{align}
 We therefore denote the matrix ${\rm M}^{\rm sc}$ as the \emph{supercell matrix}.
-The vectors \mbox{$\b S = S^i \b A_i$} are the equivalent of the Bravais vectors $\b L$ in a superlattice described by $\set{ \b A_i }$ instead of $\set{ \b a_i}$.
+The vectors \mbox{$\b S = S^\mu \b A_\mu$} are the equivalent of the Bravais vectors $\b L$ in a superlattice described by $\set{ \b A_\mu }$ instead of $\set{ \b a_\mu}$.
 The ideal, infinite crystal is obtained in the limit $N_{\rm sc} \rightarrow \infty$.
 From Eq.\,\eqref{eq:sc.1} we see that the force constants become periodic functions in the superlattice,
 \begin{align}
 	\Phi_{i {\bf L} \alpha, j {\bf K} + \b S \beta} 
-		= \Phi_{i {\bf L} \alpha, j {\bf K} \beta} \quad\text{for all}\quad \b S = S^i \b A_i~,
+		= \Phi_{i {\bf L} \alpha, j {\bf K} \beta} \quad\text{for all}\quad \b S = S^\mu \b A_\mu~,
 	\label{eq:fc.sym.2}
 \end{align}
 so that the dynamical matrix in Eq.\,\eqref{eq:D(q)} can be written as a sum over lattice points that are contained in the supercell only, $\set{\b L \in \mathds V_{\rm sc}}$
@@ -281,24 +281,24 @@ so that the dynamical matrix in Eq.\,\eqref{eq:D(q)} can be written as a sum ove
 %\end{align}
 for $\b q_{\b m}$ that fulfill
 \begin{align}
-	{\bf q_{\b m}} \cdot {\bf A}_i	= 2 \pi m_i \quad\text{with}\quad m_i \in \mathds Z~.
+	{\bf q_{\b m}} \cdot {\bf A}_\mu	= 2 \pi m_\mu \quad\text{with}\quad m_\mu \in \mathds Z~.
 	\label{eq:q.commensurate}
 \end{align}
 %the summands in the second sum of Eq.\,\eqref{eq:D^S(q).1} interfere constructively and yield a factor $\sum_{\b S}' = N / N_{\rm sc} - 1$. For all other $\b q$, the entire summand becomes negligible in the limit $N \to \infty$ when normalized to the supercell volume.
 The $\b q_{\b m}$ that fulfill Eq.\,\eqref{eq:q.commensurate} are called \emph{commensurate} $\b q$-points, as they represent wave numbers that fit into the supercell.
 In total there are $N_{\rm sc}$ non-equivalent values of $\bf q_{\b m}$ labelled by ${\bf m} = (m_1, m_2, m_3)$ that can be expressed in terms of the lattice vectors of the reciprocal supercell,
 \begin{align}
-{\bf B}^i 
-= 2 \pi \varepsilon^{ijk} \frac{{\bf A}_j \times {\bf A}_k}{{\bf A}_1 \cdot ({\bf A}_2 \times {\bf A}_3)} ~,
+{\bf B}^\mu
+= 2 \pi \varepsilon^{\mu \nu \rho} \frac{{\bf A}_\nu \times {\bf A}_\rho}{{\bf A}_1 \cdot ({\bf A}_2 \times {\bf A}_3)} ~,
 %\label{eq:dft.Bloch.bi}
 \end{align}
-where $\varepsilon^{ijk}$ denotes the Levi-Civita symbol enforcing the correct ordering of $ijk$. The complete set of $\bf q$-values is
+where $\varepsilon^{\mu \nu \rho}$ denotes the Levi-Civita symbol enforcing the correct ordering of $\mu \nu \rho$. The complete set of $\bf q$-values is
 \begin{align}
 {\bf q}_{\bf m} 
-= \sum_{i=1}^3 m_i {\bf B}^i~,
+= \sum_{i=1}^3 m_\mu {\bf B}^\mu~,
 \label{eq:q_m}
 \end{align}
-with $m_i \in \mathds Z$ such that $\b q_{\bf m}$ is an element of the first Brillouin zone of the direct lattice.
+with $m_\mu \in \mathds Z$ such that $\b q_{\bf m}$ is an element of the first Brillouin zone of the direct lattice.
 %For the set of commensurate $\b q$-points, the dynamical matrix is therefore given by
 %\begin{align}
 %{\rm D}_{i \alpha, j \beta} (\b q_{\bf m}) 	
@@ -327,7 +327,7 @@ with $m_i \in \mathds Z$ such that $\b q_{\bf m}$ is an element of the first Bri
 When restricting the lattice points to the supercell, the dynamical matrix as defined in Eq.\,\eqref{eq:D(q)} is evaluated only for the truncated sum over $\set{\b L \in \mathds V_{\rm sc}}$. The wavenumbers $\b q$ are then restricted to the commensurate $\b q$-points $\set{\b q_{\b m}}$,~i.\,e.,~those given in terms of Eq.\,\eqref{eq:q_m}. Evaluating the truncated dynamical matrix at a non-commensurate value of $\b q$ will, in general, yield a non-hermitian matrix which cannot be used to extract physically sound information about the system. To obtain an \emph{approximated} dynamical matrix at any other, non-commensurate value of $\b q$ within the Brillouin zone, we define an \emph{extended supercell}, 
 \begin{align}
 	\mathds V_{\rm sc}^{\rm ext}
-		&= \set{{\bf X} = X^i {\bf A}_i : X^i \in {[-0.5, 0.5 \boldsymbol{]}_{\mathds R}}}~,
+		&= \set{{\bf X} = X^\mu {\bf A}_\mu : X^\mu \in {[-0.5, 0.5 \boldsymbol{]}_{\mathds R}}}~,
 	\label{eq:supercell.extended}
 \end{align}
 which also contains the lattice points at the positive boundary of the supercell as depicted by open circles in Fig.\,\ref{fig:sketch_supercells}.
