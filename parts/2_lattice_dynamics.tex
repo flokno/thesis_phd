@@ -1,20 +1,22 @@
-In the previous chapter, we have seen how the many-body problem can be decoupled into an electronic problem given by Eq.\,\eqref{eq:Hsolution1}, which can be solved in the framework of DFT, and a nuclear problem given by Eq.\,\eqref{eq:chi2} that describes the dynamical properties of the nuclei. This was achieved by means of the Born-Oppenheimer approximation where electron-nucleus interactions beyond a parametric dependence on each other are neglected~\cite{BornOppenheimer}.
+In the previous chapter, we have seen how the many-body problem can be decoupled into an electronic problem %given by Eq.\,\eqref{eq:Hsolution1}, 
+which can be solved in the framework of DFT, and a nuclear problem %given by Eq.\,\eqref{eq:chi2} 
+that describes the dynamical properties of the nuclei. This was achieved by means of the Born-Oppenheimer approximation where electron-nucleus interactions beyond a parametric dependence on each other are neglected~\cite{BornOppenheimer}.
 
-\newthought{We will now approach} the description of the nuclear dynamics from two sides: First, we treat the nuclei as \emph{classical} particles on the full, non-truncated Born-Oppenheimer potential. This will lead to the formulation of \emph{ab initio molecular dynamics} (aiMD). 
-Second, we introduce the \emph{harmonic approximation} in which the nuclear Schr\"odinger equation is solved for an approximated potential.
+\newthought{We will now approach} the description of the nuclear dynamics from two sides: First, we introduce the \emph{harmonic approximation} in which the nuclear Schr\"odinger equation is solved for an approximated potential in terms of vibrational eigenmodes,~i.\,e.,~\emph{phonons}. 
+Second, we treat the nuclei as \emph{classical} particles on the full, non-truncated Born-Oppenheimer potential. This will lead to the formulation of \emph{ab initio molecular dynamics} (aiMD). In a last step, we will connect the two approaches to allow for extracting phonon properties from MD simulations.
 As no electron will appear anymore, $N \equiv N_{\rm Nuc}$ will henceforth denote the number of nuclei in the system of interest, and we denote the Born-Oppenheimer potential simply as \emph{the} potential, $\mathcal V ({\bf R})$.
 
-We begin by recalling the Schr\"odinger equation for the nuclear wavefunctions $\chi_s ({\bf R})$ initially defined in Eq.\,\eqref{eq:chi2},
+\newthought{To set the stage, we recall the Schr\"odinger equation} for the nuclear wavefunctions $\chi_s ({\bf R})$ initially defined in Eq.\,\eqref{eq:chi2},
 \begin{align}
-  \left( T^{\rm Nuc} + \mathcal V ({\bf R}) - E_s \right) \chi_s ({\bf R})
-  = 0~,
-  \label{eq:BOSE}
+\left( \mathcal T^{\rm Nuc} + \mathcal V ({\bf R}) - E_s \right) \chi_s ({\bf R})
+= 0~,
+\label{eq:BOSE}
 \end{align}
 where
 \begin{align}
-  T^{\rm Nuc}
-    = \sum_I \frac{- \hbar^2}{2 M_I} \frac{\partial^2}{\partial {\bf R}_I^2}~,
-  \label{eq:Tnuc2}
+\mathcal  T^{\rm Nuc}
+= \sum_I \frac{- \hbar^2}{2 M_I} \frac{\partial^2}{\partial {\bf R}_I^2}~,
+\label{eq:Tnuc2}
 \end{align}
 is the nuclear kinetic-energy operator as before.
 
@@ -46,7 +48,7 @@ where the expansion coefficients are called \emph{force constants}. In particula
   \equiv \left.\frac{\partial^{2} \mathcal{V}(\mathbf{R})}{\partial R_{I}^{\alpha} \partial R_{J}^{\beta}}\right|_{\mathbf{R}^{0}}~.
   \label{eq:FC2}
 \end{align}
-The harmonic approximation is typically used to assess dynamical properties of a system in some confined phase-space region close to a (local) minimum of the potential-energy surface. A local minimum configuration ${\bf R}^0$ is characterized by
+The harmonic approximation is typically used to assess dynamical properties of a system in some confined phase-space region close to a (local) minimum of the potential-energy surface.\footnote{See section \ref{sec:ltrm} in the appendix for details on geometry optimization in the context of crystal lattices.} A local minimum configuration ${\bf R}^0$ is characterized by
 \begin{align}
 	\left. \frac{\partial V({\bf R})}{\partial R^\alpha_I} 
 	\right\vert_{{\bf R}^0} 
@@ -80,7 +82,7 @@ Using these coordinates, the Hamiltonian assumes the form
 \begin{align}
 	\begin{split}
 		\mathcal{H}({\bf p}, {\bf u})
-			&= T^{\rm Nuc} ({\bf p}) + \mathcal{V}^{(2)} ({\bf u})\\
+			&= \mathcal T^{\rm Nuc} ({\bf p}) + \mathcal{V}^{(2)} ({\bf u})\\
 			&= \halb \sum_I {\bf p}_I^2 + 
 				\halb \sum_{\substack{I, J \\ \alpha, \beta}}
 					D_{I \alpha, J \beta}
@@ -88,7 +90,7 @@ Using these coordinates, the Hamiltonian assumes the form
 	\end{split}
 	\label{eq:ha.H1}
 \end{align}
-\newthought{As required earlier}, the dynamical matrix $\rm D$ is a positive definite matrix. Furthermore, we see from Eq.\,\eqref{eq:FC2} that $\rm D$ is symmetric in the $3N$ coordinates $(I, \alpha)$,
+As required earlier, the dynamical matrix $\rm D$ is a positive definite matrix. Furthermore, we see from Eq.\,\eqref{eq:FC2} that $\rm D$ is symmetric in the $3N$ coordinates $(I, \alpha)$ by the differentiability of the underlying potential $\mathcal V ({\bf R})$,
 \begin{align}
 	D_{I \alpha, J \beta} = D_{J \beta, I \alpha}~.
 	\label{eq:D.symmetric}
@@ -120,13 +122,16 @@ we can rewrite the Hamiltonian in Eq.\,\eqref{eq:ha.H1} by using the dynamical m
 		\halb \sum_{s} \omega_s^2	\, u_s^2~.
 \label{eq:ha.H2}
 \end{align}
-Here, we implicitly defined the \emph{normal coordinates} $u_s$ and their conjugate momenta $p_s$,~i.\,e.,
+Here, we implicitly defined the $3N$ \emph{normal coordinates} $u_s$ and their conjugate momenta $p_s$ via the unitary transformation\footnote{Using vector notation $${\bf e}_{s, I} \cdot {\bf u}_I = \sum_{\alpha} e_{s, I \alpha} u_I^\alpha~.$$}
 \begin{align}
 	u_s
-		&= \sum_{I \alpha} e_{s, I \alpha} \, u_{I \alpha}~,
+		&= \sum_{I} {\bf e}_{s, I} \cdot {\bf u}_{I}~,\quad\text{and}
 		\label{eq:u_s} \\
+%	p_s
+%		&= -\im \hbar \frac{\partial}{\partial u_s}~.
+%	\\
 	p_s
-		&= -\im \hbar \frac{\partial}{\partial u_s}~.
+	&=\sum_{I} {\bf e}_{s, I} \cdot {\bf p}_{I} ~.
 		\label{eq:p_s}
 \end{align}
 The Hamiltonian expressed in terms of the normal coordinates, Eq.\,\eqref{eq:ha.H2}, contains no cross-terms between different modes $s$ and $s'$. Rewritten in terms of this Hamiltonian, the wave equation \eqref{eq:BOSE} reads
@@ -157,9 +162,7 @@ The state of the entire system is therefore specified by the $3N$ quantum number
 \begin{align}
 	E ({\bf n}) = \sum_s \hbar \omega_s \left( n_s + \halb \right)~.
 \end{align}
-The thermodynamic properties of such a system of harmonic oscillators follow from this spectrum in straighforward fashion~\cite{BornHuang}.
-
-This derivation is generally valid for a system of $N$ particles described by a potential-energy surface of which a (local) minimum ${\bf R}^0$, and the matrix of second derivatives at this configuration, $\Phi^{IJ}$, is known.
+This derivation is generally valid for a system of $N$ particles described by a potential-energy surface of which a (local) minimum ${\bf R}^0$, and the matrix of second derivatives at this configuration, $\Phi_{IJ}$, is known. The thermodynamic properties of such a system of harmonic oscillators follow from this spectrum in straighforward fashion~\cite{BornHuang}.
 
 
 
