@@ -11,7 +11,7 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
 - [x] integrate interpolation in GK workflow
     - [ ] ~~compute $\kappa^\alpha$ instead of $\kappa^{\alpha \beta}$~~
     - [x] add ha-q data to dataset
-- [ ] streamline and run for completed materials
+- [x] streamline and run for completed materials
 - [ ] extract results and statistics
     - [ ] e.g. lifetimes
 - [ ] submit el. DOS for CuI w/ and w/o defects
@@ -33,8 +33,8 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
 
 ### 14.04.
 
-- [ ] discuss w/ Chris
-    - [ ] paper review
+- [x] discuss w/ Chris
+    - [x] paper review
 
 - [ ] benchmark chapter
     - [ ] MgO and CuI (for example)
@@ -47,7 +47,6 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
     - [ ] discuss convergence w.r.t. simulation time
     - [ ] lattice expansion? Comparison to NPT run?
 - [x] schedule meeting w/ Matthias
-- [ ] list open questions
 
 ### 15.04.
 
@@ -75,7 +74,7 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
 
     - [ ] symmetry properties of dynamical matrix (Maradudin adaption)
 
-- [ ] theory: heat flux
+- [x] theory: heat flux
 
 - [ ] send out to reviewers
 
@@ -116,7 +115,7 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
 
 ### 1 | Many-body problem
 
-- [ ] Sebas
+- [x] Sebas
 
 ### 2 | Lattice dynamics
 
@@ -124,7 +123,7 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
 
 3 | Heat transport
 
-- [ ] Dr. Yair
+- [x] Dr. Yair
 
 ### 4 | Implementation and benchmarking
 

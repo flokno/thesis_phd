@@ -18,96 +18,7 @@ where
 \end{align}
 is the nuclear kinetic-energy operator as before.
 
-
-\section{Classical Limit}
-The classical limit of the nuclear Schr\"odinger equation~\eqref{eq:BOSE} is usually performed by writing the nuclear wavefunction $\chi_s ({\bf R}, t)$ in terms of a real amplitude $A_s({\bf R}, t)$ and a \emph{classical action function} $S_s({\bf R}, t)$~\cite{Dirac1981,Landau2013,Marx2009}
-\begin{align}
-\chi_s({\bf R}, t) = A_s({\bf R}, t) \, {\rm e}^{\frac{\im}{\hbar} S_s({\bf R}, t)}~.
-\label{eq:class.1}
-\end{align}
-The Schr\"odinger equation then yields a set of differential equations for $A_s$ and $S_s$ that, in the limit $\hbar \to 0$, go over to a \emph{Hamilton-Jacobi} equation for the action $S_s$,
-\begin{align}
-\frac{\partial S_s}{\partial t} + \mathcal H \left({\bf R}, {\bf P}\right)
-= 0~,
-\label{eq:HamiltonJacobi}
-\end{align}
-where ${\bf P} = ({\bf P}_1, \ldots) \equiv ({\bf \nabla}_1 S_s, \ldots)$ denotes the conjugate momenta and $\mathcal H$ is the \emph{classical} Hamilton function\footnote{We use the terms \emph{Hamilton function} and \emph{Hamiltonian} interchangeably in the following.} corresponding the to the operator in Eq.\,\eqref{eq:BOSE}, from which the equations of motion for the nuclei can be obtained:
-\begin{align}
-\dot{{\bf P}}_I 
-= -\frac{\partial \mathcal H}{\partial {\bf R}_I}
-\quad\implies\quad M_I \ddot{\bf R}_I
-= -\frac{\partial \mathcal V}{\partial {\bf R}_I}~.
-% \equiv - {\bf F}_I~.
-\end{align}
-The negative gradient of the Born-Oppenheimer potential, 
-$-\partial \mathcal V / \partial {\bf R}_I$ is the force ${\bf F}_I$ acting on atom $I$ which can be obtained via the Hellmann-Feynmann theorem,~cf.~Sec.\,\ref{sec:HellmannFeynman}.
-
-\newthought{An alternative viewpoint} that is more instructive can be taken by invoking the \emph{Ehrenfest theorem}~\cite{Ehrenfest1927,Basdevant2007}. The statement is that
-\begin{align}
-\frac{\d}{\d t} \left\langle {\bf P}_I \right\rangle_{\chi_s}
-= \left\langle
-- \frac{\partial \mathcal{V}}{\partial {\bf R}_I}
-\right\rangle_{\chi_s}~,
-\label{eq:ehrenfest.de1}
-\end{align}
-where $\langle \cdot \rangle_{\chi_s}$ denotes an expectation value taken with respect to the state $\chi_s$. This expression differs only slightly from the classical counterpart, which would read
-\begin{align}
-\frac{\d}{\d t} \left\langle {\bf P}_I \right\rangle
-= \left.
-- \frac{\partial \mathcal{V}}{\partial {\bf R}_I}
-\right\vert_{{\bf R} = \langle {\bf R} \rangle}~.
-\label{eq:ehrenfest.de2}
-\end{align}
-The difference comes from the fact that, in quantum mechanics, the expectation value of a function of an observable does not equal the function of its expectation. In mathematical terms, we have
-\begin{align}
-\delta f  \equiv 
-f \bm ( \langle x \rangle \bm{)} 
-- 
-\bm{\langle} f (x) \bm{\rangle}
-\neq 0
-~,
-\label{eq:ehrenfest.delta1}
-\end{align}
-where $x = {\bf R}_I$ denotes the space coordinate, %for notional simplicity, 
-$f$ is some function of the observable   $x$, and $\delta f$ measures the difference between the classical and the quantum expectation value. Ehrenfest's argument is that this difference becomes negligible when the state is sufficiently peaked around some value $x_0$. Expanding $f$ around the expectation value of $x$ denoted by $x_0 \equiv \langle x \rangle$, we have
-\begin{align}
-f(x) = f \bm ( \langle x \rangle \bm{)}  
-+ (x - \langle x \rangle) \, f' \bm ( \langle x \rangle \bm{)}
-+ \frac{1}{2} (x - \langle x \rangle)^2 \, f'' \bm ( \langle x \rangle \bm{)}
-+ \cdots~.
-\label{eq:ehrenfest.f2}
-\end{align}
-It follows that the $f'$ term vanishes when the expectation value is taken, and
-\begin{align}
-\langle f(x) \rangle 
-= f \bm ( \langle x \rangle \bm{)}  
-+ \frac{1}{2} \Delta x^2 f'' \bm ( \langle x \rangle \bm{)}
-+ \cdots~,
-\label{eq:ehrenfest.f3}
-\end{align}
-where $\Delta x^2 = \bm{\langle} (x - \langle x \rangle)^2 \bm{\rangle}$ measures the variance of the underlying distribution,~i.\,e.~the width of the wavepacket. The relative error between the classical and quantum expectation value is %readily computed to be 
-therefore proportional to the variance $\Delta x^2$,
-\begin{align}
-\left\lvert \frac{\delta f}{f \bm ( \langle x \rangle \bm{)}} \right\rvert
-= \frac{1}{2} \Delta x^2 \left\lvert \frac{f'' \bm ( \langle x \rangle \bm{)}}{f \bm ( \langle x \rangle \bm{)}} \right\rvert
-+ \mathcal{O}(\Delta x^3)~.
-\label{eq:ehrenfest.delta2}
-\end{align}
-This estimation is general and holds for any observable $f$.
-By crudely estimating the dimension of the wavepacket in terms of the thermal de Broglie-wavelength, we find
-\begin{align}
-\Delta x^2 
-\sim \left( \frac{h}{P} \right)^2
-\sim \frac{h^2}{MT}~,
-\label{eq:ehrenfest:dimension}
-\end{align}
-where $h$ is Planck's constants, $M$ is the atomic mass, and $T$ is temperature. This estimate gives support to the intuitive assumption that we can expect the classical limit to work better the heavier the atoms and the higher the temperature.
-Let us now set $f(x) \hat = -\partial \mathcal V / \partial {\bf R}_I$, then another important conclusion can be drawn from Eq.\,\eqref{eq:ehrenfest.delta2}: For a harmonic potential $\mathcal V ({\bf R}) = \mathcal V^{(2)} ({\bf R})$, where derivatives higher than second order vanish, the classical and quantum mechanical expectation values \emph{coincide}. The quantum mechanical expectation value of position will therefore evolve in the same time-periodic fashion as a classical particle in a harmonic well.
-
-\REM{this approach can only be validated by computing observables and compare the results. One can safely say that this approach has been used successfully in a plethora of studies, while additional care must be taken at low temperature and/or systems with light atoms, especially hydrogen-bonded systems~\CITE{MD-Review?,MarklandCeriotti,Litman,pHexperiment}.}
-
 \newpage
-
 \section{Harmonic Approximation}
 The Born-Oppenheimer potential $\mathcal V ({\bf R})$ appearing in Eq.\,\eqref{eq:BOSE} is an ordinary function of the\marginnote{Remember $N \equiv N_{\rm Nuc}$.} $3 N$ coordinates ${\bf R} = ({\bf R}_1, \ldots, {\bf R}_{N})$ and therefore can be expanded as a Taylor series in displacements ${\bf U} \equiv \Delta {\bf R}$ about a given configuration ${\bf R}^0$,~i.\,e.,
 \begin{align}
@@ -250,99 +161,10 @@ The thermodynamic properties of such a system of harmonic oscillators follow fro
 
 This derivation is generally valid for a system of $N$ particles described by a potential-energy surface of which a (local) minimum ${\bf R}^0$, and the matrix of second derivatives at this configuration, $\Phi^{IJ}$, is known.
 
-\subsection{Classical harmonic dynamics}
-
-The classical dynamics generated by the harmonic Hamiltonian in Eq.\,\eqref{eq:ha.H2} is generated by the canonical equations of motion for the normal coordinates $\set{ u_s, p_s}$,
-\begin{align}
-	\dot{u}_s
-		& = \frac{\partial \mathcal H}{\partial p_s}
-			= p_s~,\quad\text{and}\quad
-	\dot{p}_s
-		 = - \frac{\partial \mathcal H}{\partial u_s}
-			= - \omega^2_s u_s~.
-\end{align}
-The solution is given in terms of plane waves,
-\begin{subequations}
-\begin{align}
-	u_s (t) 
-		&= \phantom{\omega_s} \sqrt 2 A_s \sin (\omega_s t + \varphi_s)~,\\
-	p_s (t) 
-		&= \sqrt 2 \omega_s A_s \cos (\omega_s t + \varphi_s)~,
-\end{align}
-\end{subequations}
-where $A_s$ and $\varphi_s$ are chosen based on the initial conditions. It can be beneficial to define the normal coordinates in terms of the complex amplitudes $a^{(\dagger)}_s$ ~, \REM{update convention}
-\begin{subequations}
-\label{eq:u_s.amplitudes}
-\begin{align}
-	u_s (t) 
-		&\equiv \frac{1}{\sqrt{2 \omega_s}} \left[ \D a_s (t) + \fD a_s (t) \right]~, \\
-	p_s (t) 
-		&\equiv \im \sqrt{\frac{\omega_s}{2}} \left[ \D a_s (t) - \fD a_s (t) \right]~,
-\end{align}
-\end{subequations}
-with %\marginnote{It follows $\sqrt{\omega_s} A_s = \lvert a_s (t) \rvert~.$}
-\begin{subequations}
-\label{eq:a_s(t)}
-\begin{align}
-	a_s (t) 
-		& = {\rm e}^{- \im \omega_s t} a_s (0)~, \\
-	a_s (0)
-		& = \sqrt{\omega_s} A_s {\rm e}^{- \im \varphi_s}~.
-\end{align}
-\end{subequations}
-The Hamiltonian in terms of the complex amplitudes $a^{(\dagger)}_s$ then reads\marginnote{The relation to quantum mechanics is achieved by replacing the complex numbers $a^{(\dagger)}_s$ with the operators $\sqrt{\hbar} \hat{a}^{(\dagger)}_s$ fulfilling the canonical commutation relations $$\left[ \fD{\hat{a}}_{\fP s}, \D{\hat a}_{s'} \right] = \delta_{ss'}~.$$}
-\begin{align}
-	\mathcal{H}(\b a, \D{\b a})
-		&= \sum_s \omega_s \D a_s\fD  a_s~.
-	\label{eq:Hamiltonian.aa}
-\end{align}
-
-\subsection{Harmonic sampling}
-
-\begin{align}
-	\b U_I (t) 
-		& = \frac{1}{\sqrt{M_I}} \sum_s \sqrt 2 A_s \b e_{sI} \sin (\omega_s t + \varphi_s)
-\end{align}
-
-by analogy with QM in thermal equilibrium\marginnote{Bose function ($\beta = 1 / k_{\mathrm{B}} T$): $$n_{\mathrm{B}}(\omega, T)=\frac{1}{\mathrm{e}^{\, \beta \hbar \omega}-1}~.$$}
-\begin{align}
-	E
-		=\sum_{s} \hbar \omega_{s}\left(n_{\mathrm{B}}\left(\omega_{s}, T\right)+\frac{1}{2}\right)
-\end{align}
-
-\marginnote{In the classical limit $k_{\rm B} T \gg \hbar \omega_s$, this yields the equipartition +$E_s = 3 \kb T$.}
-\begin{align}
-	\braket{A_{s}^{2}}
-		= \frac{\hbar}{\omega_{s}}\left(n_{\mathrm{B}}(\omega, T)+\frac{1}{2}\right)
-		\underset{k_{\rm B} T \gg \hbar \omega_s}{\longrightarrow} \frac{k_{\rm B} T}{\omega_s^2}
-\end{align}
-
-\subsection{Mode projection}
-
-Express amplitude $a_s (t)$ in terms of the atomic displacements $\set{\b U_I (t)}$ and velocities $\set{\dot{\b U}_I (t)}$ \TODO{Check units!}
-The inverse relation between the amplitudes $a_s$ in terms of the conjugate variables $\set{u_s, p_s}$ is
-\begin{align}
-	a_s (t) = \sqrt{\frac{\omega_s}{2}} u_s (t) + \frac{\im}{\sqrt{2 \omega_s}} p_s (t)
-\end{align}
-with
-\begin{subequations}
-	\label{eq:mode.projection.u_s}
-\begin{align}
-	u_s (t) 
-	    & = \sum_I \sqrt{M_I} \b e_{sI} \cdot \b U_I (t) ~,
-%\\
-%	p_s (t)
-%	    & = \sum_I \sqrt{M_I} \b e_{sI} \cdot \dot{\b U}_I (t) %\\
-%	\implies
-%	a_s (t) 
-%	    &= \sum_I \sqrt{M_I} \b e_{sI} \cdot \left[ \b U_I(t) + \frac{\im}{\omega_s} \dot{\b U}_I (t) \right]
-\end{align}
-\end{subequations}
-and likewise for $p_s (t)$ with $\set{\dot{\b U}_I}$ instead of $\set{\b U_I}$.
 
 
 
-\section{Periodic Systems}
+\subsection{Periodic Systems}
 As already mentioned in Sec.~\ref{sec:theory.periodic.1}, the crystalline state is characterized by a periodic long-range order described the Bravais vectors ${\bf L} = L^i {\bf a}_i$, where $\set{{\bf a}_i}$ is the crystal basis and $L^i \in \mathds Z$.
 We define this symmetry as follows:
 Let ${\bf R}^0 = \set{{\bf R}_I^0}$ be the configuration of atoms in the local minimum of interest, and let ${\bf R}^{0 \prime} = \set{{\bf R}^{0 \prime}_{I}}$ denote the configuration obtained by moving all atoms by a Bravais vector ${\bf L}$,
@@ -412,7 +234,7 @@ with the inverse relation
 \end{align}
 The values of $\b q$ can be chosen to be located in the first Brillouin zone, thereby transforming the $3N \times 3N$ matrix ${\rm D}_{IJ}$ to one $3n \times 3n$ matrix ${\rm D}_{ij} (\bf q)$ for each~$\b q$, where $n$ is the number of atoms in the primitive unit cell. The phase factor ${\rm e}^{\im \b q \cdot (\b R_i^0 - \b R_j^0)}$ does not change the eigenvalues of ${\rm D} (\b q)$ and is sometimes omitted to simplify the formulas~\cite{BornHuang}. It will however prove useful to include the phasefactor in the following.
 
-\subsection{Cyclic Boundary Conditions and Supercell Approximation}
+\subsection{Finite simulation cells}
 In the previous section, we did not specify the system beyond requiring periodic boundary conditions, and implicitly assumed an infinite crystal in the limit $N \to \infty$ without boundaries. In practice we introduce Born-von Karman cyclic boundary conditions~\cite{born2013atomtheorie}, as already done in Sec.\,\ref{sec:theory.periodic.1} for the description of electronic states, but reintroduce them here in a slightly more general fashion.
 
 \newthought{We define the boundary conditions} for the nuclear problem such that
@@ -481,6 +303,11 @@ with $m_i \in \mathds Z$ such that $\b q_{\bf m}$ is an element of the first Bri
 %	\sum_{\b L \in \mathds V_{\rm sc}} {\rm e}^{- \im \b q_{\bf m} \cdot \b L} {\rm D}_{i \b 0 \alpha, j \b L \beta}~.
 %	\label{eq:D^S(q).2}
 %\end{align}
+
+\REM{Supercell Convergence and Ledermann's Theorem}
+
+\REM{Supercell imposes effective cutoff on the range of the force constants -> effect on spectrum, Maradudin, Ledermann}
+\REM{Supercell convergence as manifestation of Ledermann's theorem!}
 
 
 \subsection{Interpolation to non-commensurate q-points}
@@ -604,159 +431,99 @@ and likewise for $\b p_{i \b L}$.
 
 \newthought{By using the property $\omega_s = \omega_{\-s}$}, the Hamiltonian can be brought into the form given earlier in Eq.\,\eqref{eq:Hamiltonian.aa}, and the time evolution of the operators is given by Eq.\,\eqref{eq:a_s(t)}.
 
-\subsection{Supercell Convergence and Ledermann's Theorem}
-
-\REM{Supercell imposes effective cutoff on the range of the force constants -> effect on spectrum, Maradudin, Ledermann}
-\REM{Supercell convergence as manifestation of Ledermann's theorem!}
-
-\section{Mode Projection}
-
-\begin{align}
-	u_b (\b q, t) 
-		& = \sum_{i \b L} \sqrt{M_I} \, \b e_{s, i\b L} (\b q) \cdot \b U_{i \b L} (t) ~,
-	\label{eq:mode.projection.u_b(q)}
-\end{align}
-and likewise for $p_b (\b q, t)$ with $\set{\dot{\b U}_{i \b L}}$ instead of $\set{\b U_{i \b L}}$.
-
-\newpage
-
-\section{Geometry Optimization for Crystals}
-\subsection{Lattice optimization at zero temperature}
-\newthought{The task of geometry optimization} is to find a local minimum $\b R^0$ of the potential-energy surface $\mathcal{V} (\b R)$. From a mathematical point of view, $\mathcal V (\b R)$ is a function of the $3N$ coordinates $\b R$, or, when lattice degrees of freedom are included, $3N + 9$ degrees of freedom.\footnote{When rotations are rigorously excluded, the lattice only has 6~degrees of freedom.} Summarizing the positional degrees of freedom including the lattice in the generalized coordinate
-\begin{align}
-x 
-= \left( R_{0}^x, R_{0}^y, \ldots, R_{N}^z; a^x_{~1}, a^x_{~2}, \ldots, a^z_{~3} \right) ~,
-\label{eq:opt.x}
-\end{align}
-we seek to find
-\begin{align}
-x^0 = \arg \min_x \mathcal V (x)~.
-\end{align}
-The standard tools to solve this problem are very well covered in the standard reference~\cite{nocedal2006}. The technical pitfalls when optimizing lattices are thoroughly discussed in~\cite{pfrommer1997,Tadmor1999}.
-A slightly different approach as the ones discussed in the references listed above is taken in the molecular simulations code \textsc{FHI-aims}~\cite{FHI-aims}. We therefore review this approach shortly in the following.
-
-\newthought{Many optimization algorithms} working with gradients as input are based on the Newton descent method in which the target function is locally approximated by a second-order Taylor expansion~\cite{nocedal2006}. In our case, we denote the generalized force as $f_x$ and the Hessian matrix of second derivatives as ${\rm H}_{xx'}$, where
-\begin{align}
-f_x 
-&= - \partial_x \mathcal V (x)~,
-\label{eq:opt.f} \\
-{\rm H}_{xx'} 
-&= \partial_x \partial_{x'} \mathcal{V} (x)~.
-\label{eq:opt.H}
-\end{align}
-Assuming that $f_x$ and ${\rm H}_{xx'}$ are known, the neighborhood of a configuration $x$ can be written to second order in a displacement $s_x$ as\marginnote{Sum convention \mbox{$s_x f_x \equiv \sum_x s_x f_x$} is implied.}
-\begin{align}
-m(x + s_x) 
-= \mathcal V (x) - s_x f_x + \halb \fD s_x \fD {\rm H}_{xx'} \fP s_{x'}~.
-\label{eq:opt.m}
-\end{align}
-The minimum of this function is given by
-\begin{align}
-s_x = {\rm H}_{xx'}^{-1} \fD f_{x'}~,
-\end{align}
-which is the essence of the Newton method. One beneficial property of the Newton method is that the exact Hessian $\rm H$ is not required to be known, and one can find approximate matrices $\rm B$ that yield good results. Replacing the exact $\rm H$ by an approximate matrix $\rm B$ is known as the \emph{quasi}-Newton method.
-Typically, an initial approximate Hessian $\rm B^0$ is chosen to be of simple form,~e.\,g.,~a constant times unit matrix, or based on some simpler model~\cite{lindh1995}. The initial guess is then updated during the optimization, for example by means of the  Broyden–Fletcher–Goldfarb–Shanno (BFGS) algorithm.\footnote{BFGS update for the estimated Hessian $B^i$ from step $i$ to $i+1$:
-	\begin{align*}
-	{\rm B}^{i + 1}_{xx'}
-	= {\rm B}^i_{xx'} 
-	& + \frac{{\rm B}^i_{x\fP{y}} s^i_{\fP{y}} s^i_{y'} {\rm B}^i_{y'x'} }{s^i_{\fP y} {\rm B}^i_{yy'} s^i_{y'}}
-	- \frac{\delta f^i_{\fP x} \delta f^i_{x'}}{\delta f^i_{\fP x} s^i_{x'}}~,
-	\end{align*}
-	with $\delta f^i = f^{i+1} - f^i$.
-}
-The configuration $x$ is updated according
-\begin{align}
-x^{i+1} = x^i + s_x^i = ~x^i + {\rm B}^i_{xx'} f^i_{x'}.
-\end{align}
-
-\newthought{If the lattice degrees of freedom} are represented by the Cartesian components $a^\alpha_i$ of the lattice vectors, the generalized force on the lattice is given by\marginnote{Symbolically:
-	$$
-	f_a 
-	= -\frac{\partial \mathcal V}{\partial a} 
-	= -V \underset{\fD \sigma}{\underbrace{\frac{1}{V}\frac{\partial \mathcal V}{\partial \varepsilon}}} \underset{\itp a}{\underbrace{\frac{\partial \varepsilon}{\partial a}}}~.
-	$$
-}
-\begin{align}
-f_a = - V \sigma \itp{a}~,
-\end{align}
-where $V = \det a$ is the unit cell volume, $\sigma$ is the $3 \times 3$~stress tensor, and $a$ is the lattice matrix.\footnote[][0em]{The lattice matrix is the collection of lattice vectors $\set{\b a_i}$,
-	\begin{align}
-	a = \begin{pmatrix} \b a_1, \b a_2, \b a_3 \end{pmatrix}~.
-	\end{align}
-}
-For non-cubic systems, a diagonal Hessian matrix $B^0 = c \mathds 1$ will therefore produce steps proportional to the reciprocal cell $\itp{a}$ which, among other things, can break the space-group symmetry of the crystal. This behavior can be avoided by defining the initial Hessian as
-\begin{align}
-B^0 = c \itp{a} a^{-1}~,
-\label{eq:opt.B0.new}
-\end{align}
-where $c$ is a numerical constant. This particular choice of $B^0$ can be viewed as making the Hessian diagonal in the native coordinate system of the lattice,~i.\,e.,~when deformations of the lattice are viewed as strain transformations in terms of the strain tensor $\varepsilon$. By the choice of the Hessian according to Eq.\,\eqref{eq:opt.B0.new}, the resulting steps $s^i_a$ will mimic such strain transformations early during the optimization:
-\begin{align}
-a^{i + 1} = a^i + s_a^i = (\mathds 1 + \varepsilon_s^i) a^i~.
-\end{align}
-Another detail that must be taken into account is that updates of the lattice necessarily have to keep the relative atomic positions expressed in the crystal basis,~i.\,e.,~their fractional coordinates, unchanged. The ideas outlined in this section have been implemented in~\textsc{FHI-aims} and the performance compared to the previous implementation is shown in Fig.\,\ref{fig:ltrm}.
-\begin{marginfigure}
-	\includegraphics[width=\textwidth]{./data/plots/relaxation/ltrm.pdf}
-	\caption{Residual force component as function of the relaxation steps, before (\texttt{trm\_2012}) and after (\texttt{trm}) optimizing the relaxation routine in \textsc{FHI-aims} according to the considerations presented in this chapter.}
-	\label{fig:ltrm}
-\end{marginfigure}
-The non-systematic decrease of the residual force observed in the previous implementation (\texttt{trm\_2012}) was due to spurious distortions of the lattice and dislocations of the atomic arrangements generated by keeping their \emph{Cartesian} instead of \emph{fractional} positions unchanged during the lattice update. These artifacts are absent in the updated implementation (\texttt{trm}). The force convergence is generally faster and better behaved.
-
-
-\subsection{Lattice optimization at finite temperature: Lattice expansion}
-\newthought{At finite temperatures},\marginnote{The volume expansion is usually measured in terms of the \emph{thermal expansion coefficient} $\alpha (T)$~\cite{Kittel1969}
-	\begin{align}
-	\alpha (T) = \frac{1}{3 V} \frac{\partial V (T)}{\partial T}~.
-	\label{eq:lattice.expansion.coefficient}
-	\end{align}
-}
-the nuclear motion results in dynamical pressure $p(T)$ and the lattice reacts by deforming,
-\begin{align}
-a (T) = \bm ( \mathds 1 + \varepsilon (T) \bm ) a_0~,
-\label{eq:lattice.T}
-\end{align}
-where $a_0$ is the 0\,K static lattice matrix, and $a (T)$ is the lattice at finite temperature given in terms of a \emph{strain transformation} $\varepsilon (T)$. 
-The energy change per unit volume $\d W$ of a system subject to an infinitesimal strain deformation $\varepsilon$ is defined as
-\begin{align}
-\d W = \sigma_{\alpha}^{~\beta} \d \varepsilon^{\alpha}_{~\beta}~,
-\label{eq:stress.strain}
-\end{align}
-where $\sigma$ is the \emph{stress tensor} of the system. The lattice $a(T)$ in thermal equilibrium will therefore be the lattice that minimizes the stress $\sigma$ in Eq.\,\eqref{eq:stress.strain}. Depending on the crystal symmetry~\cite{Nye1985}, the strain tensor $\varepsilon$ has up to six independent values. Equation\,\eqref{eq:stress.strain} therefore poses a six-dimensional optimization problem at a given temperature~$T$ which can be solved for example by coupling the system to a barostat and performing an $NPT$ simulation~\CITE{NPT}. In the language of the previous chapter, the lattice $a(T)$ is then given as a time or ensemble average $\braket{a}_{(p, T)}$ at thermodynamic conditions $(p, T)$. In practice however, this approach is quite inefficient and suffers from large noise, especially in the system sizes typically available to \emph{ab initio} MD simulations~\CITE{ai NPT}.
-
-\newthought{An approximate solution} to the six-dimensional optimization problem of finding the finite temperature lattice $a (T)$ can be  found by the following rationale: We assume that the thermodynamic pressure at a given volume $V$ and temperature $T$ is given as
-\begin{align}
-p (V, T) \approx \frac{N k_{\rm B} T}{V} + p_{\rm pot} (V_0, T) + p_{\rm int}(V)~,
-\label{eq:eos.p}
-\end{align}
-where $p_{\rm kin} (T) = N k_{\rm B} T / V$ is the kinetic pressure, and $p_{\rm pot} (V_0, T)$ is the potential part of the pressure in the system at reference volume $V_0$ which stems from the nuclear interaction $\mathcal V (\b R)$~\cite{Hansen1990}. The last term, $p_{\rm int} (V)$, is an internal pressure induced by the volume change. We assume that $p_{\rm int} (V)$ mainly stems from the lattice and is not temperature dependent. It can therefore be obtained from an equation of state parametrized at 0\,K, for example the \emph{Vinet equation}~\cite{Vinet1987}:
-\begin{align}
-p_{\rm int} (V) 
-&= \frac{3 B_0}{X^2} (1-X) {\rm e}^{\eta (1-X)} \label{eq:p.Vinet} \quad\text{with} \\ 
-X &= \left[\frac{V}{V_0}\right]^{\frac{1}{3}}
-\quad\text{and}\quad
-\eta 
-= \frac{3}{2} \left(B_0' - 1 \right)~,
-\end{align}
-where $V_0$ is the volume, $B_0$ is the bulk modulus, and $B_0' = \partial B_0 / \partial p$ is the isothermal pressure derivative of the bulk modulus. All these three parameters are obtained for the static lattice and we neglect their temperature dependence. Once the full parametrization of Eq.\,\eqref{eq:eos.p} is known, the temperature-dependent volume $V_{\rm min} (T)$ is found by requiring zero pressure. The resulting pressure $p_{\rm int} (V_{\rm min})$ can be used to find the static reference lattice $a(T)$ by optimizing the geometry while applying the external pressure $p_{\rm relax} = - p_{\rm int} (V_{\rm min})$ as depicted in Fig.\,\ref{fig:lattice.expansion}.
-\begin{marginfigure}
-	\includegraphics[width=\textwidth]{./data/sketches/lattice_expansion.jpg}
-	\caption{Determination of relaxation pressure to obtain lattice at finite temperature. Dots denote volumes used to parametrize Eq.\,\eqref{eq:p.Vinet}.}
-	\label{fig:lattice.expansion}
-\end{marginfigure}
-The lattice $a (T)$ obtained this way will then generate the static pressure contribution $p_{\rm int}$ which compensates the dynamical contributions stemming from kinetic and potential energy.
-
-\newthought{The procedure goes as follows}:
-\begin{enumerate}
-	\item To parametrize $p_{\rm int} (V)$, calculate a $p(V)$ curve for different volumes\footnote{For non-cubic systems or systems with internal degrees of freedom, use a set of external pressures $p_{\rm relax}$ to obtain a set of reference structures at different volumes $V_{p_{\rm relax}}$ by geometry optimization.} and fit the Vinet equation of state given by Eq.\,\eqref{eq:p.Vinet} to obtain $(V_0, B_0, B_0')$.
-	\item Perform MD simulation at $V_0$ and target temperature $T$ until pressure $p_{\rm pot} (V_0, T)$ is sufficiently  converged.
-	\item Minimize Eq.\,\eqref{eq:eos.p} with respect to volume to find $V_{\rm min} = \arg \min_V p (V, T)$.
-	\item Predict pressure $p_{\rm relax} = - p_{\rm int} (V_{\rm min})$ and obtain a reference structure of correct volume $V_{\rm min}$ by applying this pressure during a geometry optimization, see Fig.\,\ref{fig:lattice.expansion}. The lattice of this structure will satisfy $\det a(T) = V_{\rm min}$.
-\end{enumerate}
-
-\newthought{After the lattice $a (T)$ is obtained}, it should be verified that the pressure $p (V_{\rm min}, T)$ is indeed minimized. If a significant residual pressure $p_{\rm residual}$ persists it can be added to the pressure used for relaxation until self consistence is reached.
-
 \newpage
 
 \section{Statistical Mechanics and Molecular Dynamics}
+\REM{After discussing the harmonic approx ...}
+\subsection{Classical Limit}
+The classical limit of the nuclear Schr\"odinger equation~\eqref{eq:BOSE} is usually performed by writing the nuclear wavefunction $\chi_s ({\bf R}, t)$ in terms of a real amplitude $A_s({\bf R}, t)$ and a \emph{classical action function} $S_s({\bf R}, t)$~\cite{Dirac1981,Landau2013,Marx2009}
+\begin{align}
+\chi_s({\bf R}, t) = A_s({\bf R}, t) \, {\rm e}^{\frac{\im}{\hbar} S_s({\bf R}, t)}~.
+\label{eq:class.1}
+\end{align}
+The Schr\"odinger equation then yields a set of differential equations for $A_s$ and $S_s$ that, in the limit $\hbar \to 0$, go over to a \emph{Hamilton-Jacobi} equation for the action $S_s$,
+\begin{align}
+\frac{\partial S_s}{\partial t} + \mathcal H \left({\bf R}, {\bf P}\right)
+= 0~,
+\label{eq:HamiltonJacobi}
+\end{align}
+where ${\bf P} = ({\bf P}_1, \ldots) \equiv ({\bf \nabla}_1 S_s, \ldots)$ denotes the conjugate momenta and $\mathcal H$ is the \emph{classical} Hamilton function\footnote{We use the terms \emph{Hamilton function} and \emph{Hamiltonian} interchangeably in the following.} corresponding the to the operator in Eq.\,\eqref{eq:BOSE}, from which the equations of motion for the nuclei can be obtained:
+\begin{align}
+\dot{{\bf P}}_I 
+= -\frac{\partial \mathcal H}{\partial {\bf R}_I}
+\quad\implies\quad M_I \ddot{\bf R}_I
+= -\frac{\partial \mathcal V}{\partial {\bf R}_I}~.
+% \equiv - {\bf F}_I~.
+\end{align}
+The negative gradient of the Born-Oppenheimer potential, 
+$-\partial \mathcal V / \partial {\bf R}_I$ is the force ${\bf F}_I$ acting on atom $I$ which can be obtained via the Hellmann-Feynmann theorem,~cf.~Sec.\,\ref{sec:HellmannFeynman}.
+
+\newthought{An alternative viewpoint} that is more instructive can be taken by invoking the \emph{Ehrenfest theorem}~\cite{Ehrenfest1927,Basdevant2007}. The statement is that
+\begin{align}
+\frac{\d}{\d t} \left\langle {\bf P}_I \right\rangle_{\chi_s}
+= \left\langle
+- \frac{\partial \mathcal{V}}{\partial {\bf R}_I}
+\right\rangle_{\chi_s}~,
+\label{eq:ehrenfest.de1}
+\end{align}
+where $\langle \cdot \rangle_{\chi_s}$ denotes an expectation value taken with respect to the state $\chi_s$. This expression differs only slightly from the classical counterpart, which would read
+\begin{align}
+\frac{\d}{\d t} \left\langle {\bf P}_I \right\rangle
+= \left.
+- \frac{\partial \mathcal{V}}{\partial {\bf R}_I}
+\right\vert_{{\bf R} = \langle {\bf R} \rangle}~.
+\label{eq:ehrenfest.de2}
+\end{align}
+The difference comes from the fact that, in quantum mechanics, the expectation value of a function of an observable does not equal the function of its expectation. In mathematical terms, we have
+\begin{align}
+\delta f  \equiv 
+f \bm ( \langle x \rangle \bm{)} 
+- 
+\bm{\langle} f (x) \bm{\rangle}
+\neq 0
+~,
+\label{eq:ehrenfest.delta1}
+\end{align}
+where $x = {\bf R}_I$ denotes the space coordinate, %for notional simplicity, 
+$f$ is some function of the observable   $x$, and $\delta f$ measures the difference between the classical and the quantum expectation value. Ehrenfest's argument is that this difference becomes negligible when the state is sufficiently peaked around some value $x_0$. Expanding $f$ around the expectation value of $x$ denoted by $x_0 \equiv \langle x \rangle$, we have
+\begin{align}
+f(x) = f \bm ( \langle x \rangle \bm{)}  
++ (x - \langle x \rangle) \, f' \bm ( \langle x \rangle \bm{)}
++ \frac{1}{2} (x - \langle x \rangle)^2 \, f'' \bm ( \langle x \rangle \bm{)}
++ \cdots~.
+\label{eq:ehrenfest.f2}
+\end{align}
+It follows that the $f'$ term vanishes when the expectation value is taken, and
+\begin{align}
+\langle f(x) \rangle 
+= f \bm ( \langle x \rangle \bm{)}  
++ \frac{1}{2} \Delta x^2 f'' \bm ( \langle x \rangle \bm{)}
++ \cdots~,
+\label{eq:ehrenfest.f3}
+\end{align}
+where $\Delta x^2 = \bm{\langle} (x - \langle x \rangle)^2 \bm{\rangle}$ measures the variance of the underlying distribution,~i.\,e.~the width of the wavepacket. The relative error between the classical and quantum expectation value is %readily computed to be 
+therefore proportional to the variance $\Delta x^2$,
+\begin{align}
+\left\lvert \frac{\delta f}{f \bm ( \langle x \rangle \bm{)}} \right\rvert
+= \frac{1}{2} \Delta x^2 \left\lvert \frac{f'' \bm ( \langle x \rangle \bm{)}}{f \bm ( \langle x \rangle \bm{)}} \right\rvert
++ \mathcal{O}(\Delta x^3)~.
+\label{eq:ehrenfest.delta2}
+\end{align}
+This estimation is general and holds for any observable $f$.
+By crudely estimating the dimension of the wavepacket in terms of the thermal de Broglie-wavelength, we find
+\begin{align}
+\Delta x^2 
+\sim \left( \frac{h}{P} \right)^2
+\sim \frac{h^2}{MT}~,
+\label{eq:ehrenfest:dimension}
+\end{align}
+where $h$ is Planck's constants, $M$ is the atomic mass, and $T$ is temperature. This estimate gives support to the intuitive assumption that we can expect the classical limit to work better the heavier the atoms and the higher the temperature.
+Let us now set $f(x) \hat = -\partial \mathcal V / \partial {\bf R}_I$, then another important conclusion can be drawn from Eq.\,\eqref{eq:ehrenfest.delta2}: For a harmonic potential $\mathcal V ({\bf R}) = \mathcal V^{(2)} ({\bf R})$, where derivatives higher than second order vanish, the classical and quantum mechanical expectation values \emph{coincide}. The quantum mechanical expectation value of position will therefore evolve in the same time-periodic fashion as a classical particle in a harmonic well.
+
+\REM{this approach can only be validated by computing observables and compare the results. One can safely say that this approach has been used successfully in a plethora of studies, while additional care must be taken at low temperature and/or systems with light atoms, especially hydrogen-bonded systems~\CITE{MD-Review?,MarklandCeriotti,Litman,pHexperiment}.}
+
+\REM{to here}
+
 There exist plenty of excellent books on statistical mechanics, some of which are included in the references~\cite{Phillies2012,Tuckerman,Schrodinger1989}. This chapter merely serves to recall the most important notions necessary for computing properties of materials under thermodynamic conditions, and introduce the notation used in the following remainder of the work. In particular, the concepts of \emph{ensemble}, \emph{state}, and \emph{averages} are briefly introduced.
 
 \newthought{A thermodynamic \emph{ensemble}} can be viewed as a complete list of all allowed \emph{states} $\Gamma$ of a system of particles, where the state is an instantaneous snapshot of all microscopic variables~\cite{Phillies2012}. In classical statistical mechanics, these variables are the positions~$\b R$ and momenta~$\b P$. A particular configuration $\Gamma = \set{\b R, \b P}$ is called \emph{phase-space point}, and the phase space is the collection of all points $\Gamma$ compliant with external constraints.\footnote{Easiest example of an external constraint: If the particles are confined in a box with impenetrable walls, the possible position $\b R$ are necessarily confined to that box. Other constraints comprise total energy, particle number, and more.} To each state $\Gamma$, a statistical weight $f (\Gamma)$ is assigned, where $f$ is called the \emph{distribution function}. A thermodynamic ensemble is completely specified by the set of external constraints under which the mechanical system evolves, and the associated statistical weight function $f$.
@@ -899,3 +666,102 @@ and a stochastic force proportional to a white-noise kernel $\eta (t)$. With the
 
 \TODO{Other approaches: Nose-Hoover, Berendsen vr, svr, ...}
 \TODO{Some plots}
+
+\section{Classical harmonic dynamics and harmonic mapping}
+
+\begin{align}
+u_b (\b q, t) 
+& = \sum_{i \b L} \sqrt{M_I} \, \b e_{s, i\b L} (\b q) \cdot \b U_{i \b L} (t) ~,
+\label{eq:mode.projection.u_b(q)}
+\end{align}
+and likewise for $p_b (\b q, t)$ with $\set{\dot{\b U}_{i \b L}}$ instead of $\set{\b U_{i \b L}}$.
+
+\subsection{Classical harmonic dynamics}
+
+The classical dynamics generated by the harmonic Hamiltonian in Eq.\,\eqref{eq:ha.H2} is generated by the canonical equations of motion for the normal coordinates $\set{ u_s, p_s}$,
+\begin{align}
+\dot{u}_s
+& = \frac{\partial \mathcal H}{\partial p_s}
+= p_s~,\quad\text{and}\quad
+\dot{p}_s
+= - \frac{\partial \mathcal H}{\partial u_s}
+= - \omega^2_s u_s~.
+\end{align}
+The solution is given in terms of plane waves,
+\begin{subequations}
+	\begin{align}
+	u_s (t) 
+	&= \phantom{\omega_s} \sqrt 2 A_s \sin (\omega_s t + \varphi_s)~,\\
+	p_s (t) 
+	&= \sqrt 2 \omega_s A_s \cos (\omega_s t + \varphi_s)~,
+	\end{align}
+\end{subequations}
+where $A_s$ and $\varphi_s$ are chosen based on the initial conditions. It can be beneficial to define the normal coordinates in terms of the complex amplitudes $a^{(\dagger)}_s$ ~, \REM{update convention}
+\begin{subequations}
+	\label{eq:u_s.amplitudes}
+	\begin{align}
+	u_s (t) 
+	&\equiv \frac{1}{\sqrt{2 \omega_s}} \left[ \D a_s (t) + \fD a_s (t) \right]~, \\
+	p_s (t) 
+	&\equiv \im \sqrt{\frac{\omega_s}{2}} \left[ \D a_s (t) - \fD a_s (t) \right]~,
+	\end{align}
+\end{subequations}
+with %\marginnote{It follows $\sqrt{\omega_s} A_s = \lvert a_s (t) \rvert~.$}
+\begin{subequations}
+	\label{eq:a_s(t)}
+	\begin{align}
+	a_s (t) 
+	& = {\rm e}^{- \im \omega_s t} a_s (0)~, \\
+	a_s (0)
+	& = \sqrt{\omega_s} A_s {\rm e}^{- \im \varphi_s}~.
+	\end{align}
+\end{subequations}
+The Hamiltonian in terms of the complex amplitudes $a^{(\dagger)}_s$ then reads\marginnote{The relation to quantum mechanics is achieved by replacing the complex numbers $a^{(\dagger)}_s$ with the operators $\sqrt{\hbar} \hat{a}^{(\dagger)}_s$ fulfilling the canonical commutation relations $$\left[ \fD{\hat{a}}_{\fP s}, \D{\hat a}_{s'} \right] = \delta_{ss'}~.$$}
+\begin{align}
+\mathcal{H}(\b a, \D{\b a})
+&= \sum_s \omega_s \D a_s\fD  a_s~.
+\label{eq:Hamiltonian.aa}
+\end{align}
+
+\subsection{Harmonic sampling}
+
+\begin{align}
+\b U_I (t) 
+& = \frac{1}{\sqrt{M_I}} \sum_s \sqrt 2 A_s \b e_{sI} \sin (\omega_s t + \varphi_s)
+\end{align}
+
+by analogy with QM in thermal equilibrium\marginnote{Bose function ($\beta = 1 / k_{\mathrm{B}} T$): $$n_{\mathrm{B}}(\omega, T)=\frac{1}{\mathrm{e}^{\, \beta \hbar \omega}-1}~.$$}
+\begin{align}
+E
+=\sum_{s} \hbar \omega_{s}\left(n_{\mathrm{B}}\left(\omega_{s}, T\right)+\frac{1}{2}\right)
+\end{align}
+
+\marginnote{In the classical limit $k_{\rm B} T \gg \hbar \omega_s$, this yields the equipartition +$E_s = 3 \kb T$.}
+\begin{align}
+\braket{A_{s}^{2}}
+= \frac{\hbar}{\omega_{s}}\left(n_{\mathrm{B}}(\omega, T)+\frac{1}{2}\right)
+\underset{k_{\rm B} T \gg \hbar \omega_s}{\longrightarrow} \frac{k_{\rm B} T}{\omega_s^2}
+\end{align}
+
+\subsection{Mode projection}
+
+Express amplitude $a_s (t)$ in terms of the atomic displacements $\set{\b U_I (t)}$ and velocities $\set{\dot{\b U}_I (t)}$ \TODO{Check units!}
+The inverse relation between the amplitudes $a_s$ in terms of the conjugate variables $\set{u_s, p_s}$ is
+\begin{align}
+a_s (t) = \sqrt{\frac{\omega_s}{2}} u_s (t) + \frac{\im}{\sqrt{2 \omega_s}} p_s (t)
+\end{align}
+with
+\begin{subequations}
+	\label{eq:mode.projection.u_s}
+	\begin{align}
+	u_s (t) 
+	& = \sum_I \sqrt{M_I} \b e_{sI} \cdot \b U_I (t) ~,
+	%\\
+	%	p_s (t)
+	%	    & = \sum_I \sqrt{M_I} \b e_{sI} \cdot \dot{\b U}_I (t) %\\
+	%	\implies
+	%	a_s (t) 
+	%	    &= \sum_I \sqrt{M_I} \b e_{sI} \cdot \left[ \b U_I(t) + \frac{\im}{\omega_s} \dot{\b U}_I (t) \right]
+	\end{align}
+\end{subequations}
+and likewise for $p_s (t)$ with $\set{\dot{\b U}_I}$ instead of $\set{\b U_I}$.

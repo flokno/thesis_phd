@@ -37,6 +37,7 @@ Thesis Review
 - [ ] `Geometry optimization` -> methods?
 - [ ] Formel checken und anpassen
 - [ ] Maradudin symmetries?
+- [ ] group velocities
 
 ## 3 | Heat Transport
 
@@ -45,3 +46,4 @@ Thesis Review
 - [ ] rechne dann analytisch harmonisc/stoerungstheorie
 - [ ] diskutiere dann fit an dynamik
 - [ ] diskutiere scaling der lebenszeiten und interpolation
+- [ ] vibes: speichere modenenergien statt besetzungen!
