@@ -1,3 +1,33 @@
+\chapter{Notation}
+\epigraph{\singlespacing \it ``It is useful to start by declaring one's notations.''}{Paul Gartner}
+
+\section{Indexation}
+Throughout the thesis, we use the following symbols to index and label the appearing quantities:
+\begin{itemize}
+\item $\alpha, \beta, \gamma, \delta$: Cartesian component indices,
+\item $\mu, \nu, \rho$: crystal-basis component indices,
+\item $I, J$: atom number labels,
+\item $i, j$: atom labels in the primitive cell,
+\item ${\bf L}, {\bf K}$: lattice vectors.
+\end{itemize}
+We use a contra/covariant notation for vector components following Sands~\cite{Sands2002}, with an Einstein convention,
+$$
+{\bf x} \cdot {\bf y} = \sum_\alpha x^\alpha y_\alpha \equiv x^\alpha y_\alpha~,
+$$
+for sums over vector components. In particular, we have
+\begin{itemize}
+	\item ${\bf R}_I = (R^1_I, R^2_I, R^3_I)$: Atomic position of atom $I$ in a Cartesian components.
+	\item $\set{{\bf a}_\mu}$: crystal basis with lattice vectors ${\bf a}_\mu$.
+	\item $\set{{\bf a}^\mu}$: dual basis with inverse lattice vectors ${\bf a}^\mu$ fulfilling ${\bf a}^\mu \cdot {\bf a}_\nu = \delta^\mu_{~\nu}$. The cartesian components of $\set{{\bf a}^\mu}$ and $\set{{\bf a}_\mu}$ are related by
+	$$ a^{\mu}_{~\alpha} = (\itp a)_{\mu \alpha} ~.$$
+	\item ${\bf R}_I = R^\mu_I {\bf a}_\mu$: Atomic position of atom $I$ expressed in the crystal basis $\set{{\bf a}_\mu}$. The are $R_I^\mu$ are also called \emph{scaled} or \emph{fractional} components. They are related to the Cartesian components $R_I^\alpha$ by $R_I^\mu = {\bf a}^\mu \cdot {\bf R}_I = (\itp a)_{\mu \alpha} R_I^{\alpha}$ by the identity stated above.
+	\item ${\bf L} = L^\mu {\bf a}_\mu$: A lattice vector $\bf L$ expressed in the crystal basis $\set{{\bf a}_\mu}$. 
+	\item $\set{{\bf b}^\mu}$: reciprocal lattice vectors fulfilling ${\bf b}^\mu \cdot {\bf a}_\nu = 2 \pi \delta^\mu_{~\nu}$,~i.\,e.,~${\bf b}^\mu = 2\pi\,{\bf a}^\mu$ with the crystallographic convention of including the factor $2 \pi$ in the basis defintion.
+	\item ${\bf q} = q_\mu {\bf b}^\mu$: phonon wave vector in the reciprocal lattice basis $\set{{\bf b}^\mu}$.
+	\item ${\bf q} \cdot {\bf R}_I = 2 \pi \, q_\mu R^\mu_I$: scalar product of wave vector with atomic position.
+\end{itemize}
+We remind the reader that in Cartesian space, indices can be lowered and raised arbitrarily,~i.\,e.,~the components $x^\alpha$ and $x_\alpha$ are equal.
+
 \chapter{Bloch Theorem and Brillouin Zone}
 \epigraph{\singlespacing \it ``The idea of periodicity in the reciprocal space is useless but, I think, harmless.''}{Paul Gartner}
 \section{Bloch Theorem}
