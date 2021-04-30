@@ -35,6 +35,7 @@ Thesis Review
 
 ## 2 | Lattice Dynamics
 
+- [ ] L <-> M fuer Bravais-Vektoren?
 - [x] erste Chp. 3, dann wird klarer was gebraucht wird
 - [x] - [ ] Struktur?
     - [ ] HA
@@ -46,7 +47,9 @@ Thesis Review
 - [ ] Formel checken und anpassen
 - [ ] Maradudin symmetries?
 - [ ] group velocities
-- [ ] ${\bf e_s} \to e^\alpha_s ~\text{oder}~ e_{s, \alpha}$?
+- [x] ${\bf e_s} \to e^\alpha_s ~\text{oder}~ e_{s, \alpha}$?
+- [ ] Notation aus Kapitel 1 anpassen in Bezug auf BvK/Periodizitaet.
+- [x] intrinsic/extrinsic periodicity
 
 ## 3 | Heat Transport
 

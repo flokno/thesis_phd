@@ -6,11 +6,11 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
 ## To Do's
 
 - [ ] Chapter 2 -> Marcin/Chris
-    - [ ] Maradudin
+    - [ ] Maradudin?
 - [ ] Review Yair -> Chris
+- [ ] Anharmoncity chapter (short version of paper)
 - [ ] Methods and benchmark chapter
     - [ ] Finite time effect estimation!
-- [ ] Anharmoncity chapter (short version of paper)
 - [ ] Results chapter
     - [ ] Overview materials
     - [ ] thermal conductivity for trustworthy materials
@@ -18,6 +18,8 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
         - [ ] compare theory (?)
         - [ ] vs. sigma
     - [ ] Dynamical effects
+- [ ] Outlook
+    - [ ] Schnet
 
 # Initial Plan
 
