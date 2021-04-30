@@ -3,12 +3,12 @@ which can be solved in the framework of DFT, and a nuclear problem %given by Eq.
 that describes the dynamical properties of the nuclei. This was achieved by means of the Born-Oppenheimer approximation where electron-nucleus interactions beyond a parametric dependence on each other are neglected~\cite{BornOppenheimer}.
 
 \newthought{We will now approach} the description of the nuclear dynamics from two sides: First, we introduce the \emph{harmonic approximation} in which the nuclear Schr\"odinger equation is solved for an approximated potential in terms of vibrational eigenmodes,~i.\,e.,~\emph{phonons}. 
-Second, we treat the nuclei as \emph{classical} particles on the full, non-truncated Born-Oppenheimer potential. This will lead to the formulation of \emph{ab initio molecular dynamics} (aiMD). In a last step, we will connect the two approaches to allow for extracting phonon properties from MD simulations.
-As no electron will appear anymore, $N \equiv N_{\rm Nuc}$ will henceforth denote the number of nuclei in the system of interest, and we denote the Born-Oppenheimer potential simply as \emph{the} potential, $\mathcal V ({\bf R})$.
+Second, we treat the nuclei as \emph{classical} particles on the full, non-truncated Born-Oppenheimer potential $E^{\rm BO} ({\bf R})$. This will lead to the formulation of \emph{ab initio molecular dynamics} (aiMD). In a last step, we will connect the two approaches to allow for extracting phonon properties from MD simulations.
+As no electron will appear anymore, $N \equiv N_{\rm Nuc}$ will henceforth denote the number of nuclei in the system of interest, and we denote the Born-Oppenheimer potential simply as \emph{the} potential, $E^{\rm BO} ({\bf R}) \equiv \mathcal V ({\bf R})$.
 
-\newthought{To set the stage, we recall the Schr\"odinger equation} for the nuclear wavefunctions $\chi_s ({\bf R})$ initially defined in Eq.\,\eqref{eq:chi2},
+\newthought{To set the stage, we recall the Schr\"odinger equation} for the nuclear wavefunction $\chi ({\bf R})$ corresponding to the electronic ground state as initially defined in Eq.\,\eqref{eq:chi2},
 \begin{align}
-\left( \mathcal T + \mathcal V ({\bf R}) - E_s \right) \chi_s ({\bf R})
+\left( \mathcal T + \mathcal V ({\bf R}) - E \right) \chi ({\bf R})
 = 0~,
 \label{eq:BOSE}
 \end{align}
@@ -437,18 +437,18 @@ and likewise for $\b p_{i \b L}$.
 \section{Statistical Mechanics and Molecular Dynamics}
 \REM{After discussing the harmonic approx ...}
 \subsection{Classical Limit}
-The classical limit of the nuclear Schr\"odinger equation~\eqref{eq:BOSE} is usually performed by writing the nuclear wavefunction $\chi_s ({\bf R}, t)$ in terms of a real amplitude $A_s({\bf R}, t)$ and a \emph{classical action function} $S_s({\bf R}, t)$~\cite{Dirac1981,Landau2013,Marx2009}
+The classical limit of the nuclear Schr\"odinger equation~\eqref{eq:BOSE} is usually performed by writing the nuclear wavefunction $\chi ({\bf R}, t)$ in terms of a real amplitude $A({\bf R}, t)$ and a \emph{classical action function} $S({\bf R}, t)$~\cite{Dirac1981,Landau2013,Marx2009}
 \begin{align}
-\chi_s({\bf R}, t) = A_s({\bf R}, t) \, {\rm e}^{\frac{\im}{\hbar} S_s({\bf R}, t)}~.
+\chi({\bf R}, t) = A({\bf R}, t) \, {\rm e}^{\frac{\im}{\hbar} S({\bf R}, t)}~.
 \label{eq:class.1}
 \end{align}
-The Schr\"odinger equation then yields a set of differential equations for $A_s$ and $S_s$ that, in the limit $\hbar \to 0$, go over to a \emph{Hamilton-Jacobi} equation for the action $S_s$,
+The Schr\"odinger equation then yields a set of differential equations for $A_s$ and $S$ that, in the limit $\hbar \to 0$, go over to a \emph{Hamilton-Jacobi} equation for the action $S$,
 \begin{align}
-\frac{\partial S_s}{\partial t} + \mathcal H \left({\bf R}, {\bf P}\right)
+\frac{\partial S}{\partial t} + \mathcal H \left({\bf R}, {\bf P}\right)
 = 0~,
 \label{eq:HamiltonJacobi}
 \end{align}
-where ${\bf P} = ({\bf P}_1, \ldots) \equiv ({\bf \nabla}_1 S_s, \ldots)$ denotes the conjugate momenta and $\mathcal H$ is the \emph{classical} Hamilton function\footnote{We use the terms \emph{Hamilton function} and \emph{Hamiltonian} interchangeably in the following.} corresponding the to the operator in Eq.\,\eqref{eq:BOSE}, from which the equations of motion for the nuclei can be obtained:
+where ${\bf P} = ({\bf P}_1, \ldots) \equiv ({\bf \nabla}_1 S, \ldots)$ denotes the conjugate momenta and $\mathcal H$ is the \emph{classical} Hamilton function\footnote{We use the terms \emph{Hamilton function} and \emph{Hamiltonian} interchangeably in the following.} corresponding the to the operator in Eq.\,\eqref{eq:BOSE}, from which the equations of motion for the nuclei can be obtained:
 \begin{align}
 \dot{{\bf P}}_I 
 = -\frac{\partial \mathcal H}{\partial {\bf R}_I}
@@ -461,13 +461,13 @@ $-\partial \mathcal V / \partial {\bf R}_I$ is the force ${\bf F}_I$ acting on a
 
 \newthought{An alternative viewpoint} that is more instructive can be taken by invoking the \emph{Ehrenfest theorem}~\cite{Ehrenfest1927,Basdevant2007}. The statement is that
 \begin{align}
-\frac{\d}{\d t} \left\langle {\bf P}_I \right\rangle_{\chi_s}
+\frac{\d}{\d t} \left\langle {\bf P}_I \right\rangle_{\chi}
 = \left\langle
 - \frac{\partial \mathcal{V}}{\partial {\bf R}_I}
-\right\rangle_{\chi_s}~,
+\right\rangle_{\chi}~,
 \label{eq:ehrenfest.de1}
 \end{align}
-where $\langle \cdot \rangle_{\chi_s}$ denotes an expectation value taken with respect to the state $\chi_s$. This expression differs only slightly from the classical counterpart, which would read
+where $\langle \cdot \rangle_{\chi}$ denotes an expectation value taken with respect to the state $\chi$. This expression differs only slightly from the classical counterpart, which would read
 \begin{align}
 \frac{\d}{\d t} \left\langle {\bf P}_I \right\rangle
 = \left.
@@ -561,7 +561,7 @@ The microcanonical distribution function is defined as
 \begin{align}
 f_E (\Gamma) = \frac{1}{\mathcal{Z}_E} \delta {\bm (} H (\Gamma) - E {\bm )}~,
 \end{align}
-where the microcanonical partition sum $\mathcal{Z}_E$ is a normalizing factor for $f_E$. The partition function $f_E$ encapsulates the underlying postulate of the microcanonical ensemble,~i.\,e.,~that any point in phase space $\Gamma$ yielding an energy $H (\Gamma)$ in a thin interval around the target energy $E$ 
+where the microcanonical partition function $\mathcal{Z}_E$ is a normalizing factor for $f_E$. The distribution function $f_E$ encapsulates the underlying postulate of the microcanonical ensemble,~i.\,e.,~that any point in phase space $\Gamma$ yielding an energy $H (\Gamma)$ in a thin interval around the target energy $E$ 
 %, $H (\Gamma) \in [E, E + \d E]$, 
 will be realized with the same likelihood.
 
