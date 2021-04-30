@@ -70,6 +70,7 @@
 % comments:
 \definecolor{dblue}{RGB}{31,119,180}
 \newcommand{\REM}[1]{\textcolor{red}{{\bf #1}}}
+\newcommand{\MOVE}[1]{\textcolor{red}{{\bf Move:} #1}}
 \newcommand{\CITE}[1]{\textcolor{dblue}{{\bf [CITE: #1]}}}
 % \newcommand{\FK}[1]{\textcolor{blue}{{\bf #1 }}}
 
@@ -184,43 +185,43 @@
 % r.9 introduction
 \cleardoublepage
 \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
-\chapter{Introduction}
-\input{./parts/1_intro.tex}
+%\chapter{Introduction}
+%\input{./parts/1_intro.tex}
 
 %%
 % Start the main matter (normal chapters)
 \mainmatter
 
 \addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
-\part{Theory and Methods}
-
-\chapter{The Many Body Problem}
-\input{./parts/2_dft.tex}
-
-% \newpage
-
+%\part{Theory and Methods}
+%
+%\chapter{The Many Body Problem}
+%\input{./parts/2_dft.tex}
+%
+%% \newpage
+%
 \chapter{Nuclear and Lattice Dynamics}
 \input{./parts/2_lattice_dynamics.tex}
 
 \chapter{Heat Transport}
 \input{./parts/2_heat_transport.tex}
 
-\chapter{Anharmonicity}
-\input{./parts/anharmonicity.tex}
-
-% \part{Benchmarks?}
-
-% \part{Results}
-\chapter{Screening Materials for Anharmonicity}
-\input{./parts/screening.tex}
-
-\chapter{Thermal Conductivities for Strongly Anharmonic Compounds}
-\input{./parts/results.tex}
-
-
-\chapter{Conclusion}
-
-\chapter{Outlook}
+%\chapter{Anharmonicity}
+%\input{./parts/anharmonicity.tex}
+%
+%% \part{Benchmarks?}
+%
+%% \part{Results}
+%\chapter{Screening Materials for Anharmonicity}
+%\input{./parts/screening.tex}
+%
+%\chapter{Thermal Conductivities for Strongly Anharmonic Compounds}
+%\input{./parts/results.tex}
+%
+%
+%\chapter{Conclusion}
+%
+%\chapter{Outlook}
 
 \cleardoublepage
 \phantomsection

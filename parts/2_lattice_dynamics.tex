@@ -8,13 +8,13 @@ As no electron will appear anymore, $N \equiv N_{\rm Nuc}$ will henceforth denot
 
 \newthought{To set the stage, we recall the Schr\"odinger equation} for the nuclear wavefunctions $\chi_s ({\bf R})$ initially defined in Eq.\,\eqref{eq:chi2},
 \begin{align}
-\left( \mathcal T^{\rm Nuc} + \mathcal V ({\bf R}) - E_s \right) \chi_s ({\bf R})
+\left( \mathcal T + \mathcal V ({\bf R}) - E_s \right) \chi_s ({\bf R})
 = 0~,
 \label{eq:BOSE}
 \end{align}
 where
 \begin{align}
-\mathcal  T^{\rm Nuc}
+\mathcal  T
 = \sum_I \frac{- \hbar^2}{2 M_I} \frac{\partial^2}{\partial {\bf R}_I^2}~,
 \label{eq:Tnuc2}
 \end{align}
@@ -78,11 +78,11 @@ The condition in Eq.\,\eqref{eq:ha.positive} is satisfied when the harmonic forc
 		\label{eq:D}
 \end{align}
 where Eq.\,\eqref{eq:D} defines the \emph{dynamical matrix} $\rm D$.
-Using these coordinates, the Hamiltonian assumes the form
+Expressed in the mass-reduced coordinates ${\bf u} = \set{{\bf u}_I}$ and ${\bf p} = \set{{\bf p}_I}$, the approximated Hamiltonian reads
 \begin{align}
 	\begin{split}
-		\mathcal{H}({\bf p}, {\bf u})
-			&= \mathcal T^{\rm Nuc} ({\bf p}) + \mathcal{V}^{(2)} ({\bf u})\\
+		\mathcal{H}^{(2)}({\bf p}, {\bf u})
+			&= \mathcal T ({\bf p}) + \mathcal{V}^{(2)} ({\bf u})\\
 			&= \halb \sum_I {\bf p}_I^2 + 
 				\halb \sum_{\substack{I, J \\ \alpha, \beta}}
 					D_{I \alpha, J \beta}
@@ -90,39 +90,37 @@ Using these coordinates, the Hamiltonian assumes the form
 	\end{split}
 	\label{eq:ha.H1}
 \end{align}
-As required earlier, the dynamical matrix $\rm D$ is a positive definite matrix. Furthermore, we see from Eq.\,\eqref{eq:FC2} that $\rm D$ is symmetric in the $3N$ coordinates $(I, \alpha)$ by the differentiability of the underlying potential $\mathcal V ({\bf R})$,
+
+\newthought{As required earlier, the dynamical matrix $\rm D$ is a positive definite matrix.} Furthermore, we see from Eq.\,\eqref{eq:FC2} that $\rm D$ is symmetric in the $3N$ coordinates $(I, \alpha)$ by the differentiability of the underlying potential $\mathcal V ({\bf R})$,
 \begin{align}
 	D_{I \alpha, J \beta} = D_{J \beta, I \alpha}~.
 	\label{eq:D.symmetric}
 \end{align}
-The eigenvalues of $\rm D$ will therefore be real and positive, and the eigenvectors will be real and orthogonal. We denote the eigenvalues as $\omega_s^2$ and the normalized eigenvectors as ${\bf e}_s$, where $s$ is the \emph{mode} label. $\omega_s$ will have the unit of a frequency and  will be called \emph{eigenfrequency} in the following. The dynamical matrix elements can be rewritten in therms of the eigenvectors and eigenvalues as
-\begin{subequations}
-\label{eq:D_IJ}
+The eigenvalues of $\rm D$ will therefore be real and positive, and the eigenvectors will be real and orthogonal. We denote the eigensolutions as \emph{modes} labeled by $s$, with eigenvalues as $\omega_s^2$, and the normalized eigenvectors as ${\bf e}_s = \set{{\bf e}_{s, I}}$. \MOVE{ $\omega_s$ will have the unit of a frequency and  will be called \emph{eigenfrequency} in the following.} The dynamical matrix elements can be rewritten in therms of the eigenvectors and eigenvalues as
 \begin{align}
-	\sum_{J \beta}
-		D_{I \alpha, J \beta} \, e_{s, J \beta} 
-			&= \omega^2_s \, e_{s, I \alpha}~,~\text{or} 
-			\label{eq:sum_D_IJ} \\
+%	\sum_{J \beta}
+%		D_{I \alpha, J \beta} \, e_{s, J \beta} 
+%			&= \omega^2_s \, e_{s, I \alpha}~,~\text{or} 
+%			\label{eq:sum_D_IJ} \\
 		D_{I \alpha, J \beta}
-			&= \sum_s \omega^2_s \, e_{s, I \alpha} e_{s, J \beta}~.
-			\label{eq:D_IJs}
+			&= \sum_s \omega^2_s \, e_{s, I \alpha} e_{s, J \beta}~,
+			\label{eq:D_IJ}
 \end{align}
-\end{subequations}
-Since the eigenvectors fulfill
+and the eigenvectors fulfill
 \begin{align}
 	\sum_{I \alpha} e_{s, I \alpha} e_{s', I \alpha} = \delta_{s s'}
 	\quad \text{and} \quad
-	\sum_{s} e_{s, I \alpha} e_{s, J \beta} = \delta_{IJ} \delta_{\alpha \beta}~,
+	\sum_{s} e_{s, I \alpha} e_{s, J \beta} = \delta_{IJ} \delta_{\alpha \beta}~.
 	\label{eq:completeness.e_s}
 \end{align}
-we can rewrite the Hamiltonian in Eq.\,\eqref{eq:ha.H1} by using the dynamical matrix elements as defined in Eq.\,\eqref{eq:D_IJs}, so that
+Using the dynamical matrix elements expressed in terms of eigenvectors and eigenvalues,~Eq.\,\eqref{eq:D_IJ}, the harmonic Hamiltonian as defined in Eq.\,\eqref{eq:D_IJ} can be rewritten as
 \begin{align}
-	\mathcal{H}( {\bf p},  {\bf u})
+	\mathcal{H}^{(2)}({\bf p},  {\bf u})
 		&= \halb \sum_s p_s^2 + 
 		\halb \sum_{s} \omega_s^2	\, u_s^2~.
 \label{eq:ha.H2}
 \end{align}
-Here, we implicitly defined the $3N$ \emph{normal coordinates} $u_s$ and their conjugate momenta $p_s$ via the unitary transformation\footnote{Using vector notation $${\bf e}_{s, I} \cdot {\bf u}_I = \sum_{\alpha} e_{s, I \alpha} u_I^\alpha~.$$}
+Here, we implicitly defined the $3N$ \emph{normal coordinates} $u_s$ and their conjugate momenta $p_s$ via the orthogonal transformation\footnote{Using vector notation $${\bf e}_{s, I} \cdot {\bf u}_I = \sum_{\alpha} e_{s, I \alpha} u_I^\alpha~.$$}
 \begin{align}
 	u_s
 		&= \sum_{I} {\bf e}_{s, I} \cdot {\bf u}_{I}~,\quad\text{and}

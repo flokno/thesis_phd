@@ -1,7 +1,25 @@
 First principles thermal transport in strongly anharmonic semiconductors and insulators
 ===
 
-# Plan
+# Current Plan
+
+## To Do's
+
+- [ ] Chapter 2 -> Marcin/Chris
+    - [ ] Maradudin
+- [ ] Review Yair -> Chris
+- [ ] Methods and benchmark chapter
+    - [ ] Finite time effect estimation!
+- [ ] Anharmoncity chapter (short version of paper)
+- [ ] Results chapter
+    - [ ] Overview materials
+    - [ ] thermal conductivity for trustworthy materials
+        - [ ] Compare experiment
+        - [ ] compare theory (?)
+        - [ ] vs. sigma
+    - [ ] Dynamical effects
+
+# Initial Plan
 
 ## KW 15: analyze and plot
 
@@ -18,12 +36,12 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
 
 ### 13.04.
 
-- [ ] update plots:
-    - [ ] thermal conductivity vs. experiment, w/ and w/o interpolation
-    - [ ] thermal conductivity vs. anharmonicity, w/ and w/o interpolation
-- [ ] List materials that are far away from exp.
-- [ ] List materials for which interpolation goes wrong
-- [ ] Choose materials for further analysis
+- [x] update plots:
+    - [x] thermal conductivity vs. experiment, w/ and w/o interpolation
+    - [x] thermal conductivity vs. anharmonicity, w/ and w/o interpolation
+- [x] List materials that are far away from exp.
+- [x] List materials for which interpolation goes wrong
+- [x] Choose materials for further analysis
     - [ ] CuI
     - [ ] KCaF3
     - [ ] AgI?
@@ -90,7 +108,7 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
 
 ### 26.04.
 
-- [ ] Treffen Matthias
+- [x] Treffen Matthias
 
 - [ ] results
 
