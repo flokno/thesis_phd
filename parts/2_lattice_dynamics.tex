@@ -415,6 +415,10 @@ D_{I \alpha, J \beta}
 &= \sum_s \omega^{2}_{s \vphantom I} \, \fD e_{s, I \alpha} e^\ast_{s, J \beta}~.
 \end{align}
 
+\REM{Group velocities?}
+\REM{Space group symmetries: at least cite Maradadudin.}
+
+
 
 \newpage
 
@@ -515,7 +519,7 @@ additional care must be taken at low temperatures and for systems with light ato
 
 \subsection{Phase space and ergodic hypothesis}
 
-A thermodynamic \emph{ensemble} can be viewed as a complete list of all allowed \emph{states} $\Gamma$ of a system of particles, where the state is an instantaneous snapshot of all microscopic variables~\cite{Phillies2012}. In classical statistical mechanics, these variables are the positions~$\b R$ and momenta~$\b P$. A particular configuration $\Gamma = \set{\b R, \b P}$ is called \emph{phase-space point}, and the phase space is the collection of all points $\Gamma$ compliant with external constraints.\footnote{Easiest example of an external constraint: If the particles are confined in a box with impenetrable walls, the possible position $\b R$ are necessarily confined to that box. Other constraints comprise total energy, particle number, and more.} To each state $\Gamma$, a statistical weight $f (\Gamma)$ is assigned, where $f$ is called the \emph{distribution function}. A thermodynamic ensemble is completely specified by the set of external constraints under which the mechanical system evolves, and the associated statistical weight function $f$.
+A thermodynamic \emph{ensemble} can be viewed as a complete list of all allowed \emph{states} $\Gamma$ of a system of particles, where the state is an instantaneous snapshot of all microscopic variables~\cite{Phillies2012}. In classical statistical mechanics, these variables are the $N$ positions~${\bf R} = ({\bf R}_1, \ldots, {\bf R}_{N})$ and momenta~${\bf P} = ({\bf P}_1, \ldots, {\bf P}_{N})$.\footnote{We denote by $N$ either the number of atoms in a system of finite size, or, in periodic systems, the number of atoms in the simulation cell, $N_{\rm sc}$.} A particular configuration $\Gamma = \set{\b R, \b P}$ is called \emph{phase-space point}, and the phase space is the collection of all points $\Gamma$ compliant with external constraints.\footnote{The simplext example of an external constraint: If the particles are confined in a box with impenetrable walls, the possible position $\b R$ are necessarily confined to that box. Other constraints comprise total energy, particle number, and more.} To each state $\Gamma$, a statistical weight $f (\Gamma)$ is assigned, where $f$ is called the \emph{distribution function}. A thermodynamic ensemble is completely specified by the set of external constraints under which the mechanical system evolves, and the associated statistical weight function $f$.
 
 \newthought{Statistical averages of phase-space functions} can be obtained by averaging over all permissible states $\Gamma$ with the statistical weight given by the distribution function, $f (\Gamma)$. The \emph{phase-space average} of a generic phase-space function $A (\Gamma)$ is defined as
 \begin{align}
@@ -527,16 +531,17 @@ A thermodynamic \emph{ensemble} can be viewed as a complete list of all allowed 
 An alternative approach towards computing averages is the concept of time averaging. The \emph{time average} of a phase-space function is defined as
 \begin{align}
   \braket{A}_t
-    = \lim\limits_{t \to \infty} \frac{1}{t} \int_0^t \d t' ~ A {\bm (} \Gamma(t') {\bm )}~.
+    = \lim\limits_{t \to \infty} \frac{1}{t} \int_0^t \d t' ~ A {\bm (} \Gamma_{t'} {\bm )}~,
   \label{eq:time.average}
 \end{align}
+where $\Gamma_t = \set{ {\bf R} (t), {\bf P} (t)}$ denotes a phase-space point at time $t$ after evolving from an initial point $\Gamma_0$ as explained in the next section.
 A system for which the phase-space and the time average are identical is said to be \emph{ergodic}. The \emph{ergodic hypothesis} states that this is true for most systems with non-pathological particle interaction $\mathcal V$. Albeit being virtually impossible to prove rigorously, this hypothesis is the underlying idea of \emph{molecular dynamics} (MD) simulations, where the statistical behavior of a system is assessed by choosing a suitable initial condition and propagating it in time by numerically solving the equations of motion.
 
 \newthought{In this work}, we use two thermodynamic ensembles: the microcanonical, $NVE$ for short, where the total energy $E$ of the system is conserved, and the canonical ($NVT$), where the system can be viewed as coupled to a bath of temperature $T$. The latter is mimicking more realistic experimental conditions, where usually the temperature and not the total energy of the system can be controlled. Technically, experiments are performed rather at constants pressure $p$ instead of constant volume, and the correct ensemble to describe such a situation is the isothermal-isobaric one commonly denoted as $NPT$. In practice however, the canonical ensemble is easier to simulate and is a good approximation to the $NPT$ ensemble when the system size is not too small~\cite[p.\,134]{Tuckerman}
 
 
 \subsection{Microcanonical Ensemble}
-The microcanonical ensemble is characterized by three conserved extensive quantities: particle number $N$, system volume $V$, and total energy $E$. The total energy of a given microstate,~i.\,e.,~the configuration of particles and their momenta represented by the phase-space point $\Gamma = \set{\b R, \b P}$, is given by the Hamiltonian of the system, $H (\Gamma)$. 
+The microcanonical ensemble is characterized by three conserved extensive quantities: particle number $N$, system volume $V$, and total energy $E$. The total energy of a given microstate,~i.\,e.,~the configuration of particles and their momenta represented by the phase-space point $\Gamma = \set{\b R, \b P}$, is given by the Hamiltonian of the system, $\mathcal H (\Gamma)$. 
 %The central postulate of statistical mechanics is that each microstate is equally probable. Therefore, any point in phase space $\Gamma$ yielding an energy in a thin interval around the target energy, $H (\Gamma) \in [E, E + \d E]$, is realized with the same likelihood. Taking particle number $N$ and system volume $V$ to be fixed and non-controllable, the expectation value of a phase-space observable $A$ in an ensemble of energy $E$ is defined as
 %\begin{align}
 %	\braket{A}_E 
@@ -547,29 +552,29 @@ The microcanonical ensemble is characterized by three conserved extensive quanti
 % \newthought{The microcanonical distribution function} is defined as
 The microcanonical distribution function is defined as
 \begin{align}
-f_E (\Gamma) = \frac{1}{\mathcal{Z}_E} \delta {\bm (} H (\Gamma) - E {\bm )}~,
+f_E (\Gamma) = \frac{1}{\mathcal{Z}_E} \delta {\bm (} \mathcal H (\Gamma) - E {\bm )}~,
 \end{align}
-where the microcanonical partition function $\mathcal{Z}_E$ is a normalizing factor for $f_E$. The distribution function $f_E$ encapsulates the underlying postulate of the microcanonical ensemble,~i.\,e.,~that any point in phase space $\Gamma$ yielding an energy $H (\Gamma)$ in a thin interval around the target energy $E$ 
+where the microcanonical partition function $\mathcal{Z}_E$ is a normalizing factor for $f_E$. The distribution function $f_E$ encapsulates the underlying postulate of the microcanonical ensemble,~i.\,e.,~that any point in phase space $\Gamma$ yielding an energy $\mathcal H (\Gamma)$ in a thin interval around the target energy $E$ 
 %, $H (\Gamma) \in [E, E + \d E]$, 
 will be realized with the same likelihood.
 
-\newthought{The time evolution of a system} is governed by the Hamiltonian which generates an energy conserving propagation of a phase space point $\Gamma (t) = \set{\b R (t), \b P (t)}$ in terms of Hamilton's equations,
+\newthought{The time evolution of a system} is governed by the Hamiltonian $\mathcal H$ which generates an energy conserving propagation of a phase space point $\Gamma_t = \set{\b R (t), \b P (t)}$ in terms of Hamilton's equations,
 \begin{align}
-	\dot{\b R}_I (t) = \frac{\partial H}{\partial \b P_I} \quad\text{and}\quad
-	\dot{\b P}_I (t) = -\frac{\partial H}{\partial \b R_I}~.
+	\dot{\b R}_I (t) = \frac{\partial \mathcal H (t)}{\partial \b P_I} \quad\text{and}\quad
+	\dot{\b P}_I (t) = -\frac{\partial \mathcal H (t)}{\partial \b R_I}~.
 	\label{eq:stat.eom}
 \end{align}
-The temporal evolution of an observable $B$ is then given by the Liouville equation~\cite{Tuckerman}
+The temporal evolution of a phase-space observable $B (\Gamma_t) \equiv B(t)$ is then given by the Liouville equation~\cite{Tuckerman}
 \begin{align}
-	\dot{B} = \set{B, H} \equiv \im L B~,
+	\dot{B} (t) = \set{B (t), \mathcal H (t)} \equiv \im \mathcal L B (t)~,
 	\label{eq:Liouville}
 \end{align}
-where $L$ is the \emph{Liouville operator} defined by its action according to Eq.\,\eqref{eq:Liouville}, and $\set{\cdot , \cdot}$ denotes the \emph{Poisson bracket}.\marginnote{
+where $\mathcal L$ is the \emph{Liouville operator} defined by its action according to Eq.\,\eqref{eq:Liouville}, and $\set{\cdot , \cdot}$ denotes the \emph{Poisson bracket}.\marginnote{
 The Poisson bracket is defined by
 \begin{align}
-	\set{B, H}
-		= \sum_{I, \alpha} \frac{\partial B}{\partial R_I^\alpha} \frac{\partial H}{\partial P_I^\alpha}
-			- \frac{\partial B}{\partial P_I^\alpha} \frac{\partial H}{\partial R_I^\alpha}
+	\set{B, \mathcal H}
+		= \sum_{I, \alpha} \frac{\partial B}{\partial R_I^\alpha} \frac{\partial \mathcal H}{\partial P_I^\alpha}
+			- \frac{\partial B}{\partial P_I^\alpha} \frac{\partial \mathcal H}{\partial R_I^\alpha}
 %		= \sum_{I, \alpha} \frac{\partial B}{\partial R_I^\alpha} \dot{R}_I^\alpha
 %			+ \frac{\partial B}{\partial P_I^\alpha} \dot{P}_I^\alpha~.
 	\label{eq:Poisson}
@@ -577,10 +582,10 @@ The Poisson bracket is defined by
 }
 The Liouville equation is formally solved by
 \begin{align}
-	B (t) = {\rm e}^{\im L t} B(0)~,
+	B (t) = {\rm e}^{\im \mathcal L t} B(0)~,
 	\label{eq:B.time.evolution}
 \end{align}
-the operator ${\rm e}^{\im L t}$ is therefore called the \emph{time evolution operator} or \emph{classical propagator}.
+the operator ${\rm e}^{\im \mathcal L t}$ is therefore called the \emph{time evolution operator} or \emph{classical propagator}.
 %\paragraph{Ergodic hypothesis}
 %Under the assumption that a system initially prepared in a configuration with correct energy dynamically evolves through the entire permissible phase space, the phase-space average defined in Eq.\,\eqref{eq:phase.space.expectation} can be written in terms of a \emph{time average} defined as
 %\begin{align}
@@ -600,7 +605,7 @@ In practice, the equations of motion are solved numerically, for example by the 
 \end{align}
 \label{eq:VelocityVerlet}
 \end{subequations}
-The velocity Verlet algorithm introduces an error of order $\delta t^4$ in the integration step, but has two important properties mitigating a negative impact on obervables: First, a velocity Verlet integration step is time-reversible, an important prerequisite for long-term stability of the total energy for symmetry reasons. Second, the velocity Verlet map from $t$ to $t + \delta t$ has the property of being \emph{symplectic}~\cite[p.\,101]{Tuckerman}. This means that the discrete time propagation is not guaranteed to preserve the energy along the trajectory $\Gamma(t)$, but there exists a Hamiltonian $\tilde{H} (\Gamma, \delta t)$ which is conserved exactly and fulfills $\tilde{H (\Gamma, \delta t)} \to H(\Gamma)$ for vanishing timestep $\delta t \to 0$~\cite[p.\,121]{Tuckerman}. The symplectic property is formalized in the ``shadowing theorem'', which states that existence of a ``shadow Hamiltonian'' $\tilde H$ ensures that errors introduced by using a finite time step are bounded~\CITE{see tuckerman}.
+The velocity Verlet algorithm introduces an error of order $\delta t^4$ in the integration step, but has two important properties mitigating a negative impact on obervables: First, a velocity Verlet integration step is time-reversible, an important prerequisite for long-term stability of the total energy for symmetry reasons. Second, the velocity Verlet map from $t$ to $t + \delta t$ has the property of being \emph{symplectic}~\cite[p.\,101]{Tuckerman}. This means that the discrete time propagation is not guaranteed to preserve the energy along the trajectory $\Gamma_t$, but there exists a Hamiltonian $\tilde{\mathcal H} (\Gamma, \delta t)$ which is conserved exactly and fulfills $\tilde{\mathcal H (\Gamma, \delta t)} \to \mathcal H(\Gamma)$ for vanishing timestep $\delta t \to 0$~\cite[p.\,121]{Tuckerman}. The symplectic property is formalized in the ``shadowing theorem'', which states that existence of a ``shadow Hamiltonian'' $\tilde{\mathcal H}$ ensures that errors introduced by using a finite time step are bounded~\CITE{see tuckerman}.
 
 \subsection{Canonical ensemble}
 The canonical ensemble is characterized by the two extensive variables particle number $N$ and volume $V$, and the intensive quantity temperature $T$. It can be viewed as representing a system in contact with an infinite thermal bath of temperature $T$, where heat can be exchanged via a weak coupling.
