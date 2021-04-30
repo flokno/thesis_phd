@@ -96,7 +96,7 @@ Expressed in the mass-reduced coordinates ${\bf u} = \set{{\bf u}_I}$ and ${\bf 
 	D_{I \alpha, J \beta} = D_{J \beta, I \alpha}~.
 	\label{eq:D.symmetric}
 \end{align}
-The eigenvalues of $\rm D$ will therefore be real and positive, and the eigenvectors will be real and orthogonal. We denote the eigensolutions as \emph{modes} labeled by $s$, with eigenvalues as $\omega_s^2$, and the normalized eigenvectors as ${\bf e}_s = \set{{\bf e}_{s, I}}$. \MOVE{ $\omega_s$ will have the unit of a frequency and  will be called \emph{eigenfrequency} in the following.} The dynamical matrix elements can be rewritten in therms of the eigenvectors and eigenvalues as
+The eigenvalues of $\rm D$ will therefore be real and positive, and the eigenvectors will be real and orthogonal. We denote the eigensolutions as \emph{modes} labeled by $s$, with eigenvalues as $\omega_s^2$, and the normalized eigenvectors as ${\bf e}_s = \set{{\bf e}_{s, I}}$. The dynamical matrix elements can be rewritten in therms of the eigenvectors and eigenvalues as
 \begin{align}
 %	\sum_{J \beta}
 %		D_{I \alpha, J \beta} \, e_{s, J \beta} 
@@ -140,7 +140,7 @@ The Hamiltonian expressed in terms of the normal coordinates, Eq.\,\eqref{eq:ha.
 	= 0
 	\label{eq:ha.SE.2}
 \end{align}
-Since the Hamiltonian is a sum of terms, each depending on one coordinate only, the total nuclear wavefuntion $\chi$ can be separated into a product of wavefunctions for each mode,
+Since the Hamiltonian is a sum of terms, each depending on one coordinate only, the total nuclear wavefuntion $\chi$ can be separated into a product of wavefunctions for each mode~\cite[p.\,175]{BornHuang},
 \begin{align}
 	\chi({\bf u}) = \prod_{s} \chi_s (u_s)~.
 	\label{eq:ha.chi}
@@ -151,7 +151,7 @@ We end up with a set of $3N$ uncoupled equations, one for each mode $s$:
 		= 0~,
 	\label{eq:ha.SE.single}
 \end{align}
-where the total energy of the nuclei is the sum of each mode contribution $E = \sum_s E_s$. Equation \eqref{eq:ha.SE.single} is the familiar equation for a harmonic oscillator of frequency $\omega_s$~\cite{Dirac1981}. Permissible solutions are labeled by the integer $n_s \in \mathds N_0$ and the eigenvalue $E_s$ depends on $n_s$ via
+where the total energy of the nuclei is the sum of each mode contribution $E = \sum_s E_s$. Equation \eqref{eq:ha.SE.single} is the familiar equation for a harmonic oscillator of frequency $\omega_s$~\cite{Dirac1981}, thereby establishing $\omega_s$ as the \emph{eigenfrequency} of the mode $s$. Permissible solutions are labeled by the integer $n_s \in \mathds N_0$ and the eigenvalue $E_s$ depends on $n_s$ via
 \begin{align}
 	E_s(n_s) = \hbar \omega_s \left( n_s + \halb \right)~.
 	\label{eq:E_s}
@@ -161,7 +161,6 @@ The state of the entire system is therefore specified by the $3N$ quantum number
 	E ({\bf n}) = \sum_s \hbar \omega_s \left( n_s + \halb \right)~.
 \end{align}
 This derivation is generally valid for a system of $N$ particles described by a potential-energy surface of which a (local) minimum ${\bf R}^0$, and the matrix of second derivatives at this configuration, $\Phi_{IJ}$, is known. The thermodynamic properties of such a system of harmonic oscillators follow from this spectrum in straighforward fashion~\cite{BornHuang}.
-
 
 
 
