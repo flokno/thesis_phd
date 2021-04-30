@@ -164,8 +164,18 @@ This derivation is generally valid for a system of $N$ particles described by a 
 
 
 
-\subsection{Periodic Systems}
-As already mentioned in Sec.~\ref{sec:theory.periodic.1}, the crystalline state is characterized by a periodic long-range order described the Bravais vectors ${\bf L} = L^\mu {\bf a}_\mu$, where $\set{{\bf a}_\mu}$ is the crystal basis and $L_\mu$ are integers.\footnote{Notation: We index components in the crystal basis $\set{{\bf a}_\mu}$ with $\mu, \nu$, as opposed to Cartesian components indexed by $\alpha, \beta~.$}
+\section{Extended Systems}
+The expressions presented in the previous section are generally valid for a system of $N$ nuclei. Macroscopic materials, however, consist of $\sim 10^{23}$ atoms. From a microscopic point of view, this number is virtually infinite, and mathematically described by the \emph{bulk limit} $N \to \infty$. The most common way to deal with this bulk limit is to impose \emph{periodic boundary conditions} on a finite region of space,~i.\,e.,~a \emph{generating volume}, and normalize the quantities of interest to this volume~\cite{BornHuang}. This procedure can be adopted for extended system such as liquids, amorphous solids such as glasses, and crystals. Since we are interested in the special case of crystals with an inherent periodic long-range order throughout this work, it is beneficial to first introduce the concept of a \emph{crystal lattice} that describes a bulk crystal in terms of a \emph{unit cell} arranged periodically in three dimensional space~\cite{Sands1969}. The periodic boundary condition is later on imposed on a generating volume containing several unit cells,~i.\,e.,~a \emph{supercell}.
+
+\subsection{Periodic crystals}
+% As already mentioned in Sec.~\ref{sec:theory.periodic.1},
+\newthought{The crystalline state is characterized by a periodic long-range order} 
+described the Bravais vectors 
+\begin{align}
+	{\bf L} = L^\mu {\bf a}_\mu~,
+	\label{eq:L_Bravais}
+\end{align}
+where $\set{{\bf a}_\mu}$ are the lattice vectors of the crystal, and $L_\mu$ are integers.\footnote{Notation: We index components in the crystal basis $\set{{\bf a}_\mu}$ with $\mu, \nu$, as opposed to Cartesian components indexed by $\alpha, \beta~.$}
 We define this symmetry as follows:
 Let ${\bf R}^0 = \set{{\bf R}_I^0}$ be the configuration of atoms in the local minimum of interest, and let ${\bf R}^{0 \prime} = \set{{\bf R}^{0 \prime}_{I}}$ denote the configuration obtained by moving all atoms by a Bravais vector ${\bf L}$,
 \begin{align}
@@ -190,6 +200,7 @@ The final requirement for translational invariance of the potential is that the 
 	\mathcal{V} \left( {\bf R}' = \set{{\bf R}_{I} + {\bf L}} \right)
 	&= \mathcal{V}({\bf R} = \set{{\bf R}_{I}} ) 
 	\quad\text{for all}\quad {\bf L} = L^\mu {\bf a}_\mu~.
+	% \quad\text{with}\quad \set{L^\mu \in \mathds{N}_0}
 	\label{eq:inv.V}
 \end{align}
 This effectively corresponds to a permutation of the displacements of the atoms, $U_I \to U_{I'}$ according to $P_{\bf L}$. Figure\,\ref{fig:translation.permutation} shows a one-dimensional depiction of the relation between discrete translation by Bravais vectors and the permutation map.
@@ -217,7 +228,7 @@ Second, the forceconstants $\Phi_{I \alpha, J \beta}$ can be written as $\Phi_{i
 		= \Phi_{i {\bf L} \alpha, j {\bf K} \beta}~,
 	\label{eq:fc.sym.1}
 \end{align}
-where $\b M$ again denotes an arbitrary Bravais vector. The same translational invariance obviously holds for the dynamical matrix ${\rm D}_{IJ}.$\marginnote{Remember that ${\rm D}_{IJ} = \frac{1}{\sqrt{M_I M_J}} \Phi_{IJ}$.} It can therefore be written as
+where $\b M = M^\mu {\bf a}_\mu$ denotes an arbitrary Bravais vector. The translational invariance therefore also holds for the dynamical matrix ${\rm D}_{IJ}.$\footnote{Remember that ${\rm D}_{IJ} = \frac{1}{\sqrt{M_I M_J}} \Phi_{IJ}$.} In turn, the dynamical matrix can be written in terms of a Fourier series as
 \begin{align}
 	D_{i \b L \alpha, j \b K \beta}  
 		& = \frac{1}{N_{\b q}} \sum_{\b q} {\rm e}^{- \im \b q \cdot (\b R_{i \b L}^0 - \b R_{j \b K}^0)} {D}_{i \alpha, j \beta} (\b q)~,
