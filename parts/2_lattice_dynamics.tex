@@ -613,7 +613,7 @@ The canonical ensemble is characterized by the two extensive variables particle 
 In analogy to the previous section, we define the \emph{canonical distribution function} at inverse temperature $\beta = 1 / k_{\rm B} T$
 \begin{align}
 	f_\beta (\Gamma) 
-		= \frac{1}{\mathcal{Z}} {\rm e}^{- \beta H (\Gamma)}~,
+		= \frac{1}{\mathcal{Z}} {\rm e}^{- \beta \mathcal H (\Gamma)}~,
 	\label{eq:f.canonical}
 \end{align}
 where the  canonical partition sum $\mathcal{Z}$ normalizes $f_\beta$. 
@@ -623,7 +623,13 @@ where the  canonical partition sum $\mathcal{Z}$ normalizes $f_\beta$.
 %\end{align}
 
 \newthought{As we have seen earlier}, a time-independent Hamiltonian generates energy-preserving dynamics via the equations of motion given in Eq.\,\eqref{eq:stat.eom}. To perform a simulation at non-constant energy, the coupling to a thermal bath therefore has to be incorporated explicitly into the equations of motion. One of the many ways to achieve this is via the \emph{Langevin equation}~\cite{Vanden2006} in which the change of momentum is modified,
-\marginnote{
+\begin{align}
+	\dot{\b P}_I (t) 
+		&= \b F_I (t) - \gamma \b P_I (t) + \b F^{\rm stochastic}_I (t)~.
+	\label{eq:stat.Langevin}
+\end{align}
+This equation describes a perturbation of the nuclei induced by a velocity-dependent friction proportional to a constant $\gamma$,%\marginnote{From Eq.\,\eqref{eq:stat.Langevin} follows that $\gamma$ has the unit of inverse time.}
+and a stochastic force proportional to a white-noise kernel $\eta (t)$.\footnote{
 	% \normalsize
 	The stochastic force is given by:
 	\begin{align*}
@@ -634,13 +640,7 @@ where the  canonical partition sum $\mathcal{Z}$ normalizes $f_\beta$.
 	\end{align*}
 	It replenishes the kinetic energy dissipated by the friction proportinoal to $\gamma$, see discussion in Ref.\,\cite[p.\,328]{Phillies2012}.
 }
-\begin{align}
-	\dot{\b P}_I (t) 
-		&= \b F_I (t) - \gamma \b P_I (t) + \b F^{\rm stochastic}_I (t)~.
-	\label{eq:stat.Langevin}
-\end{align}
-This equation describes a perturbation of the nuclei induced by a velocity-dependent friction proportional to a constant $\gamma$,%\marginnote{From Eq.\,\eqref{eq:stat.Langevin} follows that $\gamma$ has the unit of inverse time.}
-and a stochastic force proportional to a white-noise kernel $\eta (t)$. With the modified equation of motion in terms of the stochastic force, an ergodic time evolution that generates the canonical distribution can be obtained, so that
+With the modified equations of motion in terms of the stochastic force, an ergodic time evolution that generates the canonical distribution can be obtained, so that
 \begin{align}
   \braket{A}_t = \braket{A}_{f_\beta}~.
 \end{align}
@@ -653,13 +653,8 @@ and a stochastic force proportional to a white-noise kernel $\eta (t)$. With the
 %	\label{eq:time.average.canonical}
 %\end{align}
 %where the time evolution of the system is given by Eq.\,\eqref{eq:stat.Langevin} and the friction constant is chosen such that the expectation value $\braket{A}_\beta$ is insensitive to the chosen value.
-
-\REM{The Langevin equation can be used to thermalize a system and generate a canonical ensemble starting from some initial configuration $\b R^0$} \cite[p.\,590]{Tuckerman}
-\REM{Plot: Temperature evolution and velocity distribution.}
-
-
-\TODO{Other approaches: Nose-Hoover, Berendsen vr, svr, ...}
-\TODO{Some plots}
+In practice, the Langevin equation can be used to thermalize a system and generate a canonical ensemble starting from some initial configuration $\b R^0$~\cite[p.\,590]{Tuckerman}.
+\REM{At least cite a few other approaches: Nose-Hoover, Berendsen vr, svr, ...}
 
 \section{Classical harmonic dynamics and harmonic mapping}
 
