@@ -14,18 +14,18 @@ It is evident from Eq.\,\eqref{eq:Fourier} that the thermal conductivity $\kappa
     \braket{J^\alpha (t) J^\beta(0)}_{\rm eq}~.
   \label{eq:GreenKubo}
 \end{align}
-This formula relates the temporal fluctuations of the macroscopic heat flux $\b J (t)$ as given by an equilibrium ensemble average of the autocorrelation function, $\braket{J^\alpha (t) J^\beta(0)}_{\rm eq}$, to the associated transport coefficient $\kappa$. It is however \emph{a priori} unclear how a microscopic description of the appearing quantities can be obtained. To tackle this question in full, we first show how the Kubo formula emerges in the framework of linear response theory. We then present how a microscopic description of heat in terms of a thermal energy density and an associated, locally conserved current follows, before reviewing the necessary steps to define an \emph{ab initio} heat flux~\cite{Carbogno2016}.
+This formula relates the temporal fluctuations of the macroscopic heat flux $\b J (t)$ as given by an equilibrium ensemble average of the autocorrelation function, $\braket{J^\alpha (t) J^\beta(0)}_{\rm eq}$, to the associated transport coefficient $\kappa^{\alpha \beta}$, where $\alpha$ and $\beta$ denote the respective Cartesian components. It is however \emph{a priori} unclear how a microscopic description of the appearing quantities can be obtained. To tackle this question in full, we first show how the Kubo formula emerges in the framework of linear response theory. We then present how a microscopic description of heat in terms of a thermal energy density and an associated, locally conserved current follows, before reviewing the necessary steps to define an \emph{ab initio} heat flux~\cite{Carbogno2016}.
 
 \section{Linear Response Theory}
-The aim of linear response theory is to compute the expected value of a phase-space observable $B$ in presence of an external perturbation driving the system out of equilibrium. The ensemble is characterized by a \emph{distribution function} $f(\Gamma, t)$, where $\Gamma = \set{\b R, \b P}$ is a shorthand for a point in phase space. The expectation value of $B$ is given by
+The aim of linear response theory is to compute the expected value of a phase-space observable $B$ in presence of an external perturbation driving the system out of equilibrium. The ensemble is characterized by a \emph{distribution function} $f(\Gamma, t)$, where $\Gamma = \set{\b R, \b P}$ is a shorthand for a point in phase space. The expectation value of $B$ as defined in Eq.\,\eqref{eq:phase.space.average} is given by
 \begin{align}
-  \braket{B (t)}_{f}
+  \braket{B (t)}
     = \int \d \Gamma ~ B (\Gamma) f(\Gamma, t)~,
   \label{eq:lr.B.1}
 \end{align}
 and we assume without loss of generality that its equilibrium value vanishes,
 \begin{align}
-\braket{B (t)}_{f^0}
+\braket{B (t)}_{0}
 = \int \d \Gamma ~ B (\Gamma) f^0(\Gamma) = 0~,
 \label{eq:lr.B0}
 \end{align}
@@ -80,41 +80,58 @@ where $\set{\cdot , \cdot}$ denotes the Poisson bracket
 and in Eq.\,\eqref{eq:lr.df.2} we only keep the terms to linear order in the perturbation.
 The solution to this differential equation is found to be\footnote{The solution is given in appendix \ref{app:lr.f}.}~\cite{Kubo1957a}
 \begin{align}
-  \Delta f (t) 
-    = \int_{-\infty}^t {\rm e}^{-\im \mathcal  L^0 (t - t')} \set{\mathcal  H' (t'), f^0}~\d t'~,
+  \Delta f (\Gamma, t) 
+    = \int_{-\infty}^t {\rm e}^{-\im \mathcal  L^0 (t - t')} \set{\mathcal  H' (\Gamma, t'), f^0 (\Gamma)}~\d t'~,
   \label{eq:lr.df(t)}
 \end{align}
-where $\exp (\im \mathcal  L^0 t)$ propagates a phase-space point $\Gamma$ by a time $t$ according to the equations of motion following from $\mathcal H^0$.
+where ${\rm e}^{\im \mathcal  L^0 t}$ propagates a phase-space point $\Gamma$ by a time $t$ according to the equations of motion following from $\mathcal H^0$.
 By splitting the interaction Hamiltonian $\mathcal H'(t)$ into an operator part $ A(\Gamma)$ and an explicitly time dependent force function $F(t)$,
 \begin{align}
   \mathcal H' (\Gamma, t)= A (\Gamma) F(t)~,
+  \label{eq:lr.H_AF}
 \end{align}
-this expression can be simplified in the canonical ensemble by using that \mbox{$\partial f^0 / \partial \mathcal H^0 = -\beta f^0$}, which leads to
+equation~\eqref{eq:lr.df.2} can be simplified in the canonical ensemble by using that \mbox{$\partial f^0 / \partial \mathcal H^0 = -\beta f^0$}, which leads to\footnote{This can be seen by using the chain rule and the canonical equations of motion:	
 \begin{align*}
-  \set{A, f^0}
-%    &= \sum_i \frac{\partial A}{\partial q_i} \frac{\partial f^0}{\partial p_i}
-%    - \frac{\partial A}{\partial p_i} \frac{\partial f^0}{\partial q_i} \\
-%    &= \sum_i \frac{\partial A}{\partial q_i} \frac{\partial f^0}{\partial H^0} \frac{\partial H^0}{\partial p_i}
-%    - \frac{\partial A}{\partial p_i} \frac{\partial f^0}{\partial H^0} \frac{\partial H^0}{\partial q_i} \\
-%    &= -\beta f^0 \sum_i
-%      \left( \frac{\partial A}{\partial p_i} \dot{q}_i +  \frac{\partial A}{\partial q_i} \dot{p}_i \right) \\
-    &= -\beta f^0 \, \frac{\d A}{\d t}~.
-\end{align*}
-%where in the second step Hamilton's equations of motion have been used.
-
-We are now in the position to formulate the expected response of a phase space observable $B$ to linear order in a perturbation described by the Hamiltonian $\mathcal H'(t) = A F(t)$,~i.\,e.,~
+	\set{A, f^0}
+	&= \sum_i \frac{\partial A}{\partial q_i} \frac{\partial f^0}{\partial p_i}
+	- \frac{\partial A}{\partial p_i} \frac{\partial f^0}{\partial q_i} \\
+	&= \sum_i \frac{\partial A}{\partial q_i} \frac{\partial f^0}{\partial H^0} \frac{\partial H^0}{\partial p_i}
+	- \frac{\partial A}{\partial p_i} \frac{\partial f^0}{\partial H^0} \frac{\partial H^0}{\partial q_i} \\
+	&= -\beta f^0 \sum_i
+	\left( \frac{\partial A}{\partial p_i} \dot{q}_i +  \frac{\partial A}{\partial q_i} \dot{p}_i \right) \\
+	&= -\beta f^0 \, \frac{\d A}{\d t} \\
+	&\equiv -\beta f^0 \, \dot A~.
+	\end{align*}}
 \begin{align}
-\braket{B (t)}_f
+  \set{A, f^0}
+    &= -\beta \dot A f^0~,
+   \label{eq:lr.dA_dt}
+\end{align}
+so that the Poisson bracket %of the perturbing Hamiltonian $\mathcal H'$ with the unperturbed distribution function $f^0$ 
+appearing in Eq.\,\eqref{eq:lr.df(t)} becomes
+\begin{align}
+	\left\{\, \mathcal  H' (\Gamma, t'), f^0 (\Gamma) \,\right\}
+		= - \beta \dot{A} (\Gamma) f^0 (\Gamma) F(t')~,
+	\label{eq:.lr.poisson.H'}
+\end{align}
+i.\,e., a product of minus the inverse temperature $\beta$ with the time derivative of the operator part $\dot A (\Gamma)$, the distribution $f^0 (\Gamma)$, and the time-dependent force function $F (t)$.
+
+\newthought{We are now in position to formulate the expected response} of a phase space observable $B$ to linear order in a perturbation described by the Hamiltonian $\mathcal H'(\Gamma, t)$ defined in Eq.\,\eqref{eq:lr.H_AF},~i.\,e.,~
+\begin{align}
+\braket{B (t)}
     &= \int \d \Gamma ~  B (\Gamma) \Delta f (\Gamma, t) \\
     &= - \beta \int_{-\infty}^t 
       \int \d \Gamma ~  
-       B (\Gamma) \, {\rm e}^{-\im \mathcal L^0 (\Gamma) (t - t')} \dot{A}(\Gamma)
+       B (\Gamma) \, {\rm e}^{-\im \mathcal L^0 (t - t')} \dot{A}(\Gamma)
        f^0(\Gamma) F(t') ~ \d t' \\
     &= - \beta \int_{-\infty}^t 
-      \braket{B(t) \dot{A}(t')}_{f^0} F(t') ~ \d t'~,
+      \braket{B(\Gamma_t) \dot{A} (\Gamma_{t'})}_{0} F(t') ~ \d t'~,
   \label{eq:lr.dB}
 \end{align}
-where it was used that $a(t) = {\rm e}^{\im \mathcal L^0 t} a(0) = a(0) {\rm e}^{-\im \mathcal L^0 t}$~\cite[p.\,498]{Tuckerman}, and $\braket{\cdot}_{f^0}$ denotes a phase-space average with respect to the unperturbed canonical distribution function $f^0 (\Gamma)$ as before. It is evident from this equation that the time propagation of the observables $\dot {A}$ and $B$ is generated by $\mathcal L^0$ and therefore microcanonical with conserved energy. The phase-space average $\braket{\cdot}_{f^0}$ on the other hand corresponds to a canonical ensemble average with a defined inverse temperature $\beta$.
+where $\braket{\cdot}_{0}$ denotes a phase-space average with respect to the unperturbed canonical distribution function $f^0 (\Gamma)$, and the notation implies that for each phase-space point $\Gamma$ in the ensemble, $B (\Gamma)$ and $\dot{A} (\Gamma)$ are evaluated at phase-space points separated in time by $t-t'$~\cite[p.\,498]{Tuckerman}.
+%it was used that $a(t) = {\rm e}^{\im \mathcal L^0 t} a(0) = a(0) {\rm e}^{-\im \mathcal L^0 t}$, and  as before. 
+%It is evident from this equation that the time propagation of the observables $\dot {A}$ and $B$ 
+The time propagation of phase-space points is generated by $\mathcal L^0$ and therefore given by the canonical equations of motion with conserved energy as defined in Eq.\,\eqref{eq:stat.eom}. The phase-space average $\braket{\cdot}_{f^0}$ on the other hand corresponds to a canonical ensemble average with a defined inverse temperature $\beta$.
 
 \subsection{Conserved densities and currents}
 Macroscopic properties of matter are often \emph{extensive},~i.\,e.,~they scale with the system size, and can be described by a locally conserved \emph{density}~\cite{Baroni2020a}. Taking the general property $A$ represented by the phase-space observable $A(\Gamma_t)$ evaluated at a time $t$ as an example, we define
@@ -122,51 +139,52 @@ Macroscopic properties of matter are often \emph{extensive},~i.\,e.,~they scale 
   A (\Gamma_t) = \int_V a (\b r, \Gamma_t) \, \d^3 r~,
   \label{eq:lr.A}
 \end{align}
-where $a(\b r, \Gamma_t)$ is a suitably chosen \emph{local density} associated with the observable $A$. The notation $\Gamma_t$ highlights that the quantity is implicitly time-dependent because the phase-space configuration $\Gamma$ evolves in time.
-When no ambiguity arises, we can therefore just write $a (\b r, t)$.\footnote{
-	Notation for phase-space functions $f (\Gamma)$:
-	\begin{align*}
-	f(t) &\equiv f(\Gamma (t)) \\
-	\frac{\partial f}{\partial t} &= \frac{\d f (\Gamma (t))}{\d t} \equiv \dot{f}(t)
-	\end{align*}
-}
+where $a(\b r, \Gamma_t)$ is a suitably chosen \emph{local density} associated with the observable $A$. The notation $\Gamma_t$ was introduced in Sec.\,\ref{sec:phase_space} to highlight that the quantity is implicitly time-dependent because the phase-space configuration $\Gamma$ evolves in time.
+%When no ambiguity arises, we can therefore just write $a (\b r, t)$.\footnote{
+%	Notation for phase-space functions $f (\Gamma)$:
+%	\begin{align*}
+%	f(t) &\equiv f(\Gamma (t)) \\
+%	\frac{\partial f}{\partial t} &= \frac{\d f (\Gamma (t))}{\d t} \equiv \dot{f}(t)
+%	\end{align*}
+%}
 The locally conserved density fulfills a continuity equation
 \begin{align}
-  \partial_t \, a(\b r, t) = - \b \nabla \cdot \b j_a (\b r, t)~,
+  \partial_t \, a(\b r, \Gamma_t) = - \b \nabla \cdot \b j (\b r, \Gamma_t)~,
   \label{eq:lr.continuity.1}
 \end{align}
-where $\b j_a (\b r, t)$ is the associated current. From the local current, the macroscopic flux is obtained by spatially averaging over the system volume,
+where $\b j (\b r, \Gamma_t)$ is the associated local current. From the local current, the macroscopic flux is obtained by spatially averaging over the system volume,
 \begin{align}
-  \b J (t)
-    = \frac{1}{V} \int_V \d^3 r ~ \b j (\b r, t)~,
+  \b J (\Gamma_t)
+    = \frac{1}{V} \int_V \d^3 r ~ \b j (\b r, \Gamma_t)~.
   \label{eq:lr.J(t)}
 \end{align}
-where the subscript $a$ was dropped for notational clarity.
-Likewise we formulate a local version of the perturbing Hamiltonian \mbox{$\mathcal H' = A (\Gamma) F(t)$} in the form
+Likewise we formulate a local version of the perturbing Hamiltonian initially defined in Eq.\,\eqref{eq:lr.H_AF},
 \begin{align}
-	\mathcal H' (\Gamma, t) = \int \d^3 r ~ a (\b r, \Gamma) v(\b r, t)~,
+	\mathcal H' (\Gamma_t, t) = \int \d^3 r ~ a (\b r, \Gamma_t) v(\b r, t)~,
 	\label{eq:lr.H'}
 \end{align}
-where $a(\b r, \Gamma)$ represents the density of interest as introduced above, and $v(\b r, t)$ is the local driving force coupling to the system via the density $a (\b r, \Gamma)$.
+where $a(\b r, \Gamma_t)$ represents the density of interest as introduced above, and $v(\b r, t)$ is the local driving force coupling to the system via the density $a (\b r, \Gamma_t)$.
 
-The local version of linear-response formula given in Eq.\,\eqref{eq:lr.dB} for a given flux $\bf J$ reads:\footnote{Take \mbox{$B \equiv \b J$} with $\braket{B} \equiv \braket{\b J} = 0$~.}
+The local version of the linear-response formula given in Eq.\,\eqref{eq:lr.dB} for the expectation value of a given local flux $\bf j$ at time $t$ reads:\footnote{Take \mbox{$B \equiv \b J$} with $\braket{B} \equiv \braket{\b J} = 0$~.}
 \begin{align}
-j^\alpha (\b r , t) 
-	& \equiv \braket{j^\alpha (\b r)}_{\Delta f (t)} \\
+%j^\alpha (\b r , t) 
+%	& \equiv 
+\braket{j^\alpha (\b r, t)}
 	&= - \beta \int_{-\infty}^{t} \d t' \int_V \d^3 r' ~ \braket{
 			j^\alpha (\b r, \Gamma_t) \dot{a} (\b r', \Gamma_{t'})
 		}_0 v (\b r', t')~.
 	\label{eq:lr.ja.1}
 \end{align}
-The time derivative of the density can be eliminated by using the continuity equation~\eqref{eq:lr.continuity.1}, $\dot a = \partial'_\beta j^\beta$ where $\partial'_\beta = \partial/\partial r^{\prime \beta}$, and integrating by parts, so that
+The time derivative of the density can be eliminated by using the continuity equation~\eqref{eq:lr.continuity.1}, $\dot a = - \partial'_\beta j^\beta$ where $\partial'_\beta = \partial/\partial r^{\prime \beta}$, and integrating by parts, so that
 \begin{align}
-j^\alpha (\b r , t) 
+\braket{j^\alpha (\b r , t) }
 &= - \beta \int_{-\infty}^{t} \d t' \int_V \d^3 r' ~ \braket{
 	j^\alpha (\b r, \Gamma_t) j^\beta (\b r', \Gamma_{t'})
-}_0 \partial'_\beta v (\b r', t')~.
+}_0 \partial'_\beta v (\b r', t')~,
 \label{eq:lr.ja.2}
 \end{align}
-If we now assume the external driving force $v (\b r, t)$ to be constant in time and homogeneously varying in space such that
+where a boundary term was neglected.\footnote{Boundary terms scale proportional to the surface of the integration volume and therefore become negligible in the thermodynamic limit $V \to \infty$.}
+If we now assume the external driving force $v (\b r, t)$ to be constant in time and linearly varying in space such that
 \begin{align}
 	\partial_\beta v (\b r, t) \equiv v_\beta~,
 	\label{eq:lr.force}
@@ -174,6 +192,7 @@ If we now assume the external driving force $v (\b r, t)$ to be constant in time
 and spatially average over Eq.\,\eqref{eq:lr.ja.2} with $\frac{1}{V} \int_V \d^3 r$, we arrive at
 \begin{align}
 	J^\alpha 
+	\equiv \braket{J^\alpha}
 		&= -\beta V \int_{0}^{\infty} 
 		\d t
 		\braket{
@@ -220,7 +239,7 @@ with
 	\mathcal H' (\Gamma) = \frac{1}{T} \int \d^3 r ~ \Delta T (\b r) e(\b r, \Gamma)~.
 	\label{eq:lr.Hp.temp}
 \end{align}
-With the previous assumption that $\Delta T(\b r)$ varies linearly in space, we find the thermodynamic force to be given by
+As earlier in Eq.\,\eqref{eq:lr.force}, we assume $\Delta T(\b r)$ to vary linearly in space, so that the thermodynamic force is given by
 \begin{align}
 	v_\beta = \frac{1}{T} \partial_\beta T (\b r) 
 		\stackrel{\eqref{eq:lr.F}}{\implies}
@@ -244,7 +263,7 @@ where $\kappa^{\alpha \beta}$ denotes the \emph{thermal conductivity tensor} def
 that is, the Green-Kubo formula for the thermal conductivity $\kappa$.
 
 \section{Heat Flux Definition}
-In order to evaluate the thermal conductivity by means of the Green-Kubo formula, Eq.\,\eqref{eq:GreenKubo}, the  heat flux observable $\b J (\Gamma)$ needs to be defined. We do so by starting from the continuity equation again,
+In order to evaluate the thermal conductivity by means of the Green-Kubo formula, Eq.\,\eqref{eq:GreenKubo}, the  heat flux observable $\b J (t)$ needs to be defined.\footnote{From now on, all time dependence is to be understood as the implicit time dependence of phase-space observables on the time evolution of a phase-space point, $f(t) = f(\Gamma_t)$.} We do so by starting from the continuity equation again,
 \begin{align}
 	\dot{e} (\b r) = - \b \nabla \cdot \b j (\b r)
 	\label{eq:hf.cont}
@@ -275,9 +294,9 @@ so that
 		= \im \frac{\b q}{q^2} \dot{e} (\b q)~.
   \label{eq:hf.j.parallel}
 \end{align}
-As before, we obtain the macroscopic heat flux as a spatial average of the (longitudinal) current,
+As before, the macroscopic heat flux is given by a spatial average of the (longitudinal) current,
 \begin{align}
-	\b J (t) = \frac{1}{V} \int \d^3 r ~ \b j_{\parallel} (\b r) = \b j_{\parallel} (\b q \to 0)~,
+	\b J = \frac{1}{V} \int \d^3 r ~ \b j_{\parallel} (\b r) = \b j_{\parallel} (\b q \to 0)~,
 	\label{eq:hf.J.1}
 \end{align}
 where it was used that, by definition of the Fourier transform, the integral over the system volume equals the long wavelength limit of the current in reciprocal space. The long wavelength limit for the time derivative of the local energy density can be obtained by Taylor expanding in $\b q$
@@ -303,7 +322,7 @@ i.\,e.,~the heat flux is given as the first moment of the time derivative of the
 
 In force-field approaches, it is common to adopt the latter approach and split the energy density into atomic contributions as
 \begin{align}
-	e (\b r, t ) = \sum_I E_I (t) \delta (\b r - \b R_I)~.
+	e (\b r, t ) = \sum_I E_I (t) \delta (\b r - \b R_I (t))~.
 	\label{eq:hf.e.atomic}
 \end{align}
 The heat flux is then given by~\cite{Helfand1960}
@@ -329,7 +348,7 @@ and a \emph{kinetic} or \emph{convective} current
 In non-convective solids, the kinetic contribution is typically neglected, as it was shown several times in the literature that its contribution to thermal conductivity is orders of magnitude lower compared to the virial flux~\cite{Vogelsang1987,Kinaci2012}. However, the kinetic flux becomes increasingly important and even dominant in liquids and gases with substantial convection~\cite{Cheng2020}.
 
 \subsection{Gauge invariance of heat flux definitions}
-As seen above, the local current is only defined up to a non-heat carrying contribution $\b j_{\perp}$. Likewise, the energy density is only defined up to terms that keep the total energy integral unchanged. The choice of a local energy partitioning as,~e.\,g.,~given by Eq.\,\eqref{eq:hf.e.atomic} is therefore not unique, and different partitioning schemes will lead to differing heat fluxes. However, the thermal conductivity obtained by these heat fluxes will be the same in the long time limit. In particular, Ercole \emph{et al.} have shown in Ref.\,\cite{Ercole2016} that two heat fluxes differing by the time derivative of a \emph{bounded} vector field,
+As seen above, the local current is only defined up to a non-heat carrying contribution $\b j_{\perp}$. Likewise, the energy density is only defined up to terms that keep the total energy integral unchanged. The choice of a local energy partitioning as,~e.\,g.,~given by Eq.\,\eqref{eq:hf.e.atomic} is therefore not unique, and different partitioning schemes will lead to differing heat fluxes. However, the thermal conductivity obtained after integrating the respective autocorrelation functions will be the same. In particular, Ercole \emph{et al.} have shown in Ref.\,\cite{Ercole2016} that two heat fluxes differing by the time derivative of a \emph{bounded} vector field,
 \begin{align}
   \tilde{\b J} (t) = \b J (t) + \frac{\d}{\d t} \b P (t)~,
 \end{align}
@@ -364,6 +383,7 @@ This makes clear that, in the absence of convection, the contribution of ${\bf J
 \end{align}
 where the difference between left- and right-hand side is given by ${\bf J}_{\rm res}$ which can be neglected whenever the kinetic flux can be neglected, as discussed above.
 
+\REM{Yair suggests to remove or put to appendix:}
 \newthought{A final remark concerning this equation} is in order: One might argue that the expression in Eq.\,\eqref{eq:J_tot_solid} is a total time derivative of ${\bf P} = \frac{1}{V}  \sum_I {\bf R}_I^0 \fD E_I$, and therefore vanishes by the aforementioned gauge invariance principle as well. However, this is not the case in an infinite solid, since the atomic configuration $\set{{\bf R}_I}$ is not bounded. The sum over atomic positions is therefore not well defined in the first place and remains to be understood as a symbolic representation of an actual energy partitioning scheme that needs to be cast in a boundary-insensitive form for any practical application of Eq.\,\eqref{eq:J_tot_solid}.\footnote{The author thanks Stefano Baroni for an insightful discussion clarifying this point.}
 
 \section{Ab initio Heat Flux}
@@ -383,7 +403,7 @@ where $e (\b r, \Gamma)$ is an appropriately chosen energy density yielding the 
 		= \sum_I \b F_I \cdot \dot{\b R}_I 
 		+ \sum_I \frac{\partial \mathcal V(\b R)}{\partial \b R_I} \cdot \dot{\b R}_I
 			\label{eq:hf.ai.Hdot}
-		\stackrel{!}{\equiv}
+		\equiv
 			\int \d^3 r ~ \dot{e} (\b r , \Gamma)~.
 \end{align}
 Since the energy is conserved, the time derivate of the Hamiltonian vanishes, and therefore $\dot{e} (\b r, \Gamma)$ needs to integrate to zero.
@@ -517,7 +537,7 @@ Using this expression for the time derivative of the atom-resolved harmonic ener
    \label{eq:J_ha_r}
 \end{align}
 which is boundary-insensitive as required since only differences of positions enter.
-W express the displacements $\set {\b u_I}$ and velocities $\set{\b p_I}$ in terms of the complex mode amplitudes $a_s (t)$ introduced in Eq.\,\eqref{eq:u_s.amplitudes.periodic} in Sec.\,\ref{sec:dynmat.periodic},
+We express the displacements $\set {\b u_I}$ and velocities $\set{\b p_I}$ in terms of the complex mode amplitudes $a_s (t)$ introduced in Eq.\,\eqref{eq:u_s.amplitudes.periodic} in Sec.\,\ref{sec:dynmat.periodic},
 \begin{align}
     \b u_I (t) 
 	    &= ~\sum_s \frac{1}{\sqrt{2 \omega_s}} \b e^\ast_{s I} \left[ \D a_{-s} (t) + \fD a_s (t)\right]~,\quad\text{and} \\
@@ -557,7 +577,7 @@ where the mode energy $E_s = \omega_s \D a_s \fD a_s$ was used.
 This result is the familiar phonon heat flux operator (when setting $\hbar = 1$), where $\D a_s (t) \fD a_s (t) \equiv n_s(t)$ is the instantaneous mode occupation as defined in Eq.\,\eqref{eq:n_s(t)}~\cite{Peierls1929,Hardy1963,Isaeva2019}.
 
 \subsection{Thermal conductivity derived from the harmonic flux}
-{With the harmonic heat flux at hand}, we are now in position to evaluate the thermal conductivity and discuss certain limits of the resulting expression. For example, it is straightforward to show that the thermal conductivity of a purely harmonic system is infinite. 
+{With the harmonic heat flux at hand}, we are now in position to discuss certain limits of the resulting thermal conductivity. For example, it is straightforward to show that the thermal conductivity of a purely harmonic system is infinite. 
 %At the same time, useful approximations to compute the thermal conductivity from a perturbation theory perspective can be found. 
 We demonstrate the reasoning for the case of the diagonal contribution to the heat flux $\b J_{\rm ha-diag}$ given by Eq.\,\eqref{eq:J.ha.diag}, which we simply denote by $J$ in the following, omitting Cartesian components for clarity when no confusion can arise.
 % The additional terms stemming from the offdiagonal contribution to the heatflux have been worked out in Ref.\,\cite{Isaeva2019}.
@@ -567,9 +587,11 @@ We demonstrate the reasoning for the case of the diagonal contribution to the he
 	\kappa
 		&=
 		\frac{V}{k_{\rm B} T^2} \int_{0}^{\infty} 
-		\d t \braket{J (t) J} ~.
+		\d t \braket{J (t) J} ~,
+	\label{eq:flux.ha.k}
 \end{align}
-The autocorrelation function for the diagonal harmonic heat flux defined in Eq.\,\eqref{eq:J.ha.diag} therefore reads
+where the last quantity in $\braket{\cdot}$ will be evaluated at $t=0$.
+The autocorrelation function for the diagonal harmonic heat flux defined in Eq.\,\eqref{eq:J.ha.diag} reads
 \begin{align}
 	\braket{J(t) J} 
 		&= \frac{1}{V^2} \sum_{ss'} v_{\fP s} v_{s'}
@@ -674,7 +696,7 @@ where $V^{(2)} (\b R)$ denotes the harmonic potential, and $V^{(3)} (\b R)$ is o
 		&\left.~~~~ \phantom{\halb} + \left(n_{p}-n_{q}\right) \delta\left(\omega_{s}+\omega_{p}-\omega_{q}\right)\right]~,
 \end{split}
 \end{align}
-where $\mathcal V^{(3)}_{spq}$ is the cubic potential transformed to phonon eigenstates. The quantum analogues of this equation and the single-mode expression for $\kappa$, Eq.\,\eqref{eq:ha.kappa.bte}, serve as the basis for most \emph{ab initio} studies of thermal conductivity in insulating solids in recent years~\cite{Broido2007,Simoncelli2019,Isaeva2019}. More recently, extensions of the perturbation-expansion approach up to fourth order have been presented~\cite{Feng2016,Feng2017,Ravichandran2018,Xia2018}.
+where $\mathcal V^{(3)}_{spq}$ is the cubic potential transformed to phonon eigenstates. This equation and the single-mode expression for $\kappa$, Eq.\,\eqref{eq:ha.kappa.bte}, serve as the basis for most \emph{ab initio} studies of thermal conductivity in insulating solids in recent years~\cite{Broido2007,Simoncelli2019,Isaeva2019}. More recently, extensions of the perturbation-expansion approach up to fourth order have been presented~\cite{Feng2016,Feng2017,Ravichandran2018,Xia2018}.
 
 \subsection{Mode lifetimes from molecular dynamics simulations}
 In \emph{ab intio} molecular dynamics, we have direct access to the non-perturbative dynamics of the nuclear system. Lifetimes can therefore be extracted by straightforward application of Eq.\,\eqref{eq:tau_ss} and \eqref{eq:G_ss}. To circumvent the problem of brute-force integrating the time integral in the evaluation of the lifetime expression, we use the theoretical discussion in terms of Green's functions from above to approximate the normalized mode-energy autocorrelation function $G_{ss'} (t)$ as
@@ -695,11 +717,13 @@ Building on the previous sections, we are now in position to present the \emph{a
 \begin{enumerate}
 	\item The thermal conductivity $\kappa_{\rm ai}$ is obtained by numerically evaluating the Green-Kubo integral using the \emph{ab initio} heat flux ${\bf J}_{\rm ai} (t)$ defined in Eq.\,\eqref{eq:J_ai} evaluated during microcanonical \emph{ab initio} molecular dynamics simulations.
 	\item The harmonic contribution $\kappa_{\rm ha}$ to the thermal conductivity is computed from the simulation data by using lifetimes extracted via Eq.\,\eqref{eq:G_s} in the BTE-type formula for $\kappa_{\rm ha}$ given in Eq.\,\eqref{eq:ha.kappa.bte}.
-	\item The quantities used to compute $\kappa_{\rm ha}$,~i.\,e., the group velocities and lifetimes, are interpolated to dense q-point grids in reciprocal space to achieve an extrapolation of the harmonic thermal conductivity to bulk limit, $\kappa_{\rm ha-bulk}~\cite{Carbogno2016}$. The interpolation works by assuming that\marginnote{We temporarily restore the full notation \mbox{$s=(b, {\bf q})$} to make the q-dependence of the appearing quantities explicit.} $\fD \tau_b ({\bf q}) = \fD \lambda_b ({\bf q}) \omega_b^{-2} ({\bf q})$ with a weakly q-dependent function $\lambda_b ({\bf q})$ obtained by linearly interpolating the lifetimes obtained at commensurate q-points. The scaling of lifetimes with $\omega_s^{-2}$ is rooted in basic phonon theory as developed by Herring~\cite{Herring1954} and holds especially for long-ranged acoustic modes which are difficult to describe in finite-sized \emph{ab initio} molecular dynamics simulations.
-	\item The interpolation scheme yields a finite-size correction term
+	\item The quantities used to compute $\kappa_{\rm ha}$,~i.\,e., the group velocities and lifetimes, are interpolated to dense q-point grids in reciprocal space to achieve an extrapolation of the harmonic thermal conductivity to bulk limit, $\kappa_{\rm ha-bulk}~\cite{Carbogno2016}$. The interpolation works by assuming that\marginnote{We temporarily restore the full notation \mbox{$s=(b, {\bf q})$} to make the q-dependence of the appearing quantities explicit.} $\fD \tau_b ({\bf q}) = \fD \lambda_b ({\bf q}) \omega_b^{-2} ({\bf q})$ with a weakly q-dependent function $\lambda_b ({\bf q})$ obtained by linearly interpolating the lifetimes obtained at commensurate q-points. The scaling of lifetimes with $\omega_s^{-2}$ is rooted in basic phonon theory as developed by Herring~\cite{Herring1954} and holds especially for long-ranged acoustic modes which are difficult to describe in finite-sized \emph{ab initio} molecular dynamics simulations. \REM{Move to preious section?}
+	\item The interpolation scheme yields a finite-size corrected thermal conductivity via
 	\begin{align}
-		\delta \kappa_{\rm bulk} = \kappa_{\rm ha-bulk} - \kappa_{\rm ha}~.
-		\label{eq:dkappa_bulk}
+		\kappa_{\rm bulk}  = \kappa_{\rm ai} - \kappa_{\rm ha} + \kappa_{\rm ha-bulk}~.
+		%\delta \kappa_{\rm bulk} = \kappa_{\rm ha-bulk} - \kappa_{\rm ha}~.
+		%\label{eq:dkappa_bulk}
+		\label{eq:kappa_bulk}
 	\end{align}
 \end{enumerate}
 
