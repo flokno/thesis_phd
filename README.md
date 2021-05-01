@@ -5,10 +5,13 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
 
 ## To Do's
 
-- [ ] Chapter 2 -> Marcin/Chris
-    - [ ] classical harmonic dynamics
-    - [ ] Maradudin?
-- [ ] Review Yair -> Chris
+- [x] Chapter 2
+    - [x] classical harmonic dynamics
+    - [ ] review
+    - [ ] -> Marcin/Chris
+- [ ] Chapter 3
+    - [ ] Review Yair 
+    - [ ] -> Chris
 - [ ] Anharmoncity chapter (short version of paper)
 - [ ] Methods and benchmark chapter
     - [ ] Finite time effect estimation!
