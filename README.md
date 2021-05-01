@@ -6,6 +6,7 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
 ## To Do's
 
 - [ ] Chapter 2 -> Marcin/Chris
+    - [ ] classical harmonic dynamics
     - [ ] Maradudin?
 - [ ] Review Yair -> Chris
 - [ ] Anharmoncity chapter (short version of paper)
