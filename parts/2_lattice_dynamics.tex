@@ -2,7 +2,7 @@ In the previous chapter, we have seen how the many-body problem can be decoupled
 which can be solved in the framework of DFT, and a nuclear problem %given by Eq.\,\eqref{eq:chi2} 
 that describes the dynamical properties of the nuclei. This was achieved by means of the Born-Oppenheimer approximation where electron-nucleus interactions beyond a parametric dependence on each other are neglected~\cite{BornOppenheimer}.
 
-\newthought{We will now approach} the description of the nuclear dynamics from two sides: First, we introduce the \emph{harmonic approximation} in which the nuclear Schr\"odinger equation is solved for an approximated potential in terms of vibrational eigenmodes,~i.\,e.,~\emph{phonons}. 
+\newthought{We will now approach} the description of the nuclear dynamics from two sides: First, we introduce the \emph{harmonic approximation} in which the nuclear Schr\"odinger equation is solved for an approximated potential in terms of vibrational eigenmodes. We will use the opportunity to discuss extended systems, in particular crystalline systems with long-range order.
 Second, we treat the nuclei as \emph{classical} particles on the full, non-truncated Born-Oppenheimer potential $E^{\rm BO} ({\bf R})$. This will lead to the formulation of \emph{ab initio molecular dynamics} (aiMD). In a last step, we will connect the two approaches to allow for extracting phonon properties from MD simulations.
 As no electron will appear anymore, $N \equiv N_{\rm Nuc}$ will henceforth denote the number of nuclei in the system of interest, and we denote the Born-Oppenheimer potential simply as \emph{the} potential, $E^{\rm BO} ({\bf R}) \equiv \mathcal V ({\bf R})$.
 
@@ -79,7 +79,7 @@ The condition in Eq.\,\eqref{eq:ha.positive} is satisfied when the harmonic forc
 		\label{eq:D}
 \end{align}
 where Eq.\,\eqref{eq:D} defines the \emph{dynamical matrix} $\rm D$.
-Expressed in the mass-reduced coordinates ${\bf u} = \set{{\bf u}_I}$ and ${\bf p} = \set{{\bf p}_I}$, the approximated Hamiltonian reads
+Expressed in the mass-reduced coordinates ${\bf u} = \set{{\bf u}_I}$ and ${\bf p} = \set{{\bf p}_I}$, the harmonic Hamiltonian reads
 \begin{align}
 	\begin{split}
 		\mathcal{H}^{(2)}({\bf p}, {\bf u})
@@ -97,7 +97,7 @@ Expressed in the mass-reduced coordinates ${\bf u} = \set{{\bf u}_I}$ and ${\bf 
 	D_{I \alpha, J \beta} = D_{J \beta, I \alpha}~.
 	\label{eq:D.symmetric}
 \end{align}
-The eigenvalues of $\rm D$ will therefore be real and positive, and the eigenvectors will be real and orthogonal. We denote the eigensolutions as \emph{modes} labeled by $s$, with eigenvalues as $\omega_s^2$, and the normalized eigenvectors as ${\bf e}_s = \set{{\bf e}_{s, I}}$. The dynamical matrix elements can be rewritten in therms of the eigenvectors and eigenvalues as
+The eigenvalues of $\rm D$ will therefore be real and positive, and the eigenvectors will be real and orthogonal. We denote the eigensolutions as \emph{modes} labeled by $s$, with eigenvalues $\omega_s^2$, and the normalized eigenvectors are ${\bf e}_s = \set{{\bf e}_{s, I}}$. The dynamical matrix elements can be rewritten in therms of the eigenvectors and eigenvalues as
 \begin{align}
 %	\sum_{J \beta}
 %		D_{I \alpha, J \beta} \, e_{s, J \beta} 
@@ -114,7 +114,7 @@ and the eigenvectors fulfill
 	\sum_{s} e_{s, I \alpha} e_{s, J \beta} = \delta_{IJ} \delta_{\alpha \beta}~.
 	\label{eq:completeness.e_s}
 \end{align}
-Using the dynamical matrix elements expressed in terms of eigenvectors and eigenvalues,~Eq.\,\eqref{eq:D_IJ}, the harmonic Hamiltonian as defined in Eq.\,\eqref{eq:D_IJ} can be rewritten as
+Using the dynamical matrix elements expressed in terms of eigenvectors and eigenvalues,~Eq.\,\eqref{eq:D_IJ}, the harmonic Hamiltonian as defined in Eq.\,\eqref{eq:ha.H1} can be rewritten as
 \begin{align}
 	\mathcal{H}^{(2)}({\bf p},  {\bf u})
 		&= \halb \sum_s p_s^2 + 
@@ -194,7 +194,7 @@ As a prerequisite for $\mathcal V ({\bf R})$ to be translationally invariant, we
 	\label{eq:translation.permutation}
 \end{align}
 This statement is equivalent to requiring that the configurations ${\bf R}^{0 \prime}_{I}$ and ${\bf R}^{0}_{I}$ are indistinguishable.\footnote{This requirement is obviously not fulfilled for molecules, where rigidly shifting all atoms can by no means induce a permutation map between atoms.} 
-The final requirement for translational invariance of the potential is that the potential energy for \emph{any} configuration differing by a Bravais vector is unchanged:,
+The final requirement for translational invariance of the potential is that the potential energy for \emph{any} configuration differing by a Bravais vector is unchanged,
 \begin{align}
 %	{\bf R}^{0 \prime}
 %	= \set{{\bf R}_{I'}^0 }
@@ -216,7 +216,7 @@ i.\,e.,~not just at the minimum. This effectively corresponds to a permutation o
 	\label{fig:translation.permutation}
 \end{marginfigure}
 
-We can draw two important conclusions from Eq.\,\eqref{eq:translation.permutation} and \eqref{eq:inv.V}. First, the existence of the map $P_{\bf L}$ enables us to write every atomic coordinate ${\bf R}_I$ as
+We can draw important conclusions from Eq.\,\eqref{eq:translation.permutation} and \eqref{eq:inv.V}. First, the existence of the map $P_{\bf L}$ enables us to write every atomic coordinate ${\bf R}_I$ as
 \begin{align}
 	\fD {\bf R}_I \equiv \fD {\bf R}_{i {\bf L}} 
 		= {\bf R}^0_{i \b L} + \fD {\bf U}_{i {\bf L}}
@@ -229,17 +229,13 @@ We can therefore split the index $I$ into a tuple
 	I = (i, {\bf L})~,
 	\label{eq:I}
 \end{align}
-where $i$ labels the atom in the unit cell, and $\bf L$ is the corresponding lattice point.
-
-
-
-Second, the forceconstants $\Phi_{I \alpha, J \beta}$ can be written as $\Phi_{i {\bf L} \alpha, j {\bf K} \beta}$ ~, where $\bf L$ and $\b K$ are the Bravais vectors belonging to $I$ and $J$, respectively. From the translational invariance of the potential, Eq.\,\eqref{eq:inv.V}, we see that the forceconstants have to fulfill
+where $i$ labels the atom in the unit cell, and $\bf L$ is the corresponding lattice point. Likewise, the forceconstants $\Phi_{I \alpha, J \beta}$ can be written as $\Phi_{i {\bf L} \alpha, j {\bf K} \beta}$, where $\bf L$ and $\b K$ are the Bravais vectors belonging to $I$ and $J$, respectively. From the translational invariance of the potential, Eq.\,\eqref{eq:inv.V}, we see that the forceconstants have to fulfill
 \begin{align}
 	\Phi_{i {\bf L} + \b M \alpha, j {\bf K} + \b M \beta} 
 		= \Phi_{i {\bf L} \alpha, j {\bf K} \beta}~,
 	\label{eq:fc.sym.1}
 \end{align}
-where $\b M = M^\mu {\bf a}_\mu$ denotes an arbitrary Bravais vector. The translational invariance holds likewise for the dynamical matrix ${\rm D}_{IJ}.$\footnote{Remember that ${\rm D}_{IJ} = \frac{1}{\sqrt{M_I M_J}} \Phi_{IJ}$.} The translational invariance expressed by Eq.\,\eqref{eq:fc.sym.1} can be regarded as the \emph{intrinsic} periodicity of the sytem.
+where $\b M = M^\mu {\bf a}_\mu$ with integers $M^\mu$ denotes an arbitrary Bravais vector. The translational invariance holds likewise for the dynamical matrix ${\rm D}_{IJ} = \frac{1}{\sqrt{M_I M_J}} \Phi_{IJ}$. The translational invariance expressed,~e.\,g.,~by Eq.\,\eqref{eq:fc.sym.1} can be regarded as the \emph{intrinsic} periodicity of the sytem.
 
 
 \subsection{Periodic boundary conditions}
@@ -254,7 +250,7 @@ where each ${\bf A}_\mu$ is a linear combination of the primitive basis vectors 
 \begin{align}
 {\bf A}_\mu = {\rm M}_{\mu}^{{\rm sc}, \nu} {\bf a}_\nu\quad\text{with}\quad {\rm M}_{\mu}^{{\rm sc}, \nu} \in \mathds Z~,
 \end{align}
-where $\rm M^{\rm sc}$ is a non-singular matrix with integer elements. The space spanned by the $\set{{\bf A}_i}$ is a parallelepiped of volume $V_{\rm sc} = N_{\bf q} V_{\rm uc}$, where $N_{\bf q} = \det {\rm M}^{\rm sc}$ is the number of lattice points that fit into the enlarged cell,\footnote{The notation $N_{\bf q}$ will become more clear in the next section, where we deal with the inverse lattice points denoted by $\bf q$.} and $V_{\rm uc} = {\bf a}_1 \cdot ({\bf a}_2 \times {\bf a}_3)$ is the unit cell volume. This cell is therefore called \emph{supercell} and the matrix ${\rm M}^{\rm sc}$ is the \emph{supercell matrix}.
+and $\rm M^{\rm sc}$ is a non-singular matrix with integer elements. The space spanned by the $\set{{\bf A}_i}$ is a parallelepiped of volume $V_{\rm sc} = N_{\bf q} V_{\rm uc}$, where $N_{\bf q} = \det {\rm M}^{\rm sc}$ is the number of lattice points that fit into the enlarged cell,\footnote{The notation $N_{\bf q}$ will become more clear in the next section, where we deal with the inverse lattice points denoted by $\bf q$.} and $V_{\rm uc} = {\bf a}_1 \cdot ({\bf a}_2 \times {\bf a}_3)$ is the unit cell volume. This cell is therefore called \emph{supercell} and the matrix ${\rm M}^{\rm sc}$ is the \emph{supercell matrix}.
 
 We define the supercell such that its midpoint is located at the origin,~i.\,e.,~
 \begin{align}
@@ -264,7 +260,7 @@ We define the supercell such that its midpoint is located at the origin,~i.\,e.,
 \end{align}
 The vectors \mbox{$\b S = S^\mu \b A_\mu$} are the equivalent of the Bravais vectors $\b L$ in a superlattice described by $\set{ \b A_\mu }$ instead of $\set{ \b a_\mu}$.
 The ideal, infinite crystal is obtained in the limit $N_{\bf q} \rightarrow \infty$.
-From Eq.\,\eqref{eq:sc.1} we see that the force constants become periodic functions in the superlattice,
+By imposing the periodic boundary conditions specified in Eq.\,\eqref{eq:sc.1}, the force constants become periodic functions in the superlattice,
 \begin{align}
 \Phi_{i {\bf L} \alpha, j {\bf K} + \b S \beta} 
 = \Phi_{i {\bf L} \alpha, j {\bf K} \beta} \quad\text{for all}\quad \b S = S^\mu \b A_\mu~.
@@ -322,8 +318,7 @@ q_\mu {\bf B}^\mu\quad\text{with}\quad q_\mu \in \mathds Z~.
 These $\b q$-points are called \emph{commensurate}, as they represent wave numbers that fit into the supercell, and the $q_\mu$ can be chosen such that each $\bf q$ is located in the first Brillouin zone of the inverse lattice. In total, there are $N_{\bf q}$ inequivalent values of $\bf q$.
 
 Equation~\eqref{eq:D(q)} transforms the $3N_{\rm sc} \times 3N_{\rm sc}$ matrix ${\rm D}_{IJ}$ to one $3N_{\rm uc} \times 3N_{\rm uc}$ matrix ${\rm D}_{ij} (\bf q)$ for each~$\b q$, where $N_{\rm uc}$ is the number of atoms in the unit cell, and $N_{\rm sc} = N_{\bf q} N_{\rm uc}$ the number of atoms in the supercell. 
-
-The phase factor ${\rm e}^{\im \b q \cdot (\b R_i^0 - \b R_j^0)}$ does not change the eigenvalues of ${\rm D} (\b q)$ and is sometimes omitted to simplify the formulas~\cite{BornHuang}. It will however prove useful to include the phasefactor in the following.
+The phase factor ${\rm e}^{\im \b q \cdot (\b R_i^0 - \b R_j^0)}$ does not change the eigenvalues of ${\rm D} (\b q)$ and is sometimes omitted to simplify the formulas~\cite{BornHuang}.
 
 \subsection{Interpolation to non-commensurate q-points}
 When restricting the lattice points to the supercell, the dynamical matrix as defined in Eq.\,\eqref{eq:D(q)} is evaluated only for the truncated sum over $\set{\b L \in \mathds V_{\rm sc}}$. The wavenumbers $\b q$ are then restricted to the commensurate $\b q$-points,~i.\,e.,~the points given in terms of Eq.\,\eqref{eq:q_m}. Evaluating the truncated dynamical matrix at a non-commensurate value $\tilde{\b q}$ will, in general, yield a non-hermitian matrix which cannot be used to extract physically sound information about the system. To obtain an \emph{approximated} dynamical matrix at any other, non-commensurate value $\tilde{\b q}$ within the Brillouin zone, we define an \emph{extended supercell}, 
@@ -358,7 +353,7 @@ In total we define
 		{\rm e}^{- \im \tilde{\b q} \cdot \b L'} {\rm e}^{\im \tilde{\b q} \cdot (\b R_i^0 - \b R_j^0)} {D}_{i \b 0 \alpha, j \b L \beta}~
 	\label{eq:D_Parlinski}
 \end{align}
-where $\b L'$ is given by Eq.\,\eqref{eq:L'} and the weights $w_{\b L}$ are chosen based on the multiplicity of the lattice point $\b L$. The dynamical matrices defined by Eq.\,\eqref{eq:D(q)} and \eqref{eq:D_Parlinski} are equal when evaluated at commensurate $\bf q$-points. We will therefore use the latter definition as \emph{the} dynamical matrix in the following.
+where $\b L'$ is chosen such that it satisfies Eq.\,\eqref{eq:L'}, and the weights $w_{\b L}$ are chosen based on the multiplicity of the lattice point $\b L$ in the extended supercell. The dynamical matrices defined by Eq.\,\eqref{eq:D(q)} and \eqref{eq:D_Parlinski} are equal when evaluated at commensurate $\bf q$-points. We will therefore use the latter definition as \emph{the} dynamical matrix in the following.
 
 \subsection{Properties of the Dynamical Matrix and its Eigenvectors}
 \label{sec:dynmat.periodic}
@@ -373,7 +368,7 @@ As noted before, the dynamical matrix ${\rm D} (\b q)$ defined in Eq.\,\eqref{eq
 		&= \sum_b \omega^2_b (\b q) \, \fD e_{b, i \alpha} (\b q) e^\ast_{b, j \beta} (\b q)~,
 \end{align}
 \end{subequations}
-where the \emph{band index} $b$ is used to discern the $3N_{\rm uc}$ \emph{branches} at each $\b q$.\footnote{The notation highlights that the $\b q$ become quasi-continuous in the $N \to \infty$ limit. In that case, $\frac{1}{N_{\b q}} \sum_{\b q} \to \int \frac{\d^3 q}{(2 \pi)^3}$} 
+where the \emph{band index} $b$ is used to discern the $3N_{\rm uc}$ \emph{branches} at each $\b q$.\footnote{The notation highlights that the $\b q$ become quasi-continuous in the $N_{\bf q} \to \infty$ limit. In that case, $\frac{1}{N_{\b q}} \sum_{\b q} \to \int \frac{\d^3 q}{(2 \pi)^3}$} 
 Since ${\rm D} (\b q)$ is hermitian, it follows that~\cite{Maradudin1968}
 \begin{align}
 	D_{i \alpha, j \beta} (- \b q) 
