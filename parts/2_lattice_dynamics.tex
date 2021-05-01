@@ -510,7 +510,7 @@ Let us now set $f(x) \hat = -\partial \mathcal V / \partial {\bf R}_I$, then ano
 \newthought{These considerations naturally lead to the formulation of \emph{ab initio} molecular dynamics simulations}, where the time evolution of a system of particles is simulated by propagating the classical equations of motion for each particle on the Born-Oppenheimer potential energy surface, $\mathcal V ({\bf R})$~\CITE{RamanParrinello,CarParrinello}. In conjunction with classical statistical mechanics, a wealth of thermodynamic properties of materials can be simulated.
 We note in passing that
 %Of course, this approach can only be validated by computing observables and comparing the results to experimental . One can safely say that this approach has been used successfully in a plethora of studies, while 
-additional care must be taken at low temperatures and for systems with light atoms, especially hydrogen-bonded systems, as already mentioned in the discussion following Eq.\,\eqref{eq:ehrenfest:dimension}~\CITE{MD-Review?,MarklandCeriotti,Litman,pHexperiment}.
+additional care must be taken at low temperatures and for systems with light atoms, especially hydrogen-bonded systems, because in these cases the quantum nature of the nuclei can become non-negligible, as already mentioned in the discussion following Eq.\,\eqref{eq:ehrenfest:dimension}~\CITE{MD-Review?,MarklandCeriotti,Litman,pHexperiment}.
 
 \newthought{As there exist plenty of excellent books on statistical mechanics}, some of which are included in the references~\cite{Phillies2012,Tuckerman,Schrodinger1989}, this chapter mainly serves to recall the most important notions necessary for computing properties of materials under thermodynamic conditions, and introduce the notation used in the remainder of the work. In particular, the concepts of \emph{ensemble}, \emph{state}, and \emph{averages} are briefly introduced.
 
@@ -611,10 +611,10 @@ The canonical ensemble is characterized by the two extensive variables particle 
 In analogy to the previous section, we define the \emph{canonical distribution function} at inverse temperature $\beta = 1 / k_{\rm B} T$
 \begin{align}
 	f_\beta (\Gamma) 
-		= \frac{1}{\mathcal{Z}} {\rm e}^{- \beta \mathcal H (\Gamma)}~,
+		= \frac{1}{\mathcal{Z}_\beta} {\rm e}^{- \beta \mathcal H (\Gamma)}~,
 	\label{eq:f.canonical}
 \end{align}
-where the  canonical partition sum $\mathcal{Z}$ normalizes $f_\beta$. 
+where the  canonical partition sum $\mathcal{Z}_\beta$ normalizes $f_\beta$. 
 %The canonical expectation value is therefore given by
 %\begin{align}
 %	\braket{A}_\beta = \int \d \Gamma ~ A(\Gamma) f_\beta(\Gamma)~.
@@ -626,7 +626,7 @@ where the  canonical partition sum $\mathcal{Z}$ normalizes $f_\beta$.
 		&= \b F_I (t) - \gamma \b P_I (t) + \b F^{\rm stochastic}_I (t)~.
 	\label{eq:stat.Langevin}
 \end{align}
-This equation describes a perturbation of the nuclei induced by a velocity-dependent friction proportional to a constant $\gamma$,%\marginnote{From Eq.\,\eqref{eq:stat.Langevin} follows that $\gamma$ has the unit of inverse time.}
+This equation describes a perturbation of the nuclei induced by a velocity-dependent friction proportional to a constant $\gamma$, %\marginnote{From Eq.\,\eqref{eq:stat.Langevin} follows that $\gamma$ has the unit of inverse time.}
 and a stochastic force proportional to a white-noise kernel $\eta (t)$.\footnote{
 	% \normalsize
 	The stochastic force is given by:
@@ -640,7 +640,7 @@ and a stochastic force proportional to a white-noise kernel $\eta (t)$.\footnote
 }
 With the modified equations of motion in terms of the stochastic force, an ergodic time evolution that generates the canonical distribution can be obtained, so that
 \begin{align}
-  \braket{A}_t = \braket{A}_{f_\beta}~.
+  \braket{A}_t = \braket{A}_{T}~.
 \end{align}
 %hypothesis for the canonical ensemble can be stated,
 %% 
@@ -652,7 +652,7 @@ With the modified equations of motion in terms of the stochastic force, an ergod
 %\end{align}
 %where the time evolution of the system is given by Eq.\,\eqref{eq:stat.Langevin} and the friction constant is chosen such that the expectation value $\braket{A}_\beta$ is insensitive to the chosen value.
 In practice, the Langevin equation can be used to thermalize a system and generate a canonical ensemble starting from some initial configuration $\b R^0$~\cite[p.\,590]{Tuckerman}.
-\REM{At least cite a few other approaches: Nose-Hoover, Berendsen vr, svr, ...}
+\REM{At least cite a few other approaches? Nose-Hoover, Berendsen vr, svr, ...}
 
 \newpage
 
@@ -862,7 +862,7 @@ in units where $\hbar = 1$. Using these amplitudes, the harmonic Hamiltonian rea
 		&= \sum_s \omega_s \D a_s \fD a_s
 \end{align}
 where the last line holds when the summation contains both $\bf q$ and $- {\bf q}$, because $\omega_s = \omega_{-s}$.
-\REM{Is this actually true?}
+\REM{Check.}
 
 
 %\REM{Only real case?}
