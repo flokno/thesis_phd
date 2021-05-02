@@ -46,10 +46,12 @@ Thesis Review
 - [x] `Geometry optimization` -> appendix?
 - [ ] Formel checken und anpassen
 - [ ] Maradudin symmetries?
-- [ ] group velocities
+- [ ] group velocities?
+- [ ] DOS?
 - [x] ${\bf e_s} \to e^\alpha_s ~\text{oder}~ e_{s, \alpha}$?
 - [ ] Notation aus Kapitel 1 anpassen in Bezug auf BvK/Periodizitaet.
 - [x] intrinsic/extrinsic periodicity
+- [ ] Brillouin zone, high-symmetry points?
 
 ## 3 | Heat Transport
 
@@ -59,3 +61,7 @@ Thesis Review
 - [ ] diskutiere dann fit an dynamik
 - [ ] diskutiere scaling der lebenszeiten und interpolation
 - [ ] vibes: speichere modenenergien statt besetzungen!
+
+## 4 | Anharmonicity
+
+- [ ] 

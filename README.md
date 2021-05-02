@@ -161,3 +161,6 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
 
 - [ ] Chris
 
+## Edits
+
+- https://tex.stackexchange.com/a/47936/91226
