@@ -5,23 +5,25 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
 
 ## To Do's
 
-- [x] Chapter 2
+- [x] Chapter 2: Lattice dynamics, phonons
     - [x] classical harmonic dynamics
     - [x] review
     - [x] -> Marcin/Chris
     - [ ] show phonon dispersions?
     - [ ] DOS?
     - [ ] idea: move Si and KCaF3 up, discuss there.
-- [x] Chapter 3
+- [x] Chapter 3: heat transport
     - [x] Review Yair 
     - [x] -> Chris
-- [ ] Anharmoncity chapter (short version of paper)
+- [ ] Chapter 4: Anharmoncity (short version of paper)
     - [ ] overview materials: 
         - [ ] sources (Springer, ICSD, MorelliSlack, …)
         - [ ] histogram sigmaA
-- [ ] Results chapter
+- [ ] Chapter 5: Results
+    - [ ] dedicated methods and benchmarks chapter?
     - [ ] compare experiment
     - [ ] Finite time effect estimation!
+        - [ ] [biased/unbiased autocorr?](https://stats.stackexchange.com/a/343524/265607)
     - [ ] thermal conductivity for trustworthy materials
         - [ ] compare theory (?)
         - [ ] vs. sigma

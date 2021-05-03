@@ -168,6 +168,7 @@ This derivation is generally valid for a system of $N$ particles described by a 
 
 \section{Extended Systems}
 \label{sec:extended_systems}
+\REM{Move up, include discussion of symmetry beyond translational}
 The expressions presented in the previous section are generally valid for a system of $N$ nuclei. Macroscopic materials, however, consist of $\sim 10^{23}$ atoms. From a microscopic point of view, this number is virtually infinite, and mathematically described by the \emph{bulk limit} $N \to \infty$. The most common way to deal with this bulk limit is to impose \emph{periodic boundary conditions} on a finite region of space,~i.\,e.,~a \emph{generating volume}, and normalize the quantities of interest to this volume~\cite{BornHuang}. This procedure can be adopted for extended system such as liquids, amorphous solids such as glasses, and crystals. Since we are interested in the special case of crystals with an inherent periodic long-range order throughout this work, it is beneficial to first introduce the concept of a \emph{crystal lattice} that describes a bulk crystal in terms of a \emph{unit cell} arranged periodically in three dimensional space~\cite{Sands1969}. The periodic boundary conditions are then imposed on a generating volume containing several unit cells,~i.\,e.,~a \emph{supercell}.
 
 \subsection{Periodic systems: Crystals}
@@ -415,6 +416,44 @@ D_{I \alpha, J \beta}
 
 \REM{Group velocities?}
 \REM{Space group symmetries: at least cite Maradadudin.}
+
+\subsection{Phonon dispersions and density of states}
+
+\REM{It makes more sense to discuss the ha. model earlier, i.e., most of what is discussd in ``class. harm. dyn.'' at the end}
+
+With the dynamical matrix for arbitrary q-points in the Brillouin zone at hand, we are in position to evaluate the spectrum of harmonic vibrational excitations in a crystal,~i.\,e.,~\emph{phonon dispersions} or \emph{phonon band structure}, as well as the \emph{density of states}, often called DOS for short.
+
+The density of states $g (\omega)$ can be used to evaluate Brillouin-zone integrals of functions that depend on the phonon energy $\hbar \omega ({\bf q})$. It is implicitly defined via
+\begin{align}
+	\braket{f}
+		&= \frac{1}{V_{\rm BZ}} \int \frac{\d^3 q}{(2 \pi)^3} ~ f{\boldsymbol (}\omega ({\bf q}) \boldsymbol ) 
+		= \int \d \omega ~ f(\omega) g (\omega)~,
+\end{align}
+where 
+\begin{align}
+	g(\omega) 
+		= \frac{1}{V_{\rm BZ}} \int \frac{\d^3 q}{(2 \pi)^3} \delta \boldsymbol{(}
+			\omega ({\bf q}) - \omega
+		\boldsymbol{)}~,
+	\label{eq:DOS}
+\end{align}
+The density of states can be computed by evaluating the phonon frequencies $\omega ({\bf q})$ on a grid in the Brillouin zone and use approximations to the $\delta$-function in Eq.\,\eqref{eq:DOS} of finite width, for example by using Gaussian functions, or by using a tetrahedron method where the integration weights on the finite grid are computed analytically based on the dispersion~\cite{Bloechl1994}.
+
+\newthought{In experiment, dispersions can be probed} by neutron scattering, where the incoming neutron beam scatters inelastically with the phonons in the crystal, and a momentum-dependent scattering amplitude can be measured with peaks corresponding to the phonon frequencies~\cite{Squires}. The phonon spectrum of fcc-silicon compoared to inelastic neutron scattering data is shonw in Fig.\,\ref{fig:ha.dispersion.si}. \begin{figure}
+	\includegraphics[width=\textwidth]{./data/plots/anharmonicity/3_bandstructures/Si/bands_dos_emb.pdf}
+	\caption{
+		Phonon bandstructure of fcc-diamond silicon obtained for a supercell with 216 atoms. Open circles denote experimental reference data from inelastic neutron scattering at room temperature~\cite{Nilsson1972}.
+	}
+	\label{fig:ha.dispersion.si}
+\end{figure}
+An alternative approach is \emph{Raman scattering}, where an incoming light beam scatters with a subset of the modes depending on their symmetry properties. Since the light has typical frequencies similar of the vibrational spectrum,~i.\,e., of the order of 10\,THz~$\sim$~40\,meV, its wavenumber $k=\omega/c$ is approximately $3 \cdot 10 ^{-7}$\,\AA$^{-1}$, where $c$ is the speed of light. Taking a typical crystal lattice constant of $a \approx 5\,$\AA, the maximum crystal wavenumber is $q=2 \pi / a \approx 1\,{\text \AA}^{-1}$. Light of similar energy as phonons therefore typically probe the dispersion very close to ${\bf q} = 0$,~i.\,e.,~the $\Gamma$ point. A comparison of calculated phonon dispersion and frequencies from Raman spectroscopy is shown in Fig.\,\ref{fig:ha.dispersion.kcaf3} for the orthorombic perovskite KCaF$_3$~\cite{Bulou1980, Demetriou2005, Knight2005}.
+\begin{figure}
+	\includegraphics[width=\textwidth]{./data/plots/anharmonicity/3_bandstructures/KCaF3/bands_dos_emb.pdf}
+	\caption{
+		Phonon bandstructure of KCaF$_3$ in the Pnma structure obtained from a supercell with 160 atoms. Open circles denote experimental reference data from Raman scattering at 40\,K~\cite{Daniel1997}.
+	}
+	\label{fig:ha.dispersion.kcaf3}
+\end{figure}
 
 
 

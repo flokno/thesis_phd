@@ -52,10 +52,13 @@ Thesis Review
 - [ ] Notation aus Kapitel 1 anpassen in Bezug auf BvK/Periodizitaet.
 - [x] intrinsic/extrinsic periodicity
 - [ ] Brillouin zone, high-symmetry points?
+- [ ] order:
+  - [ ] extended systems/crystal, HA, MD, class. HA
 
 ## 3 | Heat Transport
 
 - [x] clarify missing diffusion currents
+- [ ] discuss limits of fourier equation, e.g., boundary terms
 - [ ] definiere lebenszeit einmal allgemein
 - [ ] rechne dann analytisch harmonisc/stoerungstheorie
 - [ ] diskutiere dann fit an dynamik
