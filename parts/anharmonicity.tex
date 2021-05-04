@@ -3,7 +3,7 @@
 As we have seen in the previous chapter, thermal conductivity is an anharmonic effect -- in a purely harmonic system, thermal conductivity is infinite. We have also discussed methods to assess thermal transport in materials, either via the Green-Kubo approach, or via perturbation theory, where the potential energy is expanded to third or fourth order, and these terms are used to compute the change of phonon properties, in particular, their lifetimes.\CITE{see paper}
 From a computer simulation perspective, the two approaches have different strengths: Perturbative techniques are ideally suited, as the name suggest, when the anharmonicity is weak,~i.\,e.,~the harmonic terms in the potential dominate the dynamical evolution of the system. The Green-Kubo technique on the other hand does not need approximations to the potential energy surface, and therefore naturally includes all orders of anharmonicity. It is ideally suited in situations where the anharmonicity is strong,~i.\,e.,~when the basic assumption of perturbation theory is not satisfied. It is therefore desirable to \emph{measure} the ``degree of anharmonicity'', which, in turn, allows to discuss the question of anharmonicity not just in qualitative terms, but also in a quantitative way.
 
-\newthought{The chapter is based on work performed by the author}, as published in Ref.\,\cite{Knoop2020}. We therefore only summarize the key ideas adopted in this work.\REM{say sth. else?}
+\newthought{The chapter is based on work performed by the author}, as published in Ref.\,\cite{Knoop2020}. We therefore only summarize the key ideas adopted in this thesis.\REM{say sth. else?}
 
 \section{Definition of Anharmonicity}
 
@@ -57,7 +57,7 @@ where $F_{I, \alpha}^{(A)}$ is the $\alpha$ component of the (anharmonic) force 
 	\sigma [F]_T 
 		= \sqrt{\frac{1}{3N} \sum_{I, \alpha} \braket{F_{I, \alpha}^2}_T}~.
 \end{align}
-The effect of normalizing the distribution of forces is shown in Fig.\,\ref{fig:anh.normalization} for two exemplary materials, fcc-silicon, and an orthorombic perovskite, KCaF$_3$~\CITE{KCaf papers}.
+The effect of normalizing the distribution of forces is shown in Fig.\,\ref{fig:anh.normalization} for the two exemplary materials already discussed in the context of phonon dispersions in Sec.\,\ref{sec:ha.dispersions}, fcc-silicon, and the orthorombic perovskite KCaF$_3$.
 \begin{marginfigure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{./data/plots/anharmonicity/4_force_distribution/histogram_forces_vertical.pdf}
@@ -66,83 +66,70 @@ The effect of normalizing the distribution of forces is shown in Fig.\,\ref{fig:
 	}
 	\label{fig:anh.normalization}
 \end{marginfigure}
-
-
-\section{Examples}
-
-
-%\begin{marginfigure}
-%	\includegraphics[width=\textwidth]{./data/plots/anharmonicity/2_materials/both.pdf}
-%	\caption{
-%		\label{fig:KCaF3}
-%		KCaF$_3$ in the low-temperature Pnma~(left) and high-temperature aristotype phase~(right). Both structures are viewed along the long $b$-axis.
-%	}
-%\end{marginfigure}
-
-\REM{Move to dynamics chapter?}
-Silicon:
-
-
-Visualize anharmonicity:
-
+For these two materials, we show the normalized distributions of forces and anharmonic force contributions in Fig.\,\ref{fig:anh.sigmaA}.
 \begin{figure}
 	\includegraphics[width=\textwidth]{./data/plots/anharmonicity/5_density_plots/histogram_annotated.png}
 	\caption{
-		Normalized anharmonic force components versus normalized force components. Dashed horizontal lines: Width of the distribution estimated from standard deviation.
+		Normalized anharmonic force components versus normalized force components. Dashed horizontal lines: Width of the distribution estimated from standard deviation. Individual dots are force components sampled during an \emph{ab initio} MD simulations.
 	}
+	\label{fig:anh.sigmaA}
 \end{figure}
+In this visualization, the measure of anharmonicity $\sigmaA$ is given by the standard deviation of the distribution in y-direction, as indicated by the dashed vertical lines in the plot. The distribution of anharmonic force components is more than twice as broad for the perovskite KCaF$_3$ compared to silicon, with $\sigmaA$ of 0.36 compared to 0.15, respectively. This can be interpreted in the sense that 36\,\% of the forces stem from anharmonic contributions in KCaF$_3$, and 15\,\% in silicon. Furthermore, strongly anharmonic force contributions with a strength of $0.5\,\sigma [F]$ or more are nearly absent in silicon with a probability of $<0.01\,\%$, whereas anharmonic forces of this strength in KCaF$_3$ occur with a much higher probability of $\sim 16.5\,\%$.
 
-Anharmonicity can be analyzed for each atomic species in the material:
 
+\newthought{The anharmonicity measure defined in Eq.\,\eqref{eq:sigmaA}} can also be evaluated for subsets of the dynamical degrees of freedom,~e.\,g.,~per chemical species, as shown in Fig.\,\ref{fig.anh.sigmaA.atoms}.
 \begin{figure}
 	\includegraphics[width=\textwidth]{./data/plots/anharmonicity/5_density_plots/histogram_atoms.pdf}
 	\caption{
 		Normalized anharmonic force components versus normalized force components. Dashed horizontal lines: Width of the distribution estimated from standard deviation.
 	}
+	\label{fig.anh.sigmaA.atoms}
 \end{figure}
+In the example of KCaF$_3$, this analysis shows that the calcium (Ca) atoms occupying the vertices of the unit cell are comparatively stable, whereas potassium (K) is located in a shallow potential, which can be explained by the phase-transition mechanism observed in KCaF$_3$: Above 560\,K, the material becomes cubic, and the octahedral displacement of fluorine~(F) is removed~\cite{Bulou1980,Hidaka1984}. As shown in Fig.\,\ref{fig:anh.KCaF3}, this tilt also affect the potassium atoms, which are displaced from their high-temperature reference position.
+\begin{marginfigure}
+	\includegraphics[width=\textwidth]{./data/plots/anharmonicity/2_materials/both.pdf}
+	\caption{
+		\label{fig:KCaF3}
+		KCaF$_3$ in the low-temperature Pnma~(top) and high-temperature cubic phase~(bottom). Both structures are viewed along the long $b$-axis.
+	}
+	\label{fig:anh.KCaF3}
+\end{marginfigure}
 
-%
-%\begin{figure}
-%	\includegraphics[width=\textwidth]{./data/plots/anharmonicity/3_bandstructures/KCaF3.cub/bands_dos_emb.pdf}
-%	\caption{
-%		Phonon bandstructure of KCaF$_3$ in the cubic structure obtained from a supercell with 160 atoms.
-%	}
-%\end{figure}
-%
-%\begin{figure}
-%	\includegraphics[width=\textwidth]{./data/plots/anharmonicity/6_phase_transition/sigma_temp_annot.pdf}
-%	\caption{
-%		Normalized anharmonic force components versus normalized force components. Dashed horizontal lines: Width of the distribution estimated from standard deviation.
-%	}
-%\end{figure}
-
-\section{Screening Material Space}
-
-\subsection{Preparation: Efficient Sampling of Anharmonicity}
-
+\newthought{Furthermore, it is instructive to evalute the anharmonicity for single configurations}, be it snapshots in time during molecular dynamics simulations, or when using other sampling approaches,~e.\,g,~harmonic Monte Carlo samples as defined in Eq.\,\eqref{eq:ha.samples}. While we will discuss ``time-resolved anharmonicity'' in detail at a later point, we show the evaluation of $\sigmaA$ for samples generated by Eq.\,\eqref{eq:ha.samples} in Fig.\,\ref{fig:anh.sampling}.
 \begin{figure}
 	\includegraphics[width=4.1in]{./data/plots/anharmonicity/7_sampling/convergence_sigma_MC.pdf}
 	\caption{
-		Some text to describe the figure.
+			Anharmonicity measure $\sigmaA$ evaluated for individual atomic configurations obtained from Eq.\,\eqref{eq:ha.samples}. Dots: $\sigmaA [{\bf R}_n]$ for individual samples; Red line: Cumulative average.	Black dashed line: $\sigmaA$ from \emph{ai}MD.	Shadowed region: Convergence estimated by standard error.
 	}
+	\label{fig:anh.sampling}
 \end{figure}
+The analysis shows that a decent estimate of the anharmonicity measure $\sigmaA$ can be obtained from the harmonic sampling analysis with few samples, especially for silicon, where every individual harmonic sample yielded a $\sigmaA$ within 99\,\% of the reference value obtained by MD simulation for several hundred simulation time steps indicated by the dashed vertical line. For the more anharmonic KCaF$_3$, the harmonic sampling with 30~samples yields an estimated value of $\sigmaA_{\rm est.} = 0.38$, which differs from the MD value ($\sigmaA = 0.36$) by about 5\,\%. A distinction between largely harmonic materials like silicon, and anharmonic materials like KCaF$_3$ is therefore possible with very few samples
 
+\newthought{Motivated by this fact, investigated the possiblity to estimate $\sigmaA$ based on a single samples}, as suggested by Zacharias and coworkers in Ref.\,\cite{Zacharias2016}, where a single, deterministic sample probing the most probable part of the harmonic distribution is used by using a fixed $\zeta_s = (-1)^s)$ instead of a random distribution in Eq.\,\eqref{eq:ha.samples}. We denote anharmonicity measures obtained by such a ``one-shot'' approach by $\sigmaAOS$ in the following. As shown in Fig.\,\ref{fig:anh.one-shot}, the one-shot samples provide very good estimates for silicon in the the entire temperature range from 200\,K to 800\,K, which can be expected due to the largely harmonic nature of silicon.
 \begin{figure}
 	\includegraphics[width=4.1in]{./data/plots/anharmonicity/7_sampling/sigma_temp_one_shot.pdf}
 	\caption{
-		Some text to describe the figure.
+		$\sigmaA$ as a function of temperature obtained from MD~simulations (black circles) and one-shot sampling (triangles connected by dashed curves)
 	}
+	\label{fig:anh.one-shot}
 \end{figure}
+For KCaF$_3$, the agreement is good in the temperature range from 200\, to 400\,K, at least within the limits of the harmonic sampling approach as discussed in the previous paragraph, taking into account that only a single sample was used. Above 500\,K, however, the difference to the reference value from MD simulations increases, which is due to the phase transition occuring in KCaF$_3$ discussed earlier, which also occurs in the simulation cell. A prediction of anharmonicity across phase transitions can therefore not be expected, which can be expected by noting that the entire reference frame for the harmonic model changes when a phase transition occurs. The phase transition mechanism of KCaF$_3$ and implications for the anharmonicity measure are further discussed in Ref.\,\cite{Knoop2020}.
 
+\newthought{Ultimately, the applicability of the one-shot sampling approach} needs to be assessed for a diverse set of materials, especially if one aims to use this scheme to screen for anharmonicity in material space. As shown in Fig.\,\ref{fig:anh.screening} for a set of 63~materials, the one-shot sampling is reliable within $\pm 10\,\%$ for all materials in the set up to a value of about $\sigmaA \simeq 0.3$.
 \begin{figure}
 	\includegraphics[width=4.1in]{./data/plots/anharmonicity/8_screening/sigma_os_md.pdf}
 	\caption{
-		Some text to describe the figure.
+		Comparison of the anharmonicity measure obtained from MD simulations and one-shot sampling (OS) for 63 materials at 300\,K. The set comprises 25 rock salt (RS), 21 zincblende (ZS), 7 wurtzite (WZ), and 10 orthorombic perovskite (Perov.) materials. The diagonal line denotes perfect agreement between MD and OS, and the green area denotes a 10\,\%~error margin to guide the eye.
+		Data was taken from Ref.\,\cite{Knoop2020}.
 	}
+	\label{{fig:anh.screening}}
 \end{figure}
+For larger values of $\sigmaA$, the deviation can become larger, especially for the rock salt materials with $\sigmaA \simeq 0.35$ which the one-shot sampling overestimates by about 20\,\%. Nevertheless, the agreement is qualitatively correct up to values of about $\sigmaA \simeq 0.5$, after which materials begin to show effects not captures by the harmonic sampling,~e.\,g.,~phase transition as discussed earlier for KCaF$_3$. In particular, the three highlighted noble metal halides AgBr, CuCl, and CuBr deviate strongly. These materials tend towards non-perturbative effects during the MD simulation such as spontaneous defect formation~\cite{Knoop2020}, which is a dynamical effect impossible to be described by any reference harmonic model. We will discuss the nature of these effects in more detail later. To conclude, we point out that also in the case of non-trivial dynamical effects such as defect formation, the estimated anharmonicity scored $\sigmaAOS$ are larger than $\gtrapprox 0.5$, and therefore indicate strong anharmonicity. Classifying strong anharmonicity in terms of one-shot sampling, $\sigmaAOS$, is therefore possible for all materials in the set.
 
-\subsection{Literature Review}
 
+\subsection{Anharmonicity and thermal conductivity}
+
+Based on the qualitative discussion of thermal transport
 
 \begin{figure}
 	\includegraphics[width=4.1in]{./data/plots/anharmonicity/9_kappa/sigma_vs_kappa.pdf}

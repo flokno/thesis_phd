@@ -171,3 +171,8 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
 ## Edits
 
 - https://tex.stackexchange.com/a/47936/91226
+
+## Style
+
+- https://packages.oth-regensburg.de/ctan/macros/latex/contrib/sidenotes/caesar_example.pdf
+- https://github.com/Pseudomanifold/latex-mimosis
