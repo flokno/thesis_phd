@@ -1,0 +1,119 @@
+space_group,n_formula,material,n_primitive,mp_id,sigmaA_300,sigmaA_500,sigmaA_700,source,kappa_exp,bandgap,kappa_bte,ref_exp,ref_bte,kappa_aiGK,comment,use
+56,5,Sb2O3,20,mp-2136,0.2813984703,,,Ramprasad,,1.8,,,,r,,y
+61,2,ZnSb,16,mp-753,0.31,,,Ramprasad,3.5,0.38562664,,Bjerg: https://journals.aps.org/prb/pdf/10.1103/PhysRevB.89.024304,,,,y
+62,2,SnSe,8,mp-691,0.35,,,Toberer,0.6,0.2806616,1.0-1.5,Zhao,"Carrete(LDA), Skelton(PBEsol), Guo(LDA)",r,,y
+62,3,BaSi2,24,mp-1477,0.25,,,Springer,1.4-1.6,1.82331567,,"Hashimoto, Spitzer",,r,,y
+62,4,CuSbSe2,,mp-20331,,,,Springer,2,0.37515474,,Li,,,,y
+62,5,KCaF3,20,mp-5926,0.37,,,Roekeghem,,6.19047513,,,,y,,y
+62,5,KCdF3,20,mp-9628,0.4,,,Roekeghem,,2.96425985,,,,,,y
+122,4,AgAlS2,8,mp-5782,0.28,0.36,0.42,ICSD_exp,,1.80105873,,,,,,y
+122,4,AgAlSe2,8,mp-14091,0.27,0.35,0.41,ICSD_exp,,1.03742556,,,,,,y
+122,4,AgAlTe2,8,mp-14092,0.29,0.36,0.43,ICSD_exp,,1.04482846,,,,,,y
+122,4,AgGaS2,8,mp-5342,0.3,0.37,0.43,Ramprasad,1.4-2.6,0.89869162,,"Beasley, Rincon",,r,,y
+122,4,AgGaSe2,8,mp-5518,0.3,0.39,0.45,Springer,4.8,0.18975541,,"Beasley, Garbato",,,bandluecke,
+122,4,AlCuS2,8,mp-4979,0.24,0.31,0.37,ICSD_exp,,1.69179405,,,,,,y
+122,4,AlCuSe2,8,mp-8016,0.28,0.36,0.43,ICSD_exp,,0.86664778,,,,,,y
+122,4,AlLiTe2,8,mp-4586,0.26,0.32,0.37,ICSD_exp,,2.23240412,,,,,,y
+122,4,CuInS2,8,mp-22736,0.29,0.38,0.44,ICSD_exp,,0.56984052,,,,,,y
+122,4,GaLiTe2,8,mp-5048,0.27,0.33,0.38,ICSD_exp,,1.6591436,,,,,,y
+122,4,InLiTe2,8,mp-20782,0.26,0.32,0.37,ICSD_exp,,1.41808955,,,,,,y
+160,2,InSe,,mp-22691,,,,Toberer,1.8,0.3796121,,,,,,y
+164,2,MgSb,5,mp-2646,0.31,,,Springer,4.2,0.21912998,,"Condron, Zhang",,r,bandluecke,
+166,4,Ba2BrN,4,mp-1018098,0.41,0.53,0.61,ICSD_exp,,0.99814619,,,,,,y
+166,4,Ba2ClP,4,mp-27869,0.29,0.38,0.45,ICSD_exp,,1.11881228,,,,,,y
+166,4,CuGaO2,4,mp-4280,0.21,0.27,0.32,ICSD_exp,,0.83215561,,,,,,y
+166,4,CuScO2,4,mp-4636,0.27,0.35,0.42,ICSD_exp,,2.19543495,,,,,,y
+166,4,InLiSe2,4,mp-10618,0.35,0.44,0.52,ICSD_exp,,0.7644766,,,,,,y
+166,4,InNaO2,4,mp-5175,0.21,0.27,0.33,ICSD_exp,,1.91581589,,,,,,y
+166,4,InNaS2,4,mp-20289,0.26,0.34,0.4,ICSD_exp,,1.74737538,,,,,,y
+166,4,InNaSe2,4,mp-22473,0.32,0.41,0.48,ICSD_exp,,0.99074379,,,,,,y
+166,4,LiF2H,4,mp-24199,0.45,0.55,0.64,ICSD_exp,,8.10826827,,,,,,y
+166,4,LiRhO2,4,mp-14115,0.22,0.33,0.42,ICSD_exp,,1.40005495,,,,,,y
+166,4,LiScS2,4,mp-1001786,0.28,0.38,0.47,ICSD_exp,,1.3257546,,,,,,y
+166,4,NaF2H,4,mp-27837,0.41,0.51,0.57,ICSD_exp,,6.84833584,,,,,,y
+166,4,Sr2ClN,4,mp-23033,0.28,0.36,0.43,ICSD_exp,,1.78483615,,,,,,y
+166,4,Sr2HN,4,mp-690794,0.3,0.39,0.46,ICSD_exp,,1.72839937,,,,,,y
+166,4,Sr2IN,4,mp-569677,0.28,0.37,0.44,ICSD_exp,,1.9059764,,,,,,y
+166,5,Bi2Te3,5,mp-34202,0.24,,,Ramprasad,1.6,0.14218602,1.3,Goldsmit,"Hellmann, Broido",,"Z=81, bandluecke",
+186,2,AgI,4,mp-22894,0.42,0.52,0.59,Seko,1.03,1.25013003,1.543333333,"[42] M. C. Goetz and J. A. Cowen, Solid State Commun. 41, 293 (1982).",phono3py,,,y
+186,2,CdS,4,mp-672,0.27,0.34,0.4,Ramprasad,16,1.09516682,,MorelliSlack,,,,y
+186,2,CdSe,4,mp-1070,0.26,0.33,0.38,ICSD_exp,,0.53283994,,,,,,y
+186,2,MgTe,4,mp-1039,0.26,0.34,0.39,ICSD_exp,,2.32985921,,,,,,y
+186,2,ZnO,4,mp-2133,0.22,0.28,0.33,Ramprasad,60,0.70911085,,MorelliSlack,,,,y
+186,2,ZnS,4,mp-560588,0.22,0.28,0.33,ICSD_exp,,2.16024283,,,,,,y
+186,2,ZnSe,4,mp-380,0.22,0.28,0.33,ICSD_exp,,1.27885787,,,,,,y
+206,5,Sc2O3,40,mp-216,0.23,,,Ramprasad,17,3.86035361,,,,r,,y
+216,2,AlAs,2,mp-2172,0.17,0.22,0.26,Ramprasad,98,1.36931463,,MorelliSlack,,,,y
+216,2,CdS,2,mp-2469,0.24,0.3,0.35,ICSD_exp,,1.01260152,,,,,,y
+216,2,CdTe,2,mp-406,0.26,0.33,0.39,Seko,7.5,0.6248636,6.67,"[39] S. L. Shinde and J. S. Goela, High Thermal Conductivity Materials (Springer, Berlin, 2006)",phono3py,,,y
+216,2,CuBr,2,mp-22913,0.52,0.62,0.7,Ramprasad,1.25,0.35853114,2.75,?,phono3py,,,y
+216,2,CuCl,2,mp-22914,0.55,0.64,0.71,Ramprasad,0.84,0.52916356,1.26,Slack/Andersson,phono3py,0.5 +/- 0.2,,y
+216,2,CuI,2,mp-22895,0.37,0.46,0.53,Ramprasad,0.5-1.68,1.06148585,7.1,"CRC, Grundmann",phono3py,0.8 +/- 0.3,,y
+216,2,GaAs,2,mp-2534,0.18,0.23,0.27,Ramprasad,45,0.39278637,,MorelliSlack,,,,y
+216,2,InAs,2,mp-20305,0.21,0.27,0.32,Ramprasad,30,0.84198907,,,,,,y
+216,2,ZnS,2,mp-10695,0.23,0.29,0.34,Ramprasad,27,2.11433941,,,,,,y
+216,2,ZnSe,2,mp-1190,0.23,0.29,0.34,Ramprasad,19,1.23008569,,,,,,y
+216,2,ZnTe,2,mp-2176,0.25,0.32,0.37,Ramprasad,18,1.22881793,,,,,,y
+216,3,LiAsMg,3,mp-12558,0.27,0.36,0.43,ICSD_exp,,1.26358049,,,,,,y
+216,3,LiAsZn,3,mp-9124,0.26,0.34,0.4,ICSD_exp,,0.71544704,,,,,,y
+216,3,LiNZn,3,mp-7575,0.25,0.32,0.38,ICSD_exp,,0.72754634,,,,,,y
+216,3,ZnPLi,3,mp-10182,0.25,0.32,0.38,ICSD_exp,,1.17946793,,,,,,y
+221,2,CsBr,2,mp-22906,0.42,0.53,0.62,Ramprasad,0.94,4.41293386,,Gerlich,,,,y
+221,2,CsCl,2,mp-22865,0.39,0.51,0.6,Ramprasad,1,5.20653484,,"Gerlich, Sist",,,,y
+221,2,CsI,2,mp-1056920,0.4,0.51,0.6,Ramprasad,1.1,3.81169959,,Gerlich,,,,y
+221,5,BaLiF3,5,mp-10250,0.27,,,Roekeghem,,6.23118081,2.21,,,y,,y
+221,5,CsCaF3,5,mp-7104,0.26,,,Roekeghem,,6.895,,,,,,y
+221,5,CsCdF3,5,mp-8399,0.32,,,Roekeghem,,3.308,,,,,,y
+221,5,KMgF3,5,mp-3448,0.24,,,Roekeghem,10?,7.02234075,8.2,Martin,Roekeghem,4.6 +/- 1.2,,y
+221,5,KZnF3,5,mp-5878,0.32,,,Roekeghem,5.5,3.72440695,4.15,Suemune,Roekeghem,3.5 +/- 1.6,,y
+221,5,RbMgF3,5,mp-8402,0.23,,,Roekeghem,,6.99361625,4.5,,Roekeghem,1.4 +/- 1.9,,y
+221,5,RbZnF3,,mp-xxxx,0.3,,,Roekeghem,,3.32870099,2.46,,Roekeghem,y,,y
+221,5,SrTiO3,5,mp-5229,0.28,,,Toberer,10.5,1.76179472,6.4-8.5,"Muta, Popuri","Roekeghem, Tadano",,,y
+225,2,AgBr,2,mp-23231,0.48,0.59,0.66,Ramprasad,1.1,0.49609687,,Kamram,,0.5 +/- 0.1,,y
+225,2,AgCl,2,mp-22922,0.5,0.62,0.7,Ramprasad,0.9-1,0.72525839,0.67,"Ross, Ashqari",aapl,0.6 +/- 0.1,,y
+225,2,BaO,2,mp-1342,0.44,0.57,0.66,Ramprasad,2.3,1.81325293,2.99,MorelliSlack,aapl,2.0 +/- 0.1,,y
+225,2,BaS,2,mp-1500,0.25,0.34,0.4,ICSD_exp,,2.04849231,,,,,,y
+225,2,BaSe,2,mp-1253,0.23,0.3,0.37,ICSD_exp,,1.90755009,,,,,,y
+225,2,BaTe,2,mp-1000,0.22,0.28,0.32,ICSD_exp,,1.55286218,,,,,,y
+225,2,CaO,2,mp-2605,0.2,0.26,0.31,AAPL,27,3.42399511,20.4,MorelliSlack,aapl,18.6 +/- 9.3,,y
+225,2,CaTe,2,mp-1519,0.23,0.3,0.35,ICSD_exp,,1.36099124,,,,,,y
+225,2,CsF,2,mp-1784,0.42,0.53,0.61,ICSD_exp,,5.34048722,,,,,,y
+225,2,KBr,2,mp-23251,0.41,0.53,0.62,Ramprasad,2.8-3.4,4.33223089,2.38,"Andersson, MorelliSlack",aapl,,,y
+225,2,KCl,2,mp-23193,0.43,0.56,0.65,Ramprasad,6.5-7.1,5.01389008,3.77,"Andersson, MorelliSlack",aapl,,,y
+225,2,KF,2,mp-463,0.41,0.54,0.63,Ramprasad,6.43,6.03610536,,MorelliSlack,,,,y
+225,2,KH,2,mp-24084,0.35,0.46,0.54,ICSD_exp,,3.22984093,,,,,,y
+225,2,KI,2,mp-22898,0.39,0.5,0.59,Ramprasad,1.96-2.6,3.84587491,1.46,"Andersson, MorelliSlack",aapl,,,y
+225,2,LiBr,2,mp-23259,0.4,0.52,0.61,Ramprasad,1.83,4.98314589,,Hakansson,,,,y
+225,2,LiCl,2,mp-22905,0.38,0.5,0.59,ICSD_exp,,6.27972455,,,,,,y
+225,2,LiF,2,mp-1138,0.3,0.4,0.49,Ramprasad,17.6,8.96504122,,,,,,y
+225,2,LiH,2,mp-23703,0.26,0.34,0.4,Ramprasad,15,2.74428159,,,,,,y
+225,2,LiI,2,mp-22899,0.47,0.62,0.72,ICSD_exp,,4.3115971,,,,,,y
+225,2,MgO,2,mp-1265,0.17,0.22,0.26,Ramprasad,60,4.4913664,54,MorelliSlack,aapl,44.2 +- 7.6,,y
+225,2,NaBr,2,mp-22916,0.39,0.5,0.59,Ramprasad,2.3-2.8,4.0649551,2.74,"Sigalas, MorelliSlack",aapl,1.4 +/- 1.4,,y
+225,2,NaCl,2,mp-22862,0.36,0.48,0.56,Ramprasad,6-7.1,4.97135017,6.5,"Hakansson, MorelliSlack","aapl, Ravichandran/Broido",5.1 +/- 4.6,,y
+225,2,NaF,2,mp-682,0.33,0.44,0.53,Ramprasad,16.5,6.12048873,21.1,MorelliSlack,aapl,8.0 +/- 3.6,,y
+225,2,NaI,2,mp-23268,0.36,0.45,0.53,Ramprasad,1.33-1.8,3.58290706,1.46,"Hakansson, MorelliSlack",aapl,0.7 +/- 0.1,,y
+225,2,PbTe,2,mp-19717,0.29,0.37,0.44,AAPL,2.5,0.54199791,1.73,[80],aapl,,Z=82,
+225,2,RbBr,2,mp-22867,0.44,0.55,0.64,Ramprasad,3.38-3.8,4.15980995,1.68,"Andersson, MorelliSlack",aapl,,,y
+225,2,RbCl,2,mp-23295,0.36,0.46,0.53,Ramprasad,2.41-2.8,4.85091213,,"Andersson, MorelliSlack",,,,y
+225,2,RbF,2,mp-11718,0.41,0.54,0.63,Ramprasad,2.27,5.51032712,,Hakansson,,,,y
+225,2,RbI,2,mp-22903,0.41,0.52,0.6,Ramprasad,1.98-2.3,3.80509466,1.64,"Andersson, MorelliSlack",aapl,,,y
+225,2,SnTe,2,mp-1883,0.45,0.58,0.66,Ramprasad,1.5,0.11677203,,Spitzer,,,bandluecke,
+225,2,SrO,2,mp-2472,0.22,0.29,0.35,Ramprasad,10,3.04155007,,,,,,y
+225,2,SrS,2,mp-1087,0.21,0.27,0.32,ICSD_exp,,2.26936751,,,,,,y
+225,2,SrTe,2,mp-1958,0.22,0.29,0.34,ICSD_exp,,1.63397574,,,,,,y
+225,3,CaF2,3,mp-2741,0.26,0.34,0.4,ICSD_exp,,7.0728831,,,,,,y
+225,3,CdF2,3,mp-241,0.35,0.44,0.52,AAPL,4.3,2.89338244,3.01,"[81] Popov, P. A., Fedorov, P. P. & Osiko, V. V. Thermal conductivity of single crystals with a fluorite structure: cadmium fluoride. Phys. Solid State 52, 504–508 (2010).",aapl,,,y
+225,3,K2O,3,mp-971,0.46,0.58,0.67,ICSD_exp,,1.82991309,,,,,,y
+225,3,K2S,3,mp-1022,0.31,0.4,0.47,ICSD_exp,,2.31742856,,,,,,y
+225,3,K2Te,3,mp-1747,0.32,0.4,0.47,ICSD_exp,,2.14838917,,,,,,y
+225,3,Li2O,3,mp-1960,0.24,0.32,0.38,Ramprasad,11,4.85480061,,,,,,y
+225,3,Li2S,3,mp-1153,0.29,0.37,0.43,ICSD_exp,,3.20480037,,,,,,y
+225,3,Li2Se,3,mp-2286,0.25,0.32,0.38,ICSD_exp,,2.81393156,,,,,,y
+225,3,Li2Te,3,mp-2530,0.33,0.41,0.47,ICSD_exp,,2.37959424,,,,,,y
+225,3,Na2S,3,mp-648,0.29,0.37,0.44,ICSD_exp,,2.41164736,,,,,,y
+225,3,Na2Se,3,mp-1266,0.33,0.42,0.5,ICSD_exp,,2.00228665,,,,,,y
+225,3,Na2Te,3,mp-2784,0.31,0.4,0.47,ICSD_exp,,1.99865858,,,,,,y
+225,3,Rb2O,3,mp-1394,0.4,0.53,0.62,ICSD_exp,,1.38717546,,,,,,y
+225,3,Rb2Se,3,mp-11327,0.38,0.49,0.57,ICSD_exp,,1.78524578,,,,,,y
+225,3,SrF2,3,mp-981,0.3,0.4,0.47,AAPL,2.3,5.14514805,1.8,"[82] Moore, J. P., Weaver, F. J., Graves, R. S. & McElroy, D. L. The thermal conductivities of SrCl2 and SrF2 from 85 to 400 K. In Thermal Conductivity 18 (eds Ashworth, T. & Smith, D. R.) 115–124 (Springer, New York, 1985).",aapl,,,y

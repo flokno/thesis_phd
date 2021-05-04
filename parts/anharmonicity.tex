@@ -149,4 +149,28 @@ The analysis reveals an inverse power law relationship between thermal conductiv
 \newthought{These findings suggest the following approach} towards screening material space in search for thermal insulators: Estimate the anharmonicity for materials of interest and discard the largely harmonic ones, as they will be good thermal conductors most of the time. Of course, the reverse approach can be pursued when searching for materials with potentially high thermal conductivity.
 
 \subsection{Candidate Materials}
-In the context of the work published in Ref.\,\cite{Knoop2020}, we have identified a set of 
+\begin{marginfigure}
+	\includegraphics[width=\textwidth]{./data/plots/dataset/pies.pdf}
+	\caption{
+		Lattice types and space groups represented in the dataset. Space groups not shown in the pie chart: 56, 61, 160, 164, 206, with one representative each.
+	}
+	\label{fig:anh.pie}
+\end{marginfigure}
+In the context of the work published in Ref.\,\cite{Knoop2020}, we have identified a set of 118 binary and ternary materials for further investigation with the \emph{ab intio} Green Kubo (aiGK) approach. The materials comprises five lattice types and 12 space groups as summarized in Fig.\,\ref{fig:anh.pie}.  Since we are mainly interested in thermal insulators as candidate thermoelectric and thermal barrier coating materials, we have discarded largely harmonic materials with $\sigmaA < 0.17$ from the set, and focus on anharmonic strengths $\sigmaA > 0.2$ with a mean of $\sigmaA=0.31$ and a median of $\sigmaA = 0.29$. A histogram displaying the distribution of $\sigmaA$ values is shown in Fig.\,\ref{fig:anh.histogram}.
+\begin{figure}
+	\includegraphics[width=4.1in]{./data/plots/dataset/histogram.pdf}
+	\caption{
+		Histogram of $\sigmaAOS$ values samples for the 118 chosen materials
+	}
+	\label{fig:anh.histogram}
+\end{figure}
+All values are given with respect to room temperature, as this is the regime where the most experimental reference is available to benchmark the aiGK method and to showcase the approach. In total, there are experimental reference values for 45 materials available, were we have discarded sources of questionable quality.
+
+The materials come from these sources:
+From Ramprasad: 41
+From Toberer: 3
+From Springer: 4
+From Roekeghem: 9
+From ICSD: 55
+From Seko: 2
+From AAPL: 4
