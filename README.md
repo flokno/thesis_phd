@@ -15,13 +15,16 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
 - [x] Chapter 3: heat transport
     - [x] Review Yair 
     - [x] -> Chris
-- [ ] Chapter 4: Anharmoncity (short version of paper)
-    - [ ] overview materials: 
-        - [ ] sources (Springer, ICSD, MorelliSlack, …)
-        - [ ] histogram sigmaA
+- [x] Chapter 4: Anharmoncity (short version of paper)
+    - [x] overview materials: 
+        - [x] sources (Springer, ICSD, MorelliSlack, …)
+        - [x] histogram sigmaA
 - [ ] Chapter 5: Results
     - [ ] dedicated methods and benchmarks chapter?
+        - [ ] compare OS and MD sigmaA
     - [ ] compare experiment
+        - [ ] w/o correction
+        - [ ] w/ correction
     - [ ] Finite time effect estimation!
         - [ ] [biased/unbiased autocorr?](https://stats.stackexchange.com/a/343524/265607)
     - [ ] thermal conductivity for trustworthy materials
