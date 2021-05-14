@@ -7,15 +7,18 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
 
 - [ ] Chapter 5: Results
     - [ ] Method: Implementation
+        - [x] aiGK reformulation
         - [ ] aiGK Workflow for MgO and CuI
-            - [ ] raw flux
-            - [ ] remove gauge-invariant terms
-            - [ ] apply noise-filtering to determine cutoffs
-            - [ ] size extrapolation
-                - [ ] lifetimes from mode-energy ACF at comm. q-points
-                - [ ] BTE-like thermal conductivity
-                - [ ] interpolate to denser q-meshes
-                - [ ] extrapolate to bulk limit
+            - [x] raw flux
+            - [x] remove gauge-invariant terms
+            - [x] apply noise-filtering to determine cutoffs
+                - [x] filter integrated kappa
+                - [x] preserve symmetry
+            - [x] size extrapolation
+                - [x] lifetimes from mode-energy ACF at comm. q-points
+                - [x] BTE-like thermal conductivity
+                - [x] interpolate to denser q-meshes
+                - [x] extrapolate to bulk limit
             - [ ] time convergence discussion
                 - [ ] run workflow for truncated trajectories and investigate results as function of truncation time
                 - [ ] pick set of trustworthy materials and generalize observations

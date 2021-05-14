@@ -349,6 +349,7 @@ and a \emph{kinetic} or \emph{convective} current
 In non-convective solids, the kinetic contribution is typically neglected, as it was shown several times in the literature that its contribution to thermal conductivity is orders of magnitude lower compared to the virial flux~\cite{Vogelsang1987,Kinaci2012}. However, the kinetic flux becomes increasingly important and even dominant in liquids and gases with substantial convection~\cite{Cheng2020}.
 
 \subsection{Gauge invariance of heat flux definitions}
+\label{sec:gauge_invariance}
 As seen above, the local current is only defined up to a non-heat carrying contribution $\b j_{\perp}$. Likewise, the energy density is only defined up to terms that keep the total energy integral unchanged. The choice of a local energy partitioning as,~e.\,g.,~given by Eq.\,\eqref{eq:hf.e.atomic} is therefore not unique, and different partitioning schemes will lead to differing heat fluxes. However, the thermal conductivity obtained after integrating the respective autocorrelation functions will be the same. In particular, Ercole \emph{et al.} have shown in Ref.\,\cite{Ercole2016} that two heat fluxes differing by the time derivative of a \emph{bounded} vector field,
 \begin{align}
   \tilde{\b J} (t) = \b J (t) + \frac{\d}{\d t} \b P (t)~,
@@ -717,6 +718,7 @@ from which the lifetime $\tau_s$ can be obtained by fitting $G_s (t)$ to an expo
 \REM{Remove plot?}
 
 \section{Ab initio Green Kubo}
+\label{sec:aiGK}
 Building on the previous sections, we are now in position to present the \emph{ab initio} Green Kubo approach adopted in this work. The approach comprises four steps:
 \begin{enumerate}
 	\item The thermal conductivity $\kappa_{\rm ai}$ is obtained by numerically evaluating the Green-Kubo integral using the \emph{ab initio} heat flux ${\bf J}_{\rm ai} (t)$ defined in Eq.\,\eqref{eq:J_ai} evaluated during microcanonical \emph{ab initio} molecular dynamics simulations.
