@@ -187,8 +187,8 @@
 % r.9 introduction
 \cleardoublepage
 \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
-%\chapter{Introduction}
-%\input{./parts/1_intro.tex}
+\chapter{Introduction}
+\input{./parts/0_intro.tex}
 
 %%
 % Start the main matter (normal chapters)
@@ -198,27 +198,29 @@
 \part{Theory and Methods}
 
 \chapter{The Many Body Problem}
-\input{./parts/2_dft.tex}
+\input{./parts/1_dft.tex}
 
-% \newpage
+ \newpage
 
 \chapter{Nuclear and Lattice Dynamics}
 \input{./parts/2_lattice_dynamics.tex}
 
 \chapter{Heat Transport}
-\input{./parts/2_heat_transport.tex}
+\input{./parts/3_heat_transport.tex}
 
 \chapter{Anharmonicity}
-\input{./parts/anharmonicity.tex}
+\input{./parts/4_anharmonicity.tex}
+%
+\part{Implementation and Benchmarks}
 
-% \part{Benchmarks?}
 
+%
 % \part{Results}
 
-\chapter{Thermal Conductivities for Strongly Anharmonic Compounds}
-\input{./parts/results.tex}
-%
-%
+%\chapter{Thermal Conductivities for Strongly Anharmonic Compounds}
+%\input{./parts/results.tex}
+
+
 %\chapter{Conclusion}
 %
 %\chapter{Outlook}

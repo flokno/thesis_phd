@@ -5,13 +5,41 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
 
 ## To Do's
 
+- [ ] Chapter 5: Results
+    - [ ] Method: Implementation
+        - [ ] aiGK Workflow for MgO and CuI
+            - [ ] raw flux
+            - [ ] remove gauge-invariant terms
+            - [ ] apply noise-filtering to determine cutoffs
+            - [ ] size extrapolation
+                - [ ] lifetimes from mode-energy ACF at comm. q-points
+                - [ ] BTE-like thermal conductivity
+                - [ ] interpolate to denser q-meshes
+                - [ ] extrapolate to bulk limit
+            - [ ] time convergence discussion
+                - [ ] run workflow for truncated trajectories and investigate results as function of truncation time
+                - [ ] pick set of trustworthy materials and generalize observations
+    - [ ] Results: thermal conductivity for trustworthy materials
+        - [ ] compare to experiment
+        - [ ] compare to theory (some?)
+        - [ ] vs. sigma
+        - [ ] discuss findings
+            - [ ] chalcopyrites? the one heusler?
+    - [ ] Dynamical effects
+        - [ ] give overview of non-trivial dyn. effects observed during aiMD
+- [ ] Outlook
+    - [ ] Schnet
+    - [ ] TDEP
+
+## DONE
+
 - [x] Chapter 2: Lattice dynamics, phonons
     - [x] classical harmonic dynamics
     - [x] review
     - [x] -> Marcin/Chris
-    - [ ] show phonon dispersions?
-    - [ ] DOS?
-    - [ ] idea: move Si and KCaF3 up, discuss there.
+    - [x] show phonon dispersions?
+    - [x] DOS?
+    - [x] idea: move Si and KCaF3 up, discuss there.
 - [x] Chapter 3: heat transport
     - [x] Review Yair 
     - [x] -> Chris
@@ -20,20 +48,13 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
         - [x] sources (Springer, ICSD, MorelliSlack, …)
         - [x] histogram sigmaA
 - [ ] Chapter 5: Results
-    - [ ] dedicated methods and benchmarks chapter?
-        - [ ] compare OS and MD sigmaA
-    - [ ] compare experiment
-        - [ ] w/o correction
-        - [ ] w/ correction
-    - [ ] Finite time effect estimation!
-        - [ ] [biased/unbiased autocorr?](https://stats.stackexchange.com/a/343524/265607)
-    - [ ] thermal conductivity for trustworthy materials
-        - [ ] compare theory (?)
-        - [ ] vs. sigma
-    - [ ] Dynamical effects
-- [ ] Outlook
-    - [ ] Schnet
-    - [ ] TDEP
+    - [x] dedicated methods and benchmarks chapter?
+        - [x] compare OS and MD sigmaA
+    - [x] compare experiment
+        - [x] w/o correction
+        - [x] w/ correction
+    - [x] Finite time effect estimation!
+        - [x] [biased/unbiased autocorr?](https://stats.stackexchange.com/a/343524/265607)
 
 # Initial Plan
 
