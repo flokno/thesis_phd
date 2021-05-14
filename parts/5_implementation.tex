@@ -1,0 +1,51 @@
+\chapter{Ab Initio Green Kubo: Implementation}
+\label{chp:implementation}
+\newcommand{\tcut}{t_{\rm c}}
+
+The theoretical background for the \emph{ab initio} simulation of thermal conductivity has been established in the previous chapters, in particular, Chp.~\ref{chp:heat_transport}. The purpose of this chapter is to discuss the practical implementation of the respective formulas. 
+
+We restate the Green-Kubo formula for the thermal conductivity initially introduced in Sec.\,\TODO{ref} as
+\begin{align}
+	\kappa^{\alpha \beta} (T)
+		= \int \d \Gamma_0 ~ \kappa^{\alpha \beta} (\Gamma_0) f_T (\Gamma_0) ~,
+	\label{eq:implementation.kappa.avg}
+\end{align}
+where $\kappa^{\alpha \beta} (T)$ are the Cartesian components of the thermal conductivity tensor at temperature $T$, and $\Gamma_0$ are phase-space configurations with a respective ensemble weight $f_T (\Gamma_0)$ at the given temperature. For each phase-space configuration $\Gamma_0$, the thermal conductivity is computed as
+\begin{align}
+	\kappa^{\alpha \beta} (\Gamma_0)
+		&=
+		\frac{V}{k_{\rm B} T^2} 
+		\lim_{t_{\rm c} \to \infty}
+		\int_{0}^{\tcut} 
+		\d t ~ C_{JJ}^{\alpha \beta} (\Gamma_0, t)~,
+	\label{eq:implementatino.kappa.1}
+\end{align}
+where $	C^{\alpha \beta}_{J J} (\Gamma_0, t)$ denotes the heat flux autocorrelation function (HFACF),
+\begin{align}
+	C^{\alpha \beta}_{J J} (\Gamma_0, t)
+		=
+		\lim_{t_{0} \to \infty}
+		\frac{1}{t_0 - t}
+		\int_{0}^{t_{\rm 0} - t} 
+		\d s ~ J^\alpha (\Gamma_{t + s}) J^\beta (\Gamma_s)~,
+	\label{eq:implementatino.acf.1}
+\end{align}
+and a phase-space point $\Gamma_t$ is related to the initial configuration $\Gamma_0$ through the canonical time evolution determined by the many-body Hamiltonian of the system, $\mathcal H (\Gamma)$. Equation~\ref{eq:implementation.kappa.avg} through~\ref{eq:implementatino.acf.1} represent an exact reformulation of the Green Kubo formula.
+
+
+\newthought{In order to evaluate these equations in finite simulations}, the integrals need to be discretized and truncated to finite domains. First, we approximate Eq.\,\eqref{eq:implementation.kappa.avg} by choosing a finite set of starting configurations $\Gamma_0^i$, so that
+\begin{align}
+	\kappa^{\alpha \beta} (T)
+		\approx
+		\frac{1}{N} \sum_{i=1}^N \kappa^{\alpha \beta} (\Gamma_0^i)~,
+	\label{eq:implementation.kappa.ensemble.approx}
+\end{align}
+where the starting conditions $\Gamma_0^i$ are chosen from NVT molecular dynamics simulations for the thermodynamic conditions of interest. For each starting condition $\Gamma_0$, we perform NVE molecular dynamics simulations to generate the time evolution of the system, $\Gamma_t$, and evaluate the heat flux, $J^\alpha (\Gamma_t)$ along this trajectory. The simulation is performed for a total simulation time $t_0$, thereby truncating the time integral in Eq.\,\eqref{eq:implementatino.acf.1}. From resulting autocorrelation function of finite length, the thermal conductivity is computed via Eq.\,\eqref{eq:implementatino.kappa.1}, where a \emph{cutoff time} $\tcut < t_0$ is chosen to reduce noise when the autocorrelation function has effectively decayed~\cite{Jones2012}.
+
+
+After computing the thermal conductivity for each trajectory, the final value is given by Eq.\,\eqref{eq:implementation.kappa.ensemble.approx},~i.\,e.,~by the \emph{mean} of the individual trajectories. The statistical error due to the finite ensemble average is estimated by the \emph{standard error},~i.\,e.,~the standard deviation of the mean,
+\begin{align}
+	\Delta \kappa^{\alpha \beta} (T)
+		= \frac{1}{\sqrt{N}} \sqrt{\frac{1}{N} \sum_i \left( \kappa^{\alpha \beta} (T) - \kappa^{\alpha \beta} (\Gamma_0^i) \right)^2}~.
+	\label{eq:imp.delta.kappa}
+\end{align}
