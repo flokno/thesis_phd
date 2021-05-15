@@ -20,6 +20,10 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
                 - [x] interpolate to denser q-meshes
                 - [x] extrapolate to bulk limit
             - [ ] time convergence discussion
+                - [ ] MgO as function of simulation time
+            - [ ] compare to experiment
+            - [ ] apply to CuI
+            - [ ] scale
                 - [ ] run workflow for truncated trajectories and investigate results as function of truncation time
                 - [ ] pick set of trustworthy materials and generalize observations
     - [ ] Results: thermal conductivity for trustworthy materials

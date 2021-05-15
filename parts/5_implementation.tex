@@ -1,6 +1,7 @@
 \chapter{Ab Initio Green Kubo: Implementation}
 \label{chp:implementation}
 \newcommand{\tcut}{t_{\rm c}}
+\newcommand{\teff}{t^{\rm eff}_0}
 
 The theoretical background for the \emph{ab initio} simulation of thermal conductivity has been established in the previous chapters, in particular, Chp.~\ref{chp:heat_transport}. The purpose of this chapter is to discuss the practical implementation of the respective formulas. 
 
@@ -38,20 +39,23 @@ and a phase-space point $\Gamma_t$ is related to the initial configuration $\Gam
 	\kappa^{\alpha \beta} (T)
 		\approx
 		\frac{1}{N} \sum_{i=1}^N \kappa^{\alpha \beta} (\Gamma_0^i)~,
-	\label{eq:implementation.kappa.ensemble.approx}
+	\label{eq:implementation.kappa.mean}
 \end{align}
 where the starting conditions $\Gamma_0^i$ are chosen from NVT molecular dynamics simulations for the thermodynamic conditions of interest. For each starting condition $\Gamma_0$, we perform NVE molecular dynamics simulations to generate the time evolution of the system, $\Gamma_t$, and evaluate the heat flux, $J^\alpha (\Gamma_t)$ along this trajectory. The simulation is performed for a total simulation time $t_0$, thereby truncating the time integral in Eq.\,\eqref{eq:implementatino.acf.1}. From resulting autocorrelation function of finite length, the thermal conductivity is computed via Eq.\,\eqref{eq:implementatino.kappa.1}, where a \emph{cutoff time} $\tcut < t_0$ is chosen to reduce noise when the autocorrelation function has effectively decayed~\cite{Jones2012}.
-After computing the thermal conductivity for each trajectory, the final value is given by Eq.\,\eqref{eq:implementation.kappa.ensemble.approx},~i.\,e.,~by the \emph{mean} of the individual trajectories. The statistical error due to the finite ensemble average is estimated by the \emph{standard error},~i.\,e.,~the standard deviation of the mean,
+After computing the thermal conductivity for each trajectory, the final value is given by Eq.\,\eqref{eq:implementation.kappa.mean},~i.\,e.,~by the \emph{mean} of the individual trajectories. The statistical error due to the finite ensemble average is estimated by the \emph{standard error},~i.\,e.,~the standard deviation of the mean,
 \begin{align}
 	\Delta \kappa^{\alpha \beta} (T)
 		= \frac{1}{\sqrt{N}} \sqrt{\frac{1}{N} \sum_i \left( \kappa^{\alpha \beta} (T) - \kappa^{\alpha \beta} (\Gamma_0^i) \right)^2}~.
-	\label{eq:imp.delta.kappa}
+	\label{eq:imp.kappa.err}
 \end{align}
 
 
+\REM{Discuss $\kappa = \frac{1}{3} \sum_{\alpha} \kappa^{\alpha \alpha}$}
 
 
 \newthought{In empirical force field approaches}, the appearing equations are typically evaluated as is, and convergence in size and time can be checked in a brute-force way by increasing the respective scales well beyond the necessary limits\CITE{Lammps, Jones, more}. From an \emph{ab initio} perspective, the accessible size and time scales are each at least two orders of magnitude lower,\footnote{Force fields: 1\,ns for 10000~atoms within 1 day, \emph{ab initio}: 50\,ps for 200~atoms within 1~months.} and additional steps are necessary to increase the amount of information that can be extracted from the comparatively short simulations. The purpose of this chapter is to discuss these additional steps in detail: First, we present steps to remove noise from the heat flux autocorrelation functions $C_{JJ} (t)$, which enables to choose cutoff times $\tcut$ in a numerically robust way. Next, we discuss the size extrapolation scheme in terms of the harmonic mapping presented in Sec.\,\ref{sec:aiGK} which allows to correct for the finite size of simulations cells used in \emph{ab initio} molecular dynamics simulations. Finally, we discuss the necessary simulation times $t_0$ and how those can be estimated for novel materials.
+
+\REM{Case study MgO which is fairly harmonic, apply to strongly anharmonic CuI}
 
 \section{Noise Reduction Scheme}
 \subsection{Discard non-contributing terms}
@@ -112,13 +116,13 @@ where $v_b^\alpha ({\bf q})$ is the group velocity of a phonon mode with band in
 \newthought{In the next step}, the lifetimes $\tau_b ({\bf q})$ are interpolated to denser $\bf q$-point meshes by $\fD{\tilde{\tau}}_b (\tilde{\bf q}) = \fD \lambda_b (\tilde {\bf q}) \omega_b^{-2} (\tilde {\bf q})$ with a weakly $\bf q$-dependent function $\lambda_b (\tilde {\bf q})$ obtained by linearly interpolating the lifetimes obtained at commensurate $\bf q$-points. The scaling of lifetimes with $\omega_b^{-2} ({\bf q})$ is rooted in basic phonon theory as discussed in detail by Herring~\cite{Herring1954}. For the acoustic modes at ${\bf q} = \Gamma = 0$, where $\omega ({\bf q \to 0}) \to 0$, the value for $\lambda_b (\Gamma)$ is obtained by averaging over values at the surrounding $\bf q$-points. For the new, denser grid, an interpolated value,
 \begin{align}
 	\kappa_{\rm ha - int}^{\alpha \beta} (N_{\tilde{\bf q}}) = V k_{\rm B} \frac{N_{\bf q}}{N_{\tilde{\bf q}}} \sum_{b, \tilde{\bf q}} v^\alpha_b (\tilde{\bf q}) v^{\beta}_b (\tilde{\bf q}) \fD{\tilde{\tau}}_b (\tilde{\bf q})~,
-	\label{eq:imp.K.bte.int}
+	\label{eq:imp.K.bte.correction}
 \end{align}
-can be obtained, where $N_{\tilde{\bf q}}$ is the number of points in the new grid, and the factor $N_{\bf q} / N_{\tilde{\bf q}}$ accounts for the increased number points. The bulk limit of Eq.\,\eqref{eq:imp.K.bte.int} is obtained by computing interpolated values for an increasing density of $\bf q$-points. Since Eq.\,\eqref{eq:imp.K.bte.int} is a Riemann sum approximating the Brillouin zone integral $\int \d^3 q$, its convergence can be expected to be linear in $N_{\tilde{\bf q}}^{-1/3} \equiv 1 / n_q$,~i.\,e.,~the inverse number of $\bf q$-points per Cartesian direction. The slope of this curve can be used to extrapolate the value of $\kappa_{\rm ha}$ to bulk limit, as shown in Fig.\,\ref{fig:imp.kappa.bte.int}.
+can be obtained, where $N_{\tilde{\bf q}}$ is the number of points in the new grid, and the factor $N_{\bf q} / N_{\tilde{\bf q}}$ accounts for the increased number points. The bulk limit of Eq.\,\eqref{eq:imp.K.bte.correction} is obtained by computing interpolated values for an increasing density of $\bf q$-points. Since Eq.\,\eqref{eq:imp.K.bte.correction} is a Riemann sum approximating the Brillouin zone integral $\int \d^3 q$, its convergence can be expected to be linear in $N_{\tilde{\bf q}}^{-1/3} \equiv 1 / n_q$,~i.\,e.,~the inverse number of $\bf q$-points per Cartesian direction. The slope of this curve can be used to extrapolate the value of $\kappa_{\rm ha}$ to bulk limit, as shown in Fig.\,\ref{fig:imp.kappa.bte.correction}.
 \begin{figure}
 	\includegraphics[width=.8\textwidth]{./data/plots/lifetimes/greenkubo_summary_interpolation_fit.pdf}
 	\caption{Description of figure}
-	\label{fig:imp.kappa.bte.int}
+	\label{fig:imp.kappa.bte.correction}
 \end{figure}
 With the extrapolated value $\kappa_{\rm ha-bulk}$, a correction can be obtained via
 \begin{align}
@@ -134,3 +138,35 @@ from which the final result for the thermal conductivity can be obtained via
 \end{align}
 where $\kappa^{\alpha \beta}$ is the value from the \emph{ab initio} Green Kubo simulation.
 
+\section{Simulation Time Convergence}
+After we have seen how the cutoff time $\tcut$ in Eq.\,\eqref{eq:implementatino.kappa.1} can be obtained, and finite-size errors can be corrected, we discuss the convergence of presented scheme as a function of the simulation time $t_0$ in Eq.\,\eqref{eq:implementatino.acf.1}. We do this for the case of MgO for three independent trajectories of 60\,ps length each at GGA level of theory using the PBEsol function and light-default basissets in FHI-aims~\CITE{PBEsol, aims}. We truncate every trajectory in 10\,\% steps down to a length of 6\,ps, and apply the workflow presented in the previous chapters to each of the truncated trajectories. 
+\begin{figure}
+	\includegraphics[width=\textwidth]{./data/plots/kappa_convergence/examples/{225.02.MgO}.pdf}
+	\caption{Thermal conductivity $\kappa$ as function of the effective simulation time $\teff = 7.5\,{\rm THz} \cdot t_0$ as defined in Eq.\,\ref{eq:imp.teff}. Values are given as the ensemble average over three independent trajectories. The error bars are computed according to Eq.\,\eqref{eq:imp.kappa.err} as the standard error of the ensemble average. The blue curve is a logistic curve defined in Eq.\,\eqref{eq:imp.f_logistic} fitted to the $\kappa$ values, the dashed blue curve is the infinite time limit of the fitted function. Gray dots represent the thermal conductivity as given by the simulation without the size-correction scheme.
+	
+	Please note that the values for $\kappa$ shown here cannot be directly compared to the value displayed in Fig.\,\ref{fig:imp.hfacf.kappa.1} or \ref{fig:imp.kappa.bte.correction}, because the latter only show single components of single runs, which can vary substantially from the total average.}
+	\label{fig:imp.kappa.convergence.MgO}
+\end{figure}
+
+\newthought{The convergence of the final value of thermal conductivity} is shown in Fig.\,\ref{fig:imp.kappa.convergence.MgO} as function of a dimensionless \emph{effective simulation time} $t_0^{\rm eff}$, which we define via
+\begin{align}
+	\teff = t_0 \cdot \bar{\omega}_{\rm min}~,
+	\label{eq:imp.teff}
+\end{align}
+where $t_0$ is the (truncated) simulation time, and $\bar{\omega}_{\rm min}$ is a characteristic frequency for the slow degrees of freedom of the system, chosen as the mean frequency of the lowest 20\,\% of the vibrational spectrum as explained in Fig.\,\ref{fig:imp.w_eff}. In MgO, this frequency is 7.5\,THz.
+\begin{marginfigure}
+	\includegraphics[width=\textwidth]{./data/plots/kappa_convergence/t_eff/vdos.pdf}
+	\caption{Vibrational density of states (VDOS) for MgO. Light blue is the entire VDOS, solid blue is the lowest 20\,\% of the spectrum. $\bar{\omega}_{\rm min}$ is calculated as the average frequency in the low part of the spectrum.}
+	\label{fig:imp.w_eff}
+\end{marginfigure}
+Figure~\ref{fig:imp.kappa.convergence.MgO} shows that the thermal conductivity converges after an effective simulation time of $\teff \approx 300$, which corresponds to a time of 40\,ps, where the value of $\kappa$ reaches a plateau within the error bars. The overall shape of the curve can be described as follows: Simulations shorter than 20\,ps ($\teff \lesssim 150$) sample the early decay of the HFACF which contribute about 30\,W/mK to the total thermal condcutivity. After a simulation time of 25\,ps ($\teff \gtrsim 190$), the late decay of the HFACF is sampled, contributing more than double the amount to the total thermal conductivity of $68.8 \pm 6.1$\,W/mK after the total simulation time. In the plot, this two-step behavior is approximated by a logistic function 
+\begin{align}
+	f(t) 
+		= \frac{L}{1 + \exp \left(-\frac{(t-t_{\rm inflection})}{\tau} \right)} + f_0~,
+	\label{eq:imp.f_logistic}
+\end{align}
+which allows to accurately quantify the simulation times where the second super-linear increase in $\kappa$ occurs,~i.\,e.,~the region in the vicinity of the inflection point located at $t_{\rm inflection} = 218$, which corresponds to a simulation time of 29\,ps.
+
+The plot furthermore shows the thermal conductivities obtained without the finite-size correction discussed earlier as gray dots. Without this correction, the final value would be $45.5 \pm 6.1$\,W/mK. The finite-size correction therefore increases this value by about 50\,\%.
+
+\section{Comparison to Experiment}
