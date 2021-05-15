@@ -55,7 +55,11 @@ After computing the thermal conductivity for each trajectory, the final value is
 
 \newthought{In empirical force field approaches}, the appearing equations are typically evaluated as is, and convergence in size and time can be checked in a brute-force way by increasing the respective scales well beyond the necessary limits\CITE{Lammps, Jones, more}. From an \emph{ab initio} perspective, the accessible size and time scales are each at least two orders of magnitude lower,\footnote{Force fields: 1\,ns for 10000~atoms within 1 day, \emph{ab initio}: 50\,ps for 200~atoms within 1~months.} and additional steps are necessary to increase the amount of information that can be extracted from the comparatively short simulations. The purpose of this chapter is to discuss these additional steps in detail: First, we present steps to remove noise from the heat flux autocorrelation functions $C_{JJ} (t)$, which enables to choose cutoff times $\tcut$ in a numerically robust way. Next, we discuss the size extrapolation scheme in terms of the harmonic mapping presented in Sec.\,\ref{sec:aiGK} which allows to correct for the finite size of simulations cells used in \emph{ab initio} molecular dynamics simulations. Finally, we discuss the necessary simulation times $t_0$ and how those can be estimated for novel materials.
 
-\REM{Case study MgO which is fairly harmonic, apply to strongly anharmonic CuI}
+\REM{Case study preiclase (MgO) which is fairly harmonic, apply to strongly anharmonic CuI}
+
+\REM{plot of MgO structure?}
+
+\REM{pressure was reduced according to procedure outlined in appendix}
 
 \section{Noise Reduction Scheme}
 \subsection{Discard non-contributing terms}
@@ -141,7 +145,7 @@ where $\kappa^{\alpha \beta}$ is the value from the \emph{ab initio} Green Kubo 
 \section{Simulation Time Convergence}
 After we have seen how the cutoff time $\tcut$ in Eq.\,\eqref{eq:implementatino.kappa.1} can be obtained, and finite-size errors can be corrected, we discuss the convergence of presented scheme as a function of the simulation time $t_0$ in Eq.\,\eqref{eq:implementatino.acf.1}. We do this for the case of MgO for three independent trajectories of 60\,ps length each at GGA level of theory using the PBEsol function and light-default basissets in FHI-aims~\CITE{PBEsol, aims}. We truncate every trajectory in 10\,\% steps down to a length of 6\,ps, and apply the workflow presented in the previous chapters to each of the truncated trajectories. 
 \begin{figure}
-	\includegraphics[width=\textwidth]{./data/plots/kappa_convergence/examples/{225.02.MgO}.pdf}
+	\includegraphics[width=\textwidth]{./data/plots/kappa_convergence/examples/225_MgO.pdf}
 	\caption{Thermal conductivity $\kappa$ as function of the effective simulation time $\teff = 7.5\,{\rm THz} \cdot t_0$ as defined in Eq.\,\ref{eq:imp.teff}. Values are given as the ensemble average over three independent trajectories. The error bars are computed according to Eq.\,\eqref{eq:imp.kappa.err} as the standard error of the ensemble average. The blue curve is a logistic curve defined in Eq.\,\eqref{eq:imp.f_logistic} fitted to the $\kappa$ values, the dashed blue curve is the infinite time limit of the fitted function. Gray dots represent the thermal conductivity as given by the simulation without the size-correction scheme.
 	
 	Please note that the values for $\kappa$ shown here cannot be directly compared to the value displayed in Fig.\,\ref{fig:imp.hfacf.kappa.1} or \ref{fig:imp.kappa.bte.correction}, because the latter only show single components of single runs, which can vary substantially from the total average.}
@@ -170,3 +174,4 @@ which allows to accurately quantify the simulation times where the second super-
 The plot furthermore shows the thermal conductivities obtained without the finite-size correction discussed earlier as gray dots. Without this correction, the final value would be $45.5 \pm 6.1$\,W/mK. The finite-size correction therefore increases this value by about 50\,\%.
 
 \section{Comparison to Experiment}
+
