@@ -61,7 +61,7 @@ After computing the thermal conductivity for each trajectory, the final value is
 
 \REM{pressure was reduced according to procedure outlined in appendix}
 
-\section{Noise Reduction Scheme}
+\section{Noise Reduction Scheme and Cutoff Estimation}
 \subsection{Discard non-contributing terms}
 The raw \emph{ab initio} heat flux used in this work was defined in Eq.\,\eqref{eq:J_ai} and is given for a phase-space point $\Gamma_t = \set{{\bf R} (t), \dot{\bf R} (t)}$ by
 \begin{align}
@@ -173,32 +173,135 @@ which allows to accurately quantify the simulation times where the second super-
 
 The plot furthermore shows the thermal conductivities obtained without the finite-size correction discussed earlier as gray dots. Without this correction, the final value would be $45.5 \pm 6.1$\,W/mK. The finite-size correction therefore increases this value by about 50\,\%.
 
-\section{Comparison to Experiment}
-Periclase MgO is an important constituent of the earth mantle and its thermal properties have been studied in detail both experimentally and theoretically~\cite{charvat1957,slack1962,touloukian1970,Macpherson1983,Koker2009,tang2010,dekura2017}. We list the common reference values for the thermal conductivity of periclase MgO in Tab.\,\ref{tab:exp.MgO}.
-
-\REM{experimental scattering 36 to 70 W/mK, we list only most recent values which agree on about 66-68 W/mK + error}
-
+\section{Comparison to Literature Values}
+Periclase MgO is an important constituent of the earth mantle and its thermal properties have been studied in detail both experimentally and theoretically~\cite{charvat1957,slack1962,touloukian1970,Macpherson1983,Koker2009,Stackhouse2010,tang2010,dekura2017}. We list the common experimental reference values for the thermal conductivity of periclase MgO in Tab.\,\ref{tab:exp.MgO}.
 \begin{table}[ht]
   \centering
   \fontfamily{ppl}\selectfont
   \begin{tabular}{lc}
     \toprule
-    Reference & Thermal conductivity at 300\,K (W/mK)\\
+    Reference & Thermal conductivity \\
+    & at 300\,K (W/mK) \\
     \midrule
-    Slack 1962~\cite{slack1962} & $\approx 60$ \\
-    Touloukian~1970~\cite{touloukian1970} & $66 \pm 10$ \\
-    MacPherson~1983~\cite{Macpherson1983} & $68 \pm 11.6$ \\
+    Slack~1962~\cite{slack1962} & $59.7$ \\
+    Touloukian et al.~1970~\cite{touloukian1970} & $59.8$ \\
+    MacPherson and Schloessin~1983~\cite{Macpherson1983} & $61.7 \pm 10.5$ \\
+    Andersson and B\"ackstr\"om~1986~\cite{andersson1986} & $55.2 \pm 0.4$ \\
+    Dalton et al.~2013~\cite{dalton2013} & $53 \pm 2$ \\
+    Hofmeister~2014~\cite{hofmeister2014} & $50.1$ \\
     this work & $68.8 \pm 6.1$ \\
     \bottomrule
+    \vspace{.5em}
   \end{tabular}
-  \caption{Experimental values for the thermal conductivity of periclase MgO at ambient conditions.}
+  \caption{Experimental values for the thermal conductivity of periclase MgO at ambient conditions. %The two values for Slack are obtained for two different specimens~\cite{slack1962,andersson1986}.
+  }
   \label{tab:exp.MgO}
 \end{table}
+The aiGK value presented in this work agrees within the statistical precision with the experimental value presented by MacPherson and Schloessin~\cite{Macpherson1983}. It slightly overestimates the values reported by Slack~\cite{slack1962} and Touloukian et al.~\cite{touloukian1970}. More recent experiments by Dalton et al. and Hofmeister using laser-flash experiments report lower values of thermal conductivity in the range of 50-55\,W/mK~\cite{dalton2013,hofmeister2014}.
 
-\REM{temperature in the simulation is slightly lower than 300K, pressure is ~.5GPa, Yukutake~\cite{yukutake1978}: 6.8\,\% change per GPa. $\rightarrow$ correct to 66.5 W/mK.}
+Overall, we overestimate the experimentally observed thermal conductivity by about 10-30\,\%, depending on the reference. This can be explained by two factors: First, the simulation deals with isotopically pure MgO. Neglecting isotope scattering is known to increase the thermal conductivity noticeably in MgO~\cite{slack1962,tang2010}, and the experiments measure samples of varying isotope and defect content. Second, the aiGK theory uses classical statistical mechanics, and nuclear quantum effects lowering the heat capacity of MgO and therefore its thermal conductivity are neglected. These effects have been shown to lower the thermal conductivity in MgO by about 5\,\% at 500\,K~\cite{Puligheddu2019}, a stronger effect can therefore be expected at 300\,K. A systematic overestimation of naturally abundant MgO at moderate temperatures can therefore be expected.
+%Furthermore, small imperfections in the simulation tend to increase the thermal conductivity further: The pressure in the aiMD simulation is about 0.5\,GPa, and the thermal conductivity of MgO is known to increase with pressure by up to 6.8\,\% per GPa~\cite{yukutake1978}. Also the temperatures observed during the three aiMD runs are, on average, slightly lower than 300\,K.~\footnote{Observed temperatures in the three trajectories: 307.1\,K, 290.7\,K, 286.5\,K.}
+\begin{table}[ht]
+  \centering
+  \fontfamily{ppl}\selectfont
+  \begin{tabular}{lc}
+    \toprule
+    Reference & Thermal conductivity \\
+    & at at 300\,K (W/mK) \\
+    \midrule
+    Tang and Dong 2010~\cite{tang2010} & $\approx 66$ \\
+    Dekura and Tsuchiya 2017~\cite{dekura2017} & $\approx 54$ \\
+    Plata et al.~2017~\cite{AAPL} & $54.06$ \\
+    Xia et al.~2020~\cite{xia2020} & $50.1-58.7$ \\
+    this work & $68.8 \pm 6.1$ \\
+    \bottomrule
+    \vspace{.5em}
+  \end{tabular}
+  \caption{Theoretical values for the thermal conductivity of periclase MgO at ambient conditions. All cited approaches use a perturbative Boltzmann transport approach with three phonon scattering. Xia and coworkers use three different flavors of Boltzmann transport theory and therefore give three values for thermal conductivity in the indicated range.}
+  \label{tab:theo.MgO}
+\end{table}
+We also compare to theoretical values listed in Tab.\,\ref{tab:theo.MgO}.
+Our study agrees with the value reported by Tang and Dong~\cite{tang2010}, whereas the other available references are overall smaller by about 10-15\,W/mK, which is above the statistical precision. Again, the difference can most probably be attributed to isotope scattering and nuclear quantum effects.
 
-\REM{Tang: about 66 W/mK}
+\newthought{In summary, the agreement with literature values can be considered satisfactory}, given the wide spread of experimental values in the range of 50--62\,W/mK for non-defect-free MgO samples, and noticing that MgO is not fully classical at 300\,K.
 
-\REM{AAPL and Dekura~\cite{AAPL,dekura2017}: 54.06, }
+\section{Case Study Copper Iodide}
 
+After discussing our implementation of the aiGK method and found reasonable agreement with literature values for periclase MgO, we apply the presented methodology to zincblende copper iodide ($\gamma$-CuI), also know as marshite. CuI is a transparent semiconductor which shows several interesting electronic and thermal transport properties~\CITE{Grundmann,Boyce}. In particular, its room temperature thermal conductivity is very low with only 1.68\,W/mK~\CITE{CRC}, which is typical for copper halide materials~\CITE{CuCl,CuBr}. In polycrystalline thin films, even lower thermal conductivities of 0.48--0.55\,W/mK have been reported~\cite{yang2017,coroa2019}.
 
+\subsection{Dynamical effects}
+\label{sec:defects.CuI}
+\begin{figure}
+	\includegraphics[width=\textwidth]{./data/plots/defects/216.02.CuI/sigma_vs_time.pdf}
+	\caption{Zincblende (SG\,216) CuI, describe comp. details}
+	\label{fig:defects.CuI}
+\end{figure}
+\noindent
+In our initial screening for anharmonic materials, CuI was detected as particularly anharmonic, with a one-shot $\sigmaAOS = 0.37$, and a value of $\sigmaA = 0.4--0.5$ in molecular dynamics simulations. The peculiar dynamical effects occuring in CuI can be detected by using a time-resolved anharmonicity measure as defined in Eq.\,\eqref{eq:sigmaA.sample},~i.\,e.,~by evaluating the anharmonicity measure for each sample during the MD with $\sigmaA(t) = \sigmaA [{\bf R} (t)]$. The time-resolved values are shown in Fig.\,\ref{fig:defects.CuI} for each of the three trajectories simulated in this study.
+The characteristic features are the jumps in $\sigmaA (t)$ from values of $\sigmaA (t) \approx 0.5$ to $\sigmaA (t) \approx 1.2$ or 1.6. In the simulated time period, these values are taken for 3 to 12\,ps, before the initial value of $\sigmaA (t) \approx 0.5$ is restored. This jump in $\sigmaA (t)$ hints at a dynamical effect which strongly violates the harmonic approximation. 
+
+\begin{marginfigure}
+	\includegraphics[width=\textwidth]{./data/plots/defects/216.02.CuI/all.pdf}
+	\caption{CuI viewed in (110) direction. Top: High-symmetry zincblende structure. Middle: Copper ion in lower-right quadrant moves into interstitial site along (111) direction when $\sigmaA (t) \approx 1.2$. Bottom: Several defects form when $\sigmaA (t) \approx 1.6$}
+	\label{fig:defects.CuI.1}
+\end{marginfigure} 
+
+\newthought{The nature of this effect} can be resolved by time-averaging the positions ${\bf R} (t)$,
+\begin{align}
+	{\bf R}_{\rm avg} = \braket{{\bf R} (t)}_t~,	
+	\label{eq:R(t).avg}
+\end{align}
+for the time spans where $\sigmaA (t)$ is increased. We compare two time-averaged structures in Fig.\,\ref{fig:defects.CuI.1}: A time average with respect to the entire simulation time reveals the perfect zincblende structure of CuI which corresponds to the minimum of the potential energy surface.
+When averaging over the time span where $\sigmaA (t) \approx 1.2$, however, the average structure has one Cu atom diplaces along the (111) direction. Viewing the supercell in (110) direction, the diplacement is clearly visible (Fig.\,\ref{fig:defects.CuI.1}, middle). This means that the Cu occupies a metastable interstitial site at the given position for the respective time period. When $\sigmaA (t)$ is restored to the base value of $\sigmaA (t) \approx 0.5$, the Cu atom moves back to the high-symmetry reference position within the zincblende structure. 
+The third trajectory shown in Fig.\,\ref{fig:defects.CuI}~c) evolves to a situation where $\sigmaA \approx 1.6$. This corresponds to a situation, where more than one defects forms~(Fig.\,\ref{fig:defects.CuI.1}, bottom).
+
+%\begin{figure*}
+%	\includegraphics[width=.5\textwidth]{./data/plots/defects/216.02.CuI/perfect_110_solid.png} \hfill
+%	\includegraphics[width=.5\textwidth]{./data/plots/defects/216.02.CuI/defect_110.png}
+%	\caption{CuI viewed in (110) direction. Left: High-symmetry zincblende structure. Right: Copper ion in lower-right quadrant moves into interstitial site along (111) direction.}
+%	\label{fig:defects.CuI.1}
+%\end{figure*}
+%\begin{figure*}
+%	\includegraphics[width=.5\textwidth]{./data/plots/defects/216.02.CuI/defects_110.png} \hfill
+%	\includegraphics[width=.5\textwidth]{./data/plots/defects/216.02.CuI/defects_110_135.png}
+%	\caption{2.5 defects in (110) and rotated by 90\,deg about z-axis.}
+%	\label{}
+%\end{figure*}
+
+\subsection{Thermal conductivity}
+
+\newthought{Following the same recipe presented earlier in this chapter,} the convergence of the aiGK thermal conductivity with effective simulation time is shown in Fig.\,\ref{fig:imp.kappa.convergence.CuI} for CuI at room temperature.
+\begin{figure}
+	\includegraphics[width=\textwidth]{./data/plots/kappa_convergence/examples/216_CuI.pdf}
+	\caption{Thermal conductivity $\kappa$ as function of the effective simulation time $\teff = 1.1\,{\rm THz} \cdot t_0$ as defined in Eq.\,\ref{eq:imp.teff}. Values are given as the ensemble average over three independent trajectories. The error bars are computed according to Eq.\,\eqref{eq:imp.kappa.err} as the standard error of the ensemble average. The blue curve is a logistic curve defined in Eq.\,\eqref{eq:imp.f_logistic} fitted to the $\kappa$ values, the dashed blue curve is the infinite time limit of the fitted function. Gray dots represent the thermal conductivity as given by the simulation without the size-correction scheme.
+}
+	\label{fig:imp.kappa.convergence.CuI}
+\end{figure}
+The final value of $1.38 \pm 0.14$\,W/mK is approached within error bars after an effective simulation time of $\teff = 40$, which corresponds to $t_0=36$\,ps. The finite size correction contributes about 0.26\,W/mK to the thermal conductivity,~i.\,e.,~19\,\% of the total value.
+
+Comparing this to the available literature in Tab.\,\ref{tab:exp.CuI}, we find good agreement with the  experimental reference value of 1.68\,W/mK, while the value is clearly above the thin-film limit of 0.55\,W/mK.
+\begin{table}[ht]
+  \centering
+  \fontfamily{ppl}\selectfont
+  \begin{tabular}{lc}
+    \toprule
+    Reference & Thermal conductivity \\
+    & at 300\,K (W/mK) \\
+    \midrule
+    CRC Handbook~\cite{perry2016} (experiment) & 1.68 \\
+    Yang et al.~\cite{yang2017} (experiment) &  0.55$^{\,\dagger}$ \\
+    Togo et al.~\cite{phono3py} (theory) & 6.55--7.22 \\
+    This work & $1.38 \pm 0.14$ \\
+    \bottomrule
+    \vspace{.5em}
+  \end{tabular}
+  \caption{Experimental values and one theoretical reference for the thermal conductivity of marshite CuI at ambient conditions. The value from Yang et al. marked by $\dagger$ is from a thin film experiment, and therefore can be regarded as a lower bound of the bulk thermal conducitivity~\cite{yang2017}.}
+  \label{tab:exp.CuI}
+\end{table}
+The theoretical reference on the other hand drastically overestimates the thermal conductivity by a factor of $\approx 4$~\cite{phono3py}. Since the theoretical reference uses a perturbative approach in terms of third-order force constants obtained at the local minimum of the potential-energy surface, a probable explanation for this strong discrepancy is the inability of this approach to model the actual, strongly anharmonic dynamics of CuI with sufficient accuracy. As discussed in Sec.\,\ref{sec:defects.CuI}, the actual dynamical evolution of CuI inhibits effects like metastable defects, which are qualitatively different from the phonon picture of atoms moving about a well defined reference position in a nearly harmonic potential. These effects are, however, naturally included in the non-perturbative aiGK formalism.
+
+\section{Conclusion}
+We have introduced the technical details of our aiGK implementation, and discussed two benchmark system at ambient conditions: Periclase MgO, and marshite CuI. Although both structures are very simple cubic structures with two atoms in the unit cell, they behave quite differently from a dynamical point of view: MgO is a largely harmonic system which can be regarded as a textbook example for phonon theory, where all basic assumptions hold. In particular there are well defined reference positions, and the deviation from perfectly harmonic interactions are quite weak, with a $\sigmaA = 0.17$ signaling an anharmonic contribution to the forces of only about 17\,\%. CuI on the other hand is strongly anharmonic, with $\sigmaA \approx 0.4-0.5$, and displays spontaneous formation of metastable insterstial defects as discussed in Sec.\,\ref{sec:defects.CuI}. 
+While perturbative approaches proved to be very accurate for MgO, and even had some advantages compared to aiGK in situations where the material of interest is not fully classical, or isotope scattering lowers the thermal conductivity substantially, the differences were much bigger for the strongly anharmonic CuI, where the perturbative approach overestimated the thermal conductivity drastically, whereas the aiGK was still in good agreement.
+
+\newthought{The aiGK method is therefore our method of choice} for the investigation of the strongly anharmonic candidate thermal insulators suggested in Chp.\,\ref{chp:anharmonicity}.

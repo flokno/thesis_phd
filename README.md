@@ -19,10 +19,10 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
                 - [x] BTE-like thermal conductivity
                 - [x] interpolate to denser q-meshes
                 - [x] extrapolate to bulk limit
-            - [ ] time convergence discussion
-                - [ ] MgO as function of simulation time
-            - [ ] compare to experiment
-            - [ ] apply to CuI
+            - [x] time convergence discussion
+                - [x] MgO as function of simulation time
+            - [x] compare to experiment
+            - [x] apply to CuI
             - [ ] scale
                 - [ ] run workflow for truncated trajectories and investigate results as function of truncation time
                 - [ ] pick set of trustworthy materials and generalize observations
