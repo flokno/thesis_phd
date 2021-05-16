@@ -3,25 +3,25 @@
 \newcommand{\tcut}{t_{\rm c}}
 \newcommand{\teff}{t^{\rm eff}_0}
 
-The theoretical background for the \emph{ab initio} simulation of thermal conductivity has been established in the previous chapters, in particular, Chp.~\ref{chp:heat_transport}. The purpose of this chapter is to discuss the practical implementation of the respective formulas. 
+The theoretical background for the \emph{ab initio} simulation of thermal conductivity has been established in the previous chapters, in particular, Chp.~\ref{chp:heat_transport}. The purpose of this chapter is to discuss the practical implementation of the respective formulas for two benchmark materials. 
 
-We restate the Green-Kubo formula for the thermal conductivity initially introduced in Sec.\,\TODO{ref} as
+\newthought{We restate the Green-Kubo formula} for the thermal conductivity initially introduced in Sec.\,\TODO{ref} as
 \begin{align}
 	\kappa^{\alpha \beta} (T)
 		= \int \d \Gamma_0 ~ \kappa^{\alpha \beta} (\Gamma_0) f_T (\Gamma_0) ~,
 	\label{eq:implementation.kappa.avg}
 \end{align}
-where $\kappa^{\alpha \beta} (T)$ are the Cartesian components of the thermal conductivity tensor at temperature $T$, and $\Gamma_0$ are phase-space configurations with a respective ensemble weight $f_T (\Gamma_0)$ at the given temperature. For each phase-space configuration $\Gamma_0$, the thermal conductivity is computed as
+where $\kappa^{\alpha \beta} (T)$ are the Cartesian components of the thermal conductivity tensor at temperature $T$,\footnote{$T$ represents all thermodynamic conditions in the simulation, including pressure $p$.} and $\Gamma_0$ are phase-space configurations with a respective ensemble weight $f_T (\Gamma_0)$ at the given temperature. For each phase-space configuration $\Gamma_0$, the thermal conductivity is computed as
 \begin{align}
 	\kappa^{\alpha \beta} (\Gamma_0)
 		&=
 		\frac{V}{k_{\rm B} T^2} 
 		\lim_{t_{\rm c} \to \infty}
 		\int_{0}^{\tcut} 
-		\d t ~ C_{JJ}^{\alpha \beta} (\Gamma_0, t)~,
+		\d t ~ C_{JJ}^{\alpha \beta} (\Gamma_0, t)~.
 	\label{eq:implementatino.kappa.1}
 \end{align}
-where $	C^{\alpha \beta}_{J J} (\Gamma_0, t)$ denotes the heat flux autocorrelation function (HFACF),
+Here, $	C^{\alpha \beta}_{J J} (\Gamma_0, t)$ denotes the heat flux autocorrelation function (HFACF),
 \begin{align}
 	C^{\alpha \beta}_{J J} (\Gamma_0, t)
 		=
@@ -31,35 +31,36 @@ where $	C^{\alpha \beta}_{J J} (\Gamma_0, t)$ denotes the heat flux autocorrelat
 		\d s ~ J^\alpha (\Gamma_{t + s}) J^\beta (\Gamma_s)~,
 	\label{eq:implementatino.acf.1}
 \end{align}
-and a phase-space point $\Gamma_t$ is related to the initial configuration $\Gamma_0$ through the canonical time evolution determined by the many-body Hamiltonian of the system, $\mathcal H (\Gamma)$. Equation~\ref{eq:implementation.kappa.avg} through~\ref{eq:implementatino.acf.1} represent an exact reformulation of the Green Kubo formula.
+which can be viewed as an average over all available starting conditions $\Gamma_s$ during a simulation of length $t_0$. Each phase-space point $\Gamma_t$ is related to the initial configuration $\Gamma_0$ through the canonical time evolution determined by the many-body Hamiltonian of the system, $\mathcal H (\Gamma)$. Equation~\eqref{eq:implementation.kappa.avg} through~\eqref{eq:implementatino.acf.1} represent an exact reformulation of the Green Kubo formula.
 
 
-\newthought{In order to evaluate these equations in finite simulations}, the integrals need to be discretized and truncated to finite domains. First, we approximate Eq.\,\eqref{eq:implementation.kappa.avg} by choosing a finite set of starting configurations $\Gamma_0^i$, so that
+\newthought{In order to evaluate these equations in finite simulations}, the integrals need to be discretized and truncated to finite domains. First, we approximate Eq.\,\eqref{eq:implementation.kappa.avg} by choosing a finite set of $M$ starting configurations $\Gamma_0^i$, so that
 \begin{align}
 	\kappa^{\alpha \beta} (T)
 		\approx
-		\frac{1}{N} \sum_{i=1}^N \kappa^{\alpha \beta} (\Gamma_0^i)~,
+		\frac{1}{M} \sum_{i=1}^M \kappa^{\alpha \beta} (\Gamma_0^i)~,
 	\label{eq:implementation.kappa.mean}
 \end{align}
-where the starting conditions $\Gamma_0^i$ are chosen from NVT molecular dynamics simulations for the thermodynamic conditions of interest. For each starting condition $\Gamma_0$, we perform NVE molecular dynamics simulations to generate the time evolution of the system, $\Gamma_t$, and evaluate the heat flux, $J^\alpha (\Gamma_t)$ along this trajectory. The simulation is performed for a total simulation time $t_0$, thereby truncating the time integral in Eq.\,\eqref{eq:implementatino.acf.1}. From resulting autocorrelation function of finite length, the thermal conductivity is computed via Eq.\,\eqref{eq:implementatino.kappa.1}, where a \emph{cutoff time} $\tcut < t_0$ is chosen to reduce noise when the autocorrelation function has effectively decayed~\cite{Jones2012}.
+where the starting conditions $\Gamma_0^i$ are chosen from NVT molecular dynamics simulations for the thermodynamic conditions of interest. For each starting condition $\Gamma_0^i$, we perform NVE molecular dynamics simulations to generate the time evolution of the system, $\Gamma_t^i$, and evaluate the heat flux, $J^\alpha (\Gamma_t^i)$ along this trajectory. The simulation is performed for a total simulation time $t_0$, thereby truncating the time integral in Eq.\,\eqref{eq:implementatino.acf.1}. From the resulting autocorrelation function of finite length, the thermal conductivity is computed via Eq.\,\eqref{eq:implementatino.kappa.1}, where a \emph{cutoff time} $\tcut < t_0$ is chosen to reduce noise when the autocorrelation function has effectively decayed~\cite{Jones2012}.
 After computing the thermal conductivity for each trajectory, the final value is given by Eq.\,\eqref{eq:implementation.kappa.mean},~i.\,e.,~by the \emph{mean} of the individual trajectories. The statistical error due to the finite ensemble average is estimated by the \emph{standard error},~i.\,e.,~the standard deviation of the mean,
 \begin{align}
 	\Delta \kappa^{\alpha \beta} (T)
 		= \frac{1}{\sqrt{N}} \sqrt{\frac{1}{N} \sum_i \left( \kappa^{\alpha \beta} (T) - \kappa^{\alpha \beta} (\Gamma_0^i) \right)^2}~.
 	\label{eq:imp.kappa.err}
 \end{align}
-
-
-\REM{Discuss $\kappa = \frac{1}{3} \sum_{\alpha} \kappa^{\alpha \alpha}$}
+From the Cartesian components of the thermal conductivity $\kappa^{\alpha \beta} (t)$, the scalar thermal conductivity $\kappa (T)$ is obtained via
+\begin{align}
+	\kappa (T)
+		= \frac{1}{3} \sum_{\alpha} \kappa^{\alpha \alpha} (T)~.
+	\label{eq:kappa.scalar}
+\end{align}
 
 
 \newthought{In empirical force field approaches}, the appearing equations are typically evaluated as is, and convergence in size and time can be checked in a brute-force way by increasing the respective scales well beyond the necessary limits\CITE{Lammps, Jones, more}. From an \emph{ab initio} perspective, the accessible size and time scales are each at least two orders of magnitude lower,\footnote{Force fields: 1\,ns for 10000~atoms within 1 day, \emph{ab initio}: 50\,ps for 200~atoms within 1~months.} and additional steps are necessary to increase the amount of information that can be extracted from the comparatively short simulations. The purpose of this chapter is to discuss these additional steps in detail: First, we present steps to remove noise from the heat flux autocorrelation functions $C_{JJ} (t)$, which enables to choose cutoff times $\tcut$ in a numerically robust way. Next, we discuss the size extrapolation scheme in terms of the harmonic mapping presented in Sec.\,\ref{sec:aiGK} which allows to correct for the finite size of simulations cells used in \emph{ab initio} molecular dynamics simulations. Finally, we discuss the necessary simulation times $t_0$ and how those can be estimated for novel materials.
 
-\REM{Case study preiclase (MgO) which is fairly harmonic, apply to strongly anharmonic CuI}
+\newthought{We present the implementation in detail} for the case of periclase magnesium oxide (MgO) which is well-known in the literature, and, as a rather harmonic material, a typical benchmark system for perturbative heat transport techniques. We then apply the same approach to the strongly anharmonic marshite copper iodide (CuI), for which basic assumptions of perturbation theory are violated, as we will explain in detail. 
+Both structures are studied at GGA level of theory using the PBEsol functional and light-default basissets in FHI-aims~\CITE{PBEsol, aims}. Supercell sizes are 216 atoms each, and the MD simulations are performed via FHI-vibes~\CITE{vibes,ase}. The aiGK methods as described is implemented in FHI-vibes as well. Force constants for the size extrapolation via harmonic mapping are obtained via regression from the MD runs via hiphive~\CITE{hiphive}. The MD runs are thermalized using the pre-thermalization technique outlined in Sec.\,\REM{ref} using finite-differences force constants obtained via phonopy~\CITE{phonopy}. Afterwards, a Langevin thermostat at the target temperature (300\,K) is used to perform NVT sampling. After and initial sampling period of 2.5\,ps, the thermal pressure is relaxed according to the scheme outlined in Sec.\,\REM{ref} in the appendix to account for thermal expansion. Starting points $\Gamma^i_0$ for the NVE simulations are chosen from an NVT run for the relaxed supercell at least 2\,ps apart. The time step for the MD simulation was chosen as 5\,fs, which corresponds to a tenth of the shortest period duration of the harmonic spectrum of MgO ($\omega_{\rm max} \approx 20$\,THz).
 
-\REM{plot of MgO structure?}
-
-\REM{pressure was reduced according to procedure outlined in appendix}
 
 \section{Noise Reduction Scheme and Cutoff Estimation}
 \subsection{Discard non-contributing terms}
@@ -75,7 +76,7 @@ where $\sigma_I (t) \equiv \sigma_I [{\bf R} (t)]$ are atomic virial tensors for
 		+ \sum_I \braket{\sigma_I} \dot{\bf R}_I (t)~,
 	\label{eq:imp.J.1}
 \end{align}
-where $\braket{\sigma_I}$ is the average atomic virial, and $\delta \sigma_I (t)$ is the time-dependent part. In the absence of diffusion, the second term is the total time derivative of a bounded vector field, $\sum_I \braket{\sigma_I} \dot{\bf R}_I (t) = \frac{\d}{\d t} \sum_I \braket{\sigma_I} {\bf R}_I (t)$. By means of the gauge invariance principle introduced in Sec.\,\ref{sec:gauge_invariance}, it therefore does not contribute to the time integral in Eq.\,\eqref{eq:implementatino.kappa.1}, and can be discarded before evaluating the heat flux autocorrelation function~\cite{Ercole2016}. We therefore always use the following heat flux expression in the following:
+where $\braket{\sigma_I}$ is the average atomic virial, and $\delta \sigma_I (t)$ is the time-dependent part. In the absence of diffusion, the second term is the total time derivative of a bounded vector field, $\sum_I \braket{\sigma_I} \dot{\bf R}_I (t) = \frac{\d}{\d t} \sum_I \braket{\sigma_I} {\bf R}_I (t)$. By means of the gauge invariance principle introduced in Sec.\,\ref{sec:gauge_invariance}, it therefore does not contribute to the time integral in Eq.\,\eqref{eq:implementatino.kappa.1}, and can be discarded before evaluating the heat flux autocorrelation function~\cite{Ercole2016}. We therefore always use the following heat flux expression:
 \begin{align}
 	{\bf J} (t)
 		= \sum_I \delta \sigma_I (t) \dot{\bf R}_I (t)~.
@@ -99,30 +100,29 @@ After discarding the gauge-invariant contributions from the heat flux, there is 
 		\d t' ~ C_{JJ} (t')~,
 	\label{eq:imp.kappa.cum}
 \end{align}
-is already a much smoother function than the HFACF itself, we apply a shape-preserving Savitzky-Golay filter to $\kappa (t)$~\cite{Savitzky1964}. The remaining parameter is the window size for the filter. It is chosen based on the vibrational spectrum of the material by taking the period length corresponding to the slowest significant frequency $\omega_{\min}$. Thereby, all noise of higher frequency is effectively filtered from $\kappa (t)$, while all relevant time integrals are preserved by construction. The filter is constructed such that the antisymmetry of $\kappa (t)$ in time, $\kappa (-t) = - \kappa (t)$ is respected.\footnote{The antisymmetry of $\kappa (t)$ is a consequence of the time symmetry of $C_{JJ} (t)$.} This also ensures that $\kappa (t)$ vanishes identically at $t=0$.
+is already a much smoother function than the HFACF itself, we apply a shape-preserving Savitzky-Golay filter to $\kappa (t)$~\cite{Savitzky1964}. The remaining parameter is the window size for the filter. It is chosen based on the vibrational spectrum of the material by taking the period length corresponding to the slowest significant frequency $\omega_{\min}$. Thereby, all noise of higher frequency is effectively filtered from $\kappa (t)$, while all relevant time integrals are preserved by construction: The cumulative kappa before (orange curve) and after (black curve) lie right on top of each other in the lower panel of Fig.\,\ref{fig:imp.hfacf.kappa.1}. The filter is constructed such that the antisymmetry of $\kappa (t)$ in time, $\kappa (-t) = - \kappa (t)$ is respected.\footnote{The antisymmetry of $\kappa (t)$ is a consequence of the time symmetry of $C_{JJ} (t)$.} This also ensures that $\kappa (t)$ vanishes identically at $t=0$.
 
-Based on the filtered cumulative thermal conductivity, the HFCAF can be obtained by differentiating, which carries over the filtering to $C_{JJ} (t)$. The filtered HFACF can be obtained analytically by fitting spline functions to $\kappa (t)$, or numerically by applying the same filter on the numerical gradient of $\kappa (t)$. The resulting cumulative thermal conductivity $\kappa (t)$ and HFACF $C_{JJ} (t)$ are shown as black curves in Fig.\,\ref{fig:imp.hfacf.kappa.1}. From the noise-filtered HFACF, the cutoff time $\tcut$ is chosen by a ``first dip'' criterion,~i.\,e.,~when $C_{JJ} (t)$ drops to zero~\CITE{Chen2010 and references therein}. This corresponds to the first significant plateau in $\kappa (t)$ after removing the noise. With the cutoff time $\tcut$, the resulting thermal conductivity for a given component of the thermal conductivity tensor is given by the value $\kappa = \kappa (\tcut)$.
-
-\newthought{The presented scheme} will be used for all reported values of thermal conductivity in the following.
+Based on the filtered cumulative thermal conductivity, the HFCAF can be obtained by differentiating, which carries over the filtering to $C_{JJ} (t)$. The filtered HFACF can be obtained analytically by fitting spline functions to $\kappa (t)$, or numerically by applying the same filter on the numerical gradient of $\kappa (t)$. The resulting cumulative thermal conductivity $\kappa (t)$ and HFACF $C_{JJ} (t)$ are shown as black curves in Fig.\,\ref{fig:imp.hfacf.kappa.1}. From the noise-filtered HFACF, the cutoff time $\tcut$ is chosen by a ``first dip'' criterion,~i.\,e.,~when $C_{JJ} (t)$ drops to zero~\CITE{Chen2010 and references therein}. This corresponds to the first significant plateau in $\kappa (t)$ after removing the noise. With the cutoff time $\tcut$, the resulting thermal conductivity for a given component of the thermal conductivity tensor is given by the value $\kappa = \kappa (\tcut)$ as indicated by the dashed horizontal line in Fig.\,\ref{fig:imp.hfacf.kappa.1}.
+The presented scheme will be used for all reported values of thermal conductivity in the following.
 
 \section{Size extrapolation}
 \label{sec:imp.extrapolation}
 
-After we have seen how the Green-Kubo formula is used to compute thermal conductivities from the \emph{ab initio} heat flux evaluated along aiMD trajectories, we shortly review the size extrapolation scheme discussed in more detail in Sec.\,\ref{sec:aiGK}. The aim of the size extrapolation is to correct for finite size effects occuring in aiMD simulations, because the supercells used in \emph{ab initio} simulations are limited in size, and phonon modes of longer wavelength than the supercell are therefore not included. 
+After we have seen how the Green-Kubo formula is used to compute thermal conductivities from the \emph{ab initio} heat flux evaluated along aiMD trajectories, we shortly review the size extrapolation scheme first introduced in Ref.\,\cite{Carbogno2016} and discussed in more detail in Sec.\,\ref{sec:aiGK}. The aim of the size extrapolation is to correct for finite size effects occuring in aiMD simulations, because the supercells used in \emph{ab initio} simulations are limited in size, and phonon modes of longer wavelength than the supercell are therefore not included. 
 
 \newthought{As discussed in Sec.\,\ref{sec:aiGK}}, the correction works by computing the harmonic contribution to the thermal conductivity $\kappa_{\rm ha}$ within the supercell via Eq.\,\eqref{eq:ha.kappa.bte}
 \begin{align}
 	\kappa_{\rm ha}^{\alpha \beta} = V k_{\rm B} \sum_{b, {\bf q}} v^\alpha_b ({\bf q}) v^{\beta}_b ({\bf q}) \fD \tau_b ({\bf q})~,
 	\label{eq:imp.K.bte}
 \end{align}
-where $v_b^\alpha ({\bf q})$ is the group velocity of a phonon mode with band index $b$ and \emph{commensurate} wave vector $\bf q$, and $\tau_b ({\bf q})$ is the lifetime obtained from the autocorrelation function of the mode-resolved energy $E_b ({\bf q}, t)$ as defined and discused in Eq.\,\eqref{eq:G_s}~\cite{Carbogno2016}. For a given simulation $\set{\Gamma_t}$, Eq.\,\eqref{eq:imp.K.bte} is evaluated for all commensurate $\bf q$-points, and projected to the symmetry-inequivalent points the Brillouin zone as determinded by the space group operations to improve the statistics~\cite{Maradudin1968,Spglib}.
+where $v_b^\alpha ({\bf q})$ is the group velocity of a phonon mode with band index $b$ and \emph{commensurate} wave vector $\bf q$, and $\tau_b ({\bf q})$ is the lifetime obtained from the autocorrelation function of the mode-resolved energy $E_b ({\bf q}, t)$ as defined and discussed in Eq.\,\eqref{eq:G_s}~\cite{Carbogno2016}. For a given simulation $\set{\Gamma^i  _t}$, Eq.\,\eqref{eq:imp.K.bte} is evaluated for all commensurate $\bf q$-points, and projected to the symmetry-inequivalent points in the Brillouin zone determinded by the space group operations of the system to improve the statistics~\cite{Maradudin1968,Spglib}.
 
 \newthought{In the next step}, the lifetimes $\tau_b ({\bf q})$ are interpolated to denser $\bf q$-point meshes by $\fD{\tilde{\tau}}_b (\tilde{\bf q}) = \fD \lambda_b (\tilde {\bf q}) \omega_b^{-2} (\tilde {\bf q})$ with a weakly $\bf q$-dependent function $\lambda_b (\tilde {\bf q})$ obtained by linearly interpolating the lifetimes obtained at commensurate $\bf q$-points. The scaling of lifetimes with $\omega_b^{-2} ({\bf q})$ is rooted in basic phonon theory as discussed in detail by Herring~\cite{Herring1954}. For the acoustic modes at ${\bf q} = \Gamma = 0$, where $\omega ({\bf q \to 0}) \to 0$, the value for $\lambda_b (\Gamma)$ is obtained by averaging over values at the surrounding $\bf q$-points. For the new, denser grid, an interpolated value,
 \begin{align}
 	\kappa_{\rm ha - int}^{\alpha \beta} (N_{\tilde{\bf q}}) = V k_{\rm B} \frac{N_{\bf q}}{N_{\tilde{\bf q}}} \sum_{b, \tilde{\bf q}} v^\alpha_b (\tilde{\bf q}) v^{\beta}_b (\tilde{\bf q}) \fD{\tilde{\tau}}_b (\tilde{\bf q})~,
 	\label{eq:imp.K.bte.correction}
 \end{align}
-can be obtained, where $N_{\tilde{\bf q}}$ is the number of points in the new grid, and the factor $N_{\bf q} / N_{\tilde{\bf q}}$ accounts for the increased number points. The bulk limit of Eq.\,\eqref{eq:imp.K.bte.correction} is obtained by computing interpolated values for an increasing density of $\bf q$-points. Since Eq.\,\eqref{eq:imp.K.bte.correction} is a Riemann sum approximating the Brillouin zone integral $\int \d^3 q$, its convergence can be expected to be linear in $N_{\tilde{\bf q}}^{-1/3} \equiv 1 / n_q$,~i.\,e.,~the inverse number of $\bf q$-points per Cartesian direction. The slope of this curve can be used to extrapolate the value of $\kappa_{\rm ha}$ to bulk limit, as shown in Fig.\,\ref{fig:imp.kappa.bte.correction}.
+can be obtained, where $N_{\tilde{\bf q}}$ is the number of points in the new grid, and the factor $N_{\bf q} / N_{\tilde{\bf q}}$ accounts for the increased number points. The bulk limit of Eq.\,\eqref{eq:imp.K.bte.correction} is obtained by computing interpolated values for an increasing density of $\bf q$-points. Since Eq.\,\eqref{eq:imp.K.bte.correction} is a Riemann sum approximating the Brillouin zone integral $\int \d^3 q$, its convergence can be expected to be linear in $N_{\tilde{\bf q}}^{-1/3} \equiv 1 / n_q$, where $n_q$ is number of $\bf q$-points per Cartesian direction. The slope of this curve can be used to extrapolate the value of $\kappa_{\rm ha}$ to bulk limit, as shown in Fig.\,\ref{fig:imp.kappa.bte.correction}.
 \begin{figure}
 	\includegraphics[width=.8\textwidth]{./data/plots/lifetimes/greenkubo_summary_interpolation_fit.pdf}
 	\caption{Description of figure}
@@ -143,7 +143,7 @@ from which the final result for the thermal conductivity can be obtained via
 where $\kappa^{\alpha \beta}$ is the value from the \emph{ab initio} Green Kubo simulation.
 
 \section{Simulation Time Convergence}
-After we have seen how the cutoff time $\tcut$ in Eq.\,\eqref{eq:implementatino.kappa.1} can be obtained, and finite-size errors can be corrected, we discuss the convergence of presented scheme as a function of the simulation time $t_0$ in Eq.\,\eqref{eq:implementatino.acf.1}. We do this for the case of MgO for three independent trajectories of 60\,ps length each at GGA level of theory using the PBEsol function and light-default basissets in FHI-aims~\CITE{PBEsol, aims}. We truncate every trajectory in 10\,\% steps down to a length of 6\,ps, and apply the workflow presented in the previous chapters to each of the truncated trajectories. 
+After we have seen how the cutoff time $\tcut$ in Eq.\,\eqref{eq:implementatino.kappa.1} can be obtained, and finite-size errors can be corrected, we discuss the convergence of presented scheme as a function of the simulation time $t_0$ in Eq.\,\eqref{eq:implementatino.acf.1}. We do this for the case of MgO for three independent trajectories of 60\,ps length each. We truncate every trajectory in 10\,\% steps down to a length of 6\,ps, and apply the workflow presented in the previous sections to each of the truncated trajectories. 
 \begin{figure}
 	\includegraphics[width=\textwidth]{./data/plots/kappa_convergence/examples/225_MgO.pdf}
 	\caption{Thermal conductivity $\kappa$ as function of the effective simulation time $\teff = 7.5\,{\rm THz} \cdot t_0$ as defined in Eq.\,\ref{eq:imp.teff}. Values are given as the ensemble average over three independent trajectories. The error bars are computed according to Eq.\,\eqref{eq:imp.kappa.err} as the standard error of the ensemble average. The blue curve is a logistic curve defined in Eq.\,\eqref{eq:imp.f_logistic} fitted to the $\kappa$ values, the dashed blue curve is the infinite time limit of the fitted function. Gray dots represent the thermal conductivity as given by the simulation without the size-correction scheme.
@@ -151,8 +151,7 @@ After we have seen how the cutoff time $\tcut$ in Eq.\,\eqref{eq:implementatino.
 	Please note that the values for $\kappa$ shown here cannot be directly compared to the value displayed in Fig.\,\ref{fig:imp.hfacf.kappa.1} or \ref{fig:imp.kappa.bte.correction}, because the latter only show single components of single runs, which can vary substantially from the total average.}
 	\label{fig:imp.kappa.convergence.MgO}
 \end{figure}
-
-\newthought{The convergence of the final value of thermal conductivity} is shown in Fig.\,\ref{fig:imp.kappa.convergence.MgO} as function of a dimensionless \emph{effective simulation time} $t_0^{\rm eff}$, which we define via
+The convergence of the scalar thermal conductivity is shown in Fig.\,\ref{fig:imp.kappa.convergence.MgO} as function of a dimensionless \emph{effective simulation time} $t_0^{\rm eff}$, which we define via
 \begin{align}
 	\teff = t_0 \cdot \bar{\omega}_{\rm min}~,
 	\label{eq:imp.teff}
@@ -170,8 +169,7 @@ Figure~\ref{fig:imp.kappa.convergence.MgO} shows that the thermal conductivity c
 	\label{eq:imp.f_logistic}
 \end{align}
 which allows to accurately quantify the simulation times where the second super-linear increase in $\kappa$ occurs,~i.\,e.,~the region in the vicinity of the inflection point located at $t_{\rm inflection} = 218$, which corresponds to a simulation time of 29\,ps.
-
-The plot furthermore shows the thermal conductivities obtained without the finite-size correction discussed earlier as gray dots. Without this correction, the final value would be $45.5 \pm 6.1$\,W/mK. The finite-size correction therefore increases this value by about 50\,\%.
+The plot also shows the thermal conductivities obtained without the finite-size correction discussed earlier as gray dots. Without this correction, the final value would be $45.5 \pm 6.1$\,W/mK. The finite-size correction therefore increases this value by about 50\,\%.
 
 \section{Comparison to Literature Values}
 Periclase MgO is an important constituent of the earth mantle and its thermal properties have been studied in detail both experimentally and theoretically~\cite{charvat1957,slack1962,touloukian1970,Macpherson1983,Koker2009,Stackhouse2010,tang2010,dekura2017}. We list the common experimental reference values for the thermal conductivity of periclase MgO in Tab.\,\ref{tab:exp.MgO}.
@@ -189,7 +187,7 @@ Periclase MgO is an important constituent of the earth mantle and its thermal pr
     Andersson and B\"ackstr\"om~1986~\cite{andersson1986} & $55.2 \pm 0.4$ \\
     Dalton et al.~2013~\cite{dalton2013} & $53 \pm 2$ \\
     Hofmeister~2014~\cite{hofmeister2014} & $50.1$ \\
-    this work & $68.8 \pm 6.1$ \\
+    This work & $68.8 \pm 6.1$ \\
     \bottomrule
     \vspace{.5em}
   \end{tabular}
@@ -199,7 +197,7 @@ Periclase MgO is an important constituent of the earth mantle and its thermal pr
 \end{table}
 The aiGK value presented in this work agrees within the statistical precision with the experimental value presented by MacPherson and Schloessin~\cite{Macpherson1983}. It slightly overestimates the values reported by Slack~\cite{slack1962} and Touloukian et al.~\cite{touloukian1970}. More recent experiments by Dalton et al. and Hofmeister using laser-flash experiments report lower values of thermal conductivity in the range of 50-55\,W/mK~\cite{dalton2013,hofmeister2014}.
 
-Overall, we overestimate the experimentally observed thermal conductivity by about 10-30\,\%, depending on the reference. This can be explained by two factors: First, the simulation deals with isotopically pure MgO. Neglecting isotope scattering is known to increase the thermal conductivity noticeably in MgO~\cite{slack1962,tang2010}, and the experiments measure samples of varying isotope and defect content. Second, the aiGK theory uses classical statistical mechanics, and nuclear quantum effects lowering the heat capacity of MgO and therefore its thermal conductivity are neglected. These effects have been shown to lower the thermal conductivity in MgO by about 5\,\% at 500\,K~\cite{Puligheddu2019}, a stronger effect can therefore be expected at 300\,K. A systematic overestimation of naturally abundant MgO at moderate temperatures can therefore be expected.
+Overall, we overestimate the experimentally observed thermal conductivity by about 10-30\,\%, depending on the reference. This can be explained by two factors: First, the simulation deals with isotopically pure MgO. Neglecting isotope scattering is known to increase the thermal conductivity noticeably in MgO~\cite{slack1962,tang2010}, and the experiments measure samples of varying isotope and defect content. Second, the aiGK theory uses classical statistical mechanics, and nuclear quantum effects lowering the heat capacity of MgO and therefore its thermal conductivity are neglected. These effects have been shown to lower the thermal conductivity in MgO by about 5\,\% at 500\,K~\cite{Puligheddu2019}, a stronger effect can therefore be expected at 300\,K.
 %Furthermore, small imperfections in the simulation tend to increase the thermal conductivity further: The pressure in the aiMD simulation is about 0.5\,GPa, and the thermal conductivity of MgO is known to increase with pressure by up to 6.8\,\% per GPa~\cite{yukutake1978}. Also the temperatures observed during the three aiMD runs are, on average, slightly lower than 300\,K.~\footnote{Observed temperatures in the three trajectories: 307.1\,K, 290.7\,K, 286.5\,K.}
 \begin{table}[ht]
   \centering
@@ -213,7 +211,7 @@ Overall, we overestimate the experimentally observed thermal conductivity by abo
     Dekura and Tsuchiya 2017~\cite{dekura2017} & $\approx 54$ \\
     Plata et al.~2017~\cite{AAPL} & $54.06$ \\
     Xia et al.~2020~\cite{xia2020} & $50.1-58.7$ \\
-    this work & $68.8 \pm 6.1$ \\
+    This work & $68.8 \pm 6.1$ \\
     \bottomrule
     \vspace{.5em}
   \end{tabular}
@@ -227,7 +225,7 @@ Our study agrees with the value reported by Tang and Dong~\cite{tang2010}, where
 
 \section{Case Study Copper Iodide}
 
-After discussing our implementation of the aiGK method and found reasonable agreement with literature values for periclase MgO, we apply the presented methodology to zincblende copper iodide ($\gamma$-CuI), also know as marshite. CuI is a transparent semiconductor which shows several interesting electronic and thermal transport properties~\CITE{Grundmann,Boyce}. In particular, its room temperature thermal conductivity is very low with only 1.68\,W/mK~\CITE{CRC}, which is typical for copper halide materials~\CITE{CuCl,CuBr}. In polycrystalline thin films, even lower thermal conductivities of 0.48--0.55\,W/mK have been reported~\cite{yang2017,coroa2019}.
+After discussing our implementation of the aiGK method and found reasonable agreement with literature values for periclase MgO, we apply the presented methodology to zincblende copper iodide ($\gamma$-CuI), also know as marshite. CuI is a transparent semiconductor which shows several interesting electronic and thermal transport properties~\CITE{Grundmann,Boyce}. In particular, its room temperature thermal conductivity is very low with only 1.68\,W/mK~\cite{perry2016}, which is typical for copper halide materials~\CITE{CuCl,CuBr}. In polycrystalline thin films, even lower thermal conductivities of 0.48--0.55\,W/mK have been reported~\cite{yang2017,coroa2019}.
 
 \subsection{Dynamical effects}
 \label{sec:defects.CuI}
@@ -237,8 +235,8 @@ After discussing our implementation of the aiGK method and found reasonable agre
 	\label{fig:defects.CuI}
 \end{figure}
 \noindent
-In our initial screening for anharmonic materials, CuI was detected as particularly anharmonic, with a one-shot $\sigmaAOS = 0.37$, and a value of $\sigmaA = 0.4--0.5$ in molecular dynamics simulations. The peculiar dynamical effects occuring in CuI can be detected by using a time-resolved anharmonicity measure as defined in Eq.\,\eqref{eq:sigmaA.sample},~i.\,e.,~by evaluating the anharmonicity measure for each sample during the MD with $\sigmaA(t) = \sigmaA [{\bf R} (t)]$. The time-resolved values are shown in Fig.\,\ref{fig:defects.CuI} for each of the three trajectories simulated in this study.
-The characteristic features are the jumps in $\sigmaA (t)$ from values of $\sigmaA (t) \approx 0.5$ to $\sigmaA (t) \approx 1.2$ or 1.6. In the simulated time period, these values are taken for 3 to 12\,ps, before the initial value of $\sigmaA (t) \approx 0.5$ is restored. This jump in $\sigmaA (t)$ hints at a dynamical effect which strongly violates the harmonic approximation. 
+In our initial screening for anharmonic materials, CuI was detected as particularly anharmonic, with a one-shot $\sigmaAOS = 0.37$, and a value of $\sigmaA = 0.4-0.5$ in molecular dynamics simulations. The peculiar dynamical effects occuring in CuI can be detected by using a time-resolved anharmonicity measure as defined in Eq.\,\eqref{eq:sigmaA.sample},~i.\,e.,~by evaluating the anharmonicity measure for each sample during the MD with $\sigmaA(t) = \sigmaA [{\bf R} (t)]$. The time-resolved values are shown in Fig.\,\ref{fig:defects.CuI} for each of the three trajectories simulated in this study.
+The characteristic features are the jumps in $\sigmaA (t)$ from values of $\sigmaA (t) \approx 0.5$ to $\sigmaA (t) \approx 1.2$ or 1.6. In the simulated time period, these values are taken for 3 to 12\,ps, before the initial value of $\sigmaA (t) \approx 0.5$ is restored. The jumps in $\sigmaA (t)$ hint at a dynamical effect which strongly violates the harmonic approximation.
 
 \begin{marginfigure}
 	\includegraphics[width=\textwidth]{./data/plots/defects/216.02.CuI/all.pdf}
@@ -254,23 +252,11 @@ The characteristic features are the jumps in $\sigmaA (t)$ from values of $\sigm
 for the time spans where $\sigmaA (t)$ is increased. We compare two time-averaged structures in Fig.\,\ref{fig:defects.CuI.1}: A time average with respect to the entire simulation time reveals the perfect zincblende structure of CuI which corresponds to the minimum of the potential energy surface.
 When averaging over the time span where $\sigmaA (t) \approx 1.2$, however, the average structure has one Cu atom diplaces along the (111) direction. Viewing the supercell in (110) direction, the diplacement is clearly visible (Fig.\,\ref{fig:defects.CuI.1}, middle). This means that the Cu occupies a metastable interstitial site at the given position for the respective time period. When $\sigmaA (t)$ is restored to the base value of $\sigmaA (t) \approx 0.5$, the Cu atom moves back to the high-symmetry reference position within the zincblende structure. 
 The third trajectory shown in Fig.\,\ref{fig:defects.CuI}~c) evolves to a situation where $\sigmaA \approx 1.6$. This corresponds to a situation, where more than one defects forms~(Fig.\,\ref{fig:defects.CuI.1}, bottom).
+\REM{discuss proto-superionic state/phase transition}
 
-%\begin{figure*}
-%	\includegraphics[width=.5\textwidth]{./data/plots/defects/216.02.CuI/perfect_110_solid.png} \hfill
-%	\includegraphics[width=.5\textwidth]{./data/plots/defects/216.02.CuI/defect_110.png}
-%	\caption{CuI viewed in (110) direction. Left: High-symmetry zincblende structure. Right: Copper ion in lower-right quadrant moves into interstitial site along (111) direction.}
-%	\label{fig:defects.CuI.1}
-%\end{figure*}
-%\begin{figure*}
-%	\includegraphics[width=.5\textwidth]{./data/plots/defects/216.02.CuI/defects_110.png} \hfill
-%	\includegraphics[width=.5\textwidth]{./data/plots/defects/216.02.CuI/defects_110_135.png}
-%	\caption{2.5 defects in (110) and rotated by 90\,deg about z-axis.}
-%	\label{}
-%\end{figure*}
 
 \subsection{Thermal conductivity}
-
-\newthought{Following the same recipe presented earlier in this chapter,} the convergence of the aiGK thermal conductivity with effective simulation time is shown in Fig.\,\ref{fig:imp.kappa.convergence.CuI} for CuI at room temperature.
+Following the same recipe presented earlier in this chapter, the convergence of the aiGK thermal conductivity with effective simulation time is shown in Fig.\,\ref{fig:imp.kappa.convergence.CuI} for CuI at room temperature.
 \begin{figure}
 	\includegraphics[width=\textwidth]{./data/plots/kappa_convergence/examples/216_CuI.pdf}
 	\caption{Thermal conductivity $\kappa$ as function of the effective simulation time $\teff = 1.1\,{\rm THz} \cdot t_0$ as defined in Eq.\,\ref{eq:imp.teff}. Values are given as the ensemble average over three independent trajectories. The error bars are computed according to Eq.\,\eqref{eq:imp.kappa.err} as the standard error of the ensemble average. The blue curve is a logistic curve defined in Eq.\,\eqref{eq:imp.f_logistic} fitted to the $\kappa$ values, the dashed blue curve is the infinite time limit of the fitted function. Gray dots represent the thermal conductivity as given by the simulation without the size-correction scheme.
@@ -298,10 +284,10 @@ Comparing this to the available literature in Tab.\,\ref{tab:exp.CuI}, we find g
   \caption{Experimental values and one theoretical reference for the thermal conductivity of marshite CuI at ambient conditions. The value from Yang et al. marked by $\dagger$ is from a thin film experiment, and therefore can be regarded as a lower bound of the bulk thermal conducitivity~\cite{yang2017}.}
   \label{tab:exp.CuI}
 \end{table}
-The theoretical reference on the other hand drastically overestimates the thermal conductivity by a factor of $\approx 4$~\cite{phono3py}. Since the theoretical reference uses a perturbative approach in terms of third-order force constants obtained at the local minimum of the potential-energy surface, a probable explanation for this strong discrepancy is the inability of this approach to model the actual, strongly anharmonic dynamics of CuI with sufficient accuracy. As discussed in Sec.\,\ref{sec:defects.CuI}, the actual dynamical evolution of CuI inhibits effects like metastable defects, which are qualitatively different from the phonon picture of atoms moving about a well defined reference position in a nearly harmonic potential. These effects are, however, naturally included in the non-perturbative aiGK formalism.
+The theoretical reference on the other hand drastically overestimates the thermal conductivity by a factor of $\approx 4$~\cite{phono3py}. Since the theoretical reference uses a perturbative approach in terms of third-order force constants obtained at the local minimum of the potential-energy surface, a probable explanation for this strong discrepancy is the inability of this approach to model the actual, strongly anharmonic dynamics of CuI with sufficient accuracy. As discussed in Sec.\,\ref{sec:defects.CuI}, CuI inhibits effects like metastable defects, which are qualitatively different from the phonon picture of atoms moving about a well defined reference position in a nearly harmonic potential. These effects are, however, naturally included in the non-perturbative aiGK formalism.
 
 \section{Conclusion}
-We have introduced the technical details of our aiGK implementation, and discussed two benchmark system at ambient conditions: Periclase MgO, and marshite CuI. Although both structures are very simple cubic structures with two atoms in the unit cell, they behave quite differently from a dynamical point of view: MgO is a largely harmonic system which can be regarded as a textbook example for phonon theory, where all basic assumptions hold. In particular there are well defined reference positions, and the deviation from perfectly harmonic interactions are quite weak, with a $\sigmaA = 0.17$ signaling an anharmonic contribution to the forces of only about 17\,\%. CuI on the other hand is strongly anharmonic, with $\sigmaA \approx 0.4-0.5$, and displays spontaneous formation of metastable insterstial defects as discussed in Sec.\,\ref{sec:defects.CuI}. 
+We have introduced the technical details of our aiGK implementation, and discussed two benchmark systems at ambient conditions: Periclase MgO, and marshite CuI. Although both structures are very simple cubic structures with two atoms in the unit cell, they behave quite differently from a dynamical point of view: MgO is a largely harmonic system which can be regarded as a textbook example for phonon theory, where all basic assumptions hold. In particular there are well defined reference positions, and the deviation from perfectly harmonic interactions is quite weak, with a $\sigmaA = 0.17$ signaling an anharmonic contribution to the forces of about 17\,\%. CuI on the other hand is strongly anharmonic, with $\sigmaA \approx 0.4-0.5$, and displays spontaneous formation of metastable insterstial defects as discussed in Sec.\,\ref{sec:defects.CuI}. 
 While perturbative approaches proved to be very accurate for MgO, and even had some advantages compared to aiGK in situations where the material of interest is not fully classical, or isotope scattering lowers the thermal conductivity substantially, the differences were much bigger for the strongly anharmonic CuI, where the perturbative approach overestimated the thermal conductivity drastically, whereas the aiGK was still in good agreement.
 
 \newthought{The aiGK method is therefore our method of choice} for the investigation of the strongly anharmonic candidate thermal insulators suggested in Chp.\,\ref{chp:anharmonicity}.
