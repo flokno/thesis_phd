@@ -2,8 +2,18 @@
 % include symmetric to place margins left and right instead of right only
 % nohyper, nobib?
 \documentclass[nobib,a4paper,twoside,notoc,justified,marginals=justified]{tufte-book}
-\hypersetup{colorlinks}
+% \documentclass{caesar_book}
 \usepackage[utf8]{inputenc}
+
+% \usepackage{hyperref}
+\hypersetup{colorlinks}
+
+% \usepackage{setspace}
+% \newcommand{\newthought}[1]{\textsc{#1}}
+
+%%
+% For nicely typeset tabular material
+\usepackage{booktabs}
 
 % fix too many alphabets error
 \usepackage{amsmath, amssymb}
@@ -120,6 +130,19 @@
   December\fi\space\number\year
 }
 
+% http://tex.stackexchange.com/a/140164/1913
+% \ifxetex
+% xetex fix https://tex.stackexchange.com/a/200725/91226
+%\ifx\ifxetex\ifluatex\else % if lua- or xelatex   \newcommand{\textls}[2][5]{%
+%    \begingroup\addfontfeatures{LetterSpace=#1}#2\endgroup
+%  }
+%  \renewcommand{\allcapsspacing}[1]{\textls[15]{#1}}
+%  \renewcommand{\smallcapsspacing}[1]{\textls[10]{#1}}
+%  \renewcommand{\allcaps}[1]{\textls[15]{\MakeTextUppercase{#1}}}
+%  \renewcommand{\smallcaps}[1]{\smallcapsspacing{\scshape\MakeTextLowercase{#1}}}
+%  \renewcommand{\textsc}[1]{\smallcapsspacing{\textsmallcaps{#1}}}
+%\fi
+
 
 % Prints an epigraph and speaker in sans serif, all-caps type.
 \newcommand{\openepigraph}[2]{%
@@ -187,32 +210,32 @@
 % r.9 introduction
 \cleardoublepage
 \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
-\chapter{Introduction}
-\input{./parts/0_intro.tex}
+%\chapter{Introduction}
+%\input{./parts/0_intro.tex}
 
 %%
 % Start the main matter (normal chapters)
 \mainmatter
 
 \addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
-\part{Theory and Methods}
-
-\chapter{The Many Body Problem}
-\input{./parts/1_dft.tex}
-
- \newpage
-
-\chapter{Nuclear and Lattice Dynamics}
-\input{./parts/2_lattice_dynamics.tex}
-
-\chapter{Heat Transport}
-\input{./parts/3_heat_transport.tex}
-
-\chapter{Anharmonicity}
-\input{./parts/4_anharmonicity.tex}
+%\part{Theory and Methods}
 %
-\part{Implementation and Benchmarks}
-
+%\chapter{The Many Body Problem}
+%\input{./parts/1_dft.tex}
+%
+% \newpage
+%
+%\chapter{Nuclear and Lattice Dynamics}
+%\input{./parts/2_lattice_dynamics.tex}
+%%
+%\chapter{Heat Transport}
+%\input{./parts/3_heat_transport.tex}
+%%
+%\chapter{Anharmonicity}
+%\input{./parts/4_anharmonicity.tex}
+%
+% \part{Implementation and Benchmarks}
+\input{./parts/5_implementation.tex}
 
 %
 % \part{Results}
@@ -239,12 +262,13 @@
 % \setcounter{tocdepth}{1}
 % \addtocontents{toc}{\setcounter{tocdepth}{0}}
 \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
-%	\newcommand{\bibsection}{\section{Bibliography}} % <- was missing
-\begin{appendices}
-%  \appendixpage
-  \part*{Appendix}
-  \input{./parts/appendix.tex}
-\end{appendices}
+\newcommand{\bibsection}{\section{Bibliography}} % <- was missing
+
+%\begin{appendices}
+%%  \appendixpage
+%  \part*{Appendix}
+%  \input{./parts/appendix.tex}
+%\end{appendices}
 
 % \backmatter
 
