@@ -196,3 +196,125 @@ From AAPL: 4
 }
 
 \TODO{Include materials with reference in appendix}
+
+\newpage
+\section{Dynamical effects}
+
+\begin{figure}
+	\includegraphics[width=4.1in]{./data/plots/sigma_vs_sigma/sigma_os_md_edit.pdf}
+	\caption{describe}
+	\label{fig:sigma_os_md_dataset}
+\end{figure}
+
+
+\subsection{CuI}
+
+\begin{figure}
+	\includegraphics[width=\textwidth]{./data/plots/defects/216.02.CuI/sigma_vs_time.pdf}
+	\caption{Zincblende (SG\,216) CuI, describe comp. details}
+	\label{fig:defects.CuI}
+\end{figure}
+\noindent
+In our initial screening for anharmonic materials, CuI was detected as particularly anharmonic, with a one-shot $\sigmaAOS = 0.37$, and a value of $\sigmaA = 0.4-0.5$ in molecular dynamics simulations. The peculiar dynamical effects occuring in CuI can be detected by using a time-resolved anharmonicity measure as defined in Eq.\,\eqref{eq:sigmaA.sample},~i.\,e.,~by evaluating the anharmonicity measure for each sample during the MD with $\sigmaA(t) = \sigmaA [{\bf R} (t)]$. The time-resolved values are shown in Fig.\,\ref{fig:defects.CuI} for each of the three trajectories simulated in this study.
+The characteristic features are the jumps in $\sigmaA (t)$ from values of $\sigmaA (t) \approx 0.5$ to $\sigmaA (t) \approx 1.2$ or 1.6. In the simulated time period, these values are taken for 3 to 12\,ps, before the initial value of $\sigmaA (t) \approx 0.5$ is restored. The jumps in $\sigmaA (t)$ hint at a dynamical effect which strongly violates the harmonic approximation.
+
+\begin{marginfigure}
+	\includegraphics[width=\textwidth]{./data/plots/defects/216.02.CuI/all.pdf}
+	\caption{CuI viewed in (110) direction. Top: High-symmetry zincblende structure. Middle: Copper ion in lower-right quadrant moves into interstitial site along (111) direction when $\sigmaA (t) \approx 1.2$. Bottom: Several defects form when $\sigmaA (t) \approx 1.6$}
+	\label{fig:defects.CuI.1}
+\end{marginfigure} 
+
+\newthought{The nature of this effect} can be resolved by time-averaging the positions ${\bf R} (t)$,
+\begin{align}
+	{\bf R}_{\rm avg} = \braket{{\bf R} (t)}_t~,	
+	\label{eq:R(t).avg}
+\end{align}
+
+
+\newpage
+\subsection{KCaF$_3$}
+
+\cite{Bulou1980,Hidaka1984,Knight2005}
+
+\begin{figure}
+	\includegraphics[width=\textwidth]{./data/plots/defects/062.05.KCaF3/sigma_vs_time.pdf}
+	\caption{Orthorombic (SG\,62) KCaF$_3$, describe}
+	\label{}
+\end{figure}
+
+\begin{marginfigure}
+	\includegraphics[width=\textwidth]{./data/plots/defects/062.05.KCaF3/ref_2.png}
+	\includegraphics[width=\textwidth]{./data/plots/defects/062.05.KCaF3/rdf/geometry_in_def_2.pdf}
+	\caption{Precursor of phase transition in KCaF$_3$. Upper panel: The reference orthorombic structure viewed in (010) direction. The orthorombic displacement of the potassium sub-lattice (violet balls connected by sticks) is clearly visible. Middle panel: When $\sigmaA (t) \approx 1.1$, the potassium sub-lattice temporarily adopts a tetragonal shape. Also the fluorite atoms (small blue balls) reduce their tilt consequently. Lower panel: Radial distribution function $g(r)$ for the fluorine atoms in the orthorombic reference and deformed structure: The number of distinct peaks reduces, reflecting an increase in symmetry when the orthorombic tilt reduces.}
+	\label{fig:defects.KCaF3.1}
+\end{marginfigure} 
+
+%\begin{figure*}
+%	\includegraphics[width=.5\textwidth]{./data/plots/defects/062.05.KCaF3/plots/ref_front.png} \hfill
+%	\includegraphics[width=.5\textwidth]{./data/plots/defects/062.05.KCaF3/plots/2_front.png} \\
+%	\includegraphics[width=.5\textwidth]{./data/plots/defects/062.05.KCaF3/plots/4_front.png} \hfill
+%	\includegraphics[width=.5\textwidth]{./data/plots/defects/062.05.KCaF3/plots/5_front.png}
+%	\caption{Front view along long axis.}
+%	\label{}
+%\end{figure*}
+%
+%\begin{figure*}
+%	\includegraphics[width=.5\textwidth]{./data/plots/defects/062.05.KCaF3/plots/ref_left.png} \hfill
+%	\includegraphics[width=.5\textwidth]{./data/plots/defects/062.05.KCaF3/plots/2_left.png} \\
+%	\includegraphics[width=.5\textwidth]{./data/plots/defects/062.05.KCaF3/plots/4_left.png} \hfill
+%	\includegraphics[width=.5\textwidth]{./data/plots/defects/062.05.KCaF3/plots/5_left.png}
+%	\caption{Left view along short axis.}
+%	\label{}
+%\end{figure*}
+%
+%\begin{figure}
+%	\includegraphics[width=\textwidth]{./data/plots/defects/062.05.KCaF3/rdf/geometry_in_def_4.pdf}
+%	\caption{RDF trajectory 4}
+%	\label{}
+%\end{figure}
+
+\newpage
+\subsection{AgI}
+
+\cite{strock1934,strock1935,strock1936,hoshino1957,Brenner2020}
+
+\begin{figure}
+	\includegraphics[width=\textwidth]{./data/plots/defects/186.02.AgI/sigma_vs_time.pdf}
+	\caption{Wurtzite (SG\,186) AgI, describe comp. details}
+	\label{fig:defects.AgI}
+\end{figure}
+
+\begin{marginfigure}
+	\includegraphics[width=\textwidth]{./data/plots/defects/186.02.AgI/defects_all.png}
+	\caption{AgI viewed in (100) direction. Top: High-symmetry wurtzite structure. Middle: Silver ions move into interstitial sites along (001) direction when $\sigmaA (t) \approx 1.3$. Bottom: The same configuration viewed along (001) direction.}
+	\label{fig:defects.AgI.1}
+\end{marginfigure} 
+
+\newpage
+\subsection{AgCl}
+\cite{lowndes1972,andreoni1983,batchelor1995}
+
+\begin{figure}
+	\includegraphics[width=\textwidth]{./data/plots/defects/225.02.AgCl/sigma_vs_time.pdf}
+	\caption{Rocksalt (SG\,225) AgCl, describe comp. details}
+	\label{fig:defects.AgCl}
+\end{figure}
+
+\begin{marginfigure}[-2in]
+	\includegraphics[width=\textwidth]{./data/plots/defects/225.02.AgCl/per_atom/histogram_atoms_margin.pdf}
+	\caption{Species-resolved anharmonicity score in AgCl.}
+	\label{fig:defects.AgCl.sigmaA}
+\end{marginfigure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=3.5in]{./data/plots/pdfs/agcl.pdf}
+	\caption{Rocksalt (SG\,225) AgCl, describe comp. details}
+	\label{fig:defects.pdf.agcl}
+\end{figure}
+
+\begin{marginfigure}
+	\includegraphics[width=\textwidth]{./data/plots/pdfs/mgo_small.pdf}
+	\caption{Pair distribution function for up to four coordination shells for MgO for comparison.}
+	\label{fig:defects.pdf.mgo.small}
+\end{marginfigure}
