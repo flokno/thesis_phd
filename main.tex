@@ -196,6 +196,7 @@
 
 % Front matter
 \frontmatter
+\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
   
 %  % r.1 blank page
 %  \blankpage
@@ -224,14 +225,13 @@
 
 % r.9 introduction
 \cleardoublepage
-\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+
 \chapter{Introduction}
 \input{./parts/0_intro.tex}
 
 %%
 % Start the main matter (normal chapters)
 \mainmatter
-
 \addtocontents{toc}{\protect\setcounter{tocdepth}{1}}
 \part{Theoretical Foundation}
 
@@ -257,13 +257,10 @@
 \input{./parts/results.tex}
 
 
-\part{Conclusion}
-
-\chapter{Summary}
+% \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+% \addcontentsline{toc}{chapter}{Conclusion}
+\chapter{Conclusion}
 \input{./parts/conclusio.tex}
-
-\chapter{Outlook}
-\input{./parts/outlook.tex}
 
 \cleardoublepage
 \phantomsection
