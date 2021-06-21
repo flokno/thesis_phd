@@ -44,6 +44,7 @@ The division of potential and forces into harmonic and anharmonic contributions 
 
 
 \section{Anharmonicity measure}
+\label{sec:anharmonicity_measure}
 
 We base the definition of a measure for anharmonicity on the forces, for three reasons: First, because we have just seen that the dynamical evolution of the system is determined by the potential through the equations of motion, and therefore by the forces. Second, because the forces give more microscopic insight, as they can be resolved per atom. Third, the forces are   statistically easier to describe, since per configuration $\bf R$, there are $3N$ force components ${\bf F} = ({\bf F}_1, \ldots, {\bf F}_N)$.
 
@@ -199,15 +200,52 @@ From AAPL: 4
 
 \newpage
 \section{Dynamical effects}
+As shown in the initial screening of material space presented in Ref.\,\cite{Knoop2020}, strongly anharmonic materials with $\sigmaA > 0.3$ are prone to exhibiting non-trivial dynamical effects such as metastable defect formation and precursors of structural phase transitions. 
 
+\newthought{We carried out \emph{ab initio} molecular dynamics simulations}~\footnote{Computational settings: PBEsol function and \emph{light default} basissets. Time step 4-5\,fs based on the highest harmonic vibrational frequency, total simulation time at least 30\,ps. Lattice expansion accounted for by minimizing the pressure in the simulation cell according to the scheme outlined in Sec.\,\ref{sec:app.lattice_expansion}. Full details given in appendix \ref{sec:app.computational_details}.} for each of the candidate materials introduced in the previous chapter to see whether the materials exhibit such non-trivial dynamical effects. 
+These dynamical effects can be detected by using a time-resolved anharmonicity measure as defined in Eq.\,\eqref{eq:sigmaA.sample},~i.\,e.,~by evaluating the anharmonicity measure for each sample during the MD with $\sigmaA(t) = \sigmaA [{\bf R} (t)]$, and evaluating fluctuations of $\sigmaA (t)$ in terms of its standard deviation ${\rm std} [ \sigmaA ]$ evaluated along a given trajectory. A comparison of $\sigmaA$ values obtained by one-shot sampling, $\sigmaAOS$, and molecular dynamics, $\sigmaAMD$, is shown in Fig.\,\ref{fig:sigma_os_md_dataset}. Materials with a standard deviation larger than ${\rm std} [ \sigmaAMD ] > 0.01$ are highlighted and labeled.
 \begin{figure}
 	\includegraphics[width=4.1in]{./data/plots/sigma_vs_sigma/sigma_os_md_edit.pdf}
-	\caption{describe}
+	\caption{$\sigmaA$ values obtained by one-shot sampling (OS) and molecular dynamics simulations (MD) in comparison. Materials with significant fluctuations of the time-resolved anharmonicity measure $\sigmaA (t)$ are highlighted and labeled.}
 	\label{fig:sigma_os_md_dataset}
 \end{figure}
+We discuss the nature of these effects for KCaF$_3$, CuI, AgI, and AgCl in the following. AgBr and KCdF$_3$ are omitted because they behave qualitatively similar to AgCl and KCaF$_3$, respectively. 
 
+The discussion is meant to highlight the prevalence of non-trivial dynamical effects that violate one basic assumption of phonon theory,~i.\,e.,~the assumption of well-defined and stationary reference positions for all atoms in a given phase. Another key insight is that the observed effects are precursors of phase transitions known to occur in these materials at higher temperatures, which means that their onset is observed on the microscopic scale during the dynamic evolution already several 100\,K below the phase transition temperature.
+From a methodological point of view, we show how the time-resolved anharmonicity can be used to uncover and explain the nature of the underlying dynamical effect.
+
+\newpage
+
+\subsection{KCaF$_3$}
+KCaF$_3$ is the perovskite material already discussed in some detail in Sec.\,\ref{sec:anharmonicity_measure}, where the octahedral tilting mechanism typical for this class of materials, and the phase transition phenomenology were presented~\cite{Bulou1980,Hidaka1984,Knight2005}. In total, we performed five $NVE$ simulations for KCaF$_3$, with a simulation time of 30\,ps each. The time resolved anharmonicity measure is displayed for each of those trajectories in Fig.\,\ref{fig:defects.KCaF3.sigmaA}.
+We find that in three of the five trajectories, $\sigmaA (t)$ jumps between the reference values of $\sigmaA \approx 0.4$,\footnote{We round to 1 decimal point in the following, which is completely sufficient for the discussion of intermittent jumps.} and increased values between $\sigmaA \approx 0.8$ and $\sigmaA \approx 1.2$.
+%
+\begin{figure}
+	\includegraphics[width=\textwidth]{./data/plots/defects/062.05.KCaF3/sigma_vs_time.pdf}
+	\caption{Time-resolved anharmonicity measure $\sigmaA (t)$ for orthorombic KCaF$_3$ in five molecular dynamics runs or 30\,ps length. Increased values of $\sigmaA (t)$ are found in three trajectories (b, d, e).}
+	\label{fig:defects.KCaF3.sigmaA}
+\end{figure}
+%
+\newthought{The nature of the underlying dynamical effects} can be resolved by time-averaging the positions ${\bf R} (t)$,
+\begin{align}
+	{\bf R}_{\rm avg} = \braket{{\bf R} (t)}_t~,	
+	\label{eq:R(t).avg}
+\end{align}
+%
+\begin{marginfigure}[-3cm]
+	\includegraphics[width=\textwidth]{./data/plots/defects/062.05.KCaF3/plots/ref_left.png}
+	\includegraphics[width=\textwidth]{./data/plots/defects/062.05.KCaF3/plots/2_left.png}
+	\includegraphics[width=\textwidth]{./data/plots/defects/062.05.KCaF3/rdf/geometry_in_def_2.pdf}
+	\caption{Precursor of phase transition in KCaF$_3$. Upper panel: The reference orthorombic structure viewed in (010) direction. The orthorombic displacement of the potassium sub-lattice (violet balls connected by sticks) is clearly visible. Middle panel: When $\sigmaA (t) \approx 1.1$, the potassium sub-lattice temporarily adopts a tetragonal shape. Also the fluorite atoms (small blue balls) reduce their tilt consequently. Lower panel: Radial distribution function $g(r)$ for the fluorine atoms in the orthorombic reference and deformed structure: The number of distinct peaks reduces, reflecting an increase in symmetry when the orthorombic tilt reduces.}
+	\label{fig:defects.KCaF3.1}
+\end{marginfigure}
+\noindent
+for the time spans where $\sigmaA (t)$ is increased. Performing this time average for time spans where $\sigmaA (t) < 0.5$,~i.\,e.,~in situations where no increase is seen, one recoveres the initial orthorombic structure shown in Fig.\,\ref{fig:defects.KCaF3.1} (top figure). When averaging trajectory b) for the time where $\sigmaA (t) \approx 1.1$, the resulting structure is more symmetric, with an approximately tetragonal arrangement of atoms. This can be seen by focusing on the potassium sub lattice (purple atoms connected by sticks) in Fig.\,\ref{fig:defects.KCaF3.1} (middle). The increased symmetry is further revealed by noting that the fluorine cage becomes more ordered, as shown in terms of the F-F pair distribution function in Fig.\,\ref{fig:defects.KCaF3.1} (bottom). This phenomenon can be viewed as a precursor of the phase transitions towards tetragonal and cubic phases known to occur in the material at temperatures higher than 560\,K~\cite{Bulou1980,Hidaka1984,Knoop2020}. However, at 300\,K, well below the transition temperature, this configuration only occurs sporadically on the time scale of several picoseconds during the simulation, and is therefore not fully stabilized.
+
+% \newpage
 
 \subsection{CuI}
+\label{sec:defects.CuI}
 
 \begin{figure}
 	\includegraphics[width=\textwidth]{./data/plots/defects/216.02.CuI/sigma_vs_time.pdf}
@@ -215,106 +253,92 @@ From AAPL: 4
 	\label{fig:defects.CuI}
 \end{figure}
 \noindent
-In our initial screening for anharmonic materials, CuI was detected as particularly anharmonic, with a one-shot $\sigmaAOS = 0.37$, and a value of $\sigmaA = 0.4-0.5$ in molecular dynamics simulations. The peculiar dynamical effects occuring in CuI can be detected by using a time-resolved anharmonicity measure as defined in Eq.\,\eqref{eq:sigmaA.sample},~i.\,e.,~by evaluating the anharmonicity measure for each sample during the MD with $\sigmaA(t) = \sigmaA [{\bf R} (t)]$. The time-resolved values are shown in Fig.\,\ref{fig:defects.CuI} for each of the three trajectories simulated in this study.
-The characteristic features are the jumps in $\sigmaA (t)$ from values of $\sigmaA (t) \approx 0.5$ to $\sigmaA (t) \approx 1.2$ or 1.6. In the simulated time period, these values are taken for 3 to 12\,ps, before the initial value of $\sigmaA (t) \approx 0.5$ is restored. The jumps in $\sigmaA (t)$ hint at a dynamical effect which strongly violates the harmonic approximation.
-
+Copper iodide (CuI), also known as marshite, is a simple material with fcc lattice of the zincblende type. This phase is also known as the $\gamma$ phase ($\gamma$-CuI).
+The time-resolved anharmonicity measures are shown in Fig.\,\ref{fig:defects.CuI} for three trajectories of 60\,ps simulation time.
+The characteristic features are the jumps in $\sigmaA (t)$ from values of $\sigmaA (t) \approx 0.5$ to $\sigmaA (t) \approx 1.2$ or 1.6. In the simulated time period, these values are taken for 3 to 12\,ps, before the initial value of $\sigmaA (t) \approx 0.5$ is restored. 
+% The jumps in $\sigmaA (t)$ hint at a dynamical effect which strongly violates the harmonic approximation.
+%
 \begin{marginfigure}
 	\includegraphics[width=\textwidth]{./data/plots/defects/216.02.CuI/all.pdf}
 	\caption{CuI viewed in (110) direction. Top: High-symmetry zincblende structure. Middle: Copper ion in lower-right quadrant moves into interstitial site along (111) direction when $\sigmaA (t) \approx 1.2$. Bottom: Several defects form when $\sigmaA (t) \approx 1.6$}
 	\label{fig:defects.CuI.1}
 \end{marginfigure} 
-
-\newthought{The nature of this effect} can be resolved by time-averaging the positions ${\bf R} (t)$,
-\begin{align}
-	{\bf R}_{\rm avg} = \braket{{\bf R} (t)}_t~,	
-	\label{eq:R(t).avg}
-\end{align}
-
-
-\newpage
-\subsection{KCaF$_3$}
-
-\cite{Bulou1980,Hidaka1984,Knight2005}
-
-\begin{figure}
-	\includegraphics[width=\textwidth]{./data/plots/defects/062.05.KCaF3/sigma_vs_time.pdf}
-	\caption{Orthorombic (SG\,62) KCaF$_3$, describe}
-	\label{}
-\end{figure}
-
-\begin{marginfigure}
-	\includegraphics[width=\textwidth]{./data/plots/defects/062.05.KCaF3/ref_2.png}
-	\includegraphics[width=\textwidth]{./data/plots/defects/062.05.KCaF3/rdf/geometry_in_def_2.pdf}
-	\caption{Precursor of phase transition in KCaF$_3$. Upper panel: The reference orthorombic structure viewed in (010) direction. The orthorombic displacement of the potassium sub-lattice (violet balls connected by sticks) is clearly visible. Middle panel: When $\sigmaA (t) \approx 1.1$, the potassium sub-lattice temporarily adopts a tetragonal shape. Also the fluorite atoms (small blue balls) reduce their tilt consequently. Lower panel: Radial distribution function $g(r)$ for the fluorine atoms in the orthorombic reference and deformed structure: The number of distinct peaks reduces, reflecting an increase in symmetry when the orthorombic tilt reduces.}
-	\label{fig:defects.KCaF3.1}
-\end{marginfigure} 
-
-%\begin{figure*}
-%	\includegraphics[width=.5\textwidth]{./data/plots/defects/062.05.KCaF3/plots/ref_front.png} \hfill
-%	\includegraphics[width=.5\textwidth]{./data/plots/defects/062.05.KCaF3/plots/2_front.png} \\
-%	\includegraphics[width=.5\textwidth]{./data/plots/defects/062.05.KCaF3/plots/4_front.png} \hfill
-%	\includegraphics[width=.5\textwidth]{./data/plots/defects/062.05.KCaF3/plots/5_front.png}
-%	\caption{Front view along long axis.}
-%	\label{}
-%\end{figure*}
 %
-%\begin{figure*}
-%	\includegraphics[width=.5\textwidth]{./data/plots/defects/062.05.KCaF3/plots/ref_left.png} \hfill
-%	\includegraphics[width=.5\textwidth]{./data/plots/defects/062.05.KCaF3/plots/2_left.png} \\
-%	\includegraphics[width=.5\textwidth]{./data/plots/defects/062.05.KCaF3/plots/4_left.png} \hfill
-%	\includegraphics[width=.5\textwidth]{./data/plots/defects/062.05.KCaF3/plots/5_left.png}
-%	\caption{Left view along short axis.}
-%	\label{}
-%\end{figure*}
-%
-%\begin{figure}
-%	\includegraphics[width=\textwidth]{./data/plots/defects/062.05.KCaF3/rdf/geometry_in_def_4.pdf}
-%	\caption{RDF trajectory 4}
-%	\label{}
-%\end{figure}
+As in the case of KCaF$_3$, we compare two time-averaged structures in Fig.\,\ref{fig:defects.CuI.1}: A time average with respect to the entire simulation time reveals the perfect zincblende structure of CuI which corresponds to the minimum of the potential energy surface.
+When averaging over the time span where $\sigmaA (t) \approx 1.2$, however, the average structure has one Cu atom diplaces along the (111) direction. Viewing the supercell in (110) direction, the diplacement is clearly visible (Fig.\,\ref{fig:defects.CuI.1}, middle). This means that the Cu occupies a metastable interstitial site at the given position for the respective time period. When $\sigmaA (t)$ is restored to the base value of $\sigmaA (t) \approx 0.5$, the Cu atom moves back to the high-symmetry reference position within the zincblende structure. 
+The third trajectory shown in Fig.\,\ref{fig:defects.CuI}~c) evolves to a situation where $\sigmaA \approx 1.6$. This corresponds to a situation, where more than one defects forms~(Fig.\,\ref{fig:defects.CuI.1}, bottom).
 
-\newpage
+\newthought{$\gamma$-CuI is known to undergo a phase transition to a superionic conducting $\beta$ phase} above 643\,K~\cite{boyce1979, boyce1980,boyce1981,keen1995}. It is very likely that the defect formation observed in the aiMD simulations at 300\,K are precursors of this phase transition, but too infrequent at this temperature to destabilize the fcc lattice of the $\gamma$ phase.
+\TODO{cation size}
+
+
 \subsection{AgI}
-
-\cite{strock1934,strock1935,strock1936,hoshino1957,Brenner2020}
-
+Wurtzite silver iodide ($\beta$-AgI), or iodargyrite, is another transition metal halide that shares some similarities with $\beta$-CuI discussed in the previous section~\cite{boyce1981}. It is known to transition into the superionic conducting $\alpha$ phase above $\sim 420$\,K~\cite{hoshino1957,boyce1981,Brenner2020}, and was in fact one of the earliest studied materials exhibiting this phenomenon~\cite{strock1934,strock1935,strock1936}.
+%
 \begin{figure}
 	\includegraphics[width=\textwidth]{./data/plots/defects/186.02.AgI/sigma_vs_time.pdf}
 	\caption{Wurtzite (SG\,186) AgI, describe comp. details}
 	\label{fig:defects.AgI}
 \end{figure}
-
+%
 \begin{marginfigure}
 	\includegraphics[width=\textwidth]{./data/plots/defects/186.02.AgI/defects_all.png}
-	\caption{AgI viewed in (100) direction. Top: High-symmetry wurtzite structure. Middle: Silver ions move into interstitial sites along (001) direction when $\sigmaA (t) \approx 1.3$. Bottom: The same configuration viewed along (001) direction.}
+	\caption{AgI viewed in (100) direction. Top: High-symmetry wurtzite structure. Middle: Silver ions (red) move into interstitial sites along (001) direction when $\sigmaA (t) \approx 1.3$. Bottom: The same configuration viewed along (001) direction.}
 	\label{fig:defects.AgI.1}
 \end{marginfigure} 
+%
+The time-resolved anharmonicity measure for AgI at 300\,K is shown in Fig.\,\ref{fig:defects.AgI}. As in $\gamma$-CuI, the value jumps back and forth between the already quite large reference value of $\sigmaA \approx 0.7$, short spikes at $\sigmaA \approx 0.5$, and longer periods where $\sigmaA \approx 1.3-1.6$ for several picoseconds. For example, the first trajectory displayed in Fig.\,\ref{fig:defects.AgI}~a) jumps between $\sigmaA \approx 0.7$ and $\sigmaA \approx 1.3$ several times, where the longest time span around this value is about 5\,ps. Averaging the positions over this time span as before, we obtain a supercell containing three Ag defects moving along (001) direction in the supercell, as shown in Fig.\,\ref{fig:defects.AgI.1} (middle and bottom), as opposed to the reference wurtzite structure (top).
+It is again very likely that the instability of the wurtzite lattice towards defect formation at room temperature is a precursor of the actual phase transition taking place at temperatures approximately 120\,K higher. 
 
 \newpage
 \subsection{AgCl}
-\cite{lowndes1972,andreoni1983,batchelor1995}
-
+Silver chloride (AgCl) is yet another material of the class of transition metal halides, and the room-temperature stable phase is rock salt~\cite{lowndes1972,andreoni1983,batchelor1995}.
 \begin{figure}
 	\includegraphics[width=\textwidth]{./data/plots/defects/225.02.AgCl/sigma_vs_time.pdf}
 	\caption{Rocksalt (SG\,225) AgCl, describe comp. details}
 	\label{fig:defects.AgCl}
 \end{figure}
-
+%
 \begin{marginfigure}[-2in]
 	\includegraphics[width=\textwidth]{./data/plots/defects/225.02.AgCl/per_atom/histogram_atoms_margin.pdf}
 	\caption{Species-resolved anharmonicity score in AgCl.}
 	\label{fig:defects.AgCl.sigmaA}
 \end{marginfigure}
-
+%
+As opposed to the previously discussed transition metal halides CuI and AgI, the time-resolved anharmonicity $\sigmaA (t)$ exhibits no ``jumps'' in AgCl, but rather stays constants at $\sigmaA \approx 1$, which can be interpreted as a situation where the 0\,k harmonic model loses predictive power for the observed forces. By resolving the anharmonicity measure per atom species in Fig.\,\ref{fig:defects.AgCl.sigmaA} similar to the discussion for KCaF$_3$ in Sec.\,\ref{sec:anharmonicity_measure}, we see that the harmonic model performs better for the chlorine atoms with $\sigmaA_{\rm Cl} = 0.86$, and worse for silver with $\sigmaA_{\rm Ag} = 1.25$. This is in line with the previous observations in metal halides where small cations proved to be more mobile and susceptible to dislocations. However, no clear-cut dislocation pattern can be identified for AgCl as opposed to CuI and AgI.
+%
 \begin{figure}
 	\centering
 	\includegraphics[width=3.5in]{./data/plots/pdfs/agcl.pdf}
-	\caption{Rocksalt (SG\,225) AgCl, describe comp. details}
+	\caption{Rocksalt (SG\,225) AgCl, describe comp. details
+	Coordination shells: 
+	1: 2.75579 atoms: Cl-Ag 
+	2: 3.89727 atoms: Ag-Ag/Cl-Cl 
+	3: 4.77317 atoms: Ag-Cl 
+	4: 5.51158 atoms: Ag-Ag	
+}
 	\label{fig:defects.pdf.agcl}
 \end{figure}
-
+%
+\newthought{The nature of the dynamical effects manifesting in AgCl can nevertheless be elucidated.} We do this by computing the pair distribution functions for the first four coordinates shells in AgCl
+\CITE{pair distribution function. Boon?}
+, as shown in Fig.\,\ref{fig:defects.pdf.agcl}, and contrasting them with the prototypical, largely harmonic rock salt material magnesium oxide (MgO, $\sigmaA = 0.17$) in Fig.\,\ref{fig:defects.pdf.mgo.small}. 
+%
 \begin{marginfigure}
 	\includegraphics[width=\textwidth]{./data/plots/pdfs/mgo_small.pdf}
-	\caption{Pair distribution function for up to four coordination shells for MgO for comparison.}
+	\caption{Radial distribution function resolved by pair contributions.}
 	\label{fig:defects.pdf.mgo.small}
 \end{marginfigure}
+%
+In MgO, the distribution of atoms are sharply distinguishable, which means that the atoms vibrate closely around their reference position. In AgCl on the other hand, only the first coordination shell of silver-chlorine atoms is distinct at 300\,K. The chlorine (Cl-Cl) and silver (Ag-Ag) sublattices (purple/green area in Fig.\,\ref{fig:defects.pdf.agcl}) show discernible peaks, although the broadening is significant compared to MgO. The silver-chlorine (Cl-Ag) distribution (yellow area) is even more broadened and is still non-zero at distances normally characteristic of like atoms (Cl-Cl or Ag-Ag) , see~e.\,g.,~the non-zero width of the yellow curve at 3.9 and 5.5\,\AA (second and fourth coordination shell). In total, this leads to a very strong broadening in the third and fourth coordination shell, with a barely discernible local maximum in the third coordination shell (4.8\,\AA).
+This is in line with experimental Extended X-ray Absorption Fine Structure (EXAFS) measurements detecting an ``anomalously large motion'' in the third neighbor shell already at a temperature of 120\,K~\cite{batchelor1995}.
+This hints at severe dynamical distortions throughout the simulation which are typically discussed in terms of dynamical Frenkel pair formation, where the mobile Ag$^+$ cations dynamically populate interstitial sites~\cite{Aboagye1975,andreoni1983,wilmer1995,mebane2010}. While we can confirm an increased mobility of Ag$^+$ ions as discussed above, we do not observe a local accumulation of Ag$^+$ ions at interstitial sites, which should correspond to additional local minima in the respective pair distribution functions compared to the reference structure. However, such an effect might very well occur at higher temperatures, and the observed effects are fingerprints of the instability of the lattice towards this kind of dynamical defect formation.
+Irrespective of the exact type of defect formation, %which is beyond the scope of this work, 
+the observed dynamical effects hint at a strong form of premelting phenomenon in AgCl, which has an experimental melting temperature of 728\,K.
+
+\newthought{Similar effects can be observed in silver bromide (AgBr)}. As discussed in Ref.\,\cite{andreoni1983}, the dynamical properties of AgCl and AgBr share many similarities with the chemically related material AgI presented in the previous section. In contrast to AgI however, they do not become superionic conductors before melting, despite the increased ion mobility presented here.
+
+
+\subsection{Conclusion}
+In summary, we have observed a variety of non-perturbative dynamical effects occuring in the candidate materials, and discussed them for the prototypical systems KCaF$_3$, $\gamma$-CuI, $\beta$-AgI, and AgCl. The common feature of these effects is that they indicate phenomena which are known to occur in the respective materials, but at significantly higher temperatures. This comprised the onset of structural phase transitions in KCaF$_3$, fingerprints of a superionic phase in CuI and AgI, and pre-melting phenomena in AgCl and AgBr.
+
