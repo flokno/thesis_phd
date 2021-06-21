@@ -24,10 +24,12 @@
 % \usepackage{marginfix}
 
 \usepackage{enumitem, bm, xcolor, braket, dsfont, graphicx, cancel}
+\usepackage[multidot]{grffile}
 % \usepackage[colorlinks, linkcolor = red, citecolor = black, filecolor = black, urlcolor = blue]{hyperref} 
 % \usepackage{nameref}
 % \hypersetup{colorlinks}
 \usepackage{algorithmic}
+\usepackage{todonotes}
 
 % Quotes
 \usepackage{epigraph}
@@ -72,6 +74,7 @@
 \newcommand{\kb}{k_{\rm B}}
 \newcommand{\sigmaA}{\sigma^\mathrm{A}}
 \newcommand{\sigmaAOS}{\sigma^\mathrm{A}_\mathrm{OS}}
+\newcommand{\sigmaAMD}{\sigma^\mathrm{A}_\mathrm{MD}}
 
 % transpose
 \usepackage{relsize}
@@ -80,11 +83,24 @@
 \newcommand{\itp}[1]{{#1}^{\!\:\scalebox{0.55}[1.0]{\( - \)}1 \mathrm t}}
 
 % comments:
+% dblue: https://coolors.co/1f77b4
 \definecolor{dblue}{RGB}{31,119,180}
-\newcommand{\REM}[1]{\textcolor{red}{{\bf #1}}}
-\newcommand{\MOVE}[1]{\textcolor{red}{{\bf Move:} #1}}
-\newcommand{\CITE}[1]{\textcolor{dblue}{{\bf [CITE: #1]}}}
+\definecolor{dblue_light}{HTML}{5AAAE3}
+\definecolor{purple_light}{HTML}{A61EB3}
+\definecolor{red_light}{HTML}{FE404A}
+\definecolor{cite}{HTML}{2BB31E}
+\definecolor{djordje}{RGB}{192,225,215}
+\newcommand{\MOVE} [1] 
+{\todo[inline,backgroundcolor=red_light, bordercolor=white]{{\bf MOVE:} #1}}
+\newcommand{\REM} [1] 
+{\todo[inline,backgroundcolor=dblue_light, bordercolor=white]{{\bf REM:} #1}}
+\newcommand{\CITE} [1] 
+{\todo[inline,backgroundcolor=cite, bordercolor=white]{{\bf CITE:} #1}}
 % \newcommand{\FK}[1]{\textcolor{blue}{{\bf #1 }}}
+\newcommand{\TODO} [1] 
+{\todo[inline,backgroundcolor=red, bordercolor=white]{{\bf TODO:} #1}}
+\newcommand{\FK} [1] 
+{\todo[inline,backgroundcolor=djordje, bordercolor=white]{{\bf Florian:} #1}}
 
 % Tufte
 
@@ -169,7 +185,6 @@
 \newcommand{\hangleft}[1]{\makebox[0pt][r]{#1}}
 \newcommand{\hairsp}{\hspace{1pt}}% hair space
 \newcommand{\hquad}{\hskip0.5em\relax}% half quad space
-\newcommand{\TODO}[1]{\textcolor{red}{\bf TODO: {#1}}\xspace}
 \newcommand{\na}{\quad--}% used in tables for N/A cells
 
 % Generates the index
@@ -210,43 +225,45 @@
 % r.9 introduction
 \cleardoublepage
 \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
-%\chapter{Introduction}
-%\input{./parts/0_intro.tex}
+\chapter{Introduction}
+\input{./parts/0_intro.tex}
 
 %%
 % Start the main matter (normal chapters)
 \mainmatter
 
-\addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
-%\part{Theory and Methods}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{1}}
+\part{Theoretical Foundation}
+
+\chapter{The Many Body Problem}
+\input{./parts/1_dft.tex}
+
+\chapter{Nuclear and Lattice Dynamics}
+\input{./parts/2_lattice_dynamics.tex}
 %
-%\chapter{The Many Body Problem}
-%\input{./parts/1_dft.tex}
-%
-% \newpage
-%
-%\chapter{Nuclear and Lattice Dynamics}
-%\input{./parts/2_lattice_dynamics.tex}
-%%
-%\chapter{Heat Transport}
-%\input{./parts/3_heat_transport.tex}
-%%
-%\chapter{Anharmonicity}
-%\input{./parts/4_anharmonicity.tex}
-%
-% \part{Implementation and Benchmarks}
+\chapter{Heat Transport}
+\input{./parts/3_heat_transport.tex}
+
+
+\part{Applications}
+
+\chapter{Anharmonicity}
+\input{./parts/4_anharmonicity.tex}
+
+\chapter{Ab Initio Green Kubo -- Implementation}
 \input{./parts/5_implementation.tex}
 
-%
-% \part{Results}
-
-%\chapter{Thermal Conductivities for Strongly Anharmonic Compounds}
-%\input{./parts/results.tex}
+\chapter{Thermal Conductivities for Strongly Anharmonic Compounds}
+\input{./parts/results.tex}
 
 
-%\chapter{Conclusion}
-%
-%\chapter{Outlook}
+\part{Conclusion}
+
+\chapter{Summary}
+\input{./parts/conclusio.tex}
+
+\chapter{Outlook}
+\input{./parts/outlook.tex}
 
 \cleardoublepage
 \phantomsection
@@ -257,18 +274,18 @@
 
 % \setcounter{secnumdepth}{-1}
 
-% part*{appendix}
+\part*{Appendix}
 
 % \setcounter{tocdepth}{1}
 % \addtocontents{toc}{\setcounter{tocdepth}{0}}
 \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
 \newcommand{\bibsection}{\section{Bibliography}} % <- was missing
 
-%\begin{appendices}
-%%  \appendixpage
-%  \part*{Appendix}
-%  \input{./parts/appendix.tex}
-%\end{appendices}
+\begin{appendices}
+%  \appendixpage
+  \part*{Appendix}
+  \input{./parts/appendix.tex}
+\end{appendices}
 
 % \backmatter
 

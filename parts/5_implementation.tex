@@ -1,4 +1,4 @@
-\chapter{Ab Initio Green Kubo: Implementation}
+
 \label{chp:implementation}
 \newcommand{\tcut}{t_{\rm c}}
 \newcommand{\teff}{t^{\rm eff}_0}
@@ -225,34 +225,11 @@ Our study agrees with the value reported by Tang and Dong~\cite{tang2010}, where
 
 \section{Case Study Copper Iodide}
 
+\REM{Move to discussion of dynamical effects}
+
 After discussing our implementation of the aiGK method and found reasonable agreement with literature values for periclase MgO, we apply the presented methodology to zincblende copper iodide ($\gamma$-CuI), also know as marshite. CuI is a transparent semiconductor which shows several interesting electronic and thermal transport properties~\CITE{Grundmann,Boyce}. In particular, its room temperature thermal conductivity is very low with only 1.68\,W/mK~\cite{perry2016}, which is typical for copper halide materials~\CITE{CuCl,CuBr}. In polycrystalline thin films, even lower thermal conductivities of 0.48--0.55\,W/mK have been reported~\cite{yang2017,coroa2019}.
 
-\subsection{Dynamical effects}
-\label{sec:defects.CuI}
-\begin{figure}
-	\includegraphics[width=\textwidth]{./data/plots/defects/216.02.CuI/sigma_vs_time.pdf}
-	\caption{Zincblende (SG\,216) CuI, describe comp. details}
-	\label{fig:defects.CuI}
-\end{figure}
-\noindent
-In our initial screening for anharmonic materials, CuI was detected as particularly anharmonic, with a one-shot $\sigmaAOS = 0.37$, and a value of $\sigmaA = 0.4-0.5$ in molecular dynamics simulations. The peculiar dynamical effects occuring in CuI can be detected by using a time-resolved anharmonicity measure as defined in Eq.\,\eqref{eq:sigmaA.sample},~i.\,e.,~by evaluating the anharmonicity measure for each sample during the MD with $\sigmaA(t) = \sigmaA [{\bf R} (t)]$. The time-resolved values are shown in Fig.\,\ref{fig:defects.CuI} for each of the three trajectories simulated in this study.
-The characteristic features are the jumps in $\sigmaA (t)$ from values of $\sigmaA (t) \approx 0.5$ to $\sigmaA (t) \approx 1.2$ or 1.6. In the simulated time period, these values are taken for 3 to 12\,ps, before the initial value of $\sigmaA (t) \approx 0.5$ is restored. The jumps in $\sigmaA (t)$ hint at a dynamical effect which strongly violates the harmonic approximation.
-
-\begin{marginfigure}
-	\includegraphics[width=\textwidth]{./data/plots/defects/216.02.CuI/all.pdf}
-	\caption{CuI viewed in (110) direction. Top: High-symmetry zincblende structure. Middle: Copper ion in lower-right quadrant moves into interstitial site along (111) direction when $\sigmaA (t) \approx 1.2$. Bottom: Several defects form when $\sigmaA (t) \approx 1.6$}
-	\label{fig:defects.CuI.1}
-\end{marginfigure} 
-
-\newthought{The nature of this effect} can be resolved by time-averaging the positions ${\bf R} (t)$,
-\begin{align}
-	{\bf R}_{\rm avg} = \braket{{\bf R} (t)}_t~,	
-	\label{eq:R(t).avg}
-\end{align}
-for the time spans where $\sigmaA (t)$ is increased. We compare two time-averaged structures in Fig.\,\ref{fig:defects.CuI.1}: A time average with respect to the entire simulation time reveals the perfect zincblende structure of CuI which corresponds to the minimum of the potential energy surface.
-When averaging over the time span where $\sigmaA (t) \approx 1.2$, however, the average structure has one Cu atom diplaces along the (111) direction. Viewing the supercell in (110) direction, the diplacement is clearly visible (Fig.\,\ref{fig:defects.CuI.1}, middle). This means that the Cu occupies a metastable interstitial site at the given position for the respective time period. When $\sigmaA (t)$ is restored to the base value of $\sigmaA (t) \approx 0.5$, the Cu atom moves back to the high-symmetry reference position within the zincblende structure. 
-The third trajectory shown in Fig.\,\ref{fig:defects.CuI}~c) evolves to a situation where $\sigmaA \approx 1.6$. This corresponds to a situation, where more than one defects forms~(Fig.\,\ref{fig:defects.CuI.1}, bottom).
-\REM{discuss proto-superionic state/phase transition}
+In our initial screening for anharmonic materials, CuI was detected as particularly anharmonic, with a one-shot $\sigmaAOS = 0.37$, and a value of $\sigmaA = 0.4-0.5$ in molecular dynamics simulations. The peculiar dynamical effects occuring in CuI,~.i.\,e.,~formation of metastable Cu defects below the superionic phase transition, have been discussed in Sec.\,\ref{sec:defects.CuI}.
 
 
 \subsection{Thermal conductivity}
@@ -285,6 +262,19 @@ Comparing this to the available literature in Tab.\,\ref{tab:exp.CuI}, we find g
   \label{tab:exp.CuI}
 \end{table}
 The theoretical reference on the other hand drastically overestimates the thermal conductivity by a factor of $\approx 4$~\cite{phono3py}. Since the theoretical reference uses a perturbative approach in terms of third-order force constants obtained at the local minimum of the potential-energy surface, a probable explanation for this strong discrepancy is the inability of this approach to model the actual, strongly anharmonic dynamics of CuI with sufficient accuracy. As discussed in Sec.\,\ref{sec:defects.CuI}, CuI inhibits effects like metastable defects, which are qualitatively different from the phonon picture of atoms moving about a well defined reference position in a nearly harmonic potential. These effects are, however, naturally included in the non-perturbative aiGK formalism.
+
+\section{Discussion of necessary simulation times}
+
+\begin{figure}
+	\includegraphics[width=.49\textwidth]{./data/plots/kappa_convergence/3.pdf}
+	\includegraphics[width=.49\textwidth]{./data/plots/kappa_convergence/4.pdf}
+	\includegraphics[width=.49\textwidth]{./data/plots/kappa_convergence/5.pdf}
+	\includegraphics[width=.49\textwidth]{./data/plots/kappa_convergence/6.pdf}
+	\caption{Illustration of minimal necessary effective simulation times. Upper left: $\teff = 240$ for harmonic materials with $\sigmaA \leq 0.2$. Upper right: $\teff = 120$ for materials with $0.2 < \sigmaA \leq 0.3$. Lower left: $\teff = 60$ for materials with $0.3 < \sigmaA \leq 0.4$. Lower right: $\teff = 45$ for materials with $\sigmaA > 0.4$.}
+	\label{fig:kappa_convergence_trustlevel}
+\end{figure}
+
+
 
 \section{Conclusion}
 We have introduced the technical details of our aiGK implementation, and discussed two benchmark systems at ambient conditions: Periclase MgO, and marshite CuI. Although both structures are very simple cubic structures with two atoms in the unit cell, they behave quite differently from a dynamical point of view: MgO is a largely harmonic system which can be regarded as a textbook example for phonon theory, where all basic assumptions hold. In particular there are well defined reference positions, and the deviation from perfectly harmonic interactions is quite weak, with a $\sigmaA = 0.17$ signaling an anharmonic contribution to the forces of about 17\,\%. CuI on the other hand is strongly anharmonic, with $\sigmaA \approx 0.4-0.5$, and displays spontaneous formation of metastable insterstial defects as discussed in Sec.\,\ref{sec:defects.CuI}. 
