@@ -16,18 +16,28 @@ In the last step, we present the computed thermal conductivities for the remaini
 
 
 \section{Convergence estimation}
+We discuss simulation time convergence in the light of the \emph{effective simulation time} introduced in Sec.\,\ref{sec:implementation.convergece}. The key idea is to identify lower boundaries for the \emph{necessary} effective simulation time in a material in order to asses whether a time-converged thermal conductivity is possible to obtain within a simulation time of 30-60\,ps. The rational for this approach is that for individual materials, one would always compute several times longer trajectories to ensure that all relevant contributions are captured. In turn, several times less materials could be computed with a given amount of computational resources. Here, we leverage observations across different materials to circumvent this necessity for individual materials, thereby allowing to compute good estimates for thermal conductivity for dozens of them.
 
+We choose materials based on the criteria displayed in Fig.\,\ref{fig:results.convergence} based on converged thermal conductivities in 7 materials. We define four thresholds of minimal effective simulation time based on a material's anharmonicity $\sigmaA$, reflecting that phonons in harmonic materials like MgO have longer lifetimes than those in anharmonic materials.
+%
 \begin{figure}
 	\includegraphics[width=.49\textwidth]{./data/plots/kappa_convergence/3.pdf}
 	\includegraphics[width=.49\textwidth]{./data/plots/kappa_convergence/4.pdf}
 	\includegraphics[width=.49\textwidth]{./data/plots/kappa_convergence/5.pdf}
 	\includegraphics[width=.49\textwidth]{./data/plots/kappa_convergence/6.pdf}
 	\caption{Illustration of minimal necessary effective simulation times. Upper left: $\teff = 240$ for harmonic materials with $\sigmaA \leq 0.2$. Upper right: $\teff = 120$ for materials with $0.2 < \sigmaA \leq 0.3$. Lower left: $\teff = 60$ for materials with $0.3 < \sigmaA \leq 0.4$. Lower right: $\teff = 45$ for materials with $\sigmaA > 0.4$.}
-	\label{fig:kappa_convergence_trustlevel}
+	\label{fig:results.convergence}
 \end{figure}
+%
+We point out that at this stage, the given thresholds are meant as a \emph{necessary} condition for convergence, which ensures that a significant contribution to the cumulative thermal conductivity is included in the simulation. A statement about the \emph{sufficient} simulation time, however, can only made on the level of individual trajectories and should therefore be reserved for the verification of materials that show interesting properties after the \emph{necessary} simulation time.
+
+Based on this estimation, we identify XX materials out of the list of XXX candidates to compute thermal conductivity on, and discuss those in the following.
+\REM{list of materials in appendix}
 
 
 \section{Comparision to Experiment}
+
+
 
 \begin{figure}
 	\includegraphics[width=\textwidth]{./data/plots/kappa_vs_exp_trusted/kappa_vs_exp_corrected_annotated.pdf}

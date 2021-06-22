@@ -145,6 +145,7 @@ from which the final result for the thermal conductivity is obtained via
 where $\kappa^{\alpha \beta}$ is the value from the \emph{ab initio} Green Kubo simulation. The interpolation scheme effectively subtracts harmonic contributions to the thermal conductivity from vibrations commensurate with the supercell, and extrapolates them to the bulk limit, thereby including long-range contributions otherwise not present in the simulation cell.
 
 \section{Simulation Time Convergence}
+\label{sec:implementation.convergece}
 After we have seen how the cutoff time $\tcut$ in Eq.\,\eqref{eq:implementatino.kappa.1} can be obtained, and finite-size errors can be corrected, we discuss the convergence of presented scheme as a function of the simulation time $t_0$ in Eq.\,\eqref{eq:implementatino.acf.1}. We do this for the case of MgO for three independent trajectories of 60\,ps length each. We truncate every trajectory in 10\,\% steps down to a length of 6\,ps, and apply the workflow presented in the previous sections to each of the truncated trajectories. 
 \begin{figure}
 	\includegraphics[width=\textwidth]{./data/plots/kappa_convergence/examples/225_MgO.pdf}
