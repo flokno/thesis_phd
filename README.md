@@ -5,11 +5,17 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
 
 ## To Do's
 
-- [ ] remove CuI discussion from implementation, refer to defects section
+- [x] remove CuI discussion from implementation, refer to defects section
 - [ ] literature review/experimental benchmark/validation
-- [ ] discuss new materials
-- [ ] Chapter 5: Results
-    - [ ] Method: Implementation
+- [ ] Results: thermal conductivity for trustworthy materials
+    - [ ] compare to experiment
+        - [ ] prepare all experiments with reference
+    - [ ] compare to theory (some? probably not?)
+    - [ ] vs. sigma
+    - [ ] discuss findings
+        - [ ] chalcopyrites? the one heusler?
+- [x] Chapter 5: Results
+    - [x] Method: Implementation
         - [x] aiGK reformulation
         - [x] aiGK Workflow for MgO and CuI
             - [x] raw flux
@@ -26,15 +32,9 @@ First principles thermal transport in strongly anharmonic semiconductors and ins
                 - [x] MgO as function of simulation time
             - [x] compare to experiment
             - [x] apply to CuI
-            - [ ] scale
+            - [x] scale
                 - [x] run workflow for truncated trajectories and investigate results as function of truncation time
                 - [ ] pick set of trustworthy materials and generalize observations
-    - [ ] Results: thermal conductivity for trustworthy materials
-        - [ ] compare to experiment
-        - [ ] compare to theory (some?)
-        - [ ] vs. sigma
-        - [ ] discuss findings
-            - [ ] chalcopyrites? the one heusler?
     - [x] Dynamical effects
         - [x] give overview of non-trivial dyn. effects observed during aiMD
         - [x] KCaF3: discuss tilting of violet atoms (Ca?)

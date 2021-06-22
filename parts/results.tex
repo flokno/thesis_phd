@@ -1,6 +1,33 @@
-\section{Overview: Results of Dataset}
-\section{Discussion}
-\subsection{Comparision to Experiment}
+\label{chp:results}
+
+After introducing the implementation of the \emph{ab initio} Green Kubo (aiGK) method in the previous chapter, we are now in position to present results for the set of potential thermal insulators identified in chapter~\ref{chp:anharmonicity}.
+
+We first discuss the question of simulation time convergence for an initial set of materials in order to predict systems which can be computed with a simulation time of 30-60\,ps. This time was chosen as a compromise between the finite amount of available computational ressources, and the desire to compute as many materials from the list of candidates as possible.
+% 57 materials
+%
+In a second step, we compare the computed thermal conductivities at room temperature to experimental references for the subset of materials where experiments are available to further verify the aiGK method beyond the two materials presented in the previous chapter.
+% 22 materials 
+%
+In the last step, we present the computed thermal conductivities for the remaining materials,~i.\,e.,~those where no experimental thermal conductivity was reported before, and discuss how they fit into the schema of predicting thermal insulators from anharmonicity estimation as discussed in Sec.\,\ref{sec:kappa_vs_sigmaA}.
+\idea{we highlight some materials with noteworthy properties and try to answer some open question in the experimental literature}
+
+\idea{compare to theoretical approaches, i.e., the Roekeghem perovskites}
+
+
+
+\section{Convergence estimation}
+
+\begin{figure}
+	\includegraphics[width=.49\textwidth]{./data/plots/kappa_convergence/3.pdf}
+	\includegraphics[width=.49\textwidth]{./data/plots/kappa_convergence/4.pdf}
+	\includegraphics[width=.49\textwidth]{./data/plots/kappa_convergence/5.pdf}
+	\includegraphics[width=.49\textwidth]{./data/plots/kappa_convergence/6.pdf}
+	\caption{Illustration of minimal necessary effective simulation times. Upper left: $\teff = 240$ for harmonic materials with $\sigmaA \leq 0.2$. Upper right: $\teff = 120$ for materials with $0.2 < \sigmaA \leq 0.3$. Lower left: $\teff = 60$ for materials with $0.3 < \sigmaA \leq 0.4$. Lower right: $\teff = 45$ for materials with $\sigmaA > 0.4$.}
+	\label{fig:kappa_convergence_trustlevel}
+\end{figure}
+
+
+\section{Comparision to Experiment}
 
 \begin{figure}
 	\includegraphics[width=\textwidth]{./data/plots/kappa_vs_exp_trusted/kappa_vs_exp_corrected_annotated.pdf}
@@ -10,7 +37,7 @@
 
 
 
-\subsection{Relation to Anharmonicity}
+\section{Relation to Anharmonicity}
 
 \begin{figure}
 	\includegraphics[width=\textwidth]{./data/plots/anharmonicity/9_kappa/incl_computations/sigma_vs_kappa_annot_comp.pdf}
