@@ -1,7 +1,5 @@
-First principles thermal transport in strongly anharmonic semiconductors and insulators
+Thesis
 ===
-
-# Current Plan
 
 ## To Do's
 

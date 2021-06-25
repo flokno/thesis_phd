@@ -2,6 +2,30 @@
 
 In summary, we have studied \emph{ab initio} thermal transport.
 
+\begin{itemize}
+	\item comprehensive exposition of (classical) GK theory from first principles in the framework of DFT
+	\item development of descriptor for identification of strongly anharmonic solids and effects~\cite{Knoop2020}
+	\item general implementation of aiGK method~\cite{Carbogno2016} in FHI-vibes~\cite{FHI-vibes}
+	\item aiGK results for XX materials
+		\subitem prediction of XX thermal conductivities in materials where no experiments were available before
+	\item prototypical implementation of a data-driven approach for novel material discovery
+		\subitem leverage experimental knowledge to identify trends in material space based on efficient descriptor
+		\subitem predict candidate materials based on descriptor
+		\subitem verify candidates by high-accuracy method
+\end{itemize}
+
 \section{Outlook}
 
 There are many things left to do.
+
+\begin{itemize}
+	\item Methods:
+		\subitem ML potentials to make GK more feasible and accessible, remove computational bottleneck, go beyond GGA accuracy  
+			\CITE{Carla,DonadioBehler,DeepotSE,Langer,...}
+		\subitem analytical GK: crossover between GK and BTE approach for not-too-complex materials
+			\CITE{Dangic,Simoncelli}
+			\subsubitem NQE? \cite{shulumba2017,sutherland2021}
+	\item materials discovery
+		\subitem highlight that $\sigmaA$ is able to describe main trend in material space, improving on that by including more descriptors very well possible, will enable to accelerate novel materials discovery for thermal insulators
+			\CITE{Purcell?,Ramprasad,SISSO,Subgroup discovery,...}
+\end{itemize}

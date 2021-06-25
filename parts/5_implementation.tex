@@ -175,7 +175,8 @@ which allows to accurately quantify the simulation times where the second super-
 %The plot also shows the thermal conductivities obtained without the finite-size correction discussed earlier as gray dots. Without this correction, the final value would be $45.5 \pm 6.1$\,W/mK. The finite-size correction therefore increases this value by about 50\,\%.
 
 \section{Comparison to Literature Values}
-Periclase MgO is an important constituent of the earth mantle and its thermal properties have been studied in detail both experimentally and theoretically~\cite{charvat1957,slack1962,touloukian1970,Macpherson1983,Koker2009,Stackhouse2010,tang2010,dekura2017}. We list the common experimental reference values for the thermal conductivity of periclase MgO in Tab.\,\ref{tab:exp.MgO}.
+\label{sec:mgo.experiments}
+Periclase MgO is an important constituent of the earth mantle and its thermal properties have been studied in detail both experimentally and theoretically~\cite{charvat1957,slack1962,touloukian1970,macpherson1983,Koker2009,Stackhouse2010,tang2010,dekura2017}. We list the common experimental reference values for the thermal conductivity of periclase MgO in Tab.\,\ref{tab:exp.MgO}.
 \begin{table}[ht]
   \centering
   \fontfamily{ppl}\selectfont
@@ -186,7 +187,7 @@ Periclase MgO is an important constituent of the earth mantle and its thermal pr
     \midrule
     Slack~1962~\cite{slack1962} & $59.7$ \\
     Touloukian et al.~1970~\cite{touloukian1970} & $59.8$ \\
-    MacPherson and Schloessin~1983~\cite{Macpherson1983} & $61.7 \pm 10.5$ \\
+    MacPherson and Schloessin~1983~\cite{macpherson1983} & $61.7 \pm 10.5$ \\
     Andersson and B\"ackstr\"om~1986~\cite{andersson1986} & $55.2 \pm 0.4$ \\
     Dalton et al.~2013~\cite{dalton2013} & $53 \pm 2$ \\
     Hofmeister~2014~\cite{hofmeister2014} & $50.1$ \\
@@ -198,7 +199,7 @@ Periclase MgO is an important constituent of the earth mantle and its thermal pr
   }
   \label{tab:exp.MgO}
 \end{table}
-The aiGK value presented in this work agrees within the statistical precision with the experimental value presented by MacPherson and Schloessin~\cite{Macpherson1983}. It slightly overestimates the values reported by Slack~\cite{slack1962} and Touloukian et al.~\cite{touloukian1970}. More recent experiments by Dalton et al. and Hofmeister using laser-flash experiments report lower values of thermal conductivity in the range of 50-55\,W/mK~\cite{dalton2013,hofmeister2014}.
+The aiGK value presented in this work agrees within the statistical precision with the experimental value presented by MacPherson and Schloessin~\cite{macpherson1983}. It slightly overestimates the values reported by Slack~\cite{slack1962} and Touloukian et al.~\cite{touloukian1970}. More recent experiments by Dalton et al. and Hofmeister using laser-flash experiments report lower values of thermal conductivity in the range of 50-55\,W/mK~\cite{dalton2013,hofmeister2014}.
 
 Overall, we overestimate the experimentally observed thermal conductivity by about 10-30\,\%, depending on the reference. This can be explained by two factors: First, the simulation deals with isotopically pure MgO. Neglecting isotope scattering is known to increase the thermal conductivity noticeably in MgO~\cite{slack1962,tang2010}, and the experiments measure samples of varying isotope and defect content. Second, the aiGK theory uses classical statistical mechanics, and nuclear quantum effects lowering the heat capacity of MgO and therefore its thermal conductivity are neglected. These effects have been shown to lower the thermal conductivity in MgO by about 5\,\% at 500\,K~\cite{Puligheddu2019}, a stronger effect can therefore be expected at 300\,K.
 %Furthermore, small imperfections in the simulation tend to increase the thermal conductivity further: The pressure in the aiMD simulation is about 0.5\,GPa, and the thermal conductivity of MgO is known to increase with pressure by up to 6.8\,\% per GPa~\cite{yukutake1978}. Also the temperatures observed during the three aiMD runs are, on average, slightly lower than 300\,K.~\footnote{Observed temperatures in the three trajectories: 307.1\,K, 290.7\,K, 286.5\,K.}

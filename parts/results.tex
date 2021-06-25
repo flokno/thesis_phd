@@ -35,35 +35,46 @@ Based on this estimation, we identify XX materials out of the list of XXX candid
 \REM{list of materials in appendix}
 
 
-\section{Comparision to Experiment}
 
+\section{Comparison to Experiment}
+In order to further asses the validity of the aiGK method for the computation of thermal conductivity in anharmonic compounds, we compare results for 21 materials to the experimental literature. A detailed list including all considered experimental references is given in Tab.\,\ref{tab:kappa.exp} in appendix~\ref{sec:app.experiments}. The difficulties when comparing to experimental references haven been discussed in detail for periclase MgO in Sec.\,\ref{sec:mgo.experiments}. In principle, these carry over to all other compounds, however, for most materials, the body of literature is much smaller compared to MgO. The list of experiments also includes measurements on polycrystalline samples. While thermal conductivity should be reduced in polycrystalline samples compared to single crystals because of boundary scattering, experimental studies have shown that the effect is minor in sufficiently dense polycrystalline samples, especially in low thermal conductivity materials~\cite{charvat1957}. In the course of our literature review we have generally found differences of 0-20\,\% between measurements on single- and polycrystalline samples, which supports this finding. Nevertheless, additional care must be taken when evaluating literature on polycrystalline samples: Some experiments specifically aim at reproducing polycrystalline samples of near-bulk density in order to assess the bulk thermal conductivity of a material. Experiments aiming at measuring other properties, in particular the thermoelectric figure of merit, typically do not attempt to reproduce the bulk thermal conductivity, and use less dense samples. The resulting thermal conductivity will then be influenced severely by the details of the sample processing, and a comparison to bulk thermal conductivity is not meaningful. The experiments on polycrystalline samples considered in this work are of the former type.
 
-
+A comparison of thermal conductivities computed via the aiGK method as introduced in the previous chapter and the experimental literature is shown in Fig.\,\ref{fig:kappa_exp}.
+%
 \begin{figure}
 	\includegraphics[width=\textwidth]{./data/plots/kappa_vs_exp_trusted/kappa_vs_exp_corrected_annotated.pdf}
 	\caption{Comparison to experiment. Bullets($\bullet$): Single crystal. Stars ($\star$): Contains data from polycrystalline experiment. Error bar in y-direction: Statistical uncertainty for $\kappa^{\rm aiGK}$ from standard error over individual trajectories. Diagonal line: Agreement with experiment or mean of experiments if multiple available. Dark grey region: Agreement between mean experiment and mean computation with $\pm 15\,\%$ deviation. Light grey region: Agreement between mean experiment and mean computation with $\pm 50\,\%$ deviation.}
 	\label{fig:kappa_exp}
 \end{figure}
+%
+We find overall very good agreement in the 21 considered materials, with 10 out of 21 being within experimental accuracy of $\pm 15\,\%$, and all other within an ``extended experimental accuracy'' which we choose as $\pm 50\,\%$ within the average experimental reference, reflecting the high degree of variation in experimental values for materials where a significant amount of references is available, see especially the discussion in Ref.\,\cite{wei2016}. 
+
+The strongest deviation from experiment is seen for LiH, which is computed as $\kappa^{\rm aiGK} = 23.6 \pm 4.0$\,W/mK, where the available experimental value is $\kappa^{\rm exp} = 14.7$\,W/mK~\cite{slack1973}. However, both lithium and especially hydrogen are light elements, so that LiH is not fully classical at room temperature~\TODO{show heat capacity}. A significant overestimation by the classical Green Kubo method is therefore to be expected in this material. Interestingly, the aiGK value agrees very well with another computational study by Lindsay, who found a value of $\kappa = 23.00$\,W/mK using third-order Boltzmann transport~\cite{lindsay2016}. In that approach, the quantum nature of nuclei should be better captured than in the aiGK method, so that Lindsay ascribes the deviation from experiment to higher-order phonon-phonon interactions neglected in their approach, which is in line with the more phenomenological discussion proposed by Slack in Ref.\,\cite{slack1973}, who points out the strong anharmonicity in LiH that manifests in the change of phonon frequencies as measured by the Gr\"uneisen parameter. Indeed, in this study we find a value of $\sigmaA = 0.30$ for the strength of anharmonicity in LiH, which can be expected to be even larger when nuclear quantum effects (NQE) are considered.\footnote{NQE increase the anharmonic strength of LiH at room temperature to about $\sigmaA = 0.36$~\cite{hengst1}.} We therefore suggest LiH as an interesting yet simple candidate for studying the interplay of strong anharmoncity and nuclear quantum effects in bulk solids in future work.
 
 
-
-\section{Relation to Anharmonicity}
-
-\begin{figure}
-	\includegraphics[width=\textwidth]{./data/plots/anharmonicity/9_kappa/incl_computations/sigma_vs_kappa_annot_comp.pdf}
+\section{New materials and relation to anharmonicity}
+After validating the aiGK method against experimental literature, we present results for XX materials \emph{without} experimental reference. We display these values in the context of the $\kappa$ vs. $\sigmaA$ plot introduced in Fig.\,\ref{fig:anh.kappa}, where we identified a power-law relation of experimental thermal conductivities with the anharmonicity measure $\sigmaA$ for simple elementary and binary materials. We show the data again in Fig.\,\ref{fig:kappa_sigma_exp_comp}, but this time including the additional, non-experimentally measured materials computed in this work.
+%
+\begin{marginfigure}
+	\includegraphics[width=\textwidth]{./data/plots/anharmonicity/9_kappa/incl_computations/sigma_vs_kappa_annot_comp_margin.pdf}
 	\caption{Thermal conductivity at room temperature vs. anharmonicity measure.}
 	\label{fig:kappa_sigma_exp_comp}
-\end{figure}
+\end{marginfigure}
+%
+It is apparent that the correlation between thermal conductivity $\kappa$ and $\sigmaA$ carries over from the simple materials to the more complex binary and ternary compound classes studied in this work, since the power-law fit in Fig.\,\ref{fig:kappa_sigma_exp_comp} is still performed with respect to the experimental values presented in Fig.\,\ref{fig:anh.kappa}.
 
+
+Focusing on the new materials, we show a zoomed-in part of the $\kappa-\sigmaA$ plane in Fig.\,\ref{fig:kappa_sigma}, with only computational data, highlighting the materials where no experimental reference is available.
+%
 \begin{figure}
 	\includegraphics[width=\textwidth]{./data/plots/kappa_vs_sigma_trusted/kappa_vs_sigma_trusted.pdf}
 	\caption{Thermal conductivity at room temperature vs. anharmonicity measure. Small grey dots denote materials where experimental reference was available. Other symbols denote materials where not experimental references where available before.}
 	\label{fig:kappa_sigma}
 \end{figure}
+%
+In particular, we find 28 new materials with a computed bulk thermal conductivity of $\kappa^{\rm aiGK} < 10\,{\rm W/mK}$, 24 of which show $\kappa^{\rm aiGK} < 5\,{\rm W/mK}$, and 8 with $\kappa^{\rm aiGK} \leq 2\,{\rm W/mK}$. A full list of all values is given in Tab.\,\ref{tab:kappa.noexp}. The materials of very low thermal conductivity comprise simple binary, cubic materials such as the rock salt structures CsF ($\kappa^{\rm aiGK} = 0.84$) and LiI ($\kappa^{\rm aiGK} = 1.07$), or the fluorite structure Na$_2$Te ($\kappa^{\rm aiGK} = 1.64$). Particularly noteworthy is another class of ternary materials, so-called chalcopyrites, a tetragonal crystal class closely related to the zincblende structure~\cite{wasim1979}. These crystals have been studied in the past mainly because of their non-linear optical properties~\cite{ho2014}, but also thermal transport properties have been studies\cite{spitzer1970,wasim1979,garbato1979,beasley1994}.
 
-\newpage
 
-\subsection{Chalcopyrites}
 \begin{figure}
 	\centering
 	GaLiTe$_2$ \hspace{3.7cm} InLiTe$_2$\\
@@ -78,42 +89,42 @@ Based on this estimation, we identify XX materials out of the list of XXX candid
 \begin{table}[ht]
   \centering
   \fontfamily{ppl}\selectfont
-\begin{tabular}{lrrr}
+\begin{tabular}{rrrr}
 \toprule
-     material &  kappa\_corrected &      sigma &  space\_group \\
+Space group  &    material & $\kappa^{\rm aiGK}$ & $\sigmaA$  \\
 \midrule
- InLiTe$_2$ &             0.46 &       0.33 &          122 \\
- GaLiTe$_2$ &             0.47 &       0.31 &          122 \\
-  AgAlS$_2$ &             0.84 &       0.33 &          122 \\
-        CsF &             0.84 &       0.48 &          225 \\
-        LiI &             1.07 &       0.49 &          225 \\
-   Na$_2$Te &             1.64 &       0.38 &          225 \\
-   KCdF$_3$ &             1.67 &       1.32 &           62 \\
-   KCaF$_3$ &             2.00 &       0.52 &           62 \\
-    Rb$_2$O &             2.08 &       0.47 &          225 \\
-      ZnPLi &             2.09 &       0.27 &          216 \\
- InNaSe$_2$ &             2.22 &       0.34 &          166 \\
-  CsCdF$_3$ &             2.30 &       0.35 &          221 \\
- InLiSe$_2$ &             2.34 &       0.40 &          166 \\
-   Na$_2$Se &             2.63 &       0.35 &          225 \\
-   Li$_2$Te &             3.24 &       0.36 &          225 \\
-  BaLiF$_3$ &             3.27 &       0.29 &          221 \\
-         KH &             3.39 &       0.37 &          225 \\
-  RbZnF$_3$ &             3.47 &       0.32 &          221 \\
-     K$_2$O &             3.67 &       0.38 &          225 \\
-       LiCl &             4.14 &       0.40 &          225 \\
-   Sr$_2$HN &             4.17 &       0.26 &          166 \\
-    Na$_2$S &             4.40 &       0.33 &          225 \\
-   Li$_2$Se &             4.55 &       0.33 &          225 \\
-     LiAsMg &             4.67 &       0.26 &          216 \\
-  LiScS$_2$ &             6.42 &       0.27 &          166 \\
-  RbMgF$_3$ &             6.94 &       0.24 &          221 \\
-      LiNZn &             8.42 &       0.27 &          216 \\
-  InNaO$_2$ &             9.71 &       0.23 &          166 \\
-  CuGaO$_2$ &            12.82 &       0.22 &          166 \\
-  LiRhO$_2$ &            13.37 &       0.21 &          166 \\
-    Li$_2$S &            13.85 &       0.31 &          225 \\
-    Li$_2$O &            21.39 &       0.29 &          225 \\
+         122 &  InLiTe$_2$ &                0.46 &       0.33 \\
+         122 &  GaLiTe$_2$ &                0.47 &       0.31 \\
+         122 &   AgAlS$_2$ &                0.84 &       0.33 \\
+         225 &         CsF &                0.84 &       0.48 \\
+         225 &         LiI &                1.07 &       0.49 \\
+         225 &    Na$_2$Te &                1.64 &       0.38 \\
+          62 &    KCdF$_3$ &                1.67 &       1.32 \\
+          62 &    KCaF$_3$ &                2.00 &       0.52 \\
+         225 &     Rb$_2$O &                2.08 &       0.47 \\
+         216 &       ZnPLi &                2.09 &       0.27 \\
+         166 &  InNaSe$_2$ &                2.22 &       0.34 \\
+         221 &   CsCdF$_3$ &                2.30 &       0.35 \\
+         166 &  InLiSe$_2$ &                2.34 &       0.40 \\
+         225 &    Na$_2$Se &                2.63 &       0.35 \\
+         225 &    Li$_2$Te &                3.24 &       0.36 \\
+         221 &   BaLiF$_3$ &                3.27 &       0.29 \\
+         225 &          KH &                3.39 &       0.37 \\
+         221 &   RbZnF$_3$ &                3.47 &       0.32 \\
+         225 &      K$_2$O &                3.67 &       0.38 \\
+         225 &        LiCl &                4.14 &       0.40 \\
+         166 &    Sr$_2$HN &                4.17 &       0.26 \\
+         225 &     Na$_2$S &                4.40 &       0.33 \\
+         225 &    Li$_2$Se &                4.55 &       0.33 \\
+         216 &      LiAsMg &                4.67 &       0.26 \\
+         166 &   LiScS$_2$ &                6.42 &       0.27 \\
+         221 &   RbMgF$_3$ &                6.94 &       0.24 \\
+         216 &       LiNZn &                8.42 &       0.27 \\
+         166 &   InNaO$_2$ &                9.71 &       0.23 \\
+         166 &   CuGaO$_2$ &               12.82 &       0.22 \\
+         166 &   LiRhO$_2$ &               13.37 &       0.21 \\
+         225 &     Li$_2$S &               13.85 &       0.31 \\
+         225 &     Li$_2$O &               21.39 &       0.29 \\
 \bottomrule
 \end{tabular}
   \caption{Thermal conductivities without experimental reference.}
