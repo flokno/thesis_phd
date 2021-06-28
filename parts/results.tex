@@ -31,7 +31,7 @@ We choose materials based on the criteria displayed in Fig.\,\ref{fig:results.co
 %
 We point out that at this stage, the given thresholds are meant as a \emph{necessary} condition for convergence, which ensures that a significant contribution to the cumulative thermal conductivity is included in the simulation. A statement about the \emph{sufficient} simulation time, however, can only made on the level of individual trajectories and should therefore be reserved for the verification of materials that show interesting properties after the \emph{necessary} simulation time.
 
-Based on this estimation, we identify XX materials out of the list of XXX candidates to compute thermal conductivity on, and discuss those in the following.
+Based on this estimation, we identify \todo{fill}XX~materials out of the list of \todo{fill}XXX~candidates to compute thermal conductivity on, and discuss those in the following.
 \REM{list of materials in appendix}
 
 
@@ -51,7 +51,7 @@ We find overall very good agreement in the 21 considered materials, with 10 out 
 
 \begin{marginfigure}
 	\includegraphics[width=\textwidth]{./data/plots/heat_capacity/225.LiH/thermal_properties.pdf}
-	\caption{Harmonic heat capacity for LiH compared to the classical Dulong-Petit value.}
+	\caption{Harmonic heat capacity per formula unit $c_V^{\rm ha}$ for LiH compared to the classical Dulong-Petit value.}
 	\label{fig:LiH.cv}
 \end{marginfigure}
 %
@@ -59,7 +59,7 @@ The strongest deviation from experiment is seen for LiH, which is computed as $\
 
 
 \section{New materials and relation to anharmonicity}
-After validating the aiGK method against experimental literature, we present results for XX materials \emph{without} experimental reference. We display these values in the context of the $\kappa$ vs. $\sigmaA$ plot introduced in Fig.\,\ref{fig:anh.kappa}, where we identified a power-law relation of experimental thermal conductivities with the anharmonicity measure $\sigmaA$ for simple elementary and binary materials. We show the data again in Fig.\,\ref{fig:kappa_sigma_exp_comp}, but this time including the additional, non-experimentally measured materials computed in this work.
+After validating the aiGK method against experimental literature, we present results for \todo{fill}XX~materials \emph{without} experimental reference. We display these values in the context of the $\kappa$ vs. $\sigmaA$ plot introduced in Fig.\,\ref{fig:anh.kappa}, where we identified a power-law relation of experimental thermal conductivities with the anharmonicity measure $\sigmaA$ for simple elementary and binary materials. We show the data again in Fig.\,\ref{fig:kappa_sigma_exp_comp}, but this time including the additional, non-experimentally measured materials computed in this work.
 %
 \begin{marginfigure}
 	\includegraphics[width=\textwidth]{./data/plots/anharmonicity/9_kappa/incl_computations/sigma_vs_kappa_annot_comp_margin.pdf}
@@ -78,7 +78,9 @@ Focusing on the new materials, we show a zoomed-in part of the $\kappa-\sigmaA$ 
 	\label{fig:kappa_sigma}
 \end{figure}
 %
-In particular, we find 28 new materials with a computed bulk thermal conductivity of $\kappa^{\rm aiGK} < 10\,{\rm W/mK}$, 24 of which show $\kappa^{\rm aiGK} < 5\,{\rm W/mK}$, and 8 with $\kappa^{\rm aiGK} \leq 2\,{\rm W/mK}$. A full list of all values is given in Tab.\,\ref{tab:kappa.noexp}. The materials of very low thermal conductivity comprise simple binary, cubic materials such as the rock salt structures CsF ($\kappa^{\rm aiGK} = 0.84$) and LiI ($\kappa^{\rm aiGK} = 1.07$), or the fluorite structure Na$_2$Te ($\kappa^{\rm aiGK} = 1.64$). Particularly noteworthy is another class of ternary materials, so-called chalcopyrites, a tetragonal crystal class closely related to the zincblende structure~\cite{wasim1979}. These crystals have been studied in the past mainly because of their non-linear optical properties~\cite{ho2014}, but also thermal transport properties have been studies\cite{spitzer1970,wasim1979,garbato1979,beasley1994}.
+In particular, we find 28 new materials with a computed bulk thermal conductivity of $\kappa^{\rm aiGK} < 10\,{\rm W/mK}$, 24 of which show $\kappa^{\rm aiGK} < 5\,{\rm W/mK}$, and 8 with $\kappa^{\rm aiGK} \leq 2\,{\rm W/mK}$. A full list of all values is given in Tab.\,\ref{tab:kappa.noexp}. The materials of very low thermal conductivity comprise simple binary, cubic materials such as the rock salt structures CsF ($\kappa^{\rm aiGK} = 0.84$) and LiI ($\kappa^{\rm aiGK} = 1.07$), or the fluorite structure Na$_2$Te ($\kappa^{\rm aiGK} = 1.64$). 
+
+Particularly noteworthy is class of ternary materials, so-called chalcopyrites, a tetragonal crystal class closely related to the zincblende structure~\cite{wasim1979}. These crystals have been studied in the past primarily because of their non-linear optical properties~\cite{ho2014}, but also thermal transport properties have been studied~\cite{spitzer1970,wasim1979,garbato1979}, mainly because thermal transport can limit the optical efficiency in these devices~\cite{beasley1994}.
 
 
 \begin{figure}
@@ -105,7 +107,7 @@ Space group  &    material & $\kappa^{\rm aiGK}$ & $\sigmaA$  \\
          225 &         CsF &                0.84 &       0.48 \\
          225 &         LiI &                1.07 &       0.49 \\
          225 &    Na$_2$Te &                1.64 &       0.38 \\
-          62 &    KCdF$_3$ &                1.67 &       1.32 \\
+          62 &    KCdF$_3$ &                1.67 &       0.53* \\
           62 &    KCaF$_3$ &                2.00 &       0.52 \\
          225 &     Rb$_2$O &                2.08 &       0.47 \\
          216 &       ZnPLi &                2.09 &       0.27 \\
@@ -133,6 +135,6 @@ Space group  &    material & $\kappa^{\rm aiGK}$ & $\sigmaA$  \\
          225 &     Li$_2$O &               21.39 &       0.29 \\
 \bottomrule
 \end{tabular}
-  \caption{Thermal conductivities without experimental reference.}
+  \caption{Bulk thermal conductivities for materials without experimental reference. *: The anharmonicity measure for KCaF$_3$ is increased when the entire simulation is taken into account with $\sigmaA \approx 1.32$, since the simulation is close to a structural phase transition. We observe jumps in $\sigmaA (t)$ similar to those discussed for KCaF$_3$ in Sec.\,\ref{chp:anharmonicity}, but more pronounced. When KCdF$_3$ is close to the orthorombic reference, $\sigmaA \approx 0.53$. Structural phase transition are known to occur in KCdF$_3$ at around 470\,K~\cite{hidaka1977,hidaka1990}.}
   \label{tab:kappa.noexp}
 \end{table}
