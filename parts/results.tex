@@ -73,26 +73,73 @@ It is apparent that the correlation between thermal conductivity $\kappa$ and $\
 Focusing on the new materials, we show a zoomed-in part of the $\kappa-\sigmaA$ plane in Fig.\,\ref{fig:kappa_sigma}, with only computational data, highlighting the materials where no experimental reference is available.
 %
 \begin{figure}
-	\includegraphics[width=\textwidth]{./data/plots/kappa_vs_sigma_trusted/kappa_vs_sigma_trusted.pdf}
-	\caption{Thermal conductivity at room temperature vs. anharmonicity measure. Small grey dots denote materials where experimental reference was available. Other symbols denote materials where not experimental references where available before.}
+	\includegraphics[width=\textwidth]{./data/plots/kappa_vs_sigma_trusted/kappa_vs_sigma_trusted_experiment.pdf}
+	\caption{Thermal conductivity at room temperature computed via \emph{ab initio} Green Kubo (aiGK) vs. anharmonicity measure. Filled symbols denote materials without experimental reference. Open symbols represent materials where experimental reference is available.}
 	\label{fig:kappa_sigma}
 \end{figure}
 %
 In particular, we find 28 new materials with a computed bulk thermal conductivity of $\kappa^{\rm aiGK} < 10\,{\rm W/mK}$, 24 of which show $\kappa^{\rm aiGK} < 5\,{\rm W/mK}$, and 8 with $\kappa^{\rm aiGK} \leq 2\,{\rm W/mK}$. A full list of all values is given in Tab.\,\ref{tab:kappa.noexp}. The materials of very low thermal conductivity comprise simple binary, cubic materials such as the rock salt structures CsF ($\kappa^{\rm aiGK} = 0.84$) and LiI ($\kappa^{\rm aiGK} = 1.07$), or the fluorite structure Na$_2$Te ($\kappa^{\rm aiGK} = 1.64$). 
 
-Particularly noteworthy is class of ternary materials, so-called chalcopyrites, a tetragonal crystal class closely related to the zincblende structure~\cite{wasim1979}. These crystals have been studied in the past primarily because of their non-linear optical properties~\cite{ho2014}, but also thermal transport properties have been studied~\cite{spitzer1970,wasim1979,garbato1979}, mainly because thermal transport can limit the optical efficiency in these devices~\cite{beasley1994}.
+Particularly noteworthy is a class of ternary materials, so-called \emph{chalcopyrites}, a tetragonal crystal class closely related to the zincblende structure~\cite{wasim1979}. These crystals have been studied in the past primarily because of their non-linear optical properties~\cite{ho2014}, but also thermal transport properties have been studied~\cite{spitzer1970,wasim1979,garbato1979}, mainly because thermal transport can limit the optical efficiency in these devices~\cite{beasley1994}. However, experimental references for this class of materials are scarce, and do not agree well~\cite{beasley1994}. 
+%
+\begin{table}[ht]
+  \centering
+  \fontfamily{ppl}\selectfont
+  \begin{tabular}{lc}
+    \toprule
+    Reference & Thermal conductivity \\
+    & at 300\,K (W/mK) \\
+    \midrule
+    Berger 1966~\cite{berger1969}   & $2.7$ \\
+    Beasley 1995~\cite{beasley1994} & $1.1$ \\
+    This work                       & \prelim{$0.5 \pm 0.2$}  \\
+    \bottomrule
+    \vspace{.5em}
+  \end{tabular}
+  \caption{Overview of experimental references for AgGaSe$_2$. \inlinecomment{update values}.}
+  \label{tab:exp.aggase2}
+\end{table}
+%
+Picking AgGaSe$_2$ as an example, there are two distinct measurements available as summarized in Tab.\,\ref{tab:exp.aggase2}, ranging from $1.1-2.7$\,W/mK~\cite{beasley1994,berger1969}. These values are complemented by calculated values based on semi-empirical models, ranging from $4.8-9.0$\,W/mK~\cite{wasim1979,rincon1995}. Our computed thermal conductivities are collected in Tab.\,\ref{tab:exp.chalcopyrites}.
+%
+\begin{table}[ht]
+  \centering
+  \fontfamily{ppl}\selectfont
+  \begin{tabular}{lrr}
+    \toprule
+    Material & $\kappa^{\rm aiGK}$ & $\sigmaA$ \\
+    \midrule
+        AgAlS$_2$   & \prelim{$0.84 \pm 0.13$} & 0.33 \\
+        AgAlSe$_2$  & \prelim{$0.49 \pm 0.13$} & 0.37 \\
+        AgGaSe$_2$  & \prelim{$0.53 \pm 0.13$} & 0.35 \\
+        LiGaTe$_2$  & \prelim{$0.74 \pm 0.05$} & 0.31 \\
+        LiInTe$_2$  & \prelim{$0.85 \pm 0.10$} & 0.33 \\
+    \bottomrule
+    \vspace{.5em}
+  \end{tabular}
+  \caption{Overview of computed thermal conductivities for chalcopyrite materials.}
+  \label{tab:exp.chalcopyrites}
+\end{table}
+%
+Besides AgGaSe$_2$, there is experimental reference the closely related material, AgGaS$_2$, with a measured thermal conductivity of 1.4\,W/mK~\cite{beasley1994}.\footnote{While we included AgGaS$_2$ in our dataset, we needed to discard the material because of aiMD convergence problems. However, we like to mention this material in the context of this study as potentially interesting material for future investigations.} While our computational data might underestimate the thermal conductivity in these compounds slightly\footnote{Please keep in mind, that the absolute errors are only of the order of 0.5-1\,W/mK.}, we nevertheless see a clear indiciation of very low intrinsic thermal conductivity in AgGaSe$_2$, and the chemically closely related compounds AgAlS$_2$ and AgAlSe$_2$. At least regarding their thermal transport properties, they are therefore comparable to the thermoelectric material Mg$_3$Sb$_2$~\cite{kajikawa2003,condron2006,zhang2009,zhang2018,pan2020,ding2021}.
 
+\TODO{discuss phonon dispersions: flat acoustic modes, flat, near-degenerate optical bands indicative of localized motion}
 
 \begin{figure}
 	\centering
+	AgGaSe2$_2$ \hspace{3.7cm} AgAlSe$_2$\\
+	% \includegraphics[width=0.49\textwidth]{./data/plots/spectral_functions/122.04.AgGaS2.12.png}
+	\includegraphics[width=0.49\textwidth]{./data/plots/spectral_functions/122.04.AgGaSe2.12.png}
+	%	AgAlS$_2$ \hspace{3.7cm} AgAlSe$_2$\\
+	%\includegraphics[width=0.49\textwidth]{./data/plots/spectral_functions/122.04.AgAlS2.15.png}
+	\includegraphics[width=0.49\textwidth]{./data/plots/spectral_functions/122.04.AgAlSe2.12.png}
+	\\
 	GaLiTe$_2$ \hspace{3.7cm} InLiTe$_2$\\
-	\includegraphics[width=0.45\textwidth]{./data/plots/spectral_functions/122.04.GaLiTe2.png}
-	\includegraphics[width=0.45\textwidth]{./data/plots/spectral_functions/122.04.InLiTe2.png}
-	\caption{Spectral functions for the chalcopyrite materials GaLiTe$_2$ and InLiTe$_2$.}
-	\label{fig:kappa_sigma}
+	\includegraphics[width=0.49\textwidth]{./data/plots/spectral_functions/122.04.GaLiTe2.png}
+	\includegraphics[width=0.49\textwidth]{./data/plots/spectral_functions/122.04.InLiTe2.png}
+	\caption{Spectral functions for the chalcopyrite materials, AgGaSe$_2$, AgAlSe$_2$, GaLiTe$_2$, and InLiTe$_2$.}
+	\label{fig:sqe_all}
 \end{figure}
-
-\cite{kuhn1985,kuhn1987,isaenko2005}
 
 \begin{table}[ht]
   \centering
@@ -104,6 +151,7 @@ Space group  &    material & $\kappa^{\rm aiGK}$ & $\sigmaA$  \\
          122 &  InLiTe$_2$ &                0.46 &       0.33 \\
          122 &  GaLiTe$_2$ &                0.47 &       0.31 \\
          122 &   AgAlS$_2$ &                0.84 &       0.33 \\
+         122 &   FILL CHALCOPYRITES &       ---- &       ---- \\
          225 &         CsF &                0.84 &       0.48 \\
          225 &         LiI &                1.07 &       0.49 \\
          225 &    Na$_2$Te &                1.64 &       0.38 \\
