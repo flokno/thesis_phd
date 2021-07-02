@@ -105,6 +105,8 @@
 {\todo[inline,backgroundcolor=djordje, bordercolor=white]{{\bf Florian:} #1}}
 \newcommand{\idea} [1] 
 {\todo[inline,backgroundcolor=yellow, bordercolor=white]{{\bf idea:} #1}}
+\newcommand{\inlinecomment}[1]{\textcolor{red}{{\bf #1 }}}
+\newcommand{\prelim}[1]{\textcolor{red}{{\bf prelim:} {\it #1 }}}
 
 % Tufte
 
@@ -230,27 +232,28 @@
 % r.9 introduction
 \cleardoublepage
 
-\chapter{Introduction}
-\input{./parts/0_intro.tex}
+%\chapter{Introduction}
+%\input{./parts/0_intro.tex}
 
 %%
 % Start the main matter (normal chapters)
 \mainmatter
-\addtocontents{toc}{\protect\setcounter{tocdepth}{1}}
-\part{Theoretical Foundation}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{2}}  % later -> 1
 
-\chapter{The Many Body Problem}
-\input{./parts/1_dft.tex}
-
-\chapter{Nuclear and Lattice Dynamics}
-\input{./parts/2_lattice_dynamics.tex}
+%\part{Theoretical Foundation}
 %
-\chapter{Heat Transport}
-\input{./parts/3_heat_transport.tex}
+%\chapter{The Many Body Problem}
+%\input{./parts/1_dft.tex}
+%
+%\chapter{Nuclear and Lattice Dynamics}
+%\input{./parts/2_lattice_dynamics.tex}
+%%
+%\chapter{Heat Transport}
+%\input{./parts/3_heat_transport.tex}
 
 
-\part{Applications}
-
+%\part{Applications}
+%
 \chapter{Anharmonicity}
 \input{./parts/4_anharmonicity.tex}
 
@@ -271,7 +274,7 @@
 \addcontentsline{toc}{chapter}{Bibliography}
 
 \bibliographystyle{unsrt}
-\bibliography{references}
+\bibliography{references,references_experiments}
 
 % \setcounter{secnumdepth}{-1}
 
