@@ -122,9 +122,10 @@ Picking AgGaSe$_2$ as an example, there are two distinct measurements available 
 \end{table}
 %
 Besides AgGaSe$_2$, there is experimental reference the closely related material, AgGaS$_2$, with a measured thermal conductivity of 1.4\,W/mK~\cite{beasley1994}.\footnote{While we included AgGaS$_2$ in our dataset, we needed to discard the material because of aiMD convergence problems. However, we like to mention this material in the context of this study as potentially interesting material for future investigations.} While our computational data might underestimate the thermal conductivity in these compounds slightly\footnote{Please keep in mind, that the absolute errors are only of the order of 0.5-1\,W/mK.}, we nevertheless see a clear indiciation of very low intrinsic thermal conductivity in AgGaSe$_2$, and the chemically closely related compounds AgAlS$_2$ and AgAlSe$_2$. At least regarding their thermal transport properties, they are therefore comparable to the thermoelectric material Mg$_3$Sb$_2$~\cite{kajikawa2003,condron2006,zhang2009,zhang2018,pan2020,ding2021}.
+\todo{$\kappa_{\rm MgSb}^{\rm aiGK} = 1.10 \pm 0.26$}
 
-\TODO{discuss phonon dispersions: flat acoustic modes, flat, near-degenerate optical bands indicative of localized motion}
-
+To elucidate the nuclear dynamics of the chalcopyrite systems, we present phonon spectral functions obtained from a temperature dependent model Hamiltonian for the nuclear system up to third-order displacements to estimate phonon-phonon interactions in Fig.\,\ref{fig:sqe_all}~\cite{Hellman2013,Hellman2013b,Squires}.
+%
 \begin{figure}
 	\centering
 	AgGaSe2$_2$ \hspace{3.7cm} AgAlSe$_2$\\
@@ -140,6 +141,8 @@ Besides AgGaSe$_2$, there is experimental reference the closely related material
 	\caption{Spectral functions for the chalcopyrite materials, AgGaSe$_2$, AgAlSe$_2$, GaLiTe$_2$, and InLiTe$_2$.}
 	\label{fig:sqe_all}
 \end{figure}
+%
+The common feature of these dispersions are the very flat acoustic branches which vary less than 1\,THz across the entire Brillouin zone, and a multitude of flat, nearly degenerate optical branches showing very litte to no dispersion. From a phonon-theory point of view, non-dispersive branches correspond to localized atomic motion in the system and therefore carry little heat beyond the Einstein-like diffusion of thermal energy from atom to atom, which is the dominant heat transport mechanism in structurally disordered systems like glasses~\cite{Simoncelli2019}. Furthermore, in particular the optical branches are substantially broadened, which corresponds to strong anharmonic coupling in these systems, reducing their thermal conductivity.
 
 \begin{table}[ht]
   \centering
