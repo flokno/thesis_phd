@@ -87,6 +87,9 @@
 \definecolor{dblue}{RGB}{31,119,180}
 \definecolor{dblue_light}{HTML}{5AAAE3}
 \definecolor{purple_light}{HTML}{A61EB3}
+\definecolor{yellow1}{HTML}{E7EB90}
+\definecolor{yellow2}{HTML}{FADF63}
+\definecolor{yellow3}{HTML}{E6AF2E}
 \definecolor{red_light}{HTML}{FE404A}
 \definecolor{cite}{HTML}{2BB31E}
 \definecolor{djordje}{RGB}{192,225,215}
@@ -102,11 +105,13 @@
 \newcommand{\ADD} [1] 
 {\todo[inline,backgroundcolor=red, bordercolor=white]{{\bf ADD} #1}}
 \newcommand{\FK} [1] 
-{\todo[inline,backgroundcolor=djordje, bordercolor=white]{{\bf Florian:} #1}}
+{\todo[inline,backgroundcolor=yellow2, bordercolor=white]{{\bf Florian:} #1}}
 \newcommand{\idea} [1] 
-{\todo[inline,backgroundcolor=yellow, bordercolor=white]{{\bf idea:} #1}}
+{\todo[inline,backgroundcolor=red, bordercolor=white]{{\bf idea:} #1}}
 \newcommand{\inlinecomment}[1]{\textcolor{red}{{\bf #1 }}}
 \newcommand{\prelim}[1]{\textcolor{red}{{\bf prelim:} {\it #1 }}}
+\newcommand{\CC} [1] 
+{\todo[inline,backgroundcolor=yellow3, bordercolor=white]{{\bf CC:} #1}}
 
 % Tufte
 
@@ -232,28 +237,28 @@
 % r.9 introduction
 \cleardoublepage
 
-%\chapter{Introduction}
-%\input{./parts/0_intro.tex}
+\chapter{Introduction}
+\input{./parts/0_intro.tex}
 
 %%
 % Start the main matter (normal chapters)
 \mainmatter
 \addtocontents{toc}{\protect\setcounter{tocdepth}{2}}  % later -> 1
 
-%\part{Theoretical Foundation}
+\part{Theoretical Foundation}
+
+\chapter{The Many Body Problem}
+\input{./parts/1_dft.tex}
+
+\chapter{Nuclear and Lattice Dynamics}
+\input{./parts/2_lattice_dynamics.tex}
 %
-%\chapter{The Many Body Problem}
-%\input{./parts/1_dft.tex}
-%
-%\chapter{Nuclear and Lattice Dynamics}
-%\input{./parts/2_lattice_dynamics.tex}
-%%
-%\chapter{Heat Transport}
-%\input{./parts/3_heat_transport.tex}
+\chapter{Heat Transport}
+\input{./parts/3_heat_transport.tex}
 
 
-%\part{Applications}
-%
+\part{Applications}
+
 \chapter{Anharmonicity}
 \input{./parts/4_anharmonicity.tex}
 
