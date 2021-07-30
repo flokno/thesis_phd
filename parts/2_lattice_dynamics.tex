@@ -79,7 +79,7 @@ The condition in Eq.\,\eqref{eq:ha.positive} is satisfied when the harmonic forc
 		\Phi_{I \alpha, J \beta}~,
 		\label{eq:D}
 \end{align}
-where Eq.\,\eqref{eq:D} defines the \emph{dynamical matrix} $\rm D$.
+where Eq.\,\eqref{eq:D} defines the \emph{dynamical matrix} $\rm D$.\footnote{There seems to be no general agreement that the matrix $\rm D$,~i.\,e.,~the mass-weighted force constants, are called ``dynamical matrix'', or if this term is reserved for the Fourier transformed matrices studied in periodic systems. However, we follow Born and Huang in using the term dynamical matrix irrespective of the question of lattice periodicity~\cite[p.\,173]{BornHuang}.}
 Expressed in the mass-reduced coordinates ${\bf u} = \set{{\bf u}_I}$ and ${\bf p} = \set{{\bf p}_I}$, the harmonic Hamiltonian reads
 \begin{align}
 	\begin{split}
@@ -142,7 +142,7 @@ The Hamiltonian expressed in terms of the normal coordinates, Eq.\,\eqref{eq:ha.
 	= 0
 	\label{eq:ha.SE.2}
 \end{align}
-Since the Hamiltonian is a sum of terms, each depending on one coordinate only, the total nuclear wavefuntion $\chi$ can be separated into a product of wavefunctions for each mode~\cite[p.\,175]{BornHuang},
+Since the Hamiltonian is a sum of terms, each depending on one coordinate only, the total bosonic nuclear wavefuntion $\chi$ can be separated into a product of wavefunctions for each mode~\cite[p.\,175]{BornHuang},
 \begin{align}
 	\chi({\bf u}) = \prod_{s} \chi_s (u_s)~.
 	\label{eq:ha.chi}
@@ -183,12 +183,13 @@ where $\set{{\bf a}_\mu}$ are \emph{lattice vectors} spanning the unit cell of t
 crystal.\footnote{Notation: We index components in the crystal basis $\set{{\bf a}_\mu}$ with $\mu, \nu$, as opposed to Cartesian components indexed by $\alpha, \beta~.$} The Bravais vectors $\bf L$ span a regular grid,~i.\,e.,~a \emph{lattice}, and are therefore also called \emph{lattice points}.
 
 \newthought{The invariance of the potential energy under translations by arbitrary Bravais vectors} $\bf L$ is defined as follows:
-Let ${\bf R}^0 = \set{{\bf R}_I^0}$ be the configuration of atoms in a local minimum of the potential energy, and let ${\bf R}^{0 \prime} = \set{{\bf R}^{0 \prime}_{I}}$ denote the configuration obtained by moving all atoms by a Bravais vector ${\bf L}$,
+Let ${\bf R} = \set{{\bf R}_I}$ be a configuration of atoms, %in a local minimum of the potential energy, 
+and let ${\bf R}^{\prime} = \set{{\bf R}^{\prime}_{I}}$ denote the configuration obtained by moving all atoms by a Bravais vector ${\bf L}$,
 \begin{align}
-	{\bf R}^{0 \prime}_{I} = {\bf R}^0_{I} + {\bf L}~.
+	{\bf R}^{\prime}_{I} = {\bf R}_{I} + {\bf L}~.
 	\label{eq:RI'}
 \end{align}
-As a prerequisite for $\mathcal V ({\bf R})$ to be translationally invariant, we require that ${\bf R}^{0 \prime} = \set{{\bf R}^{0 \prime}_{I}}$ is a minimum configuration of the potential as well, \emph{and} there is a bijective permutation map $P_{\bf L}$ between the atomic positions ${\bf R}^{0 \prime}_{I}$ and ${\bf R}^{0}_{I'}$ which fulfills
+As a prerequisite for $\mathcal V ({\bf R})$ to be translationally invariant, we require that ${\bf R}^{0 \prime} = \set{{\bf R}^{0 \prime}_{I}}$ are minimum configurations of the potential both before and after translating the system by $\bf L$, \emph{and} there is a bijective permutation map $P_{\bf L}$ between the atomic positions ${\bf R}^{0 \prime}_{I}$ and ${\bf R}^{0}_{I'}$ which fulfills
 \begin{align}
 	P_{\bf L} : I \to I' \quad\text{such that}\quad
 	{\bf R}^{0 \prime}_{I}
@@ -209,7 +210,7 @@ The final requirement for translational invariance of the potential is that the 
 	% \quad\text{with}\quad \set{L^\mu \in \mathds{N}_0}
 	\label{eq:inv.V}
 \end{align}
-i.\,e.,~not just at the minimum. This effectively corresponds to a permutation of the displacements of the atoms, $U_I \to U_{I'}$ according to $P_{\bf L}$. Figure\,\ref{fig:translation.permutation} shows a one-dimensional depiction of the relation between discrete translation by Bravais vectors and the permutation map.
+i.\,e.,~not just at the minimum. This effectively corresponds to a permutation of the displacements of the atoms, $U_I \to U_{I'}$ according to $P_{\bf L}$ defined in Eq.\,\eqref{eq:translation.permutation}. Figure\,\ref{fig:translation.permutation} shows a one-dimensional depiction of the relation between discrete translation by Bravais vectors and the permutation map.
 \begin{marginfigure}
 	\centering
 	% \includegraphics[width=.68\textwidth]{./sketches/permutation1.jpg}
@@ -414,13 +415,13 @@ D_{I \alpha, J \beta}
 \label{eq:D_IJ_s_complex}
 \end{align}
 
-\REM{Group velocities?}
-\REM{Space group symmetries: at least cite Maradadudin.}
+%\REM{Group velocities?}
+%\REM{Space group symmetries: at least cite Maradadudin.}
 
 \subsection{Phonon dispersions and density of states}
 \label{sec:ha.dispersions}
 
-\REM{It makes more sense to discuss the ha. model earlier, i.e., most of what is discussd in ``class. harm. dyn.'' at the end}
+\REM{It makes more sense to discuss the ha. model earlier, i.e., most of what is discussd in ``class. harm. dyn.'' at the end?}
 
 With the dynamical matrix for arbitrary q-points in the Brillouin zone at hand, we are in position to evaluate the spectrum of harmonic vibrational excitations in a crystal,~i.\,e.,~\emph{phonon dispersions} or \emph{phonon band structure}, as well as the \emph{density of states}, often called DOS for short.
 
@@ -549,10 +550,10 @@ By crudely estimating the dimension of the wavepacket in terms of the thermal de
 where $h$ is Planck's constants, $M$ is the atomic mass, and $T$ is temperature. This estimate gives support to the intuitive assumption that we can expect the classical limit to work better the heavier the atoms and the higher the temperature.
 Let us now set $f(x) \hat = -\partial \mathcal V / \partial {\bf R}_I$, then another important conclusion can be drawn from Eq.\,\eqref{eq:ehrenfest.delta2}: For a harmonic potential $\mathcal V ({\bf R}) = \mathcal V^{(2)} ({\bf R})$, where derivatives higher than second order vanish, the classical and quantum mechanical expectation values \emph{coincide}. The quantum mechanical expectation value of the position will therefore evolve in the same time-periodic fashion as a classical particle in a harmonic well.
 
-\newthought{These considerations naturally lead to the formulation of \emph{ab initio} molecular dynamics simulations}, where the time evolution of a system of particles is simulated by propagating the classical equations of motion for each particle on the Born-Oppenheimer potential energy surface, $\mathcal V ({\bf R})$~\CITE{RamanParrinello,CarParrinello}. In conjunction with classical statistical mechanics, a wealth of thermodynamic properties of materials can be simulated.
+\newthought{These considerations naturally lead to the formulation of \emph{ab initio} molecular dynamics simulations}, where the time evolution of a system of particles is simulated by propagating the classical equations of motion for each particle on the Born-Oppenheimer potential energy surface, $\mathcal V ({\bf R})$~\cite{Parrinello1981,Car1985}. In conjunction with classical statistical mechanics, a wealth of thermodynamic properties of materials can be simulated.
 We note in passing that
 %Of course, this approach can only be validated by computing observables and comparing the results to experimental . One can safely say that this approach has been used successfully in a plethora of studies, while 
-additional care must be taken at low temperatures and for systems with light atoms, especially hydrogen-bonded systems, because in these cases the quantum nature of the nuclei can become non-negligible, as already mentioned in the discussion following Eq.\,\eqref{eq:ehrenfest:dimension}~\CITE{MD-Review?,MarklandCeriotti,Litman,pHexperiment}.
+additional care must be taken at low temperatures and for systems with light atoms, especially hydrogen-bonded systems, because in these cases the quantum nature of the nuclei can become non-negligible, as already mentioned in the discussion following Eq.\,\eqref{eq:ehrenfest:dimension}~\cite{Parrinello1984,Markland2018,Litman2020}.
 
 \newthought{As there exist plenty of excellent books on statistical mechanics}, some of which are included in the references~\cite{Phillies2012,Tuckerman,Schrodinger1989}, this chapter mainly serves to recall the most important notions necessary for computing properties of materials under thermodynamic conditions, and introduce the notation used in the remainder of the work. In particular, the concepts of \emph{ensemble}, \emph{state}, and \emph{averages} are briefly introduced.
 

@@ -310,18 +310,30 @@ year = {1955}
   publisher={Taylor \& Francis}
 }
 
-@article{Ceperley1980, 
-year = {1980}, 
-title = {{Ground State of the Electron Gas by a Stochastic Method}}, 
-author = {Ceperley, D. M.}, 
-journal = {Physical Review Letters}, 
-issn = {0031-9007}, 
-doi = {10.1103/physrevlett.45.566}, 
-abstract = {{An exact stochastic simulation of the Schroedinger equation for charged bosons and fermions has been used to calculate the correlation energies, to locate the transitions to their respective crystal phases at zero temperature within 10\%, and to establish the stability at intermediate densities of a ferromagnetic fluid of electrons.}}, 
-pages = {566--569}, 
-number = {7}, 
-volume = {45}, 
-keywords = {}
+@article{Ceperley1980, 
+
+year = {1980}, 
+
+title = {{Ground State of the Electron Gas by a Stochastic Method}}, 
+
+author = {Ceperley, D. M.}, 
+
+journal = {Physical Review Letters}, 
+
+issn = {0031-9007}, 
+
+doi = {10.1103/physrevlett.45.566}, 
+
+abstract = {{An exact stochastic simulation of the Schroedinger equation for charged bosons and fermions has been used to calculate the correlation energies, to locate the transitions to their respective crystal phases at zero temperature within 10\%, and to establish the stability at intermediate densities of a ferromagnetic fluid of electrons.}}, 
+
+pages = {566--569}, 
+
+number = {7}, 
+
+volume = {45}, 
+
+keywords = {}
+
 }
 
 @article{Perdew1992,
@@ -1588,6 +1600,136 @@ year = {2005}
 
 
 # molecular dynamics
+@article{Parrinello1981, 
+
+year = {1981}, 
+
+title = {{Polymorphic transitions in single crystals: A new molecular dynamics method}}, 
+
+author = {Parrinello, M and Rahman, A}, 
+
+journal = {Journal of Applied Physics}, 
+
+issn = {0021-8979}, 
+
+doi = {10.1063/1.328693}, 
+
+pages = {7182--7190}, 
+
+number = {12}, 
+
+volume = {52}, 
+
+keywords = {}
+
+}
+
+@article{Parrinello1984, 
+
+year = {1984}, 
+
+title = {{Study of an F center in molten KCl}}, 
+
+author = {Parrinello, M and Rahman, A}, 
+
+journal = {The Journal of Chemical Physics}, 
+
+issn = {0021-9606}, 
+
+doi = {10.1063/1.446740}, 
+
+pages = {860--867}, 
+
+number = {2}, 
+
+volume = {80}, 
+
+keywords = {}
+
+}
+
+@article{Car1985, 
+
+year = {1985}, 
+
+title = {{Unified Approach for Molecular Dynamics and Density-Functional Theory}}, 
+
+author = {Car, R. and Parrinello, M.}, 
+
+journal = {Physical Review Letters}, 
+
+issn = {0031-9007}, 
+
+doi = {10.1103/physrevlett.55.2471}, 
+
+pmid = {10032153}, 
+
+abstract = {{We present a unified scheme that, by combining molecular dynamics and density-functional theory, profoundly extends the range of both concepts. Our approach extends molecular dynamics beyond the usual pair-potential approximation, thereby making possible the simulation of both covalently bonded and metallic systems. In addition it permits the application of density-functional theory to much larger systems than previously feasible. The new technique is demonstrated by the calculation of some static and dynamic properties of crystalline silicon within a self-consistent pseudopotential framework.}}, 
+
+pages = {2471--2474}, 
+
+number = {22}, 
+
+volume = {55}, 
+
+keywords = {}
+
+}
+
+@article{Markland2018, 
+
+year = {2018}, 
+
+title = {{Nuclear quantum effects enter the mainstream}}, 
+
+author = {Markland, Thomas E. and Ceriotti, Michele}, 
+
+journal = {Nature Reviews Chemistry}, 
+
+doi = {10.1038/s41570-017-0109}, 
+
+eprint = {1803.01037}, 
+
+abstract = {{Atomistic simulations of chemical, biological and materials systems have become increasingly precise and predictive owing to the development of accurate and efficient techniques that describe the quantum mechanical behaviour of electrons. Nevertheless, the overwhelming majority of such simulations still assumes that the nuclei behave as classical particles. Historically, this approximation could sometimes be justified owing to the complexity and computational overhead. However, neglecting nuclear quantum effects has become one of the largest sources of error, especially when systems containing light atoms are treated using current state-of-the-art descriptions of chemical interactions. Over the past decade, this realization has spurred a series of methodological advances that have dramatically reduced the cost of including these important physical effects in the structure and dynamics of chemical systems. Here, we discuss how these developments are now allowing nuclear quantum effects to become a mainstream feature of molecular simulations. These advances have led to new insights into phenomena that are relevant to different areas of science — from biochemistry to condensed matter — and open the door to many exciting future opportunities. The approximation underlying most atomistic simulations to treat nuclei classically can lead to large errors and the failure to capture important physical effects. This Review reports on recent developments that enable modelling of quantum nuclei at a computational cost comparable with that of a classical simulation.}}, 
+
+pages = {0109}, 
+
+number = {3}, 
+
+volume = {2}, 
+
+keywords = {}
+
+}
+
+@article{Litman2020, 
+
+year = {2019}, 
+
+title = {{Temperature dependence of the vibrational spectrum of porphycene: a qualitative failure of classical-nuclei molecular dynamics}}, 
+
+author = {Litman, Yair and Behler, Jörg and Rossi, Mariana}, 
+
+journal = {Faraday Discussions}, 
+
+issn = {1359-6640}, 
+
+doi = {10.1039/c9fd00056a}, 
+
+pmid = {31544185}, 
+
+abstract = {{The temperature dependence of vibrational spectra can provide information about structural changes of a system and also serve as a probe to identify different vibrational mode couplings. Fully anharmonic temperature-dependent calculations of these quantities are challenging due to the cost associated with statistically converging trajectory-based methods, especially when accounting for nuclear quantum effects. Here, we train a high-dimensional neural network potential energy surface for the porphycene molecule based on data generated with DFT-B3LYP, including pairwise van der Waals interactions. In addition, we fit a kernel ridge regression model for the molecular dipole moment surface. The combination of this machinery with thermostatted path integral molecular dynamics (TRPMD) allows us to obtain well-converged, full-dimensional, fully-anharmonic vibrational spectra including nuclear quantum effects, without sacrificing the first-principles quality of the potential-energy surface or the dipole surface. Within this framework, we investigate the temperature and isotopologue dependence of the high-frequency vibrational fingerprints of porphycene. While classical-nuclei dynamics predicts a red shift of the vibrations encompassing the NH and CH stretches, TRPMD predicts a strong blue shift in the NH-stretch region and a smaller one in the CH-stretch region. We explain this behavior by analyzing the modulation of the effective potential with temperature, which arises from vibrational coupling between quasi-classical thermally activated modes and high-frequency quantized modes.}}, 
+
+pages = {526--546}, 
+
+number = {0}, 
+
+volume = {221}, 
+
+keywords = {}
+
+}
+
 @article{Chen2010,
   title={How to improve the accuracy of equilibrium molecular dynamics for computation of thermal conductivity?},
   author={Chen, Jie and Zhang, Gang and Li, Baowen},
@@ -2571,44 +2713,81 @@ keywords = {}
 
 }
 
-@article{Nagai2020, 
-year = {2020}, 
-title = {{Completing density functional theory by machine learning hidden messages from molecules}}, 
-author = {Nagai, Ryo and Akashi, Ryosuke and Sugino, Osamu}, 
-journal = {npj Computational Materials}, 
-doi = {10.1038/s41524-020-0310-0}, 
-abstract = {{Kohn–Sham density functional theory (DFT) is the basis of modern computational approaches to electronic structures. Their accuracy heavily relies on the exchange-correlation energy functional, which encapsulates electron–electron interaction beyond the classical model. As its universal form remains undiscovered, approximated functionals constructed with heuristic approaches are used for practical studies. However, there are problems in their accuracy and transferability, while any systematic approach to improve them is yet obscure. In this study, we demonstrate that the functional can be systematically constructed using accurate density distributions and energies in reference molecules via machine learning. Surprisingly, a trial functional machine learned from only a few molecules is already applicable to hundreds of molecules comprising various first- and second-row elements with the same accuracy as the standard functionals. This is achieved by relating density and energy using a flexible feed-forward neural network, which allows us to take a functional derivative via the back-propagation algorithm. In addition, simply by introducing a nonlocal density descriptor, the nonlocal effect is included to improve accuracy, which has hitherto been impractical. Our approach thus will help enrich the DFT framework by utilizing the rapidly advancing machine-learning technique.}}, 
-pages = {43}, 
-number = {1}, 
-volume = {6}, 
-keywords = {}
+@article{Nagai2020, 
+
+year = {2020}, 
+
+title = {{Completing density functional theory by machine learning hidden messages from molecules}}, 
+
+author = {Nagai, Ryo and Akashi, Ryosuke and Sugino, Osamu}, 
+
+journal = {npj Computational Materials}, 
+
+doi = {10.1038/s41524-020-0310-0}, 
+
+abstract = {{Kohn–Sham density functional theory (DFT) is the basis of modern computational approaches to electronic structures. Their accuracy heavily relies on the exchange-correlation energy functional, which encapsulates electron–electron interaction beyond the classical model. As its universal form remains undiscovered, approximated functionals constructed with heuristic approaches are used for practical studies. However, there are problems in their accuracy and transferability, while any systematic approach to improve them is yet obscure. In this study, we demonstrate that the functional can be systematically constructed using accurate density distributions and energies in reference molecules via machine learning. Surprisingly, a trial functional machine learned from only a few molecules is already applicable to hundreds of molecules comprising various first- and second-row elements with the same accuracy as the standard functionals. This is achieved by relating density and energy using a flexible feed-forward neural network, which allows us to take a functional derivative via the back-propagation algorithm. In addition, simply by introducing a nonlocal density descriptor, the nonlocal effect is included to improve accuracy, which has hitherto been impractical. Our approach thus will help enrich the DFT framework by utilizing the rapidly advancing machine-learning technique.}}, 
+
+pages = {43}, 
+
+number = {1}, 
+
+volume = {6}, 
+
+keywords = {}
+
 }
 
-@article{Cohen2008, 
-year = {2008}, 
-title = {{Insights into Current Limitations of Density Functional Theory}}, 
-author = {Cohen, Aron J. and Mori-S\'anchez, Paula and Yang, Weitao}, 
-journal = {Science}, 
-issn = {0036-8075}, 
-doi = {10.1126/science.1158722}, 
-pmid = {18687952}, 
-abstract = {{Density functional theory of electronic structure is widely and successfully applied in simulations throughout engineering and sciences. However, for many predicted properties, there are spectacular failures that can be traced to the delocalization error and static correlation error of commonly used approximations. These errors can be characterized and understood through the perspective of fractional charges and fractional spins introduced recently. Reducing these errors will open new frontiers for applications of density functional theory.}}, 
-pages = {792--794}, 
-number = {5890}, 
-volume = {321}, 
-keywords = {}
+@article{Cohen2008, 
+
+year = {2008}, 
+
+title = {{Insights into Current Limitations of Density Functional Theory}}, 
+
+author = {Cohen, Aron J. and Mori-S\'anchez, Paula and Yang, Weitao}, 
+
+journal = {Science}, 
+
+issn = {0036-8075}, 
+
+doi = {10.1126/science.1158722}, 
+
+pmid = {18687952}, 
+
+abstract = {{Density functional theory of electronic structure is widely and successfully applied in simulations throughout engineering and sciences. However, for many predicted properties, there are spectacular failures that can be traced to the delocalization error and static correlation error of commonly used approximations. These errors can be characterized and understood through the perspective of fractional charges and fractional spins introduced recently. Reducing these errors will open new frontiers for applications of density functional theory.}}, 
+
+pages = {792--794}, 
+
+number = {5890}, 
+
+volume = {321}, 
+
+keywords = {}
+
 }
-
-@article{Cohen2012, 
-year = {2012}, 
-title = {{Challenges for Density Functional Theory}}, 
-author = {Cohen, Aron J. and Mori-S\'anchez, Paula and Yang, Weitao}, 
-journal = {Chemical Reviews}, 
-issn = {0009-2665}, 
-doi = {10.1021/cr200107z}, 
-pmid = {22191548}, 
-pages = {289--320}, 
-number = {1}, 
-volume = {112}, 
-keywords = {}
+
+
+@article{Cohen2012, 
+
+year = {2012}, 
+
+title = {{Challenges for Density Functional Theory}}, 
+
+author = {Cohen, Aron J. and Mori-S\'anchez, Paula and Yang, Weitao}, 
+
+journal = {Chemical Reviews}, 
+
+issn = {0009-2665}, 
+
+doi = {10.1021/cr200107z}, 
+
+pmid = {22191548}, 
+
+pages = {289--320}, 
+
+number = {1}, 
+
+volume = {112}, 
+
+keywords = {}
+
 }
