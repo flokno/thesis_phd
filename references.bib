@@ -321,6 +321,20 @@
   volume       = {46},
 }
 
+@article{Perdew2008,
+  abstract     = {{Popular modern generalized gradient approximations are biased toward the description of free-atom energies. Restoration of the first-principles gradient expansion for exchange over a wide range of density gradients eliminates this bias. We introduce a revised Perdew-Burke-Ernzerhof generalized gradient approximation that improves equilibrium properties of densely packed solids and their surfaces.}},
+  author       = {Perdew, John P. and Ruzsinszky, Adrienn and Csonka, Gábor I. and Vydrov, Oleg A. and Scuseria, Gustavo E. and Constantin, Lucian A. and Zhou, Xiaolan and Burke, Kieron},
+  date         = {2008},
+  doi          = {10.1103/physrevlett.100.136406},
+  eprint       = {0711.0156},
+  issn         = {0031-9007},
+  journaltitle = {Physical Review Letters},
+  number       = {13},
+  pages        = {136406},
+  title        = {{Restoring the Density-Gradient Expansion for Exchange in Solids and Surfaces}},
+  volume       = {100},
+}
+
 @article{Bendt1983,
   author       = {Bendt, Paul and Zunger, Alex},
   publisher    = {APS},
@@ -1111,6 +1125,44 @@
   volume       = {180},
 }
 
+@article{Zhao2021,
+  abstract     = {{We describe and benchmark the quasi-four-component (Q4C) approach to relativistic density functional simulations of molecules and solids, using precise, numerically tabulated atom-centered orbital (NAO) basis sets to discretize Dirac's equation. The Q4C approach initially projects the atomic solution to (electron-only) positive-energy states and eventually deals with only two components but retains the precision of traditional four-component (4C) relativistic methods. While Q4C inherently reduces the dimension of the Hamiltonian matrix in diagonalization, the adoption of localized NAO basis functions in solids further limits the computational demand in real space operations, promising a pathway to investigate large and complex systems containing heavy elements with the precision of a 4C method. Here, we first perform validation and benchmark calculations for cohesive properties of a set of diatomic molecules and of previously established periodic model systems (i.e., silver halides). Then we report Q4C relativistic energy band structure benchmarks for a series of 103 periodic materials, including chemical elements up to Bi, and providing quantitative comparisons with more approximate scalar-relativistic and spin-orbit coupled treatments. Finally, we demonstrate the applicability of the method to band structure calculations of simple and complex hybrid organic-inorganic perovskites containing Pb and Bi, i.e., Cs2AgBiCl6 and a larger system (containing 94 atoms per unit cell), (4-FPEA)2PbI4. The effect of full Q4C, compared with scalar relativity, on binding energies can be significant even for relatively light p-orbital bonded main group elements such as Br and I—i.e., 0.3 and 0.6 eV for Br2 and I2 binding energies, respectively.}},
+  author       = {Zhao, Rundong and Yu, Victor Wen-zhe and Zhang, Kimberly and Xiao, Yunlong and Zhang, Yong and Blum, Volker},
+  date         = {2021},
+  doi          = {10.1103/physrevb.103.245144},
+  issn         = {2469-9950},
+  journaltitle = {Physical Review B},
+  number       = {24},
+  pages        = {245144},
+  title        = {{Quasi-four-component method with numeric atom-centered orbitals for relativistic density functional simulations of molecules and solids}},
+  volume       = {103},
+}
+
+@article{Huhn2017,
+  abstract     = {{We quantify the accuracy of different non-self-consistent and self-consistent spin-orbit coupling (SOC) treatments in Kohn-Sham and hybrid density functional theory by providing a band-structure benchmark set for the valence and low-lying conduction energy bands of 103 inorganic compounds, covering chemical elements up to polonium. Reference energy band structures for the PBE density functional are obtained using the full-potential (linearized) augmented plane wave code wien2k, employing its self-consistent treatment of SOC including Dirac-type p1/2 orbitals in the basis set. We use this benchmark set to benchmark a computationally simpler, non-self-consistent all-electron treatment of SOC based on scalar-relativistic orbitals and numeric atom-centered orbital basis functions. For elements up to Z≈50, both treatments agree virtually exactly. For the heaviest elements considered (Tl, Pb, Bi, Po), the band-structure changes due to SOC are captured with a relative deviation of 11\% or less. For different density functionals (PBE versus the hybrid HSE06), we show that the effect of spin-orbit coupling is usually similar but can be dissimilar if the qualitative features of the predicted underlying scalar-relativistic band structures do not agree. All band structures considered in this work are available online via the NOMAD repository to aid in future benchmark studies and methods development.}},
+  author       = {Huhn, William P. and Blum, Volker},
+  date         = {2017},
+  doi          = {10.1103/physrevmaterials.1.033803},
+  eprint       = {1705.01804},
+  journaltitle = {Physical Review Materials},
+  number       = {3},
+  pages        = {033803},
+  title        = {{One-hundred-three compound band-structure benchmark of post-self-consistent spin-orbit coupling treatments in density functional theory}},
+  volume       = {1},
+}
+
+@article{vanLenthe1994,
+  author       = {Lenthe, E van and Baerends, E J and Snijders, J G},
+  date         = {1994},
+  doi          = {10.1063/1.467943},
+  issn         = {0021-9606},
+  journaltitle = {The Journal of Chemical Physics},
+  number       = {11},
+  pages        = {9783--9792},
+  title        = {{Relativistic total energy using regular approximations}},
+  volume       = {101},
+}
+
 @article{larsen2017,
   author       = {Larsen, Ask Hjorth and Mortensen, Jens J{ø}rgen and Blomqvist, Jakob and Castelli, Ivano E and Christensen, Rune and Du{ł}ak, Marcin and Friis, Jesper and Groves, Michael N and Hammer, Bj{ø}rk and Hargus, Cory and others},
   publisher    = {IOP Publishing},
@@ -1134,14 +1186,7 @@
   volume       = {190},
 }
 
-@book{negele2018quantum,
-  author    = {Negele, John W},
-  publisher = {CRC Press},
-  date      = {2018},
-  title     = {Quantum many-particle systems},
-}
-
-@article{pfrommer1997,
+@article{Pfrommer1997,
   author       = {Pfrommer, Bernd G and Côté, Michel and Louie, Steven G and Cohen, Marvin L},
   publisher    = {Elsevier},
   date         = {1997},
@@ -1202,6 +1247,15 @@
   pages        = {1--10},
   title        = {An efficient and accurate framework for calculating lattice thermal conductivity of solids: AFLOW—AAPL Automatic Anharmonic Phonon Library},
   volume       = {3},
+}
+
+@article{phonopy,
+  author       = {Togo, A and Tanaka, I},
+  date         = {2015-11},
+  journaltitle = {Scr. Mater.},
+  pages        = {1--5},
+  title        = {First principles phonon calculations in materials science},
+  volume       = {108},
 }
 
 @article{phono3py,
@@ -1299,10 +1353,10 @@
   title     = {Statistical thermodynamics},
 }
 
-@book{Negele2018,
+@book{NegeleOrland,
   author    = {Negele, John W},
-  publisher = {CRC Press},
-  date      = {2018},
+  publisher = {Addison-Wesley Publishing},
+  date      = {1988},
   title     = {Quantum many-particle systems},
 }
 
@@ -1499,6 +1553,19 @@
   pages        = {83--94},
   title        = {Structural phase transitions in KCdF3 and K0. 5Rb0. 5CdF3},
   volume       = {20},
+}
+
+@article{Toberer2011,
+  abstract     = {{Mitigation of the global energy crisis requires tailoring the thermal conductivity of materials. Low thermal conductivity is critical in a broad range of energy conversion technologies, including thermoelectrics and thermal barrier coatings. Here, we review the chemical trends and explore the origins of low thermal conductivity in crystalline materials. A unifying feature in the latest materials is the incorporation of structural complexity to decrease the phonon velocity and increase scattering. With this understanding, strategies for combining these mechanisms can be formulated for designing new materials with exceptionally low thermal conductivity.}},
+  author       = {Toberer, Eric S. and Zevalkink, Alex and Snyder, G. Jeffrey},
+  date         = {2011},
+  doi          = {10.1039/c1jm11754h},
+  issn         = {0959-9428},
+  journaltitle = {Journal of Materials Chemistry},
+  number       = {40},
+  pages        = {15843--15852},
+  title        = {{Phonon engineering through crystal chemistry}},
+  volume       = {21},
 }
 
 @article{Chen2019,

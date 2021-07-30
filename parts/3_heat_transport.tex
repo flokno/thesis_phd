@@ -388,6 +388,7 @@ where the difference between left- and right-hand side is given by ${\bf J}_{\rm
 \newthought{A final remark concerning the heat flux definition} is in order: One might argue that the expression in Eq.\,\eqref{eq:J_tot_solid} is a total time derivative of ${\bf P} = \frac{1}{V}  \sum_I {\bf R}_I^0 \fD E_I$, and therefore vanishes by the aforementioned gauge invariance principle as well. However, this is not the case in an infinite solid, since the atomic configuration $\set{{\bf R}_I}$ is not bounded. The sum over atomic positions is therefore not well defined in the first place and remains to be understood as a symbolic representation of an actual energy partitioning scheme that needs to be cast in a boundary-insensitive form for any practical application of Eq.\,\eqref{eq:J_tot_solid}.\footnote{The author thanks Stefano Baroni for an insightful discussion clarifying this point.}
 
 \section{Ab initio Heat Flux}
+\label{sec:ab_initio_heat_flux}
 The above formulas are readily applied when empirical force fields are used to describe the atomic interactions, as an atomic partitioning of the total energy is trivial in that case, although care must be taken in deriving the correct formulae nevertheless~\cite{Fan2015,Boone2019}. An \emph{ab initio} derivation of heat flux on the other hand was a long-standing problem because it was not clear how an expression like Eq.\,\eqref{eq:J_tot_solid} can be obtained when no atomic partitioning is available~\cite{Stackhouse2010}. This problem was solved when Marcologno \emph{et al.} and Carbogno \emph{et al.} independently arrived at well-defined heat flux expressions in \mbox{\emph{ab initio}} frameworks~\cite{Marcolongo2016,Carbogno2016}. We adopt the latter approach in the following, but present a derivation that slightly differs from Ref.\,\cite{Carbogno2016},~i.\,e.,~by starting from Eq.\,\eqref{eq:hf.J} instead of Eq.\,\eqref{eq:hf.J.atomic}, and using the phase-space formalism developed in this chapter.
 
 % \paragraph{Derivation of ab initio Heat Flux}
@@ -631,7 +632,7 @@ and the generalized heat capacity
 \end{align}
 
 \newthought{In the perfectly harmonic case}, the mode-energy autocorrelation function $G_{ss'}$ can be evaluated analytically by noting that the expectation value $\braket{\cdot}$ can be viewed as a functional integral with the distribution function $f = {\rm e}^{-\beta \sum_s \omega_s \D a_{s} \fD a_{s}}$ and can therefore be evaluated by means of a Wick theorem~\cite{Isaeva2019}.
-Keeping only the non-vanishing pairings, we have\footnote{In the context of complex field integration, the Wick theorem reads~\cite{Negele2018} $$\braket{ABCD} = \braket{AB}\braket{CD} + \braket{AC}\braket{BD} + \braket{AD}\braket{BC}.$$ Pairings with a non-equal number of ``creators'' $\D a$ and ``annihilators'' $a$ vanish identically because of the symmetry of the distribution function $f$.}
+Keeping only the non-vanishing pairings, we have\footnote{In the context of complex field integration, the Wick theorem reads~\cite{NegeleOrland} $$\braket{ABCD} = \braket{AB}\braket{CD} + \braket{AC}\braket{BD} + \braket{AD}\braket{BC}.$$ Pairings with a non-equal number of ``creators'' $\D a$ and ``annihilators'' $a$ vanish identically because of the symmetry of the distribution function $f$.}
 \begin{align}
 	\braket{\D a_s (t) \fD{a}_s (t) \D a_{s'} \fD a_{s'}}
 		= \braket{n_s} \braket{n_{s'}} + \fD g_s (t) g^\ast_{s} (t) \delta_{ss'}~,
@@ -655,7 +656,7 @@ It is apparent that the product $g_s(t) g^\ast_s(t)$ is not time-dependent, and 
 \end{align}
 Consequently, the harmonic heatflux autocorrelation function integrates to infinity and the thermal conductivity $\kappa$ diverges.
 
-\newthought{A finite thermal conductivity} is obtained when the phonons are allowed to interact, for example by introducing impurities, electron-phonon interactions, or self interactions via anharmonic contributions to the potential-energy surface. If the perturbation is weak, it can be expressed by modified Green's functions~\cite{Negele2018}
+\newthought{A finite thermal conductivity} is obtained when the phonons are allowed to interact, for example by introducing impurities, electron-phonon interactions, or self interactions via anharmonic contributions to the potential-energy surface. If the perturbation is weak, it can be expressed by modified Green's functions~\cite{NegeleOrland}
 \begin{align}
 	g_s (t) = {\rm e}^{\im \left( \omega_s + \Sigma_s \right) t} \braket{n_s}~,
 	\label{eq:ha.kappa.g.self}
@@ -738,4 +739,4 @@ Building on the previous sections, we are now in position to present the \emph{a
 \section{Conclusion}
 It is apparent from the presentation above that a low-order expansion of the potential-energy surface combined with low-order perturbation expressions represents a wealth of approximations that certainly hold for some materials~\cite{Ladd1986,Broido2007,Puligheddu2019}, but are questionable or even outright unjustified for others. In particular, dynamical effects such as phase transitions to dynamically stabilized crystal structures (ZrO$_2$~\cite{Carbogno2014,Carbogno2016}, SrTiO$_3$~\cite{Tadano2015}), spontaneous defect formation (e.\,g., in noble metal halides~\cite{Ulrich1999,Brenner2020}), or simply a soft bonding and therefore strong anharmonicity (NaCl~\cite{Ravichandran2018}, NaBr~\cite{Shen2020}) are inherently absent in such a description. These are cases where a non-perturbative description of thermal transport is necessary. By the same argument, largely harmonic materials like silicon or diamond fulfill the requirements for a perturbative treatment, and brute-force simulating the nuclear dynamics via MD techniques is therefore not necessary.
 
-\newthought{For these reasons, it is desirable to pre-categorize materials} in terms of their ``anharmonic strength'', especially when one attempts to screen materials space for a significant amount of materials. We present a systematic approach towars ``measuring anharmonicity'' in the next chapter.
+\newthought{For these reasons, it is desirable to pre-categorize materials} in terms of their ``anharmonic strength'', especially when one attempts to screen materials space for a significant amount of materials, as this allows to choose appropriate simulation techniques for each system. We present a systematic approach towars ``measuring anharmonicity'' in the next chapter.
