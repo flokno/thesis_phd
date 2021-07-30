@@ -692,6 +692,44 @@
   volume       = {132},
 }
 
+@article{McLennan1959,
+  abstract     = {{The description of steady-state phenomena, near equilibrium, in terms of Gibbs ensembles is discussed. The Liouville equation is modified to include external nonconservative forces which prevent the system from reaching equilibrium. The steady state ensembles are then obtained as (approximately) time-independent solutions to the Liouville equation; such ensembles depend linearly on the thermodynamic parameters which characterize the deviation from equilibrium. With the aid of the steady state ensembles the linear relations between the thermodynamic fluxes and forces are obtained.}},
+  author       = {McLennan, James A.},
+  date         = {1959},
+  doi          = {10.1103/physrev.115.1405},
+  issn         = {0031-899X},
+  journaltitle = {Physical Review},
+  number       = {6},
+  pages        = {1405--1409},
+  title        = {{Statistical Mechanics of the Steady State}},
+  volume       = {115},
+}
+
+@article{McLennan1960,
+  author       = {McLennan, James A},
+  date         = {1960},
+  doi          = {10.1063/1.1706081},
+  issn         = {0031-9171},
+  journaltitle = {Physics of Fluids},
+  number       = {4},
+  pages        = {493},
+  title        = {{Statistical Mechanics of Transport in Fluids}},
+  volume       = {3},
+}
+
+@article{Zwanzig1965,
+  author       = {Zwanzig, R},
+  date         = {1965},
+  doi          = {10.1146/annurev.pc.16.100165.000435},
+  issn         = {0066-426X},
+  journaltitle = {Annual Review of Physical Chemistry},
+  note         = {Discussion of "thermal processes": Problem of representing effect of temperature gradient through perturbation Hamiltonian},
+  number       = {1},
+  pages        = {67--102},
+  title        = {{Time-Correlation Functions and Transport Coefficients in Statistical Mechanics}},
+  volume       = {16},
+}
+
 @article{Ladd1986,
   author       = {Ladd, Anthony JC and Moran, Bill and Hoover, William G},
   publisher    = {APS},
@@ -834,7 +872,7 @@
   volume       = {120},
 }
 
-@article{xia2020,
+@article{Xia2020,
   author       = {Xia, Yi and Hegde, Vinay I and Pal, Koushik and Hua, Xia and Gaines, Dale and Patel, Shane and He, Jiangang and Aykol, Muratahan and Wolverton, Chris},
   publisher    = {APS},
   date         = {2020},
@@ -1180,7 +1218,7 @@
 @misc{scipy,
   author = {Jones, Eric and Oliphant, Travis and Peterson, Pearu and others},
   url    = {http://www.scipy.org/},
-  date   = {2001--},
+  date   = {2001},
   title  = {{SciPy}: Open source scientific tools for {Python}},
 }
 
@@ -1473,6 +1511,19 @@
   volume       = {170},
 }
 
+@article{Verlet1967,
+  abstract     = {{The equation of motion of a system of 864 particles interacting through a Lennard-Jones potential has been integrated for various values of the temperature and density, relative, generally, to a fluid state. The equilibrium properties have been calculated and are shown to agree very well with the corresponding properties of argon. It is concluded that, to a good approximation, the equilibrium state of argon can be described through a two-body potential.}},
+  author       = {Verlet, Loup},
+  date         = {1967},
+  doi          = {10.1103/physrev.159.98},
+  issn         = {0031-899X},
+  journaltitle = {Physical Review},
+  number       = {1},
+  pages        = {98--103},
+  title        = {{Computer "Experiments" on Classical Fluids. I. Thermodynamical Properties of Lennard-Jones Molecules}},
+  volume       = {159},
+}
+
 @article{Parrinello1981,
   author       = {Parrinello, M and Rahman, A},
   date         = {1981},
@@ -1508,6 +1559,64 @@
   pages        = {2471--2474},
   title        = {{Unified Approach for Molecular Dynamics and Density-Functional Theory}},
   volume       = {55},
+}
+
+@article{Nose1984,
+  author       = {Nosé, Shuichi},
+  date         = {1984},
+  doi          = {10.1063/1.447334},
+  issn         = {0021-9606},
+  journaltitle = {The Journal of Chemical Physics},
+  number       = {1},
+  pages        = {511--519},
+  title        = {{A unified formulation of the constant temperature molecular dynamics methods}},
+  volume       = {81},
+}
+
+@article{Hoover1985,
+  abstract     = {{Nosé has modified Newtonian dynamics so as to reproduce both the canonical and the isothermal-isobaric probability densities in the phase space of an N-body system. He did this by scaling time (with s) and distance (with V1/D in D dimensions) through Lagrangian equations of motion. The dynamical equations describe the evolution of these two scaling variables and their two conjugate momenta ps and pv. Here we develop a slightly different set of equations, free of time scaling. We find the dynamical steady-state probability density in an extended phase space with variables x, px, V, ε̇, and ζ, where the x are reduced distances and the two variables ε̇ and ζ act as thermodynamic friction coefficients. We find that these friction coefficients have Gaussian distributions. From the distributions the extent of small-system non-Newtonian behavior can be estimated. We illustrate the dynamical equations by considering their application to the simplest possible case, a one-dimensional classical harmonic oscillator.}},
+  author       = {Hoover, William G.},
+  date         = {1985},
+  doi          = {10.1103/physreva.31.1695},
+  issn         = {1050-2947},
+  journaltitle = {Physical Review A},
+  number       = {3},
+  pages        = {1695--1697},
+  title        = {{Canonical dynamics: Equilibrium phase-space distributions}},
+  volume       = {31},
+}
+
+@book{FrenkelSmit,
+  author    = {Frenkel, Daan and Smit, Berend},
+  publisher = {Academic Press, Elsevier},
+  date      = {2002},
+  title     = {{Understanding Molecular Simulations}},
+}
+
+@article{Bussi2007,
+  abstract     = {{The authors present a new molecular dynamics algorithm for sampling the canonical distribution. In this approach the velocities of all the particles are rescaled by a properly chosen random factor. The algorithm is formally justified and it is shown that, in spite of its stochastic nature, a quantity can still be defined that remains constant during the evolution. In numerical applications this quantity can be used to measure the accuracy of the sampling. The authors illustrate the properties of this new method on Lennard-Jones and TIP4P water models in the solid and liquid phases. Its performance is excellent and largely independent of the thermostat parameter also with regard to the dynamic properties.}},
+  author       = {Bussi, Giovanni and Donadio, Davide and Parrinello, Michele},
+  date         = {2007},
+  doi          = {10.1063/1.2408420},
+  eprint       = {0803.4060},
+  issn         = {0021-9606},
+  journaltitle = {The Journal of Chemical Physics},
+  number       = {1},
+  pages        = {014101},
+  title        = {{Canonical sampling through velocity rescaling}},
+  volume       = {126},
+}
+
+@article{Andersen1980,
+  author       = {Andersen, Hans C},
+  date         = {1980},
+  doi          = {10.1063/1.439486},
+  issn         = {0021-9606},
+  journaltitle = {The Journal of Chemical Physics},
+  number       = {4},
+  pages        = {2384--2393},
+  title        = {{Molecular dynamics simulations at constant pressure and/or temperature}},
+  volume       = {72},
 }
 
 @article{Markland2018,
