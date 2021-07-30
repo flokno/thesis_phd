@@ -278,7 +278,7 @@ Using the periodic boundary conditions in the superlattice, the dynamical matrix
 \begin{align}
 	D_{i \b L \alpha, j \b K \beta}  
 		& = \frac{1}{N_{\bf q}} \sum_{\b q} {\rm e}^{- \im \b q \cdot (\b R_{i \b L}^0 - \b R_{j \b K}^0)} {D}_{i \alpha, j \beta} (\b q)~,
-	\label{eq:D_{iLa}}
+	\label{eq:D_{iLa}_0}
 \end{align}
 with the inverse relation
 \begin{align}
@@ -874,7 +874,8 @@ as well as the mode energy,
 We will later see how the time-dependent, mode-resolved energy can be used to extract phonon lifetimes from molecular dynamics simulations.
 \REM{Move this discussion to here?}
 
-\newthought{As a final remark}, we like to point out that for periodic systems, where $s=(b, {\bf q})$, the eigenvectors used in the transformation defined in Eq.\,\eqref{eq:u_p_st.real} are not strictly real, and therefore the normal mode coordiantes $\set{u_s, p_s}$ can be complex numbers already. In this situation, one needs to define two independent complex amplitudes, $a_s$ and $a_{-s}$, where $-s = (b, - {\bf q})$ denotes a mode with opposite wave vector~\cite[p.\,300]{BornHuang}. In this case, we define\footnote{The explicit formulas in terms of $(b, {\bf q})$ are given in appendix~\ref{app:formulas.ha}.}
+\newthought{As a final remark}, we like to point out that for periodic systems, where $s=(b, {\bf q})$, the eigenvectors used in the transformation defined in Eq.\,\eqref{eq:u_p_st.real} are not strictly real, and therefore the normal mode coordiantes $\set{u_s, p_s}$ can be complex numbers already. In this situation, one needs to define two independent complex amplitudes, $a_s$ and $a_{-s}$, where $s = (b, - {\bf q})$ denotes a mode with opposite wave vector~\cite[p.\,300]{BornHuang}. In this case, we define\footnote{The explicit formulas in terms of $(b, {\bf q})$ are given in appendix~\ref{app:formulas.ha}.}
+\REM{Use notation $-s \to \bar s$?}
 \begin{subequations}
 	\label{eq:u_s.periodic}
 \begin{align}
