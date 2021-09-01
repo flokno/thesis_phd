@@ -99,17 +99,16 @@ Particularly noteworthy is a class of ternary materials, so-called \emph{chalcop
 \begin{table}[ht]
   \centering
   \fontfamily{ppl}\selectfont
-  \begin{tabular}{lc}
+  \begin{tabulary}{\textwidth}{LC}
     \toprule
-    Reference & Thermal conductivity \\
-    & at 300\,K (W/mK) \\
+    Reference & Thermal conductivity at 300\,K (W/mK) \\
     \midrule
-    Berger 1966~\cite{berger1969}   & $2.7$ \\
-    Beasley 1995~\cite{beasley1994} & $1.1$ \\
-    This work                       & \prelim{$0.5 \pm 0.2$}  \\
+    Berger 1966~\cite{berger1969}   & $2.7$          \\
+    Beasley 1995~\cite{beasley1994} & $1.1$          \\
+    This work                       & $0.6 \pm 0.2$  \\
     \bottomrule
     \vspace{.5em}
-  \end{tabular}
+  \end{tabulary}
   \caption{Overview of experimental references for AgGaSe$_2$. \inlinecomment{update values}.}
   \label{tab:exp.aggase2}
 \end{table}
@@ -119,23 +118,23 @@ Picking AgGaSe$_2$ as an example, there are two distinct measurements available 
 \begin{table}[ht]
   \centering
   \fontfamily{ppl}\selectfont
-  \begin{tabular}{lrr}
+  \begin{tabularx}{\textwidth}{lXcXc}
     \toprule
-    Material & $\kappa^{\rm aiGK}$ & $\sigmaA$ \\
+    Material & & $\kappa^{\rm aiGK}$ & & $\sigmaA$ \\
     \midrule
-        AgAlS$_2$   & \prelim{$0.84 \pm 0.13$} & 0.33 \\
-        AgAlSe$_2$  & \prelim{$0.49 \pm 0.13$} & 0.37 \\
-        AgGaSe$_2$  & \prelim{$0.53 \pm 0.13$} & 0.35 \\
-        LiGaTe$_2$  & \prelim{$0.74 \pm 0.05$} & 0.31 \\
-        LiInTe$_2$  & \prelim{$0.85 \pm 0.10$} & 0.33 \\
+	  AgAlS$_2$   & & $1.01 \pm 0.20$ & & 0.33 \\
+          AgAlSe$_2$  & & $0.62 \pm 0.16$ & & 0.37 \\
+          AgGaSe$_2$  & & $0.61 \pm 0.18$ & & 0.35 \\
+          GaLiTe$_2$  & & $0.81 \pm 0.15$ & & 0.31 \\
+          InLiTe$_2$  & & $1.01 \pm 0.26$ & & 0.33 \\
     \bottomrule
     \vspace{.5em}
-  \end{tabular}
+  \end{tabularx}
   \caption{Overview of computed thermal conductivities for chalcopyrite materials.}
   \label{tab:exp.chalcopyrites}
 \end{table}
 
-Besides AgGaSe$_2$, there is experimental reference for the closely related material, AgGaS$_2$, with a measured thermal conductivity of 1.4\,W/mK~\cite{beasley1994}.\footnote{While we included AgGaS$_2$ in our dataset, we needed to discard the material because of aiMD convergence problems. However, we like to mention this material in the context of this study as potentially interesting material for future investigations.} While our computational data might underestimate the thermal conductivity in these compounds slightly\footnote{Please keep in mind, that the absolute errors are only of the order of 0.5-1\,W/mK.}, we nevertheless see a clear indiciation of very low intrinsic thermal conductivity in AgGaSe$_2$, and the chemically closely related compounds AgAlS$_2$ and AgAlSe$_2$. At least regarding their thermal transport properties, they are therefore comparable or even superior to the existing thermoelectric materials listed in the previous section, while being free of heavy metals such as Pb or Bi.
+Besides AgGaSe$_2$, there is experimental reference for the chemically closely related material, AgGaS$_2$, with a measured thermal conductivity of 1.4\,W/mK~\cite{beasley1994}.\footnote{While we included AgGaS$_2$ in our dataset, we needed to discard the material because of aiMD convergence problems. However, we like to mention this material in the context of this study as potentially interesting material for future investigations.} While our computational data might underestimate the thermal conductivity in these compounds slightly\footnote{Please keep in mind, that the absolute errors are only of the order of 0.5-1\,W/mK.}, we nevertheless see a clear indiciation of very low intrinsic thermal conductivity in AgGaSe$_2$, and the chemically closely related compounds AgAlS$_2$ and AgAlSe$_2$. At least regarding their thermal transport properties, they are therefore comparable or even superior to the existing thermoelectric materials listed in the previous section, while being free of heavy metals such as Pb or Bi.
  % Mg$_3$Sb$_2$~\cite{kajikawa2003,condron2006,zhang2009,zhang2018,pan2020,ding2021}.
 %\todo{$\kappa_{\rm MgSb}^{\rm aiGK} = 1.10 \pm 0.26$}
 
@@ -162,45 +161,45 @@ The common feature of these dispersions are the very flat acoustic branches whic
 \begin{table}[ht]
   \centering
   \fontfamily{ppl}\selectfont
-\begin{tabular}{rrrr}
+\begin{tabularx}{\linewidth}{rXXX}
 \toprule
 Space group  &    material & $\kappa^{\rm aiGK}$ & $\sigmaA$  \\
 \midrule
-         122 &  InLiTe$_2$ &                0.46 &       0.33 \\
-         122 &  GaLiTe$_2$ &                0.47 &       0.31 \\
-         122 &   AgAlS$_2$ &                0.84 &       0.33 \\
-         122 &   FILL CHALCOPYRITES &       ---- &       ---- \\
-         225 &         CsF &                0.84 &       0.48 \\
-         225 &         LiI &                1.07 &       0.49 \\
-         225 &    Na$_2$Te &                1.64 &       0.38 \\
-          62 &    KCdF$_3$ &                1.67 &       0.53* \\
-          62 &    KCaF$_3$ &                2.00 &       0.52 \\
-         225 &     Rb$_2$O &                2.08 &       0.47 \\
-         216 &       ZnPLi &                2.09 &       0.27 \\
-         166 &  InNaSe$_2$ &                2.22 &       0.34 \\
-         221 &   CsCdF$_3$ &                2.30 &       0.35 \\
-         166 &  InLiSe$_2$ &                2.34 &       0.40 \\
-         225 &    Na$_2$Se &                2.63 &       0.35 \\
-         225 &    Li$_2$Te &                3.24 &       0.36 \\
-         221 &   BaLiF$_3$ &                3.27 &       0.29 \\
-         225 &          KH &                3.39 &       0.37 \\
-         221 &   RbZnF$_3$ &                3.47 &       0.32 \\
-         225 &      K$_2$O &                3.67 &       0.38 \\
-         225 &        LiCl &                4.14 &       0.40 \\
-         166 &    Sr$_2$HN &                4.17 &       0.26 \\
-         225 &     Na$_2$S &                4.40 &       0.33 \\
-         225 &    Li$_2$Se &                4.55 &       0.33 \\
-         216 &      LiAsMg &                4.67 &       0.26 \\
-         166 &   LiScS$_2$ &                6.42 &       0.27 \\
-         221 &   RbMgF$_3$ &                6.94 &       0.24 \\
-         216 &       LiNZn &                8.42 &       0.27 \\
-         166 &   InNaO$_2$ &                9.71 &       0.23 \\
-         166 &   CuGaO$_2$ &               12.82 &       0.22 \\
-         166 &   LiRhO$_2$ &               13.37 &       0.21 \\
-         225 &     Li$_2$S &               13.85 &       0.31 \\
-         225 &     Li$_2$O &               21.39 &       0.29 \\
+         122 & AgAlSe$_2$ &             0.62 &       0.37 \\
+         122 & GaLiTe$_2$ &             0.81 &       0.32 \\
+         225 &        CsF &             0.84 &       0.48 \\
+         122 & InLiTe$_2$ &             1.01 &       0.34 \\
+         122 &  AgAlS$_2$ &             1.01 &       0.33 \\
+         225 &        LiI &             1.07 &       0.49 \\
+         225 &   Na$_2$Te &             1.64 &       0.38 \\
+          62 &   KCdF$_3$ &             1.67 &       1.32 \\
+          62 &   KCaF$_3$ &             2.00 &       0.52 \\
+         225 &    Rb$_2$O &             2.08 &       0.47 \\
+         216 &      ZnPLi &             2.09 &       0.27 \\
+         166 & InNaSe$_2$ &             2.22 &       0.34 \\
+         221 &  CsCdF$_3$ &             2.30 &       0.35 \\
+         166 & InLiSe$_2$ &             2.34 &       0.40 \\
+         225 &   Na$_2$Se &             2.63 &       0.35 \\
+         225 &   Li$_2$Te &             3.24 &       0.36 \\
+         221 &  BaLiF$_3$ &             3.27 &       0.29 \\
+         225 &         KH &             3.39 &       0.37 \\
+         221 &  RbZnF$_3$ &             3.47 &       0.32 \\
+         225 &     K$_2$O &             3.67 &       0.38 \\
+         225 &       LiCl &             4.14 &       0.40 \\
+         166 &   Sr$_2$HN &             4.17 &       0.26 \\
+         225 &    Na$_2$S &             4.40 &       0.33 \\
+         225 &   Li$_2$Se &             4.55 &       0.33 \\
+         216 &     LiAsMg &             4.67 &       0.26 \\
+         166 &  LiScS$_2$ &             6.42 &       0.27 \\
+         221 &  RbMgF$_3$ &             6.94 &       0.24 \\
+         216 &      LiNZn &             8.42 &       0.27 \\
+         166 &  InNaO$_2$ &             9.71 &       0.23 \\
+         166 &  CuGaO$_2$ &            12.82 &       0.22 \\
+         166 &  LiRhO$_2$ &            13.37 &       0.21 \\
+         225 &    Li$_2$S &            13.85 &       0.31 \\
+         225 &    Li$_2$O &            21.39 &       0.29 \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
   \caption{Bulk thermal conductivities for materials without experimental reference. *: The anharmonicity measure for KCaF$_3$ is increased when the entire simulation is taken into account with $\sigmaA \approx 1.32$, since the simulation is close to a structural phase transition. We observe jumps in $\sigmaA (t)$ similar to those discussed for KCaF$_3$ in Sec.\,\ref{chp:anharmonicity}, but more pronounced. When KCdF$_3$ is close to the orthorombic reference, $\sigmaA \approx 0.53$. Structural phase transition are known to occur in KCdF$_3$ at around 470\,K~\cite{hidaka1977,hidaka1990}.}
   \label{tab:kappa.noexp}
 \end{table}
