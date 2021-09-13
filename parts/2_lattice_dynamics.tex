@@ -2,8 +2,9 @@
 In the previous chapter, we have seen how the many-body problem can be decoupled into an electronic problem %given by Eq.\,\eqref{eq:Hsolution1}, 
 which can be solved in the framework of DFT, and a nuclear problem %given by Eq.\,\eqref{eq:chi2} 
 that describes the dynamical properties of the nuclei. This was achieved by means of the Born-Oppenheimer approximation where electron-nucleus interactions beyond a parametric dependence on each other are neglected~\cite{BornOppenheimer}.
+\mscomment{dynamics are decoupled}
 
-\newthought{We will now approach} the description of the nuclear dynamics from two sides: First, we introduce the \emph{harmonic approximation} in which the nuclear Schr\"odinger equation is solved for an approximated potential in terms of vibrational eigenmodes. We will use the opportunity to discuss extended systems, in particular crystalline systems with long-range order.
+\newthought{We will now approach} the description of the nuclear dynamics from two sides: First, we introduce the \emph{harmonic approximation} in which the nuclear Schr\"odinger equation is solved for an approximated potential in terms of vibrational eigenmodes. We will discuss extended systems next, in particular crystalline systems with long-range order.
 Second, we treat the nuclei as \emph{classical} particles on the full, non-truncated Born-Oppenheimer potential $E^{\rm BO} ({\bf R})$. This will lead to the formulation of \emph{ab initio molecular dynamics} (aiMD). In a last step, we will connect the two approaches to allow for extracting phonon properties from MD simulations.
 As no electron will appear anymore, $N \equiv N_{\rm Nuc}$ will henceforth denote the number of nuclei in the system of interest, and we denote the Born-Oppenheimer potential simply as \emph{the} potential, $E^{\rm BO} ({\bf R}) \equiv \mathcal V ({\bf R})$.
 
@@ -24,7 +25,7 @@ is the nuclear kinetic-energy operator as before.
 \newpage
 \section{Harmonic Approximation}
 \label{sec:HA}
-The Born-Oppenheimer potential $\mathcal V ({\bf R})$ appearing in Eq.\,\eqref{eq:BOSE} is an ordinary function of the\marginnote{Remember $N \equiv N_{\rm Nuc}$.} $3 N$ coordinates ${\bf R} = ({\bf R}_1, \ldots, {\bf R}_{N})$ and therefore can be expanded as a Taylor series in displacements ${\bf U} \equiv \Delta {\bf R}$ about a given configuration ${\bf R}^0$,~i.\,e.,
+The Born-Oppenheimer potential $\mathcal V ({\bf R})$ in Eq.\,\eqref{eq:BOSE} is an ordinary function of the\marginnote{Remember $N \equiv N_{\rm Nuc}$.} $3 N$ coordinates ${\bf R} = ({\bf R}_1, \ldots, {\bf R}_{N})$ and therefore can be expanded as a Taylor series in displacements ${\bf U} \equiv \Delta {\bf R}$ about a given configuration ${\bf R}^0$,~i.\,e.,
 \begin{align}
 \begin{split}
   \mathcal V ({\bf R} = {\bf R}^0 + {\bf U})
@@ -92,8 +93,8 @@ Expressed in the mass-reduced coordinates ${\bf u} = \set{{\bf u}_I}$ and ${\bf 
 	\end{split}
 	\label{eq:ha.H1}
 \end{align}
-
-\newthought{As required earlier, the dynamical matrix $\rm D$ is a positive definite matrix.} Furthermore, we see from Eq.\,\eqref{eq:FC2} that $\rm D$ is symmetric in the $3N$ coordinates $(I, \alpha)$ by the differentiability of the underlying potential $\mathcal V ({\bf R})$,
+%
+As required in Eq.\,\eqref{eq:ha.positive}, the dynamical matrix $\rm D$ needs to be positive definite to make $\mathcal H^{(2)}$ bounded. Furthermore, we see from Eq.\,\eqref{eq:FC2} that $\rm D$ is symmetric in the $3N$ coordinates $(I, \alpha)$ by the differentiability of the underlying potential $\mathcal V ({\bf R})$,
 \begin{align}
 	D_{I \alpha, J \beta} = D_{J \beta, I \alpha}~.
 	\label{eq:D.symmetric}
@@ -274,6 +275,10 @@ Again this property carries over to the dynamical matrix. In contrast to Eq.\,\e
 \REM{Supercell imposes effective cutoff on the range of the force constants -> effect on spectrum, Maradudin, Ledermann}
 
 \subsection{Dynamical matrix for periodic systems}
+%
+\mscomment{this is textbook stuff, looks strange}
+\FK{maybe shorten or move to appendix}
+%
 Using the periodic boundary conditions in the superlattice, the dynamical matrix for the crystal can be written in terms of a Fourier series as
 \begin{align}
 	D_{i \b L \alpha, j \b K \beta}  
@@ -488,7 +493,7 @@ where ${\bf P} = ({\bf P}_1, \ldots) \equiv ({\bf \nabla}_1 S, \ldots)$ denotes 
 The negative gradient of the Born-Oppenheimer potential, 
 $-\partial \mathcal V / \partial {\bf R}_I$ is the force ${\bf F}_I$ acting on atom $I$ which can be obtained via the Hellmann-Feynman theorem,~cf.~Sec.\,\ref{sec:HellmannFeynman}.
 
-\newthought{An alternative viewpoint} that is more instructive can be taken by invoking the \emph{Ehrenfest theorem}~\cite{Ehrenfest1927,Basdevant2007}. The statement is that that the time derivative of the expectation value of an atom's momentum ${\bf P}_I$ in is given by the expectation value of the negative gradient of the potential,
+\newthought{An alternative viewpoint} that is more instructive can be taken by invoking the \emph{Ehrenfest theorem}~\cite{Ehrenfest1927,Basdevant2007}. The statement is that that the time derivative of the expectation value of an atom's momentum ${\bf P}_I$ is given by the expectation value of the negative gradient of the potential,
 \begin{align}
 \frac{\d}{\d t} \left\langle {\bf P}_I \right\rangle_{\chi}
 = \left\langle
@@ -652,7 +657,9 @@ The velocity Verlet algorithm introduces an error of order $\delta t^4$ in the i
 \subsection{Canonical ensemble}
 The canonical ensemble is characterized by the two extensive variables particle number $N$ and volume $V$, and the intensive quantity temperature $T$. It can be viewed as representing a system in contact with an infinite thermal bath of temperature $T$, where heat can be exchanged via a weak coupling.
 
-In analogy to the previous section, we define the \emph{canonical distribution function} at inverse temperature $\beta = 1 / k_{\rm B} T$
+In analogy to the previous section, we 
+\mscomment{make clear when ``we'' is you and when someone 100yrs ago}
+define the \emph{canonical distribution function} at inverse temperature $\beta = 1 / k_{\rm B} T$
 \begin{align}
 	f_\beta (\Gamma) 
 		= \frac{1}{\mathcal{Z}_\beta} {\rm e}^{- \beta \mathcal H (\Gamma)}~,
@@ -834,7 +841,7 @@ with an average with respect to the harmonic potential,
 \label{eq:ha.expectation.1}
 \end{align}
 where ${\bf R}_m$ denotes a sample generated by Eq.\,\eqref{eq:ha.samples}, and $M$ ist the total number of samples~\cite[p.\,15]{FrenkelSmit}. This sampling approach can be understood as a harmonic Monte Carlo approach~\cite{West2006,Peslherbe1999}.
-
+\mscomment{this is not textbook, explain more}
 
 \subsection{Harmonic mapping}
 In the previous section, we have investigated the time evolution of (mode) displacements generated by the harmonic model in analytical fashion. We found that the mode occupations $n_s$, and therefore the energy of each mode, $E_s$, were constant in time. Pictorially, this can be explained by the absence of interactions between the normal modes -- once a mode is excited, it cannot lose or gain energy.
@@ -916,6 +923,9 @@ in units where $\hbar = 1$. Using these amplitudes, the harmonic Hamiltonian rea
 		&= \sum_s \omega_s \D a_s \fD a_s
 \end{align}
 where the last line holds when the summation contains both $\bf q$ and $- {\bf q}$, because $\omega_s = \omega_{-s}$.
+
+\mscomment{shorten and cite textbooks}
+\FK{\cite{BornHuang,Maradudin}}
 
 %\REM{Only real case?}
 %

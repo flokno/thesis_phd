@@ -1,7 +1,9 @@
 \label{chp:anharmonicity}
 
-As we have seen in the previous chapter, thermal conductivity is an anharmonic effect --- in a purely harmonic system, thermal conductivity is infinite. We have also discussed methods to assess thermal transport in materials, either via the Green-Kubo approach, or via perturbation theory. In perturbation theory, the potential energy is expanded to third or fourth order, and these terms are used to compute the change of phonon properties, in particular, their lifetimes.
-From a computational perspective, the two approaches have different strengths: Perturbative techniques are ideally suited when the anharmonicity is weak,~i.\,e.,~there is a well defined reference configuration and the harmonic terms in the potential dominate the dynamical evolution of the system. However, in strongly anharmonic systems, these basic assumptions can be violated, for example because the reference configuration changes qualitatively during phase transitions, or the anharmonic terms in the potential become too strong to be described by the asymptotic perturbation series~\cite[p.\,53]{NegeleOrland}. The Green-Kubo technique on the other hand does not require approximations to the potential energy surface, and therefore naturally includes dynamical effects of arbitrary anharmonic strength. It is ideally suited in situations where the anharmonicity is strong,~i.\,e.,~when the basic assumptions of perturbation theory are not satisfied. It is therefore desirable to \emph{measure} the ``degree of anharmonicity'' to enable a discussion of anharmonicity on a quantitative basis.
+As we have seen in the previous chapter, thermal conductivity is an anharmonic effect --- in a purely harmonic system, thermal conductivity is infinite. We have also discussed methods to assess vibrational thermal transport in materials, either via the Green-Kubo approach, or via perturbation theory. In perturbation theory, the potential energy is expanded to third or fourth order, and these terms are used to compute the change of phonon properties, in particular, their lifetimes.
+\mscomment{explain who did what}
+\FK{move up/repeat the discussion from e.g. conclusion/outlook}
+From a computational perspective, the two approaches have different strengths: Perturbative techniques are ideally suited when the anharmonicity is weak,~i.\,e.,~there is a well defined reference configuration and the harmonic terms in the potential dominate the dynamical evolution of the system. However, in strongly anharmonic systems, these basic assumptions can be violated, for example because the reference configuration changes qualitatively during phase transitions, or the anharmonic terms in the potential become too strong to be described by the asymptotic perturbation series~\cite[p.\,53]{NegeleOrland}. The Green-Kubo technique on the other hand does not require approximations to the potential-energy surface, and therefore naturally includes dynamical effects of arbitrary anharmonic strength. It is ideally suited in situations where the anharmonicity is strong,~i.\,e.,~when the basic assumptions of perturbation theory are not satisfied. It is therefore desirable to \emph{measure} the ``degree of anharmonicity'' to enable a discussion of anharmonicity on a quantitative basis.
 
 \section{Definition of Anharmonicity}
 
@@ -17,7 +19,10 @@ where $\bf P$ and $\bf R$ denote the atomic momenta and coordinates. Using an ex
 		= \mathcal V^{(2)} ({\bf R}) + \mathcal V^{\rm A} ({\bf R})~.
 	\label{eq:anh.V}
 \end{align}
-In the classical limit, the dynamical evolution of the nuclei is determined by the potential through the atomic forces as defined Eq.\,\eqref{eq:dyn.eom.classical},
+In the classical limit, the dynamical evolution of the nuclei is determined by the potential through the interatomic
+\mscomment{what else forces?}
+\FK{in our framework none, otherwise 3 others + more interactions}
+ forces as defined Eq.\,\eqref{eq:dyn.eom.classical},
 \begin{align}
 	M_I \ddot{\bf R}_I
 		= -\frac{\partial \mathcal V}{\partial {\bf R}_I}
@@ -135,13 +140,13 @@ A prediction of anharmonicity across phase transitions cannot be expected from s
 \end{figure}
 For larger values of $\sigmaA$, the deviation can become larger, especially for the group of rock salt materials with $\sigmaA \simeq 0.35$ (red squares) where the one-shot sampling overestimates $\sigmaA$ by about 20\,\%. Nevertheless, the agreement is qualitatively correct up to values of about $\sigmaA \simeq 0.4$, after which materials begin to show effects not captured by the harmonic sampling,~e.\,g.,~phase transitions as discussed earlier for KCaF$_3$. In particular, the three highlighted noble metal halides AgBr, CuCl, and CuBr deviate strongly. These materials tend towards non-perturbative effects during the MD simulation such as spontaneous defect formation~\cite{Knoop2020}, which is a dynamical effect impossible to describe by any fixed-reference harmonic model. We will discuss the nature of these effects in more detail later in Sec.\,\ref{sec:dynamical_effects}. 
 
-To conclude, we point out that also in the case of non-trivial dynamical effects such as defect formation, the estimated anharmonicity scores $\sigmaAOS$ are larger than $\gtrapprox 0.5$, and therefore indicate strong anharmonicity. A qualitative classification of strong anharmonicity in terms of one-shot sampling is therefore possible for all materials in the set, while quantitative agreement is only achieved for harmonic materials with $\sigmaA \lesssim 0.2$.
+To conclude, we point out that also in the case of non-trivial dynamical effects such as defect formation, the estimated anharmonicity scores $\sigmaAOS$ are larger than $\gtrapprox 0.5$, and therefore indicate strong anharmonicity. A qualitative classification of strong anharmonicity in terms of one-shot sampling is therefore possible for all materials in the set, while quantitative agreement is only achieved for clearly harmonic materials with $\sigmaA \lesssim 0.2$.
 
 
 \section{Anharmonicity and thermal conductivity}
 \label{sec:kappa_vs_sigmaA}
 
-Based on the qualitative discussion of thermal transport in Sec.\,\ref{sec:hf.kappa.ha}, one can expect that stronger anharmonicity leads to shorter phonon lifetimes and therefore lower thermal conductivity. We tested this hypothesis for a list of 47 materials where experimental references were available~\cite{morelli2006,Chen2019}. The results are shown in Fig.\,\ref{fig:anh.kappa}.
+Based on the qualitative discussion of thermal transport in Sec.\,\ref{sec:hf.kappa.ha}, one may expect that stronger anharmonicity leads to shorter phonon lifetimes and therefore lower thermal conductivity. We tested this hypothesis for 47 materials where experimental data was available~\cite{morelli2006,Chen2019}. The results are shown in Fig.\,\ref{fig:anh.kappa}.
 \begin{figure}
 	\includegraphics[width=4.1in]{./data/plots/anharmonicity/9_kappa/sigma_vs_kappa.pdf}
 	\caption{
@@ -152,14 +157,34 @@ Based on the qualitative discussion of thermal transport in Sec.\,\ref{sec:hf.ka
 \end{figure}
 The analysis reveals an inverse power law relationship between thermal conductivity and anharmonicity for the materials in the dataset. Given that just a single descriptor is used,~i.\,e.,~the estimated anharmonicity score, and no further vibrational properties as commonly employed in semi-empirical models for thermal condcutivity~\cite{Toberer2011,Chen2019}, this correlation is surprisingly good and indicates that $\sigmaA$ captures some essential physics relevant to heat transport.
 
+\mscomment{Why are the rock salts bottom right?}
+\FK{More ionic character and therefore weaker bonding on average compared to ZB and WZ.}
+\mscomment{tell that these are ``close to harmonic materials''}
+\FK{not sure they are}
+
+\mscorrect{why Pearson rho? What does it tell?}
+\mscorrect{why is an order of magnitude ok here?}
+\mscorrect{it looks more than an order of magnitude}
+
 \newthought{The most important messages from Fig.\,\ref{fig:anh.kappa} can be summarized as follows}, adopting the definition suggested by Morelli and Slack to define ``high thermal conductivity'' as $\kappa \gtrsim 50 \, {\rm W/mK}$~\cite{morelli2006}:
 \begin{enumerate}
-	\item Largely harmonic materials with $\sigmaA \simeq 0.1$, like diamond (C), boron nitride (BN), or boron phosphide (BP) can be expected to be good thermal conductors with $\kappa \gtrsim 100\,{\rm W/mK}$.
+	\item Largely harmonic materials with $\sigmaA \simeq 0.1$, like diamond (C)
+	\mscorrect{is the line 0.1 or 0.2?}
+	\FK{if the statement is ``$\kappa > 100$'' $\sigmaA$ should be <0.2. so probably yes}
+	, boron nitride (BN), or boron phosphide (BP) can be expected to be good thermal conductors with $\kappa \gtrsim 100\,{\rm W/mK}$.
 	\item Strongly anharmonic materials with $\sigmaA \gtrsim 0.3$ can be expected to be poor thermal conductors with $\kappa \lesssim 10\,{\rm W/mK}$.
+    \mscomment{would you say 0.3 still works with BTE?}
+    \FK{yes, with more sophisticated approaches than 0K third order, see discussion in \cite{Ravichandran2018} for NaCl.}
 	\item $\sigmaA$ has a strong correlation with thermal conductivity across the entire dataset, but nevertheless only a rough estimate can be made solely based on $\sigmaA$, especially in the middle region with $\sigmaA \simeq 0.2$. This can be seen by comparing strontium oxide (SrO) with $\kappa = 10\,{\rm W/mK}$ and $\sigmaA = 0.22$, and zinc oxide (ZnO) with $\kappa = 60\,{\rm W/mK}$ and $\sigmaA = 0.24$, or beryllium oxide (BeO) with $\kappa = 370\,{\rm W/mK}$ and $\sigmaA = 0.16$ to magnesium oxide (MgO) with $\kappa = 60\,{\rm W/mK}$ and $\sigmaA = 0.18$. These pairs of materials differ only slightly in their estimated anharmonicity, but still quite strongly in the thermal conductivity. Nevertheless, the correct order of magnitude of $\kappa$ as indicated by the grey area in Fig.\,\ref{fig:anh.kappa} can always be predicted for the investigated materials.
 \end{enumerate}
 
-\newthought{These findings suggest the following approach} towards screening material space in search for thermal insulators: Estimate the anharmonicity for materials of interest and discard the largely harmonic ones, as they will be good thermal conductors most of the time. Of course, the reverse approach can be pursued when searching for materials with potentially high thermal conductivity.
+\newthought{These findings suggest the following approach} towards screening material space in search for thermal insulators: Estimate the anharmonicity for materials of interest and discard the largely harmonic ones, as they will be good thermal conductors most of the time. 
+\mscomment{sounds bad. Are there examples for thermal insulators with $\sigmaA < 02$}
+\FK{not in our data.}
+\ADD{worst example}
+\mscomment{more importantly: can we use BTE yes/no? important for material space exploration}
+
+Of course, the reverse approach can be pursued when searching for materials with potentially high thermal conductivity.
 
 \section{Candidate Materials}
 \begin{marginfigure}
@@ -193,8 +218,13 @@ The materials have been chosen based on the following criteria:
 \begin{enumerate}
 	\item Material has to have an experimentally known stable phase at room temperature,
 	\item material has to be semiconductor or insulator with a bandgap large enough to prevent partial occupations of the valence band during molecular dynamics simulations,
+	\mscorrect{it was not explained what happens in this case}
 	\item the most heavy element considered is Barium ($Z=56$), after which relativistic effects beyond the ``zeroth order regular approximation'' cannot be neglected~\cite{vanLenthe1994,Huhn2017,Zhao2021}.
+    \mscorrect{ZORA is not explained anywhere}
 \end{enumerate}
+
+\mscorrect{not just application driven, also Q whether BTE works and when it doesn't there is interesting physics}
+
 
 %\REM{
 %The materials come from these sources:
@@ -212,9 +242,11 @@ The materials have been chosen based on the following criteria:
 \newpage
 \section{Dynamical effects}
 \label{sec:dynamical_effects}
-As shown in the initial screening of material space presented in Ref.\,\cite{Knoop2020}, strongly anharmonic materials with $\sigmaA > 0.3$ are prone to exhibiting non-trivial dynamical effects such as metastable defect formation and precursors of structural phase transitions. 
+As shown in the initial screening of material space presented in Ref.\,\cite{Knoop2020},
+\mscorrect{this is also part of the thesis, don't just cite}
+ strongly anharmonic materials with $\sigmaA > 0.3$ are prone to exhibiting non-trivial dynamical effects such as metastable defect formation and precursors of structural phase transitions. 
 
-\newthought{We carried out \emph{ab initio} molecular dynamics simulations}~\footnote{Computational settings: PBEsol function and \emph{light default} basissets. Time step 4-5\,fs based on the highest harmonic vibrational frequency, total simulation time at least 30\,ps. Lattice expansion accounted for by minimizing the pressure in the simulation cell according to the scheme outlined in Sec.\,\ref{sec:app.lattice_expansion}. Full details given in appendix \ref{sec:app.computational_details}.} for each of the candidate materials introduced in the previous chapter to see whether the materials exhibit such non-trivial dynamical effects. 
+\newthought{We carried out \emph{ab initio} molecular dynamics simulations}~\footnote{Computational settings: PBEsol function and \emph{light default} basissets. Time step 4-5\,fs such that the fastest motion corresponding to the highest harmonic vibrational frequency is sufficiently sampled, total simulation time at least 30\,ps. Lattice expansion accounted for by minimizing the pressure in the simulation cell according to the scheme outlined in Sec.\,\ref{sec:app.lattice_expansion}. Full details given in appendix \ref{sec:app.computational_details}.} for each of the candidate materials introduced in the previous chapter to see whether the materials exhibit such non-trivial dynamical effects. 
 These dynamical effects can be detected by using a time-resolved anharmonicity measure as defined in Eq.\,\eqref{eq:sigmaA.sample},~i.\,e.,~by evaluating the anharmonicity measure for each sample during the MD with $\sigmaA(t) = \sigmaA [{\bf R} (t)]$, and evaluating fluctuations of $\sigmaA (t)$ in terms of its standard deviation ${\rm std} [ \sigmaA ]$ evaluated along a given trajectory. A comparison of $\sigmaA$ values obtained by one-shot sampling, $\sigmaAOS$, and molecular dynamics, $\sigmaAMD$, is shown in Fig.\,\ref{fig:sigma_os_md_dataset}. Materials with a standard deviation larger than ${\rm std} [ \sigmaAMD ] > 0.01$ are highlighted and labeled.
 \begin{figure}
 	\includegraphics[width=4.1in]{./data/plots/sigma_vs_sigma/sigma_os_md_edit.pdf}
@@ -225,6 +257,13 @@ We discuss the nature of these effects for KCaF$_3$, CuI, AgI, and AgCl in the f
 
 The discussion is meant to highlight the prevalence of non-trivial dynamical effects that violate one basic assumption of phonon theory,~i.\,e.,~the assumption of well-defined and stationary reference positions for all atoms in a given phase. Another key insight is that the observed effects are precursors of phase transitions known to occur in these materials at higher temperatures, which means that their onset is observed on the microscopic scale during the dynamic evolution already several 100\,K below the phase transition temperature.
 From a methodological point of view, we show how the time-resolved anharmonicity can be used to uncover and explain the nature of the underlying dynamical effect.
+
+  \mscorrect{honest discussion of simulation times}
+  \FK{this is done for GK, for these static properties 30ps is \emph{grotesquely} overconverged.}
+  \mscorrect{supercell sizes}
+  \FK{beyond the scope of this work, see \cite{Carbogno2016} for supercell scaling behavior of interpolation scheme}
+  \mscorrect{I would conclude that above $\sigmaA > .2$ non-perturbative calculation should be performed}
+  \FK{I wouldn't.}
 
 \newpage
 
@@ -254,6 +293,9 @@ We find that in three of the five trajectories, $\sigmaA (t)$ jumps between the 
 \noindent
 for the time spans in which $\sigmaA (t)$ is increased. Performing this time average for time spans where $\sigmaA (t) < 0.5$,~i.\,e.,~in situations in which no increase is seen, one recovers the initial orthorombic structure shown in Fig.\,\ref{fig:defects.KCaF3.1} (top figure). When averaging trajectory b) for the time where $\sigmaA (t) \approx 1.1$, the resulting structure is more symmetric, with an approximately tetragonal arrangement of atoms. This can be seen by focusing on the potassium sub lattice (purple atoms connected by sticks) in Fig.\,\ref{fig:defects.KCaF3.1} (middle). The increased symmetry is further revealed by noting that the fluorine cage becomes more ordered, as shown in terms of the F-F pair distribution function in Fig.\,\ref{fig:defects.KCaF3.1} (bottom). This phenomenon can be viewed as a precursor of the phase transitions towards tetragonal and cubic phases known to occur in this material at temperatures higher than 560\,K~\cite{Bulou1980,Hidaka1984,Knoop2020}. However, at 300\,K, well below the transition temperature, this configuration only occurs sporadically on the time scale of several picoseconds during the simulation, and is therefore not fully stabilized.
 
+\mscorrect{it is not expected that the full supercell adopts the structure but only one/few atoms}
+\FK{Fig. \ref{fig:defects.KCaF3.1} clearly shows that we observe a collective effect and not single atom defects.}
+
 % \newpage
 
 \subsection{CuI}
@@ -264,7 +306,10 @@ for the time spans in which $\sigmaA (t)$ is increased. Performing this time ave
 	\caption{Time-resolved anharmonicity measure $\sigmaA (t)$ for zincblende CuI in three molecular dynamics runs of 60\,ps length. Increased values of $\sigmaA (t)$ are found in all three trajectories.}
 	\label{fig:defects.CuI}
 \end{figure}
-\noindent
+%
+\mscomment{why don't you show pair distribution function for the time snapshots}
+\FK{I tried by it's difficult to normalize because only 1 of 216 atoms moves. It would be an interesting project to do proper coarse graining on this.}
+%
 Copper iodide (CuI), also known as marshite, is a simple material with fcc lattice of the zincblende type. This phase is also known as the $\gamma$ phase ($\gamma$-CuI).
 The time-resolved anharmonicity measures are shown in Fig.\,\ref{fig:defects.CuI} for three trajectories of 60\,ps simulation time.
 The characteristic features are the jumps in $\sigmaA (t)$ from values of $\sigmaA (t) \approx 0.5$ to $\sigmaA (t) \approx 1.2$ or 1.6. In the simulated time period, these values are taken for 3 to 12\,ps, before the initial value of $\sigmaA (t) \approx 0.5$ is restored. 
@@ -276,13 +321,13 @@ The characteristic features are the jumps in $\sigmaA (t)$ from values of $\sigm
 	\label{fig:defects.CuI.1}
 \end{marginfigure} 
 %
-As in the case of KCaF$_3$, we compare two time-averaged structures in Fig.\,\ref{fig:defects.CuI.1}: A time average with respect to the entire simulation time reveals the perfect zincblende structure of CuI which corresponds to the minimum of the potential energy surface.
+As in the case of KCaF$_3$, we compare two time-averaged structures in Fig.\,\ref{fig:defects.CuI.1}: A time average with respect to the entire simulation time reveals the perfect zincblende structure of CuI which corresponds to the minimum of the potential-energy surface.
 When averaging over the time span where $\sigmaA (t) \approx 1.2$, however, the average structure has one Cu atom diplaced along the (111) direction. Viewing the supercell in (110) direction, the diplacement is clearly visible (Fig.\,\ref{fig:defects.CuI.1}, middle). This means that the Cu occupies a metastable interstitial site at the given position for the respective time period. When $\sigmaA (t)$ is restored to the base value of $\sigmaA (t) \approx 0.5$, the Cu atom moves back to the high-symmetry reference position within the zincblende structure. 
 The third trajectory shown in Fig.\,\ref{fig:defects.CuI}~c) evolves to a situation where $\sigmaA \approx 1.6$. This corresponds to a situation, where more than one defects forms~(Fig.\,\ref{fig:defects.CuI.1}, bottom).
 
 \newthought{$\gamma$-CuI is known to undergo a phase transition to a superionic conducting $\beta$ phase} above 643\,K~\cite{boyce1979, boyce1980,boyce1981,keen1995}. It is very likely that the defect formation observed in the aiMD simulations at 300\,K are precursors of this phase transition, but too infrequent at this temperature to destabilize the fcc lattice of the $\gamma$ phase.
-% \TODO{cation size}
-
+\mscorrect{also the other embryos don't destabilize the stable phase}
+\FK{I don't understand, sorry.}
 
 \subsection{AgI}
 Wurtzite silver iodide ($\beta$-AgI), or iodargyrite, is another transition metal halide that shares some similarities with $\beta$-CuI discussed in the previous section~\cite{boyce1981}. It is known to transition into the superionic conducting $\alpha$ phase above $\sim 420$\,K~\cite{hoshino1957,boyce1981,Brenner2020}, and was in fact one of the earliest studied materials exhibiting this phenomenon~\cite{strock1934,strock1935,strock1936}.
@@ -308,6 +353,8 @@ Silver chloride (AgCl) is yet another material of the class of transition metal 
 \begin{figure}
 	\includegraphics[width=\textwidth]{./data/plots/defects/225.02.AgCl/sigma_vs_time.pdf}
 	\caption{Time-resolved anharmonicity measure $\sigmaA (t)$ for rock salt AgCl in five molecular dynamics runs of 30\,ps length. No temporarily increased value of $\sigmaA (t)$ is observed.}
+	\mscomment{pair distribution function?}
+	\FK{see Fig. \ref{fig:defects.pdf.agcl}
 	\label{fig:defects.AgCl}
 \end{figure}
 %
@@ -317,7 +364,14 @@ Silver chloride (AgCl) is yet another material of the class of transition metal 
 	\label{fig:defects.AgCl.sigmaA}
 \end{marginfigure}
 %
-As opposed to the previously discussed transition metal halides CuI and AgI, the time-resolved anharmonicity $\sigmaA (t)$ exhibits no ``jumps'' in AgCl, but rather stays constants at $\sigmaA \approx 1$, which can be interpreted as a situation where the 0\,k harmonic model loses predictive power for the observed forces. By resolving the anharmonicity measure per atom species in Fig.\,\ref{fig:defects.AgCl.sigmaA} similar to the discussion for KCaF$_3$ in Sec.\,\ref{sec:anharmonicity_measure}, we see that the harmonic model performs better for the chlorine atoms with $\sigmaA_{\rm Cl} = 0.86$, and worse for silver with $\sigmaA_{\rm Ag} = 1.25$. This is in line with the previous observations in metal halides where small cations proved to be more mobile and susceptible to dislocations. However, no clear-cut dislocation pattern can be identified for AgCl as opposed to CuI and AgI.
+As opposed to the previously discussed transition metal halides CuI and AgI, the time-resolved anharmonicity $\sigmaA (t)$ exhibits no ``jumps'' in AgCl, but rather stays close to $\sigmaA \approx 1$, which can be interpreted as a situation where the 0\,k harmonic model loses predictive power for the observed forces. 
+\mscorrect{I don't understand the logic}
+\FK{explain why $\sigmaA = 1$ means $R^2=0$.}
+By resolving the anharmonicity measure per atom species in Fig.\,\ref{fig:defects.AgCl.sigmaA} similar to the discussion for KCaF$_3$ in Sec.\,\ref{sec:anharmonicity_measure}, we see that the harmonic model performs better for the chlorine atoms with $\sigmaA_{\rm Cl} = 0.86$, and worse for silver with $\sigmaA_{\rm Ag} = 1.25$. 
+\mscorrect{performs?}
+\FK{is more predictive?}
+This is in line with the previous observations
+\CITE{sth} in metal halides where small cations proved to be more mobile and susceptible to dislocations. However, no clear-cut dislocation pattern can be identified for AgCl as opposed to CuI and AgI.
 %
 \begin{figure}
 	\centering
@@ -328,6 +382,7 @@ As opposed to the previously discussed transition metal halides CuI and AgI, the
 	2: 3.89727 atoms: Ag-Ag/Cl-Cl 
 	3: 4.77317 atoms: Ag-Cl 
 	4: 5.51158 atoms: Ag-Ag	
+	\mscorrect{fix!}
 }
 	\label{fig:defects.pdf.agcl}
 \end{figure}
@@ -342,15 +397,31 @@ As opposed to the previously discussed transition metal halides CuI and AgI, the
 	\label{fig:defects.pdf.mgo.small}
 \end{marginfigure}
 %
-In MgO, the distribution of atoms are sharply distinguishable, which means that the atoms vibrate closely around their reference position. In AgCl on the other hand, only the first coordination shell of silver-chlorine atoms is distinct at 300\,K. The chlorine (Cl-Cl) and silver (Ag-Ag) sublattices (purple/green area in Fig.\,\ref{fig:defects.pdf.agcl}) show discernible peaks, although the broadening is significant compared to MgO. The silver-chlorine (Cl-Ag) distribution (yellow area) is even more broadened and is still non-zero at distances normally characteristic of like atoms (Cl-Cl or Ag-Ag) , see~e.\,g.,~the non-zero width of the yellow curve at 3.9 and 5.5\,\AA (second and fourth coordination shell). In total, this leads to a very strong broadening in the third and fourth coordination shell, with a barely discernible local maximum in the third coordination shell (4.8\,\AA).
+In MgO, the distribution of atoms are narrowly distinguishable, which means that the atoms vibrate closely around their reference position. 
+\mscomment{isn't this a sing of harmonic behavior?}
+\FK{Exactly.}
+In AgCl on the other hand, only the first coordination shell of silver-chlorine atoms is distinct at 300\,K. The chlorine (Cl-Cl) and silver (Ag-Ag) sublattices (purple/green area in Fig.\,\ref{fig:defects.pdf.agcl}) show discernible peaks, although the broadening is significant compared to MgO. The silver-chlorine (Cl-Ag) distribution (yellow area) is even more broadened and is still non-zero at distances normally characteristic of like atoms (Cl-Cl or Ag-Ag) , see~e.\,g.,~the non-zero width of the yellow curve at 3.9 and 5.5\,\AA (second and fourth coordination shell). In total, this leads to a very strong broadening in the third and fourth coordination shell, with a barely discernible local maximum in the third coordination shell (4.8\,\AA).
 This is in line with experimental Extended X-ray Absorption Fine Structure (EXAFS) measurements detecting an ``anomalously large motion'' in the third neighbor shell already at a temperature of 120\,K~\cite{batchelor1995}.
-This hints at severe dynamical distortions throughout the simulation which are typically discussed in terms of dynamical Frenkel pair formation, where the mobile Ag$^+$ cations dynamically populate interstitial sites~\cite{Aboagye1975,andreoni1983,wilmer1995,mebane2010}. While we can confirm an increased mobility of Ag$^+$ ions as discussed above, we do not observe a local accumulation of Ag$^+$ ions at interstitial sites, which should correspond to additional local minima in the respective pair distribution functions compared to the reference structure. However, such an effect might very well occur at higher temperatures, and the observed effects are fingerprints of the instability of the lattice towards this kind of dynamical defect formation.
+This hints at severe dynamical distortions throughout the simulation which are typically discussed in terms of dynamical Frenkel pair formation, where the mobile Ag$^+$ cations dynamically populate interstitial sites~\cite{Aboagye1975,andreoni1983,wilmer1995,mebane2010}. While we can confirm an increased mobility of Ag$^+$ ions as discussed above, we do not observe a local accumulation of Ag$^+$ ions at interstitial sites, which should correspond to additional local minima in the respective pair distribution functions compared to the reference structure. 
+%
+\mscomment{minima? maxima?}
+\FK{maxima probably correct}
+\mscomment{where would interstitial be in Fig. 4.21?}
+\FK{check!}
+%
+However, such an effect might very well occur at higher temperatures, and the observed effects are fingerprints of the instability of the lattice towards this kind of dynamical defect formation.
 Irrespective of the exact type of defect formation, %which is beyond the scope of this work, 
 the observed dynamical effect hints at a strong form of premelting phenomenon in AgCl, which has an experimental melting temperature of 728\,K.
 
 \newthought{Similar effects can be observed in silver bromide (AgBr)}. As discussed in Ref.\,\cite{andreoni1983}, the dynamical properties of AgCl and AgBr share many similarities with the chemically related material AgI presented in the previous section. In contrast to AgI however, they do not become superionic conductors before melting, despite the increased ion mobility presented here.
+\mscomment{this is not your results}
+\FK{true}
 
 
 \subsection{Conclusion}
-In summary, we have observed a variety of non-perturbative dynamical effects occuring in the candidate materials, and discussed them for the prototypical systems KCaF$_3$, $\gamma$-CuI, $\beta$-AgI, and AgCl. The common feature of these effects is that they indicate phenomena which are known to occur in the respective materials, but at significantly higher temperatures. This comprised the onset of structural phase transitions in KCaF$_3$, fingerprints of a superionic phase in CuI and AgI, and pre-melting phenomena in AgCl and AgBr.
+In summary, we have observed a variety of non-perturbative dynamical effects occuring in the candidate materials, and discussed them for the prototypical systems KCaF$_3$, $\gamma$-CuI, $\beta$-AgI, and AgCl. The common feature of these effects is that they reflect thermodynamic phenomena which are known to occur in the respective materials, but at significantly higher temperatures. This comprised the onset of structural phase transitions in KCaF$_3$, fingerprints of a superionic phase in CuI and AgI, and pre-melting phenomena in AgCl and AgBr.
+\mscomment{what was your finding? embryos like this were known to exist before}
+\FK{not to me, but I'd be happy to find a reference and supplement previous findings}
+\mscomment{what does this mean for you project?}
+\FK{it means that these materials are particularly interesting to study -- but also particularly difficult to converge out and gather statistics.}
 

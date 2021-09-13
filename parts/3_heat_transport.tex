@@ -1,21 +1,28 @@
 \label{chp:heat_transport}
 \epigraph{\singlespacing \it ``It seems there is no problem in modern physics for which there are on record as many false starts, and as many theories which overlook some essential feature, as in the problem of the thermal conductivity of [electrically] non-conducting crystals.''}{R.~Peierls, 1960~\cite{Peierls1960}}
 
+\mscomment{is this still relevant? why?}
+\FK{it's a nice quote, but should be connected}
 
-Conductive heat transport is the phenomenon of vibrational energy traversing a material when a temperature gradient is applied. As first described by Joseph Fourier in the early 19th century~\cite{Fourier1878}, the heat flux $\b J$ resulting from a stationary temperature gradient $\nabla T$ is directly proportional to this gradient. The proportionality constant is second-rank tensor denoted by $\kappa$ and called the \emph{thermal conductivity}. The defining equation,
+Conductive 
+\mscomment{name other forms of heat conduction as well}
+heat transport is the phenomenon of vibrational energy traversing a material when a temperature gradient is applied. As first described by Joseph Fourier in the early 19th century~\cite{Fourier1878}, the heat flux $\b J$ resulting from a stationary temperature gradient $\nabla T$ is directly proportional to this gradient. The proportionality constant is second-rank tensor denoted by $\kappa$ and called the \emph{thermal conductivity}. The defining equation,
 \begin{align}
   \b J = - \kappa \nabla T~,
   \label{eq:Fourier}
 \end{align}
 is called \emph{Fourier's law}. The sign convention is such that the heat flows from ``hot to cold'' in compliance witht the second law of thermodynamics. The regime where Eq.\,\eqref{eq:Fourier} is valid is called the \emph{diffusive} regime, as it holds when the temperature gradient is small on microscopic scale, and the sample size is big enough so that boundary effects are negligible~\cite{Kapitza1941a,Antidormi2020}.
 
-It is evident from Eq.\,\eqref{eq:Fourier} that the thermal conductivity $\kappa$ is an explicitly non-equilibrium quantity. As such, it can be related to equilibrium fluctuations by means of a \emph{fluctuation-dissipation theorem}~\cite{Einstein1905a,Nyquist1928,Callen1951,Kubo1957a}, resulting in the famous Green-Kubo formula~\cite{Green1952,Kubo1957b},
+It is evident from Eq.\,\eqref{eq:Fourier} that the thermal conductivity $\kappa$ is an explicitly non-equilibrium quantity. As such, it can be related to equilibrium fluctuations by means of the \emph{fluctuation-dissipation theorem}~\cite{Einstein1905a,Nyquist1928,Callen1951,Kubo1957a}, resulting in the famous Green-Kubo formula~\cite{Green1952,Kubo1957b},
 \begin{align}
   \kappa^{\alpha \beta} = \frac{V}{k_{\rm B} T^2} \int_{0}^{\infty} \d t ~
     \braket{J^\alpha (t) J^\beta(0)}_{\rm eq}~.
   \label{eq:GreenKubo_0}
 \end{align}
-This formula relates the temporal fluctuations of the macroscopic heat flux $\b J (t)$ as given by an equilibrium ensemble average of the autocorrelation function, $\braket{J^\alpha (t) J^\beta(0)}_{\rm eq}$, to the associated transport coefficient $\kappa^{\alpha \beta}$, where $\alpha$ and $\beta$ denote the respective Cartesian components. It is however \emph{a priori} unclear how a microscopic description of the appearing quantities can be obtained. To tackle this question in full, we first show how the Kubo formula emerges in the framework of linear response theory. We then present how a microscopic description of heat in terms of a thermal energy density and an associated, locally conserved current follows, before reviewing the necessary steps to define an \emph{ab initio} heat flux~\cite{Carbogno2016}.
+This formula relates the temporal fluctuations of the macroscopic heat flux $\b J (t)$ as given by an equilibrium ensemble average of the autocorrelation function, $\braket{J^\alpha (t) J^\beta(0)}_{\rm eq}$, to the associated transport coefficient $\kappa^{\alpha \beta}$, where $\alpha$ and $\beta$ denote the respective Cartesian components. It is however \emph{a priori} unclear how a microscopic description of the appearing quantities can be obtained. To tackle this question in full, we 
+\mscomment{``we'': you or someone else?}
+\FK{``closely following Baroni and coworkers in Ref.\,\cite{Baroni2020a}''. Clarify how many dots I connected}
+first show how the Kubo formula emerges in the framework of linear response theory. We then present how a microscopic description of heat in terms of a thermal energy density and an associated, locally conserved current follows, before reviewing the necessary steps to define an \emph{ab initio} heat flux~\cite{Carbogno2016}.
 
 \section{Linear Response Theory}
 The aim of linear response theory is to compute the expected value of a phase-space observable $B$ in presence of an external perturbation driving the system out of equilibrium. The ensemble is characterized by a \emph{distribution function} $f(\Gamma, t)$, where $\Gamma = \set{\b R, \b P}$ is a shorthand for a point in phase space. The expectation value of $B$ as defined in Eq.\,\eqref{eq:phase.space.average} is given by
@@ -386,6 +393,8 @@ This makes clear that, in the absence of convection, the contribution of ${\bf J
 where the difference between left- and right-hand side is given by ${\bf J}_{\rm res}$ which can be neglected whenever the kinetic flux can be neglected, as discussed above. The exact definition for the non-diffusive current in terms of fixed reference positions $\set{{\bf R}^0_I}$ was already used by Ladd and coworkers in Ref.\,\cite{Ladd1986} to simplify the occuring expressions. An in-depth discussion of the subtleties arising in the definition of an exact expression for the non-convective heat flux in solids can be found in Sec.~2.3.1 and appendix A of Ref.~\cite{ErcoleThesis}.
 
 \newthought{A final remark concerning the heat flux definition} is in order: One might argue that the expression in Eq.\,\eqref{eq:J_tot_solid} is a total time derivative of ${\bf P} = \frac{1}{V}  \sum_I {\bf R}_I^0 \fD E_I$, and therefore vanishes by the aforementioned gauge invariance principle as well. However, this is not the case in an infinite solid, since the atomic configuration $\set{{\bf R}_I}$ is not bounded. The sum over atomic positions is therefore not well defined in the first place and remains to be understood as a symbolic representation of an actual energy partitioning scheme that needs to be cast in a boundary-insensitive form for any practical application of Eq.\,\eqref{eq:J_tot_solid}.\footnote{The author thanks Stefano Baroni for an insightful discussion clarifying this point.}
+\mscomment{wasn't this already discussed in the literature?}
+\FK{Iffyness yes, as clarification why gauge invariance doesn't make everything vanish I find it helpful}
 
 \section{Ab initio Heat Flux}
 \label{sec:ab_initio_heat_flux}
@@ -704,12 +713,17 @@ where $V^{(2)} (\b R)$ denotes the harmonic potential, and $V^{(3)} (\b R)$ is o
 where $\mathcal V^{(3)}_{spq}$ is the cubic potential transformed to phonon eigenstates. This equation and the single-mode expression for $\kappa$, Eq.\,\eqref{eq:ha.kappa.bte}, serve as the basis for most \emph{ab initio} studies of thermal conductivity in insulating solids in recent years~\cite{Broido2007,Simoncelli2019,Isaeva2019}. More recently, extensions of the perturbation-expansion approach up to fourth order have been presented~\cite{Feng2016,Feng2017,Ravichandran2018,Xia2018}. While higher-order perturbation theory can improve the description of heat transport in anharmonic solids~\cite{Xia2020,Ravichandran2020}, it's applicability is currently limited to simple, highly-symmetric materials because of the scaling of quartic force constants with system size, see the discussion in appendix D of Ref.~\cite{Ravichandran2018}.
 
 \subsection{Mode lifetimes from molecular dynamics simulations}
-In \emph{ab intio} molecular dynamics, we have direct access to the non-perturbative dynamics of the nuclear system. Lifetimes can therefore be extracted by straightforward application of Eq.\,\eqref{eq:tau_ss} and \eqref{eq:G_ss}. To circumvent the problem of brute-force integrating the time integral in the evaluation of the lifetime expression, we use the theoretical discussion in terms of Green's functions from above to approximate the normalized mode-energy autocorrelation function $G_{ss'} (t)$ as
+In \emph{ab intio} molecular dynamics, we have direct access to the non-perturbative dynamics of the nuclear system. Lifetimes can therefore be extracted by straightforward application of Eq.\,\eqref{eq:tau_ss} and \eqref{eq:G_ss}. To circumvent the problem of brute-force integrating the time integral in the evaluation of the lifetime expression, we use the Green's functions defined above to approximate the normalized mode-energy autocorrelation function $G_{ss'} (t)$ as
 \begin{align}
 	G_{ss'} (t) \approx G_s (t) \delta_{ss'} = \frac{\braket{E_s (t) E_s}}{\braket{E^2_s}}
 		\approx  {\rm e}^{-t / \tau_s}~,
 	\label{eq:G_s}
 \end{align}
+%
+\mscomment{how good is single-mode approximation?}
+\FK{it depends, afaik mostly in high $\kappa$ materials}
+\ADD{Discussion, e.g. Marzari relaxon papers?}
+%
 from which the lifetime $\tau_s$ can be obtained by fitting $G_s (t)$ to an exponential function. This is exemplified for a simulation of MgO at 300\,K in Fig.\,\ref{fig:G_s}
 \begin{figure}
 	\includegraphics[width=\textwidth]{./data/plots/lifetimes/greenkubo_summary_interpolation_lifetimes.pdf}
@@ -718,6 +732,8 @@ from which the lifetime $\tau_s$ can be obtained by fitting $G_s (t)$ to an expo
 \end{figure}
 \REM{Interpolation here?}
 \REM{Remove plot?}
+\mscomment{explain better}
+\mscomment{explain non straight line behavior}
 
 \section{Ab initio Green Kubo}
 \label{sec:aiGK}
@@ -733,6 +749,9 @@ Building on the previous sections, we are now in position to present the \emph{a
 		%\label{eq:dkappa_bulk}
 		\label{eq:kappa_bulk}
 	\end{align}
+	%
+	\mscomment{was this explained?}
+	\FK{this is the explanation, clarify wording}
 \end{enumerate}
 
 
