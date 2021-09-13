@@ -97,6 +97,9 @@
 \definecolor{red_light}{HTML}{FE404A}
 \definecolor{cite}{HTML}{2BB31E}
 \definecolor{djordje}{RGB}{192,225,215}
+\definecolor{matthias1}{HTML}{EE9484}
+\definecolor{matthias2}{HTML}{DC3A1E}
+
 \newcommand{\MOVE} [1] 
 {\todo[inline,backgroundcolor=red_light, bordercolor=white]{{\bf MOVE:} #1}}
 \newcommand{\REM} [1] 
@@ -117,7 +120,10 @@
 \newcommand{\CC} [1] 
 {\todo[inline,backgroundcolor=yellow3, bordercolor=white]{{\bf CC:} #1}}
 \newcommand{\CHECK}{\todo{check}}
-
+\newcommand{\mscomment} [1] 
+{\todo[inline,backgroundcolor=matthias1, bordercolor=white]{{\bf Matthias comment:} #1}}
+\newcommand{\mscorrect} [1] 
+{\todo[inline,backgroundcolor=matthias2, bordercolor=white]{{\bf Matthias correction:} #1}}
 % Tufte
 
 % TOC
@@ -242,42 +248,42 @@
 % r.9 introduction
 \cleardoublepage
 
-\chapter{Introduction}
-\input{./parts/0_intro.tex}
+% \chapter{Introduction}
+% \input{./parts/0_intro.tex}
 
 %%
 % Start the main matter (normal chapters)
 \mainmatter
 \addtocontents{toc}{\protect\setcounter{tocdepth}{1}}  % later -> 1
 
-\part{Theoretical Foundation}
+% \part{Theoretical Foundation}
 
 \chapter{The Many Body Problem}
 \input{./parts/1_dft.tex}
 
-\chapter{Nuclear and Lattice Dynamics}
-\input{./parts/2_lattice_dynamics.tex}
-%
-\chapter{Heat Transport}
-\input{./parts/3_heat_transport.tex}
+% \chapter{Nuclear and Lattice Dynamics}
+% \input{./parts/2_lattice_dynamics.tex}
+% %
+% \chapter{Heat Transport}
+% \input{./parts/3_heat_transport.tex}
 
 
-\part{Applications}
+% \part{Applications}
 
-\chapter{Anharmonicity}
-\input{./parts/4_anharmonicity.tex}
+% \chapter{Anharmonicity}
+% \input{./parts/4_anharmonicity.tex}
 
-\chapter{Ab Initio Green Kubo: Implementation}
-\input{./parts/5_implementation.tex}
+% \chapter{Ab Initio Green Kubo: Implementation}
+% \input{./parts/5_implementation.tex}
 
-\chapter{Thermal Conductivities for Strongly Anharmonic Compounds}
-\input{./parts/results.tex}
+% \chapter{Thermal Conductivities for Strongly Anharmonic Compounds}
+% \input{./parts/results.tex}
 
 
-% \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
-% \addcontentsline{toc}{chapter}{Conclusion}
-\chapter{Conclusion}
-\input{./parts/conclusio.tex}
+% % \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+% % \addcontentsline{toc}{chapter}{Conclusion}
+% \chapter{Conclusion}
+% \input{./parts/conclusio.tex}
 
 \cleardoublepage
 \phantomsection

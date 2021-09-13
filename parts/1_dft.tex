@@ -58,7 +58,7 @@ This Hamiltonian governs the dynamical evolution of a many-particle system repre
 \end{align}
 from which all material properties (neglecting relativistic and effects and electromagnetic fields) follow.
 
-\section{The Born Oppenheimer Approximation}
+\section{The Born-Oppenheimer Approximation}
 We go over to a unitless Hamiltonian by scaling Eq.\,\eqref{eq:Hamiltonian} with the Hartree energy $E_{\rm h} = m_{\rm e} e^4 / \hbar^2 \approx 27.2\,{\rm eV}$, where $\hbar$ denotes the Planck constant. Distances are expressed in terms of the Bohr radius $a_0 = \hbar^2 / m e^2$ such that~$\hat{\bf r} \equiv {\bf r} = a_0 \tilde{\bf r}$, and the momentum operators are replaced by the respective differential operators, $\hat{\bf p}=-\im \hbar \partial / \partial {\bf r}$~\cite{Czycholl}. We find
 \begin{align}
 \begin{split}
@@ -76,6 +76,8 @@ We go over to a unitless Hamiltonian by scaling Eq.\,\eqref{eq:Hamiltonian} with
 \end{split}
 \end{align}
 which depends on the charge numbers $\{Z_I\}$ and the mass ratios $\{ m_{\rm e} / M_I \}$. From this viewpoint, we see that the relative order of magnitude of the nuclear kinetic energy $\hat{T}^{\rm Nuc}$ is \mbox{$m_{\rm e} / M_I \approx 10^{-4} - 10^{-5}$}. This means that the nuclear kinetic energy can be treated as a perturbation term with respect to the electronic and electron-nuclear contributions,
+\mscomment{this is not perturbation theory (so far)}
+\FK{rephrase: ... total energy can be expanded in powers of the mass ratio $m/M$ using the el/el-nuc contributions as reference}
 \begin{align}
     \hat{H}   &= \hat{H}^0 + \hat{T}^{\rm Nuc}~, \text{ where} 
     \label{eq:H=H0+T}
@@ -87,6 +89,9 @@ which depends on the charge numbers $\{Z_I\}$ and the mass ratios $\{ m_{\rm e} 
         + {\hat{V}}^{\mathrm{Nuc}-\mathrm{Nuc}}~.
     \label{eq:H0}
 \end{align}
+%
+\mscomment{move nuc-nuc to 1.9 bc it is computed w.r.t. to el. wavefunctions}
+\FK{check}
 In our notation, the time-independent many-body Schr\"odinger equation reads
 \begin{align}
     \hat{H} \psi ({\bf r}, {\bf R}) = E \psi ({\bf r}, {\bf R})~,
@@ -149,6 +154,8 @@ Solving this equation is performed in two steps:
 	\label{eq:E^BO_0}
 \end{align}
 % or simply as \emph{the potential}, $\mathcal V (\b R) $.
+\mscomment{is this still valid in strongly anharmonic compounds? are these approximations related?}
+\FK{good question. Check BornHuang, Stanke2015}
 
 \newpage
 \section{Density Functional Theory}
@@ -233,7 +240,9 @@ Since the density $n_\Psi$ is obtained from the solution $\Ket{\Psi}$ of Eq.\,\e
 \end{align}
 
 \subsection{Hohenberg-Kohn Theorem}
-Hohenberg and Kohn were able to show that, for non-degenerate\footnote{Kohn was later able to loosen the requirement of non-degeneracy~\cite{Kohn1985}.} ground states $\Psi \equiv \Psi_0$, there exists the \emph{inverse map} from ground-state densities $\mathbb N_0$ to potential functions $\mathbb V$, and that this map is bijective~\cite{Hohenberg1964}:
+Hohenberg and Kohn were able to show that, for non-degenerate\footnote{Kohn was later able to loosen the requirement of non-degeneracy~\cite{Kohn1985}.
+\mscomment{proof by Levy-Lieb}
+} ground states $\Psi \equiv \Psi_0$, there exists the \emph{inverse map} from ground-state densities $\mathbb N_0$ to potential functions $\mathbb V$, and that this map is bijective~\cite{Hohenberg1964}:
 \begin{align}
 	M^{-1}: \mathbb N_0 \rightarrow \mathbb V~. 
 \end{align}
@@ -289,14 +298,17 @@ under the constraint of fixed particle number imposed by the Lagrange multiplier
 \newpage
 
 \section{The Born-Oppenheimer Surface}
-In the definition of the effective electronic Hamiltonian in Eq.\,\eqref{eq:H.dft.1}, we had neglected the electrostatic nuclear repulsion $V^{\rm Nuc-Nuc}$ defined in Eq.\,\eqref{eq:Vnuc}. The Born-Oppenheimer potential-energy surface defined in Eq.\,\eqref{eq:E^BO_0} therefore consists of both terms,~i.\,e.,
+In the definition of the effective electronic Hamiltonian in Eq.\,\eqref{eq:H.dft.1}, we had neglected the electrostatic nuclear repulsion $V^{\rm Nuc-Nuc}$ defined in Eq.\,\eqref{eq:Vnuc}.
+\mscomment{we had not neglected, but put it into Tnuc}
+\FK{we actually neglected it in the named equation, but check}
+The Born-Oppenheimer potential-energy surface defined in Eq.\,\eqref{eq:E^BO_0} therefore consists of both terms,~i.\,e.,
 \begin{align}
 	E^{\rm BO} ({\bf R}) 
 		= E[n] + \sum_{I < J} \frac{Z_{I} Z_{J} e^{2}}{\left|{\bf R}_{I}-{\bf R}_{J}\right|}~.
 	\label{eq:E^BO}
 \end{align}
 
-\subsection{Hellmann-Feynmann Theorem}
+\subsection{Hellmann-Feynman Theorem}
 \label{sec:HellmannFeynman}
 The forces on individual atomic positions ${\bf R}_I$ are given in terms of derivatives of the Born-Oppenheimer energy, $E^{\rm BO} ({\bf R})$,
 \begin{align}
@@ -356,7 +368,10 @@ which is solely determined by the ground-state electron density $n ({\bf x})$ an
 \end{align}
 \end{theorem}
 
-\newthought{While the Hellmann-Feynman theorem is formally correct}, in practice there often arise correction terms when non-complete basis sets are used that also depend on the parameter $\lambda$, or an approximation to the true ground-state density is used~\cite{Bendt1983,Chan1993}. In atomic-cerntered basissets, the most important correction terms are the so-called \emph{Pulay forces}~\cite{Pulay1969}.
+\newthought{While the Hellmann-Feynman theorem is formally correct}, in practice there often arise correction terms when non-complete basis sets
+\mscomment{not related to non-completeness, but moving basissets}
+\FK{no: \cite{Pulay1969,Scheffler.1984emt,Ventra.2000}}
+are used that also depend on the parameter $\lambda$, or an approximation to the true ground-state density is used~\cite{Bendt1983,Chan1993}. In atomic-cerntered basissets, the most important correction terms are the so-called \emph{Pulay forces}~\cite{Pulay1969}.
 
 \newpage
 
@@ -370,6 +385,9 @@ In order to proceed, we follow the original argument by Kohn and Sham~\cite{Kohn
 		\equiv T[n] + W[n]~,
 	\label{eq:dft.Fn.2}
 \end{align}
+%
+\mscomment{$W[n]$ is not $\Braket{\Psi | W | \Psi}$, should be $T_s [n]$, the kinetic energy of \emph{non-interacting} electrons}
+%
 where $T[n]$ denotes the kinetic energy of the electrons expressed as a functional of the density $n ({\bf x})$, and $W[n]$ denotes the electron-electron interaction term as before. We split this term into two contributions,
 \begin{align}
 	\begin{split}
