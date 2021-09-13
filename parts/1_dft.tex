@@ -387,6 +387,7 @@ In order to proceed, we follow the original argument by Kohn and Sham~\cite{Kohn
 \end{align}
 %
 \mscomment{$W[n]$ is not $\Braket{\Psi | W | \Psi}$, should be $T_s [n]$, the kinetic energy of \emph{non-interacting} electrons}
+\FK{check in handson slides}
 %
 where $T[n]$ denotes the kinetic energy of the electrons expressed as a functional of the density $n ({\bf x})$, and $W[n]$ denotes the electron-electron interaction term as before. We split this term into two contributions,
 \begin{align}
@@ -489,6 +490,8 @@ is the \emph{exchange-correlation potential} formally defined as the functional 
 \label{eq:dft.KS.2}
 \end{align}
 This is a set of one-particle Schr\"odinger-like equations for the orbitals $\psi_l$ with eigenvalues $\epsilon_l$ in an effective potential $v^{\rm eff}[n]$ called \emph{Kohn-Sham equations}. The \emph{Kohn-Sham theorem} ensures that, for any external potential $v^{\rm ext}$, there exists a \emph{unique} effective potential $v^{\rm eff}[n]$ which yields \emph{non-interacting} single-particle orbitals $\psi_l$ that reproduce the ground-state density $n$ of the \emph{interacting} many-particle system~\cite[p.\,51]{Kohn1965}.
+\mscorrect{v-representability: most densities are not!}
+\FK{check: \cite{Dreizler2012}}
 
 \newthought{The effective potential itself is a functional of the density} $n$ given in terms of the orbitals by Eq.\,\eqref{eq:dft.KS.n(psi)}, the Kohn-Sham equations therefore need to be solved \emph{self-consistently}: One starts from an initial guess for the density $n^0$ to set up the effective potential, and solves for $(\psi_l, \epsilon_l)$. From the solution, an updated density $n^1$ is computed via Eq.\,\eqref{eq:dft.KS.n(psi)}. The procedure is repeated until the density residual $\delta n^i = \lVert n^i - n^{i-1} \rVert$ is smaller than the desired precision. 
 % % see https://www.isi.edu/sites/default/files/users/serboixo/lecture10.pdf
@@ -527,7 +530,10 @@ The total energy in terms of the Kohn-Sham eigenvalues $\set{\epsilon_l}$ and de
 We are finally in position to introduce approximations to the exchange-correlation energy functional $E^{\rm xc}[n]$ from which the corresponding potential can be obtained by the functional derivative with respect to the density.\marginnote{Remember $$v^{\rm xc} [n] ({\bf x}) = \frac{\delta E^{\rm xc}[n]}{\delta n ({\bf x})}~.$$
 } Indeed, the very success of the Kohn-Sham DFT scheme can most likely be traced back to the fact that simple approximations to $E^{\rm xc}[n]$ lead to reasonable results for a large class of systems. 
 
-\subsection{Local Density Approximation (LDA)}
+\subsection{Local-Density Approximation (LDA)}
+%
+\mscomment{use $e = ne$ as described in footnote}
+%
 \newthought{Let us now define} an exchange-correlation energy density $e^{\rm xc} \left[ n \right] ({\bf x})$ via
 \begin{align}
 	E^{\rm xc}[n] 
@@ -551,7 +557,10 @@ This approximation is called the \emph{local density approximation} (LDA), and t
 		= \int \d^3 x ~ e^{\rm xc}_{\rm LDA} \left(n ({\bf x}) \right)~.
 	\label{eq:dft.LDA.1}
 \end{align}
-The energy density $e^{\rm xc}_{\rm LDA} \left(n ({\bf x}) \right)$ is usually taken to be the exchange-correlation energy density of a homogeneous electron gas obtained from higher-level theory approaches~\cite{Ceperley1980}.\footnote{Depending on the application, it can be beneficial to parametrize LDA on other reference system~\cite{Nagai2020}.} The LDA is (by construction) exact in the limit of vanishing density gradient, $\lvert \nabla n ({\bf x}) \rvert / n({\bf x}) \rightarrow 0$, but yields surprisingly good results under circumstances where the density is non-homogeneous as well~\cite[p.\,183]{Dreizler2012}.
+The energy density $e^{\rm xc}_{\rm LDA} \left(n ({\bf x}) \right)$ is usually taken to be the exchange-correlation energy density of a homogeneous electron gas obtained from higher-level theory
+  \mscomment{disagree}
+  \FK{in what way?}
+ approaches~\cite{Ceperley1980}.\footnote{Depending on the application, it can be beneficial to parametrize LDA on other reference system~\cite{Nagai2020}.} The LDA is (by construction) exact in the limit of vanishing density gradient, $\lvert \nabla n ({\bf x}) \rvert / n({\bf x}) \rightarrow 0$, but yields surprisingly good results under circumstances where the density is non-homogeneous as well~\cite[p.\,183]{Dreizler2012}.
 
 \subsection{Generalized Gradient Approximation (GGA)}
 \newthought{In the spirit of the original work} by Hohenberg and Kohn, and Kohn and Sham, improvements on the LDA can be constructed by going beyond the local density and taking into account gradients of the density as well,
@@ -570,6 +579,8 @@ Again, the full functional $e^{\rm xc}[n]$ is replaced by a function of the dens
 where $e^{\rm x}_{\rm hom}(n)$ is the exchange energy density of a homogeneous electron gas, and $F^{\rm xc}(n, \nabla n)$ is an \emph{enhancement factor}~\cite{Perdew1992}.
 
 \newthought{The generalized gradient approximation is often a good compromise} between accuracy and numerical cost when studying nuclear dynamics of solids, and we will use this approximation throughout the work. However, when studying electronic properties including excitations, one often needs to use more sophisticated approximation schemes~\cite{Cohen2008,Cohen2012}.
+\mscomment{excitations go beyond dft}
+\FK{clarify that citations hint at challenges/problems for DFT, post-DFT approaches are necessary}
 
 \vfill
 
