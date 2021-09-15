@@ -1,6 +1,32 @@
 Thesis Review
 ===
 
+## Matthias
+
+### DFT
+
+- [ ] $T$, $T_s$: Clarify if there is more than notation
+  - [ ] v representability, uniqueness
+
+### Lattice dynamics
+
+- [ ] Shorten / move to appendix?
+
+### Isotope effects
+
+- [ ] use Eq. 1 from Tang to estimate effect, relate to other works
+- [ ] suggest MA project on explicitly studying the effect based on a trained potential
+  - [ ] Cite: Tang/Tamura, Haigis and dicussion therein, Garg?
+
+### Embryos / Precursors
+
+- [ ] ZrO2: Ferroelastic switch [Carbogno2014]
+- [ ] Clathrates can host stable defeats [Bhattacharya2017]
+- [ ] Perovskites? -> Klarbring CMO [Klarbring.2018]
+- [ ] Superionic conductors? -> Klarbring Ceria CeO2 [Klarbring.20183gv]
+
+
+
 - `Theory and methods` aufspalten in dedizierte Kapitel?
 
 ## Notation
