@@ -75,24 +75,25 @@ We go over to a unitless Hamiltonian by scaling Eq.\,\eqref{eq:Hamiltonian} with
     \label{eq:Hscaled}
 \end{split}
 \end{align}
-which depends on the charge numbers $\{Z_I\}$ and the mass ratios $\{ m_{\rm e} / M_I \}$. From this viewpoint, we see that the relative order of magnitude of the nuclear kinetic energy $\hat{T}^{\rm Nuc}$ is \mbox{$m_{\rm e} / M_I \approx 10^{-4} - 10^{-5}$}. This means that the nuclear kinetic energy can be treated as a perturbation term with respect to the electronic and electron-nuclear contributions,
-\mscomment{this is not perturbation theory (so far)}
-\FK{rephrase: ... total energy can be expanded in powers of the mass ratio $m/M$ using the el/el-nuc contributions as reference}
+which depends on the charge numbers $\{Z_I\}$ and the mass ratios $\{ m_{\rm e} / M_I \}$. From this viewpoint, we see that the relative order of magnitude of the nuclear kinetic energy $\hat{T}^{\rm Nuc}$ is \mbox{$m_{\rm e} / M_I \approx 10^{-4} - 10^{-5}$}. 
+We therefore expand the total energy in powers of the mass ratio $m/M$ using the electronic contributions as reference,
+%This means that the nuclear kinetic energy can be treated as a perturbation term with respect to the electronic and electron-nuclear contributions,
+%\mscomment{this is not perturbation theory (so far)}
+%\FK{rephrase: ... total energy can be expanded in powers of the mass ratio $m/M$ using the el/el-nuc contributions as reference}
 \begin{align}
-    \hat{H}   &= \hat{H}^0 + \hat{T}^{\rm Nuc}~, \text{ where} 
+    \hat{H}   &= \hat{H}^0 + \hat{T}^{\rm Nuc} + {\hat{V}}^{\mathrm{Nuc}-\mathrm{Nuc}}~, \text{ where} 
     \label{eq:H=H0+T}
     \\
     \hat{H}^0 &=
           {\hat{T}}^{\mathrm{e}}
         + {\hat{V}}^{\mathrm{e}-\mathrm{e}}
-        + {\hat{V}}^{\mathrm{e}-\mathrm{Nuc}}
-        + {\hat{V}}^{\mathrm{Nuc}-\mathrm{Nuc}}~.
+        + {\hat{V}}^{\mathrm{e}-\mathrm{Nuc}}~.
     \label{eq:H0}
 \end{align}
 %
-\mscomment{move nuc-nuc to 1.9 bc it is computed w.r.t. to el. wavefunctions}
-\FK{check}
-In our notation, the time-independent many-body Schr\"odinger equation reads
+%\mscomment{move nuc-nuc to 1.9 bc it is computed w.r.t. to el. wavefunctions}
+%\FK{check}
+In this notation, the time-independent many-body Schr\"odinger equation reads
 \begin{align}
     \hat{H} \psi ({\bf r}, {\bf R}) = E \psi ({\bf r}, {\bf R})~,
     \label{eq:Schroedinger1}
@@ -112,12 +113,14 @@ The functions $\phi_l$ and the eigenvalue $E_l^0({\bf R})$ depend \emph{parametr
 The nuclear functions $\chi_l$ are determined by using the expanded wavefunction $\psi$ given by Eq.\,\eqref{eq:psi_expansion_phi} in the full Schr\"odinger equation~\eqref{eq:Schroedinger1},
 \begin{align}
     (\hat{H} - E) \psi ({\bf r}, {\bf R})
-        & = \sum_l (\hat{H}^0 + \hat{T}^{\rm Nuc} - E) \chi_l ({\bf R}) \phi_l ({\bf r}, {\bf R}) \nonumber \\
-        &= \sum_l (E^0_l({\bf R}) + \hat{T}^{\rm Nuc} - E) \chi_l ({\bf R}) \phi_l ({\bf r}, {\bf R}) = 0~,
+        & = \sum_l (\hat{T}^{\rm Nuc} + {{V}}^{\mathrm{Nuc}-\mathrm{Nuc}} ({\bf R}) + \hat{H}^0 - E) \chi_l ({\bf R}) \phi_l ({\bf r}, {\bf R}) \nonumber \\
+        &= \sum_l (\hat{T}^{\rm Nuc} + {{V}}^{\mathrm{Nuc}-\mathrm{Nuc}} ({\bf R}) + E^0_l({\bf R}) - E) \chi_l ({\bf R}) \phi_l ({\bf r}, {\bf R}) = 0~,
 \end{align}
+%
+where $V^{\mathrm{Nuc}-\mathrm{Nuc}} ({\bf R})$ is the potential energy contribution from the nuclear configuration $\bf R$,
 and integrating with $\int \d^3 r ~ \phi^\ast_m ({\bf r}, {\bf R})$ using their orthonormality, so that
 \begin{align}
-    \left( \hat{T}^{\rm Nuc} + E^0_m({\bf R}) \right) \chi_m ({\bf R})
+    \left( \hat{T}^{\rm Nuc} + {{V}}^{\mathrm{Nuc}-\mathrm{Nuc}} ({\bf R}) + E^0_m({\bf R}) \right) \chi_m ({\bf R})
         + \sum_l \hat{C}_{ml} ({\bf R}) \chi_l ({\bf R})
         = E \chi_m ({\bf R})~.
     \label{eq:chi1}
@@ -138,24 +141,25 @@ The operator $\hat{C}_{ml}$, given by
 describes coupling between different electronic states $(l, m)$. This term is of the order $(m/M)^{1/4} \approx 10^{-1} - 10^{-2}$ smaller than the nuclear energy~\cite{BornOppenheimer}. Neglecting the coupling terms $C_{ml}$ is known as the \emph{Born-Oppenheimer (BO) approximation}.\footnote[][0em]{Born and Oppenheimer neglected $C_{ml}$ in their original work~\cite{BornOppenheimer} and later called this the \emph{adiabatic approximation}~\cite{BornHuang}. However, only the terms $C_{m \neq l}$ describe transitions between different electronic states induced by nuclear coupling, and keeping the terms $C_{m=l}$ gives the exact potential when the electronic states are sufficiently separated,~e.\,g.,~in presence of an electronic gap~\cite{Born1951kopplung}. Therefore the term ``adiabatic approximation'' is nowadays used when only the terms $C_{m=l}$ are kept~\cite{Marx2009}. The full BO approximation is correct to fourth order in the expansion of the full Hamiltonian in the mass parameter $\sqrt[4]{m/M}$~\cite{BornHuang}. Corrections to the forces arising from the $C_{m=l}$ term can however be expected to be much smaller~\cite{Ziman1955}.
 } Within this approximation, the dynamical evolution of electrons and nuclei is completely separated and the electrons can be pictured as moving \emph{adiabatically} with the nuclei. The nuclear Schr\"odinger equation reduces to
 \begin{align}
-    \left( \hat{T}^{\rm Nuc} + E^0_l({\bf R}) \right) \chi_l ({\bf R})
+    \left( \hat{T}^{\rm Nuc} + V^{\mathrm{Nuc}-\mathrm{Nuc}} ({\bf R}) + E^0_l({\bf R}) \right) \chi_l ({\bf R})
         = E \chi_l ({\bf R})~.
     \label{eq:chi2}
 \end{align}
 Solving this equation is performed in two steps:
 \begin{enumerate}
     \item For a given configuration $\bf R$, the electronic Schr\"odinger equation \eqref{eq:Hsolution1} is solved, yielding the energies $E^0_l({\bf R})$ which thereby parametrically depend on $\bf R$.
-    \item For each electronic quantum number $l$, Eq.\,\eqref{eq:chi2} is solved, where the electronic energy $E^0_l({\bf R})$ defines the effective \emph{potential-energy surface} for the nuclei.
+    \item For each electronic quantum number $l$, Eq.\,\eqref{eq:chi2} is solved, where the nuclear repulsion $V^{\mathrm{Nuc}-\mathrm{Nuc}} ({\bf R})$ together with the electronic energy $E^0_l({\bf R})$ define the effective \emph{potential-energy surface} for the nuclei.
 \end{enumerate}
 
-\newthought{Since we will deal with insulators and semiconductors} with bandgaps providing a sufficient energetic separation between the electronic ground state $l=0$ and the first exited state $l=1$,\footnote{Thermal energy at room temperature is \mbox{$\sim 25\,{\rm meV} \ll $~typical bandgap}.} we will concentrate on the electronic ground state energy $E^0_0$ for the given configuration ${\bf R}$ in the following. We denote this energy as the \emph{Born-Oppenheimer potential energy},
+\newthought{Since we will be dealing with insulators and semiconductors} with bandgaps providing a sufficient energetic separation between the electronic ground state $l=0$ and the first exited state $l=1$,\footnote{Thermal energy at room temperature is \mbox{$\sim 25\,{\rm meV} \ll $~typical bandgap}.} we will concentrate on the electronic ground state energy $E^0_0$ for the given configuration ${\bf R}$ in the following. We denote this energy as the \emph{Born-Oppenheimer potential energy},
 \begin{align}
-	E^{\rm BO} ({\bf R}) \equiv E^0_0 ({\bf R})~.
+	E^{\rm BO} ({\bf R}) \equiv E^0_0 ({\bf R}) + V^{\mathrm{Nuc}-\mathrm{Nuc}} ({\bf R})~.
 	\label{eq:E^BO_0}
 \end{align}
 % or simply as \emph{the potential}, $\mathcal V (\b R) $.
-\mscomment{is this still valid in strongly anharmonic compounds? are these approximations related?}
-\FK{good question. Check BornHuang, Stanke2015}
+%\mscomment{is this still valid in strongly anharmonic compounds? are these approximations related?}
+%\FK{good question. Check BornHuang, Stanke2015}
+% A: yes, this should be independent of anharmonicity
 
 \newpage
 \section{Density Functional Theory}

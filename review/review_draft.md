@@ -3,10 +3,56 @@ Thesis Review
 
 ## Matthias
 
+> Es gibt insbesondere 2 Dinge, die mir noch nicht gefallen:
+>
+> a) Beschreibung und kritische Diskussion der verschiedenen Näherungen und der damit verbundene Fehler. Das muss genauer und detaillierter dargestellt werden. Zu zero-point effects und zu isotopes gibt es eigentlich schon einige Ideen in der Literatur, wie man die abschätzend berücksichtigen kann. Das sollte auch diskutiert werden.
+>
+> b) Die Vergleiche mit BT müssen ausgebaut und genauer geführt werden. Die primäre Motivation der Arbeit war ja, festzustellen, wann BT nicht mir zuverlässig funktioniert. Und hier kannst/solltest du die BT Rechnungen aus der Literatur genauer diskutieren. Es gibt ja einige BT Beispiele, die für "sigma^A groesser als 0.4" Systeme durchgeführt wurden.
+
+
+
+### a) Näherungen und Fehler
+
+Zero-point effects / NQE:
+
+- suggested in     [1]S. Volz *et al.*, Microelectron J **31**, 815 (2000).  
+
+- Scrutinized in     [1]J. E. Turney, A. J. H. McGaughey, and C. H. Amon, Phys Rev B **79**, 224305 (2009).  
+
+  → no systematic improvement bc different error cancellations
+
+  → "The mapping of classical phonons onto an equivalent quantum system is approximately correct only at high temperatures, where QCs are unnecessary."
+
+- also checked in     [1]M. Puligheddu *et al.*, Phys Rev Mater **3**, 085401 (2019).  with similar conclusion:
+
+  "... we ﬁnd that using BE heat capacities with MD lifetimes (A2) worsens rather than  improves the agreement with the BTE-ALD results (A4). In agreement with Ref. [26], BE treatment of heat capacities together with MD lifetimes is ruled out as a possible quantum correction for classical MD simulations of thermal conductivity."
+
+Isotopes:
+
+- correction available from perturbation theory by treating mass disorder as pert. Hamiltonian
+
+- correction formula due to Tang&Dong for MgO
+
+  - use?
+
+- no general correction scheme for aiGK besides explicit "alloying" in the supercell
+
+  → could be tested w/ ML potential
+
+### b) BT
+
+- [x] überblick literatur
+  - [x] welche Studien
+  - [x] welche Art von BTE
+- [x] überlapp mit unseren materialien, insbes bei >3rd order BTE
+- [x]  trend 3rd vs. 4th order, vgl Xia/Ravichandran
+- [x]  Diskussion von Kandidaten im Licht von sigma^A: NaCl und weitere
+
 ### DFT
 
 - [ ] $T$, $T_s$: Clarify if there is more than notation
-  - [ ] v representability, uniqueness
+  - [ ] $T_s$: very definition of universal functional, see KohnSham1965, p.44f in Dreizler1990, in particular p. 48
+  - [ ] v representability, uniqueness: p. 25 in Engel2011, p. 49 in Dreizler1990
 
 ### Lattice dynamics
 
@@ -21,11 +67,20 @@ Thesis Review
 ### Embryos / Precursors
 
 - [ ] ZrO2: Ferroelastic switch [Carbogno2014]
-- [ ] Clathrates can host stable defeats [Bhattacharya2017]
+- [ ] Clathrates can host stable defects [Bhattacharya2017]
 - [ ] Perovskites? -> Klarbring CMO [Klarbring.2018]
 - [ ] Superionic conductors? -> Klarbring Ceria CeO2 [Klarbring.20183gv]
+- [ ] precurs: new method how to find them.
 
 
+
+### Chris
+
+- BTE Diskussion:
+  - schau nochmal insbes. NaCl an und diskutiere daran die BTE-Literatur im Vergleich zu aiGK
+  - ggf weitere Beispiele?
+  - nochmal betonen, dass die Frage mit den vorhandenen Daten (NOMAD!) beantwortet werden kann
+  - 
 
 - `Theory and methods` aufspalten in dedizierte Kapitel?
 
