@@ -165,14 +165,15 @@ Solving this equation is performed in two steps:
 \section{Density Functional Theory}
 \epigraph{\singlespacing \it ``It is my sense that at the present time DFT is the method of choice for systems consisting of many (\,$\gtrsim 5$) atoms and for smaller systems, when moderate accuracies are sufficient.''}{W.~Kohn, 1993}
 
-In the previous chapter, it was tacitly assumed that the electronic Schr\"odinger equation \eqref{eq:Hsolution1} yielding the effective potential for the nuclei can be solved. Finding an exact solution to this equation is, however, infeasible for more than a few electrons. We will now introduce \emph{density functional theory} (DFT) as a framework for making approximations that enable to find a first-principles electronic potential-energy surface $E^{\rm BO} ({\bf R})$ for atomic systems with order of magnitudes more electrons.
+In the previous chapter, it was tacitly assumed that the electronic Schr\"odinger equation \eqref{eq:Hsolution1} yielding the effective potential for the nuclei can be solved. Finding an exact solution to this equation is, however, infeasible for more than a few electrons. We will now introduce \emph{density functional theory} (DFT) as a framework for making approximations that enable to find a first-principles potential-energy surface $E^{\rm BO} ({\bf R})$ for atomic systems with order of magnitudes more electrons.
 
-To set the stage, we rewrite the electronic Schr\"odinger equation \eqref{eq:Hsolution1}:
+To set the stage, we rewrite the electronic Hamiltonian given in Eq.\,\eqref{eq:H0} as
 \begin{align}
 	\hat H = \hat T + \hat W + \hat V^{\rm ext}~,
 	\label{eq:H.dft.1}
 \end{align}
-where $\hat T \equiv \hat T^{\rm e}$ denotes the electronic kinetic energy operator, $\hat W \equiv \hat V^{\rm e-e}$ is the electronic Coulomb repulsion, and $\hat V^{\rm ext} \equiv \hat V^{\rm e-Nuc}$ is the \emph{external} potential determined by the nuclear configuration $\bf R$. For the time being, the bare nuclear-nuclear repulsion $\hat V^{\rm Nuc-Nuc}$ is neglected as it merely contributes an additive constant to the electronic Hamiltonian at fixed configuration $\bf R$. We will restore this term again when looking at gradients of the total energy.
+where $\hat T \equiv \hat T^{\rm e}$ denotes the electronic kinetic energy operator, $\hat W \equiv \hat V^{\rm e-e}$ is the electronic Coulomb repulsion, and $\hat V^{\rm ext} \equiv \hat V^{\rm e-Nuc}$ is the \emph{external} potential determined by the nuclear configuration $\bf R$. 
+%For the time being, the bare nuclear-nuclear repulsion $\hat V^{\rm Nuc-Nuc}$ is neglected as it merely contributes an additive constant to the electronic Hamiltonian at fixed configuration $\bf R$. We will restore this term again when looking at gradients of the total energy.
 
 \newthought{We look for solutions} to Eq.\,\eqref{eq:H.dft.1} of the form
 \begin{align}
@@ -194,7 +195,7 @@ where $\hat H$ is the electronic Hamiltonian given by Eq.\,\eqref{eq:H.dft.1}, $
 	$$
 	All functions are assumed to be sufficiently well-behaved such that the usual manipulations are mathematically well defined.
 },
-and $E_\Psi$ is the corresponding total energy.
+and $E_\Psi$ is the corresponding total energy of the electrons.
 The state $\Ket{\Psi}$ maps to an electron density $n_\Psi ({\bf x})$ at a given point in space, ${\bf x} \in \mathds R^3$, via the density operator
 \begin{align}
 	\hat n ({\bf x}) \equiv \sum_i \hat n_i ({\bf x}) = \sum_i \delta ({\bf x} - \hat{\bf r}_i)~,
@@ -244,8 +245,7 @@ Since the density $n_\Psi$ is obtained from the solution $\Ket{\Psi}$ of Eq.\,\e
 \end{align}
 
 \subsection{Hohenberg-Kohn Theorem}
-Hohenberg and Kohn were able to show that, for non-degenerate\footnote{Kohn was later able to loosen the requirement of non-degeneracy~\cite{Kohn1985}.
-\mscomment{proof by Levy-Lieb}
+Hohenberg and Kohn were able to show that, for non-degenerate\footnote{The requirement of non-degenerate ground states can be loosened by replacing the Hohenberg-Kohn functional with the Lieb functional~\cite{Levy.1979,Lieb.1983,Englisch.1984a,Englisch.1984b}, cf.~\cite[Chp.\,4.2]{Dreizler2012}.
 } ground states $\Psi \equiv \Psi_0$, there exists the \emph{inverse map} from ground-state densities $\mathbb N_0$ to potential functions $\mathbb V$, and that this map is bijective~\cite{Hohenberg1964}:
 \begin{align}
 	M^{-1}: \mathbb N_0 \rightarrow \mathbb V~. 
@@ -257,7 +257,7 @@ The beauty of this theorem is that it establishes a one-to-one correspondence be
 	F[n] \equiv \Braket{\Psi [n] | \hat T + \hat W | \Psi [n]}~,
 	\label{eq:dft.Fn}
 \end{align}
-i.\,e.,~the contributions to the Hamiltonian which do not depend on the external potential. The ground-state total energy for a given potential function $v^{\rm ext}$ is then given as
+i.\,e.,~the contributions to the Hamiltonian which do not depend on the external potential. The ground-state total energy for a given potential function $v^{\rm ext}$ is
 \begin{align}
 	E [n] 
 		= \Braket{\Psi [n] | \hat H | \Psi [n]}
@@ -302,9 +302,10 @@ under the constraint of fixed particle number imposed by the Lagrange multiplier
 \newpage
 
 \section{The Born-Oppenheimer Surface}
+\TODO{rephrase:}
 In the definition of the effective electronic Hamiltonian in Eq.\,\eqref{eq:H.dft.1}, we had neglected the electrostatic nuclear repulsion $V^{\rm Nuc-Nuc}$ defined in Eq.\,\eqref{eq:Vnuc}.
-\mscomment{we had not neglected, but put it into Tnuc}
-\FK{we actually neglected it in the named equation, but check}
+%\mscomment{we had not neglected, but put it into Tnuc}
+%\FK{we actually neglected it in the named equation, but check}
 The Born-Oppenheimer potential-energy surface defined in Eq.\,\eqref{eq:E^BO_0} therefore consists of both terms,~i.\,e.,
 \begin{align}
 	E^{\rm BO} ({\bf R}) 
@@ -372,10 +373,7 @@ which is solely determined by the ground-state electron density $n ({\bf x})$ an
 \end{align}
 \end{theorem}
 
-\newthought{While the Hellmann-Feynman theorem is formally correct}, in practice there often arise correction terms when non-complete basis sets
-\mscomment{not related to non-completeness, but moving basissets}
-\FK{no: \cite{Pulay1969,Scheffler.1984,Ventra.2000}}
-are used that also depend on the parameter $\lambda$, or an approximation to the true ground-state density is used~\cite{Bendt1983,Chan1993}. In atomic-cerntered basissets, the most important correction terms are the so-called \emph{Pulay forces}~\cite{Pulay1969}.
+\newthought{While the Hellmann-Feynman theorem is formally correct}, in practice there often arise correction terms when non-complete basis sets are used that also depend on the parameter $\lambda$, or an approximation to the true ground-state density is used~\cite{Bendt1983,Scheffler.1984,Chan1993,Ventra.2000}. In atomic-cerntered basissets, the most important correction terms are the so-called \emph{Pulay forces}~\cite{Pulay1969}.
 
 \newpage
 
