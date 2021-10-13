@@ -245,6 +245,7 @@ Since the density $n_\Psi$ is obtained from the solution $\Ket{\Psi}$ of Eq.\,\e
 \end{align}
 
 \subsection{Hohenberg-Kohn Theorem}
+\label{sec:HK}
 Hohenberg and Kohn were able to show that, for non-degenerate\footnote{The requirement of non-degenerate ground states can be loosened by replacing the Hohenberg-Kohn functional with the Lieb functional~\cite{Levy.1979,Lieb.1983,Englisch.1984a,Englisch.1984b}, cf.~\cite[Chp.\,4.2]{Dreizler2012}.
 } ground states $\Psi \equiv \Psi_0$, there exists the \emph{inverse map} from ground-state densities $\mathbb N_0$ to potential functions $\mathbb V$, and that this map is bijective~\cite{Hohenberg1964}:
 \begin{align}
@@ -380,18 +381,20 @@ which is solely determined by the ground-state electron density $n ({\bf x})$ an
 \section{Kohn-Sham Scheme}
 \newthought{By introducing density functional theory}, we have not solved the many-body problem. However, we have shifted the intricacies of this problem to a \emph{universal} functional $F[n]$ which depends on the electron density $n({\bf x})$. Since the density is a scalar function of three coordinates, $n: \mathds R^3 \rightarrow \mathds R$, this entails a massive reduction of complexity compared to working with wavefunctions, which are complex functions of $3N$ variables, $\Psi: \mathds R^{3N} \rightarrow \mathds C$.
 
-In order to proceed, we follow the original argument by Kohn and Sham~\cite{Kohn1965} and investigate the universal functional $F[n]$ in more detail. The definition reads
+In order to proceed, we follow the original argument by Kohn and Sham~\cite{Kohn1965} and investigate the universal functional $F[n]$ in more detail. 
+Kohn and Sham write the universal function $F [n]$ as
+%
 \begin{align}
 	F[n] 
-		= \Braket{\Psi [n] | \hat T + \hat W | \Psi [n]}
-		\equiv T[n] + W[n]~,
+		%= \Braket{\Psi [n] | \hat T + \hat W | \Psi [n]}
+		\equiv T_{\rm s}[n] + W[n]~,
 	\label{eq:dft.Fn.2}
 \end{align}
 %
-\mscomment{$W[n]$ is not $\Braket{\Psi | W | \Psi}$, should be $T_s [n]$, the kinetic energy of \emph{non-interacting} electrons}
-\FK{check in handson slides}
+%\mscomment{$W[n]$ is not $\Braket{\Psi | W | \Psi}$, should be $T_s [n]$, the kinetic energy of \emph{non-interacting} electrons}
+%\FK{check in handson slides}
 %
-where $T[n]$ denotes the kinetic energy of the electrons expressed as a functional of the density $n ({\bf x})$, and $W[n]$ denotes the electron-electron interaction term as before. We split this term into two contributions,
+where $T_{\rm s}[n]$ denotes the kinetic energy of \emph{non-interacting} electrons with density $n$. $W[n]$ denotes the electron-electron interaction term as before, with two contributions
 \begin{align}
 	\begin{split}
 	W[n] 
@@ -407,13 +410,18 @@ where $E^{\rm es} [n]$ is the electrostatic (Hartree) energy stemming from the c
 		= \int \mathrm{d}^{3} x^{\prime} \frac{n\left(\boldsymbol{x}^{\prime}\right)}{\left|\boldsymbol{x}-\boldsymbol{x}^{\prime}\right|}~,
 	\label{eq:dft.KS.ves}
 \end{align}
-which is a functional of the density itself. $E^{\rm xc} [n]$ denotes all exchange and correlation effects not captured by $E^{\rm es} [n]$ and is therefore termed the \emph{exchange-correlation energy}. Again, we have only shifted the problem, this time to the unknown functional $E^{\rm xc} [n]$ which we will discuss later.
+which is a functional of the density itself. $E^{\rm xc} [n]$ denotes all exchange and correlation effects not captured by $T_{\rm s} [n]$ or $E^{\rm es} [n]$, and is therefore termed the \emph{exchange-correlation energy}. 
+%
 In this notation, the total energy functional for the electron system in an external potential reads
 \begin{align}
 	E[n]
-		= T[n] +  E^{\rm es}[n] + E^{\rm xc} [n] + V^{\rm ext}[n]~.
+		= T_{\rm s}[n] +  E^{\rm es}[n] + V^{\rm ext}[n] + E^{\rm xc} [n]~.
+%		= \underset{\text{known}}{\underbrace{T_{\rm s}[n] +  E^{\rmdefault es}[n] + V^{\rm ext}[n]}} 
+%		  + \underset{\text{unknown}}{\underbrace{E^{\rm xc} [n]}}~.
 	\label{eq:dft.Ks.En}
 \end{align}
+%
+Again, the problem is only shifted, this time to the unknown functional $E^{\rm xc} [n]$ which we will discuss later.
 
 Let us now define the density $n({\bf x})$ in terms of an \emph{auxiliary} orthonormal set of complex functions $\{ \psi_l ({\bf x}) \}$, such that
 \begin{align}
@@ -424,7 +432,7 @@ where the $f_l$ denote the occupation of each orbital,~i.\,e.,~a Fermi-like func
 \begin{align}
 	\frac{\delta}{\delta \psi^\ast_l ({\bf x})}
 		\left[
-			T[n] +  E^{\rm es}[n] + E^{\rm xc} [n] + V^{\rm ext}[n]
+			T_{\rm s}[n] +  E^{\rm es}[n] + V^{\rm ext}[n] + E^{\rm xc} [n]
 			- \lambda_l \left(
 				\int \d^3 x ~ \left\lvert \psi_l ({\bf x}) \right\rvert^2 - 1
 			\right)
@@ -461,8 +469,8 @@ $\delta / \delta \psi^\ast = (\delta n / \delta \psi^\ast) \delta / \delta n$, s
 	\left(
 		-\frac{1}{2} \nabla^2 
 		+ v^{\rm es} [n] ({\bf x})
-		+ v^{\rm xc} [n] ({\bf x})
 		+ v^{\rm ext}  ({\bf x})
+		+ v^{\rm xc} [n] ({\bf x})
 	\right) \psi_l ({\bf x})
 	= \frac{\lambda_l}{f_l} \psi_l ({\bf x})~.
 	\label{eq:dft.KS.1}
@@ -478,8 +486,8 @@ is the \emph{exchange-correlation potential} formally defined as the functional 
 	v^{\rm eff} [n] ({\bf x})
 	\equiv
 		v^{\rm es} [n] ({\bf x})
-		+ v^{\rm xc} [n] ({\bf x})
-		+ v^{\rm ext}  ({\bf x})~,
+		+ v^{\rm ext}  ({\bf x})
+		+ v^{\rm xc} [n] ({\bf x})~,
 	\label{eq:dft.KS.veff}
 \end{align}
  and denoting $\epsilon_l \equiv \lambda_l / f_l$, we can write
@@ -491,9 +499,11 @@ is the \emph{exchange-correlation potential} formally defined as the functional 
 	= \epsilon_l \psi_l ({\bf x})~.
 \label{eq:dft.KS.2}
 \end{align}
-This is a set of one-particle Schr\"odinger-like equations for the orbitals $\psi_l$ with eigenvalues $\epsilon_l$ in an effective potential $v^{\rm eff}[n]$ called \emph{Kohn-Sham equations}. The \emph{Kohn-Sham theorem} ensures that, for any external potential $v^{\rm ext}$, there exists a \emph{unique} effective potential $v^{\rm eff}[n]$ which yields \emph{non-interacting} single-particle orbitals $\psi_l$ that reproduce the ground-state density $n$ of the \emph{interacting} many-particle system~\cite[p.\,51]{Kohn1965}.
-\mscorrect{v-representability: most densities are not!}
-\FK{check: \cite{Dreizler2012}}
+This is a set of one-particle Schr\"odinger-like equations for the orbitals $\psi_l$ with eigenvalues $\epsilon_l$ in an effective potential $v^{\rm eff}[n]$ called \emph{Kohn-Sham equations}.
+
+%The \emph{Kohn-Sham theorem} ensures that, for any external potential $v^{\rm ext}$, there exists a \emph{unique} effective potential $v^{\rm eff}[n]$ which yields \emph{non-interacting} single-particle orbitals $\psi_l$ that reproduce the ground-state density $n$ of the \emph{interacting} many-particle system~\cite[p.\,51]{Kohn1965}.
+%\mscorrect{v-representability: most densities are not!}
+%\FK{check: \cite{Dreizler2012}}
 
 \newthought{The effective potential itself is a functional of the density} $n$ given in terms of the orbitals by Eq.\,\eqref{eq:dft.KS.n(psi)}, the Kohn-Sham equations therefore need to be solved \emph{self-consistently}: One starts from an initial guess for the density $n^0$ to set up the effective potential, and solves for $(\psi_l, \epsilon_l)$. From the solution, an updated density $n^1$ is computed via Eq.\,\eqref{eq:dft.KS.n(psi)}. The procedure is repeated until the density residual $\delta n^i = \lVert n^i - n^{i-1} \rVert$ is smaller than the desired precision. 
 % % see https://www.isi.edu/sites/default/files/users/serboixo/lecture10.pdf
@@ -510,7 +520,8 @@ This is a set of one-particle Schr\"odinger-like equations for the orbitals $\ps
 	\label{eq:dft.KS.Tn}
 \end{align}
 thereby eliminating the Kohn-Sham orbitals $\psi_l$ from the expression.
-The total energy in terms of the Kohn-Sham eigenvalues $\set{\epsilon_l}$ and density $n ({\bf x}) = \sum_l \lvert \psi_l ({\bf x}) \rvert^2$ is then given as\marginnote{Remember that $$E[n] = T[n] +  E^{\rm es}[n] + E^{\rm xc} [n] + V^{\rm ext}[n]~,$$ and $$	v^{\rm eff} [n] ({\bf x}) = v^{\rm es} [n] ({\bf x}) + v^{\rm xc} [n] ({\bf x}) + v^{\rm ext}  ({\bf x})~.$$}
+The total energy in terms of the Kohn-Sham eigenvalues $\set{\epsilon_l}$ and density $n ({\bf x})$  %= \sum_l \lvert \psi_l ({\bf x}) \rvert^2$ 
+is then given as\marginnote{Remember that $$E[n] = T_{\rm s}[n] +  E^{\rm es}[n] + E^{\rm xc} [n] + V^{\rm ext}[n]~,$$ and $$	v^{\rm eff} [n] ({\bf x}) = v^{\rm es} [n] ({\bf x}) + v^{\rm xc} [n] ({\bf x}) + v^{\rm ext}  ({\bf x})~.$$}
 \begin{align}
 	E[n]
 %		&\stackrel{\phantom{\eqref{eq:dft.KS.Tn}}}{=} 
@@ -526,6 +537,9 @@ The total energy in terms of the Kohn-Sham eigenvalues $\set{\epsilon_l}$ and de
 			- \int \d^3 x ~ v^{\rm xc}[n] ({\bf x}) n ({\bf x})~.
 	\label{eq:dft.KS.En}
 \end{align}
+
+\newthought{The densities that can be obtained by solving the Kohn-Sham equations as outlined above} are restricted to those that can be written as a sum of single-particle functions as defined in Eq.\,\eqref{eq:dft.KS.n(psi)}, so-called \emph{non-interacting $v$-representable} densities. In general, an arbitrary ground-state density $n ({\bf r})$ of an interacting electron system \emph{cannot be guaranteed} to be non-interacting $v$-representable. This questions is linked to the differentiability of the kinetic energy functional $T_{\rm s} [n]$ with respect to variations in the density, $\delta n$, which is generally not guaranteed for arbitrary $\delta n$. Possible extensions to solve this issue have been suggested in literature, in particular by Levy and Lieb~\cite{Levy.1979,Lieb.1983,Englisch.1984a,Englisch.1984b}, as discussed in \cite[Chp.\,4.2]{Dreizler2012}. However, this problem is of minor importance in numerical simulations, because on discrete spatial grids, any physically admissible density $n$ can be shown to be representable by Eq.\,\eqref{eq:dft.KS.n(psi)}~\cite{Chayes.1985}. 
+
 
 \section{Approximations to the exchange-correlation energy}
 \label{sec:dft.approximations}
