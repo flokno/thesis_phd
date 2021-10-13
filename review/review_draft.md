@@ -9,8 +9,6 @@ Thesis Review
 >
 > b) Die Vergleiche mit BT müssen ausgebaut und genauer geführt werden. Die primäre Motivation der Arbeit war ja, festzustellen, wann BT nicht mir zuverlässig funktioniert. Und hier kannst/solltest du die BT Rechnungen aus der Literatur genauer diskutieren. Es gibt ja einige BT Beispiele, die für "sigma^A groesser als 0.4" Systeme durchgeführt wurden.
 
-
-
 ### a) Näherungen und Fehler
 
 Zero-point effects / NQE:
@@ -72,7 +70,9 @@ Isotopes:
 - [ ] Superionic conductors? -> Klarbring Ceria CeO2 [Klarbring.20183gv]
 - [ ] precurs: new method how to find them.
 
+### Style
 
+- [ ] Gebrauch von "we"
 
 ### Chris
 
@@ -80,8 +80,7 @@ Isotopes:
   - schau nochmal insbes. NaCl an und diskutiere daran die BTE-Literatur im Vergleich zu aiGK
   - ggf weitere Beispiele?
   - nochmal betonen, dass die Frage mit den vorhandenen Daten (NOMAD!) beantwortet werden kann
-  - 
-
+  
 - `Theory and methods` aufspalten in dedizierte Kapitel?
 
 ## Notation
