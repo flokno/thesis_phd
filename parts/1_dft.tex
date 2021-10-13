@@ -547,36 +547,37 @@ We are finally in position to introduce approximations to the exchange-correlati
 } Indeed, the very success of the Kohn-Sham DFT scheme can most likely be traced back to the fact that simple approximations to $E^{\rm xc}[n]$ lead to reasonable results for a large class of systems. 
 
 \subsection{Local-Density Approximation (LDA)}
-%
-\mscomment{use $e = ne$ as described in footnote}
-%
-\newthought{Let us now define} an exchange-correlation energy density $e^{\rm xc} \left[ n \right] ({\bf x})$ via
+
+Let us now define an exchange-correlation energy density $e^{\rm xc} \left[ n \right] ({\bf x})$ via
 \begin{align}
 	E^{\rm xc}[n] 
 		= \int \d^3 x ~ e^{\rm xc} \left[ n \right] ({\bf x})~,
 \label{eq:dft.xc.1}
 \end{align}
-where the density is a functional of the density by itself. 
-The most straighforward way to approximate $e^{\rm xc}[n] ({\bf x})$ is to replace the \emph{functional} $e^{\rm xc} [n] ({\bf x})$ by a \emph{function} of the local density,
+where the density is a functional of the density by itself.
+%
+The most straighforward way to approximate $e^{\rm xc}[n] ({\bf x})$ is to replace the \emph{functional} $e^{\rm xc} [n] ({\bf x})$ by a \emph{function} of the local density,\footnote{Some authors prefer to write 
+  \mbox{$e^{\rm xc}(n) = n \tilde e^{\rm xc} (n)$}, such that
+	\begin{align*}
+		E^{\rm xc} [n] 
+		  = \int \d^3 x ~ n({\bf x}) \tilde e^{\rm xc} (n ({\bf x}))~.
+	\end{align*}
+	For example, Hohenberg and Kohn used the energy density $e^{\rm xc} (n)$~\cite{Hohenberg1964}, whereas Kohn and Sham used ``energy per electron'', $\tilde e^{\rm xc} (n)$~\cite{Kohn1965}.
+	}
+%
 \begin{align}
 	e^{\rm xc} [n] ({\bf x})
 		\approx e^{\rm xc}_{\rm LDA} \bm ( n({\bf x}) \bm )~.
 	\label{eq:dft.exc.lda.1}
 \end{align}
-This approximation is called the \emph{local density approximation} (LDA), and the resulting exchange-correlation energy reads\marginnote{Some authors prefer to write 
-  \mbox{$e^{\rm xc}(n) = n \tilde e^{\rm xc} (n)$}, such that
-	\begin{align*}
-		E^{\rm xc} = \int \d^3 x ~ n({\bf x}) \tilde e^{\rm xc} (n ({\bf x}))~.
-	\end{align*}}
+This approximation is called the \emph{local density approximation} (LDA), and the resulting exchange-correlation energy reads
+%
 \begin{align}
 	E^{\rm xc}_{\rm LDA}[n] 
 		= \int \d^3 x ~ e^{\rm xc}_{\rm LDA} \left(n ({\bf x}) \right)~.
 	\label{eq:dft.LDA.1}
 \end{align}
-The energy density $e^{\rm xc}_{\rm LDA} \left(n ({\bf x}) \right)$ is usually taken to be the exchange-correlation energy density of a homogeneous electron gas obtained from higher-level theory
-  \mscomment{disagree}
-  \FK{in what way?}
- approaches~\cite{Ceperley1980}.\footnote{Depending on the application, it can be beneficial to parametrize LDA on other reference system~\cite{Nagai2020}.} The LDA is (by construction) exact in the limit of vanishing density gradient, $\lvert \nabla n ({\bf x}) \rvert / n({\bf x}) \rightarrow 0$, but yields surprisingly good results under circumstances where the density is non-homogeneous as well~\cite[p.\,183]{Dreizler2012}.
+The energy density $e^{\rm xc}_{\rm LDA} \left(n ({\bf x}) \right)$ is usually taken to be the exchange-correlation energy density of a homogeneous electron gas obtained from many-body theory~\cite{Ceperley1980}.\footnote{Depending on the application, it can be beneficial to parametrize LDA on other reference system~\cite{Nagai2020}.} The LDA is (by construction) exact in the limit of vanishing density gradient, $\lvert \nabla n ({\bf x}) \rvert / n({\bf x}) \rightarrow 0$, but yields surprisingly good results under circumstances where the density is non-homogeneous as well~\cite[p.\,183]{Dreizler2012}.
 
 \subsection{Generalized Gradient Approximation (GGA)}
 \newthought{In the spirit of the original work} by Hohenberg and Kohn, and Kohn and Sham, improvements on the LDA can be constructed by going beyond the local density and taking into account gradients of the density as well,
@@ -594,9 +595,7 @@ Again, the full functional $e^{\rm xc}[n]$ is replaced by a function of the dens
 \end{align}
 where $e^{\rm x}_{\rm hom}(n)$ is the exchange energy density of a homogeneous electron gas, and $F^{\rm xc}(n, \nabla n)$ is an \emph{enhancement factor}~\cite{Perdew1992}.
 
-\newthought{The generalized gradient approximation is often a good compromise} between accuracy and numerical cost when studying nuclear dynamics of solids, and we will use this approximation throughout the work. However, when studying electronic properties including excitations, one often needs to use more sophisticated approximation schemes~\cite{Cohen2008,Cohen2012}.
-\mscomment{excitations go beyond dft}
-\FK{clarify that citations hint at challenges/problems for DFT, post-DFT approaches are necessary}
+\newthought{The generalized gradient approximation is often a good compromise} between accuracy and numerical cost when studying nuclear dynamics of solids, and we will use this approximation throughout the work. However, when studying electronic properties including excitations, one often needs to use more sophisticated approximation schemes, or go beyond DFT altogether~\cite{Cohen2008,Cohen2012}.
 
 \vfill
 
