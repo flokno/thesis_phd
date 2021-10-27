@@ -5,6 +5,8 @@
 % \documentclass{caesar_book}
 \usepackage[utf8]{inputenc}
 
+\usepackage[all]{nowidow}
+
 % \usepackage{hyperref}
 \hypersetup{colorlinks}
 
@@ -121,7 +123,7 @@
 {\todo[inline,backgroundcolor=yellow3, bordercolor=white]{{\bf CC:} #1}}
 \newcommand{\CHECK}{\todo{check}}
 \newcommand{\CONTINUE}
-{\todo[inline,backgroundcolor=yellow1, bordercolor=white]{{\bf Continue here.}}}
+{\todo[inline,backgroundcolor=yellow1, bordercolor=white]{{\bf Continue here.} \today}}
 \newcommand{\mscomment} [1] 
 {\todo[inline,backgroundcolor=matthias1, bordercolor=white]{{\bf Matthias comment:} #1}}
 \newcommand{\mscorrect} [1] 
