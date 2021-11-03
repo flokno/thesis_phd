@@ -63,7 +63,7 @@ However, some very recent path-integral molecular dynamics based approaches usin
 \section{Perspective}
 After discussing the status quo and potential futures of the methods used in this work, I want to discuss more long-term trends that are currently emerging in the field of heat transport simulations, and might have the power to push the topic forward considerably:
 %In light of the constant development of solid state physics, materials science, and computational sciences, we see two main routes for the further improvement of the status quo in \emph{ab initio} heat transport simulations from equilibrium approaches: 
-Green-Kubo simulations using machine-learned expressions for the potential-energy function $\mathcal{V} ({\bf R})$~\cite{Korotaev2019,Li2020,Mangold2020},
+Green-Kubo simulations using machine-learned expressions for the potential-energy function $\mathcal{V} ({\bf R})$~\cite{Korotaev.2019,Li.2020,Mangold.2020},
 \mscomment{is this all?}
 \FK{These are the available, citable approaches for GK from ML. Verdi/Kresse is still not even on arxiv.}
  and model Hamiltonian-based approaches using Boltzmann transport theory~\cite{Simoncelli2019} or analytical Green's functions~\cite{Isaeva2019,dangic2021}.
@@ -72,7 +72,7 @@ Green-Kubo simulations using machine-learned expressions for the potential-energ
 \label{sec:outlook.ml}
 The advent of machine-learned potentials with \emph{ab initio} quality~\cite{Lorenz2004,Behler2007,Bartok2010,Bartok2013,shapeev2016} coupled with on-the-fly or active-learning training strategies~\cite{Li2015,Jinnouchi2019,podryabinkin2017,Liu2021} promises to become a versatile tool for dynamical simulations of materials in a range of subfields, especially for phenomena where the electronic structure of a given material is only of secondary importance,~i.\,e.,~in uncharged systems with electronically trivial defects. In such materials, machine-learned potentials can remove computational bottlenecks when aiming for statistical convergence in simulation time, as well as system and ensemble sizes, which in turn could make GK-based transport simulations of new materials accessible to more researchers than currently.
 
-While several proofs of principle for GK simulations from machine-learned potentials exist already~\cite{Korotaev2019,Li2020,Mangold2020}, some more fundamental problems persist,~e.\,g.,~the question of transferability across temperature and phase transitions in particular, or how long-range electrostatic interactions in polar systems can be properly described in these models~\cite{Artrith2011,Grisafi2019,yue2021,kovacs2021}. From materials discovery perspective, where one aims at studying a multitude of systems, it remains to be seen how straightforward and robust the parametrization of these force fields can be achieved in practice, and if the extra cost in human time in order to train the potentials can be reduced to a minimum without compromising their reliability. The aiGK data computed and made available in the course of this project can help to develop and benchmark these approaches.
+While several proofs of principle for GK simulations from machine-learned potentials exist already~\cite{Korotaev.2019,Li.2020,Mangold.2020}, some more fundamental problems persist,~e.\,g.,~the question of transferability across temperature and phase transitions in particular, or how long-range electrostatic interactions in polar systems can be properly described in these models~\cite{Artrith2011,Grisafi2019,yue2021,kovacs2021}. From materials discovery perspective, where one aims at studying a multitude of systems, it remains to be seen how straightforward and robust the parametrization of these force fields can be achieved in practice, and if the extra cost in human time in order to train the potentials can be reduced to a minimum without compromising their reliability. The aiGK data computed and made available in the course of this project can help to develop and benchmark these approaches.
 
 
 \subsection{Boltzmann transport and analytical Green's functions}
@@ -99,7 +99,7 @@ Last but not least, lattice-dynamics techniques can be coupled with molecular dy
 %		\cite{Artrith2011,Grisafi2019,yue2021,kovacs2021}
 %		active learning/on the fly:
 %		\cite{Li2015,Jinnouchi2019,podryabinkin2017,Liu2021}
-%  	Shapeev: \cite{Korotaev2019},	DeepotSE: \cite{Li2020}, DonadioBehler: \cite{Mangold2020}
+%  	Shapeev: \cite{Korotaev.2019},	DeepotSE: \cite{Li.2020}, DonadioBehler: \cite{Mangold.2020}
 %		\subitem analytical GK: crossover between GK and BTE approach for not-too-complex materials
 %		\cite{dangic2021,Simoncelli2019,Isaeva2019}
 %			\subsubitem NQE? \cite{shulumba2017,sutherland2021}
