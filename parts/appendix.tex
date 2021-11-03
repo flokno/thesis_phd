@@ -188,7 +188,7 @@ If $M > 3N$ displacements are used,~e.\,g.,~because positive and negative displa
 \Phi &= - {\rm F} {\rm U}^{+}~,
 \label{eq:phi.pseudo.1}
 \end{align}
-where ${\rm U}^{+}$ denotes the Moore-Penrose pseudo inverse of the displacement matrix $\rm U$~\cite{Penrose1955,Parlinski1997}.
+where ${\rm U}^{+}$ denotes the Moore-Penrose pseudo inverse of the displacement matrix $\rm U$~\cite{Penrose.1955,Parlinski.1997}.
 
 \newthought{The number of required force calculations} can be reduced by considering the spacegroup symmetry of the crystal. This can be achieved in two ways: First, the symmetry can be used to identify the set of inequivalent displacements from which all other forces can be constructed by the following argument: We define the representation $\Gamma^g$ of a symmetry operation $g$ by its action on the atomic coordinates $\set{\b R_I = \b R_I^0 + \b U_I}$ as
 \begin{align}
@@ -229,7 +229,7 @@ A complementary approach is to use the symmetry elements $\set{g}$ to reduce the
 = \sum_{i=1}^{D} p_i \tilde{\Phi}_i~,
 \label{eq:sym.Phi.irrep.1}
 \end{align}
-where the $\tilde{\Phi}_i$ are \emph{solely} determined by the space group elements $\set{g}$ and analytical properties of the forceconstants, and only the \emph{irreducible components} $p_i$ are system dependent. The pseudoinverse procedure given in Eq.\,\eqref{eq:phi.pseudo.1} then only has to be performed for the $D$ parameters $p_i$~\cite{Parlinski1997}. This procedure can drastically reduce the number of free parameters in the forceconstant matrix. For example, in a $4\times4\times4$ bcc lattice with 128 atoms, $\Phi$ is a matrix with $(3 \cdot 128)^2 = 147456$ elements. However, there are only $D=11$ irreducible parameters $p_i$ that need to be determined~\cite{Hellman2013}.
+where the $\tilde{\Phi}_i$ are \emph{solely} determined by the space group elements $\set{g}$ and analytical properties of the forceconstants, and only the \emph{irreducible components} $p_i$ are system dependent. The pseudoinverse procedure given in Eq.\,\eqref{eq:phi.pseudo.1} then only has to be performed for the $D$ parameters $p_i$~\cite{Parlinski.1997}. This procedure can drastically reduce the number of free parameters in the forceconstant matrix. For example, in a $4\times4\times4$ bcc lattice with 128 atoms, $\Phi$ is a matrix with $(3 \cdot 128)^2 = 147456$ elements. However, there are only $D=11$ irreducible parameters $p_i$ that need to be determined~\cite{Hellman.2013}.
 
 \TODO{Add the theory for symmetry reduction}
 
@@ -249,7 +249,7 @@ we seek to find
 \begin{align}
 x^0 = \arg \min_x \mathcal V (x)~.
 \end{align}
-The standard tools to solve this problem are very well covered in the standard reference~\cite{nocedal2006}. The technical pitfalls when optimizing lattices are thoroughly discussed in~\cite{Pfrommer1997,Tadmor1999}.
+The standard tools to solve this problem are very well covered in the standard reference~\cite{nocedal2006}. The technical pitfalls when optimizing lattices are thoroughly discussed in~\cite{Pfrommer.1997,Tadmor.1999}.
 A slightly different approach as the ones discussed in the references listed above is taken in the molecular simulations code \textsc{FHI-aims}~\cite{FHI-aims}. We therefore review this approach shortly in the following.
 
 \newthought{Many optimization algorithms} working with gradients as input are based on the Newton descent method in which the target function is locally approximated by a second-order Taylor expansion~\cite{nocedal2006}. In our case, we denote the generalized force as $f_x$ and the Hessian matrix of second derivatives as ${\rm H}_{xx'}$, where
@@ -272,7 +272,7 @@ The minimum of this function is given by
 s_x = {\rm H}_{xx'}^{-1} \fD f_{x'}~,
 \end{align}
 which is the essence of the Newton method. One beneficial property of the Newton method is that the exact Hessian $\rm H$ is not required to be known, and one can find approximate matrices $\rm B$ that yield good results. Replacing the exact $\rm H$ by an approximate matrix $\rm B$ is known as the \emph{quasi}-Newton method.
-Typically, an initial approximate Hessian $\rm B^0$ is chosen to be of simple form,~e.\,g.,~a constant times unit matrix, or based on some simpler model~\cite{lindh1995}. The initial guess is then updated during the optimization, for example by means of the  Broyden–Fletcher–Goldfarb–Shanno (BFGS) algorithm.\footnote{BFGS update for the estimated Hessian $B^i$ from step $i$ to $i+1$:
+Typically, an initial approximate Hessian $\rm B^0$ is chosen to be of simple form,~e.\,g.,~a constant times unit matrix, or based on some simpler model~\cite{Lindh.1995}. The initial guess is then updated during the optimization, for example by means of the  Broyden–Fletcher–Goldfarb–Shanno (BFGS) algorithm.\footnote{BFGS update for the estimated Hessian $B^i$ from step $i$ to $i+1$:
 	\begin{align*}
 	{\rm B}^{i + 1}_{xx'}
 	= {\rm B}^i_{xx'} 
@@ -345,7 +345,7 @@ where $\sigma$ is the \emph{stress tensor} of the system. The lattice $a(T)$ in 
 p (V, T) \approx \frac{N k_{\rm B} T}{V} + p_{\rm pot} (V_0, T) + p_{\rm int}(V)~,
 \label{eq:eos.p}
 \end{align}
-where $p_{\rm kin} (T) = N k_{\rm B} T / V$ is the kinetic pressure, and $p_{\rm pot} (V_0, T)$ is the potential part of the pressure in the system at reference volume $V_0$ which stems from the nuclear interaction $\mathcal V (\b R)$~\cite{Hansen1990}. The last term, $p_{\rm int} (V)$, is an internal pressure induced by the volume change. We assume that $p_{\rm int} (V)$ mainly stems from the lattice and is not temperature dependent. It can therefore be obtained from an equation of state parametrized at 0\,K, for example the \emph{Vinet equation}~\cite{Vinet1987}:
+where $p_{\rm kin} (T) = N k_{\rm B} T / V$ is the kinetic pressure, and $p_{\rm pot} (V_0, T)$ is the potential part of the pressure in the system at reference volume $V_0$ which stems from the nuclear interaction $\mathcal V (\b R)$~\cite{Hansen1990}. The last term, $p_{\rm int} (V)$, is an internal pressure induced by the volume change. We assume that $p_{\rm int} (V)$ mainly stems from the lattice and is not temperature dependent. It can therefore be obtained from an equation of state parametrized at 0\,K, for example the \emph{Vinet equation}~\cite{Vinet.1987}:
 \begin{align}
 p_{\rm int} (V) 
 &= \frac{3 B_0}{X^2} (1-X) {\rm e}^{\eta (1-X)} \label{eq:p.Vinet} \quad\text{with} \\ 

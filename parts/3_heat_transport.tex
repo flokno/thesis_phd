@@ -1,7 +1,7 @@
 \label{chp:heat_transport}
 \epigraph{\singlespacing \it ``It seems there is no problem in modern physics for which there are on record as many false starts, and as many theories which overlook some essential feature, as in the problem of the thermal conductivity of [electrically] non-conducting crystals.''}{R.~Peierls, 1960~\cite{Peierls1960}}
 
-As this quote by Rudolf Peierls exemplifies, developing a microscopic theory for heat transport in dielectric crystals was a long-standing problem for solid-state physics in the 20th century. Early attempts to explain this phenomenon sparked by experiments conducted by Eucken comprise those by Einstein, Debye, and Born and von Karman in the early 1910s~\cite{Eucken.1911,Einstein.1911,Debye.1912,Cahill.1988}. However, they failed to explain the experimental findings (Einstein), or could only provide qualitative understanding (Debye). One key insight by Debye missing in the earlier attempt by Einstein is the notion of a \emph{phonon gas},~i.\,e.,~that the collective excitations of the nuclear degrees of freedom show qualitatively similar behavior as molecules in a gas. It was in 1929 that Peierls himself contributed a model for heat transport in solids that was able to explain key experimental findings such as the $1/T$ dependence of a material's thermal conductivity at elevated temperatures, which he could achieve by computing three-phonon scattering due to anharmonic terms in the potential-energy surface~\cite{Peierls1929}. It took another 80 years until this approach led to the development of a fully \emph{ab initio} computational approach by Broido and coworkers in 2007~\cite{Broido2007}, using the method of Boltzmann transport equation pioneered by Peierls and further developed in the meantime~\cite{Omini.1996,Omini.1997,Broido.2005}. By the time of writing this work, Boltzmann transport theory is the established way to compute thermal transport properties of dielectric crystals from first principles, and many new, more refined approaches have been developed in recent years~\cite{Feng2016,Xia2018,Ravichandran2018,Simoncelli2019}.
+As this quote by Rudolf Peierls exemplifies, developing a microscopic theory for heat transport in dielectric crystals was a long-standing problem for solid-state physics in the 20th century. Early attempts to explain this phenomenon sparked by experiments conducted by Eucken comprise those by Einstein, Debye, and Born and von Karman in the early 1910s~\cite{Eucken.1911,Einstein.1911,Debye.1912,Cahill.1988}. However, they failed to explain the experimental findings (Einstein), or could only provide qualitative understanding (Debye). One key insight by Debye missing in the earlier attempt by Einstein is the notion of a \emph{phonon gas},~i.\,e.,~that the collective excitations of the nuclear degrees of freedom show qualitatively similar behavior as molecules in a gas. It was in 1929 that Peierls himself contributed a model for heat transport in solids that was able to explain key experimental findings such as the $1/T$ dependence of a material's thermal conductivity at elevated temperatures, which he could achieve by computing three-phonon scattering due to anharmonic terms in the potential-energy surface~\cite{Peierls.1929}. It took another 80 years until this approach led to the development of a fully \emph{ab initio} computational approach by Broido and coworkers in 2007~\cite{Broido.2007}, using the method of Boltzmann transport equation pioneered by Peierls and further developed in the meantime~\cite{Omini.1996,Omini.1997,Broido.2005}. By the time of writing this work, Boltzmann transport theory is the established way to compute thermal transport properties of dielectric crystals from first principles, and many new, more refined approaches have been developed in recent years~\cite{Feng.2016,Xia.2018,Ravichandran.2018,Simoncelli.2019}.
 
 \newthought{However, Boltzmann transport theory always relies on the phonon gas model} and treats phonon-phonon interactions as perturbative effects due to low-order anharmonic corrections to the potential-energy surface. When dealing with strongly anharmonic materials, this perturbative treatment becomes more and more cumbersome, and sometimes even unjustified, as we will discuss in more detail later. In this chapter, we therefore review heat transport in solids in the framework of Green-Kubo theory without treating the nuclear dynamics as a phonon gas.
 
@@ -14,7 +14,7 @@ Conductive heat transport is the phenomenon of vibrational energy traversing a m
 \end{align}
 is called \emph{Fourier's law}. The sign convention is such that the heat flows from ``hot to cold'' in accordance with the second law of thermodynamics. The regime where Eq.\,\eqref{eq:Fourier} is valid is called the \emph{diffusive} regime, as it holds when the temperature gradient is small on microscopic scale, and the sample size is big enough so that boundary effects are negligible~\cite{Kapitza1941a,Antidormi2020}.
 
-It is evident from Eq.\,\eqref{eq:Fourier} that the thermal conductivity $\kappa$ is an explicitly non-equilibrium quantity. As such, it can be related to equilibrium fluctuations by means of the \emph{fluctuation-dissipation theorem}~\cite{Einstein1905a,Nyquist1928,Callen1951,Kubo1957a}, resulting in the famous Green-Kubo formula~\cite{Green1952,Kubo1957b},
+It is evident from Eq.\,\eqref{eq:Fourier} that the thermal conductivity $\kappa$ is an explicitly non-equilibrium quantity. As such, it can be related to equilibrium fluctuations by means of the \emph{fluctuation-dissipation theorem}~\cite{Einstein1905a,Nyquist.1928,Callen.1951,Kubo1957a}, resulting in the famous Green-Kubo formula~\cite{Green.1952,Kubo1957b},
 \begin{align}
   \kappa^{\alpha \beta} = \frac{V}{k_{\rm B} T^2} \int_{0}^{\infty} \d t ~
     \braket{J^\alpha (t) J^\beta(0)}_{\rm eq}~.
@@ -23,7 +23,7 @@ It is evident from Eq.\,\eqref{eq:Fourier} that the thermal conductivity $\kappa
 This formula relates the temporal fluctuations of the macroscopic heat flux $\b J (t)$ as given by an equilibrium ensemble average of the autocorrelation function, $\braket{J^\alpha (t) J^\beta(0)}_{\rm eq}$, to the associated transport coefficient $\kappa^{\alpha \beta}$, where $\alpha$ and $\beta$ denote the respective Cartesian components. It is however \emph{a priori} unclear how a microscopic description of the appearing quantities can be obtained. To tackle this question in full, we 
 %\mscomment{``we'': you or someone else?}
 %\FK{``closely following Baroni and coworkers in Ref.\,\cite{Baroni2020a}''. Clarify how many dots I connected}
-first show how the Kubo formula emerges in the framework of linear response theory, closely following Baroni and coworkers in Ref.\,\cite{Baroni2020a}. We then present how a microscopic description of heat in terms of a thermal energy density and an associated, locally conserved current follows, before reviewing the necessary steps to define an \emph{ab initio} heat flux~\cite{Carbogno2016}.
+first show how the Kubo formula emerges in the framework of linear response theory, closely following Baroni and coworkers in Ref.\,\cite{Baroni2020a}. We then present how a microscopic description of heat in terms of a thermal energy density and an associated, locally conserved current follows, before reviewing the necessary steps to define an \emph{ab initio} heat flux~\cite{Carbogno.2016}.
 
 
 
@@ -179,7 +179,7 @@ After this general exposition, let us now look at the example of the total energ
 	E = \int_V \d^3 r ~ e(\b r)~.
 	\label{eq:lr.E}
 \end{align}
-We are interested in the occuring flux in the presence of an inhomogeneous temperature, $T(\b r) = T + \Delta T(\b r)$, which couples linearly to the energy density  $e (\b r)$, so that\footnote{$E$ and $\mathcal H(\Gamma)$ are related by $E = \braket{\mathcal H}$. The same holds for the occurring densities $e(\b r)$ and $e (\b r, \Gamma)$.}\footnote{The situation can viewed as a \emph{stationary nonequilibrium state}. The general theory has been worked out by McLennan~\cite{McLennan1959,McLennan1960}. See also the discussion by Zwanzig in Ref.~\cite{Zwanzig1965}.}
+We are interested in the occuring flux in the presence of an inhomogeneous temperature, $T(\b r) = T + \Delta T(\b r)$, which couples linearly to the energy density  $e (\b r)$, so that\footnote{$E$ and $\mathcal H(\Gamma)$ are related by $E = \braket{\mathcal H}$. The same holds for the occurring densities $e(\b r)$ and $e (\b r, \Gamma)$.}\footnote{The situation can viewed as a \emph{stationary nonequilibrium state}. The general theory has been worked out by McLennan~\cite{Mclennan.1959,Mclennan.1960}. See also the discussion by Zwanzig in Ref.~\cite{Zwanzig.1965}.}
 \begin{align}
 	\mathcal H (\Gamma) = \frac{1}{T} \int \d^3 r ~ T (\b r) e(\b r, \Gamma) 
 		\equiv \mathcal H^0 (\Gamma) + \mathcal H' (\Gamma)~,
@@ -275,7 +275,7 @@ In force-field approaches, it is common to adopt the latter approach and split t
 	e (\b r, t ) = \sum_I E_I (t) \delta (\b r - \b R_I (t))~.
 	\label{eq:hf.e.atomic}
 \end{align}
-The heat flux is then given by~\cite{Helfand1960}
+The heat flux is then given by~\cite{Helfand.1960}
 \begin{align}
 	\b J (t) 
 		= \frac{1}{V} \frac{\d}{\d t} \sum_I E_I(t) \b R_I(t)
@@ -295,15 +295,15 @@ and a \emph{kinetic} or \emph{convective} current
 		= \frac{1}{V} \sum_I E_I (t) \dot{\b R}_I (t)~.
 	\label{eq:J_kin}
 \end{align}
-While the kinetic flux becomes increasingly important and even dominant in liquids and gases with substantial convection~\cite{Cheng2020}, it is typically neglected in non-convective solids, as it was shown several times in the literature that its contribution to thermal conductivity is orders of magnitude lower compared to the virial flux~\cite{Vogelsang1987,Kinaci2012}. However, also in solids it is not strictly vanishing, and discarding the kinetic flux as defined in Eq.\,\eqref{eq:J_kin} therefore is an approximation which we discuss in the following.
+While the kinetic flux becomes increasingly important and even dominant in liquids and gases with substantial convection~\cite{Cheng.2020}, it is typically neglected in non-convective solids, as it was shown several times in the literature that its contribution to thermal conductivity is orders of magnitude lower compared to the virial flux~\cite{Vogelsang.1987,Kinaci.2012}. However, also in solids it is not strictly vanishing, and discarding the kinetic flux as defined in Eq.\,\eqref{eq:J_kin} therefore is an approximation which we discuss in the following.
 
 \subsection{Gauge invariance of heat flux definitions}
 \label{sec:gauge_invariance}
-As seen above, the local current is only defined up to a non-heat carrying contribution $\b j_{\perp}$. Likewise, the energy density is only defined up to terms that keep the total energy integral unchanged. The choice of a local energy partitioning as,~e.\,g.,~given by Eq.\,\eqref{eq:hf.e.atomic} is therefore not unique, and different partitioning schemes will lead to differing heat fluxes. However, the thermal conductivity obtained after integrating the respective autocorrelation functions will be the same. In particular, Ercole \emph{et al.} have shown in Ref.\,\cite{Ercole2016} that two heat fluxes differing by the time derivative of a \emph{bounded} vector field,
+As seen above, the local current is only defined up to a non-heat carrying contribution $\b j_{\perp}$. Likewise, the energy density is only defined up to terms that keep the total energy integral unchanged. The choice of a local energy partitioning as,~e.\,g.,~given by Eq.\,\eqref{eq:hf.e.atomic} is therefore not unique, and different partitioning schemes will lead to differing heat fluxes. However, the thermal conductivity obtained after integrating the respective autocorrelation functions will be the same. In particular, Ercole \emph{et al.} have shown in Ref.\,\cite{Ercole.2016} that two heat fluxes differing by the time derivative of a \emph{bounded} vector field,
 \begin{align}
   \tilde{\b J} (t) = \b J (t) + \frac{\d}{\d t} \b P (t)~,
 \end{align}
-can differ in time, and in general also their autocorrelation functions will differ. The thermal conductivity obtained from both fluxes will however be the same, which can be viewed as a \emph{gauge invariance principle} for the heat flux. This property can be used to discard terms from the flux that do not contribute to the thermal conductivity and thereby reduce noise~\cite{Marcolongo2020}. 
+can differ in time, and in general also their autocorrelation functions will differ. The thermal conductivity obtained from both fluxes will however be the same, which can be viewed as a \emph{gauge invariance principle} for the heat flux. This property can be used to discard terms from the flux that do not contribute to the thermal conductivity and thereby reduce noise~\cite{Marcolongo.2020}. 
 %We will show practical implications of this ``gauge invariance principle'' later in the results part.
 
 \newthought{As an example of immediate practical importance}, we rewrite the heat flux expression presented in Eq.\,\eqref{eq:hf.J.atomic} as
@@ -313,7 +313,7 @@ can differ in time, and in general also their autocorrelation functions will dif
 	&= \frac{1}{V} \sum_I \b R_I^0 \fD{\dot{E}}_I + { \frac{1}{V} \frac{\d}{\d t} \sum_I \b U_I E_I}~,
 	\label{eq:J_gauge_1}
 \end{align}
-where the instantaneous positions ${\bf R} (t)$ are split into a fixed reference ${\bf R}^0$ and a displacement field ${\bf U} (t)$~\cite{Isaeva2019}. When all the atomic displacements $\set{{\bf U}_I}$ are bounded,~i.\,e.,~in the absence of convective terms, the second term in Eq.\,\eqref{eq:J_gauge_1} fulfills the condition of being the time derivative of a bounded vector field and therefore does not contribute to the thermal conductivity by the gauge invariance principle. Using the definition of the kinetic flux in Eq.\,\eqref{eq:J_kin}, the second, non-contributing term can be written as
+where the instantaneous positions ${\bf R} (t)$ are split into a fixed reference ${\bf R}^0$ and a displacement field ${\bf U} (t)$~\cite{Isaeva.2019}. When all the atomic displacements $\set{{\bf U}_I}$ are bounded,~i.\,e.,~in the absence of convective terms, the second term in Eq.\,\eqref{eq:J_gauge_1} fulfills the condition of being the time derivative of a bounded vector field and therefore does not contribute to the thermal conductivity by the gauge invariance principle. Using the definition of the kinetic flux in Eq.\,\eqref{eq:J_kin}, the second, non-contributing term can be written as
 \begin{align}
 	\frac{1}{V} \frac{\d}{\d t} \sum_I \b U_I E_I
 		= {\bf J}_{\rm kin} + {\bf J}_{\rm res}
@@ -332,7 +332,7 @@ This makes clear that, in the absence of convection, the contribution of ${\bf J
 		\approx {\bf J}_{\rm pot} (t)~,
 	\label{eq:J_tot_solid}
 \end{align}
-where the difference between left- and right-hand side is given by ${\bf J}_{\rm res}$ which can be neglected whenever the kinetic flux can be neglected, as discussed above. The exact definition for the non-diffusive current in terms of fixed reference positions $\set{{\bf R}^0_I}$ was already used by Ladd and coworkers in Ref.\,\cite{Ladd1986} to simplify the occuring expressions. An in-depth discussion of the subtleties arising in the definition of an exact expression for the non-convective heat flux in solids can be found in Sec.~2.3.1 and appendix A of Ref.~\cite{ErcoleThesis}.
+where the difference between left- and right-hand side is given by ${\bf J}_{\rm res}$ which can be neglected whenever the kinetic flux can be neglected, as discussed above. The exact definition for the non-diffusive current in terms of fixed reference positions $\set{{\bf R}^0_I}$ was already used by Ladd and coworkers in Ref.\,\cite{Ladd.1986} to simplify the occuring expressions. An in-depth discussion of the subtleties arising in the definition of an exact expression for the non-convective heat flux in solids can be found in Sec.~2.3.1 and appendix A of Ref.~\cite{ErcoleThesis}.
 
 \newthought{A final remark concerning the heat flux definition} is in order: One might argue that the expression in Eq.\,\eqref{eq:J_tot_solid} is a total time derivative of ${\bf P} = \frac{1}{V}  \sum_I {\bf R}_I^0 \fD E_I$, and therefore vanishes by the aforementioned gauge invariance principle as well. However, this is not the case in an infinite solid, since the atomic configuration $\set{{\bf R}_I}$ is not bounded. The sum over atomic positions is therefore not well defined in the first place and remains to be understood as a symbolic representation of an actual energy partitioning scheme that needs to be cast in a boundary-insensitive form for any practical application of Eq.\,\eqref{eq:J_tot_solid}.\footnote{The author thanks Stefano Baroni for an insightful discussion clarifying this point.}
 %\mscomment{wasn't this already discussed in the literature?}
@@ -340,7 +340,7 @@ where the difference between left- and right-hand side is given by ${\bf J}_{\rm
 
 \section{Ab initio Heat Flux}
 \label{sec:ab_initio_heat_flux}
-The above formulas are readily applied when empirical force fields are used to describe the atomic interactions, as an atomic partitioning of the total energy is trivial in that case, although care must be taken in deriving the correct formulae nevertheless~\cite{Fan2015,Boone2019}. An \emph{ab initio} derivation of heat flux on the other hand was a long-standing problem because it was not clear how an expression like Eq.\,\eqref{eq:J_tot_solid} can be obtained when no atomic partitioning is available~\cite{Stackhouse2010}. This problem was solved when Marcologno \emph{et al.} and Carbogno \emph{et al.} independently arrived at well-defined heat flux expressions in \mbox{\emph{ab initio}} frameworks~\cite{Marcolongo2016,Carbogno2016}. We adopt the latter approach in the following, but present a derivation that slightly differs from Ref.\,\cite{Carbogno2016},~i.\,e.,~by starting from Eq.\,\eqref{eq:hf.J} instead of Eq.\,\eqref{eq:hf.J.atomic}, and using the phase-space formalism developed in this chapter.
+The above formulas are readily applied when empirical force fields are used to describe the atomic interactions, as an atomic partitioning of the total energy is trivial in that case, although care must be taken in deriving the correct formulae nevertheless~\cite{Fan.2015,Boone.2019}. An \emph{ab initio} derivation of heat flux on the other hand was a long-standing problem because it was not clear how an expression like Eq.\,\eqref{eq:J_tot_solid} can be obtained when no atomic partitioning is available~\cite{Stackhouse.2010}. This problem was solved when Marcologno \emph{et al.} and Carbogno \emph{et al.} independently arrived at well-defined heat flux expressions in \mbox{\emph{ab initio}} frameworks~\cite{Marcolongo.2016,Carbogno.2016}. We adopt the latter approach in the following, but present a derivation that slightly differs from Ref.\,\cite{Carbogno.2016},~i.\,e.,~by starting from Eq.\,\eqref{eq:hf.J} instead of Eq.\,\eqref{eq:hf.J.atomic}, and using the phase-space formalism developed in this chapter.
 
 % \paragraph{Derivation of ab initio Heat Flux}
 To evaluate Eq.\,\eqref{eq:hf.J},\footnote{Recall Eq.\,\eqref{eq:hf.J}:$$\b J (t) 
@@ -417,7 +417,7 @@ By using Eq.\,\eqref{eq:hf.ai.F} in the first summand of the above equation, Eq.
 	\label{eq:hf.ai.J}
 \end{align}
 where the Cartesian indices of the expressions have been written out explicitly.
-As shown in Ref.\,\cite{Carbogno2016}, this expression can be written in terms of atomic contributions to the stress tensor $\sigma$ defined by
+As shown in Ref.\,\cite{Carbogno.2016}, this expression can be written in terms of atomic contributions to the stress tensor $\sigma$ defined by
 \begin{align}
   \sigma^{\alpha \beta} 
     = - \frac{\partial V ({\bf R})}{\partial \varepsilon_{\alpha \beta}}
@@ -441,9 +441,9 @@ This can be rationalized by using the same steps that led to the Hellmann-Feynma
     = \frac{\partial f (\b r_1 - \b r_2)}{\partial r_1^\alpha} (r_1^\beta - r_2 ^\beta)~,
   \label{eq:strain.derivative}
 \end{align}
-as discussed in detail in Ref.\,\cite{Knuth2015}. 
+as discussed in detail in Ref.\,\cite{Knuth.2015}. 
 
-The atomic stress contributions $\sigma_I$ are functionals of the electron density and atomic configuration and therefore can be computed in \emph{ab initio} frameworks, for example in the all-electron, numeric atomic orbital electronic structure code \emph{FHI-aims}~\cite{FHI-aims,Knuth2015}.\footnote{We mention in passing that in practical implementations, additional contributions to $\sigma_I$ need to be computed to account for basis set dependent Pulay terms just like in the computation of other gradients of the total energy. See again Ref.\,\cite{Knuth2015} for a comprehensive list of the arising terms.} 
+The atomic stress contributions $\sigma_I$ are functionals of the electron density and atomic configuration and therefore can be computed in \emph{ab initio} frameworks, for example in the all-electron, numeric atomic orbital electronic structure code \emph{FHI-aims}~\cite{FHI-aims,Knuth.2015}.\footnote{We mention in passing that in practical implementations, additional contributions to $\sigma_I$ need to be computed to account for basis set dependent Pulay terms just like in the computation of other gradients of the total energy. See again Ref.\,\cite{Knuth.2015} for a comprehensive list of the arising terms.} 
 The final result for the \emph{ab initio} heat flux used in this work is therefore
 \begin{align}
 	{\bf J}_{\rm ai} (t) = \sum_I \sigma_I (t) \dot{\bf R}_I~,
@@ -456,7 +456,7 @@ where $\sigma_I (t)$ is Eq.\,\eqref{eq:hf.sigma_I} evaluated for the configurati
 % \CITE{[1] O. H. Nielsen and R. M. Martin, Phys. Rev. B 32, 3780 (1985).?}
 
 \section{Heat Flux in the Harmonic Approximation}
-We now discuss heat flux in the harmonic approximation. This work was pioneered by Debye and Peierls~\cite{Debye1914,Peierls1929}, with a formal derivation first presented by Hardy~\cite{Hardy1963}. It allows to deduct several important conclusions about thermal transport in solids, and the insights will later be used to boost convergence of non-perturbative \emph{ab initio} Green Kubo simulations.
+We now discuss heat flux in the harmonic approximation. This work was pioneered by Debye and Peierls~\cite{Debye.1914,Peierls.1929}, with a formal derivation first presented by Hardy~\cite{Hardy.1963}. It allows to deduct several important conclusions about thermal transport in solids, and the insights will later be used to boost convergence of non-perturbative \emph{ab initio} Green Kubo simulations.
 
 \newthought{We start from the gauge-invariant heat flux expression} for solids as defined in Eq.\,\eqref{eq:J_tot_solid},~i.\,e.,
 \begin{align}
@@ -529,14 +529,14 @@ the diagonal contribution ($s=s'$) to the flux reads
 	\label{eq:J.ha.diag}
 \end{align}
 where the mode energy $E_s = \omega_s \D a_s \fD a_s$ was used.
-This result is the familiar phonon heat flux operator (when setting $\hbar = 1$), where $\D a_s (t) \fD a_s (t) \equiv n_s(t)$ is the instantaneous mode occupation as defined in Eq.\,\eqref{eq:n_s(t)}~\cite{Peierls1929,Hardy1963,Isaeva2019}.
+This result is the familiar phonon heat flux operator (when setting $\hbar = 1$), where $\D a_s (t) \fD a_s (t) \equiv n_s(t)$ is the instantaneous mode occupation as defined in Eq.\,\eqref{eq:n_s(t)}~\cite{Peierls.1929,Hardy.1963,Isaeva.2019}.
 
 \subsection{Thermal conductivity derived from the harmonic flux}
 \label{sec:hf.kappa.ha}
 {With the harmonic heat flux at hand}, we are now in position to discuss certain limits of the resulting thermal conductivity. For example, it is straightforward to show that the thermal conductivity of a purely harmonic system is infinite. 
 %At the same time, useful approximations to compute the thermal conductivity from a perturbation theory perspective can be found. 
 We demonstrate the reasoning for the case of the diagonal contribution to the heat flux $\b J_{\rm ha-diag}$ given by Eq.\,\eqref{eq:J.ha.diag}, which we simply denote by $J$ in the following, omitting Cartesian components for clarity when no confusion can arise.
-% The additional terms stemming from the offdiagonal contribution to the heatflux have been worked out in Ref.\,\cite{Isaeva2019}.
+% The additional terms stemming from the offdiagonal contribution to the heatflux have been worked out in Ref.\,\cite{Isaeva.2019}.
 
 \newthought{As discussed in detail in Sec.\,\ref{sec:Thermal.Conductivity}}, the thermal conductivity is given by the Kubo formula
 \begin{align}
@@ -582,7 +582,7 @@ and the generalized heat capacity
 	\label{c_ss}
 \end{align}
 
-\newthought{In the perfectly harmonic case}, the mode-energy autocorrelation function $G_{ss'}$ can be evaluated analytically by noting that the expectation value $\braket{\cdot}$ can be viewed as a functional integral with the distribution function $f = {\rm e}^{-\beta \sum_s \omega_s \D a_{s} \fD a_{s}}$ and can therefore be evaluated by means of a Wick theorem~\cite{Isaeva2019}.
+\newthought{In the perfectly harmonic case}, the mode-energy autocorrelation function $G_{ss'}$ can be evaluated analytically by noting that the expectation value $\braket{\cdot}$ can be viewed as a functional integral with the distribution function $f = {\rm e}^{-\beta \sum_s \omega_s \D a_{s} \fD a_{s}}$ and can therefore be evaluated by means of a Wick theorem~\cite{Isaeva.2019}.
 Keeping only the non-vanishing pairings, we have\footnote{In the context of complex field integration, the Wick theorem reads~\cite{NegeleOrland} $$\braket{ABCD} = \braket{AB}\braket{CD} + \braket{AC}\braket{BD} + \braket{AD}\braket{BC}.$$ Pairings with a non-equal number of ``creators'' $\D a$ and ``annihilators'' $a$ vanish identically because of the symmetry of the distribution function $f$.}
 \begin{align}
 	\braket{\D a_s (t) \fD{a}_s (t) \D a_{s'} \fD a_{s'}}
@@ -645,7 +645,7 @@ In low-order perturbation theory, the phonon self energy can be obtained by appr
 	\label{eq:V3}
 \end{align}
 %
-where $V^{(2)} (\b R)$ denotes the harmonic potential, and $V^{(3)} (\b R)$ is obtained by expanding the potential $\mathcal V (\b R)$ to third order. Further assuming the cubic contribution $V^{(3)} (\b R)$ to be small compared to the harmonic part, the inverse mode lifetime $\tau_s^{-1} = 2 \Gamma_s$ is given by the Fermi Golden Rule expression~\cite{Maradudin1962,Cowley.1963}
+where $V^{(2)} (\b R)$ denotes the harmonic potential, and $V^{(3)} (\b R)$ is obtained by expanding the potential $\mathcal V (\b R)$ to third order. Further assuming the cubic contribution $V^{(3)} (\b R)$ to be small compared to the harmonic part, the inverse mode lifetime $\tau_s^{-1} = 2 \Gamma_s$ is given by the Fermi Golden Rule expression~\cite{Maradudin.1962,Cowley.1963}
 %
 \begin{align}
 \begin{split}
@@ -657,13 +657,13 @@ where $V^{(2)} (\b R)$ denotes the harmonic potential, and $V^{(3)} (\b R)$ is o
 \label{eq:Gamma_s}
 \end{align}
 %
-where $\mathcal V^{(3)}_{spq}$ is the cubic potential transformed to phonon eigenstates. This equation and the single-mode expression for $\kappa$, Eq.\,\eqref{eq:ha.kappa.bte}, serve as the basis for most \emph{ab initio} studies of thermal conductivity in insulating solids in recent years~\cite{Broido2007,Simoncelli2019,Isaeva2019}.\footnote{The lifetime expression in Eq.\,\eqref{eq:Gamma_s} is modified when the full linearized Boltzmann transport equation is solved without performing the single-mode relaxation time approximation, where momentum-preserving phonon collisions (normal processes) are neglected~\cite{Klemens.1958,Omini.1996,Omini.1997,Broido.2005}. These are typically small for thermal insulators, however they can be of particular importance in highly conducting solids and two-dimensional systems~\cite{Lindsay.2010,Fugallo.2014,Cepellotti.2016}. \label{foot:SMRTA}} 
-More recently, extensions of the perturbation-expansion approach up to fourth order have been presented~\cite{Feng2016,Feng2017,Ravichandran2018,Xia2018}. While higher-order perturbation theory can improve the description of heat transport in anharmonic solids~\cite{Xia2020,Ravichandran2020}, it's applicability is currently limited to simple, highly-symmetric materials because of the scaling of quartic force constants with system size, see the discussion in appendix D of Ref.~\cite{Ravichandran2018}.
+where $\mathcal V^{(3)}_{spq}$ is the cubic potential transformed to phonon eigenstates. This equation and the single-mode expression for $\kappa$, Eq.\,\eqref{eq:ha.kappa.bte}, serve as the basis for most \emph{ab initio} studies of thermal conductivity in insulating solids in recent years~\cite{Broido.2007,Simoncelli.2019,Isaeva.2019}.\footnote{The lifetime expression in Eq.\,\eqref{eq:Gamma_s} is modified when the full linearized Boltzmann transport equation is solved without performing the single-mode relaxation time approximation, where momentum-preserving phonon collisions (normal processes) are neglected~\cite{Klemens.1958,Omini.1996,Omini.1997,Broido.2005}. These are typically small for thermal insulators, however they can be of particular importance in highly conducting solids and two-dimensional systems~\cite{Lindsay.2010,Fugallo.2014,Cepellotti.2016}. \label{foot:SMRTA}} 
+More recently, extensions of the perturbation-expansion approach up to fourth order have been presented~\cite{Feng.2016,Feng.2017,Ravichandran.2018,Xia.2018}. While higher-order perturbation theory can improve the description of heat transport in anharmonic solids~\cite{Xia.2020,Ravichandran.2020}, it's applicability is currently limited to simple, highly-symmetric materials because of the scaling of quartic force constants with system size, see the discussion in appendix D of Ref.~\cite{Ravichandran.2018}.
 \TODO{Add/refer to discussion in terms of $\sigmaA$.}
 
 
 \subsection{Mode lifetimes from molecular dynamics simulations}
-In \emph{ab intio} molecular dynamics, we have direct access to the non-perturbative dynamics of the nuclear system. Lifetimes can therefore be extracted by straightforward application of Eq.\,\eqref{eq:tau_ss} and \eqref{eq:G_ss}~\cite{Ladd1986}. To circumvent the problem of brute-force integrating the time integral in the evaluation of the lifetime expression in Eq.\,\eqref{eq:tau_ss}, we use the analytic Green's function expression defined in Eq.\,\eqref{eq:ha.kappa.gg.Sigma} to approximate the normalized mode-energy autocorrelation function $G_{ss'} (t)$ as
+In \emph{ab intio} molecular dynamics, we have direct access to the non-perturbative dynamics of the nuclear system. Lifetimes can therefore be extracted by straightforward application of Eq.\,\eqref{eq:tau_ss} and \eqref{eq:G_ss}~\cite{Ladd.1986}. To circumvent the problem of brute-force integrating the time integral in the evaluation of the lifetime expression in Eq.\,\eqref{eq:tau_ss}, we use the analytic Green's function expression defined in Eq.\,\eqref{eq:ha.kappa.gg.Sigma} to approximate the normalized mode-energy autocorrelation function $G_{ss'} (t)$ as
 %
 \begin{align}
 	G_{ss'} (t) \approx G_s (t) \delta_{ss'} = \frac{\braket{E_s (t) E_s}}{\braket{E^2_s}}
@@ -694,11 +694,11 @@ from which the lifetime $\tau_s$ can be obtained by fitting $G_s (t)$ to an expo
 
 \section{Ab initio Green Kubo}
 \label{sec:aiGK}
-Building on the previous sections, we are now in position to shortly sketch the \emph{ab initio} Green Kubo approach adopted in this work~\cite{Carbogno2016}, before introducing the methodological details in more depth later in Chp.\,\ref{chp:implementation}. The approach comprises four steps:
+Building on the previous sections, we are now in position to shortly sketch the \emph{ab initio} Green Kubo approach adopted in this work~\cite{Carbogno.2016}, before introducing the methodological details in more depth later in Chp.\,\ref{chp:implementation}. The approach comprises four steps:
 \begin{enumerate}
 	\item The thermal conductivity $\kappa_{\rm ai}$ is obtained by numerically evaluating the Green-Kubo integral using the \emph{ab initio} heat flux ${\bf J}_{\rm ai} (t)$ defined in Eq.\,\eqref{eq:J_ai} evaluated during microcanonical \emph{ab initio} molecular dynamics simulations.
 	\item The harmonic contribution $\kappa_{\rm ha}$ to the thermal conductivity is computed from the simulation data by using lifetimes extracted via Eq.\,\eqref{eq:G_s} in the BTE-type formula for $\kappa_{\rm ha}$ given in Eq.\,\eqref{eq:ha.kappa.bte}.
-	\item The quantities used to compute $\kappa_{\rm ha}$,~i.\,e., the group velocities and lifetimes, are interpolated to dense q-point grids in reciprocal space to achieve an extrapolation of the harmonic thermal conductivity to bulk limit, $\kappa_{\rm ha-bulk}~\cite{Carbogno2016}$. The interpolation works by assuming that\marginnote{We temporarily restore the full notation \mbox{$s=(b, {\bf q})$} to make the q-dependence of the appearing quantities explicit.} $\fD \tau_b ({\bf q}) = \fD \lambda_b ({\bf q}) \omega_b^{-2} ({\bf q})$ with a weakly q-dependent function $\lambda_b ({\bf q})$ obtained by linearly interpolating the lifetimes obtained at commensurate q-points. The scaling of lifetimes with $\omega_s^{-2}$ is rooted in basic phonon theory as developed by Herring~\cite{Herring1954} and holds especially for long-ranged acoustic modes which are difficult to describe in finite-sized \emph{ab initio} molecular dynamics simulations. A more detailed account of the interpolation scheme is given in Sec.\,\ref{sec:imp.extrapolation}.
+	\item The quantities used to compute $\kappa_{\rm ha}$,~i.\,e., the group velocities and lifetimes, are interpolated to dense q-point grids in reciprocal space to achieve an extrapolation of the harmonic thermal conductivity to bulk limit, $\kappa_{\rm ha-bulk}$~\cite{Carbogno.2016}. The interpolation works by assuming that\marginnote{We temporarily restore the full notation \mbox{$s=(b, {\bf q})$} to make the q-dependence of the appearing quantities explicit.} $\fD \tau_b ({\bf q}) = \fD \lambda_b ({\bf q}) \omega_b^{-2} ({\bf q})$ with a weakly q-dependent function $\lambda_b ({\bf q})$ obtained by linearly interpolating the lifetimes obtained at commensurate q-points. The scaling of lifetimes with $\omega_s^{-2}$ is rooted in basic phonon theory as developed by Herring~\cite{Herring.1954} and holds especially for long-ranged acoustic modes which are difficult to describe in finite-sized \emph{ab initio} molecular dynamics simulations. A more detailed account of the interpolation scheme is given in Sec.\,\ref{sec:imp.extrapolation}.
 	\item The interpolation scheme yields a finite-size corrected thermal conductivity via
 	\begin{align}
 		\kappa_{\rm bulk}  = \kappa_{\rm ai} - \kappa_{\rm ha} + \kappa_{\rm ha-bulk}~.
@@ -714,6 +714,6 @@ Building on the previous sections, we are now in position to shortly sketch the 
 
 
 \section{Conclusion}
-It is apparent from the presentation above that a low-order expansion of the potential-energy surface combined with low-order perturbation expressions represents a wealth of approximations that certainly hold for some materials~\cite{Ladd1986,Broido2007,Puligheddu2019}, but are questionable or even outright unjustified for others. In particular, dynamical effects such as phase transitions to dynamically stabilized crystal structures (ZrO$_2$~\cite{Carbogno2014,Carbogno2016}, SrTiO$_3$~\cite{Tadano2015}), spontaneous defect formation (e.\,g., in noble metal halides~\cite{Ulrich1999,Brenner2020}), or simply a soft bonding and therefore strong anharmonicity (NaCl~\cite{Ravichandran2018}, NaBr~\cite{Shen2020}) are inherently absent in such a description. These are cases where a non-perturbative description of thermal transport is necessary. By the same argument, largely harmonic materials like silicon or diamond fulfill the requirements for a perturbative treatment, and brute-force simulating the nuclear dynamics via MD techniques is therefore not necessary.
+It is apparent from the presentation above that a low-order expansion of the potential-energy surface combined with low-order perturbation expressions represents a wealth of approximations that certainly hold for some materials~\cite{Ladd.1986,Broido.2007,Puligheddu.2019}, but are questionable or even outright unjustified for others. In particular, dynamical effects such as phase transitions to dynamically stabilized crystal structures (ZrO$_2$~\cite{Carbogno.2014,Carbogno.2016}, SrTiO$_3$~\cite{Tadano.2015}), spontaneous defect formation (e.\,g., in noble metal halides~\cite{Ulrich.1999,Brenner.2020}), or simply a soft bonding and therefore strong anharmonicity (NaCl~\cite{Ravichandran.2018}, NaBr~\cite{Shen.2020}) are inherently absent in such a description. These are cases where a non-perturbative description of thermal transport is necessary. By the same argument, largely harmonic materials like silicon or diamond fulfill the requirements for a perturbative treatment, and brute-force simulating the nuclear dynamics via MD techniques is therefore not necessary.
 
 \newthought{For these reasons, it is desirable to pre-categorize materials} in terms of their ``anharmonic strength'', especially when one attempts to screen materials space for a significant amount of materials, as this allows to choose appropriate simulation techniques for each system. We present a systematic approach towars ``measuring anharmonicity'' in the next chapter.
