@@ -95,13 +95,12 @@ In the example of KCaF$_3$, this analysis shows that the calcium (Ca) atoms occu
 \begin{marginfigure}
 	\includegraphics[width=\textwidth]{./data/plots/anharmonicity/2_materials/both.pdf}
 	\caption{
-		\label{fig:KCaF3}
 		KCaF$_3$ in the low-temperature Pnma~(top) and high-temperature cubic phase~(bottom). Both structures are viewed along the long $b$-axis.
 	}
 	\label{fig:anh.KCaF3}
 \end{marginfigure}
 
-\newthought{It is instructive to evalute the anharmonicity for single configurations}, be it snapshots in time during molecular dynamics simulations, or when using other sampling approaches,~e.\,g,~harmonic Monte Carlo samples as defined in Eq.\,\eqref{eq:ha.samples}. The sample-resolved anharmonicity is given in analogy to Eq.\,\eqref{eq:sigmaA} as
+\newthought{It is instructive to evaluate the anharmonicity for single configurations}, be it snapshots in time during molecular dynamics simulations, or when using other sampling approaches,~e.\,g,~harmonic Monte Carlo samples as defined in Eq.\,\eqref{eq:ha.samples}. The sample-resolved anharmonicity is given in analogy to Eq.\,\eqref{eq:sigmaA} as
 \begin{align}
 	\sigmaA [{\bf R}]
 		= \sqrt{\frac{\sum_{I, \alpha} (F^{\rm A}_{I, \alpha})^2}{\sum_{I, \alpha} {(F_{I, \alpha})^2}}}~.
@@ -111,7 +110,7 @@ While we will discuss ``time-resolved anharmonicity'' in detail at a later point
 \begin{figure}
 	\includegraphics[width=4.1in]{./data/plots/anharmonicity/7_sampling/convergence_sigma_MC.pdf}
 	\caption{
-			Anharmonicity measure $\sigmaA$ evaluated for individual atomic configurations obtained from Eq.\,\eqref{eq:ha.samples}. Dots: $\sigmaA [{\bf R}_n]$ for individual samples; Red line: Cumulative average.	Black dashed line: $\sigmaA$ from \emph{ai}MD.	Shadowed region: Convergence estimated by standard error.
+			Anharmonicity measure $\sigmaA$ evaluated for individual atomic configurations obtained from Eq.\,\eqref{eq:ha.samples}. Dots: $\sigmaA [{\bf R}_n]$ for individual samples; Red line: Cumulative average.	Black dashed line: $\sigmaA$ from aiMD.	Shadowed region: Convergence estimated by standard error.
 	}
 	\label{fig:anh.sampling}
 \end{figure}
