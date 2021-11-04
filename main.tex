@@ -2,16 +2,21 @@
 % include symmetric to place margins left and right instead of right only
 % nohyper, nobib?
 \documentclass[nobib,a4paper,twoside,notoc,justified,marginals=justified]{tufte-book}
-% \documentclass{caesar_book}
+
 \usepackage[utf8]{inputenc}
 
 \usepackage[all]{nowidow}
 
+% citations
+\usepackage[style=phys, biblabel=brackets,]{biblatex}
+\addbibresource{references.bib}
+\addbibresource{references_experiments.bib}
+
+\usepackage[T1]{fontenc}
+% \usepackage{babel}
+
 % \usepackage{hyperref}
 \hypersetup{colorlinks}
-
-% \usepackage{setspace}
-% \newcommand{\newthought}[1]{\textsc{#1}}
 
 %%
 % For nicely typeset tabular material
@@ -22,6 +27,7 @@
 \newcommand\hmmax{0}
 \newcommand\bmmax{0}
 
+% paragraph indentation
 \AtBeginDocument{\setlength{\parindent}{0em}}
 
 % fix margins?
@@ -284,21 +290,18 @@
 
 
 \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
-\addcontentsline{toc}{chapter}{Conclusion}
 
-\chapter{Conclusion}
+\chapter*{Conclusion}
+\addcontentsline{toc}{chapter}{Conclusion}
 \input{./parts/conclusio.tex}
 
 \cleardoublepage
 \phantomsection
 \addcontentsline{toc}{chapter}{Bibliography}
 
-\bibliographystyle{unsrt}
-\bibliography{references,references_experiments}
-
 % \setcounter{secnumdepth}{-1}
 
-\part*{Appendix}
+\printbibliography
 
 % \setcounter{tocdepth}{1}
 % \addtocontents{toc}{\setcounter{tocdepth}{0}}
