@@ -18,8 +18,17 @@ data/*
 *.bak
 *.idx
 *.pdf
+*.bcf
+*.fdb_latexmk
+*.fls
+*.run.xml
+.texpadtmp/
+main.ilg
+main.ind
 
 # things that are not plain scripts or plots
 *.xcf
 *.ipynb
 *.ipynb_checkpoints
+**.DS_Store
+*.ignore
