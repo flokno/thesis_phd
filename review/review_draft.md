@@ -5,7 +5,7 @@ Thesis Review
 
 - [ ] numeric force constants via regression (appendix)
 - [ ] `fig:translation.permutation` w/o PBC (?)
-- [ ] 
+- [ ] happy with translational invariance?
 
 ## Matthias
 

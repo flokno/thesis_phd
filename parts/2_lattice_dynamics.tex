@@ -187,18 +187,11 @@ crystal.\footnote{Notation: We index components in the crystal basis $\set{{\bf 
 Let ${\bf R} = \set{{\bf R}_I}$ be a configuration of atoms, %in a local minimum of the potential energy, 
 and let ${\bf R}^{\prime} = \set{{\bf R}^{\prime}_{I}}$ denote the configuration obtained by moving all atoms by a Bravais vector ${\bf L}$,
 \begin{align}
-	{\bf R}^{\prime}_{I} = {\bf R}_{I} + {\bf L}~.
+	{\bf R}^{\prime}_{I} = \fD {\bf R}_{I} + {\bf L}~,
 	\label{eq:RI'}
 \end{align}
-As a prerequisite for $\mathcal V ({\bf R})$ to be translationally invariant, we require that ${\bf R}^{0 \prime} = \set{{\bf R}^{0 \prime}_{I}}$ are reference configurations of the potential both before and after translating the system by $\bf L$, \emph{and} there is a bijective permutation map $P_{\bf L}$ between the atomic positions ${\bf R}^{0 \prime}_{I}$ and ${\bf R}^{0}_{I'}$ which fulfills
-\begin{align}
-	P_{\bf L} : I \to I' \quad\text{such that}\quad
-	{\bf R}^{0 \prime}_{I}
-		= {\bf R}^{0}_{I'}~.
-	\label{eq:translation.permutation}
-\end{align}
-This statement is equivalent to requiring that the configurations ${\bf R}^{0 \prime}_{I}$ and ${\bf R}^{0}_{I}$ are indistinguishable.\footnote{This requirement is obviously not fulfilled for molecules, where rigidly shifting all atoms can by no means induce a permutation map between atoms.} 
-The final requirement for translational invariance of the potential is that the potential energy for \emph{any} configuration differing by a Bravais vector is unchanged,
+%
+then for each configuration ${\bf R}$, ${\bf R}'$, the potential energy is unchanged,
 \begin{align}
 %	{\bf R}^{0 \prime}
 %	= \set{{\bf R}_{I'}^0 }
@@ -207,11 +200,20 @@ The final requirement for translational invariance of the potential is that the 
 %	\label{eq:inv.R0} \\
 	\mathcal{V} \left( {\bf R}' = \set{{\bf R}_{I} + {\bf L}} \right)
 	&= \mathcal{V}({\bf R} = \set{{\bf R}_{I}} ) 
-	\quad\text{for all}\quad {\bf L} = L^\mu {\bf a}_\mu~,
+	\quad\text{for all}\quad {\bf L} = L^\mu {\bf a}_\mu~.
 	% \quad\text{with}\quad \set{L^\mu \in \mathds{N}_0}
 	\label{eq:inv.V}
 \end{align}
-i.\,e.,~not just at the minimum. This effectively corresponds to a permutation of the displacements of the atoms, $U_I \to U_{I'}$ according to $P_{\bf L}$ defined in Eq.\,\eqref{eq:translation.permutation}. Figure\,\ref{fig:translation.permutation} shows a one-dimensional depiction of the relation between discrete translation by Bravais vectors and the permutation map.
+%
+As a consequence of this translational invariance, we observe that the reference configurations ${\bf R}^{0} = \set{{\bf R}^{0}_{I}}$ of the potential both before and after translating the system by $\bf L$ are unchanged,\footnote{Reference positions are typically thermodynamic expectation values of the atomic positions. In simple systems, these coincide with local minima of the potential.} \emph{and} there is a bijective permutation map $P_{\bf L}$ between the atomic positions ${\bf R}^{0 \prime}_{I}$ and ${\bf R}^{0}_{I'}$ which fulfills
+\begin{align}
+	P_{\bf L} : I \to I' \quad\text{such that}\quad
+	{\bf R}^{0 \prime}_{I}
+		= {\bf R}^{0}_{I'}~.
+	\label{eq:translation.permutation}
+\end{align}
+This statement is equivalent to requiring that the configurations ${\bf R}^{0 \prime}_{I}$ and ${\bf R}^{0}_{I}$ are indistinguishable.\footnote{This requirement is obviously not fulfilled for molecules, where rigidly shifting all atoms can by no means induce a permutation map between atoms.} 
+Writing the atomic configurations as reference positions plus displacements, ${\bf R} = {\bf R}^0 + {\bf U}$, this corresponds to a permutation of the displacements of the atoms, $U_I \to U_{I'}$ according to $P_{\bf L}$ defined in Eq.\,\eqref{eq:translation.permutation}. Figure\,\ref{fig:translation.permutation} shows a one-dimensional depiction of the relation between discrete translation by Bravais vectors and the permutation map.
 \begin{marginfigure}
 	\centering
 	% \includegraphics[width=.68\textwidth]{./sketches/permutation1.jpg}
@@ -270,9 +272,9 @@ By imposing the periodic boundary conditions specified in Eq.\,\eqref{eq:sc.1}, 
 = \Phi_{i {\bf L} \alpha, j {\bf K} \beta} \quad\text{for all}\quad \b S = S^\mu \b A_\mu~.
 \label{eq:fc.sym.2}
 \end{align}
-Again this property carries over to the dynamical matrix. In contrast to Eq.\,\eqref{eq:fc.sym.1}, the translational invariance expressed by Eq.\,\eqref{eq:fc.sym.2} must be regarded as an \emph{extrinsic} periodicity of the sytem, as it imposes an effective cutoff on the range of interactions captured in the finite supercell.
+Again this property carries over to the dynamical matrix. In contrast to Eq.\,\eqref{eq:fc.sym.1}, the translational invariance expressed by Eq.\,\eqref{eq:fc.sym.2} must be regarded as an \emph{extrinsic} periodicity of the sytem, as it imposes an effective cutoff on the range of interactions captured in the finite supercell~\cite[p.~38\,ff.]{Maradudin}.
 
-\REM{Supercell imposes effective cutoff on the range of the force constants -> effect on spectrum, Maradudin, Ledermann}
+%\REM{Supercell imposes effective cutoff on the range of the force constants -> effect on spectrum, Maradudin, Ledermann}
 
 \subsection{Dynamical matrix for periodic systems}
 %
