@@ -1,6 +1,12 @@
 Thesis Review
 ===
 
+## Finale
+
+- [ ] numeric force constants via regression (appendix)
+- [ ] `fig:translation.permutation` w/o PBC (?)
+- [ ] 
+
 ## Matthias
 
 > Es gibt insbesondere 2 Dinge, die mir noch nicht gefallen:
@@ -48,9 +54,9 @@ Isotopes:
 
 ### DFT
 
-- [ ] $T$, $T_s$: Clarify if there is more than notation
-  - [ ] $T_s$: very definition of universal functional, see KohnSham1965, p.44f in Dreizler1990, in particular p. 48
-  - [ ] v representability, uniqueness: p. 25 in Engel2011, p. 49 in Dreizler1990
+- [x] $T$, $T_s$: Clarify if there is more than notation
+  - [x] $T_s$: very definition of universal functional, see KohnSham1965, p.44f in Dreizler1990, in particular p. 48
+  - [x] v representability, uniqueness: p. 25 in Engel2011, p. 49 in Dreizler1990
 
 ### Lattice dynamics
 

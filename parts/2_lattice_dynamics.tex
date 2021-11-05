@@ -2,11 +2,12 @@
 In the previous chapter, we have seen how the many-body problem can be decoupled into an electronic problem %given by Eq.\,\eqref{eq:Hsolution1}, 
 which can be solved in the framework of DFT, and a nuclear problem %given by Eq.\,\eqref{eq:chi2} 
 that describes the dynamical properties of the nuclei. This was achieved by means of the Born-Oppenheimer approximation where electron-nucleus interactions beyond a parametric dependence on each other are neglected~\cite{BornOppenheimer}.
-\mscomment{dynamics are decoupled}
+% \mscomment{dynamics are decoupled}
 
 \newthought{We will now approach} the description of the nuclear dynamics from two sides: First, we introduce the \emph{harmonic approximation} in which the nuclear Schr\"odinger equation is solved for an approximated potential in terms of vibrational eigenmodes. We will discuss extended systems next, in particular crystalline systems with long-range order.
 Second, we treat the nuclei as \emph{classical} particles on the full, non-truncated Born-Oppenheimer potential $E^{\rm BO} ({\bf R})$. This will lead to the formulation of \emph{ab initio molecular dynamics} (aiMD). In a last step, we will connect the two approaches to allow for extracting phonon properties from MD simulations.
-As no electron will appear anymore, $N \equiv N_{\rm Nuc}$ will henceforth denote the number of nuclei in the system of interest, and we denote the Born-Oppenheimer potential simply as \emph{the} potential, $E^{\rm BO} ({\bf R}) \equiv \mathcal V ({\bf R})$.
+As no electron will appear anymore, $N \equiv N_{\rm Nuc}$ will henceforth denote the number of nuclei in the system of interest, and we denote the Born-Oppenheimer potential simply as \emph{the} potential, 
+$$E^{\rm BO} ({\bf R}) \equiv \mathcal V ({\bf R})~.$$
 
 \newthought{To set the stage, we recall the Schr\"odinger equation} for the nuclear wavefunction $\chi ({\bf R})$ corresponding to the electronic ground state as initially defined in Eq.\,\eqref{eq:chi2},
 \begin{align}
@@ -22,7 +23,7 @@ where
 \end{align}
 is the nuclear kinetic-energy operator as before.
 
-\newpage
+
 \section{Harmonic Approximation}
 \label{sec:HA}
 The Born-Oppenheimer potential $\mathcal V ({\bf R})$ in Eq.\,\eqref{eq:BOSE} is an ordinary function of the\marginnote{Remember $N \equiv N_{\rm Nuc}$.} $3 N$ coordinates ${\bf R} = ({\bf R}_1, \ldots, {\bf R}_{N})$ and therefore can be expanded as a Taylor series in displacements ${\bf U} \equiv \Delta {\bf R}$ about a given configuration ${\bf R}^0$,~i.\,e.,
@@ -165,7 +166,6 @@ The state of the entire system is therefore specified by the $3N$ quantum number
 \end{align}
 This derivation is generally valid for a system of $N$ particles described by a potential-energy surface of which a (local) minimum ${\bf R}^0$, and the matrix of second derivatives at this configuration, $\Phi_{IJ}$, is known. The thermodynamic properties of such a system of harmonic oscillators follow from this spectrum in straighforward fashion~\cite{BornHuang}.
 
-\newpage
 
 \section{Extended Systems}
 \label{sec:extended_systems}
@@ -181,7 +181,7 @@ The expressions presented in the previous section are generally valid for a syst
 	\label{eq:L_Bravais}
 \end{align}
 where $\set{{\bf a}_\mu}$ are \emph{lattice vectors} spanning the unit cell of the %crystal, and $L^\mu$ are integers.
-crystal.\footnote{Notation: We index components in the crystal basis $\set{{\bf a}_\mu}$ with $\mu, \nu$, as opposed to Cartesian components indexed by $\alpha, \beta~.$} The Bravais vectors $\bf L$ span a regular grid,~i.\,e.,~a \emph{lattice}, and are therefore also called \emph{lattice points}.
+crystal.\footnote{Notation: We index components in the crystal basis $\set{{\bf a}_\mu}$ with $\mu, \nu$, as opposed to Cartesian components indexed by $\alpha, \beta~.$ Summing convention is implied as explained in appendix~\ref{app:notation}.} The Bravais vectors $\bf L$ span a regular grid,~i.\,e.,~a \emph{lattice}, and are therefore also called \emph{lattice points}.
 
 \newthought{The invariance of the potential energy under translations by arbitrary Bravais vectors} $\bf L$ is defined as follows:
 Let ${\bf R} = \set{{\bf R}_I}$ be a configuration of atoms, %in a local minimum of the potential energy, 
@@ -190,7 +190,7 @@ and let ${\bf R}^{\prime} = \set{{\bf R}^{\prime}_{I}}$ denote the configuration
 	{\bf R}^{\prime}_{I} = {\bf R}_{I} + {\bf L}~.
 	\label{eq:RI'}
 \end{align}
-As a prerequisite for $\mathcal V ({\bf R})$ to be translationally invariant, we require that ${\bf R}^{0 \prime} = \set{{\bf R}^{0 \prime}_{I}}$ are minimum configurations of the potential both before and after translating the system by $\bf L$, \emph{and} there is a bijective permutation map $P_{\bf L}$ between the atomic positions ${\bf R}^{0 \prime}_{I}$ and ${\bf R}^{0}_{I'}$ which fulfills
+As a prerequisite for $\mathcal V ({\bf R})$ to be translationally invariant, we require that ${\bf R}^{0 \prime} = \set{{\bf R}^{0 \prime}_{I}}$ are reference configurations of the potential both before and after translating the system by $\bf L$, \emph{and} there is a bijective permutation map $P_{\bf L}$ between the atomic positions ${\bf R}^{0 \prime}_{I}$ and ${\bf R}^{0}_{I'}$ which fulfills
 \begin{align}
 	P_{\bf L} : I \to I' \quad\text{such that}\quad
 	{\bf R}^{0 \prime}_{I}
@@ -216,7 +216,7 @@ i.\,e.,~not just at the minimum. This effectively corresponds to a permutation o
 	\centering
 	% \includegraphics[width=.68\textwidth]{./sketches/permutation1.jpg}
 	\includegraphics[width=\textwidth]{./data/sketches/permutation1.jpg}
-	\caption{\REM{w/o PBC!} A linear chain with three atoms (bullets) displaced from their equilibrium position (open circels). With periodic boundary conditions, the consecutive translation by a lattice vector $a$ induces a permutation of the atoms,~i.\,e.,~$(1, 2 , 3) \to (3, 1, 2) \to (2, 3, 1)$.}
+	\caption{A linear chain with three atoms (bullets) displaced from their equilibrium position (open circels). With periodic boundary conditions, the consecutive translation by a lattice vector $a$ induces a permutation of the atoms,~i.\,e.,~$(1, 2 , 3) \to (3, 1, 2) \to (2, 3, 1)$.}
 	\label{fig:translation.permutation}
 \end{marginfigure}
 
