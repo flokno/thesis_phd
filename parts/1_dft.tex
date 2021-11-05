@@ -303,11 +303,8 @@ under the constraint of fixed particle number imposed by the Lagrange multiplier
 \newpage
 
 \section{The Born-Oppenheimer Surface}
-\TODO{rephrase:}
-In the definition of the effective electronic Hamiltonian in Eq.\,\eqref{eq:H.dft.1}, we had neglected the electrostatic nuclear repulsion $V^{\rm Nuc-Nuc}$ defined in Eq.\,\eqref{eq:Vnuc}.
-%\mscomment{we had not neglected, but put it into Tnuc}
-%\FK{we actually neglected it in the named equation, but check}
-The Born-Oppenheimer potential-energy surface defined in Eq.\,\eqref{eq:E^BO_0} therefore consists of both terms,~i.\,e.,
+The Born-Oppenheimer or \emph{potential-energy surface} $E^{\rm BO} ({\bf R})$ was defined in Eq.\,\eqref{eq:E^BO_0},~i.\,e., it is given as the ground-state energy of the electron system and the electrostatic nuclear repulsion $V^{\rm Nuc-Nuc}$ defined in Eq.\,\eqref{eq:Vnuc} for each nuclear configuration $\bf R$. In terms of the energy functional $E[n]$ and the ground-state density $n \equiv n({\bf R})$ , this energy reads
+%
 \begin{align}
 	E^{\rm BO} ({\bf R}) 
 		= E[n] + \sum_{I < J} \frac{Z_{I} Z_{J} e^{2}}{\left|{\bf R}_{I}-{\bf R}_{J}\right|}~.
@@ -597,7 +594,7 @@ where $e^{\rm x}_{\rm hom}(n)$ is the exchange energy density of a homogeneous e
 
 \newthought{The generalized gradient approximation is often a good compromise} between accuracy and numerical cost when studying nuclear dynamics of solids, and we will use this approximation throughout the work. However, when studying electronic properties including excitations, one often needs to use more sophisticated approximation schemes, or go beyond DFT altogether~\cite{Cohen.2008,Cohen.2012}.
 
-\vfill
+
 
 \section{Periodic Systems}
 \label{sec:theory.periodic.1}
