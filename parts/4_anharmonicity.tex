@@ -1,7 +1,5 @@
 \label{chp:anharmonicity}
 
-\REM{update intro when chapter is ready}
-
 We have seen in the previous chapter that thermal conductivity is an anharmonic effect --- in a purely harmonic system, thermal conductivity is ill-defined. We have also discussed methods to assess vibrational thermal transport in materials from first principles: Either via the \emph{ab initio} Green-Kubo approach~\cite{Marcolongo.2016,Carbogno.2016}, or via perturbation theory, where the potential energy is expanded to third or fourth order in the atomic displacements, and these terms are used to compute the change of phonon properties such as their lifetimes~\cite{Broido.2007,Simoncelli.2019,Isaeva.2019,Feng.2016,Feng.2017,Ravichandran.2018,Xia.2018}.
 
 As we will see, the discussion of the differences between these approaches will be greatly facilitated once we can formally define and assess ``anharmonicity'' in a quantitative way. To this end, we have developed a scheme to measure the strength of anharmonicity in a material by means of a single number,~$\sigmaA$, irrespective of physical observables.
@@ -9,6 +7,15 @@ As we will see, the discussion of the differences between these approaches will 
 
 
 \section{Definition of Anharmonicity}
+\label{sec:anharmonicity.definition}
+
+\begin{marginfigure}
+	\centering
+	% \includegraphics[width=.68\textwidth]{./sketches/permutation1.jpg}
+	\includegraphics[width=\textwidth]{./data/plots/anharmonicity/1_pes_sketch/sketch_vertical.pdf}
+	\caption{Upper: Sketch of a one-dimensional potential-energy surface $\mathcal V$ (solid black), its harmonic approximation $\mathcal{V}^{(2)} (\b R)$ (dashed blue), and the anharmonic contribution $\mathcal{V}^{\rm A} (\b R)$ (solid red). Lower: The force ${F} ({\bf R})$ given by the derivative of $\mathcal V$ (black), the force $F^{(2)}$ stemming from $\mathcal{V}^{(2)} (\b R)$ (blue), and the anharmonic contribution $F^\mathrm{A} = F - F^{(2)}$ (red), cf.~Eq.\,\eqref{eq:anh.F}.}
+	\label{fig:pes_sketch_vertical}
+\end{marginfigure}
 
 In accordance with the previous chapters, classical nuclear dynamics within the Born-Oppenheimer approximation is governed by the Hamiltonian
 \begin{align}
@@ -35,17 +42,20 @@ In the classical limit, the dynamical evolution of the nuclei is determined by t
 	\label{eq:anh.F}
 \end{align}
 The division of potential and forces into harmonic and anharmonic contributions is depicted for a one-dimensional potential in Fig.\,\ref{fig:pes_sketch_vertical}.
-\begin{marginfigure}
-	\centering
-	% \includegraphics[width=.68\textwidth]{./sketches/permutation1.jpg}
-	\includegraphics[width=\textwidth]{./data/plots/anharmonicity/1_pes_sketch/sketch_vertical.pdf}
-	\caption{Upper: Sketch of a one-dimensional potential-energy surface $\mathcal V$ (solid black), its harmonic approximation $\mathcal{V}^{(2)} (\b R)$ (dashed blue), and the anharmonic contribution $\mathcal{V}^{\rm A} (\b R)$ (solid red). Lower: The force ${F} ({\bf R})$ given by the derivative of $\mathcal V$ (black), the force $F^{(2)}$ stemming from $\mathcal{V}^{(2)} (\b R)$ (blue), and the anharmonic contribution $F^\mathrm{A} = F - F^{(2)}$ (red), cf.~Eq.\,\eqref{eq:anh.F}.}
-	\label{fig:pes_sketch_vertical}
-\end{marginfigure}
+
 
 
 \section{Anharmonicity measure}
 \label{sec:anharmonicity_measure}
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{./data/plots/anharmonicity/4_force_distribution/histogram_forces_vertical.pdf}
+	\caption{
+		Force component distribution before and after normalization with the width of the distribution $\sigma [F]$. $p(F)$ denotes the probability to find a force component $F_{I, \alpha}$ of strength $F$ in the material. Panel a) and b) show the distribution before normalization, c) and d) after normalization. Dashed vertical lines denotes the standard deviation of the displayed distribution.
+	}
+	\label{fig:anh.normalization}
+\end{marginfigure}
 
 We base the definition of a measure for anharmonicity on the forces, for two reasons: First, because the forces give microscopic insight, as they can be resolved per atom. Second, the forces are statistically easier to describe, since per configuration $\bf R$, there are $3N$ force components ${\bf F} = ({\bf F}_1, \ldots, {\bf F}_N)$.
 
@@ -62,14 +72,7 @@ where $F_{I, \alpha}^{(A)}$ is the $\alpha$ component of the (anharmonic) force 
 		= \sqrt{\frac{1}{3N} \sum_{I, \alpha} \braket{F_{I, \alpha}^2}_T}~.
 \end{align}
 The effect of normalizing the distribution of forces is shown in Fig.\,\ref{fig:anh.normalization} for the two exemplary materials already discussed in the context of phonon dispersions in Sec.\,\ref{sec:ha.dispersions}, silicon, and the orthorombic perovskite KCaF$_3$. Only after normalizing the forces, a meaningful comparison between materials or across temperatures can be achieved.
-\begin{marginfigure}
-	\centering
-	\includegraphics[width=0.8\textwidth]{./data/plots/anharmonicity/4_force_distribution/histogram_forces_vertical.pdf}
-	\caption{
-		Force component distribution before and after normalization with the width of the distribution $\sigma [F]$. $p(F)$ denotes the probability to find a force component $F_{I, \alpha}$ of strength $F$ in the material. Panel a) and b) show the distribution before normalization, c) and d) after normalization. Dashed vertical lines denotes the standard deviation of the displayed distribution.
-	}
-	\label{fig:anh.normalization}
-\end{marginfigure}
+
 
 
 \newthought{For the two exemplary materials, we show the joint normalized distributions of force and anharmonic force contributions} in Fig.\,\ref{fig:anh.sigmaA}, where the thermodynamic sampling is performed by \emph{ab initio} molecular dynamics simulations at 300\,K.
@@ -220,9 +223,9 @@ Since we are mainly interested in thermal insulators as candidate thermoelectric
 	}
 	\label{fig:anh.histogram}
 \end{figure}
-All values are given with respect to room temperature, as this is the regime where the most experimental reference is available to benchmark the aiGK method later on. In total, there are experimental reference values for 45 materials available. The references are given in Tab.\,\ref{tab:kappa.exp} in appendix~\ref{sec:app.experiments}.
+All values are given with respect to room temperature, as this is the regime where the most experimental reference is available to benchmark the aiGK method later on. In total, there are experimental reference values for 45 materials available. These references are given in Tab.\,\ref{tab:kappa.exp} in appendix~\ref{sec:app.experiments}.
 
-\TODO{Include full list of materials with reference in appendix}
+% \TODO{Include full list of materials with reference in appendix}
 
 The materials have been chosen based on the following criteria:
 \begin{enumerate}
@@ -411,8 +414,8 @@ This hints at severe dynamical distortions throughout the simulation which are t
 %
 %\mscomment{minima? maxima?}
 %\FK{maxima probably correct}
-\mscomment{where would interstitial be in Fig. 4.21?}
-\FK{check!}
+%\mscomment{where would interstitial be in Fig. 4.21?}
+%\FK{check!}
 %
 However, such an effect might very well occur at higher temperatures, and the observed effects are fingerprints of the instability of the lattice towards this kind of dynamical defect formation.
 Irrespective of the exact type of defect formation, %which is beyond the scope of this work, 
@@ -457,13 +460,13 @@ These findings and trends are in line with a similar study conducted by Ravichan
 
 \section{Conclusion}
 
-\TODO{Actual conclusion!}
+Using the anharmonicity measure $\sigmaA$ introduced in Sec.\,\ref{sec:anharmonicity.definition}, we have shown that anharmonicity defined in this way strongly correlates with bulk thermal conductivity in simple semiconductors and insulators. Based on this finding, we have suggested candidate thermal insulator materials for further study. In these materials, we have observed a variety of non-perturbative dynamical effects, and discussed them for the prototypical systems KCaF$_3$, $\gamma$-CuI, $\beta$-AgI, and AgCl. The common feature of these effects is that they reflect thermodynamic phenomena which are known to occur in the respective materials, but at significantly higher temperatures. This comprised the onset of structural phase transitions in KCaF$_3$, fingerprints of a superionic phase in CuI and AgI, and pre-melting phenomena in AgCl and AgBr. Although these phenomena are known, we have presented a new way of finding and discussing these effects in terms of the time-resolved anharmonicity measure $\sigmaA (t)$.
+%\mscomment{what was your finding? embryos like this were known to exist before}
+%\FK{not to me, but I'd be happy to find a reference and supplement previous findings}
+%\mscomment{what does this mean for you project?}
+%\FK{it means that these materials are particularly interesting to study -- but also particularly difficult to converge out and gather statistics.}
 
-In summary, we have observed a variety of non-perturbative dynamical effects occuring in the candidate materials, and discussed them for the prototypical systems KCaF$_3$, $\gamma$-CuI, $\beta$-AgI, and AgCl. The common feature of these effects is that they reflect thermodynamic phenomena which are known to occur in the respective materials, but at significantly higher temperatures. This comprised the onset of structural phase transitions in KCaF$_3$, fingerprints of a superionic phase in CuI and AgI, and pre-melting phenomena in AgCl and AgBr.
-\mscomment{what was your finding? embryos like this were known to exist before}
-\FK{not to me, but I'd be happy to find a reference and supplement previous findings}
-\mscomment{what does this mean for you project?}
-\FK{it means that these materials are particularly interesting to study -- but also particularly difficult to converge out and gather statistics.}
+In the same light, we have scrutinized Boltzmann transport approaches for computing thermal conductivity. We found that higher-order anharmonicity can play an important role and lower thermal conductivity considerably, even in simple compounds at room temperature. This calls for the necessity of non-perturbative approaches, for two reason: First, the inclusion of fourth-order scattering cannot necessarily be considered sufficient when significant differences compared with third-order scattering are observed. Second, treating fourth-order terms is computationally very demanding and has hitherto only been performed for simple systems with high symmetry. When aiming for a consistent and accurate simulation of thermal conductivities across materials spaces containing more complex systems, non-perturbative calculations in terms of \emph{ab initio} Green Kubo simulations therefore seem necessary. In the next chapter, we introduce and benchmark this method, before applying it to materials from the list of candidates identified earlier.
 
-From a computational perspective, the two approaches have different strengths: Perturbative techniques are ideally suited when the anharmonicity is weak,~i.\,e.,~there is a well defined reference configuration and the harmonic terms in the potential dominate the dynamical evolution of the system. However, in strongly anharmonic systems, these basic assumptions can be violated, for example because the reference configuration changes qualitatively during phase transitions, or the anharmonic terms in the potential become too strong to be described by the asymptotic perturbation series~\cite[p.\,53]{NegeleOrland}. The Green-Kubo technique on the other hand does not require approximations to the potential-energy surface, and therefore naturally includes dynamical effects of arbitrary anharmonic strength. It is ideally suited in situations where the anharmonicity is strong,~i.\,e.,~when the basic assumptions of perturbation theory are not satisfied. It is therefore desirable to \emph{measure} the ``degree of anharmonicity'' to enable a discussion of anharmonicity on a quantitative basis.
+%From a computational perspective, the two approaches have different strengths: Perturbative techniques are ideally suited when the anharmonicity is weak,~i.\,e.,~there is a well defined reference configuration and the harmonic terms in the potential dominate the dynamical evolution of the system. However, in strongly anharmonic systems, these basic assumptions can be violated, for example because the reference configuration changes qualitatively during phase transitions, or the anharmonic terms in the potential become too strong to be described by the asymptotic perturbation series~\cite[p.\,53]{NegeleOrland}. The Green-Kubo technique on the other hand does not require approximations to the potential-energy surface, and therefore naturally includes dynamical effects of arbitrary anharmonic strength. It is ideally suited in situations where the anharmonicity is strong,~i.\,e.,~when the basic assumptions of perturbation theory are not satisfied. It is therefore desirable to \emph{measure} the ``degree of anharmonicity'' to enable a discussion of anharmonicity on a quantitative basis.
 

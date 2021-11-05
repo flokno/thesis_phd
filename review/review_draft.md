@@ -6,6 +6,9 @@ Thesis Review
 - [ ] numeric force constants via regression (appendix)
 - [ ] `fig:translation.permutation` w/o PBC (?)
 - [ ] happy with translational invariance?
+- [ ] Sec. 3.6.: harmonic flux/interpolation: improve?
+- [ ] where would interstitial be in Fig. 4.21?
+- [ ] Intro chp. 4?
 
 ## Matthias
 
