@@ -39,12 +39,11 @@ which can be viewed as an average over all available starting conditions $\Gamma
 	\label{eq:implementation.kappa.mean}
 \end{align}
 where the starting conditions $\Gamma_0^i$ are chosen from NVT molecular dynamics simulations for the thermodynamic conditions of interest. For each starting condition $\Gamma_0^i$, we perform NVE molecular dynamics simulations to generate the time evolution of the system, $\Gamma_t^i$, 
-\mscomment{you don't need initial equilibration?}
-\FK{All convergence checks go by discarding the first time period, I didn't see an effect there when discarding a few ps. I think it really depends on the quantity one is interest in. Also it's often a minor error compared to things like energy drift in aiMD runs, I would guess.}
-and evaluate the heat flux, $J^\alpha (\Gamma_t^i)$ along this trajectory. The simulation is performed for a total simulation time $t_0$, thereby truncating the time integral in Eq.\,\eqref{eq:implementatino.acf.1}. From the resulting autocorrelation function of finite length, the thermal conductivity is computed via Eq.\,\eqref{eq:implementatino.kappa.1}, where a \emph{cutoff time} $\tcut < t_0$ is chosen to reduce noise
-\mscomment{what noise?}
-\FK{statistical noise in the ACF due to finite size/finite time scales. Not fully balances statistical distribution of phonon modes, etc}
- when the autocorrelation function has effectively decayed~\cite{Jones.2012}.
+%\mscomment{you don't need initial equilibration?}
+%\FK{All convergence checks go by discarding the first time period, I didn't see an effect there when discarding a few ps. I think it really depends on the quantity one is interest in. Also it's often a minor error compared to things like energy drift in aiMD runs, I would guess.}
+and evaluate the heat flux, $J^\alpha (\Gamma_t^i)$ along this trajectory. The simulation is performed for a total simulation time $t_0$, thereby truncating the time integral in Eq.\,\eqref{eq:implementatino.acf.1}. From the resulting autocorrelation function of finite length, the thermal conductivity is computed via Eq.\,\eqref{eq:implementatino.kappa.1}, where a \emph{cutoff time} $\tcut < t_0$ is chosen to avoid integrating parts of the autocorrelation function after it has effectively decayed, as non-zero values are only due to statistical fluctuations stemming from finite size and time effects~\cite{Jones.2012}.
+%\mscomment{what noise?}
+%\FK{statistical noise in the ACF due to finite size/finite time scales. Not fully balances statistical distribution of phonon modes, etc}
 After computing the thermal conductivity for each trajectory, the final value is given by Eq.\,\eqref{eq:implementation.kappa.mean},~i.\,e.,~by the \emph{mean} of the individual trajectories. The statistical error due to the finite ensemble average is estimated by the \emph{standard error},~i.\,e.,~the standard deviation of the mean,
 \begin{align}
 	\Delta \kappa^{\alpha \beta} (T)
@@ -61,9 +60,7 @@ From the Cartesian components of the thermal conductivity $\kappa^{\alpha \beta}
 
 \newthought{In empirical force field approaches}, the appearing equations can be evaluated as is, and convergence in size and time can be checked in a brute-force way by increasing the respective scales well beyond the necessary limits.
 %\CITE{Lammps, Jones, more}. 
-From an \emph{ab initio} perspective, the accessible size and time scales are each at least two orders of magnitude lower,\footnote{Force fields: 1\,ns for 10000~atoms within 1 day on one supercomputer node, \emph{ab initio}: 50\,ps for 200~atoms within 1~months on five supercomputer nodes.} and additional steps are necessary to increase the amount of information that can be extracted from the comparatively short simulations. The purpose of this chapter is to discuss these additional steps in detail: First, we present steps to remove noise 
-\FK{see noise discussion above}
-from the heat flux autocorrelation functions $C_{JJ} (t)$, which enables to choose cutoff times $\tcut$ in a numerically robust way. Next, we discuss the size extrapolation scheme in terms of the harmonic mapping presented in Sec.\,\ref{sec:aiGK} which allows to correct for the finite size of simulations cells used in \emph{ab initio} molecular dynamics simulations. Finally, we discuss the necessary simulation times $t_0$ and how those can be estimated for novel materials.
+From an \emph{ab initio} perspective, the accessible size and time scales are each at least two orders of magnitude lower,\footnote{Force fields: 1\,ns for 10000~atoms within 1 day on one supercomputer node, \emph{ab initio}: 50\,ps for 200~atoms within 1~months on five supercomputer nodes.} and additional steps are necessary to increase the amount of information that can be extracted from the comparatively short simulations. The purpose of this chapter is to discuss these additional steps in detail: First, we present steps to remove noise from the heat flux autocorrelation functions $C_{JJ} (t)$, which enables to choose cutoff times $\tcut$ in a numerically robust way. Next, we discuss the size extrapolation scheme in terms of the harmonic mapping presented in Sec.\,\ref{sec:aiGK} which allows to correct for the finite size of simulations cells used in \emph{ab initio} molecular dynamics simulations. Finally, we discuss the necessary simulation times $t_0$ and how those can be estimated for novel materials.
 
 \newthought{We present the implementation in detail} for the case of periclase magnesium oxide (MgO) which is well-known in the literature, and, as a rather harmonic material, a typical benchmark system for perturbative heat transport techniques. We then apply the same approach to the strongly anharmonic marshite copper iodide (CuI), for which basic assumptions of perturbation theory are violated, as we will explain in detail. 
 Both structures are studied at GGA level of theory using the PBEsol functional and light-default basissets in FHI-aims~\cite{Perdew.2008,FHI-aims}. Supercell sizes are 216 atoms each, and the MD simulations are performed via FHI-vibes~\cite{Larsen.2017,FHI-vibes}. The aiGK methods as described is implemented in FHI-vibes as well. Force constants for the size extrapolation via harmonic mapping are obtained via regression from the MD runs via the temperature dependent effective potentials code (TDEP)~\cite{Hellman.2013}. The MD runs are thermalized using the pre-thermalization technique outlined in Sec.\,\ref{sec:harmonic_sampling} using finite-differences force constants obtained via phonopy~\cite{phonopy}. Afterwards, a Langevin thermostat at the target temperature (300\,K) is used to perform NVT sampling. After and initial sampling period of 2.5\,ps, the thermal pressure is relaxed according to the scheme outlined in Sec.\,\ref{sec:app.lattice_expansion} in the appendix to account for thermal expansion. Starting points $\Gamma^i_0$ for the NVE simulations are chosen from an NVT run for the relaxed supercell at least 2\,ps apart. The time step for the MD simulation was chosen as 5\,fs, which corresponds to a tenth of the shortest period duration of the harmonic spectrum of MgO ($\omega_{\rm max} \approx 20$\,THz).
@@ -119,7 +116,7 @@ The presented scheme will be used for all reported values of thermal conductivit
 \section{Size extrapolation}
 \label{sec:imp.extrapolation}
 
-\mscomment{tell more clearly what is new and what not}
+%\mscomment{tell more clearly what is new and what not}
 After we have seen how the Green-Kubo formula is used to compute thermal conductivities from the \emph{ab initio} heat flux evaluated along aiMD trajectories, we shortly review the size extrapolation scheme first introduced in Ref.\,\cite{Carbogno.2016} and discussed in more detail in Sec.\,\ref{sec:aiGK}. The aim of the size extrapolation is to correct for finite size effects occuring in aiMD simulations, because the supercells used in \emph{ab initio} simulations are limited in size, and phonon modes of longer wavelength than the supercell are therefore not included. 
 
 \newthought{As discussed in Sec.\,\ref{sec:aiGK}}, the correction works by computing the harmonic contribution to the thermal conductivity $\kappa_{\rm ha}$ within the supercell via Eq.\,\eqref{eq:ha.kappa.bte}
@@ -129,7 +126,7 @@ After we have seen how the Green-Kubo formula is used to compute thermal conduct
 \end{align}
 where $v_b^\alpha ({\bf q})$ is the group velocity of a phonon mode with band index $b$ and \emph{commensurate} wave vector $\bf q$, and $\tau_b ({\bf q})$ is the lifetime obtained from the autocorrelation function of the mode-resolved energy $E_b ({\bf q}, t)$ as defined and discussed in Eq.\,\eqref{eq:G_s}~\cite{Carbogno.2016}. For a given simulation $\set{\Gamma^i  _t}$, Eq.\,\eqref{eq:imp.K.bte} is evaluated for all commensurate $\bf q$-points, and projected to the symmetry-inequivalent points in the Brillouin zone determinded by the space group operations of the system to improve the statistics~\cite{Maradudin.1968}. The irreducible q-points in the Brillouin zone are obtained by iteratively reducing the given grid with the available symmetry operations for the system obtained by the spglib package~\cite{Spglib}.
 
-\newthought{In the next step}, the lifetimes $\tau_b ({\bf q})$ are interpolated to denser $\bf q$-point meshes by $\fD{\tilde{\tau}}_b (\tilde{\bf q}) = \fD \lambda_b (\tilde {\bf q}) \omega_b^{-2} (\tilde {\bf q})$ with a weakly $\bf q$-dependent function $\lambda_b (\tilde {\bf q})$ obtained by linearly interpolating the lifetimes obtained at commensurate $\bf q$-points. The scaling of lifetimes with $\omega_b^{-2} ({\bf q})$ is rooted in basic phonon theory as discussed in detail by Herring~\cite{Herring.1954}. For the acoustic modes at ${\bf q} = \Gamma = 0$, where $\omega ({\bf q \to 0}) \to 0$, the value for $\lambda_b (\Gamma)$ is obtained by averaging over values at the surrounding $\bf q$-points. For the new, denser grid, an interpolated value,
+\newthought{In the next step}, the lifetimes $\tau_b ({\bf q})$ are interpolated to denser $\bf q$-point meshes by $\fD{\tilde{\tau}}_b (\tilde{\bf q}) = \fD \lambda_b (\tilde {\bf q}) \omega_b^{-2} (\tilde {\bf q})$ with a weakly $\bf q$-dependent function $\lambda_b (\tilde {\bf q})$ obtained by linearly interpolating the lifetimes obtained at commensurate $\bf q$-points.\footnote{We use linear interpolation at variance with Ref.\,\cite{Carbogno.2016}, as we found it to be numerically more robust. However, results should not significantly depend on the interpolation algorithm used to obtain $\lambda_b (\tilde {\bf q})$, as the physically relevant contribution is captured by the $\omega_b^{-2} ({\bf q})$  scaling.} The scaling of lifetimes with $\omega_b^{-2} ({\bf q})$ is rooted in basic phonon theory as discussed in detail by Herring~\cite{Herring.1954}. For the acoustic modes at ${\bf q} = \Gamma = 0$, where $\omega ({\bf q \to 0}) \to 0$, the value for $\lambda_b (\Gamma)$ is obtained by averaging over values at the surrounding $\bf q$-points. For the new, denser grid, an interpolated value,
 \begin{align}
 	\kappa_{\rm ha - int}^{\alpha \beta} (N_{\tilde{\bf q}}) = V k_{\rm B} \frac{N_{\bf q}}{N_{\tilde{\bf q}}} \sum_{b, \tilde{\bf q}} v^\alpha_b (\tilde{\bf q}) v^{\beta}_b (\tilde{\bf q}) \fD{\tilde{\tau}}_b (\tilde{\bf q})~,
 	\label{eq:imp.K.bte.correction}
@@ -201,20 +198,24 @@ Periclase MgO is an important constituent of the earth mantle and its thermal pr
     Touloukian et al.~1970~\cite{touloukian1970} & $59.8$ \\
     MacPherson and Schloessin~1983~\cite{Macpherson.1983} & $61.7 \pm 10.5$ \\
     Andersson and B\"ackstr\"om~1986~\cite{Andersson.1986} & $55.2 \pm 0.4$ \\
+    Katsura 1997~\cite{Katsura.1997} & $65 \pm 15^{\,\dagger}$ \\
     Dalton et al.~2013~\cite{Dalton.2013} & $53 \pm 2$ \\
     Hofmeister~2014~\cite{Hofmeister.2014} & $50.1$ \\
     This work (theory) & $68.8 \pm 6.1$ \\
     \bottomrule
     \vspace{.5em}
   \end{tabular}
-  \caption{Experimental values for the thermal conductivity of periclase MgO at ambient conditions. %The two values for Slack are obtained for two different specimens~\cite{Slack.1962,Andersson.1986}.
+  \caption{Experimental values for the thermal conductivity of periclase MgO at ambient conditions. The value marked by $\dagger$ was computed from thermal diffusivity measurements by Katsura according Ref.\,\cite{Hofmeister.2014} with parameters from Ref.~\cite{Dubrovinsky.1997,Chase.1998}.
   }
   \label{tab:exp.MgO}
 \end{table}
-The aiGK value presented in this work agrees within the statistical precision with the experimental value presented by MacPherson and Schloessin~\cite{Macpherson.1983}. It slightly overestimates the values reported by Slack~\cite{Slack.1962} and Touloukian et al.~\cite{touloukian1970}. More recent experiments by Dalton et al. and Hofmeister using laser-flash experiments report lower values of thermal conductivity in the range of 50-55\,W/mK~\cite{Dalton.2013,Hofmeister.2014}.
+The aiGK value presented in this work agrees within the statistical precision with the experimental value presented by MacPherson and Schloessin~\cite{Macpherson.1983}. It slightly overestimates the values reported by Slack~\cite{Slack.1962}, Touloukian et al.~\cite{touloukian1970}, and Katsura~\cite{Katsura.1997}. More recent experiments by Dalton et al. and Hofmeister using laser-flash experiments report lower values of thermal conductivity in the range of 50-55\,W/mK~\cite{Dalton.2013,Hofmeister.2014}.
 
-Overall, we overestimate the experimentally observed thermal conductivity by about 10-30\,\%, depending on the reference. This can be explained by two factors: First, the simulation deals with isotopically pure MgO. Neglecting isotope scattering is known to increase the thermal conductivity noticeably in MgO~\cite{Slack.1962,Tang.2010}, and the experiments measure samples of varying isotope and defect content. Second, the aiGK theory uses classical statistical mechanics, and nuclear quantum effects lowering the heat capacity of MgO and therefore its thermal conductivity are neglected. These effects have been shown to lower the thermal conductivity in MgO by about 5\,\% at 500\,K~\cite{Puligheddu.2019}, a stronger effect can therefore be expected at 300\,K.
+Overall, we overestimate the experimentally observed thermal conductivity by about 10-30\,\%, depending on the reference. This can be explained by two factors: First, the simulation deals with isotopically pure MgO. Isotope scattering is known to decrease the thermal conductivity in MgO by up to 46\,\% when the natural abundance of magnesium isotopes is considered~\cite{Slack.1962,Tang.2010}. As MgO is a major constituent of the earth mantle, available experiments investigate MgO in this form.\footnote{Natural abundance of Mg in the earth mantle is 80\% $^{24}$Mg, 10\% $^{25}$Mg, 10\% $^{26}$Mg~\cite{Berglund.2011}.} Second, the aiGK theory uses classical statistical mechanics, and nuclear quantum effects lowering the heat capacity of MgO and therefore its thermal conductivity are neglected. These effects have been shown to lower the thermal conductivity in MgO by about 5\,\% at 500\,K~\cite{Puligheddu.2019}, a stronger effect can therefore be expected at 300\,K. In total, an overestimation of thermal conductivity in non-isotopically-pure MgO at ambient conditions is therefore expected.\footnote{Unfortunately, experimental measurements for isotopically pure MgO are not available.}
 %Furthermore, small imperfections in the simulation tend to increase the thermal conductivity further: The pressure in the aiMD simulation is about 0.5\,GPa, and the thermal conductivity of MgO is known to increase with pressure by up to 6.8\,\% per GPa~\cite{Yukutake.1978}. Also the temperatures observed during the three aiMD runs are, on average, slightly lower than 300\,K.~\footnote{Observed temperatures in the three trajectories: 307.1\,K, 290.7\,K, 286.5\,K.}
+
+We also compare to theoretical values listed in Tab.\,\ref{tab:theo.MgO}.
+%
 \begin{table}[ht]
   \centering
   \fontfamily{ppl}\selectfont
@@ -223,6 +224,8 @@ Overall, we overestimate the experimentally observed thermal conductivity by abo
     Reference & Thermal conductivity \\
     & at at 300\,K (W/mK) \\
     \midrule
+    de Koker 2010 (LDA)~\cite{Koker.2010} & $\approx 75^{\,\dagger}$ \\
+    Stackhouse et al. 2010 (LDA)~\cite{Stackhouse.2010} & $58 \pm 6^{\,\dagger}$ \\
     Tang and Dong 2010 (LDA)~\cite{Tang.2010} & $\approx 66$ \\
     Dekura and Tsuchiya 2017 (LDA)~\cite{Dekura.2017} & $\approx 54$ \\
     Plata et al.~2017 (PBE)~\cite{AAPL} & $54.06$ \\
@@ -231,23 +234,25 @@ Overall, we overestimate the experimentally observed thermal conductivity by abo
     \bottomrule
     \vspace{.5em}
   \end{tabular}
-  \caption{Theoretical values for the thermal conductivity of periclase MgO at ambient conditions. All cited approaches use a perturbative Boltzmann transport approach with three phonon scattering. Xia and coworkers use three different flavors of Boltzmann transport theory and therefore give three values for thermal conductivity in the indicated range.}
+  \caption{Theoretical values for the thermal conductivity of periclase MgO at ambient conditions. All cited approaches use a perturbative Boltzmann transport approach with three phonon scattering. Xia and coworkers use three different flavors of Boltzmann transport theory and therefore give three values for thermal conductivity in the indicated range. Values marked with $\dagger$ are extrapolated values using data from higher temperatures using Eq.\,(17) in Ref.\,\cite{Koker.2010} and Eq.\,(5) in Ref.\,\cite{Stackhouse.2010}, respectively. See also discussion in Ref.\,\cite{Haigis.2012}.}
   \label{tab:theo.MgO}
 \end{table}
-We also compare to theoretical values listed in Tab.\,\ref{tab:theo.MgO}.
-Our study agrees with the value reported by Tang and Dong~\cite{Tang.2010}, whereas the other available references are overall smaller by about 10-15\,W/mK, which is above the statistical precision. Again, the difference can most probably be attributed to isotope scattering and nuclear quantum effects.
+%
+Our study agrees well with the values reported by de Koker, and Stackhouse and coworkers~\cite{Koker.2009,Stackhouse.2010}. Both use non-perturbative \emph{ab initio} molecular dynamics-based methods and simulate isotopically pure MgO, they are therefore closely related from a methodological point of view. All other approaches are based on Boltzmann transport theory and account for isotope scattering. They are therefore smaller, overall by about 10-15\,W/mK, and mutually agree quite well irrespective of the xc-functional. The only exception is the value reported by Tang and Dong, which is about 20\,\% larger, which they partially attribute to underestimated lattice constants due to their LDA functional~\cite{Tang.2010}.\footnote{Indeed, Tang and Dong find a density of MgO at ambient conditions of 3.70\,g/cm$^3$, compared with an experimantal value of 3.58\,g/cm$^3$~\cite{Speziale.2001}.}
 
-\newthought{In summary, the agreement with literature values can be considered satisfactory}, given the wide spread of experimental values in the range of 50--62\,W/mK for non-defect-free MgO samples, and noticing that MgO is not fully classical at 300\,K. Furthermore, please note that MgO is largely harmonic with $\sigmaA = 0.17$ and therefore not an ideally suited candidate material for Green-Kubo studies, as all requirements for perturbative Boltzmann transport are fulfilled, and good quantitative agreement can be achieved with that approach,~cf.~Tab.\,\ref{tab:theo.MgO}.
+\newthought{In summary, the agreement with literature values can be considered satisfactory}, in particular with the related computational approaches by de Koker, and Stackhouse and coworkers. In comparison to the experimental literature, we observe a systematic overestimation of available values, which is to be expected due to the lack of isotope effects in our simulations, as discussed.
 
-\mscomment{no reason to use isotopically pure MgO, add information which istope abundance was used}
-\FK{natural abundance of Mg is 79\% $^{24}$Mg, 10\% $^{25}$Mg, 10\% $^{26}$Mg~\cite{Berglund.2011}, we have approx. 100 Mg atoms in the simulation -> nice project.}
-\mscomment{isotope effect estimation can be improved}
-\FK{True, see discussion in \cite{Haigis.2012} using Eq. (1) from \cite{Tang.2010}.}
-\ADD{Stackhouse \cite{Stackhouse.2010} and Koker \cite{Koker.2009} as discussed in Haigis \cite{Haigis.2012}.}
-\mscorrect{...not ideally suited...: this should be ideal because BT works}
-\FK{yes but GK is expensive and isotope scattering + NQE, which are important here, are easier to incorporate into BT}
-\mscomment{Do TangDong use PBEsol or similar?}
-\FK{they use LDA}
+%Given the wide spread of experimental values in the range of 50--62\,W/mK for non-defect-free MgO samples, and noticing that MgO is not fully classical at 300\,K. Furthermore, please note that MgO is largely harmonic with $\sigmaA = 0.17$ and therefore not an ideally suited candidate material for Green-Kubo studies, as all requirements for perturbative Boltzmann transport are fulfilled, and good quantitative agreement can be achieved with that approach,~cf.~Tab.\,\ref{tab:theo.MgO}.
+
+%\mscomment{no reason to use isotopically pure MgO, add information which istope abundance was used}
+%\FK{natural abundance of Mg is 79\% $^{24}$Mg, 10\% $^{25}$Mg, 10\% $^{26}$Mg~\cite{Berglund.2011}, we have approx. 100 Mg atoms in the simulation -> nice project.}
+%\mscomment{isotope effect estimation can be improved}
+%\FK{True, see discussion in \cite{Haigis.2012} using Eq. (1) from \cite{Tang.2010}.}
+%\ADD{Stackhouse \cite{Stackhouse.2010} and Koker \cite{Koker.2009} as discussed in Haigis \cite{Haigis.2012}.}
+%\mscorrect{...not ideally suited...: this should be ideal because BT works}
+%\FK{yes but GK is expensive and isotope scattering + NQE, which are important here, are easier to incorporate into BT}
+%\mscomment{Do TangDong use PBEsol or similar?}
+%\FK{they use LDA}
 
 
 \section{Case Study Copper Iodide}
