@@ -232,8 +232,9 @@
 %  % r.1 blank page
 %  \blankpage
 %  
-%% r.3 full title page
-%\maketitle
+% r.3 full title page
+% \maketitle
+\input{./parts/title.tex}
 
 % r.5 contents
 \tableofcontents
@@ -243,15 +244,16 @@
 % \listoftables
 
 % r.7 dedication
-%\cleardoublepage
-%~\vfill
-%\begin{doublespace}
-%  \noindent\fontsize{12}{12}\selectfont\itshape
-%  \nohyphenation
-%  \hfill To my teachers.
-%\end{doublespace}
-%\vfill
-%\vfill
+\cleardoublepage
+~\vfill
+\begin{doublespace}
+  \noindent\fontsize{12}{12}\selectfont\itshape
+  \nohyphenation
+  \thispagestyle{empty}
+  \hfill To my teachers.
+\end{doublespace}
+\vfill
+\vfill
 
 
 % r.9 introduction
@@ -302,8 +304,6 @@
 
 \printbibliography
 
-% \setcounter{tocdepth}{1}
-% \addtocontents{toc}{\setcounter{tocdepth}{0}}
 \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
 \newcommand{\bibsection}{\section{Bibliography}} % <- was missing
 
@@ -313,7 +313,9 @@
   \input{./parts/appendix.tex}
 \end{appendices}
 
-% \backmatter
+\backmatter
+% Eigenstaendigkeitserklaerung
+\input{./parts/declaration.tex}
 
 
 
