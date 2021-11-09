@@ -95,7 +95,7 @@ Focusing on the new materials, we show a zoomed-in part of the $\kappa-\sigmaA$ 
 	\hfill
 	\includegraphics[width=.49\textwidth]{./data/plots/kappa_vs_sigma_trusted/kappa_vs_sigma_trusted_experiment_zoom.pdf}
 	\caption{
-	Thermal conductivity at room temperature computed via \emph{ab initio} Green Kubo (aiGK) vs. anharmonicity measure. Filled symbols denote materials without experimental reference. Left: Overview of studied materials without experimental reference. Materials with experimental reference are included as small dots for reference. Right: Zoom into the region $\kappa \leq 5$\,W/mK. Open symbols represent materials where experimental reference is available.}
+	Thermal conductivity at room temperature computed via \emph{ab initio} Green Kubo (aiGK) vs. anharmonicity measure. Filled symbols denote materials without experimental reference. Left: Overview of studied materials without experimental reference. Materials with experimental reference are included as small dots for reference. Right: Zoom into the region $\kappa \leq 5$\,W/mK. Open symbols represent materials where experimental reference is available. The dashed line and shaded area are the same as in Fig.\,\ref{fig:kappa_sigma_exp_comp},~i.\,e.,~they represent a power-law fit to experimental thermal conductivities and a $\pm 50\,\%$ margin.}
 	\label{fig:kappa_sigma}
 \end{figure*}
 %
@@ -119,7 +119,7 @@ Particularly noteworthy is a class of ternary materials, so-called \emph{chalcop
     \bottomrule
     \vspace{.5em}
   \end{tabulary}
-  \caption{Overview of experimental references for AgGaSe$_2$. \inlinecomment{update values}.}
+  \caption{Overview of experimental references for AgGaSe$_2$.}
   \label{tab:exp.aggase2}
 \end{table}
 %
@@ -130,7 +130,7 @@ Picking AgGaSe$_2$ as an example, there are two distinct measurements available 
   \fontfamily{ppl}\selectfont
   \begin{tabularx}{\textwidth}{lXcXc}
     \toprule
-    Material & & $\kappa^{\rm aiGK}$ & & $\sigmaA$ \\
+    Material & & $\kappa^{\rm aiGK}$ (W/mK) & & $\sigmaA$ \\
     \midrule
 	  AgAlS$_2$   & & $1.01 \pm 0.20$ & & 0.33 \\
           AgAlSe$_2$  & & $0.62 \pm 0.16$ & & 0.37 \\
@@ -144,9 +144,12 @@ Picking AgGaSe$_2$ as an example, there are two distinct measurements available 
   \label{tab:exp.chalcopyrites}
 \end{table}
 
-Besides AgGaSe$_2$, there is experimental reference for the chemically closely related material, AgGaS$_2$, with a measured thermal conductivity of 1.4\,W/mK~\cite{Beasley.1994}.\footnote{While we included AgGaS$_2$ in our dataset, we needed to discard the material because of aiMD convergence problems. 
-\mscomment{what kind of problems?}
-However, we like to mention this material in the context of this study as potentially interesting material for future investigations.} While our computational data might underestimate the thermal conductivity in these compounds slightly\footnote{Please keep in mind, that the absolute errors are only of the order of 0.5-1\,W/mK.}, we nevertheless see a clear indiciation of very low intrinsic thermal conductivity in AgGaSe$_2$, and the chemically closely related compounds AgAlS$_2$ and AgAlSe$_2$. At least regarding their thermal transport properties, they are therefore comparable or even superior to the existing thermoelectric materials listed in the previous section, while being free of heavy metals such as Pb or Bi.
+Besides AgGaSe$_2$, there is experimental reference for the chemically closely related material, AgGaS$_2$, with a measured thermal conductivity of 1.4\,W/mK~\cite{Beasley.1994}.
+%\footnote{While we included AgGaS$_2$ in our dataset, we needed to discard the material because of aiMD convergence problems. 
+%\mscomment{what kind of problems?}
+%However, we like to mention this material in the context of this study as potentially interesting material for future investigations.} 
+While our computational data might underestimate the thermal conductivity in these compounds slightly\footnote{Please keep in mind, that the absolute errors are only of the order of 0.5-1\,W/mK.}, we nevertheless see a clear indiciation of very low intrinsic thermal conductivity in AgGaSe$_2$, and the chemically closely related compounds AgAlS$_2$ and AgAlSe$_2$. At least regarding their thermal transport properties, they are therefore comparable or even superior to the existing thermoelectric materials listed in the previous section, while being free of heavy metals such as Pb or Bi.
+The class of chalcopyrite materials has recently been investigated in a high-throughput study conducted by Plata and coworkers~\cite{Plata.2021pre}. Their findings are overall in line with ours, supporting the finding that the class of chalcopyrite materials may comprise several promising thermal insulators.
  % Mg$_3$Sb$_2$~\cite{kajikawa2003,Condron.2006,Zhang.2009,Zhang.2018,Pan.2020,Ding.2021}.
 %\todo{$\kappa_{\rm MgSb}^{\rm aiGK} = 1.10 \pm 0.26$}
 
@@ -175,7 +178,7 @@ The common feature of these dispersions are the very flat acoustic branches whic
   \fontfamily{ppl}\selectfont
 \begin{tabularx}{\linewidth}{rXXX}
 \toprule
-Space group  &    material & $\kappa^{\rm aiGK}$ & $\sigmaA$  \\
+Space group  &    material & $\kappa^{\rm aiGK}$ (W/mK) & $\sigmaA$  \\
 \midrule
          122 & AgAlSe$_2$ &             0.62 &       0.37 \\
          122 & GaLiTe$_2$ &             0.81 &       0.32 \\
@@ -184,7 +187,7 @@ Space group  &    material & $\kappa^{\rm aiGK}$ & $\sigmaA$  \\
          122 &  AgAlS$_2$ &             1.01 &       0.33 \\
          225 &        LiI &             1.07 &       0.49 \\
          225 &   Na$_2$Te &             1.64 &       0.38 \\
-          62 &   KCdF$_3$ &             1.67 &       0.53* \\
+          62 &   KCdF$_3$ &             1.67 &       0.53$^\dagger$ \\
           62 &   KCaF$_3$ &             2.00 &       0.52 \\
          225 &    Rb$_2$O &             2.08 &       0.47 \\
          216 &      ZnPLi &             2.09 &       0.27 \\
@@ -212,12 +215,12 @@ Space group  &    material & $\kappa^{\rm aiGK}$ & $\sigmaA$  \\
          225 &    Li$_2$O &            21.39 &       0.29 \\
 \bottomrule
 \end{tabularx}
-  \caption{Bulk thermal conductivities for materials without experimental reference. *: The anharmonicity measure for KCaF$_3$ is increased when the entire simulation is taken into account with $\sigmaA \approx 1.32$, since the simulation is close to a structural phase transition. We observe jumps in $\sigmaA (t)$ similar to those discussed for KCaF$_3$ in Sec.\,\ref{chp:anharmonicity}, but more pronounced. When KCdF$_3$ is close to the orthorombic reference, $\sigmaA \approx 0.53$. Structural phase transition are known to occur in KCdF$_3$ at around 470\,K~\cite{Hidaka.1977,Hidaka.1990}.}
+  \caption{Bulk thermal conductivities for materials without experimental reference. $\dagger$: The anharmonicity measure for KCaF$_3$ is increased when the entire simulation is taken into account with $\sigmaA \approx 1.32$, since the simulation is close to a structural phase transition. We observe jumps in $\sigmaA (t)$ similar to those discussed for KCaF$_3$ in Sec.\,\ref{chp:anharmonicity}, but more pronounced. When KCdF$_3$ is close to the orthorombic reference, $\sigmaA \approx 0.53$. Structural phase transition are known to occur in KCdF$_3$ at around 470\,K~\cite{Hidaka.1977,Hidaka.1990}.}
   \label{tab:kappa.noexp}
 \end{table}
 
 \section{Conclusion}
 We have estimated the convergence of aiGK simulations in terms of an effective simulation time focusing on the slow degrees of freedom of the system, and validated the approach against experimental values from the literature. In total, we computed thermal conductivities for 57 materials and verified our screening approach in terms of the anharmonicity measure $\sigmaA$. We found that the overall trend of decreasing thermal conductivity when anharmonicity increases initially inferred from the set of simple compounds carried over qualitatively to the more complex bulk materials considered in this work. We presented thermal conductivities for 33 materials where experiemental reference is not yet available, and identified the family of chalcopyrite crystals as a potentially interesting class of low thermal conductivity compounds, with several systems showing very low thermal conductivity of $\kappa \approx 1$\,W/mK at room temperature, which is comparable to or even below currently investigated thermoelectric candidates such as SnSe or Mg$_2$Sb$_3$~\cite{Zhao.2014,Wei.2016,Sassi.2014,Pan.2020,kajikawa2003,Condron.2006,Zhang.2009,Zhang.2018,Ding.2021}
 
-\mscomment{Limits should be discussed before results part.}
-\FK{So far the structure was i) Implementation (what do we do), ii) benchmark (how do we perform, what do we miss), iii) application (what do we find, knowing about possible shortcomings).}
+%\mscomment{Limits should be discussed before results part.}
+%\FK{So far the structure was i) Implementation (what do we do), ii) benchmark (how do we perform, what do we miss), iii) application (what do we find, knowing about possible shortcomings).}
