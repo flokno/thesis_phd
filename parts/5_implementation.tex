@@ -205,7 +205,7 @@ Periclase MgO is an important constituent of the earth mantle and its thermal pr
     \bottomrule
     \vspace{.5em}
   \end{tabular}
-  \caption{Experimental values for the thermal conductivity of periclase MgO at ambient conditions. The value marked by $\dagger$ was computed from thermal diffusivity measurements by Katsura according Ref.\,\cite{Hofmeister.2014} with parameters from Ref.~\cite{Dubrovinsky.1997,Chase.1998}.
+  \caption{Experimental values for the thermal conductivity of periclase MgO at ambient conditions. The value marked by $\dagger$ was computed from thermal diffusivity measurements by Katsura according to Ref.\,\cite{Hofmeister.2014} with parameters from Ref.~\cite{Dubrovinsky.1997,Chase.1998}.
   }
   \label{tab:exp.MgO}
 \end{table}
@@ -257,17 +257,19 @@ Our study agrees well with the values reported by de Koker, and Stackhouse and c
 
 \section{Case Study Copper Iodide}
 
-After discussing our implementation of the aiGK method and found reasonable agreement with literature values for periclase MgO,
-\mscomment{You should agree if there are no other approximation}
-\FK{I listed the most important approximations, for full agreement one would need a consistent comparison with same computational parameters and good statistics, see \cite{Puligheddu.2019}.}
+After discussing our implementation of the aiGK method %and found reasonable agreement with literature values 
+for periclase MgO,
+%\mscomment{You should agree if there are no other approximation}
+%\FK{I listed the most important approximations, for full agreement one would need a consistent comparison with same computational parameters and good statistics, see \cite{Puligheddu.2019}.}
 we apply the presented methodology to zincblende copper iodide ($\gamma$-CuI), also know as marshite. CuI is a transparent semiconductor which shows several interesting electronic and thermal transport properties: In particular, its room temperature thermal conductivity is very low with only 1.68\,W/mK~\cite{perry2016}, which is typical for copper halide materials~\cite{Slack.1982}. In polycrystalline thin films, even lower thermal conductivities of 0.48--0.55\,W/mK have been reported~\cite{Yang.2017,Coroa.2019}.
 
 In our initial screening for anharmonic materials, CuI was detected as particularly anharmonic, with a one-shot $\sigmaAOS = 0.37$, 
-\mscorrect{0.4 ist mild}
-\FK{no.}
-and a value of $\sigmaA = 0.4-0.5$ in molecular dynamics simulations. The peculiar dynamical effects occuring in CuI,~.i.\,e.,~formation of metastable Cu defects below the superionic phase transition, have been discussed in Sec.\,\ref{sec:defects.CuI} in the previous chapter. CuI can therefore be considered a bigger challenge for dynamical simulations compared to MgO.
-\mscomment{I disagree, CuI should be easier for GK}
-\FK{yes, for GK, but I meant common ab initio simulations in general. Clarify}
+%\mscorrect{0.4 ist mild}
+%\FK{no.}
+and a value of $\sigmaA = 0.4-0.5$ in molecular dynamics simulations. The peculiar dynamical effects occuring in CuI,~.i.\,e.,~formation of metastable Cu defects below the superionic phase transition, have been discussed in Sec.\,\ref{sec:defects.CuI} in the previous chapter. CuI can therefore be considered a bigger challenge for \emph{ab initio} dynamical simulations compared to MgO.
+%\mscomment{I disagree, CuI should be easier for GK}
+%\FK{yes, for GK, but I meant common ab initio simulations in general. Clarify}
+Furthermore, as we have seen in Sec.\,\ref{sec:anharmonicity.bte}, thermal transport in strongly anharmonic zincblende compounds is often dominated by higher-order phonon scattering, a strong deviation to Boltzmann transport simulations based on third-order scattering can therefore be expected.
 
 
 
@@ -281,7 +283,7 @@ Following the same recipe presented earlier in this chapter, the convergence of 
 \end{figure}
 The final value of $1.38 \pm 0.14$\,W/mK is approached within error bars after an effective simulation time of $\teff = 40$, which corresponds to $t_0=36$\,ps. The finite size correction contributes about 0.26\,W/mK to the thermal conductivity,~i.\,e.,~19\,\% of the total value.
 
-Comparing this to the available literature in Tab.\,\ref{tab:exp.CuI}, we find good agreement with the  experimental reference value of 1.68\,W/mK, while the value is clearly above the thin-film limit of 0.55\,W/mK.
+Comparing this to the available literature in Tab.\,\ref{tab:exp.CuI}, we find good agreement with the  experimental reference value of 1.68\,W/mK, while the value is clearly above the thin-film limit of 0.55\,W/mK~\cite{Yang.2017}.
 \begin{table}[ht]
   \centering
   \fontfamily{ppl}\selectfont
@@ -301,20 +303,20 @@ Comparing this to the available literature in Tab.\,\ref{tab:exp.CuI}, we find g
   \label{tab:exp.CuI}
 \end{table}
 The theoretical reference on the other hand drastically overestimates the thermal conductivity by a factor of $\approx 4$~\cite{phono3py}. 
-\mscomment{Explain in more detail, are there empirical parameters:}
-Since the theoretical reference uses a perturbative approach in terms of third-order force constants obtained at the local minimum of the potential-energy surface, a probable explanation for this strong discrepancy is the inability of this approach to model the actual, strongly anharmonic dynamics of CuI with sufficient accuracy. As discussed in Sec.\,\ref{sec:defects.CuI}, CuI inhibits effects like metastable defects, which are qualitatively different from the phonon picture of atoms moving about a well defined reference position in a nearly harmonic potential. These effects are, however, naturally included in the non-perturbative aiGK formalism.
+%\mscomment{Explain in more detail, are there empirical parameters:}
+As discussed in Sec.\,\ref{sec:anharmonicity.bte}, this is expected since the theoretical reference uses a perturbative approach in terms of third-order force constants obtained at the local minimum of the potential-energy surface, which is problematic for CuI: As discussed in Sec.\,\ref{sec:defects.CuI}, CuI inhibits effects like metastable defects, which are qualitatively different from the phonon picture of atoms moving about a well defined reference position in a nearly harmonic potential. This supports the assumption that higher than third-order terms of the potential-energy surface are important when modeling the actual, strongly anharmonic dynamics of CuI with sufficient accuracy. These effects are, however, naturally included in the non-perturbative aiGK formalism.
 
 
 \section{Conclusion}
 We have introduced the technical details of our aiGK implementation, and discussed two benchmark systems at ambient conditions: Periclase MgO, and marshite CuI. Although both structures are very simple cubic structures with two atoms in the unit cell, they behave quite differently from a dynamical point of view: MgO is a largely harmonic system which can be regarded as a textbook example for phonon theory, where all basic assumptions hold. In particular there are well defined reference positions, and the deviation from perfectly harmonic interactions is quite weak, with a $\sigmaA = 0.17$ signaling an anharmonic contribution to the forces of about 17\,\%. CuI on the other hand is strongly anharmonic, with $\sigmaA \approx 0.4-0.5$, and displays spontaneous formation of metastable insterstial defects as discussed in Sec.\,\ref{sec:defects.CuI}. 
 While perturbative approaches proved to be very accurate for MgO, and even had some advantages compared to aiGK in situations where the material of interest is not fully classical, or isotope scattering lowers the thermal conductivity substantially, the differences were much bigger for the strongly anharmonic CuI, where the perturbative approach overestimated the thermal conductivity drastically, whereas the aiGK is in good agreement.
-\mscorrect{When you compare GK with BT you should use same isotope concentration}
-\FK{I do, for the simulation. BT includes isotope scattering perturbatively in the postprocessing. We cannot do this. Then what do we compare?}
+%\mscorrect{When you compare GK with BT you should use same isotope concentration}
+%\FK{I do, for the simulation. BT includes isotope scattering perturbatively in the postprocessing. We cannot do this. Then what do we compare?}
 
-\mscomment{say that this was the motivation which we could confirm:}
-\newthought{The aiGK method is therefore our method of choice} for the investigation of the strongly anharmonic candidate thermal insulators suggested in Chp.\,\ref{chp:anharmonicity} with potentially low thermal conductivity.
+%\mscomment{say that this was the motivation which we could confirm:}
+\newthought{The aiGK method is therefore our method of choice} for the investigation of the strongly anharmonic candidate thermal insulators suggested in Chp.\,\ref{chp:anharmonicity}.
 
-\mscorrect{ZP effects should be estimated}
-\FK{I do this to some extent later for LiF, and I think available techniques are unsatisfactory.}
-\mscorrect{discuss isotope scattering in more detail, in particular w.r.t to harmonic/anharmonic materials}
-\FK{I think I did this, clarify.}
+%\mscorrect{ZP effects should be estimated}
+%\FK{I do this to some extent later for LiF, and I think available techniques are unsatisfactory.}
+%\mscorrect{discuss isotope scattering in more detail, in particular w.r.t to harmonic/anharmonic materials}
+%\FK{I think I did this, clarify.}

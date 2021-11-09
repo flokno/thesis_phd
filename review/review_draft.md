@@ -9,6 +9,7 @@ Thesis Review
 - [ ] Sec. 3.6.: harmonic flux/interpolation: improve?
 - [ ] where would interstitial be in Fig. 4.21?
 - [ ] Intro chp. 4?
+- [ ] t_eff xlabel?
 
 ## Matthias
 
