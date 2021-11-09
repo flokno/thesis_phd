@@ -10,6 +10,7 @@ Thesis Review
 - [ ] where would interstitial be in Fig. 4.21?
 - [ ] Intro chp. 4?
 - [ ] t_eff xlabel?
+- [ ] grueneisen discussion?
 
 ## Matthias
 
