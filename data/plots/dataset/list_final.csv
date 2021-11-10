@@ -67,7 +67,7 @@ space_group,n_formula,material,n_primitive,mp_id,sigmaA_300,sigmaA_500,sigmaA_70
 221,5,KMgF3,5,mp-3448,0.24,,,Roekeghem,10?,7.02234075,8.2,Martin,Roekeghem,4.6 +/- 1.2,,y
 221,5,KZnF3,5,mp-5878,0.32,,,Roekeghem,5.5,3.72440695,4.15,Suemune,Roekeghem,3.5 +/- 1.6,,y
 221,5,RbMgF3,5,mp-8402,0.23,,,Roekeghem,,6.99361625,4.5,,Roekeghem,1.4 +/- 1.9,,y
-221,5,RbZnF3,,mp-xxxx,0.3,,,Roekeghem,,3.32870099,2.46,,Roekeghem,y,,y
+221,5,RbZnF3,5,mp-xxxx,0.3,,,Roekeghem,,3.32870099,2.46,,Roekeghem,y,,y
 221,5,SrTiO3,5,mp-5229,0.28,,,Toberer,10.5,1.76179472,6.4-8.5,"Muta, Popuri","Roekeghem, Tadano",,,y
 225,2,AgBr,2,mp-23231,0.48,0.59,0.66,Ramprasad,1.1,0.49609687,,Kamram,,0.5 +/- 0.1,,y
 225,2,AgCl,2,mp-22922,0.5,0.62,0.7,Ramprasad,0.9-1,0.72525839,0.67,"Ross, Ashqari",aapl,0.6 +/- 0.1,,y
