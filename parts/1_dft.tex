@@ -181,7 +181,7 @@ where $\hat T \equiv \hat T^{\rm e}$ denotes the electronic kinetic energy opera
 	\label{eq:SE.dft.1}
 \end{align}
 where $\hat H$ is the electronic Hamiltonian given by Eq.\,\eqref{eq:H.dft.1}, $\Ket{\Psi}$ denotes a many-body eigenstate in index-free bra--ket notation\sidenote{
-	Here and in the following we employ the usual convention that many-body wavefunctions are obtained from the state $\Ket{\Psi}$ via
+	Here and in the following we employ the convention that many-body wavefunctions are obtained from the state $\Ket{\Psi}$ via
 	\begin{align*}
 		\braket{{\bf r} | \Psi} 
 			&= \Psi ({\bf r}) \\
@@ -313,7 +313,7 @@ The Born-Oppenheimer or \emph{potential-energy surface} $E^{\rm BO} ({\bf R})$ w
 
 \subsection{The Hellmann-Feynman theorem}
 \label{sec:HellmannFeynman}
-The forces on individual atomic positions ${\bf R}_I$ are given in terms of derivatives of the Born-Oppenheimer energy, $E^{\rm BO} ({\bf R})$,
+The force ${\bf F}_I$ on an individual atom at position ${\bf R}_I$ is given as the derivative of the Born-Oppenheimer energy, $E^{\rm BO} ({\bf R})$,
 \begin{align}
 	\frac{\d}{\d {\bf R}_I} E^{\rm BO} ({\bf R})
 		\stackrel{\eqref{eq:E^BO}}{=}
@@ -323,7 +323,7 @@ The forces on individual atomic positions ${\bf R}_I$ are given in terms of deri
 			~.
 	\label{eq:hellmannfeynman.1}
 \end{align}
-The electronic part is given by
+The electronic part reads
 \begin{align}
 		\frac{\d}{\d {\bf R}_I} E[n]
 			= 
@@ -509,7 +509,7 @@ This is a set of one-particle Schr\"odinger-like equations for the orbitals $\ps
 
 \newthought{When the solution $\set{\psi_l, \epsilon_l}$ is known}, Eq.\,\eqref{eq:dft.KS.2} can be used to express the kinetic energy in terms of the density $n$ and eigenvalues $\epsilon_l$ by summing and integrating with $\sum_l \int \d^3 x~\psi^\ast_l ({\bf x})$ and using the orthonormality of the orbitals $\psi_l$, so that
 \begin{align}
-	T[n] 
+	T_s[n] 
 		\equiv - \frac{1}{2}\sum_l \int \d^3 x ~ \psi^\ast_l ({\bf x}) \nabla^2 \psi({\bf x})
 		\stackrel{\eqref{eq:dft.KS.2}}{=} 
 			\sum_l \epsilon_l 
