@@ -31,7 +31,7 @@ We remind the reader that in Cartesian space, indices can be lowered and raised 
 
 \chapter{Bloch Theorem and Brillouin Zone}
 \epigraph{\singlespacing \it ``The idea of periodicity in the reciprocal space is useless but, I think, harmless.''}{Paul Gartner}
-\section{Bloch Theorem}
+\section{Bloch theorem}
 \label{sec:BlochTheorem}
 The Schr\"odinger equation in 1d reads
 \begin{align}
@@ -199,7 +199,9 @@ where ${\rm U}^{+}$ denotes the Moore-Penrose pseudo inverse of the displacement
 	\label{fig:symmetry.1}
 \end{marginfigure}
 
-\newthought{The number of required force calculations} can be reduced by considering the spacegroup symmetry of the crystal. This can be achieved in two ways: First, the symmetry can be used to identify the set of inequivalent displacements from which all other forces can be constructed by the following argument: We define the representation $\Gamma^g$ of a symmetry operation $g$ by its action on the atomic coordinates $\set{\b R_I = \b R_I^0 + \b U_I}$ as
+\section{Space group symmetry}
+\label{sec:app.space-group-symmetry}
+The number of required force calculations can be reduced by considering the space group symmetry of the crystal. This can be achieved in two ways: First, the symmetry can be used to identify the set of inequivalent displacements from which all other forces can be constructed by the following argument: We define the representation $\Gamma^g$ of a symmetry operation $g$ by its action on the atomic coordinates $\set{\b R_I = \b R_I^0 + \b U_I}$ as
 \begin{align}
 \b R_I^{g} &\equiv {\Gamma}^g (\b R_I) = { P}^g_{IJ} \b R^0_J + { M}^g \b U_I~,
 \label{eq:sym.RI'}
@@ -225,7 +227,7 @@ It follows that the force on atom $I$ in the new configuration $\tilde{\b R}^g$ 
 = {M}^g  {P}^{g-1}_{IJ} \b F_J (\b R)~.
 \label{eq:sym.Ftilde}
 \end{align}
-By means of this equation, the set of forces obtained for a configuration $\set{\b R_I = \b R_I^0 + \b U_I}$ can be used to generate a set of forces for each symmetrically equivalent configuration $\set{\tilde{\b R}_I^g = \b R_I^0 + {\rm M}^g P^{g-1}_{IJ} \b U_J}$, where $g$ are spacegroup elements.
+By means of this equation, the set of forces obtained for a configuration $\set{\b R_I = \b R_I^0 + \b U_I}$ can be used to generate a set of forces for each symmetrically equivalent configuration $\set{\tilde{\b R}_I^g = \b R_I^0 + {\rm M}^g P^{g-1}_{IJ} \b U_J}$, where $g$ are space group elements.
 
 A complementary approach is to use the symmetry elements $\set{g}$ to reduce the forceconstant matrix to an irreducible basis,
 \begin{align}
@@ -537,7 +539,7 @@ under the boundary condition $y (t \to -\infty) = 0$. In total we obtain
 \end{align}
 
 \chapter{Explicit Formulas}
-\section{Harmonic Approximation}
+\section{Harmonic approximation}
 \label{app:formulas.ha}
 In Sec.\,\ref{sec:dynmat.periodic}, we introduced the shorthand notation $s=(b, \b q)$, $-s=(b, -\b q)$ to write brief formulas. We give the explicit form of these formulas here.
 
@@ -587,7 +589,7 @@ In Sec.\,\ref{sec:dynmat.periodic}, we introduced the shorthand notation $s=(b, 
 
 \newpage
 
-\section{Heat Capacity}
+\section{Heat capacity}
 \begin{subequations}
 \begin{align}
 	\beta

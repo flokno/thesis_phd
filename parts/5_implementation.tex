@@ -66,7 +66,7 @@ From an \emph{ab initio} perspective, the accessible size and time scales are ea
 Both structures are studied at GGA level of theory using the PBEsol functional and light-default basissets in FHI-aims~\cite{Perdew.2008,FHI-aims}. Supercell sizes are 216 atoms each, and the MD simulations are performed via FHI-vibes~\cite{Larsen.2017,FHI-vibes}. The aiGK methods as described is implemented in FHI-vibes as well. Force constants for the size extrapolation via harmonic mapping are obtained via regression from the MD runs via the temperature dependent effective potentials code (TDEP)~\cite{Hellman.2013}. The MD runs are thermalized using the pre-thermalization technique outlined in Sec.\,\ref{sec:harmonic_sampling} using finite-differences force constants obtained via phonopy~\cite{phonopy}. Afterwards, a Langevin thermostat at the target temperature (300\,K) is used to perform NVT sampling. After and initial sampling period of 2.5\,ps, the thermal pressure is relaxed according to the scheme outlined in Sec.\,\ref{sec:app.lattice_expansion} in the appendix to account for thermal expansion. Starting points $\Gamma^i_0$ for the NVE simulations are chosen from an NVT run for the relaxed supercell at least 2\,ps apart. The time step for the MD simulation was chosen as 5\,fs, which corresponds to a tenth of the shortest period duration of the harmonic spectrum of MgO ($\omega_{\rm max} \approx 20$\,THz).
 
 
-\section{Noise Reduction Scheme and Cutoff Estimation}
+\section{Noise reduction scheme and cutoff estimation}
 \subsection{Discard non-contributing terms}
 The raw \emph{ab initio} heat flux used in this work was defined in Eq.\,\eqref{eq:J_ai} and is given for a phase-space point $\Gamma_t = \set{{\bf R} (t), \dot{\bf R} (t)}$ by
 \begin{align}
@@ -151,7 +151,7 @@ from which the final result for the thermal conductivity is obtained via
 \end{align}
 where $\kappa^{\alpha \beta}$ is the value from the \emph{ab initio} Green Kubo simulation. The interpolation scheme effectively subtracts harmonic contributions to the thermal conductivity from vibrations commensurate with the supercell, and extrapolates them to the bulk limit, thereby including long-range contributions otherwise not present in the simulation cell.
 
-\section{Simulation Time Convergence}
+\section{Simulation time convergence}
 \label{sec:implementation.convergece}
 After we have seen how the cutoff time $\tcut$ in Eq.\,\eqref{eq:implementatino.kappa.1} can be obtained, and finite-size errors can be corrected, we discuss the convergence of presented scheme as a function of the simulation time $t_0$ in Eq.\,\eqref{eq:implementatino.acf.1}. We do this for the case of MgO for three independent trajectories of 60\,ps length each. We truncate every trajectory in 10\,\% steps down to a length of 6\,ps, and apply the workflow presented in the previous sections to each of the truncated trajectories. 
 \begin{figure}
@@ -183,7 +183,7 @@ Figure~\ref{fig:imp.kappa.convergence.MgO} shows that the thermal conductivity c
 which allows to accurately quantify the simulation times where the second super-linear increase in $\kappa$ occurs,~i.\,e.,~the region in the vicinity of the inflection point located at $t_{\rm inflection} = 218$, which corresponds to a simulation time of 29\,ps.
 %The plot also shows the thermal conductivities obtained without the finite-size correction discussed earlier as gray dots. Without this correction, the final value would be $45.5 \pm 6.1$\,W/mK. The finite-size correction therefore increases this value by about 50\,\%.
 
-\section{Comparison to Literature Values}
+\section{Comparison to literature values}
 \label{sec:mgo.experiments}
 Periclase MgO is an important constituent of the earth mantle and its thermal properties have been studied in detail both experimentally and theoretically~\cite{Charvat.1957,Slack.1962,touloukian1970,Macpherson.1983,Koker.2009,Stackhouse.2010,Tang.2010,Dekura.2017}. We list the common experimental reference values for the thermal conductivity of periclase MgO in Tab.\,\ref{tab:exp.MgO}.
 \begin{table}[ht]
@@ -255,7 +255,7 @@ Our study agrees well with the values reported by de Koker, and Stackhouse and c
 %\FK{they use LDA}
 
 
-\section{Case Study Copper Iodide}
+\section{Case study copper iodide}
 
 After discussing our implementation of the aiGK method %and found reasonable agreement with literature values 
 for periclase MgO,

@@ -5,7 +5,7 @@ As this quote by Rudolf Peierls exemplifies, developing a microscopic theory for
 
 \newthought{However, Boltzmann transport theory always relies on the phonon gas model} and treats phonon-phonon interactions as perturbative effects due to low-order anharmonic corrections to the potential-energy surface. When dealing with strongly anharmonic materials, this perturbative treatment becomes more and more cumbersome, and sometimes even unjustified, as we will discuss in more detail later. In this chapter, we therefore review heat transport in solids in the framework of Green-Kubo theory without treating the nuclear dynamics as a phonon gas.
 
-\section{Thermal Conductivity}
+\section{Introduction}
 \label{sec:thermal_conductivity}
 Conductive heat transport is the phenomenon of vibrational energy traversing a material when a temperature gradient is applied. As first described by Joseph Fourier in the early 19th century, the heat flux $\b J$ resulting from a stationary temperature gradient $\nabla T$ is directly proportional to this gradient~\cite{Fourier1878}. The proportionality constant is second-rank tensor denoted by $\kappa$ and called the \emph{thermal conductivity}. The defining equation,
 \begin{align}
@@ -27,7 +27,7 @@ first show how the Kubo formula emerges in the framework of linear response theo
 
 
 
-\section{Linear Response Theory}
+\section{Linear response theory}
 The aim of linear response theory is to compute the expectation value of a phase-space observable $B (\Gamma)$ in a system characterized by the many-body Hamiltonian $\mathcal H^0 (\Gamma)$ in presence of an external perturbation $\mathcal H' (\Gamma, t)$ driving the system out of equilibrium, where $\Gamma = \set{\b R, \b P}$ is a shorthand for a point in phase space.
 The full Hamiltonian is written as
 \begin{align}
@@ -213,7 +213,7 @@ where $\kappa^{\alpha \beta}$ denotes the \emph{thermal conductivity tensor} def
 \end{align}
 that is, the Green-Kubo formula for the thermal conductivity $\kappa$.
 
-\section{Heat Flux Definition}
+\section{Heat flux definition}
 In order to evaluate the thermal conductivity by means of the Green-Kubo formula, Eq.\,\eqref{eq:GreenKubo}, the  heat flux observable $\b J (t)$ needs to be defined.\footnote{From now on, all time dependence is to be understood as the implicit time dependence of phase-space observables on the time evolution of a phase-space point, $f(t) = f(\Gamma_t)$.} We do so by starting from the continuity equation again,
 \begin{align}
 	\dot{e} (\b r) = - \b \nabla \cdot \b j (\b r)
@@ -339,7 +339,7 @@ where the difference between left- and right-hand side is given by ${\bf J}_{\rm
 %\mscomment{wasn't this already discussed in the literature?}
 %\FK{Iffyness yes, as clarification why gauge invariance doesn't make everything vanish I find it helpful}
 
-\section{Ab initio Heat Flux}
+\section{Ab initio heat flux}
 \label{sec:ab_initio_heat_flux}
 The above formulas are readily applied when empirical force fields are used to describe the atomic interactions, as an atomic partitioning of the total energy is trivial in that case, although care must be taken in deriving the correct formulae nevertheless~\cite{Fan.2015,Boone.2019}. An \emph{ab initio} derivation of heat flux on the other hand was a long-standing problem because it was not clear how an expression like Eq.\,\eqref{eq:J_tot_solid} can be obtained when no atomic partitioning is available~\cite{Stackhouse.2010}. This problem was solved when Marcologno \emph{et al.} and Carbogno \emph{et al.} independently arrived at well-defined heat flux expressions in \mbox{\emph{ab initio}} frameworks~\cite{Marcolongo.2016,Carbogno.2016}. We adopt the latter approach in the following, but present a derivation that slightly differs from Ref.\,\cite{Carbogno.2016},~i.\,e.,~by starting from Eq.\,\eqref{eq:hf.J} instead of Eq.\,\eqref{eq:hf.J.atomic}, and using the phase-space formalism developed in this chapter.
 
@@ -458,7 +458,7 @@ where $\sigma_I (t)$ is Eq.\,\eqref{eq:hf.sigma_I} evaluated for the configurati
 
 % \CITE{[1] O. H. Nielsen and R. M. Martin, Phys. Rev. B 32, 3780 (1985).?}
 
-\section{Heat Flux in the Harmonic Approximation}
+\section{Heat flux in the harmonic approximation}
 We now discuss heat flux in the harmonic approximation. This work was pioneered by Debye and Peierls~\cite{Debye.1914,Peierls.1929}, with a formal derivation first presented by Hardy~\cite{Hardy.1963}. It allows to deduct several important conclusions about thermal transport in solids, and the insights will later be used to boost convergence of non-perturbative \emph{ab initio} Green Kubo simulations.
 
 \newthought{We start from the gauge-invariant heat flux expression} for solids as defined in Eq.\,\eqref{eq:J_tot_solid},~i.\,e.,

@@ -7,7 +7,7 @@ features of complex atomic systems without too much computation.''}{P.A.M. Dirac
 
 \newthought{In this chapter}, we summarize the theoretical background of {\it ab initio} simulations starting from the non-relativistic, time-independent Schrödinger equation for a general many-body system.
 
-\section{The Many Body Hamiltonian}
+\section{The many body Hamiltonian}
 
 The full (non-relativistic) many body Hamiltonian in the absence of external electromagnetic fields for an otherwise arbitrary system reads
 \begin{align}
@@ -58,7 +58,7 @@ This Hamiltonian governs the dynamical evolution of a many-particle system repre
 \end{align}
 from which all material properties (neglecting relativistic and effects and electromagnetic fields) follow.
 
-\section{The Born-Oppenheimer Approximation}
+\section{The Born-Oppenheimer approximation}
 We go over to a unitless Hamiltonian by scaling Eq.\,\eqref{eq:Hamiltonian} with the Hartree energy $E_{\rm h} = m_{\rm e} e^4 / \hbar^2 \approx 27.2\,{\rm eV}$, where $\hbar$ denotes the Planck constant. Distances are expressed in terms of the Bohr radius $a_0 = \hbar^2 / m e^2$ such that~$\hat{\bf r} \equiv {\bf r} = a_0 \tilde{\bf r}$, and the momentum operators are replaced by the respective differential operators, $\hat{\bf p}=-\im \hbar \partial / \partial {\bf r}$~\cite{Czycholl}. We find
 \begin{align}
 \begin{split}
@@ -162,7 +162,7 @@ Solving this equation is performed in two steps:
 % A: yes, this should be independent of anharmonicity
 
 \newpage
-\section{Density Functional Theory}
+\section{Density functional theory}
 \epigraph{\singlespacing \it ``It is my sense that at the present time DFT is the method of choice for systems consisting of many (\,$\gtrsim 5$) atoms and for smaller systems, when moderate accuracies are sufficient.''}{W.~Kohn, 1993}
 
 In the previous chapter, it was tacitly assumed that the electronic Schr\"odinger equation \eqref{eq:Hsolution1} yielding the effective potential for the nuclei can be solved. Finding an exact solution to this equation is, however, infeasible for more than a few electrons. We will now introduce \emph{density functional theory} (DFT) as a framework for making approximations that enable to find a first-principles potential-energy surface $E^{\rm BO} ({\bf R})$ for atomic systems with order of magnitudes more electrons.
@@ -244,7 +244,7 @@ Since the density $n_\Psi$ is obtained from the solution $\Ket{\Psi}$ of Eq.\,\e
 	\label{eq:dft.map.1}
 \end{align}
 
-\subsection{Hohenberg-Kohn Theorem}
+\subsection{The Hohenberg-Kohn theorem}
 \label{sec:HK}
 Hohenberg and Kohn were able to show that, for non-degenerate\footnote{The requirement of non-degenerate ground states can be loosened by replacing the Hohenberg-Kohn functional with the Lieb functional~\cite{Levy.1979,Lieb.1983,Englisch.1984a,Englisch.1984b}, cf.~\cite[Chp.\,4.2]{Dreizler2012}.
 } ground states $\Psi \equiv \Psi_0$, there exists the \emph{inverse map} from ground-state densities $\mathbb N_0$ to potential functions $\mathbb V$, and that this map is bijective~\cite{Hohenberg.1964}:
@@ -302,7 +302,7 @@ under the constraint of fixed particle number imposed by the Lagrange multiplier
 
 \newpage
 
-\section{The Born-Oppenheimer Surface}
+\section{The Born-Oppenheimer surface}
 The Born-Oppenheimer or \emph{potential-energy surface} $E^{\rm BO} ({\bf R})$ was defined in Eq.\,\eqref{eq:E^BO_0},~i.\,e., it is given as the ground-state energy of the electron system and the electrostatic nuclear repulsion $V^{\rm Nuc-Nuc}$ defined in Eq.\,\eqref{eq:Vnuc} for each nuclear configuration $\bf R$. In terms of the energy functional $E[n]$ and the ground-state density $n \equiv n({\bf R})$ , this energy reads
 %
 \begin{align}
@@ -311,7 +311,7 @@ The Born-Oppenheimer or \emph{potential-energy surface} $E^{\rm BO} ({\bf R})$ w
 	\label{eq:E^BO}
 \end{align}
 
-\subsection{Hellmann-Feynman Theorem}
+\subsection{The Hellmann-Feynman theorem}
 \label{sec:HellmannFeynman}
 The forces on individual atomic positions ${\bf R}_I$ are given in terms of derivatives of the Born-Oppenheimer energy, $E^{\rm BO} ({\bf R})$,
 \begin{align}
@@ -375,7 +375,7 @@ which is solely determined by the ground-state electron density $n ({\bf x})$ an
 
 \newpage
 
-\section{Kohn-Sham Scheme}
+\section{The Kohn-Sham scheme}
 \newthought{By introducing density functional theory}, we have not solved the many-body problem. However, we have shifted the intricacies of this problem to a \emph{universal} functional $F[n]$ which depends on the electron density $n({\bf x})$. Since the density is a scalar function of three coordinates, $n: \mathds R^3 \rightarrow \mathds R$, this entails a massive reduction of complexity compared to working with wavefunctions, which are complex functions of $3N$ variables, $\Psi: \mathds R^{3N} \rightarrow \mathds C$.
 
 In order to proceed, we follow the original argument by Kohn and Sham~\cite{Kohn.1965} and investigate the universal functional $F[n]$ in more detail. 
@@ -543,7 +543,7 @@ is then given as\marginnote{Remember that $$E[n] = T_{\rm s}[n] +  E^{\rm es}[n]
 We are finally in position to introduce approximations to the exchange-correlation energy functional $E^{\rm xc}[n]$ from which the corresponding potential can be obtained by the functional derivative with respect to the density.\marginnote{Remember $$v^{\rm xc} [n] ({\bf x}) = \frac{\delta E^{\rm xc}[n]}{\delta n ({\bf x})}~.$$
 } Indeed, the very success of the Kohn-Sham DFT scheme can most likely be traced back to the fact that simple approximations to $E^{\rm xc}[n]$ lead to reasonable results for a large class of systems. 
 
-\subsection{Local-Density Approximation (LDA)}
+\subsection{The local-density approximation (LDA)}
 
 Let us now define an exchange-correlation energy density $e^{\rm xc} \left[ n \right] ({\bf x})$ via
 \begin{align}
@@ -576,7 +576,7 @@ This approximation is called the \emph{local density approximation} (LDA), and t
 \end{align}
 The energy density $e^{\rm xc}_{\rm LDA} \left(n ({\bf x}) \right)$ is usually taken to be the exchange-correlation energy density of a homogeneous electron gas obtained from many-body theory~\cite{Ceperley.1980}.\footnote{Depending on the application, it can be beneficial to parametrize LDA on other reference system~\cite{Nagai.2020}.} The LDA is (by construction) exact in the limit of vanishing density gradient, $\lvert \nabla n ({\bf x}) \rvert / n({\bf x}) \rightarrow 0$, but yields surprisingly good results under circumstances where the density is non-homogeneous as well~\cite[p.\,183]{Dreizler2012}.
 
-\subsection{Generalized Gradient Approximation (GGA)}
+\subsection{The generalized gradient approximation (GGA)}
 \newthought{In the spirit of the original work} by Hohenberg and Kohn, and Kohn and Sham, improvements on the LDA can be constructed by going beyond the local density and taking into account gradients of the density as well,
 \begin{align}
 	e^{\rm xc} [n] ({\bf x})
@@ -596,9 +596,9 @@ where $e^{\rm x}_{\rm hom}(n)$ is the exchange energy density of a homogeneous e
 
 
 
-\section{Periodic Systems}
+\section{Periodic systems}
 \label{sec:theory.periodic.1}
-\REM{Duplicate of the phonon part, maybe just introduce BvK boundary conditions -- or don't mention at all?}
+%\REM{Duplicate of the phonon part, maybe just introduce BvK boundary conditions -- or don't mention at all?}
 So far, we did not specify the external potential $v^{\rm ext} ({\bf x})$ entering the Kohn-Sham equation \eqref{eq:dft.KS.1} beyond stating that it describes the arrangement of nuclei. For (finite) molecules and clusters, this is already sufficient and a self-consistent solution to Eq.\,\eqref{eq:dft.KS.1} can be attempted from here. For (practically infinite) bulk systems and crystals on the other hand, further assumptions need to be made.
 
 Let us assume that the configuration of the nuclei is in a perfect periodic arrangement described by the 

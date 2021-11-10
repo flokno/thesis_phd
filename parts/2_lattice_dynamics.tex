@@ -24,7 +24,7 @@ where
 is the nuclear kinetic-energy operator as before.
 
 
-\section{Harmonic Approximation}
+\section{The harmonic approximation}
 \label{sec:HA}
 The Born-Oppenheimer potential $\mathcal V ({\bf R})$ in Eq.\,\eqref{eq:BOSE} is an ordinary function of the\marginnote{Remember $N \equiv N_{\rm Nuc}$.} $3 N$ coordinates ${\bf R} = ({\bf R}_1, \ldots, {\bf R}_{N})$ and therefore can be expanded as a Taylor series in displacements ${\bf U} \equiv \Delta {\bf R}$ about a given configuration ${\bf R}^0$,~i.\,e.,
 \begin{align}
@@ -167,9 +167,9 @@ The state of the entire system is therefore specified by the $3N$ quantum number
 This derivation is generally valid for a system of $N$ particles described by a potential-energy surface of which a (local) minimum ${\bf R}^0$, and the matrix of second derivatives at this configuration, $\Phi_{IJ}$, is known. The thermodynamic properties of such a system of harmonic oscillators follow from this spectrum in straighforward fashion~\cite{BornHuang}.
 
 
-\section{Extended Systems}
+\section{Extended systems}
 \label{sec:extended_systems}
-\REM{Move up, include discussion of symmetry beyond translational}
+%\REM{Move up, include discussion of symmetry beyond translational}
 The expressions presented in the previous section are generally valid for a system of $N$ nuclei. Macroscopic materials, however, consist of $\sim 10^{23}$ atoms. From a microscopic point of view, this number is virtually infinite, and mathematically described by the \emph{bulk limit} $N \to \infty$. The most common way to deal with this bulk limit is to impose \emph{periodic boundary conditions} on a finite region of space,~i.\,e.,~a \emph{generating volume}, and normalize the quantities of interest to this volume~\cite{BornHuang}. This procedure can be adopted for extended system such as liquids, amorphous solids such as glasses, and crystals. Since we are interested in the special case of crystals with an inherent periodic long-range order throughout this work, it is beneficial to first introduce the concept of a \emph{crystal lattice} that describes a bulk crystal in terms of a \emph{unit cell} arranged periodically in three dimensional space~\cite{Sands1969}. The periodic boundary conditions are then imposed on a generating volume containing several unit cells,~i.\,e.,~a \emph{supercell}.
 
 \subsection{Periodic systems: Crystals}
@@ -243,6 +243,7 @@ where $i$ labels the atom in the unit cell, and $\bf L$ is the corresponding lat
 \end{align}
 where $\b M = M^\mu {\bf a}_\mu$ with integers $M^\mu$ denotes an arbitrary Bravais vector. The translational invariance holds likewise for the dynamical matrix ${\rm D}_{IJ} = \frac{1}{\sqrt{M_I M_J}} \Phi_{IJ}$. The translational invariance expressed,~e.\,g.,~by Eq.\,\eqref{eq:fc.sym.1} can be regarded as the \emph{intrinsic} periodicity of the sytem.
 
+\newthought{In addition to the discrete translational invariance}, a crystal is characterized by point group symmetries such as rotations and reflections about lattice points or planes~\cite{Dresselhaus2007}. The above consideration in terms of permutation maps representing these additional symmetries of the lattice can be extended to these operations, see comments in Sec.\,\ref{sec:app.space-group-symmetry} in the appendix.
 
 \subsection{Periodic boundary conditions}
 In the previous section, we did not specify the system beyond requiring periodicity in space, and implicitly assumed an infinite crystal in the limit $N \to \infty$ without boundaries. In practice we introduce Born-von Karman cyclic boundary conditions~\cite{born2013atomtheorie}, as already done in Sec.\,\ref{sec:theory.periodic.1} for the description of electronic states, but reintroduce them here in a slightly more general fashion.
@@ -276,7 +277,7 @@ Again this property carries over to the dynamical matrix. In contrast to Eq.\,\e
 
 %\REM{Supercell imposes effective cutoff on the range of the force constants -> effect on spectrum, Maradudin, Ledermann}
 
-\subsection{Dynamical matrix for periodic systems}
+\subsection{The dynamical matrix for periodic systems}
 %
 \mscomment{this is textbook stuff, looks strange}
 \FK{maybe shorten or move to appendix}
@@ -365,7 +366,7 @@ In total we define
 \end{align}
 where $\b L'$ is chosen such that it satisfies Eq.\,\eqref{eq:L'}, and the weights $w_{\b L}$ are chosen based on the multiplicity of the lattice point $\b L$ in the extended supercell. The dynamical matrices defined by Eq.\,\eqref{eq:D(q)} and \eqref{eq:D_Parlinski} are equal when evaluated at commensurate $\bf q$-points. We will therefore use the latter definition as \emph{the} dynamical matrix in the following.
 
-\subsection{Properties of the Dynamical Matrix and its Eigenvectors}
+\subsection{Properties of the dynamical matrix and its eigenvectors}
 \label{sec:dynmat.periodic}
 As noted before, the dynamical matrix ${\rm D} (\b q)$ defined in Eq.\,\eqref{eq:D_Parlinski} is a hermitian $3N_{\rm uc} \times 3N_{\rm uc}$ matrix in the indices $(i \alpha, j \beta)$ for each $\b q$ within the Brillouin zone.\footnote{These can be either commensurate points $\bf q$, or interpolated points $\tilde{\bf q}$.} The $3N_{\rm uc}$ eigenvalues will therefore be real, and there will be $3N_{\rm uc}$ complex, orthogonal eigenvectors. In accordance with Eq.\,\eqref{eq:D_IJ} we denote
 \begin{subequations}
@@ -428,7 +429,7 @@ D_{I \alpha, J \beta}
 \subsection{Phonon dispersions and density of states}
 \label{sec:ha.dispersions}
 
-\REM{It makes more sense to discuss the ha. model earlier, i.e., most of what is discussd in ``class. harm. dyn.'' at the end?}
+%\REM{It makes more sense to discuss the ha. model earlier, i.e., most of what is discussd in ``class. harm. dyn.'' at the end?}
 
 With the dynamical matrix for arbitrary q-points in the Brillouin zone at hand, we are in position to evaluate the spectrum of harmonic vibrational excitations in a crystal,~i.\,e.,~\emph{phonon dispersions} or \emph{phonon band structure}, as well as the \emph{density of states}, often called DOS for short.
 
@@ -468,10 +469,10 @@ An alternative approach is \emph{Raman scattering}, where an incoming light beam
 
 \newpage
 
-\section{Statistical Mechanics and Molecular Dynamics}
+\section{Statistical mechanics and molecular dynamics}
 After discussing nuclear dynamics in the harmonic approximation, and specifying the crystalline state in terms of an intrinsic and extrinsic periodicity in space, we proceed by discussing nuclear dynamics on the full potential energy surface $\mathcal{V} ({\bf R})$ without approximations, but in the classical limes.
 
-\subsection{Classical Limit}
+\subsection{The classical limit}
 The classical limit of the nuclear Schr\"odinger equation~\eqref{eq:BOSE} is usually performed by writing the nuclear wavefunction $\chi ({\bf R}, t)$ in terms of a real amplitude $A({\bf R}, t)$ and a \emph{classical action function} $S({\bf R}, t)$~\cite{Dirac1981,Landau2013,Marx2009}
 \begin{align}
 \chi({\bf R}, t) = A({\bf R}, t) \, {\rm e}^{\frac{\im}{\hbar} S({\bf R}, t)}~.
@@ -588,7 +589,7 @@ A system for which the phase-space and the time average are identical is said to
 \newthought{In this work}, we use two thermodynamic ensembles: the microcanonical, $NVE$ for short, where the total energy $E$ of the system is conserved, and the canonical ($NVT$), where the system can be viewed as coupled to a bath of temperature $T$. The latter is mimicking more realistic experimental conditions, where usually the temperature and not the total energy of the system can be controlled. Technically, experiments are performed rather at constants pressure $p$ instead of constant volume, and the correct ensemble to describe such a situation is the isothermal-isobaric one commonly denoted as $NPT$. In practice however, the canonical ensemble is easier to simulate and is a good approximation to the $NPT$ ensemble when the system size is not too small~\cite[p.\,134]{Tuckerman}
 
 
-\subsection{Microcanonical Ensemble}
+\subsection{The microcanonical ensemble}
 The microcanonical ensemble is characterized by three conserved extensive quantities: particle number $N$, system volume $V$, and total energy $E$. The total energy of a given microstate,~i.\,e.,~the configuration of particles and their momenta represented by the phase-space point $\Gamma = \set{\b R, \b P}$, is given by the Hamiltonian of the system, $\mathcal H (\Gamma)$. 
 %The central postulate of statistical mechanics is that each microstate is equally probable. Therefore, any point in phase space $\Gamma$ yielding an energy in a thin interval around the target energy, $H (\Gamma) \in [E, E + \d E]$, is realized with the same likelihood. Taking particle number $N$ and system volume $V$ to be fixed and non-controllable, the expectation value of a phase-space observable $A$ in an ensemble of energy $E$ is defined as
 %\begin{align}
@@ -656,7 +657,7 @@ In practice, the equations of motion are solved numerically, for example by the 
 The velocity Verlet algorithm introduces an error of order $\delta t^4$ in the integration step, but has two important properties mitigating a negative impact on obervables: First, a velocity Verlet integration step is time-reversible, an important prerequisite for long-term stability of the total energy for symmetry reasons. Second, the velocity Verlet map from $t$ to $t + \delta t$ has the property of being \emph{symplectic}~\cite[p.\,101]{Tuckerman}. This means that the discrete time propagation is not guaranteed to preserve the energy along the trajectory $\Gamma_t$, but there exists a Hamiltonian $\tilde{\mathcal H} (\Gamma, \delta t)$ which is conserved exactly and fulfills $\tilde{\mathcal H (\Gamma, \delta t)} \to \mathcal H(\Gamma)$ for vanishing timestep $\delta t \to 0$~\cite[p.\,121]{Tuckerman}. The symplectic property is formalized in the ``shadowing theorem'', which states that existence of a ``shadow Hamiltonian'' $\tilde{\mathcal H}$ ensures that errors introduced by using a finite time step are bounded~\cite[p.
 ,120]{Tuckerman}.
 
-\subsection{Canonical ensemble}
+\subsection{The canonical ensemble}
 The canonical ensemble is characterized by the two extensive variables particle number $N$ and volume $V$, and the intensive quantity temperature $T$. It can be viewed as representing a system in contact with an infinite thermal bath of temperature $T$, where heat can be exchanged via a weak coupling.
 
 In analogy to the previous section, the \emph{canonical distribution function} at inverse temperature $\beta = 1 / k_{\rm B} T$ is defined as
