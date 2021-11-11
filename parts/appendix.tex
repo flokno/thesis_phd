@@ -583,35 +583,40 @@ Classical limit $k_{\rm B} T \gg \hbar \omega_s$
 
 \input{./parts/appendix_screening.tex}
 
-\chapter{Computational details}
+\input{./parts/appendix_experiments.tex}
+
+
+
+\chapter{Data Availability and Computational Details}
 \label{sec:app.computational_details}
-All \emph{ab initio} molecular dynamics simulations have been performed with the PBEsol functional~\cite{Perdew.2008}, $2 \times 2 \times 2$ k-point sampling, and light\_default basis sets in FHI-aims~\cite{FHI-aims}. All input and output files are uploaded to NOMAD~\cite{Draxl.2019} with the upload ID iu8DcWKIQKaUFoAzEsUaCQ.
-Supercell sizes ($N_{\rm Supercell}$) are given for each crystal class in Tab.\,\ref{tab:app.sc-sizes}.
+
+A github repository including raw data and latex files, as well as plotting scripts and additional notes will be made available via \href{http://thesis.flokno.me}{thesis.flokno.me} after the thesis is accepted.
+
+\vspace{1em}
+
+All \emph{ab initio} molecular dynamics simulations have been performed with the PBEsol functional~\cite{Perdew.2008}, $2 \times 2 \times 2$ k-point sampling, and light\_default basis sets in FHI-aims~\cite{FHI-aims}. All input and output files are uploaded to NOMAD~\cite{Draxl.2019} with the DOI \href{https://dx.doi.org/10.17172/NOMAD/2021.11.11-1}{10.17172/NOMAD/2021.11.11-1}.
+Supercell sizes ($N_{\rm Supercell}$) are listed for each crystal class in Tab.\,\ref{tab:app.sc-sizes}.
 %
 \begin{table}[ht]
 \begin{tabular}{rlllll}
 \toprule
-Space group & Lattice & $N_{\rm Formula}$ & $N_{\rm Primitive}$ & $N_{\rm Supercell}$ & Prototype      \\
+Space group & Lattice             & $N_{\rm Primitive}$ & $N_{\rm Supercell}$ & Prototype      \\
 \midrule              
-62          & ort     & 2                 & 8                   & 256                 & SnSe           \\
-62          & ort     & 4                 & 16                  & 192                 & CuSbSe$_2$     \\
-62          & ort     & 5                 & 20                  & 160                 & KCaF$_3$       \\
-122         & tet     & 4                 & 8                   & 216                 & AgAlS$_2$      \\
-164         & tri     & 5                 & 5                   & 160                 & Mg$_3$Sb$_2$   \\
-166         & tri     & 4                 & 4                   & 192                 & Ba$_2$BrN      \\
-186         & wur     & 2                 & 4                   & 192                 & AgI            \\
-216         & zbl     & 2                 & 2                   & 216                 & AlAs           \\
-216         & hsl     & 3                 & 3                   & 162                 & LiAsMg         \\
-221         & cscl    & 2                 & 2                   & 128                 & CsBr           \\
-221         & perov   & 5                 & 5                   & 160                 & BaLiF$_3$      \\
-225         & nacl    & 2                 & 2                   & 216                 & AgBr           \\
-225         & caf     & 3                 & 3                   & 198                 & CaF$_2$        \\
+62          & orthorombic         & 8                   & 256                 & SnSe           \\
+62          & orthorombic         & 16                  & 192                 & CuSbSe$_2$     \\
+62          & orthorombic         & 20                  & 160                 & KCaF$_3$       \\
+122         & tetragonal          & 8                   & 216                 & AgAlS$_2$      \\
+164         & trigonal            & 5                   & 160                 & Mg$_3$Sb$_2$   \\
+166         & trigonal            & 4                   & 192                 & Ba$_2$BrN      \\
+186         & wurtzite            & 4                   & 192                 & AgI            \\
+216         & zincblende          & 2                   & 216                 & AlAs           \\
+216         & heusler             & 3                   & 162                 & LiAsMg         \\
+221         & cesium chloride     & 2                   & 128                 & CsBr           \\
+221         & perovskite          & 5                   & 160                 & BaLiF$_3$      \\
+225         & rock salt           & 2                   & 216                 & AgBr           \\
+225         & fluorite            & 3                   & 198                 & CaF$_2$        \\
 \bottomrule
 \end{tabular}
 \caption{Supercell sizes for the studied materials, given for one prototype of each class.}
 \label{tab:app.sc-sizes}
 \end{table}
-
-\chapter{Experimental References}
-\label{sec:app.experiments}
-\input{./parts/appendix_experiments.tex}
