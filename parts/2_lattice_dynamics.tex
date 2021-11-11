@@ -431,13 +431,13 @@ D_{I \alpha, J \beta}
 
 %\REM{It makes more sense to discuss the ha. model earlier, i.e., most of what is discussd in ``class. harm. dyn.'' at the end?}
 
-With the dynamical matrix for arbitrary q-points in the Brillouin zone at hand, we are in position to evaluate the spectrum of harmonic vibrational excitations in a crystal,~i.\,e.,~\emph{phonon dispersions} or \emph{phonon band structure}, as well as the \emph{density of states}, often called DOS for short.
+With the dynamical matrix for arbitrary q-points in the Brillouin zone at hand, we are in position to evaluate the spectrum of harmonic vibrational excitations in a crystal,~i.\,e.,~\emph{phonon dispersions} or \emph{phonon band structure}, as well as the \emph{density of states} (DOS).
 
 The density of states $g (\omega)$ can be used to evaluate Brillouin-zone integrals of functions that depend on the phonon energy $\hbar \omega ({\bf q})$. It is implicitly defined via
 \begin{align}
 	\braket{f}
 		&= \frac{1}{V_{\rm BZ}} \int \frac{\d^3 q}{(2 \pi)^3} ~ f{\boldsymbol (}\omega ({\bf q}) \boldsymbol ) 
-		= \int \d \omega ~ f(\omega) g (\omega)~,
+		\equiv \int \d \omega ~ f(\omega) g (\omega)~,
 \end{align}
 where 
 \begin{align}
@@ -470,6 +470,7 @@ An alternative approach is \emph{Raman scattering}, where an incoming light beam
 \newpage
 
 \section{Statistical mechanics and molecular dynamics}
+\label{sec:statistical-mechanics}
 After discussing nuclear dynamics in the harmonic approximation, and specifying the crystalline state in terms of an intrinsic and extrinsic periodicity in space, we proceed by discussing nuclear dynamics on the full potential energy surface $\mathcal{V} ({\bf R})$ without approximations, but in the classical limes.
 
 \subsection{The classical limit}
@@ -586,7 +587,7 @@ An alternative approach towards computing averages is the concept of time averag
 where $\Gamma_t = \set{ {\bf R} (t), {\bf P} (t)}$ denotes a phase-space point at time $t$ after evolving from an initial point $\Gamma_0$ as explained in the next section.
 A system for which the phase-space and the time average are identical is said to be \emph{ergodic}. The \emph{ergodic hypothesis} states that this is true for most systems with non-pathological particle interaction $\mathcal V$. Albeit being virtually impossible to prove rigorously, this hypothesis is the underlying idea of \emph{molecular dynamics} (MD) simulations, where the statistical behavior of a system is assessed by choosing a suitable initial condition and propagating it in time by numerically solving the equations of motion.
 
-\newthought{In this work}, we use two thermodynamic ensembles: the microcanonical, $NVE$ for short, where the total energy $E$ of the system is conserved, and the canonical ($NVT$), where the system can be viewed as coupled to a bath of temperature $T$. The latter is mimicking more realistic experimental conditions, where usually the temperature and not the total energy of the system can be controlled. Technically, experiments are performed rather at constants pressure $p$ instead of constant volume, and the correct ensemble to describe such a situation is the isothermal-isobaric one commonly denoted as $NPT$. In practice however, the canonical ensemble is easier to simulate and is a good approximation to the $NPT$ ensemble when the system size is not too small~\cite[p.\,134]{Tuckerman}
+\newthought{In this work}, we use two thermodynamic ensembles: the microcanonical, $NVE$ for short, where the total energy $E$ of the system is conserved, and the canonical ($NVT$), where the system can be viewed as coupled to a bath of temperature $T$. The latter is mimicking more realistic experimental conditions, where usually the temperature and not the total energy of the system can be controlled. Technically, experiments are performed rather at constant pressure $p$ instead of constant volume, and the correct ensemble to describe such a situation is the isothermal-isobaric one commonly denoted as $NPT$. In practice however, the canonical ensemble is easier to simulate and is a good approximation to the $NPT$ ensemble when the system size is not too small~\cite[p.\,134]{Tuckerman}
 
 
 \subsection{The microcanonical ensemble}
@@ -654,6 +655,7 @@ In practice, the equations of motion are solved numerically, for example by the 
 \end{align}
 \label{eq:VelocityVerlet}
 \end{subequations}
+%
 The velocity Verlet algorithm introduces an error of order $\delta t^4$ in the integration step, but has two important properties mitigating a negative impact on obervables: First, a velocity Verlet integration step is time-reversible, an important prerequisite for long-term stability of the total energy for symmetry reasons. Second, the velocity Verlet map from $t$ to $t + \delta t$ has the property of being \emph{symplectic}~\cite[p.\,101]{Tuckerman}. This means that the discrete time propagation is not guaranteed to preserve the energy along the trajectory $\Gamma_t$, but there exists a Hamiltonian $\tilde{\mathcal H} (\Gamma, \delta t)$ which is conserved exactly and fulfills $\tilde{\mathcal H (\Gamma, \delta t)} \to \mathcal H(\Gamma)$ for vanishing timestep $\delta t \to 0$~\cite[p.\,121]{Tuckerman}. The symplectic property is formalized in the ``shadowing theorem'', which states that existence of a ``shadow Hamiltonian'' $\tilde{\mathcal H}$ ensures that errors introduced by using a finite time step are bounded~\cite[p.
 ,120]{Tuckerman}.
 
@@ -674,7 +676,7 @@ where the  canonical partition sum $\mathcal{Z}_\beta$ normalizes $f_\beta$.
 %	\braket{A}_\beta = \int \d \Gamma ~ A(\Gamma) f_\beta(\Gamma)~.
 %\end{align}
 
-\newthought{As we have seen earlier}, a time-independent Hamiltonian generates energy-preserving dynamics via the equations of motion given in Eq.\,\eqref{eq:stat.eom}. To perform a simulation at non-constant energy, the coupling to a thermal bath therefore has to be incorporated explicitly into the equations of motion. One of the many ways to achieve this is via the \emph{Langevin equation}~\cite{Vanden.2006} in which the change of momentum is modified,
+\newthought{a time-independent Hamiltonian generates energy-preserving dynamics} via the equations of motion given in Eq.\,\eqref{eq:stat.eom}, as we have seen earlier. To perform a simulation at non-constant energy, the coupling to a thermal bath therefore has to be incorporated explicitly into the equations of motion. One of the many ways to achieve this is via the \emph{Langevin equation}~\cite{Vanden.2006} in which the change of momentum is modified,
 \begin{align}
 	\dot{\b P}_I (t) 
 		&= \b F_I (t) - \gamma \b P_I (t) + \b F^{\rm stochastic}_I (t)~.

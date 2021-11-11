@@ -117,6 +117,14 @@ This is sometimes termed ``periodicity of Bloch functions in reciprocal space''.
 
 \chapter{Numerical Force Constants}
 \label{app:force_constants}
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=\textwidth]{./data/sketches/symop.jpg}
+	\caption{The configurations $\b R$, $\b R^g$, and $\tilde{\b R}^g$ obtained from the symmetry operation $g=\text{90 degrees rotation}$ for a two-dimensional system with five atoms. Arrows indicate the force at each atom.}
+	\label{fig:symmetry.1}
+\end{marginfigure}
+
 The force constants $\Phi$ can be obtained from first-order derivatives of the potential-energy surface,~i.\,e.,~the forces, by rewriting the second derivative in terms of a finite difference expression,
 \begin{align}
 \Phi_{I \alpha, J \beta}
@@ -153,13 +161,6 @@ If $M > 3N$ displacements are used,~e.\,g.,~because positive and negative displa
 where ${\rm U}^{+}$ denotes the Moore-Penrose pseudo inverse of the displacement matrix $\rm U$~\cite{Penrose.1955,Parlinski.1997}.
 
 \newthought{When the set of displacements and forces} $\set{ {\rm U}, {\rm F} }$ comes from thermodynamic sampling instead of finite differences, the resulting force constants $\Phi$ obtained via Eq.\,\eqref{eq:phi.pseudo.1} become temperature dependent. This is the key idea behind the \emph{temperature dependent effective potentials} (TDEP) method introduced in Ref.\,\cite{Hellman.2013}.
-
-\begin{marginfigure}
-	\centering
-	\includegraphics[width=\textwidth]{./data/sketches/symop.jpg}
-	\caption{The configurations $\b R$, $\b R^g$, and $\tilde{\b R}^g$ obtained from the symmetry operation $g=\text{90 degrees rotation}$ for a two-dimensional system with five atoms. Arrows indicate the force at each atom.}
-	\label{fig:symmetry.1}
-\end{marginfigure}
 
 \section{Space group symmetry}
 \label{sec:app.space-group-symmetry}

@@ -3,7 +3,7 @@
 
 As this quote by Rudolf Peierls exemplifies, developing a microscopic theory for heat transport in dielectric crystals was a long-standing problem for solid-state physics in the 20th century. Early attempts to explain this phenomenon sparked by experiments conducted by Eucken comprise those by Einstein, Debye, and Born and von Karman in the early 1910s~\cite{Eucken.1911,Einstein.1911,Debye.1912,Cahill.1988}. However, they failed to explain the experimental findings (Einstein), or could only provide qualitative understanding (Debye). One key insight by Debye missing in the earlier attempt by Einstein is the notion of a \emph{phonon gas},~i.\,e.,~that the collective excitations of the nuclear degrees of freedom show qualitatively similar behavior as molecules in a gas. It was in 1929 that Peierls himself contributed a model for heat transport in solids that was able to explain key experimental findings such as the $1/T$ dependence of a material's thermal conductivity at elevated temperatures, which he could achieve by computing three-phonon scattering due to anharmonic terms in the potential-energy surface~\cite{Peierls.1929}. It took another 80 years until this approach led to the development of a fully \emph{ab initio} computational approach by Broido and coworkers in 2007~\cite{Broido.2007}, using the method of Boltzmann transport equation pioneered by Peierls and further developed in the meantime~\cite{Omini.1996,Omini.1997,Broido.2005}. By the time of writing this work, Boltzmann transport theory is the established way to compute thermal transport properties of dielectric crystals from first principles, and many new, more refined approaches have been developed in recent years~\cite{Feng.2016,Xia.2018,Ravichandran.2018,Simoncelli.2019}.
 
-\newthought{However, Boltzmann transport theory always relies on the phonon gas model} and treats phonon-phonon interactions as perturbative effects due to low-order anharmonic corrections to the potential-energy surface. When dealing with strongly anharmonic materials, this perturbative treatment becomes more and more cumbersome, and sometimes even unjustified, as we will discuss in more detail later. In this chapter, we therefore review heat transport in solids in the framework of Green-Kubo theory without treating the nuclear dynamics as a phonon gas.
+\newthought{However, Boltzmann transport theory always relies on the phonon gas model} and treats phonon-phonon interactions as perturbative effects due to low-order anharmonic corrections to the potential-energy surface. When dealing with strongly anharmonic materials, this perturbative treatment becomes more and more cumbersome, and sometimes even unjustified, as we will discuss in more detail later. In this chapter, we therefore review heat transport in solids in the framework of Green-Kubo theory without treating the nuclear dynamics as a phonon gas~ \cite{Green.1952,Kubo1957a,Kubo1957b,Helfand.1960,Hardy.1963}.
 
 \section{Introduction}
 \label{sec:thermal_conductivity}
@@ -28,7 +28,7 @@ first show how the Kubo formula emerges in the framework of linear response theo
 
 
 \section{Linear response theory}
-The aim of linear response theory is to compute the expectation value of a phase-space observable $B (\Gamma)$ in a system characterized by the many-body Hamiltonian $\mathcal H^0 (\Gamma)$ in presence of an external perturbation $\mathcal H' (\Gamma, t)$ driving the system out of equilibrium, where $\Gamma = \set{\b R, \b P}$ is a shorthand for a point in phase space.
+The aim of linear response theory is to compute the expectation value of a phase-space observable $B (\Gamma)$ in a system characterized by the many-body Hamiltonian $\mathcal H^0 (\Gamma)$ in presence of an external perturbation $\mathcal H' (\Gamma, t)$ driving the system out of equilibrium, where $\Gamma = \set{\b R, \b P}$ is a shorthand for a point in phase space.\footnote{The notation used in this chapter was introduced in Sec.\,\ref{sec:statistical-mechanics}.}
 The full Hamiltonian is written as
 \begin{align}
   \mathcal H (\Gamma, t)
@@ -153,7 +153,7 @@ and spatially average over Eq.\,\eqref{eq:lr.ja.2} with $\frac{1}{V} \int_V \d^3
 	\label{eq:lr.J}
 \end{align}
 where the stationarity in time was used to shift the lower bound of the integral to $t=0$.
-This resembles the well-known macroscopic transport equation
+This resembles the well-known macroscopic transport equation~\cite{Onsager1931a}
 \begin{align}
 	J^\alpha =  L^{\alpha \beta} F_\beta~,
 		\label{eq:lr.LF}
@@ -197,7 +197,7 @@ As earlier in Eq.\,\eqref{eq:lr.force}, we assume $\Delta T(\b r)$ to vary linea
 	F_\beta = - \frac{1}{T^2} (\b \nabla T)_\beta ~.
 	\label{eq:lr.F.temp}
 \end{align}
-Using the general transport equation $\b J = L \b F$ with the conductance given by Eq.\,\eqref{eq:lr.L} and $F$ as defined above, we obtain
+Using the general transport equation defined in Eq.\,\ref{eq:lr.LF} with the conductance given by Eq.\,\eqref{eq:lr.L} and $F$ as defined above, we obtain
 \begin{align}
 	J^\alpha 
 		&= - \kappa^{\alpha \beta} (\b \nabla T)_\beta~,
@@ -673,13 +673,7 @@ In \emph{ab intio} molecular dynamics, we have direct access to the non-perturba
 	\label{eq:G_s}
 \end{align}
 %
-from which the lifetime $\tau_s$ can be obtained by fitting $G_s (t)$ to an exponential function. This is exemplified for a simulation of MgO at 300\,K in Fig.\,\ref{fig:G_s}.
-%
-\begin{figure}
-	\includegraphics[width=\textwidth]{./data/plots/lifetimes/greenkubo_summary_interpolation_lifetimes.pdf}
-	\caption{Fit of mode lifetimes for MgO at 300\,K. Simulation performed with a timestep of 5\,fs for a simulation time of 60\,ps. The size of the simulatin cell was 216 atoms. Left: normalized mode-energy autocorrelation function $G_s (t)$ as obtained from the simulation by Eq.\,\eqref{eq:G_ss}. Right: Analytic expression of the form $G_s (t) = {\rm e}^{-t / \tau_s}$ after fitting mode lifetimes $\tau_s$. The y-axis is logarithmic such that exponential functions appear as straight lines.}
-	\label{fig:G_s}
-\end{figure}
+from which the lifetime $\tau_s$ can be obtained by fitting $G_s (t)$ to an exponential function. 
 %
 %\REM{Interpolation here?}
 %\REM{Remove plot?}
