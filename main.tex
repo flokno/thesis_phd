@@ -13,8 +13,8 @@
 \addbibresource{references.bib}
 \addbibresource{references_experiments.bib}
 
-% \usepackage{babel}
-% \usepackage{hyperref}
+\usepackage{hyperref}[bookmarksnumbered=true]
+\usepackage{bookmark,xpatch}
 \hypersetup{colorlinks}
 
 %%
@@ -29,6 +29,17 @@
 % paragraph indentation
 \AtBeginDocument{\setlength{\parindent}{0em}}
 
+% metadata and edoc fixes
+\title{Heat transport in strongly anharmonic solids from first principles}
+\author{Florian Knoop}
+\usepackage[a-1b]{pdfx}
+% \usepackage[english,USenglish,german]{babel}
+\geometry{
+  left=25.2mm, % left margin
+  textwidth=100mm, % main text block
+  marginparsep=8.2mm, % gutter between main text block and margin notes
+  marginparwidth=49.4mm % width of margin notes
+}
 % fix margins?
 % \usepackage{marginfix}
 
@@ -222,7 +233,6 @@
 \usepackage{makeidx}
 \makeindex
 
-
 \begin{document}
 
 % Front matter
@@ -295,6 +305,8 @@
 \addcontentsline{toc}{chapter}{Conclusion}
 \input{./parts/conclusio.tex}
 
+\bookmarksetup{startatroot}
+
 \cleardoublepage
 \phantomsection
 \addcontentsline{toc}{chapter}{Bibliography}
@@ -306,9 +318,12 @@
 \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
 \newcommand{\bibsection}{\section{Bibliography}} % <- was missing
 
+\part*{Appendix}
+
+\bookmarksetupnext{rellevel=-1}
+
 \begin{appendices}
-%  \appendixpage
-  \part*{Appendix}
+  % \appendixpage
   \input{./parts/appendix.tex}
 \end{appendices}
 

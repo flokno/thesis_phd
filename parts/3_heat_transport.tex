@@ -586,7 +586,16 @@ and the generalized heat capacity
 \end{align}
 
 \newthought{In the perfectly harmonic case}, the mode-energy autocorrelation function $G_{ss'}$ can be evaluated analytically by noting that the expectation value $\braket{\cdot}$ can be viewed as a functional integral with the distribution function $f = {\rm e}^{-\beta \sum_s \omega_s \D a_{s} \fD a_{s}}$ and can therefore be evaluated by means of a Wick theorem~\cite{Isaeva.2019}.
-Keeping only the non-vanishing pairings, we have\footnote{In the context of complex field integration, the Wick theorem reads~\cite{NegeleOrland} $$\braket{ABCD} = \braket{AB}\braket{CD} + \braket{AC}\braket{BD} + \braket{AD}\braket{BC}.$$ Pairings with a non-equal number of ``creators'' $\D a$ and ``annihilators'' $a$ vanish identically because of the symmetry of the distribution function $f$.}
+Keeping only the non-vanishing pairings, we have\footnote{In the context of complex field integration, the Wick theorem reads~\cite{NegeleOrland}
+%
+\begin{align*}
+  \braket{ABCD} 
+    &= \braket{AB}\braket{CD} \\
+    &~ + \braket{AC}\braket{BD} \\
+    &~  + \braket{AD}\braket{BC}~.
+\end{align*}
+%
+ Pairings with a non-equal number of ``creators'' $\D a$ and ``annihilators'' $a$ vanish identically because of the symmetry of the distribution function $f$.}
 \begin{align}
 	\braket{\D a_s (t) \fD{a}_s (t) \D a_{s'} \fD a_{s'}}
 		= \braket{n_s} \braket{n_{s'}} + \fD g_s (t) g^\ast_{s} (t) \delta_{ss'}~,

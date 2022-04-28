@@ -240,8 +240,8 @@ which is the essence of the Newton method. One beneficial property of the Newton
 Typically, an initial approximate Hessian $\rm B^0$ is chosen to be of simple form,~e.\,g.,~a constant times unit matrix, or based on some simpler model~\cite{Lindh.1995}. The initial guess is then updated during the optimization, for example by means of the  Broyden–Fletcher–Goldfarb–Shanno (BFGS) algorithm.\footnote{BFGS update for the estimated Hessian $B^i$ from step $i$ to $i+1$:
 	\begin{align*}
 	{\rm B}^{i + 1}_{xx'}
-	= {\rm B}^i_{xx'} 
-	& + \frac{{\rm B}^i_{x\fP{y}} s^i_{\fP{y}} s^i_{y'} {\rm B}^i_{y'x'} }{s^i_{\fP y} {\rm B}^i_{yy'} s^i_{y'}}
+	&={\rm B}^i_{xx'} \\
+	&~ + \frac{{\rm B}^i_{x\fP{y}} s^i_{\fP{y}} s^i_{y'} {\rm B}^i_{y'x'} }{s^i_{\fP y} {\rm B}^i_{yy'} s^i_{y'}}
 	- \frac{\delta f^i_{\fP x} \delta f^i_{x'}}{\delta f^i_{\fP x} s^i_{x'}}~,
 	\end{align*}
 	with $\delta f^i = f^{i+1} - f^i$.
@@ -419,8 +419,8 @@ equation~\eqref{eq:app.lr.df.2} can be simplified in the canonical ensemble by u
 	\set{A, f^0}
 	&= \sum_i \frac{\partial A}{\partial q_i} \frac{\partial f^0}{\partial p_i}
 	- \frac{\partial A}{\partial p_i} \frac{\partial f^0}{\partial q_i} \\
-	&= \sum_i \frac{\partial A}{\partial q_i} \frac{\partial f^0}{\partial H^0} \frac{\partial H^0}{\partial p_i}
-	- \frac{\partial A}{\partial p_i} \frac{\partial f^0}{\partial H^0} \frac{\partial H^0}{\partial q_i} \\
+	&= \sum_i \frac{\partial A}{\partial q_i} \frac{\partial f^0}{\partial H^0} \frac{\partial H^0}{\partial p_i} \\
+	&~~ - \frac{\partial A}{\partial p_i} \frac{\partial f^0}{\partial H^0} \frac{\partial H^0}{\partial q_i} \\
 	&= -\beta f^0 \sum_i
 	\left( \frac{\partial A}{\partial p_i} \dot{q}_i +  \frac{\partial A}{\partial q_i} \dot{p}_i \right) \\
 	&= -\beta f^0 \, \frac{\d A}{\d t} \\
