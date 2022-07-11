@@ -118,13 +118,6 @@ This is sometimes termed ``periodicity of Bloch functions in reciprocal space''.
 \chapter{Numerical Force Constants}
 \label{app:force_constants}
 
-\begin{marginfigure}
-	\centering
-	\includegraphics[width=\textwidth]{./data/sketches/symop.jpg}
-	\caption{The configurations $\b R$, $\b R^g$, and $\tilde{\b R}^g$ obtained from the symmetry operation $g=\text{90 degrees rotation}$ for a two-dimensional system with five atoms. Arrows indicate the force at each atom.}
-	\label{fig:symmetry.1}
-\end{marginfigure}
-
 The force constants $\Phi$ can be obtained from first-order derivatives of the potential-energy surface,~i.\,e.,~the forces, by rewriting the second derivative in terms of a finite difference expression,
 \begin{align}
 \Phi_{I \alpha, J \beta}
@@ -151,6 +144,14 @@ In practice, atom $I$ is displaced by a small but finite displacement $\epsilon$
 %	H &= - U^{+} F \\
 %	F &= \begin{pmatrix} \b F_1, & \cdots, & \b F_{3N} \end{pmatrix}
 %\end{align}
+%
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=\textwidth]{./data/sketches/symop.jpg}
+	\caption{The configurations $\b R$, $\b R^g$, and $\tilde{\b R}^g$ obtained from the symmetry operation $g=\text{90 degrees rotation}$ for a two-dimensional system with five atoms. Arrows indicate the force at each atom.}
+	\label{fig:symmetry.1}
+\end{marginfigure}
+%
 If $M > 3N$ displacements are used,~e.\,g.,~because positive and negative displacements $\pm \epsilon$ are used, the force constants can be obtained by solving an overdetermined linear equation of the kind
 \begin{align}
 {\rm F}_{[3N \times M]} &= - \Phi_{[3N \times 3N]} {\rm U}_{[3N \times M]} \\

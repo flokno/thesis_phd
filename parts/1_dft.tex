@@ -25,17 +25,17 @@ where
         =\sum_{i} \frac{\hat{\mathbf{p}}_{i}^{2}}{2 m_{\rm e}}
     \label{eq:Te}
 \end{align}
-is the kinetic energy operator for electrons of mass $m_{\rm e}$ with momentum operators $\hat{\bf p}_i$, and 
+is the kinetic energy operator for electrons of mass $m_{\rm e}$ with momentum operators $\hat{{\bf p}}_i$, and 
 \begin{align}
     \hat V^{\rm e-e}
-        = \sum_{i < j} \frac{e^{2}}{\left|\hat{\b r}_{i}-\hat{\bf r}_{j}\right|}~,
+        = \sum_{i < j} \frac{e^{2}}{\left|\hat{\b r}_{i}-\hat{{\bf r}}_{j}\right|}~,
     \label{eq:Ve}
 \end{align}
-is the Coulombic electron-electron repulsion operator with the electronic position operators $\hat{\bf r}_i$ and the elementary charge $e$. 
+is the Coulombic electron-electron repulsion operator with the electronic position operators $\hat{{\bf r}}_i$ and the elementary charge $e$. 
 The Coulomb attraction between the negatively charged electrons and the positively charged nuclei reads
 \begin{align}
     \hat V^{\rm e-Nuc}
-        = -\sum_{i, J} \frac{Z_J e^{2}}{\left|\hat{\b r}_{i}-\hat{\bf R}_{J}\right|}~,
+        = -\sum_{i, J} \frac{Z_J e^{2}}{\left|\hat{\b r}_{i}-\hat{{\bf R}}_{J}\right|}~,
     \label{eq:Venuc}
 \end{align}
 where $Z_J$ denotes the charge number of nucleus $J$, and $\hat{\bf R}_J$ is the nuclear position operator. 
@@ -575,6 +575,8 @@ This approximation is called the \emph{local density approximation} (LDA), and t
 	\label{eq:dft.LDA.1}
 \end{align}
 The energy density $e^{\rm xc}_{\rm LDA} \left(n ({\bf x}) \right)$ is usually taken to be the exchange-correlation energy density of a homogeneous electron gas obtained from many-body theory~\cite{Ceperley.1980}.\footnote{Depending on the application, it can be beneficial to parametrize LDA on other reference system~\cite{Nagai.2020}.} The LDA is (by construction) exact in the limit of vanishing density gradient, $\lvert \nabla n ({\bf x}) \rvert / n({\bf x}) \rightarrow 0$, but yields surprisingly good results under circumstances where the density is non-homogeneous as well~\cite[p.\,183]{Dreizler2012}.
+
+\newpage
 
 \subsection{The generalized gradient approximation (GGA)}
 \newthought{In the spirit of the original work} by Hohenberg and Kohn, and Kohn and Sham, improvements on the LDA can be constructed by going beyond the local density and taking into account gradients of the density as well,

@@ -14,8 +14,13 @@
 \addbibresource{references_experiments.bib}
 
 \usepackage{hyperref}[bookmarksnumbered=true]
-\usepackage{bookmark,xpatch}
-\hypersetup{colorlinks}
+\usepackage[numbered]{bookmark}
+\usepackage{xpatch}
+\hypersetup{
+  colorlinks,
+  pdfstartview = XYZ null null 1.00,% x y zoom
+  pdfstartpage = 1
+}
 
 %%
 % For nicely typeset tabular material
@@ -32,7 +37,7 @@
 % metadata and edoc fixes
 \title{Heat transport in strongly anharmonic solids from first principles}
 \author{Florian Knoop}
-\usepackage[a-1b]{pdfx}
+% \usepackage[a-1b]{pdfx}
 % \usepackage[english,USenglish,german]{babel}
 \geometry{
   left=25.2mm, % left margin

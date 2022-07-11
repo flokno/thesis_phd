@@ -68,23 +68,23 @@ Both structures are studied at GGA level of theory using the PBEsol functional a
 
 \section{Noise reduction scheme and cutoff estimation}
 \subsection{Discard non-contributing terms}
-The raw \emph{ab initio} heat flux used in this work was defined in Eq.\,\eqref{eq:J_ai} and is given for a phase-space point $\Gamma_t = \set{{\bf R} (t), \dot{\bf R} (t)}$ by
+The raw \emph{ab initio} heat flux used in this work was defined in Eq.\,\eqref{eq:J_ai} and is given for a phase-space point $\Gamma_t = \set{{\bf R} (t), \dot{{\bf R}} (t)}$ by
 \begin{align}
 	{\bf J}^{\rm raw} (t) 
-		= \frac{1}{V} \sum_I \sigma_I (t)  \dot{\bf R}_I (t)~,
+		= \frac{1}{V} \sum_I \sigma_I (t)  \dot{{\bf R}}_I (t)~,
 	\label{eq:imp.J.0}
 \end{align}
-where $\sigma_I (t) \equiv \sigma_I [{\bf R} (t)]$ are atomic virial tensors for the configuration at the given time $t$ as defined in Eq.\,\eqref{eq:hf.sigma_I}, and $\dot{\bf R}_I (t)$ is the velocity of atom $I$ as usual. We split the raw flux in two parts,
+where $\sigma_I (t) \equiv \sigma_I [{\bf R} (t)]$ are atomic virial tensors for the configuration at the given time $t$ as defined in Eq.\,\eqref{eq:hf.sigma_I}, and $\dot{{\bf R}}_I (t)$ is the velocity of atom $I$ as usual. We split the raw flux in two parts,
 \begin{align}
 	{\bf J}^{\rm raw} (t)
-		= \frac{1}{V} \sum_I \delta \sigma_I (t) \dot{\bf R}_I (t) 
-		+ \frac{1}{V} \sum_I \braket{\sigma_I} \dot{\bf R}_I (t)~,
+		= \frac{1}{V} \sum_I \delta \sigma_I (t) \dot{{\bf R}}_I (t) 
+		+ \frac{1}{V} \sum_I \braket{{\sigma_I}} \dot{{\bf R}}_I (t)~,
 	\label{eq:imp.J.1}
 \end{align}
-where $\braket{\sigma_I}$ is the average atomic virial, and $\delta \sigma_I (t)$ is the time-dependent part. In the absence of diffusion, the second term is the total time derivative of a bounded vector field, $\sum_I \braket{\sigma_I} \dot{\bf R}_I (t) = \frac{\d}{\d t} \sum_I \braket{\sigma_I} {\bf R}_I (t)$. By means of the gauge invariance principle introduced in Sec.\,\ref{sec:gauge_invariance}, it therefore does not contribute to the time integral in Eq.\,\eqref{eq:implementatino.kappa.1}, and can be discarded before evaluating the heat flux autocorrelation function~\cite{Ercole.2016}. We therefore always use the following heat flux expression:
+where $\braket{\sigma_I}$ is the average atomic virial, and $\delta \sigma_I (t)$ is the time-dependent part. In the absence of diffusion, the second term is the total time derivative of a bounded vector field, $\sum_I \braket{\sigma_I} \dot{{\bf R}}_I (t) = \frac{\d}{\d t} \sum_I \braket{{\sigma_I}} {\bf R}_I (t)$. By means of the gauge invariance principle introduced in Sec.\,\ref{sec:gauge_invariance}, it therefore does not contribute to the time integral in Eq.\,\eqref{eq:implementatino.kappa.1}, and can be discarded before evaluating the heat flux autocorrelation function~\cite{Ercole.2016}. We therefore always use the following heat flux expression:
 \begin{align}
 	{\bf J} (t)
-		= \frac{1}{V} \sum_I \delta \sigma_I (t) \dot{\bf R}_I (t)~.
+		= \frac{1}{V} \sum_I \delta \sigma_I (t) \dot{{\bf R}}_I (t)~.
 	\label{eq:imp.J}
 \end{align}
 Depending on the material, discarding the non-contributing part from the raw heat flux reduces the noise in the simulation \emph{massively}, as shown for the case of MgO in the upper panel of Fig.\,\ref{fig:imp.hfacf.kappa.1} (orange curves compared to light blue curves).
@@ -136,9 +136,9 @@ where $v_b^\alpha ({\bf q})$ is the group velocity of a phonon mode with band in
 %
 For a given simulation $\set{\Gamma^i  _t}$, Eq.\,\eqref{eq:imp.K.bte} is evaluated for all commensurate $\bf q$-points, and projected to the symmetry-inequivalent points in the Brillouin zone determinded by the space group operations of the system to improve the statistics~\cite{Maradudin.1968}. The irreducible q-points in the Brillouin zone are obtained by iteratively reducing the given grid with the available symmetry operations for the system obtained by the spglib package~\cite{Spglib}.
 
-\newthought{In the next step}, the lifetimes $\tau_b ({\bf q})$ are interpolated to denser $\bf q$-point meshes by $\fD{\tilde{\tau}}_b (\tilde{\bf q}) = \fD \lambda_b (\tilde {\bf q}) \omega_b^{-2} (\tilde {\bf q})$ with a weakly $\bf q$-dependent function $\lambda_b (\tilde {\bf q})$ obtained by linearly interpolating the lifetimes obtained at commensurate $\bf q$-points.\footnote{We use linear interpolation at variance with Ref.\,\cite{Carbogno.2016}, as we found it to be numerically more robust. However, results should not significantly depend on the interpolation algorithm used to obtain $\lambda_b (\tilde {\bf q})$, as the physically relevant contribution is captured by the $\omega_b^{-2} ({\bf q})$  scaling.} The scaling of lifetimes with $\omega_b^{-2} ({\bf q})$ is rooted in basic phonon theory as discussed in detail by Herring~\cite{Herring.1954}. For the acoustic modes at ${\bf q} = \Gamma = 0$, where $\omega ({\bf q \to 0}) \to 0$, the value for $\lambda_b (\Gamma)$ is obtained by averaging over values at the surrounding $\bf q$-points. For the new, denser grid, an interpolated value,
+\newthought{In the next step}, the lifetimes $\tau_b ({\bf q})$ are interpolated to denser $\bf q$-point meshes by $\fD{\tilde{\tau}}_b (\tilde{{\bf q}}) = \fD \lambda_b (\tilde{{\bf q}}) \omega_b^{-2} (\tilde {{\bf q}})$ with a weakly $\bf q$-dependent function $\lambda_b (\tilde {{\bf q}})$ obtained by linearly interpolating the lifetimes obtained at commensurate $\bf q$-points.\footnote{We use linear interpolation at variance with Ref.\,\cite{Carbogno.2016}, as we found it to be numerically more robust. However, results should not significantly depend on the interpolation algorithm used to obtain $\lambda_b (\tilde{{\bf q}})$, as the physically relevant contribution is captured by the $\omega_b^{-2} ({\bf q})$  scaling.} The scaling of lifetimes with $\omega_b^{-2} ({\bf q})$ is rooted in basic phonon theory as discussed in detail by Herring~\cite{Herring.1954}. For the acoustic modes at ${\bf q} = \Gamma = 0$, where $\omega ({\bf q \to 0}) \to 0$, the value for $\lambda_b (\Gamma)$ is obtained by averaging over values at the surrounding $\bf q$-points. For the new, denser grid, an interpolated value,
 \begin{align}
-	\kappa_{\rm ha - int}^{\alpha \beta} (N_{\tilde{\bf q}}) = V k_{\rm B} \frac{N_{\bf q}}{N_{\tilde{\bf q}}} \sum_{b, \tilde{\bf q}} v^\alpha_b (\tilde{\bf q}) v^{\beta}_b (\tilde{\bf q}) \fD{\tilde{\tau}}_b (\tilde{\bf q})~,
+	\kappa_{\rm ha - int}^{\alpha \beta} (N_{\tilde{\bf q}}) = V k_{\rm B} \frac{N_{\bf q}}{N_{\tilde{\bf q}}} \sum_{b, \tilde{{\bf q}}} v^\alpha_b (\tilde{{\bf q}}) v^{\beta}_b (\tilde{{\bf q}}) \fD{\tilde{\tau}}_b (\tilde{{\bf q}})~,
 	\label{eq:imp.K.bte.correction}
 \end{align}
 can be obtained, where $N_{\tilde{\bf q}}$ is the number of points in the new grid, and the factor $N_{\bf q} / N_{\tilde{\bf q}}$ accounts for the increased number points. The bulk limit of Eq.\,\eqref{eq:imp.K.bte.correction} is obtained by computing interpolated values for an increasing density of $\bf q$-points. Since Eq.\,\eqref{eq:imp.K.bte.correction} is a Riemann sum approximating the Brillouin zone integral $\int \d^3 q$, its convergence can be expected to be linear in $N_{\tilde{\bf q}}^{-1/3} \equiv 1 / n_q$, where $n_q$ is number of $\bf q$-points per Cartesian direction. The slope of this curve can be used to extrapolate the value of $\kappa_{\rm ha}$ to bulk limit, as shown in Fig.\,\ref{fig:imp.kappa.bte.correction}.
